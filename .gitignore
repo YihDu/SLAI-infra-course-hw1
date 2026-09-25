@@ -1,0 +1,11 @@
+__pycache__/
+*.pyc
+.DS_Store
+
+# local experiment reports
+check-*.json
+estimate-*.json
+grade-*.json
+
+# submission artifacts
+*.zip

@@ -1,0 +1,41 @@
+{
+  "bias": "balanced",
+  "created_at": "2026-09-28 14:26:28",
+  "failure_class": "generate_error",
+  "family": "memory",
+  "fingerprint": "ff6870b21f8f0ec7",
+  "hypothesis": "novelty: random mnk tiles=(8, 8, 48)",
+  "id": "cand-055",
+  "kind": "novelty",
+  "ops": [
+    {
+      "op": "gemm_order",
+      "order": "mnk"
+    },
+    {
+      "k_chunk": 48,
+      "m_tile": 8,
+      "n_tile": 8,
+      "op": "gemm_tiles"
+    },
+    {
+      "enabled": 0,
+      "op": "gemm_prefetch"
+    },
+    {
+      "op": "scores_residency",
+      "space": "rf"
+    },
+    {
+      "enabled": 0,
+      "op": "fuse_bias_gelu"
+    }
+  ],
+  "parent": "cand-047",
+  "provenance_note": null,
+  "round": 10,
+  "status": "pruned",
+  "struct_sig": "mnk+nofuse+nopf+s:rf",
+  "summary": "[{\"op\": \"gemm_order\", \"order\": \"mnk\"}, {\"op\": \"gemm_tiles\", \"m_tile\": 8, \"n_tile\": 8, \"k_chunk\": 48}, {\"op\": \"gemm_prefetch\", \"enabled\": 0}, {\"op\": \"scores_residency\", \"space\": \"rf\"}, {\"op\": \"fuse_bias_gelu\", \"enabled\": 0}]",
+  "verdict_note": "[Errno 32] Broken pipe"
+}

@@ -8,9 +8,37 @@ import json
 from contextlib import contextmanager
 from dataclasses import dataclass
 from math import sqrt
+from pathlib import Path
 
 from codesign.challenge.abi import Layout, build_layout
 from codesign.challenge.workload import MODELS, SCENARIOS
+
+# Search recipe: phase-1 software knobs.  The search engine writes
+# project/recipe.json per candidate; values here reproduce the B-stationary
+# baseline (cand-001) when the file is absent.
+DEFAULT_RECIPE = {
+    "gemm": {
+        "order": "nkm",      # "mnk" (original baseline) | "nkm" (B-stationary)
+        "m_tile": 8,
+        "n_tile": 16,
+        "k_chunk": 48,
+        "prefetch": 0,       # double-buffered B tile loads (nkm only)
+    },
+    "attention": {"scores": "hbm"},    # "hbm" | "rf" (scores+probs stay in RF)
+    "fusion": {"bias_gelu": 0},        # fuse b1-add + GELU into one pass
+}
+
+
+def load_recipe(path=None):
+    recipe = json.loads(json.dumps(DEFAULT_RECIPE))
+    p = Path(path) if path else Path(__file__).resolve().parent / "recipe.json"
+    if p.exists():
+        for section, values in json.loads(p.read_text()).items():
+            if isinstance(values, dict) and isinstance(recipe.get(section), dict):
+                recipe[section].update(values)
+            else:
+                recipe[section] = values
+    return recipe
 
 
 def var(name):
@@ -27,6 +55,10 @@ def mul(*items):
 
 def minimum(*items):
     return {"min": list(items)}
+
+
+def mod(a, b):
+    return {"mod": [a, b]}
 
 
 def sub(a, b):
@@ -55,11 +87,19 @@ class Tensor:
 
 
 class Builder:
-    def __init__(self, layout: Layout, gemm_n_tile: int = 16):
-        if gemm_n_tile not in (8, 16):
-            raise ValueError("Unsupported GEMM N tile")
+    def __init__(self, layout: Layout, recipe: dict | None = None):
+        recipe = recipe or load_recipe()
+        g = recipe["gemm"]
+        if int(g["n_tile"]) <= 0 or int(g["k_chunk"]) <= 0 or int(g["m_tile"]) <= 0:
+            raise ValueError("GEMM tiles must be positive")
         self.layout = layout
-        self.gemm_n_tile = gemm_n_tile
+        self.gemm_n_tile = int(g["n_tile"])
+        self.m_tile = int(g["m_tile"])
+        self.k_chunk = int(g["k_chunk"])
+        self.order = g["order"]
+        self.prefetch = int(g["prefetch"])
+        self.scores_res = recipe["attention"]["scores"]
+        self.fuse_bias_gelu = int(recipe["fusion"]["bias_gelu"])
         self.lines = []
         self.loops = []
         self.serial = 0
@@ -123,24 +163,108 @@ class Builder:
         if b.shape != (k_extent, n_extent):
             raise ValueError("GEMM weight shape")
         tile_n = self.gemm_n_tile
+        m_tile = self.m_tile
+        k_chunk = self.k_chunk
         if n_extent % tile_n:
             raise ValueError("GEMM N extent does not fit tile")
-        with self.loop(f"{name}m", 0, m_extent, 8) as row:
-            rows = minimum(8, sub(m_extent, row))
-            with self.loop(f"{name}n", 0, n_extent, tile_n) as col:
-                cells = mul(rows, tile_n)
-                self.vec("add", [imm(0), imm(0)], rf(2, cells))
-                with self.loop(f"{name}k", 0, k_extent, 48) as inner:
-                    depth = minimum(48, sub(k_extent, inner))
+        if self.order == "mnk":
+            # Original baseline order: B tile re-loaded for every m-tile.
+            with self.loop(f"{name}m", 0, m_extent, m_tile) as row:
+                rows = minimum(m_tile, sub(m_extent, row))
+                with self.loop(f"{name}n", 0, n_extent, tile_n) as col:
+                    cells = mul(rows, tile_n)
+                    self.vec("add", [imm(0), imm(0)], rf(2, cells))
+                    with self.loop(f"{name}k", 0, k_extent, k_chunk) as inner:
+                        depth = minimum(k_chunk, sub(k_extent, inner))
+                        self.ld(
+                            hbm(
+                                add(a.offset, mul(row, k_extent), inner),
+                                mul(rows, depth),
+                                [rows, depth],
+                                [k_extent, 1],
+                            ),
+                            rf(0, mul(rows, depth)),
+                        )
+                        self.ld(
+                            hbm(
+                                add(b.offset, mul(inner, n_extent), col),
+                                mul(depth, tile_n),
+                                [depth, tile_n],
+                                [n_extent, 1],
+                            ),
+                            rf(1, mul(depth, tile_n)),
+                        )
+                        self.emit(
+                            "MMA.ACC",
+                            a=rf(0, mul(rows, depth)),
+                            b=rf(1, mul(depth, tile_n)),
+                            acc=rf(2, cells),
+                            m=rows,
+                            n=tile_n,
+                            k=depth,
+                            event=None,
+                        )
+                    self.st(
+                        rf(2, cells),
+                        hbm(
+                            add(out.offset, mul(row, n_extent), col),
+                            cells,
+                            [rows, tile_n],
+                            [n_extent, 1],
+                        ),
+                    )
+            return
+        if self.order != "nkm":
+            raise ValueError(f"Unsupported GEMM order {self.order}")
+        # B-stationary order: each weight tile is loaded once per (n, k) chunk
+        # and reused across all m-tiles.  All m-tile accumulators for one
+        # n-tile stay live in lane 2, which requires m_extent * tile_n <= the
+        # lane capacity (1024 FP32 words at 16 vector lanes).
+        if m_extent * tile_n > 1024:
+            raise ValueError("GEMM accumulators exceed RF lane capacity")
+        chunks = -(-k_extent // k_chunk)
+        with self.loop(f"{name}n", 0, n_extent, tile_n) as col:
+            with self.loop(f"{name}z", 0, m_extent, m_tile) as row:
+                rows = minimum(m_tile, sub(m_extent, row))
+                self.vec(
+                    "add", [imm(0), imm(0)], rf(2, mul(rows, tile_n), mul(row, tile_n))
+                )
+            if self.prefetch:
+                # Double-buffer B in lanes 1/3: inside iteration i, issue the
+                # async load for chunk i+1 before the m-loop MMAs consume the
+                # current buffer.  The last iteration re-loads the final tile
+                # (clamped offset) — harmless.
+                depth0 = minimum(k_chunk, k_extent)
+                self.ld(
+                    hbm(
+                        add(b.offset, col),
+                        mul(depth0, tile_n),
+                        [depth0, tile_n],
+                        [n_extent, 1],
+                    ),
+                    rf(1, mul(depth0, tile_n)),
+                )
+            with self.loop(f"{name}k", 0, k_extent, k_chunk) as inner:
+                depth = minimum(k_chunk, sub(k_extent, inner))
+                if self.prefetch:
+                    ki = {"ceildiv": [inner, k_chunk]}
+                    lane_cur = add(1, mul(2, mod(ki, 2)))
+                    lane_nxt = add(1, mul(2, mod(add(ki, 1), 2)))
+                    inner_next = minimum(
+                        add(inner, k_chunk), mul(chunks - 1, k_chunk)
+                    )
+                    depth_next = minimum(k_chunk, sub(k_extent, inner_next))
                     self.ld(
                         hbm(
-                            add(a.offset, mul(row, k_extent), inner),
-                            mul(rows, depth),
-                            [rows, depth],
-                            [k_extent, 1],
+                            add(b.offset, mul(inner_next, n_extent), col),
+                            mul(depth_next, tile_n),
+                            [depth_next, tile_n],
+                            [n_extent, 1],
                         ),
-                        rf(0, mul(rows, depth)),
+                        rf(lane_nxt, mul(depth_next, tile_n)),
                     )
+                else:
+                    lane_cur = 1
                     self.ld(
                         hbm(
                             add(b.offset, mul(inner, n_extent), col),
@@ -150,18 +274,32 @@ class Builder:
                         ),
                         rf(1, mul(depth, tile_n)),
                     )
+                with self.loop(f"{name}m", 0, m_extent, m_tile) as row:
+                    rows = minimum(m_tile, sub(m_extent, row))
+                    self.ld(
+                        hbm(
+                            add(a.offset, mul(row, k_extent), inner),
+                            mul(rows, depth),
+                            [rows, depth],
+                            [k_extent, 1],
+                        ),
+                        rf(0, mul(rows, depth)),
+                    )
                     self.emit(
                         "MMA.ACC",
                         a=rf(0, mul(rows, depth)),
-                        b=rf(1, mul(depth, tile_n)),
-                        acc=rf(2, cells),
+                        b=rf(lane_cur, mul(depth, tile_n)),
+                        acc=rf(2, mul(rows, tile_n), mul(row, tile_n)),
                         m=rows,
                         n=tile_n,
                         k=depth,
                         event=None,
                     )
+            with self.loop(f"{name}s", 0, m_extent, m_tile) as row:
+                rows = minimum(m_tile, sub(m_extent, row))
+                cells = mul(rows, tile_n)
                 self.st(
-                    rf(2, cells),
+                    rf(2, cells, mul(row, tile_n)),
                     hbm(
                         add(out.offset, mul(row, n_extent), col),
                         cells,
@@ -222,6 +360,25 @@ class Builder:
                 self.vec("add", [rf(0, n), rf(1, n)], rf(2, n))
                 self.st(rf(2, n), hbm(add(out.offset, mul(row, width), col), n))
 
+    def bias_gelu(self, source: Tensor, bias: Tensor, out: Tensor, rows: int, width: int, name: str):
+        """Fused `add_bias` + `gelu`: one read of `source`, no `biased` scratch."""
+        with self.loop(name, 0, rows) as row:
+            with self.loop(f"{name}c", 0, width, 384) as col:
+                n = minimum(384, sub(width, col))
+                addr = add(source.offset, mul(row, width), col)
+                self.ld(hbm(addr, n), rf(0, n))
+                self.ld(hbm(add(bias.offset, col), n), rf(2, n))
+                self.vec("add", [rf(0, n), rf(2, n)], rf(0, n))
+                self.vec("mul", [rf(0, n), rf(0, n)], rf(1, n))
+                self.vec("mul", [rf(1, n), rf(0, n)], rf(1, n))
+                self.vec("fma", [rf(1, n), imm(0.044715), rf(0, n)], rf(1, n))
+                self.vec("mul", [rf(1, n), imm(sqrt(2 / 3.141592653589793))], rf(1, n))
+                self.sfu("tanh", rf(1, n), rf(1, n))
+                self.vec("add", [rf(1, n), imm(1)], rf(1, n))
+                self.vec("mul", [rf(0, n), imm(0.5)], rf(0, n))
+                self.vec("mul", [rf(0, n), rf(1, n)], rf(0, n))
+                self.st(rf(0, n), hbm(add(out.offset, mul(row, width), col), n))
+
     def gelu(self, source: Tensor, out: Tensor, rows: int, width: int, name: str):
         with self.loop(name, 0, rows) as row:
             with self.loop(f"{name}c", 0, width, 384) as col:
@@ -262,8 +419,10 @@ class Builder:
                     self.ld(hbm(source_addr, hd), rf(0, hd))
                     self.st(rf(0, hd), hbm(target_addr, hd))
         total = past + rows
-        scores = self.alloc(f"{name}_scores", rows, total)
-        probs = self.alloc(f"{name}_probs", rows, total)
+        rf_scores = self.scores_res == "rf"
+        if not rf_scores:
+            scores = self.alloc(f"{name}_scores", rows, total)
+            probs = self.alloc(f"{name}_probs", rows, total)
         with self.loop(f"{name}q", 0, rows) as row:
             limit = add(past, row, 1)
             with self.loop(f"{name}head", 0, h) as head:
@@ -281,30 +440,56 @@ class Builder:
                         ),
                         rf(1, cells),
                     )
-                    self.vec("add", [imm(0), imm(0)], rf(2, n))
-                    self.emit(
-                        "MMA.ACC",
-                        a=rf(0, hd),
-                        b=rf(1, cells),
-                        acc=rf(2, n),
-                        m=1,
-                        n=n,
-                        k=hd,
-                        event=None,
-                    )
-                    self.vec("mul", [rf(2, n), imm(1 / sqrt(hd))], rf(2, n))
-                    self.st(rf(2, n), hbm(add(scores.offset, mul(row, total), key), n))
-                self.ld(hbm(add(scores.offset, mul(row, total)), limit), rf(0, limit))
-                self.reduce("max", rf(0, limit), rf(1, 1))
-                self.vec("sub", [rf(0, limit), rf(1, 1)], rf(0, limit))
-                self.sfu("exp", rf(0, limit), rf(0, limit))
-                self.reduce("sum", rf(0, limit), rf(1, 1))
-                self.vec("div", [rf(0, limit), rf(1, 1)], rf(0, limit))
-                self.st(rf(0, limit), hbm(add(probs.offset, mul(row, total)), limit))
+                    if rf_scores:
+                        # Scores accumulate directly in lane 4 at [key, key+n).
+                        self.vec("add", [imm(0), imm(0)], rf(4, n, key))
+                        self.emit(
+                            "MMA.ACC",
+                            a=rf(0, hd),
+                            b=rf(1, cells),
+                            acc=rf(4, n, key),
+                            m=1,
+                            n=n,
+                            k=hd,
+                            event=None,
+                        )
+                        self.vec("mul", [rf(4, n, key), imm(1 / sqrt(hd))], rf(4, n, key))
+                    else:
+                        self.vec("add", [imm(0), imm(0)], rf(2, n))
+                        self.emit(
+                            "MMA.ACC",
+                            a=rf(0, hd),
+                            b=rf(1, cells),
+                            acc=rf(2, n),
+                            m=1,
+                            n=n,
+                            k=hd,
+                            event=None,
+                        )
+                        self.vec("mul", [rf(2, n), imm(1 / sqrt(hd))], rf(2, n))
+                        self.st(rf(2, n), hbm(add(scores.offset, mul(row, total), key), n))
+                if rf_scores:
+                    svec = rf(4, limit)
+                else:
+                    svec = rf(0, limit)
+                    self.ld(hbm(add(scores.offset, mul(row, total)), limit), svec)
+                self.reduce("max", svec, rf(1, 1))
+                self.vec("sub", [svec, rf(1, 1)], svec)
+                self.sfu("exp", svec, svec)
+                self.reduce("sum", svec, rf(1, 1))
+                self.vec("div", [svec, rf(1, 1)], svec)
+                if not rf_scores:
+                    self.st(svec, hbm(add(probs.offset, mul(row, total)), limit))
                 self.vec("add", [imm(0), imm(0)], rf(2, hd))
                 with self.loop(f"{name}value", 0, limit, 16) as key:
                     depth = minimum(16, sub(limit, key))
-                    self.ld(hbm(add(probs.offset, mul(row, total), key), depth), rf(0, depth))
+                    if rf_scores:
+                        probs_view = rf(4, depth, key)
+                    else:
+                        probs_view = rf(0, depth)
+                        self.ld(
+                            hbm(add(probs.offset, mul(row, total), key), depth), probs_view
+                        )
                     self.ld(
                         hbm(
                             add(v_out.offset, mul(head, v_out.shape[2] * hd), mul(key, hd)),
@@ -314,7 +499,7 @@ class Builder:
                     )
                     self.emit(
                         "MMA.ACC",
-                        a=rf(0, depth),
+                        a=probs_view,
                         b=rf(1, mul(depth, hd)),
                         acc=rf(2, hd),
                         m=1,
@@ -342,8 +527,10 @@ class Builder:
         """One decode step: score historical and newly generated KV separately."""
         generated = step + 1
         total = past + generated
-        scores = self.alloc(f"{name}_scores", total)
-        probs = self.alloc(f"{name}_probs", total)
+        rf_scores = self.scores_res == "rf"
+        if not rf_scores:
+            scores = self.alloc(f"{name}_scores", total)
+            probs = self.alloc(f"{name}_probs", total)
         for kind, target, component in (("k", new_k, 1), ("v", new_v, 2)):
             with self.loop(f"{name}{kind}h", 0, h) as head:
                 source = add(qkv.offset, component * d, mul(head, hd))
@@ -368,26 +555,46 @@ class Builder:
                         ),
                         rf(1, cells),
                     )
-                    self.vec("add", [imm(0), imm(0)], rf(2, n))
-                    self.emit(
-                        "MMA.ACC",
-                        a=rf(0, hd),
-                        b=rf(1, cells),
-                        acc=rf(2, n),
-                        m=1,
-                        n=n,
-                        k=hd,
-                        event=None,
-                    )
-                    self.vec("mul", [rf(2, n), imm(1 / sqrt(hd))], rf(2, n))
-                    self.st(rf(2, n), hbm(add(scores.offset, score_base, key), n))
-            self.ld(hbm(scores.offset, total), rf(0, total))
-            self.reduce("max", rf(0, total), rf(1, 1))
-            self.vec("sub", [rf(0, total), rf(1, 1)], rf(0, total))
-            self.sfu("exp", rf(0, total), rf(0, total))
-            self.reduce("sum", rf(0, total), rf(1, 1))
-            self.vec("div", [rf(0, total), rf(1, 1)], rf(0, total))
-            self.st(rf(0, total), hbm(probs.offset, total))
+                    if rf_scores:
+                        acc = rf(4, n, add(score_base, key))
+                        self.vec("add", [imm(0), imm(0)], acc)
+                        self.emit(
+                            "MMA.ACC",
+                            a=rf(0, hd),
+                            b=rf(1, cells),
+                            acc=acc,
+                            m=1,
+                            n=n,
+                            k=hd,
+                            event=None,
+                        )
+                        self.vec("mul", [acc, imm(1 / sqrt(hd))], acc)
+                    else:
+                        self.vec("add", [imm(0), imm(0)], rf(2, n))
+                        self.emit(
+                            "MMA.ACC",
+                            a=rf(0, hd),
+                            b=rf(1, cells),
+                            acc=rf(2, n),
+                            m=1,
+                            n=n,
+                            k=hd,
+                            event=None,
+                        )
+                        self.vec("mul", [rf(2, n), imm(1 / sqrt(hd))], rf(2, n))
+                        self.st(rf(2, n), hbm(add(scores.offset, score_base, key), n))
+            if rf_scores:
+                svec = rf(4, total)
+            else:
+                svec = rf(0, total)
+                self.ld(hbm(scores.offset, total), svec)
+            self.reduce("max", svec, rf(1, 1))
+            self.vec("sub", [svec, rf(1, 1)], svec)
+            self.sfu("exp", svec, svec)
+            self.reduce("sum", svec, rf(1, 1))
+            self.vec("div", [svec, rf(1, 1)], svec)
+            if not rf_scores:
+                self.st(svec, hbm(probs.offset, total))
             self.vec("add", [imm(0), imm(0)], rf(2, hd))
             for source, count, prob_base, stride in (
                 (history_v, past, 0, past),
@@ -395,7 +602,13 @@ class Builder:
             ):
                 with self.loop(f"{name}value{prob_base}", 0, count, 16) as key:
                     depth = minimum(16, sub(count, key))
-                    self.ld(hbm(add(probs.offset, prob_base, key), depth), rf(0, depth))
+                    if rf_scores:
+                        probs_view = rf(4, depth, add(prob_base, key))
+                    else:
+                        probs_view = rf(0, depth)
+                        self.ld(
+                            hbm(add(probs.offset, prob_base, key), depth), probs_view
+                        )
                     self.ld(
                         hbm(
                             add(source.offset, mul(head, stride * hd), mul(key, hd)),
@@ -405,7 +618,7 @@ class Builder:
                     )
                     self.emit(
                         "MMA.ACC",
-                        a=rf(0, depth),
+                        a=probs_view,
                         b=rf(1, mul(depth, hd)),
                         acc=rf(2, hd),
                         m=1,
@@ -489,8 +702,11 @@ def generate_m1_p1() -> tuple[str, Layout, int]:
                 b.add_rows(x, att, res, rows, d, name + "res")
                 b.layernorm(res, weights["ln2_g"], weights["ln2_b"], ln2, rows, d, name + "ln2")
                 b.gemm(ln2, weights["w1"], ff1, rows, d, f, name + "w1")
-                b.add_bias(ff1, weights["b1"], biased, rows, f, name + "bias1")
-                b.gelu(biased, activated, rows, f, name + "gelu")
+                if b.fuse_bias_gelu:
+                    b.bias_gelu(ff1, weights["b1"], activated, rows, f, name + "biasgelu")
+                else:
+                    b.add_bias(ff1, weights["b1"], biased, rows, f, name + "bias1")
+                    b.gelu(biased, activated, rows, f, name + "gelu")
                 b.gemm(activated, weights["w2"], ff2, rows, f, d, name + "w2")
                 b.add_rows(res, ff2, y, rows, d, name + "out", weights["b2"])
                 x = y
@@ -514,7 +730,7 @@ def generate_m1_p1() -> tuple[str, Layout, int]:
     return program, layout, b.cursor
 
 
-def generate_m1_d1(gemm_n_tile: int = 16) -> tuple[str, Layout, int]:
+def generate_m1_d1(gemm_n_tile: int | None = None, recipe: dict | None = None) -> tuple[str, Layout, int]:
     """Compile the D1 model's history and causally released decode steps."""
     model = MODELS["M2"]
     batch, past, steps = SCENARIOS["D1"]
@@ -522,7 +738,11 @@ def generate_m1_d1(gemm_n_tile: int = 16) -> tuple[str, Layout, int]:
         raise ValueError("D1 baseline requires batch one")
     d, f, h, hd = model.width, model.ffn, model.heads, model.head_width
     layout = build_layout(model, "D1")
-    b = Builder(layout, gemm_n_tile=gemm_n_tile)
+    if recipe is None:
+        recipe = load_recipe()
+    if gemm_n_tile is not None:
+        recipe["gemm"]["n_tile"] = gemm_n_tile
+    b = Builder(layout, recipe)
     output = b.symbol("output/hidden")
     for step in range(steps):
         x = b.symbol(f"input/step{step}")
@@ -575,8 +795,11 @@ def generate_m1_d1(gemm_n_tile: int = 16) -> tuple[str, Layout, int]:
             b.add_rows(x, att, res, 1, d, name + "res")
             b.layernorm(res, weights["ln2_g"], weights["ln2_b"], ln2, 1, d, name + "ln2")
             b.gemm(ln2, weights["w1"], ff1, 1, d, f, name + "w1")
-            b.add_bias(ff1, weights["b1"], biased, 1, f, name + "bias1")
-            b.gelu(biased, activated, 1, f, name + "gelu")
+            if b.fuse_bias_gelu:
+                b.bias_gelu(ff1, weights["b1"], activated, 1, f, name + "biasgelu")
+            else:
+                b.add_bias(ff1, weights["b1"], biased, 1, f, name + "bias1")
+                b.gelu(biased, activated, 1, f, name + "gelu")
             b.gemm(activated, weights["w2"], ff2, 1, f, d, name + "w2")
             b.add_rows(res, ff2, y, 1, d, name + "out", weights["b2"])
             x = y

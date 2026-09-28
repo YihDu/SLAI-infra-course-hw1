@@ -1,0 +1,104 @@
+{
+  "candidate": "cand-051",
+  "reports": {
+    "grade": {
+      "mode": "grade",
+      "cases": {
+        "M1_P1": {
+          "functional_passed": true,
+          "max_abs_error": 4.721705174404178e-06,
+          "cycles": 14111249,
+          "instruction_count": 274415,
+          "hbm_read_bytes": 174063616,
+          "hbm_write_bytes": 8120320,
+          "peak_window_power_w": 2.3279813293190665,
+          "busy_cycles": {
+            "sm0.dma": 2846624,
+            "sm0.issue": 274415,
+            "sm0.noc_in": 2719744,
+            "sm0.noc_out": 126880,
+            "sm0.rf_read": 4720520,
+            "sm0.rf_write": 3604840,
+            "sm0.sfu": 269964,
+            "sm0.shared_read": 0,
+            "sm0.shared_write": 0,
+            "sm0.tc": 5630304,
+            "sm0.vec": 570168,
+            "sm0.issue_wait": 13836770,
+            "shared.hbm_channel_0": 1395232,
+            "shared.hbm_channel_1": 1507552,
+            "shared.hbm_channel_2": 1395232,
+            "shared.hbm_channel_3": 1395232,
+            "shared.noc": 2846624
+          }
+        },
+        "M2_D1": {
+          "functional_passed": true,
+          "max_abs_error": 2.9756341235476214e-06,
+          "cycles": 921682,
+          "instruction_count": 34458,
+          "hbm_read_bytes": 16011264,
+          "hbm_write_bytes": 167936,
+          "peak_window_power_w": 1.859370174430437,
+          "busy_cycles": {
+            "sm0.dma": 252800,
+            "sm0.issue": 34458,
+            "sm0.noc_in": 250176,
+            "sm0.noc_out": 2624,
+            "sm0.rf_read": 144864,
+            "sm0.rf_write": 271616,
+            "sm0.sfu": 8832,
+            "sm0.shared_read": 0,
+            "sm0.shared_write": 0,
+            "sm0.tc": 252224,
+            "sm0.vec": 19072,
+            "sm0.issue_wait": 887064,
+            "shared.hbm_channel_0": 126304,
+            "shared.hbm_channel_1": 127072,
+            "shared.hbm_channel_2": 125600,
+            "shared.hbm_channel_3": 126624,
+            "shared.noc": 252800
+          }
+        }
+      },
+      "score": 1761.5596139891823,
+      "eligible": true,
+      "area_mm2": 6.671639413760001
+    }
+  },
+  "static": {
+    "M1_P1": {
+      "lines": 1915,
+      "ops": {
+        "WG.BEGIN": 1,
+        "FOR": 412,
+        "LD": 316,
+        "REDUCE": 72,
+        "VEC": 432,
+        "SFU": 48,
+        "ST": 148,
+        "END.FOR": 412,
+        "MMA.ACC": 72,
+        "STEP.COMMIT": 1,
+        "WG.END": 1
+      }
+    },
+    "M2_D1": {
+      "lines": 2682,
+      "ops": {
+        "WG.BEGIN": 1,
+        "FOR": 560,
+        "LD": 456,
+        "REDUCE": 96,
+        "VEC": 608,
+        "SFU": 64,
+        "ST": 200,
+        "END.FOR": 560,
+        "MMA.ACC": 128,
+        "STEP.COMMIT": 8,
+        "WG.END": 1
+      }
+    }
+  },
+  "verdict": "evaluated"
+}

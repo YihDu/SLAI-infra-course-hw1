@@ -1,0 +1,24 @@
+{
+  "bias": "balanced",
+  "created_at": "2026-09-28 13:58:46",
+  "failure_class": "none",
+  "family": "hardware",
+  "fingerprint": "94bc9c7b5d9d25cf",
+  "hypothesis": "exploit cand-019: hw reduction_units 0->1",
+  "id": "cand-044",
+  "kind": "exploit",
+  "ops": [
+    {
+      "op": "hw_set",
+      "path": "reduction_units",
+      "value": 1
+    }
+  ],
+  "parent": "cand-019",
+  "provenance_note": null,
+  "round": 9,
+  "status": "evaluated",
+  "struct_sig": "hw:reduction_units=1",
+  "summary": "[{\"op\": \"hw_set\", \"path\": \"reduction_units\", \"value\": 1}]",
+  "verdict_note": null
+}

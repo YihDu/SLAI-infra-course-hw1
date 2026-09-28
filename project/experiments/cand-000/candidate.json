@@ -1,0 +1,9 @@
+{
+  "created_at": "2026-09-28 10:46:22",
+  "hypothesis": "frozen baseline reference point (score=1000)",
+  "id": "cand-000",
+  "parent": null,
+  "status": "kept",
+  "summary": "unmodified starter compiler + baseline hardware",
+  "verdict_note": "reference root"
+}

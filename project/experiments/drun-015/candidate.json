@@ -1,0 +1,22 @@
+{
+  "bias": "balanced",
+  "created_at": "2026-09-28 11:37:16",
+  "failure_class": "dry_run",
+  "family": "attention",
+  "fingerprint": "19039ac31e1e14e2",
+  "hypothesis": "novelty: untried structure scores_rf on cand-001",
+  "id": "drun-015",
+  "kind": "novelty",
+  "ops": [
+    {
+      "op": "scores_residency",
+      "space": "rf"
+    }
+  ],
+  "parent": "cand-001",
+  "round": 2,
+  "status": "pruned",
+  "struct_sig": "s:rf",
+  "summary": "[{\"op\": \"scores_residency\", \"space\": \"rf\"}]",
+  "verdict_note": "mechanism test"
+}

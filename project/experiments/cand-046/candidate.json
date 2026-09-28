@@ -1,0 +1,24 @@
+{
+  "bias": "balanced",
+  "created_at": "2026-09-28 14:04:05",
+  "failure_class": "none",
+  "family": "compute",
+  "fingerprint": "195ec88606acde60",
+  "hypothesis": "expand cand-036: reduction unit for LN/softmax reduces [reduction_units=1]",
+  "id": "cand-046",
+  "kind": "expand",
+  "ops": [
+    {
+      "op": "hw_set",
+      "path": "reduction_units",
+      "value": 1
+    }
+  ],
+  "parent": "cand-036",
+  "provenance_note": null,
+  "round": 9,
+  "status": "evaluated",
+  "struct_sig": "hw:reduction_units=1",
+  "summary": "[{\"op\": \"hw_set\", \"path\": \"reduction_units\", \"value\": 1}]",
+  "verdict_note": null
+}

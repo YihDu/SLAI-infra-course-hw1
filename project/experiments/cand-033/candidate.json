@@ -1,0 +1,41 @@
+{
+  "bias": "balanced",
+  "created_at": "2026-09-28 13:07:25",
+  "failure_class": "none",
+  "family": "memory",
+  "fingerprint": "f0ee74fb076a59aa",
+  "hypothesis": "novelty: random nkm tiles=(1, 8, 32)",
+  "id": "cand-033",
+  "kind": "novelty",
+  "ops": [
+    {
+      "op": "gemm_order",
+      "order": "nkm"
+    },
+    {
+      "k_chunk": 32,
+      "m_tile": 1,
+      "n_tile": 8,
+      "op": "gemm_tiles"
+    },
+    {
+      "enabled": 1,
+      "op": "gemm_prefetch"
+    },
+    {
+      "op": "scores_residency",
+      "space": "rf"
+    },
+    {
+      "enabled": 1,
+      "op": "fuse_bias_gelu"
+    }
+  ],
+  "parent": "cand-019",
+  "provenance_note": null,
+  "round": 6,
+  "status": "dominated",
+  "struct_sig": "fuse+nkm+pf+s:rf",
+  "summary": "[{\"op\": \"gemm_order\", \"order\": \"nkm\"}, {\"op\": \"gemm_tiles\", \"m_tile\": 1, \"n_tile\": 8, \"k_chunk\": 32}, {\"op\": \"gemm_prefetch\", \"enabled\": 1}, {\"op\": \"scores_residency\", \"space\": \"rf\"}, {\"op\": \"fuse_bias_gelu\", \"enabled\": 1}]",
+  "verdict_note": null
+}

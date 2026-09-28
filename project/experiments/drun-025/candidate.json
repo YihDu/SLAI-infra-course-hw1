@@ -1,0 +1,24 @@
+{
+  "bias": "balanced",
+  "created_at": "2026-09-28 13:36:33",
+  "failure_class": "dry_run",
+  "family": "hardware",
+  "fingerprint": "32db6f8fc708a8cc",
+  "hypothesis": "expand cand-020: widen RF ports to relieve MMA read-port bound [rf_ports=8R4W]",
+  "id": "drun-025",
+  "kind": "expand",
+  "ops": [
+    {
+      "op": "hw_set",
+      "path": "rf_ports",
+      "value": "8R4W"
+    }
+  ],
+  "parent": "cand-020",
+  "provenance_note": null,
+  "round": 7,
+  "status": "pruned",
+  "struct_sig": "hw:rf_ports=8R4W",
+  "summary": "[{\"op\": \"hw_set\", \"path\": \"rf_ports\", \"value\": \"8R4W\"}]",
+  "verdict_note": "mechanism test"
+}

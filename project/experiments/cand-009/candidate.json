@@ -1,0 +1,23 @@
+{
+  "bias": "balanced",
+  "created_at": "2026-09-28 12:03:02",
+  "failure_class": "none",
+  "family": "fusion",
+  "fingerprint": "33c61a7d000396c1",
+  "hypothesis": "novelty: untried structure fuse_gelu on cand-001",
+  "id": "cand-009",
+  "kind": "novelty",
+  "ops": [
+    {
+      "enabled": 1,
+      "op": "fuse_bias_gelu"
+    }
+  ],
+  "parent": "cand-001",
+  "provenance_note": null,
+  "round": 2,
+  "status": "evaluated",
+  "struct_sig": "fuse",
+  "summary": "[{\"op\": \"fuse_bias_gelu\", \"enabled\": 1}]",
+  "verdict_note": null
+}

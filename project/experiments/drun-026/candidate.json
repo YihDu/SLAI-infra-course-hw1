@@ -1,0 +1,24 @@
+{
+  "bias": "balanced",
+  "created_at": "2026-09-28 13:36:33",
+  "failure_class": "dry_run",
+  "family": "memory",
+  "fingerprint": "790882511f0a7043",
+  "hypothesis": "expand cand-014: wider SM NoC link [sm_noc_bytes_per_cycle=128]",
+  "id": "drun-026",
+  "kind": "expand",
+  "ops": [
+    {
+      "op": "hw_set",
+      "path": "sm_noc_bytes_per_cycle",
+      "value": 128
+    }
+  ],
+  "parent": "cand-014",
+  "provenance_note": null,
+  "round": 7,
+  "status": "pruned",
+  "struct_sig": "hw:sm_noc_bytes_per_cycle=128",
+  "summary": "[{\"op\": \"hw_set\", \"path\": \"sm_noc_bytes_per_cycle\", \"value\": 128}]",
+  "verdict_note": "mechanism test"
+}

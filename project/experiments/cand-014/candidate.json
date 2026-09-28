@@ -1,0 +1,23 @@
+{
+  "bias": "balanced",
+  "created_at": "2026-09-28 12:15:55",
+  "failure_class": "none",
+  "family": "attention",
+  "fingerprint": "19039ac31e1e14e2",
+  "hypothesis": "expand cand-001: keep attention scores in RF",
+  "id": "cand-014",
+  "kind": "expand",
+  "ops": [
+    {
+      "op": "scores_residency",
+      "space": "rf"
+    }
+  ],
+  "parent": "cand-001",
+  "provenance_note": null,
+  "round": 3,
+  "status": "kept",
+  "struct_sig": "s:rf",
+  "summary": "[{\"op\": \"scores_residency\", \"space\": \"rf\"}]",
+  "verdict_note": null
+}

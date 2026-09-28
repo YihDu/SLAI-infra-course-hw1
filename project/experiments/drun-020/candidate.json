@@ -1,0 +1,26 @@
+{
+  "bias": "balanced",
+  "created_at": "2026-09-28 11:38:47",
+  "failure_class": "dry_run",
+  "family": "memory",
+  "fingerprint": "c72def168724372d",
+  "hypothesis": "novelty: untried structure nkm_pf on cand-001",
+  "id": "drun-020",
+  "kind": "novelty",
+  "ops": [
+    {
+      "op": "gemm_order",
+      "order": "nkm"
+    },
+    {
+      "enabled": 1,
+      "op": "gemm_prefetch"
+    }
+  ],
+  "parent": "cand-001",
+  "round": 1,
+  "status": "pruned",
+  "struct_sig": "nkm+pf",
+  "summary": "[{\"op\": \"gemm_order\", \"order\": \"nkm\"}, {\"op\": \"gemm_prefetch\", \"enabled\": 1}]",
+  "verdict_note": "mechanism test"
+}

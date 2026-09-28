@@ -1,0 +1,2523 @@
+{
+  "archives": {
+    "diversity": {
+      "attention|balanced": "cand-019",
+      "compute|balanced": "cand-046",
+      "fusion|balanced": "cand-009",
+      "hardware|balanced": "cand-047",
+      "memory|balanced": "cand-053",
+      "sig:fuse": "cand-009",
+      "sig:fuse+hw:hbm_channels=1+nkm+pf+s:rf": "cand-049",
+      "sig:fuse+mnk+nopf+s:hbm": "cand-021",
+      "sig:fuse+nkm": "cand-010",
+      "sig:fuse+nkm+pf+s:rf": "cand-033",
+      "sig:fuse+nkm+s:rf": "cand-051",
+      "sig:hw:dma_depth=2": "cand-053",
+      "sig:hw:reduction_units=1": "cand-044",
+      "sig:hw:rf_ports=8R4W": "cand-047",
+      "sig:hw:vector_lanes=8": "cand-045",
+      "sig:mnk": "cand-000",
+      "sig:mnk+nofuse+nopf+s:hbm": "cand-027",
+      "sig:nkm": "cand-001",
+      "sig:nkm+pf": "cand-003",
+      "sig:nkm+pf+s:rf": "cand-015",
+      "sig:nkm+s:rf": "cand-017",
+      "sig:pf": "cand-025",
+      "sig:s:rf": "cand-019"
+    },
+    "elite": [
+      "cand-047",
+      "cand-052",
+      "cand-051",
+      "cand-050",
+      "cand-053",
+      "cand-019",
+      "cand-044",
+      "cand-020"
+    ],
+    "pareto": [
+      "cand-047"
+    ]
+  },
+  "candidates": {
+    "cand-000": {
+      "bias": "balanced",
+      "cycles": {
+        "M1_P1": 30996995,
+        "M2_D1": 1302032
+      },
+      "failure_class": "none",
+      "family": "memory",
+      "fingerprint": "8c85c43dcdc09a36",
+      "hypothesis": "frozen baseline reference point (score=1000)",
+      "kind": "manual",
+      "parent": null,
+      "score": 1000.0,
+      "status": "kept",
+      "struct_sig": "mnk"
+    },
+    "cand-001": {
+      "bias": "balanced",
+      "cycles": {
+        "M1_P1": 22373717,
+        "M2_D1": 1310832
+      },
+      "failure_class": "none",
+      "family": "memory",
+      "fingerprint": "4f0084c3f43a4af2",
+      "hypothesis": "B-stationary GEMM loop order n->k->m removes ~8x repeated weight loads",
+      "kind": "manual",
+      "parent": "cand-000",
+      "score": 1173.0811006016247,
+      "status": "kept",
+      "struct_sig": "nkm"
+    },
+    "cand-002": {
+      "area_mm2": 5.59764068864,
+      "bias": "balanced",
+      "cycles": {
+        "M1_P1": 27996777,
+        "M2_D1": 1737288
+      },
+      "dominated_by_parent": true,
+      "failure_class": "none",
+      "family": "memory",
+      "fingerprint": "a9631f7a313e736a",
+      "hypothesis": "exploit cand-001: tiles (8, 16, 48)->(8, 8, 48)",
+      "improved": false,
+      "kind": "exploit",
+      "ops": [
+        {
+          "op": "gemm_order",
+          "order": "nkm"
+        },
+        {
+          "k_chunk": 48,
+          "m_tile": 8,
+          "n_tile": 8,
+          "op": "gemm_tiles"
+        }
+      ],
+      "parent": "cand-001",
+      "power_w": 1.931752833217892,
+      "round": 1,
+      "score": 910.920963143551,
+      "status": "dominated",
+      "struct_sig": "nkm"
+    },
+    "cand-003": {
+      "area_mm2": 5.59764068864,
+      "bias": "balanced",
+      "cycles": {
+        "M1_P1": 22494677,
+        "M2_D1": 1453168
+      },
+      "dominated_by_parent": true,
+      "failure_class": "none",
+      "family": "memory",
+      "fingerprint": "c72def168724372d",
+      "hypothesis": "novelty: untried structure nkm_pf on cand-001",
+      "improved": false,
+      "kind": "novelty",
+      "ops": [
+        {
+          "op": "gemm_order",
+          "order": "nkm"
+        },
+        {
+          "enabled": 1,
+          "op": "gemm_prefetch"
+        }
+      ],
+      "parent": "cand-001",
+      "power_w": 1.7715864571831552,
+      "round": 1,
+      "score": 1111.1503617194342,
+      "status": "dominated",
+      "struct_sig": "nkm+pf"
+    },
+    "cand-004": {
+      "area_mm2": 5.59764068864,
+      "bias": "balanced",
+      "cycles": {
+        "M1_P1": 26522537,
+        "M2_D1": 1310832
+      },
+      "dominated_by_parent": true,
+      "failure_class": "none",
+      "family": "memory",
+      "fingerprint": "5e60de2f5066b4dc",
+      "hypothesis": "exploit cand-001: tiles (8, 16, 48)->(2, 16, 48)",
+      "improved": false,
+      "kind": "exploit",
+      "ops": [
+        {
+          "op": "gemm_order",
+          "order": "nkm"
+        },
+        {
+          "k_chunk": 48,
+          "m_tile": 2,
+          "n_tile": 16,
+          "op": "gemm_tiles"
+        }
+      ],
+      "parent": "cand-001",
+      "power_w": 1.7715864571831552,
+      "round": 2,
+      "score": 1077.4312710849626,
+      "status": "dominated",
+      "struct_sig": "nkm"
+    },
+    "cand-005": {
+      "area_mm2": 5.59764068864,
+      "bias": "balanced",
+      "cycles": {
+        "M1_P1": 24445817,
+        "M2_D1": 1351504
+      },
+      "dominated_by_parent": true,
+      "failure_class": "none",
+      "family": "memory",
+      "fingerprint": "56a05cecf41c0696",
+      "hypothesis": "exploit cand-001: tiles (8, 16, 48)->(8, 16, 24)",
+      "improved": false,
+      "kind": "exploit",
+      "ops": [
+        {
+          "op": "gemm_order",
+          "order": "nkm"
+        },
+        {
+          "k_chunk": 24,
+          "m_tile": 8,
+          "n_tile": 16,
+          "op": "gemm_tiles"
+        }
+      ],
+      "parent": "cand-001",
+      "power_w": 1.7715864571831552,
+      "round": 2,
+      "score": 1105.2478525385854,
+      "status": "dominated",
+      "struct_sig": "nkm"
+    },
+    "cand-006": {
+      "area_mm2": 5.59764068864,
+      "bias": "balanced",
+      "cycles": {
+        "M1_P1": 23262277,
+        "M2_D1": 1317280
+      },
+      "dominated_by_parent": true,
+      "failure_class": "none",
+      "family": "memory",
+      "fingerprint": "0d868c77dfb8fd32",
+      "hypothesis": "exploit cand-001: tiles (8, 16, 48)->(8, 16, 64)",
+      "improved": false,
+      "kind": "exploit",
+      "ops": [
+        {
+          "op": "gemm_order",
+          "order": "nkm"
+        },
+        {
+          "k_chunk": 64,
+          "m_tile": 8,
+          "n_tile": 16,
+          "op": "gemm_tiles"
+        }
+      ],
+      "parent": "cand-001",
+      "power_w": 1.7715864571831552,
+      "round": 2,
+      "score": 1147.6394407423866,
+      "status": "dominated",
+      "struct_sig": "nkm"
+    },
+    "cand-007": {
+      "area_mm2": 5.59764068864,
+      "bias": "balanced",
+      "cycles": {
+        "M1_P1": 30851135,
+        "M2_D1": 1298904
+      },
+      "failure_class": "none",
+      "family": "fusion",
+      "fingerprint": "c6152b1c5747f74a",
+      "hypothesis": "expand cand-000: fuse bias+gelu epilogue",
+      "improved": true,
+      "kind": "expand",
+      "ops": [
+        {
+          "enabled": 1,
+          "op": "fuse_bias_gelu"
+        }
+      ],
+      "parent": "cand-000",
+      "power_w": 1.7715864571802942,
+      "round": 2,
+      "score": 1003.5673543192571,
+      "status": "evaluated",
+      "struct_sig": "fuse"
+    },
+    "cand-008": {
+      "area_mm2": 5.59764068864,
+      "bias": "balanced",
+      "cycles": {
+        "M1_P1": 22348817,
+        "M2_D1": 1450040
+      },
+      "failure_class": "none",
+      "family": "fusion",
+      "fingerprint": "850a9ef1390e1f3e",
+      "hypothesis": "expand cand-003: fuse bias+gelu epilogue",
+      "improved": true,
+      "kind": "expand",
+      "ops": [
+        {
+          "enabled": 1,
+          "op": "fuse_bias_gelu"
+        }
+      ],
+      "parent": "cand-003",
+      "power_w": 1.7715864571831552,
+      "round": 2,
+      "score": 1115.972170751516,
+      "status": "evaluated",
+      "struct_sig": "fuse"
+    },
+    "cand-009": {
+      "area_mm2": 5.59764068864,
+      "bias": "balanced",
+      "cycles": {
+        "M1_P1": 22227857,
+        "M2_D1": 1307704
+      },
+      "failure_class": "none",
+      "family": "fusion",
+      "fingerprint": "33c61a7d000396c1",
+      "hypothesis": "novelty: untried structure fuse_gelu on cand-001",
+      "improved": true,
+      "kind": "novelty",
+      "ops": [
+        {
+          "enabled": 1,
+          "op": "fuse_bias_gelu"
+        }
+      ],
+      "parent": "cand-001",
+      "power_w": 1.7715864571831552,
+      "round": 2,
+      "score": 1178.3304547853895,
+      "status": "evaluated",
+      "struct_sig": "fuse"
+    },
+    "cand-010": {
+      "area_mm2": 5.59764068864,
+      "bias": "balanced",
+      "cycles": {
+        "M1_P1": 22382453,
+        "M2_D1": 1307704
+      },
+      "dominated_by_parent": true,
+      "failure_class": "none",
+      "family": "fusion",
+      "fingerprint": "c3a05a00e8785bef",
+      "hypothesis": "exploit cand-009: tiles (8, 16, 48)->(16, 16, 48)",
+      "improved": false,
+      "kind": "exploit",
+      "ops": [
+        {
+          "op": "gemm_order",
+          "order": "nkm"
+        },
+        {
+          "k_chunk": 48,
+          "m_tile": 16,
+          "n_tile": 16,
+          "op": "gemm_tiles"
+        },
+        {
+          "enabled": 1,
+          "op": "fuse_bias_gelu"
+        }
+      ],
+      "parent": "cand-009",
+      "power_w": 1.7715864571831552,
+      "round": 3,
+      "score": 1174.2540289231054,
+      "status": "dominated",
+      "struct_sig": "fuse+nkm"
+    },
+    "cand-011": {
+      "area_mm2": 5.59764068864,
+      "bias": "balanced",
+      "cycles": {
+        "M1_P1": 24210373,
+        "M2_D1": 1323688
+      },
+      "dominated_by_parent": true,
+      "failure_class": "none",
+      "family": "fusion",
+      "fingerprint": "3661bda877c83bf0",
+      "hypothesis": "exploit cand-009: tiles (8, 16, 48)->(8, 16, 32)",
+      "improved": false,
+      "kind": "exploit",
+      "ops": [
+        {
+          "op": "gemm_order",
+          "order": "nkm"
+        },
+        {
+          "k_chunk": 32,
+          "m_tile": 8,
+          "n_tile": 16,
+          "op": "gemm_tiles"
+        },
+        {
+          "enabled": 1,
+          "op": "fuse_bias_gelu"
+        }
+      ],
+      "parent": "cand-009",
+      "power_w": 1.7715864571831552,
+      "round": 3,
+      "score": 1122.2175843408888,
+      "status": "dominated",
+      "struct_sig": "fuse+nkm"
+    },
+    "cand-012": {
+      "area_mm2": 5.59764068864,
+      "bias": "balanced",
+      "cycles": {
+        "M1_P1": 27850917,
+        "M2_D1": 1734160
+      },
+      "dominated_by_parent": true,
+      "failure_class": "none",
+      "family": "fusion",
+      "fingerprint": "f314351fb378b9e5",
+      "hypothesis": "exploit cand-009: tiles (8, 16, 48)->(8, 8, 48)",
+      "improved": false,
+      "kind": "exploit",
+      "ops": [
+        {
+          "op": "gemm_order",
+          "order": "nkm"
+        },
+        {
+          "k_chunk": 48,
+          "m_tile": 8,
+          "n_tile": 8,
+          "op": "gemm_tiles"
+        },
+        {
+          "enabled": 1,
+          "op": "fuse_bias_gelu"
+        }
+      ],
+      "parent": "cand-009",
+      "power_w": 1.931752833217892,
+      "round": 3,
+      "score": 914.1264889348438,
+      "status": "dominated",
+      "struct_sig": "fuse+nkm"
+    },
+    "cand-013": {
+      "area_mm2": 5.59764068864,
+      "bias": "balanced",
+      "cycles": {
+        "M1_P1": 30851135,
+        "M2_D1": 1298904
+      },
+      "failure_class": "none",
+      "family": "memory",
+      "fingerprint": "15dcc438f76ab5b8",
+      "hypothesis": "expand cand-007: double-buffer B tiles",
+      "improved": false,
+      "kind": "expand",
+      "ops": [
+        {
+          "enabled": 1,
+          "op": "gemm_prefetch"
+        }
+      ],
+      "parent": "cand-007",
+      "power_w": 1.7715864571802942,
+      "round": 3,
+      "score": 1003.5673543192571,
+      "status": "evaluated",
+      "struct_sig": "pf"
+    },
+    "cand-014": {
+      "area_mm2": 5.59764068864,
+      "bias": "balanced",
+      "cycles": {
+        "M1_P1": 22100837,
+        "M2_D1": 1284834
+      },
+      "failure_class": "none",
+      "family": "attention",
+      "fingerprint": "19039ac31e1e14e2",
+      "hypothesis": "expand cand-001: keep attention scores in RF",
+      "improved": true,
+      "kind": "expand",
+      "ops": [
+        {
+          "op": "scores_residency",
+          "space": "rf"
+        }
+      ],
+      "parent": "cand-001",
+      "power_w": 1.7715864571831552,
+      "round": 3,
+      "score": 1192.1825329196229,
+      "status": "kept",
+      "struct_sig": "s:rf"
+    },
+    "cand-015": {
+      "area_mm2": 5.59764068864,
+      "bias": "balanced",
+      "cycles": {
+        "M1_P1": 22075937,
+        "M2_D1": 1424034
+      },
+      "dominated_by_parent": true,
+      "failure_class": "none",
+      "family": "memory",
+      "fingerprint": "46b7b004577c04fd",
+      "hypothesis": "novelty: untried structure nkm_pf_rf on cand-009",
+      "improved": false,
+      "kind": "novelty",
+      "ops": [
+        {
+          "op": "gemm_order",
+          "order": "nkm"
+        },
+        {
+          "enabled": 1,
+          "op": "gemm_prefetch"
+        },
+        {
+          "op": "scores_residency",
+          "space": "rf"
+        }
+      ],
+      "parent": "cand-009",
+      "power_w": 1.7715864571831552,
+      "round": 3,
+      "score": 1133.0546914360318,
+      "status": "dominated",
+      "struct_sig": "nkm+pf+s:rf"
+    },
+    "cand-016": {
+      "area_mm2": 5.59764068864,
+      "bias": "balanced",
+      "cycles": {
+        "M1_P1": 24079193,
+        "M2_D1": 1298658
+      },
+      "dominated_by_parent": true,
+      "failure_class": "none",
+      "family": "attention",
+      "fingerprint": "3ed983a6780dce16",
+      "hypothesis": "exploit cand-014: tiles (8, 16, 48)->(8, 16, 32)",
+      "improved": false,
+      "kind": "exploit",
+      "ops": [
+        {
+          "op": "gemm_order",
+          "order": "nkm"
+        },
+        {
+          "k_chunk": 32,
+          "m_tile": 8,
+          "n_tile": 16,
+          "op": "gemm_tiles"
+        },
+        {
+          "op": "scores_residency",
+          "space": "rf"
+        }
+      ],
+      "parent": "cand-014",
+      "power_w": 1.7715864571831552,
+      "round": 4,
+      "score": 1136.0626036140557,
+      "status": "dominated",
+      "struct_sig": "nkm+s:rf"
+    },
+    "cand-017": {
+      "area_mm2": 5.59764068864,
+      "bias": "balanced",
+      "cycles": {
+        "M1_P1": 22255433,
+        "M2_D1": 1284834
+      },
+      "dominated_by_parent": true,
+      "failure_class": "none",
+      "family": "attention",
+      "fingerprint": "b3c122bf8a968893",
+      "hypothesis": "exploit cand-014: tiles (8, 16, 48)->(16, 16, 48)",
+      "improved": false,
+      "kind": "exploit",
+      "ops": [
+        {
+          "op": "gemm_order",
+          "order": "nkm"
+        },
+        {
+          "k_chunk": 48,
+          "m_tile": 16,
+          "n_tile": 16,
+          "op": "gemm_tiles"
+        },
+        {
+          "op": "scores_residency",
+          "space": "rf"
+        }
+      ],
+      "parent": "cand-014",
+      "power_w": 1.7715864571831552,
+      "round": 4,
+      "score": 1188.0346056227518,
+      "status": "dominated",
+      "struct_sig": "nkm+s:rf"
+    },
+    "cand-018": {
+      "area_mm2": 5.59764068864,
+      "bias": "balanced",
+      "cycles": {
+        "M1_P1": 27716789,
+        "M2_D1": 1707234
+      },
+      "dominated_by_parent": true,
+      "failure_class": "none",
+      "family": "attention",
+      "fingerprint": "c16f062eaf2ae286",
+      "hypothesis": "exploit cand-014: tiles (8, 16, 48)->(8, 8, 48)",
+      "improved": false,
+      "kind": "exploit",
+      "ops": [
+        {
+          "op": "gemm_order",
+          "order": "nkm"
+        },
+        {
+          "k_chunk": 48,
+          "m_tile": 8,
+          "n_tile": 8,
+          "op": "gemm_tiles"
+        },
+        {
+          "op": "scores_residency",
+          "space": "rf"
+        }
+      ],
+      "parent": "cand-014",
+      "power_w": 1.9026077852199403,
+      "round": 4,
+      "score": 923.5334757991376,
+      "status": "dominated",
+      "struct_sig": "nkm+s:rf"
+    },
+    "cand-019": {
+      "area_mm2": 5.59764068864,
+      "bias": "balanced",
+      "cycles": {
+        "M1_P1": 21954977,
+        "M2_D1": 1281698
+      },
+      "failure_class": "none",
+      "family": "attention",
+      "fingerprint": "2e4feb59f56b0539",
+      "hypothesis": "expand cand-009: keep attention scores in RF",
+      "improved": true,
+      "kind": "expand",
+      "ops": [
+        {
+          "op": "scores_residency",
+          "space": "rf"
+        }
+      ],
+      "parent": "cand-009",
+      "power_w": 1.7715864571831552,
+      "round": 4,
+      "score": 1197.5985984332774,
+      "status": "kept",
+      "struct_sig": "s:rf"
+    },
+    "cand-020": {
+      "area_mm2": 5.59764068864,
+      "bias": "balanced",
+      "cycles": {
+        "M1_P1": 22109573,
+        "M2_D1": 1281698
+      },
+      "failure_class": "none",
+      "family": "attention",
+      "fingerprint": "6de9256553383d73",
+      "hypothesis": "expand cand-010: keep attention scores in RF",
+      "improved": true,
+      "kind": "expand",
+      "ops": [
+        {
+          "op": "scores_residency",
+          "space": "rf"
+        }
+      ],
+      "parent": "cand-010",
+      "power_w": 1.7715864571831552,
+      "round": 4,
+      "score": 1193.4042900831387,
+      "status": "evaluated",
+      "struct_sig": "s:rf"
+    },
+    "cand-021": {
+      "area_mm2": 5.59764068864,
+      "bias": "balanced",
+      "cycles": {
+        "M1_P1": 33021791,
+        "M2_D1": 1339272
+      },
+      "dominated_by_parent": true,
+      "failure_class": "none",
+      "family": "memory",
+      "fingerprint": "5bd0cc22e122250c",
+      "hypothesis": "novelty: random mnk tiles=(8, 16, 24)",
+      "improved": false,
+      "kind": "novelty",
+      "ops": [
+        {
+          "op": "gemm_order",
+          "order": "mnk"
+        },
+        {
+          "k_chunk": 24,
+          "m_tile": 8,
+          "n_tile": 16,
+          "op": "gemm_tiles"
+        },
+        {
+          "enabled": 0,
+          "op": "gemm_prefetch"
+        },
+        {
+          "op": "scores_residency",
+          "space": "hbm"
+        },
+        {
+          "enabled": 1,
+          "op": "fuse_bias_gelu"
+        }
+      ],
+      "parent": "cand-014",
+      "power_w": 1.7715864571802942,
+      "round": 4,
+      "score": 955.2915117902414,
+      "status": "dominated",
+      "struct_sig": "fuse+mnk+nopf+s:hbm"
+    },
+    "cand-022": {
+      "area_mm2": 5.59764068864,
+      "bias": "balanced",
+      "cycles": {
+        "M1_P1": 24026741,
+        "M2_D1": 1323298
+      },
+      "dominated_by_parent": true,
+      "failure_class": "none",
+      "family": "attention",
+      "fingerprint": "ac572e82f17a050f",
+      "hypothesis": "exploit cand-019: tiles (8, 16, 48)->(8, 16, 24)",
+      "improved": false,
+      "kind": "exploit",
+      "ops": [
+        {
+          "op": "gemm_order",
+          "order": "nkm"
+        },
+        {
+          "k_chunk": 24,
+          "m_tile": 8,
+          "n_tile": 16,
+          "op": "gemm_tiles"
+        },
+        {
+          "op": "scores_residency",
+          "space": "rf"
+        },
+        {
+          "enabled": 1,
+          "op": "fuse_bias_gelu"
+        }
+      ],
+      "parent": "cand-019",
+      "power_w": 1.7715864571831552,
+      "round": 5,
+      "score": 1126.6638611979947,
+      "status": "dominated",
+      "struct_sig": "fuse+nkm+s:rf"
+    },
+    "cand-023": {
+      "area_mm2": 5.59764068864,
+      "bias": "balanced",
+      "cycles": {
+        "M1_P1": 23933333,
+        "M2_D1": 1295522
+      },
+      "dominated_by_parent": true,
+      "failure_class": "none",
+      "family": "attention",
+      "fingerprint": "4db087d2863f570d",
+      "hypothesis": "exploit cand-019: tiles (8, 16, 48)->(8, 16, 32)",
+      "improved": false,
+      "kind": "exploit",
+      "ops": [
+        {
+          "op": "gemm_order",
+          "order": "nkm"
+        },
+        {
+          "k_chunk": 32,
+          "m_tile": 8,
+          "n_tile": 16,
+          "op": "gemm_tiles"
+        },
+        {
+          "op": "scores_residency",
+          "space": "rf"
+        },
+        {
+          "enabled": 1,
+          "op": "fuse_bias_gelu"
+        }
+      ],
+      "parent": "cand-019",
+      "power_w": 1.7715864571831552,
+      "round": 5,
+      "score": 1140.8975242069364,
+      "status": "dominated",
+      "struct_sig": "fuse+nkm+s:rf"
+    },
+    "cand-024": {
+      "area_mm2": 5.59764068864,
+      "bias": "balanced",
+      "cycles": {
+        "M1_P1": 22281209,
+        "M2_D1": 1281698
+      },
+      "dominated_by_parent": true,
+      "failure_class": "none",
+      "family": "attention",
+      "fingerprint": "52b8df7fb6990c4f",
+      "hypothesis": "exploit cand-019: tiles (8, 16, 48)->(4, 16, 48)",
+      "improved": false,
+      "kind": "exploit",
+      "ops": [
+        {
+          "op": "gemm_order",
+          "order": "nkm"
+        },
+        {
+          "k_chunk": 48,
+          "m_tile": 4,
+          "n_tile": 16,
+          "op": "gemm_tiles"
+        },
+        {
+          "op": "scores_residency",
+          "space": "rf"
+        },
+        {
+          "enabled": 1,
+          "op": "fuse_bias_gelu"
+        }
+      ],
+      "parent": "cand-019",
+      "power_w": 1.7715864571831552,
+      "round": 5,
+      "score": 1188.7989042667773,
+      "status": "dominated",
+      "struct_sig": "fuse+nkm+s:rf"
+    },
+    "cand-025": {
+      "area_mm2": 5.59764068864,
+      "bias": "balanced",
+      "cycles": {
+        "M1_P1": 22182149,
+        "M2_D1": 1424034
+      },
+      "dominated_by_parent": true,
+      "failure_class": "none",
+      "family": "memory",
+      "fingerprint": "30fd2cc2cedd6be3",
+      "hypothesis": "expand cand-020: double-buffer B tiles",
+      "improved": false,
+      "kind": "expand",
+      "ops": [
+        {
+          "enabled": 1,
+          "op": "gemm_prefetch"
+        }
+      ],
+      "parent": "cand-020",
+      "power_w": 1.7715864571831552,
+      "round": 5,
+      "score": 1130.3388047148876,
+      "status": "dominated",
+      "struct_sig": "pf"
+    },
+    "cand-026": {
+      "area_mm2": 5.59764068864,
+      "bias": "balanced",
+      "cycles": {
+        "M1_P1": 22221797,
+        "M2_D1": 1427170
+      },
+      "dominated_by_parent": true,
+      "failure_class": "none",
+      "family": "memory",
+      "fingerprint": "8a7c84d9a7be1c97",
+      "hypothesis": "expand cand-014: double-buffer B tiles",
+      "improved": false,
+      "kind": "expand",
+      "ops": [
+        {
+          "enabled": 1,
+          "op": "gemm_prefetch"
+        }
+      ],
+      "parent": "cand-014",
+      "power_w": 1.7715864571831552,
+      "round": 5,
+      "score": 1128.088530457202,
+      "status": "dominated",
+      "struct_sig": "pf"
+    },
+    "cand-027": {
+      "area_mm2": 5.59764068864,
+      "bias": "balanced",
+      "cycles": {
+        "M1_P1": 27592005,
+        "M2_D1": 1237679
+      },
+      "dominated_by_parent": true,
+      "failure_class": "none",
+      "family": "memory",
+      "fingerprint": "d366bee507975620",
+      "hypothesis": "novelty: random mnk tiles=(8, 64, 16)",
+      "improved": false,
+      "kind": "novelty",
+      "ops": [
+        {
+          "op": "gemm_order",
+          "order": "mnk"
+        },
+        {
+          "k_chunk": 16,
+          "m_tile": 8,
+          "n_tile": 64,
+          "op": "gemm_tiles"
+        },
+        {
+          "enabled": 0,
+          "op": "gemm_prefetch"
+        },
+        {
+          "op": "scores_residency",
+          "space": "hbm"
+        },
+        {
+          "enabled": 0,
+          "op": "fuse_bias_gelu"
+        }
+      ],
+      "parent": "cand-019",
+      "power_w": 1.7715864571831552,
+      "round": 5,
+      "score": 1087.11373917888,
+      "status": "dominated",
+      "struct_sig": "mnk+nofuse+nopf+s:hbm"
+    },
+    "cand-028": {
+      "area_mm2": 5.59764068864,
+      "bias": "balanced",
+      "cycles": {
+        "M1_P1": 26103797,
+        "M2_D1": 1281698
+      },
+      "dominated_by_parent": true,
+      "failure_class": "none",
+      "family": "attention",
+      "fingerprint": "7c136c16167cb951",
+      "hypothesis": "exploit cand-019: tiles (8, 16, 48)->(2, 16, 48)",
+      "improved": false,
+      "kind": "exploit",
+      "ops": [
+        {
+          "op": "gemm_order",
+          "order": "nkm"
+        },
+        {
+          "k_chunk": 48,
+          "m_tile": 2,
+          "n_tile": 16,
+          "op": "gemm_tiles"
+        },
+        {
+          "op": "scores_residency",
+          "space": "rf"
+        },
+        {
+          "enabled": 1,
+          "op": "fuse_bias_gelu"
+        }
+      ],
+      "parent": "cand-019",
+      "power_w": 1.7715864571831552,
+      "round": 6,
+      "score": 1098.3125106615971,
+      "status": "dominated",
+      "struct_sig": "fuse+nkm+s:rf"
+    },
+    "cand-029": {
+      "area_mm2": 5.59764068864,
+      "bias": "balanced",
+      "cycles": {
+        "M1_P1": 22850897,
+        "M2_D1": 1293474
+      },
+      "dominated_by_parent": true,
+      "failure_class": "none",
+      "family": "attention",
+      "fingerprint": "7ed8a97e522117f4",
+      "hypothesis": "exploit cand-019: tiles (8, 16, 48)->(8, 16, 64)",
+      "improved": false,
+      "kind": "exploit",
+      "ops": [
+        {
+          "op": "gemm_order",
+          "order": "nkm"
+        },
+        {
+          "k_chunk": 64,
+          "m_tile": 8,
+          "n_tile": 16,
+          "op": "gemm_tiles"
+        },
+        {
+          "op": "scores_residency",
+          "space": "rf"
+        },
+        {
+          "enabled": 1,
+          "op": "fuse_bias_gelu"
+        }
+      ],
+      "parent": "cand-019",
+      "power_w": 1.7715864571831552,
+      "round": 6,
+      "score": 1168.5307558154386,
+      "status": "dominated",
+      "struct_sig": "fuse+nkm+s:rf"
+    },
+    "cand-030": {
+      "area_mm2": 5.59764068864,
+      "bias": "balanced",
+      "cycles": {
+        "M1_P1": 27570929,
+        "M2_D1": 1704098
+      },
+      "dominated_by_parent": true,
+      "failure_class": "none",
+      "family": "attention",
+      "fingerprint": "703e7311b450d7db",
+      "hypothesis": "exploit cand-019: tiles (8, 16, 48)->(8, 8, 48)",
+      "improved": false,
+      "kind": "exploit",
+      "ops": [
+        {
+          "op": "gemm_order",
+          "order": "nkm"
+        },
+        {
+          "k_chunk": 48,
+          "m_tile": 8,
+          "n_tile": 8,
+          "op": "gemm_tiles"
+        },
+        {
+          "op": "scores_residency",
+          "space": "rf"
+        },
+        {
+          "enabled": 1,
+          "op": "fuse_bias_gelu"
+        }
+      ],
+      "parent": "cand-019",
+      "power_w": 1.9026077852199403,
+      "round": 6,
+      "score": 926.8247918622404,
+      "status": "dominated",
+      "struct_sig": "fuse+nkm+s:rf"
+    },
+    "cand-031": {
+      "area_mm2": 5.59764068864,
+      "bias": "balanced",
+      "cycles": {
+        "M1_P1": 27321035,
+        "M2_D1": 1213810
+      },
+      "failure_class": "none",
+      "family": "attention",
+      "fingerprint": "7c58a9e1521ae859",
+      "hypothesis": "expand cand-027: keep attention scores in RF",
+      "improved": true,
+      "kind": "expand",
+      "ops": [
+        {
+          "op": "scores_residency",
+          "space": "rf"
+        }
+      ],
+      "parent": "cand-027",
+      "power_w": 1.7715864571831552,
+      "round": 6,
+      "score": 1103.1808039751736,
+      "status": "evaluated",
+      "struct_sig": "s:rf"
+    },
+    "cand-032": {
+      "area_mm2": 5.59764068864,
+      "bias": "balanced",
+      "cycles": {
+        "M1_P1": 22431545,
+        "M2_D1": 1424034
+      },
+      "dominated_by_parent": true,
+      "failure_class": "none",
+      "family": "memory",
+      "fingerprint": "7044d4568cdc1820",
+      "hypothesis": "expand cand-024: double-buffer B tiles",
+      "improved": false,
+      "kind": "expand",
+      "ops": [
+        {
+          "enabled": 1,
+          "op": "gemm_prefetch"
+        }
+      ],
+      "parent": "cand-024",
+      "power_w": 1.7715864571831552,
+      "round": 6,
+      "score": 1124.0376356259756,
+      "status": "dominated",
+      "struct_sig": "pf"
+    },
+    "cand-033": {
+      "area_mm2": 5.59764068864,
+      "bias": "balanced",
+      "cycles": {
+        "M1_P1": 50660093,
+        "M2_D1": 1926050
+      },
+      "dominated_by_parent": true,
+      "failure_class": "none",
+      "family": "memory",
+      "fingerprint": "f0ee74fb076a59aa",
+      "hypothesis": "novelty: random nkm tiles=(1, 8, 32)",
+      "improved": false,
+      "kind": "novelty",
+      "ops": [
+        {
+          "op": "gemm_order",
+          "order": "nkm"
+        },
+        {
+          "k_chunk": 32,
+          "m_tile": 1,
+          "n_tile": 8,
+          "op": "gemm_tiles"
+        },
+        {
+          "enabled": 1,
+          "op": "gemm_prefetch"
+        },
+        {
+          "op": "scores_residency",
+          "space": "rf"
+        },
+        {
+          "enabled": 1,
+          "op": "fuse_bias_gelu"
+        }
+      ],
+      "parent": "cand-019",
+      "power_w": 1.8243357268374292,
+      "round": 6,
+      "score": 643.1375334157768,
+      "status": "dominated",
+      "struct_sig": "fuse+nkm+pf+s:rf"
+    },
+    "cand-034": {
+      "area_mm2": 5.59764068864,
+      "bias": "balanced",
+      "cycles": {
+        "M1_P1": 21954977,
+        "M2_D1": 1281698
+      },
+      "failure_class": "harness_noop",
+      "failure_note": "hw mutation never staged to inputs (bug fixed 2026-09-28); evaluated point = parent hw",
+      "family": "hardware",
+      "fingerprint": "bc9f80dc971510a2",
+      "hypothesis": "exploit cand-019: hw rf_ports 4R2W->8R4W",
+      "improved": false,
+      "kind": "exploit",
+      "ops": [
+        {
+          "op": "hw_set",
+          "path": "rf_ports",
+          "value": "8R4W"
+        }
+      ],
+      "parent": "cand-019",
+      "power_w": 1.7715864571831552,
+      "round": 7,
+      "score": 1197.5985984332774,
+      "status": "pruned",
+      "struct_sig": "hw:rf_ports=8R4W"
+    },
+    "cand-035": {
+      "area_mm2": 5.59764068864,
+      "bias": "balanced",
+      "cycles": {
+        "M1_P1": 21954977,
+        "M2_D1": 1281698
+      },
+      "failure_class": "harness_noop",
+      "failure_note": "hw mutation never staged to inputs (bug fixed 2026-09-28); evaluated point = parent hw",
+      "family": "hardware",
+      "fingerprint": "fe9942186646c82e",
+      "hypothesis": "exploit cand-019: hw sm_count 8->12",
+      "improved": false,
+      "kind": "exploit",
+      "ops": [
+        {
+          "op": "hw_set",
+          "path": "sm_count",
+          "value": 12
+        }
+      ],
+      "parent": "cand-019",
+      "power_w": 1.7715864571831552,
+      "round": 7,
+      "score": 1197.5985984332774,
+      "status": "pruned",
+      "struct_sig": "hw:sm_count=12"
+    },
+    "cand-036": {
+      "area_mm2": 5.59764068864,
+      "bias": "balanced",
+      "cycles": {
+        "M1_P1": 27175175,
+        "M2_D1": 1210674
+      },
+      "failure_class": "none",
+      "family": "fusion",
+      "fingerprint": "062742f6b8fbbde1",
+      "hypothesis": "expand cand-031: fuse bias+gelu epilogue",
+      "improved": true,
+      "kind": "expand",
+      "ops": [
+        {
+          "enabled": 1,
+          "op": "fuse_bias_gelu"
+        }
+      ],
+      "parent": "cand-031",
+      "power_w": 1.7715864571831552,
+      "round": 7,
+      "score": 1107.569130887403,
+      "status": "evaluated",
+      "struct_sig": "fuse"
+    },
+    "cand-037": {
+      "area_mm2": 5.59764068864,
+      "bias": "balanced",
+      "cycles": {
+        "M1_P1": 22109573,
+        "M2_D1": 1281698
+      },
+      "failure_class": "harness_noop",
+      "failure_note": "hw mutation never staged to inputs (bug fixed 2026-09-28); evaluated point = parent hw",
+      "family": "hardware",
+      "fingerprint": "32db6f8fc708a8cc",
+      "hypothesis": "expand cand-020: widen RF ports to relieve MMA read-port bound [rf_ports=8R4W]",
+      "improved": false,
+      "kind": "expand",
+      "ops": [
+        {
+          "op": "hw_set",
+          "path": "rf_ports",
+          "value": "8R4W"
+        }
+      ],
+      "parent": "cand-020",
+      "power_w": 1.7715864571831552,
+      "round": 7,
+      "score": 1193.4042900831387,
+      "status": "pruned",
+      "struct_sig": "hw:rf_ports=8R4W"
+    },
+    "cand-038": {
+      "area_mm2": 5.59764068864,
+      "bias": "balanced",
+      "cycles": {
+        "M1_P1": 22100837,
+        "M2_D1": 1284834
+      },
+      "failure_class": "harness_noop",
+      "failure_note": "hw mutation never staged to inputs (bug fixed 2026-09-28); evaluated point = parent hw",
+      "family": "memory",
+      "fingerprint": "790882511f0a7043",
+      "hypothesis": "expand cand-014: wider SM NoC link [sm_noc_bytes_per_cycle=128]",
+      "improved": false,
+      "kind": "expand",
+      "ops": [
+        {
+          "op": "hw_set",
+          "path": "sm_noc_bytes_per_cycle",
+          "value": 128
+        }
+      ],
+      "parent": "cand-014",
+      "power_w": 1.7715864571831552,
+      "round": 7,
+      "score": 1192.1825329196229,
+      "status": "pruned",
+      "struct_sig": "hw:sm_noc_bytes_per_cycle=128"
+    },
+    "cand-039": {
+      "area_mm2": 5.59764068864,
+      "bias": "balanced",
+      "cycles": {
+        "M1_P1": 27433687,
+        "M2_D1": 1751464
+      },
+      "dominated_by_parent": true,
+      "failure_class": "harness_noop",
+      "failure_note": "hw mutation never staged to inputs (bug fixed 2026-09-28); evaluated point = parent hw",
+      "family": "memory",
+      "fingerprint": "1560e00fa1dfaaf4",
+      "hypothesis": "novelty: random nkm tiles=(16, 8, 64)",
+      "improved": false,
+      "kind": "novelty",
+      "ops": [
+        {
+          "op": "gemm_order",
+          "order": "nkm"
+        },
+        {
+          "k_chunk": 64,
+          "m_tile": 16,
+          "n_tile": 8,
+          "op": "gemm_tiles"
+        },
+        {
+          "enabled": 0,
+          "op": "gemm_prefetch"
+        },
+        {
+          "op": "scores_residency",
+          "space": "hbm"
+        },
+        {
+          "enabled": 0,
+          "op": "fuse_bias_gelu"
+        },
+        {
+          "op": "hw_set",
+          "path": "sm_count",
+          "value": 32
+        }
+      ],
+      "parent": "cand-019",
+      "power_w": 2.0154056390369264,
+      "round": 7,
+      "score": 916.4904172822608,
+      "status": "pruned",
+      "struct_sig": "hw:sm_count=32+nkm+nofuse+nopf+s:hbm"
+    },
+    "cand-040": {
+      "area_mm2": 5.59764068864,
+      "bias": "balanced",
+      "cycles": {
+        "M1_P1": 21954977,
+        "M2_D1": 1281698
+      },
+      "failure_class": "harness_noop",
+      "failure_note": "hw mutation never staged to inputs (bug fixed 2026-09-28); evaluated point = parent hw",
+      "family": "hardware",
+      "fingerprint": "94bc9c7b5d9d25cf",
+      "hypothesis": "exploit cand-019: hw reduction_units 0->1",
+      "improved": false,
+      "kind": "exploit",
+      "ops": [
+        {
+          "op": "hw_set",
+          "path": "reduction_units",
+          "value": 1
+        }
+      ],
+      "parent": "cand-019",
+      "power_w": 1.7715864571831552,
+      "round": 8,
+      "score": 1197.5985984332774,
+      "status": "pruned",
+      "struct_sig": "hw:reduction_units=1"
+    },
+    "cand-041": {
+      "area_mm2": 5.59764068864,
+      "bias": "balanced",
+      "cycles": {
+        "M1_P1": 21954977,
+        "M2_D1": 1281698
+      },
+      "failure_class": "harness_noop",
+      "failure_note": "hw mutation never staged to inputs (bug fixed 2026-09-28); evaluated point = parent hw",
+      "family": "hardware",
+      "fingerprint": "4b40a64f4b60265f",
+      "hypothesis": "exploit cand-019: hw hbm_channels 4->2",
+      "improved": false,
+      "kind": "exploit",
+      "ops": [
+        {
+          "op": "hw_set",
+          "path": "hbm_channels",
+          "value": 2
+        }
+      ],
+      "parent": "cand-019",
+      "power_w": 1.7715864571831552,
+      "round": 8,
+      "score": 1197.5985984332774,
+      "status": "pruned",
+      "struct_sig": "hw:hbm_channels=2"
+    },
+    "cand-042": {
+      "area_mm2": 5.59764068864,
+      "bias": "balanced",
+      "cycles": {
+        "M1_P1": 21954977,
+        "M2_D1": 1281698
+      },
+      "failure_class": "harness_noop",
+      "failure_note": "hw mutation never staged to inputs (bug fixed 2026-09-28); evaluated point = parent hw",
+      "family": "hardware",
+      "fingerprint": "765f765265610450",
+      "hypothesis": "exploit cand-019: hw noc_bytes_per_cycle 256->512",
+      "improved": false,
+      "kind": "exploit",
+      "ops": [
+        {
+          "op": "hw_set",
+          "path": "noc_bytes_per_cycle",
+          "value": 512
+        }
+      ],
+      "parent": "cand-019",
+      "power_w": 1.7715864571831552,
+      "round": 8,
+      "score": 1197.5985984332774,
+      "status": "pruned",
+      "struct_sig": "hw:noc_bytes_per_cycle=512"
+    },
+    "cand-043": {
+      "bias": "balanced",
+      "failure_class": "harness_noop",
+      "failure_note": "hw mutation never staged to inputs (bug fixed 2026-09-28); evaluated point = parent hw",
+      "family": "memory",
+      "fingerprint": "e77a558cd6774839",
+      "hypothesis": "expand cand-036: dma_depth=2 to make prefetch actually overlap [dma_depth=2]",
+      "kind": "expand",
+      "ops": [
+        {
+          "op": "hw_set",
+          "path": "dma_depth",
+          "value": 2
+        }
+      ],
+      "parent": "cand-036",
+      "round": 8,
+      "status": "pruned",
+      "struct_sig": "hw:dma_depth=2"
+    },
+    "cand-044": {
+      "area_mm2": 5.8376406886400005,
+      "bias": "balanced",
+      "cycles": {
+        "M1_P1": 21954977,
+        "M2_D1": 1281698
+      },
+      "failure_class": "none",
+      "family": "hardware",
+      "fingerprint": "94bc9c7b5d9d25cf",
+      "hypothesis": "exploit cand-019: hw reduction_units 0->1",
+      "improved": false,
+      "kind": "exploit",
+      "ops": [
+        {
+          "op": "hw_set",
+          "path": "reduction_units",
+          "value": 1
+        }
+      ],
+      "parent": "cand-019",
+      "power_w": 1.7775864571831552,
+      "round": 9,
+      "score": 1197.5985984332774,
+      "status": "evaluated",
+      "struct_sig": "hw:reduction_units=1"
+    },
+    "cand-045": {
+      "area_mm2": 5.50164068864,
+      "bias": "balanced",
+      "cycles": {
+        "M1_P1": 22265321,
+        "M2_D1": 1288802
+      },
+      "dominated_by_parent": true,
+      "failure_class": "none",
+      "family": "hardware",
+      "fingerprint": "1055104233338e90",
+      "hypothesis": "exploit cand-019: hw vector_lanes 16->8",
+      "improved": false,
+      "kind": "exploit",
+      "ops": [
+        {
+          "op": "hw_set",
+          "path": "vector_lanes",
+          "value": 8
+        }
+      ],
+      "parent": "cand-019",
+      "power_w": 1.7691864571831553,
+      "round": 9,
+      "score": 1185.9408933569387,
+      "status": "dominated",
+      "struct_sig": "hw:vector_lanes=8"
+    },
+    "cand-046": {
+      "area_mm2": 5.8376406886400005,
+      "bias": "balanced",
+      "cycles": {
+        "M1_P1": 27175175,
+        "M2_D1": 1210674
+      },
+      "failure_class": "none",
+      "family": "compute",
+      "fingerprint": "195ec88606acde60",
+      "hypothesis": "expand cand-036: reduction unit for LN/softmax reduces [reduction_units=1]",
+      "improved": false,
+      "kind": "expand",
+      "ops": [
+        {
+          "op": "hw_set",
+          "path": "reduction_units",
+          "value": 1
+        }
+      ],
+      "parent": "cand-036",
+      "power_w": 1.7775864571831552,
+      "round": 9,
+      "score": 1107.569130887403,
+      "status": "evaluated",
+      "struct_sig": "hw:reduction_units=1"
+    },
+    "cand-047": {
+      "area_mm2": 6.671639413760001,
+      "bias": "balanced",
+      "cycles": {
+        "M1_P1": 12917099,
+        "M2_D1": 888914
+      },
+      "failure_class": "none",
+      "family": "hardware",
+      "fingerprint": "32db6f8fc708a8cc",
+      "hypothesis": "expand cand-020: widen RF ports to relieve MMA read-port bound [rf_ports=8R4W]",
+      "improved": true,
+      "kind": "expand",
+      "ops": [
+        {
+          "op": "hw_set",
+          "path": "rf_ports",
+          "value": "8R4W"
+        }
+      ],
+      "parent": "cand-020",
+      "power_w": 2.3279813293190665,
+      "round": 9,
+      "score": 1874.814304538389,
+      "status": "kept",
+      "struct_sig": "hw:rf_ports=8R4W"
+    },
+    "cand-048": {
+      "bias": "balanced",
+      "failure_class": "generate_error",
+      "failure_note": "grade produced no report (rc=1):\n\nTraceback (most recent call last):\n  File \"/Users/yihdu/Codefield/SLAI-infra-Code/transformer-codesign-starter/challenge.py\", line 6, in <module>\n    raise SystemExit(main())\n                     ^^^^^^\n  File \"/Users/yihdu/Codefield/SLAI-infra-Code/transformer-code",
+      "family": "memory",
+      "fingerprint": "6ab351a88bec5627",
+      "hypothesis": "expand cand-014: dma_depth=2 to make prefetch actually overlap [dma_depth=2]",
+      "kind": "expand",
+      "ops": [
+        {
+          "op": "hw_set",
+          "path": "dma_depth",
+          "value": 2
+        }
+      ],
+      "parent": "cand-014",
+      "round": 9,
+      "status": "pruned",
+      "struct_sig": "hw:dma_depth=2"
+    },
+    "cand-049": {
+      "area_mm2": 5.44764068864,
+      "bias": "balanced",
+      "cycles": {
+        "M1_P1": 28400621,
+        "M2_D1": 2250698
+      },
+      "dominated_by_parent": true,
+      "failure_class": "none",
+      "family": "memory",
+      "fingerprint": "b3503608c839b8de",
+      "hypothesis": "novelty: random nkm tiles=(32, 8, 32)",
+      "improved": false,
+      "kind": "novelty",
+      "ops": [
+        {
+          "op": "gemm_order",
+          "order": "nkm"
+        },
+        {
+          "k_chunk": 32,
+          "m_tile": 32,
+          "n_tile": 8,
+          "op": "gemm_tiles"
+        },
+        {
+          "enabled": 1,
+          "op": "gemm_prefetch"
+        },
+        {
+          "op": "scores_residency",
+          "space": "rf"
+        },
+        {
+          "enabled": 1,
+          "op": "fuse_bias_gelu"
+        },
+        {
+          "op": "hw_set",
+          "path": "hbm_channels",
+          "value": 1
+        }
+      ],
+      "parent": "cand-019",
+      "power_w": 1.5061085769694176,
+      "round": 9,
+      "score": 794.5991478350456,
+      "status": "dominated",
+      "struct_sig": "fuse+hw:hbm_channels=1+nkm+pf+s:rf"
+    },
+    "cand-050": {
+      "area_mm2": 6.671639413760001,
+      "bias": "balanced",
+      "cycles": {
+        "M1_P1": 18493067,
+        "M2_D1": 1297490
+      },
+      "dominated_by_parent": true,
+      "failure_class": "none",
+      "family": "hardware",
+      "fingerprint": "c0c82030ca9ad779",
+      "hypothesis": "exploit cand-047: tiles (16, 16, 48)->(16, 8, 48)",
+      "improved": false,
+      "kind": "exploit",
+      "ops": [
+        {
+          "op": "gemm_order",
+          "order": "nkm"
+        },
+        {
+          "k_chunk": 48,
+          "m_tile": 16,
+          "n_tile": 8,
+          "op": "gemm_tiles"
+        },
+        {
+          "op": "scores_residency",
+          "space": "rf"
+        },
+        {
+          "enabled": 1,
+          "op": "fuse_bias_gelu"
+        }
+      ],
+      "parent": "cand-047",
+      "power_w": 2.6023709853516293,
+      "round": 10,
+      "score": 1296.9228571905599,
+      "status": "dominated",
+      "struct_sig": "fuse+nkm+s:rf"
+    },
+    "cand-051": {
+      "area_mm2": 6.671639413760001,
+      "bias": "balanced",
+      "cycles": {
+        "M1_P1": 14111249,
+        "M2_D1": 921682
+      },
+      "dominated_by_parent": true,
+      "failure_class": "none",
+      "family": "hardware",
+      "fingerprint": "aa0e97af5d268445",
+      "hypothesis": "exploit cand-047: tiles (16, 16, 48)->(16, 16, 24)",
+      "improved": false,
+      "kind": "exploit",
+      "ops": [
+        {
+          "op": "gemm_order",
+          "order": "nkm"
+        },
+        {
+          "k_chunk": 24,
+          "m_tile": 16,
+          "n_tile": 16,
+          "op": "gemm_tiles"
+        },
+        {
+          "op": "scores_residency",
+          "space": "rf"
+        },
+        {
+          "enabled": 1,
+          "op": "fuse_bias_gelu"
+        }
+      ],
+      "parent": "cand-047",
+      "power_w": 2.3279813293190665,
+      "round": 10,
+      "score": 1761.5596139891823,
+      "status": "dominated",
+      "struct_sig": "fuse+nkm+s:rf"
+    },
+    "cand-052": {
+      "area_mm2": 6.671639413760001,
+      "bias": "balanced",
+      "cycles": {
+        "M1_P1": 13116989,
+        "M2_D1": 888914
+      },
+      "failure_class": "none",
+      "family": "hardware",
+      "fingerprint": "bc9f80dc971510a2",
+      "hypothesis": "expand cand-019: widen RF ports to relieve MMA read-port bound [rf_ports=8R4W]",
+      "improved": true,
+      "kind": "expand",
+      "ops": [
+        {
+          "op": "hw_set",
+          "path": "rf_ports",
+          "value": "8R4W"
+        }
+      ],
+      "parent": "cand-019",
+      "power_w": 2.3279813293190665,
+      "round": 10,
+      "score": 1860.4743007003888,
+      "status": "evaluated",
+      "struct_sig": "hw:rf_ports=8R4W"
+    },
+    "cand-053": {
+      "area_mm2": 5.957640688640001,
+      "bias": "balanced",
+      "cycles": {
+        "M1_P1": 21298223,
+        "M2_D1": 1222470
+      },
+      "failure_class": "none",
+      "family": "memory",
+      "fingerprint": "d0ae7c9cd4adadcd",
+      "hypothesis": "expand cand-044: dma_depth=2 to make prefetch actually overlap [dma_depth=2]",
+      "improved": true,
+      "kind": "expand",
+      "ops": [
+        {
+          "op": "hw_set",
+          "path": "dma_depth",
+          "value": 2
+        }
+      ],
+      "parent": "cand-044",
+      "power_w": 1.9649001931822625,
+      "round": 10,
+      "score": 1245.0300554926546,
+      "status": "evaluated",
+      "struct_sig": "hw:dma_depth=2"
+    },
+    "cand-054": {
+      "bias": "balanced",
+      "failure_class": "generate_error",
+      "failure_note": "[Errno 32] Broken pipe",
+      "family": "memory",
+      "fingerprint": "f820976715786740",
+      "hypothesis": "expand cand-020: second DMA engine [dma_engines=2]",
+      "kind": "expand",
+      "ops": [
+        {
+          "op": "hw_set",
+          "path": "dma_engines",
+          "value": 2
+        }
+      ],
+      "parent": "cand-020",
+      "round": 10,
+      "status": "pruned",
+      "struct_sig": "hw:dma_engines=2"
+    },
+    "cand-055": {
+      "bias": "balanced",
+      "failure_class": "generate_error",
+      "failure_note": "[Errno 32] Broken pipe",
+      "family": "memory",
+      "fingerprint": "ff6870b21f8f0ec7",
+      "hypothesis": "novelty: random mnk tiles=(8, 8, 48)",
+      "kind": "novelty",
+      "ops": [
+        {
+          "op": "gemm_order",
+          "order": "mnk"
+        },
+        {
+          "k_chunk": 48,
+          "m_tile": 8,
+          "n_tile": 8,
+          "op": "gemm_tiles"
+        },
+        {
+          "enabled": 0,
+          "op": "gemm_prefetch"
+        },
+        {
+          "op": "scores_residency",
+          "space": "rf"
+        },
+        {
+          "enabled": 0,
+          "op": "fuse_bias_gelu"
+        }
+      ],
+      "parent": "cand-047",
+      "round": 10,
+      "status": "pruned",
+      "struct_sig": "mnk+nofuse+nopf+s:rf"
+    },
+    "drun-001": {
+      "bias": "balanced",
+      "failure_class": "dry_run",
+      "failure_note": "mechanism test",
+      "family": "memory",
+      "fingerprint": "a9631f7a313e736a",
+      "hypothesis": "exploit cand-001: tiles (8, 16, 48)->(8, 8, 48)",
+      "kind": "exploit",
+      "ops": [
+        {
+          "op": "gemm_order",
+          "order": "nkm"
+        },
+        {
+          "k_chunk": 48,
+          "m_tile": 8,
+          "n_tile": 8,
+          "op": "gemm_tiles"
+        }
+      ],
+      "parent": "cand-001",
+      "round": 1,
+      "status": "pruned",
+      "struct_sig": "nkm"
+    },
+    "drun-002": {
+      "bias": "balanced",
+      "failure_class": "dry_run",
+      "failure_note": "mechanism test",
+      "family": "memory",
+      "fingerprint": "5e60de2f5066b4dc",
+      "hypothesis": "exploit cand-001: tiles (8, 16, 48)->(2, 16, 48)",
+      "kind": "exploit",
+      "ops": [
+        {
+          "op": "gemm_order",
+          "order": "nkm"
+        },
+        {
+          "k_chunk": 48,
+          "m_tile": 2,
+          "n_tile": 16,
+          "op": "gemm_tiles"
+        }
+      ],
+      "parent": "cand-001",
+      "round": 1,
+      "status": "pruned",
+      "struct_sig": "nkm"
+    },
+    "drun-003": {
+      "bias": "balanced",
+      "failure_class": "dry_run",
+      "failure_note": "mechanism test",
+      "family": "memory",
+      "fingerprint": "0d868c77dfb8fd32",
+      "hypothesis": "exploit cand-001: tiles (8, 16, 48)->(8, 16, 64)",
+      "kind": "exploit",
+      "ops": [
+        {
+          "op": "gemm_order",
+          "order": "nkm"
+        },
+        {
+          "k_chunk": 64,
+          "m_tile": 8,
+          "n_tile": 16,
+          "op": "gemm_tiles"
+        }
+      ],
+      "parent": "cand-001",
+      "round": 1,
+      "status": "pruned",
+      "struct_sig": "nkm"
+    },
+    "drun-004": {
+      "bias": "balanced",
+      "failure_class": "dry_run",
+      "failure_note": "mechanism test",
+      "family": "fusion",
+      "fingerprint": "33c61a7d000396c1",
+      "hypothesis": "expand cand-000: fuse bias+gelu epilogue",
+      "kind": "expand",
+      "ops": [
+        {
+          "enabled": 1,
+          "op": "fuse_bias_gelu"
+        }
+      ],
+      "parent": "cand-000",
+      "round": 1,
+      "status": "pruned",
+      "struct_sig": "fuse"
+    },
+    "drun-005": {
+      "bias": "balanced",
+      "failure_class": "dry_run",
+      "failure_note": "mechanism test",
+      "family": "memory",
+      "fingerprint": "c72def168724372d",
+      "hypothesis": "novelty: untried structure nkm_pf on cand-001",
+      "kind": "novelty",
+      "ops": [
+        {
+          "op": "gemm_order",
+          "order": "nkm"
+        },
+        {
+          "enabled": 1,
+          "op": "gemm_prefetch"
+        }
+      ],
+      "parent": "cand-001",
+      "round": 1,
+      "status": "pruned",
+      "struct_sig": "nkm+pf"
+    },
+    "drun-006": {
+      "bias": "balanced",
+      "failure_class": "dry_run",
+      "failure_note": "mechanism test",
+      "family": "memory",
+      "fingerprint": "a9631f7a313e736a",
+      "hypothesis": "exploit cand-001: tiles (8, 16, 48)->(8, 8, 48)",
+      "kind": "exploit",
+      "ops": [
+        {
+          "op": "gemm_order",
+          "order": "nkm"
+        },
+        {
+          "k_chunk": 48,
+          "m_tile": 8,
+          "n_tile": 8,
+          "op": "gemm_tiles"
+        }
+      ],
+      "parent": "cand-001",
+      "round": 1,
+      "status": "pruned",
+      "struct_sig": "nkm"
+    },
+    "drun-007": {
+      "bias": "balanced",
+      "failure_class": "dry_run",
+      "failure_note": "mechanism test",
+      "family": "memory",
+      "fingerprint": "5e60de2f5066b4dc",
+      "hypothesis": "exploit cand-001: tiles (8, 16, 48)->(2, 16, 48)",
+      "kind": "exploit",
+      "ops": [
+        {
+          "op": "gemm_order",
+          "order": "nkm"
+        },
+        {
+          "k_chunk": 48,
+          "m_tile": 2,
+          "n_tile": 16,
+          "op": "gemm_tiles"
+        }
+      ],
+      "parent": "cand-001",
+      "round": 1,
+      "status": "pruned",
+      "struct_sig": "nkm"
+    },
+    "drun-008": {
+      "bias": "balanced",
+      "failure_class": "dry_run",
+      "failure_note": "mechanism test",
+      "family": "memory",
+      "fingerprint": "0d868c77dfb8fd32",
+      "hypothesis": "exploit cand-001: tiles (8, 16, 48)->(8, 16, 64)",
+      "kind": "exploit",
+      "ops": [
+        {
+          "op": "gemm_order",
+          "order": "nkm"
+        },
+        {
+          "k_chunk": 64,
+          "m_tile": 8,
+          "n_tile": 16,
+          "op": "gemm_tiles"
+        }
+      ],
+      "parent": "cand-001",
+      "round": 1,
+      "status": "pruned",
+      "struct_sig": "nkm"
+    },
+    "drun-009": {
+      "bias": "balanced",
+      "failure_class": "dry_run",
+      "failure_note": "mechanism test",
+      "family": "fusion",
+      "fingerprint": "33c61a7d000396c1",
+      "hypothesis": "expand cand-000: fuse bias+gelu epilogue",
+      "kind": "expand",
+      "ops": [
+        {
+          "enabled": 1,
+          "op": "fuse_bias_gelu"
+        }
+      ],
+      "parent": "cand-000",
+      "round": 1,
+      "status": "pruned",
+      "struct_sig": "fuse"
+    },
+    "drun-010": {
+      "bias": "balanced",
+      "failure_class": "dry_run",
+      "failure_note": "mechanism test",
+      "family": "memory",
+      "fingerprint": "c72def168724372d",
+      "hypothesis": "novelty: untried structure nkm_pf on cand-001",
+      "kind": "novelty",
+      "ops": [
+        {
+          "op": "gemm_order",
+          "order": "nkm"
+        },
+        {
+          "enabled": 1,
+          "op": "gemm_prefetch"
+        }
+      ],
+      "parent": "cand-001",
+      "round": 1,
+      "status": "pruned",
+      "struct_sig": "nkm+pf"
+    },
+    "drun-011": {
+      "bias": "balanced",
+      "failure_class": "dry_run",
+      "failure_note": "mechanism test",
+      "family": "memory",
+      "fingerprint": "56a05cecf41c0696",
+      "hypothesis": "exploit cand-001: tiles (8, 16, 48)->(8, 16, 24)",
+      "kind": "exploit",
+      "ops": [
+        {
+          "op": "gemm_order",
+          "order": "nkm"
+        },
+        {
+          "k_chunk": 24,
+          "m_tile": 8,
+          "n_tile": 16,
+          "op": "gemm_tiles"
+        }
+      ],
+      "parent": "cand-001",
+      "round": 2,
+      "status": "pruned",
+      "struct_sig": "nkm"
+    },
+    "drun-012": {
+      "bias": "balanced",
+      "failure_class": "dry_run",
+      "failure_note": "mechanism test",
+      "family": "memory",
+      "fingerprint": "0d868c77dfb8fd32",
+      "hypothesis": "exploit cand-001: tiles (8, 16, 48)->(8, 16, 64)",
+      "kind": "exploit",
+      "ops": [
+        {
+          "op": "gemm_order",
+          "order": "nkm"
+        },
+        {
+          "k_chunk": 64,
+          "m_tile": 8,
+          "n_tile": 16,
+          "op": "gemm_tiles"
+        }
+      ],
+      "parent": "cand-001",
+      "round": 2,
+      "status": "pruned",
+      "struct_sig": "nkm"
+    },
+    "drun-013": {
+      "bias": "balanced",
+      "failure_class": "dry_run",
+      "failure_note": "mechanism test",
+      "family": "memory",
+      "fingerprint": "a9631f7a313e736a",
+      "hypothesis": "exploit cand-001: tiles (8, 16, 48)->(8, 8, 48)",
+      "kind": "exploit",
+      "ops": [
+        {
+          "op": "gemm_order",
+          "order": "nkm"
+        },
+        {
+          "k_chunk": 48,
+          "m_tile": 8,
+          "n_tile": 8,
+          "op": "gemm_tiles"
+        }
+      ],
+      "parent": "cand-001",
+      "round": 2,
+      "status": "pruned",
+      "struct_sig": "nkm"
+    },
+    "drun-014": {
+      "bias": "balanced",
+      "failure_class": "dry_run",
+      "failure_note": "mechanism test",
+      "family": "fusion",
+      "fingerprint": "33c61a7d000396c1",
+      "hypothesis": "expand cand-000: fuse bias+gelu epilogue",
+      "kind": "expand",
+      "ops": [
+        {
+          "enabled": 1,
+          "op": "fuse_bias_gelu"
+        }
+      ],
+      "parent": "cand-000",
+      "round": 2,
+      "status": "pruned",
+      "struct_sig": "fuse"
+    },
+    "drun-015": {
+      "bias": "balanced",
+      "failure_class": "dry_run",
+      "failure_note": "mechanism test",
+      "family": "attention",
+      "fingerprint": "19039ac31e1e14e2",
+      "hypothesis": "novelty: untried structure scores_rf on cand-001",
+      "kind": "novelty",
+      "ops": [
+        {
+          "op": "scores_residency",
+          "space": "rf"
+        }
+      ],
+      "parent": "cand-001",
+      "round": 2,
+      "status": "pruned",
+      "struct_sig": "s:rf"
+    },
+    "drun-016": {
+      "bias": "balanced",
+      "failure_class": "dry_run",
+      "failure_note": "mechanism test",
+      "family": "memory",
+      "fingerprint": "a9631f7a313e736a",
+      "hypothesis": "exploit cand-001: tiles (8, 16, 48)->(8, 8, 48)",
+      "kind": "exploit",
+      "ops": [
+        {
+          "op": "gemm_order",
+          "order": "nkm"
+        },
+        {
+          "k_chunk": 48,
+          "m_tile": 8,
+          "n_tile": 8,
+          "op": "gemm_tiles"
+        }
+      ],
+      "parent": "cand-001",
+      "round": 1,
+      "status": "pruned",
+      "struct_sig": "nkm"
+    },
+    "drun-017": {
+      "bias": "balanced",
+      "failure_class": "dry_run",
+      "failure_note": "mechanism test",
+      "family": "memory",
+      "fingerprint": "5e60de2f5066b4dc",
+      "hypothesis": "exploit cand-001: tiles (8, 16, 48)->(2, 16, 48)",
+      "kind": "exploit",
+      "ops": [
+        {
+          "op": "gemm_order",
+          "order": "nkm"
+        },
+        {
+          "k_chunk": 48,
+          "m_tile": 2,
+          "n_tile": 16,
+          "op": "gemm_tiles"
+        }
+      ],
+      "parent": "cand-001",
+      "round": 1,
+      "status": "pruned",
+      "struct_sig": "nkm"
+    },
+    "drun-018": {
+      "bias": "balanced",
+      "failure_class": "dry_run",
+      "failure_note": "mechanism test",
+      "family": "memory",
+      "fingerprint": "0d868c77dfb8fd32",
+      "hypothesis": "exploit cand-001: tiles (8, 16, 48)->(8, 16, 64)",
+      "kind": "exploit",
+      "ops": [
+        {
+          "op": "gemm_order",
+          "order": "nkm"
+        },
+        {
+          "k_chunk": 64,
+          "m_tile": 8,
+          "n_tile": 16,
+          "op": "gemm_tiles"
+        }
+      ],
+      "parent": "cand-001",
+      "round": 1,
+      "status": "pruned",
+      "struct_sig": "nkm"
+    },
+    "drun-019": {
+      "bias": "balanced",
+      "failure_class": "dry_run",
+      "failure_note": "mechanism test",
+      "family": "fusion",
+      "fingerprint": "c6152b1c5747f74a",
+      "hypothesis": "expand cand-000: fuse bias+gelu epilogue",
+      "kind": "expand",
+      "ops": [
+        {
+          "enabled": 1,
+          "op": "fuse_bias_gelu"
+        }
+      ],
+      "parent": "cand-000",
+      "round": 1,
+      "status": "pruned",
+      "struct_sig": "fuse"
+    },
+    "drun-020": {
+      "bias": "balanced",
+      "failure_class": "dry_run",
+      "failure_note": "mechanism test",
+      "family": "memory",
+      "fingerprint": "c72def168724372d",
+      "hypothesis": "novelty: untried structure nkm_pf on cand-001",
+      "kind": "novelty",
+      "ops": [
+        {
+          "op": "gemm_order",
+          "order": "nkm"
+        },
+        {
+          "enabled": 1,
+          "op": "gemm_prefetch"
+        }
+      ],
+      "parent": "cand-001",
+      "round": 1,
+      "status": "pruned",
+      "struct_sig": "nkm+pf"
+    },
+    "drun-021": {
+      "bias": "balanced",
+      "failure_class": "dry_run",
+      "failure_note": "mechanism test",
+      "family": "memory",
+      "fingerprint": "00b2c20daecdcb08",
+      "hypothesis": "exploit cand-001: tiles (8, 16, 48)->(8, 16, 32)",
+      "kind": "exploit",
+      "ops": [
+        {
+          "op": "gemm_order",
+          "order": "nkm"
+        },
+        {
+          "k_chunk": 32,
+          "m_tile": 8,
+          "n_tile": 16,
+          "op": "gemm_tiles"
+        }
+      ],
+      "parent": "cand-001",
+      "round": 1,
+      "status": "pruned",
+      "struct_sig": "nkm"
+    },
+    "drun-022": {
+      "bias": "balanced",
+      "failure_class": "dry_run",
+      "failure_note": "mechanism test",
+      "family": "hardware",
+      "fingerprint": "bc9f80dc971510a2",
+      "hypothesis": "exploit cand-019: hw rf_ports 4R2W->8R4W",
+      "kind": "exploit",
+      "ops": [
+        {
+          "op": "hw_set",
+          "path": "rf_ports",
+          "value": "8R4W"
+        }
+      ],
+      "parent": "cand-019",
+      "round": 7,
+      "status": "pruned",
+      "struct_sig": "hw:rf_ports=8R4W"
+    },
+    "drun-023": {
+      "bias": "balanced",
+      "failure_class": "dry_run",
+      "failure_note": "mechanism test",
+      "family": "hardware",
+      "fingerprint": "fe9942186646c82e",
+      "hypothesis": "exploit cand-019: hw sm_count 8->12",
+      "kind": "exploit",
+      "ops": [
+        {
+          "op": "hw_set",
+          "path": "sm_count",
+          "value": 12
+        }
+      ],
+      "parent": "cand-019",
+      "round": 7,
+      "status": "pruned",
+      "struct_sig": "hw:sm_count=12"
+    },
+    "drun-024": {
+      "bias": "balanced",
+      "failure_class": "dry_run",
+      "failure_note": "mechanism test",
+      "family": "fusion",
+      "fingerprint": "062742f6b8fbbde1",
+      "hypothesis": "expand cand-031: fuse bias+gelu epilogue",
+      "kind": "expand",
+      "ops": [
+        {
+          "enabled": 1,
+          "op": "fuse_bias_gelu"
+        }
+      ],
+      "parent": "cand-031",
+      "round": 7,
+      "status": "pruned",
+      "struct_sig": "fuse"
+    },
+    "drun-025": {
+      "bias": "balanced",
+      "failure_class": "dry_run",
+      "failure_note": "mechanism test",
+      "family": "hardware",
+      "fingerprint": "32db6f8fc708a8cc",
+      "hypothesis": "expand cand-020: widen RF ports to relieve MMA read-port bound [rf_ports=8R4W]",
+      "kind": "expand",
+      "ops": [
+        {
+          "op": "hw_set",
+          "path": "rf_ports",
+          "value": "8R4W"
+        }
+      ],
+      "parent": "cand-020",
+      "round": 7,
+      "status": "pruned",
+      "struct_sig": "hw:rf_ports=8R4W"
+    },
+    "drun-026": {
+      "bias": "balanced",
+      "failure_class": "dry_run",
+      "failure_note": "mechanism test",
+      "family": "memory",
+      "fingerprint": "790882511f0a7043",
+      "hypothesis": "expand cand-014: wider SM NoC link [sm_noc_bytes_per_cycle=128]",
+      "kind": "expand",
+      "ops": [
+        {
+          "op": "hw_set",
+          "path": "sm_noc_bytes_per_cycle",
+          "value": 128
+        }
+      ],
+      "parent": "cand-014",
+      "round": 7,
+      "status": "pruned",
+      "struct_sig": "hw:sm_noc_bytes_per_cycle=128"
+    },
+    "drun-027": {
+      "bias": "balanced",
+      "failure_class": "dry_run",
+      "failure_note": "mechanism test",
+      "family": "memory",
+      "fingerprint": "1560e00fa1dfaaf4",
+      "hypothesis": "novelty: random nkm tiles=(16, 8, 64)",
+      "kind": "novelty",
+      "ops": [
+        {
+          "op": "gemm_order",
+          "order": "nkm"
+        },
+        {
+          "k_chunk": 64,
+          "m_tile": 16,
+          "n_tile": 8,
+          "op": "gemm_tiles"
+        },
+        {
+          "enabled": 0,
+          "op": "gemm_prefetch"
+        },
+        {
+          "op": "scores_residency",
+          "space": "hbm"
+        },
+        {
+          "enabled": 0,
+          "op": "fuse_bias_gelu"
+        },
+        {
+          "op": "hw_set",
+          "path": "sm_count",
+          "value": 32
+        }
+      ],
+      "parent": "cand-019",
+      "round": 7,
+      "status": "pruned",
+      "struct_sig": "hw:sm_count=32+nkm+nofuse+nopf+s:hbm"
+    }
+  },
+  "counter": 55,
+  "dry_counter": 27,
+  "fingerprints": {
+    "062742f6b8fbbde1": "cand-036",
+    "0d868c77dfb8fd32": "cand-006",
+    "1055104233338e90": "cand-045",
+    "15dcc438f76ab5b8": "cand-013",
+    "19039ac31e1e14e2": "cand-014",
+    "195ec88606acde60": "cand-046",
+    "2e4feb59f56b0539": "cand-019",
+    "30fd2cc2cedd6be3": "cand-025",
+    "32db6f8fc708a8cc": "cand-047",
+    "33c61a7d000396c1": "cand-009",
+    "3661bda877c83bf0": "cand-011",
+    "3ed983a6780dce16": "cand-016",
+    "46b7b004577c04fd": "cand-015",
+    "4db087d2863f570d": "cand-023",
+    "4f0084c3f43a4af2": "cand-001",
+    "52b8df7fb6990c4f": "cand-024",
+    "56a05cecf41c0696": "cand-005",
+    "5bd0cc22e122250c": "cand-021",
+    "5e60de2f5066b4dc": "cand-004",
+    "6ab351a88bec5627": "cand-048",
+    "6de9256553383d73": "cand-020",
+    "703e7311b450d7db": "cand-030",
+    "7044d4568cdc1820": "cand-032",
+    "7c136c16167cb951": "cand-028",
+    "7c58a9e1521ae859": "cand-031",
+    "7ed8a97e522117f4": "cand-029",
+    "850a9ef1390e1f3e": "cand-008",
+    "8a7c84d9a7be1c97": "cand-026",
+    "8c85c43dcdc09a36": "cand-000",
+    "94bc9c7b5d9d25cf": "cand-044",
+    "a9631f7a313e736a": "cand-002",
+    "aa0e97af5d268445": "cand-051",
+    "ac572e82f17a050f": "cand-022",
+    "b3503608c839b8de": "cand-049",
+    "b3c122bf8a968893": "cand-017",
+    "bc9f80dc971510a2": "cand-052",
+    "c0c82030ca9ad779": "cand-050",
+    "c16f062eaf2ae286": "cand-018",
+    "c3a05a00e8785bef": "cand-010",
+    "c6152b1c5747f74a": "cand-007",
+    "c72def168724372d": "cand-003",
+    "d0ae7c9cd4adadcd": "cand-053",
+    "d366bee507975620": "cand-027",
+    "f0ee74fb076a59aa": "cand-033",
+    "f314351fb378b9e5": "cand-012",
+    "f820976715786740": "cand-054",
+    "ff6870b21f8f0ec7": "cand-055"
+  },
+  "head": "cand-047",
+  "search": {
+    "best_id": "cand-047",
+    "best_score": 1874.814304538389,
+    "bottleneck": "P1 sm0.issue_wait=12712892",
+    "explore_ratio": 0.54,
+    "need_new_operator": false,
+    "phase": 2,
+    "plateau_rounds": 1,
+    "round": 10
+  }
+}

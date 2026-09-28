@@ -1,0 +1,18 @@
+{
+  "bias": null,
+  "created_at": "2026-09-28 10:46:22",
+  "failure_class": null,
+  "family": null,
+  "fingerprint": null,
+  "hypothesis": "B-stationary GEMM loop order n->k->m removes ~8x repeated weight loads",
+  "id": "cand-001",
+  "kind": "manual",
+  "ops": null,
+  "parent": "cand-000",
+  "provenance_note": "inputs/compiler.py was originally sha256:57e341f0... (hand-edited B-stationary gemm). On 2026-09-28 the autonomous-search upgrade replaced it with the recipe-parameterized compiler (sha256:160d9838...), which emits byte-identical programs/M1_P1.asm and M2_D1.asm (sha256 2558f89b/88ffd568, matching programs/ here). Original source bytes were unrecoverable; semantics preserved exactly (order=nkm m_tile=8 n_tile=16 k_chunk=48 prefetch=0 scores=hbm fuse=0).",
+  "round": null,
+  "status": "kept",
+  "struct_sig": "nkm",
+  "summary": "gemm() loop reorder; accs live in lane2; single WG unchanged",
+  "verdict_note": "P1 1.385x, correctness pass; serial chain still dominant"
+}

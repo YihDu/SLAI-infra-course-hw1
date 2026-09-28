@@ -167,7 +167,73 @@ Codex session JSONL). Include dead ends. Deadlines: milestone 1 = **2026-10-07
 | `ASSEMBLY_GUIDE.md` | Map of the generated programs' block structure |
 
 Git: branch `dev-yh`, remote `origin` = GitHub `YihDu/SLAI-infra-course-hw1`.
-Status at briefing time: unmodified baseline committed; no experiments run yet.
+
+### Experiment harness (project/search/, built 2026-09-28)
+
+Lightweight deterministic controller — the agent proposes hypotheses and edits
+candidate inputs; the harness only executes the fixed chain
+`stage inputs → generate → check → estimate → grade → metrics.json →
+append iteration-log.md`. Evaluator (challenge.py) is the sole ground truth;
+correctness is a hard gate (failed check → status `incorrect`, no timing).
+
+```sh
+python -m project.search.controller status           # registry table
+python -m project.search.controller new cand-NNN --parent cand-001 \
+    --hypothesis "..." --summary "..." [--from-worktree | --compiler F --hardware F]
+python -m project.search.controller run cand-NNN --seed 7   # ~6 min
+python -m project.search.controller keep|cand-NNN --note "..."
+python -m project.search.controller revert cand-NNN --note "..."  # restores parent inputs
+python -m project.search.controller checkout cand-NNN      # stage inputs to worktree
+```
+
+Each `project/experiments/cand-NNN/` holds `candidate.json` (id, parent,
+hypothesis, status), `inputs/` (compiler.py + hardware.json + recipe.json
+snapshots — the source of truth, not the worktree), `programs/`, `reports/`,
+`metrics.json`, `proposal.json`. Branching = `new --parent <non-head>`;
+`checkout` realizes any branch. The log is append-only; verdicts append a
+`### cand-NNN verdict:` entry.
+
+Current registry root: cand-000 = baseline (score 1000.0, kept root),
+cand-001 = B-stationary GEMM (score 1173.1).
+
+### Autonomous search (project/search/, built 2026-09-28)
+
+Operator-graph evolutionary search on top of the harness. Modules:
+
+| File | Role |
+| --- | --- |
+| `search/dsl.py` | Structured operators (`gemm_order`, `gemm_tiles`, `gemm_prefetch`, `scores_residency`, `fuse_bias_gelu`; `hw_set`/`workgroups` locked at phase 1), recipe validation, fingerprints |
+| `search/propose.py` | Proposal policy: 3 exploit incumbent + 2 expand archives + 1 novelty per round; structural templates (`STRUCTURES`) separate from the numeric tile grid (`legal_tiles`) |
+| `search/engine.py` | `run_search(rounds, per_round, seeds, dry_run, max_grades)`; pruning cascade `DSL validate -> duplicate -> constraint -> generate -> static screen -> grade`; archives update; plateau policy; `search_state.md` |
+| `search/archives.py` | elite (top-8 score) / pareto (P1,D1 cycles front) / diversity (family,bias cells) — correct candidates only |
+| `search/evaluator.py` | `evaluate_search` = generate + static screen + one `grade` run (which already contains functional_passed + timing + score) |
+
+Recipe-driven compiler: `project/compiler.py` loads `project/recipe.json`
+(defaults = `dsl.DEFAULT_RECIPE`, byte-identical output to cand-001). DSL-only
+candidates inherit `project/experiments/_shared/compiler.py`; a proposal may
+pin a different compiler via `compiler_path`.
+
+Commands:
+
+```sh
+python -m project.search.controller search-plan --rounds 2 --per-round 6   # dry run
+python -m project.search.controller search-run  --rounds 5 --per-round 6 \
+    --max-grades 30 --seed 7                                              # real run
+python -m project.search.controller graph     # candidate DAG
+python -m project.search.controller state-md  # regenerate search_state.md
+```
+
+Search state lives in `registry.json["search"]` (round, plateau_rounds,
+explore_ratio, need_new_operator, phase). Plateau policy: 3 flat rounds ->
+explore_ratio rises; 6 -> `need_new_operator` (agent must register a new
+structural template, not keep tuning). Phase 1 searches recipe only; phase 2
+unlocks `hw_set`/`workgroups`.
+
+Known trap fixed 2026-09-28: `next_id` collided with manually created ids and
+once overwrote `cand-001`'s `candidate.json`/`inputs/compiler.py`; restored
+with a `provenance_note`. Never write into an existing `cand-NNN/` dir.
+
+Dry-run candidates use `drun-NNN` ids (mechanism tests, no evaluator).
 
 ## 11. Known baseline weaknesses → first hypotheses to test
 

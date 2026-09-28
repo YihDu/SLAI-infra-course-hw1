@@ -1,0 +1,24 @@
+{
+  "bias": "balanced",
+  "created_at": "2026-09-28 14:01:05",
+  "failure_class": "none",
+  "family": "hardware",
+  "fingerprint": "1055104233338e90",
+  "hypothesis": "exploit cand-019: hw vector_lanes 16->8",
+  "id": "cand-045",
+  "kind": "exploit",
+  "ops": [
+    {
+      "op": "hw_set",
+      "path": "vector_lanes",
+      "value": 8
+    }
+  ],
+  "parent": "cand-019",
+  "provenance_note": null,
+  "round": 9,
+  "status": "dominated",
+  "struct_sig": "hw:vector_lanes=8",
+  "summary": "[{\"op\": \"hw_set\", \"path\": \"vector_lanes\", \"value\": 8}]",
+  "verdict_note": null
+}

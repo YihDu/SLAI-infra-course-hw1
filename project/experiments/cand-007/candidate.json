@@ -1,0 +1,23 @@
+{
+  "bias": "balanced",
+  "created_at": "2026-09-28 11:57:04",
+  "failure_class": "none",
+  "family": "fusion",
+  "fingerprint": "c6152b1c5747f74a",
+  "hypothesis": "expand cand-000: fuse bias+gelu epilogue",
+  "id": "cand-007",
+  "kind": "expand",
+  "ops": [
+    {
+      "enabled": 1,
+      "op": "fuse_bias_gelu"
+    }
+  ],
+  "parent": "cand-000",
+  "provenance_note": null,
+  "round": 2,
+  "status": "evaluated",
+  "struct_sig": "fuse",
+  "summary": "[{\"op\": \"fuse_bias_gelu\", \"enabled\": 1}]",
+  "verdict_note": null
+}

@@ -1,0 +1,37 @@
+{
+  "bias": "balanced",
+  "created_at": "2026-09-28 12:41:59",
+  "failure_class": "none",
+  "family": "attention",
+  "fingerprint": "52b8df7fb6990c4f",
+  "hypothesis": "exploit cand-019: tiles (8, 16, 48)->(4, 16, 48)",
+  "id": "cand-024",
+  "kind": "exploit",
+  "ops": [
+    {
+      "op": "gemm_order",
+      "order": "nkm"
+    },
+    {
+      "k_chunk": 48,
+      "m_tile": 4,
+      "n_tile": 16,
+      "op": "gemm_tiles"
+    },
+    {
+      "op": "scores_residency",
+      "space": "rf"
+    },
+    {
+      "enabled": 1,
+      "op": "fuse_bias_gelu"
+    }
+  ],
+  "parent": "cand-019",
+  "provenance_note": null,
+  "round": 5,
+  "status": "dominated",
+  "struct_sig": "fuse+nkm+s:rf",
+  "summary": "[{\"op\": \"gemm_order\", \"order\": \"nkm\"}, {\"op\": \"gemm_tiles\", \"m_tile\": 4, \"n_tile\": 16, \"k_chunk\": 48}, {\"op\": \"scores_residency\", \"space\": \"rf\"}, {\"op\": \"fuse_bias_gelu\", \"enabled\": 1}]",
+  "verdict_note": null
+}

@@ -1,0 +1,33 @@
+{
+  "bias": "balanced",
+  "created_at": "2026-09-28 12:07:40",
+  "failure_class": "none",
+  "family": "fusion",
+  "fingerprint": "3661bda877c83bf0",
+  "hypothesis": "exploit cand-009: tiles (8, 16, 48)->(8, 16, 32)",
+  "id": "cand-011",
+  "kind": "exploit",
+  "ops": [
+    {
+      "op": "gemm_order",
+      "order": "nkm"
+    },
+    {
+      "k_chunk": 32,
+      "m_tile": 8,
+      "n_tile": 16,
+      "op": "gemm_tiles"
+    },
+    {
+      "enabled": 1,
+      "op": "fuse_bias_gelu"
+    }
+  ],
+  "parent": "cand-009",
+  "provenance_note": null,
+  "round": 3,
+  "status": "dominated",
+  "struct_sig": "fuse+nkm",
+  "summary": "[{\"op\": \"gemm_order\", \"order\": \"nkm\"}, {\"op\": \"gemm_tiles\", \"m_tile\": 8, \"n_tile\": 16, \"k_chunk\": 32}, {\"op\": \"fuse_bias_gelu\", \"enabled\": 1}]",
+  "verdict_note": null
+}

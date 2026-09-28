@@ -1,0 +1,46 @@
+{
+  "bias": "balanced",
+  "created_at": "2026-09-28 13:45:55",
+  "failure_class": "harness_noop",
+  "family": "memory",
+  "fingerprint": "1560e00fa1dfaaf4",
+  "hypothesis": "novelty: random nkm tiles=(16, 8, 64)",
+  "id": "cand-039",
+  "kind": "novelty",
+  "ops": [
+    {
+      "op": "gemm_order",
+      "order": "nkm"
+    },
+    {
+      "k_chunk": 64,
+      "m_tile": 16,
+      "n_tile": 8,
+      "op": "gemm_tiles"
+    },
+    {
+      "enabled": 0,
+      "op": "gemm_prefetch"
+    },
+    {
+      "op": "scores_residency",
+      "space": "hbm"
+    },
+    {
+      "enabled": 0,
+      "op": "fuse_bias_gelu"
+    },
+    {
+      "op": "hw_set",
+      "path": "sm_count",
+      "value": 32
+    }
+  ],
+  "parent": "cand-019",
+  "provenance_note": null,
+  "round": 7,
+  "status": "pruned",
+  "struct_sig": "hw:sm_count=32+nkm+nofuse+nopf+s:hbm",
+  "summary": "[{\"op\": \"gemm_order\", \"order\": \"nkm\"}, {\"op\": \"gemm_tiles\", \"m_tile\": 16, \"n_tile\": 8, \"k_chunk\": 64}, {\"op\": \"gemm_prefetch\", \"enabled\": 0}, {\"op\": \"scores_residency\", \"space\": \"hbm\"}, {\"op\": \"fuse_bias_gelu\", \"enabled\": 0}, {\"op\": \"hw_set\", \"path\": \"sm_count\", \"value\": 32}]",
+  "verdict_note": null
+}

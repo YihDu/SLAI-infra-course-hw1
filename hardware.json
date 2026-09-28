@@ -6,7 +6,7 @@
   "multicast": false,
   "noc_bytes_per_cycle": 256,
   "reduction_units": 0,
-  "rf_ports": "4R2W",
+  "rf_ports": "8R4W",
   "sfu_lanes": 8,
   "shared_banks": 4,
   "shared_kib": 128,

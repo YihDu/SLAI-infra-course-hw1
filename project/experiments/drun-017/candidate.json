@@ -1,0 +1,28 @@
+{
+  "bias": "balanced",
+  "created_at": "2026-09-28 11:38:47",
+  "failure_class": "dry_run",
+  "family": "memory",
+  "fingerprint": "5e60de2f5066b4dc",
+  "hypothesis": "exploit cand-001: tiles (8, 16, 48)->(2, 16, 48)",
+  "id": "drun-017",
+  "kind": "exploit",
+  "ops": [
+    {
+      "op": "gemm_order",
+      "order": "nkm"
+    },
+    {
+      "k_chunk": 48,
+      "m_tile": 2,
+      "n_tile": 16,
+      "op": "gemm_tiles"
+    }
+  ],
+  "parent": "cand-001",
+  "round": 1,
+  "status": "pruned",
+  "struct_sig": "nkm",
+  "summary": "[{\"op\": \"gemm_order\", \"order\": \"nkm\"}, {\"op\": \"gemm_tiles\", \"m_tile\": 2, \"n_tile\": 16, \"k_chunk\": 48}]",
+  "verdict_note": "mechanism test"
+}

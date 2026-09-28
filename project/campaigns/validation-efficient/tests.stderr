@@ -1,0 +1,78 @@
+test_incomplete_success_cannot_enter_archives (test_coordinator.CoordinatorTests.test_incomplete_success_cannot_enter_archives) ... ok
+test_isolated_parallel_duplicate_and_budget (test_coordinator.CoordinatorTests.test_isolated_parallel_duplicate_and_budget) ... ok
+test_slow_first_does_not_block_refill_or_change_publication_order (test_coordinator.CoordinatorTests.test_slow_first_does_not_block_refill_or_change_publication_order) ... ok
+test_legacy_fingerprint_compatibility (test_policy.TestFingerprintAndCompilerIdentity.test_legacy_fingerprint_compatibility)
+fingerprint(recipe, hw) without compiler identity produces unchanged legacy digest. ... ok
+test_optional_compiler_identity (test_policy.TestFingerprintAndCompilerIdentity.test_optional_compiler_identity)
+Optional compiler identity is permitted and produces distinct fingerprints. ... ok
+test_apply_ops_hardware_mutation_phase2 (test_policy.TestHardwareMenuAndDependencies.test_apply_ops_hardware_mutation_phase2)
+Mutating hardware fields via apply_ops in phase 2 must succeed and validate. ... ok
+test_canonical_dependency_sfu_clamped_on_vector_reduction (test_policy.TestHardwareMenuAndDependencies.test_canonical_dependency_sfu_clamped_on_vector_reduction)
+Reducing vector_lanes below sfu_lanes clamps sfu_lanes canonically. ... ok
+test_canonical_dependency_shared_zero (test_policy.TestHardwareMenuAndDependencies.test_canonical_dependency_shared_zero)
+Setting shared_kib to 0 removes shared_banks and shared_ports. ... ok
+test_canonical_dependency_tc_zero (test_policy.TestHardwareMenuAndDependencies.test_canonical_dependency_tc_zero)
+Setting tc_count to 0 removes tc_array and tc_k_parallel. ... ok
+test_full_hardware_menu_presence (test_policy.TestHardwareMenuAndDependencies.test_full_hardware_menu_presence)
+HW_MENU must include tc_array, tc_k_parallel, sfu_lanes, shared_banks/ports, multicast. ... ok
+test_reject_impossible_sfu_lanes_exceeding_vector_lanes (test_policy.TestHardwareMenuAndDependencies.test_reject_impossible_sfu_lanes_exceeding_vector_lanes)
+Setting sfu_lanes > vector_lanes must reject explicitly. ... ok
+test_reject_impossible_shared_subfield_when_shared_zero (test_policy.TestHardwareMenuAndDependencies.test_reject_impossible_shared_subfield_when_shared_zero)
+Setting shared_banks or shared_ports when shared_kib == 0 must reject explicitly. ... ok
+test_reject_impossible_tc_subfield_when_tc_zero (test_policy.TestHardwareMenuAndDependencies.test_reject_impossible_tc_subfield_when_tc_zero)
+Setting tc_array or tc_k_parallel when tc_count == 0 must reject explicitly. ... ok
+test_reject_unknown_hardware_field_and_value (test_policy.TestHardwareMenuAndDependencies.test_reject_unknown_hardware_field_and_value)
+Unknown field or invalid value must raise DslError explicitly. ... ok
+test_validate_hardware_rejects_impossible_hardware (test_policy.TestHardwareMenuAndDependencies.test_validate_hardware_rejects_impossible_hardware)
+validate_hardware directly flags invalid/impossible configurations. ... ok
+test_diagnostics_records_rejection_reasons (test_policy.TestProposalQuotaAndPolicy.test_diagnostics_records_rejection_reasons)
+Rejection reasons (e.g. duplicate_fingerprint or recipe_invalid) are recorded. ... ok
+test_exact_quota_count_6 (test_policy.TestProposalQuotaAndPolicy.test_exact_quota_count_6)
+count=6 must yield exactly 2 exploit, 2 expand, 2 novelty without truncation. ... ok
+test_existing_call_signature_preserved (test_policy.TestProposalQuotaAndPolicy.test_existing_call_signature_preserved)
+Calling propose_round with 6 arguments works without error. ... ok
+test_finite_attempts_bound (test_policy.TestProposalQuotaAndPolicy.test_finite_attempts_bound)
+Attempts must terminate within <= 128 finite bounds. ... ok
+test_each_accumulator_partition_must_fit (test_policy.TestRfAccumulatorSpace.test_each_accumulator_partition_must_fit) ... ok
+test_full_space_retains_wide_tiles_and_prunes_impossible_ones (test_policy.TestRfAccumulatorSpace.test_full_space_retains_wide_tiles_and_prunes_impossible_ones) ... ok
+test_partition_count_and_partition_capacity_are_separate_limits (test_policy.TestRfAccumulatorSpace.test_partition_count_and_partition_capacity_are_separate_limits) ... ok
+test_slow_check_path_is_cost_pruning_not_illegal_isa (test_policy.TestRfAccumulatorSpace.test_slow_check_path_is_cost_pruning_not_illegal_isa) ... ok
+test_unused_global_prompt_shape_does_not_prune_stage_override (test_policy.TestRfAccumulatorSpace.test_unused_global_prompt_shape_does_not_prune_stage_override) ... ok
+test_wide_n_requires_distributed_accumulators (test_policy.TestRfAccumulatorSpace.test_wide_n_requires_distributed_accumulators) ... ok
+test_stage_gemm_tiles_phase1_unlocked (test_policy.TestStageGemmTilesNeighborhoodsAndValidation.test_stage_gemm_tiles_phase1_unlocked)
+stage_gemm_tiles is unlocked in Phase 1. ... ok
+test_stage_tile_neighborhood_generation (test_policy.TestStageGemmTilesNeighborhoodsAndValidation.test_stage_tile_neighborhood_generation)
+stage_tile_neighborhood produces legal 1-step and 2-step stage tile ops. ... ok
+test_validate_recipe_rejects_bad_stage (test_policy.TestStageGemmTilesNeighborhoodsAndValidation.test_validate_recipe_rejects_bad_stage)
+validate_recipe rejects invalid stage names, non-dict overrides, or illegal tiles. ... ok
+test_struct_sig_backward_compatibility (test_policy.TestStructureSignature.test_struct_sig_backward_compatibility)
+struct_sig handles both dict (recipe, hw) and legacy op lists. ... ok
+test_structure_signature_effective_recipe_and_hardware (test_policy.TestStructureSignature.test_structure_signature_effective_recipe_and_hardware)
+Signature represents effective recipe state (order, pf, s, fuse, stages) and hw diffs. ... ok
+test_structure_signature_exposed (test_policy.TestStructureSignature.test_structure_signature_exposed)
+structure_signature must be exposed in dsl and propose modules. ... ok
+test_archive_update_and_pareto (test_records.TestArchives.test_archive_update_and_pareto) ... ok
+test_is_admissible_new_fields (test_records.TestArchives.test_is_admissible_new_fields) ... ok
+test_preserve_legacy_valid_entries (test_records.TestArchives.test_preserve_legacy_valid_entries) ... ok
+test_cache_rejects_ineligible_or_failed (test_records.TestCache.test_cache_rejects_ineligible_or_failed) ... ok
+test_cache_store_lookup_and_linkage (test_records.TestCache.test_cache_store_lookup_and_linkage) ... ok
+test_execution_key_components (test_records.TestCache.test_execution_key_components) ... ok
+test_input_fingerprint (test_records.TestCache.test_input_fingerprint) ... ok
+test_incumbent_promotion_and_pareto_retention (test_records.TestRecords.test_incumbent_promotion_and_pareto_retention) ... ok
+test_iteration_log_and_missing_errors_graceful (test_records.TestRecords.test_iteration_log_and_missing_errors_graceful) ... ok
+test_atomic_save_and_load (test_records.TestState.test_atomic_save_and_load) ... ok
+test_next_id_checks_registry_and_existing_dirs (test_records.TestState.test_next_id_checks_registry_and_existing_dirs) ... ok
+test_budget_parallel_failures_count (test_runtime.RuntimeTests.test_budget_parallel_failures_count) ... ok
+test_isolated_generation (test_runtime.RuntimeTests.test_isolated_generation) ... ok
+test_single_grade_and_full (test_runtime.RuntimeTests.test_single_grade_and_full) ... ok
+test_timeout_and_memory (test_runtime.RuntimeTests.test_timeout_and_memory) ... ok
+test_three_small_measured_gains_block_but_memory_failure_does_not (test_validation_hierarchy.HierarchyTests.test_three_small_measured_gains_block_but_memory_failure_does_not) ... ok
+test_tiles_and_placement_cannot_reset_structure_budget (test_validation_hierarchy.HierarchyTests.test_tiles_and_placement_cannot_reset_structure_budget) ... ok
+test_bound_against_actual_frozen_checker (test_validation_hierarchy.ValidationCostTests.test_bound_against_actual_frozen_checker) ... ok
+test_longer_dependency_chains_grow_superlinearly (test_validation_hierarchy.ValidationCostTests.test_longer_dependency_chains_grow_superlinearly) ... ok
+test_single_wg_uses_real_fast_path (test_validation_hierarchy.ValidationCostTests.test_single_wg_uses_real_fast_path) ... ok
+
+----------------------------------------------------------------------
+Ran 51 tests in 0.958s
+
+OK

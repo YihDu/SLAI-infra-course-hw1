@@ -1,0 +1,46 @@
+{
+  "candidate": "cand-105",
+  "reports": {},
+  "evaluation_attempts": 1,
+  "runs": {
+    "grade": {
+      "command": [
+        "/Users/yihdu/Codefield/SLAI-infra-Code/transformer-codesign-starter/.venv/bin/python",
+        "/Users/yihdu/Codefield/SLAI-infra-Code/transformer-codesign-starter/challenge.py",
+        "grade",
+        "--hardware",
+        "/Users/yihdu/Codefield/SLAI-infra-Code/transformer-codesign-starter/project/experiments/cand-105/inputs/hardware.json",
+        "--program-p1",
+        "/Users/yihdu/Codefield/SLAI-infra-Code/transformer-codesign-starter/project/experiments/cand-105/programs/M1_P1.asm",
+        "--program-d1",
+        "/Users/yihdu/Codefield/SLAI-infra-Code/transformer-codesign-starter/project/experiments/cand-105/programs/M2_D1.asm",
+        "--report",
+        "/Users/yihdu/Codefield/SLAI-infra-Code/transformer-codesign-starter/project/experiments/cand-105/reports/grade.json",
+        "--seed",
+        "7",
+        "--baseline",
+        "/Users/yihdu/Codefield/SLAI-infra-Code/transformer-codesign-starter/baseline_manifest.json"
+      ],
+      "exit_code": -15,
+      "elapsed": 37.36664620798547,
+      "peak_memory_mib": 3080.0026092529297,
+      "failure_class": "memory_limit"
+    }
+  },
+  "static": {
+    "M1_P1": {
+      "expanded_instructions": 161561,
+      "bytes": 560256,
+      "workgroup_lifetimes": 4
+    },
+    "M2_D1": {
+      "expanded_instructions": 15066,
+      "bytes": 533511,
+      "workgroup_lifetimes": 1
+    }
+  },
+  "verdict": "not_verified",
+  "failure_class": "memory_limit",
+  "failure_note": "",
+  "elapsed": 37.36708070896566
+}

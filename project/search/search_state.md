@@ -18,7 +18,7 @@
 - evaluator_error: 1
 - generate_error: 3
 - harness_noop: 9
-- memory_limit: 1
+- memory_limit: 6
 
 ## pareto front
 - cand-095 {'M1_P1': 8522411, 'M2_D1': 718132}

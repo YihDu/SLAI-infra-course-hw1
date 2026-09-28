@@ -233,6 +233,8 @@ def propose_round(reg: dict, round_no: int, count: int,
     if not best:
         best = next(iter(reg.get("candidates", {})), "cand-000")
     tried = _tried_fingerprints(reg)
+    from .hierarchy import blocked_structures, outer_signature, outer_structure
+    blocked_outer = blocked_structures(reg)
 
     if diagnostics is not None:
         diagnostics.setdefault("rejections", [])
@@ -278,6 +280,10 @@ def propose_round(reg: dict, round_no: int, count: int,
         if r_errs:
             record_rejection(f"recipe_invalid: {'; '.join(r_errs)}", kind, ops, parent)
             return False
+        outer_sig = outer_signature(recipe)
+        if outer_sig in blocked_outer:
+            record_rejection(f"inner_plateau: {outer_sig}", kind, ops, parent)
+            return False
         cost_reasons = dsl.evaluation_cost_reasons(recipe)
         if cost_reasons:
             record_rejection(f"evaluation_cost: {'; '.join(cost_reasons)}", kind, ops, parent)
@@ -304,6 +310,7 @@ def propose_round(reg: dict, round_no: int, count: int,
             "kind": kind, "hypothesis": hypothesis,
             "recipe": recipe, "hardware": hw, "fingerprint": fp,
             "struct_sig": sig, "compiler_path": compiler_path,
+            "outer_sig": outer_sig, "outer_structure": outer_structure(recipe),
         })
         return True
 

@@ -1,0 +1,2828 @@
+{
+  "M1_P1": {
+    "ops": {
+      "WG.BEGIN": 1,
+      "LD": 59224,
+      "REDUCE": 7800,
+      "VEC": 43698,
+      "SFU": 5070,
+      "ST": 13948,
+      "MMA.ACC": 31776,
+      "STEP.COMMIT": 1,
+      "WG.END": 1
+    },
+    "aggregates": {
+      "prompt": {
+        "read_bytes": 262144,
+        "write_bytes": 0,
+        "loads": 256,
+        "stores": 0
+      },
+      "ln1_g": {
+        "read_bytes": 399360,
+        "write_bytes": 0,
+        "loads": 390,
+        "stores": 0
+      },
+      "ln1_b": {
+        "read_bytes": 399360,
+        "write_bytes": 0,
+        "loads": 390,
+        "stores": 0
+      },
+      "ln1": {
+        "read_bytes": 9732096,
+        "write_bytes": 399360,
+        "loads": 4032,
+        "stores": 390
+      },
+      "wqkv": {
+        "read_bytes": 9437184,
+        "write_bytes": 0,
+        "loads": 2880,
+        "stores": 0
+      },
+      "qkv": {
+        "read_bytes": 1198080,
+        "write_bytes": 1198080,
+        "loads": 9360,
+        "stores": 576
+      },
+      "new_k": {
+        "read_bytes": 13178880,
+        "write_bytes": 399360,
+        "loads": 7920,
+        "stores": 3120
+      },
+      "new_v": {
+        "read_bytes": 13178880,
+        "write_bytes": 399360,
+        "loads": 7920,
+        "stores": 3120
+      },
+      "ctx": {
+        "read_bytes": 3244032,
+        "write_bytes": 399360,
+        "loads": 1344,
+        "stores": 3120
+      },
+      "wo": {
+        "read_bytes": 3145728,
+        "write_bytes": 0,
+        "loads": 960,
+        "stores": 0
+      },
+      "att": {
+        "read_bytes": 399360,
+        "write_bytes": 399360,
+        "loads": 390,
+        "stores": 192
+      },
+      "res": {
+        "read_bytes": 798720,
+        "write_bytes": 399360,
+        "loads": 780,
+        "stores": 390
+      },
+      "ln2_g": {
+        "read_bytes": 399360,
+        "write_bytes": 0,
+        "loads": 390,
+        "stores": 0
+      },
+      "ln2_b": {
+        "read_bytes": 399360,
+        "write_bytes": 0,
+        "loads": 390,
+        "stores": 0
+      },
+      "ln2": {
+        "read_bytes": 12976128,
+        "write_bytes": 399360,
+        "loads": 5376,
+        "stores": 390
+      },
+      "w1": {
+        "read_bytes": 12582912,
+        "write_bytes": 0,
+        "loads": 3840,
+        "stores": 0
+      },
+      "ff1": {
+        "read_bytes": 1597440,
+        "write_bytes": 1597440,
+        "loads": 1170,
+        "stores": 768
+      },
+      "b1": {
+        "read_bytes": 1597440,
+        "write_bytes": 0,
+        "loads": 1170,
+        "stores": 0
+      },
+      "gelu": {
+        "read_bytes": 12976128,
+        "write_bytes": 1597440,
+        "loads": 5184,
+        "stores": 1170
+      },
+      "w2": {
+        "read_bytes": 12582912,
+        "write_bytes": 0,
+        "loads": 3648,
+        "stores": 0
+      },
+      "ff2": {
+        "read_bytes": 399360,
+        "write_bytes": 399360,
+        "loads": 390,
+        "stores": 192
+      },
+      "b2": {
+        "read_bytes": 399360,
+        "write_bytes": 0,
+        "loads": 390,
+        "stores": 0
+      },
+      "out": {
+        "read_bytes": 665600,
+        "write_bytes": 399360,
+        "loads": 650,
+        "stores": 390
+      },
+      "hidden": {
+        "read_bytes": 0,
+        "write_bytes": 133120,
+        "loads": 0,
+        "stores": 130
+      },
+      "step0": {
+        "read_bytes": 4096,
+        "write_bytes": 0,
+        "loads": 4,
+        "stores": 0
+      }
+    },
+    "weights_read_bytes": 41342976,
+    "unique_weight_bytes": 9464832,
+    "weights": {
+      "layer0/ln1_g": {
+        "read_bytes": 133120,
+        "write_bytes": 0,
+        "loads": 130,
+        "stores": 0
+      },
+      "layer0/ln1_b": {
+        "read_bytes": 133120,
+        "write_bytes": 0,
+        "loads": 130,
+        "stores": 0
+      },
+      "layer0/wqkv": {
+        "read_bytes": 3145728,
+        "write_bytes": 0,
+        "loads": 960,
+        "stores": 0
+      },
+      "layer0/wo": {
+        "read_bytes": 1048576,
+        "write_bytes": 0,
+        "loads": 320,
+        "stores": 0
+      },
+      "layer0/ln2_g": {
+        "read_bytes": 133120,
+        "write_bytes": 0,
+        "loads": 130,
+        "stores": 0
+      },
+      "layer0/ln2_b": {
+        "read_bytes": 133120,
+        "write_bytes": 0,
+        "loads": 130,
+        "stores": 0
+      },
+      "layer0/w1": {
+        "read_bytes": 4194304,
+        "write_bytes": 0,
+        "loads": 1280,
+        "stores": 0
+      },
+      "layer0/b1": {
+        "read_bytes": 532480,
+        "write_bytes": 0,
+        "loads": 390,
+        "stores": 0
+      },
+      "layer0/w2": {
+        "read_bytes": 4194304,
+        "write_bytes": 0,
+        "loads": 1216,
+        "stores": 0
+      },
+      "layer0/b2": {
+        "read_bytes": 133120,
+        "write_bytes": 0,
+        "loads": 130,
+        "stores": 0
+      },
+      "layer1/ln1_g": {
+        "read_bytes": 133120,
+        "write_bytes": 0,
+        "loads": 130,
+        "stores": 0
+      },
+      "layer1/ln1_b": {
+        "read_bytes": 133120,
+        "write_bytes": 0,
+        "loads": 130,
+        "stores": 0
+      },
+      "layer1/wqkv": {
+        "read_bytes": 3145728,
+        "write_bytes": 0,
+        "loads": 960,
+        "stores": 0
+      },
+      "layer1/wo": {
+        "read_bytes": 1048576,
+        "write_bytes": 0,
+        "loads": 320,
+        "stores": 0
+      },
+      "layer1/ln2_g": {
+        "read_bytes": 133120,
+        "write_bytes": 0,
+        "loads": 130,
+        "stores": 0
+      },
+      "layer1/ln2_b": {
+        "read_bytes": 133120,
+        "write_bytes": 0,
+        "loads": 130,
+        "stores": 0
+      },
+      "layer1/w1": {
+        "read_bytes": 4194304,
+        "write_bytes": 0,
+        "loads": 1280,
+        "stores": 0
+      },
+      "layer1/b1": {
+        "read_bytes": 532480,
+        "write_bytes": 0,
+        "loads": 390,
+        "stores": 0
+      },
+      "layer1/w2": {
+        "read_bytes": 4194304,
+        "write_bytes": 0,
+        "loads": 1216,
+        "stores": 0
+      },
+      "layer1/b2": {
+        "read_bytes": 133120,
+        "write_bytes": 0,
+        "loads": 130,
+        "stores": 0
+      },
+      "layer2/ln1_g": {
+        "read_bytes": 133120,
+        "write_bytes": 0,
+        "loads": 130,
+        "stores": 0
+      },
+      "layer2/ln1_b": {
+        "read_bytes": 133120,
+        "write_bytes": 0,
+        "loads": 130,
+        "stores": 0
+      },
+      "layer2/wqkv": {
+        "read_bytes": 3145728,
+        "write_bytes": 0,
+        "loads": 960,
+        "stores": 0
+      },
+      "layer2/wo": {
+        "read_bytes": 1048576,
+        "write_bytes": 0,
+        "loads": 320,
+        "stores": 0
+      },
+      "layer2/ln2_g": {
+        "read_bytes": 133120,
+        "write_bytes": 0,
+        "loads": 130,
+        "stores": 0
+      },
+      "layer2/ln2_b": {
+        "read_bytes": 133120,
+        "write_bytes": 0,
+        "loads": 130,
+        "stores": 0
+      },
+      "layer2/w1": {
+        "read_bytes": 4194304,
+        "write_bytes": 0,
+        "loads": 1280,
+        "stores": 0
+      },
+      "layer2/b1": {
+        "read_bytes": 532480,
+        "write_bytes": 0,
+        "loads": 390,
+        "stores": 0
+      },
+      "layer2/w2": {
+        "read_bytes": 4194304,
+        "write_bytes": 0,
+        "loads": 1216,
+        "stores": 0
+      },
+      "layer2/b2": {
+        "read_bytes": 133120,
+        "write_bytes": 0,
+        "loads": 130,
+        "stores": 0
+      }
+    },
+    "tensors": {
+      "input/prompt": {
+        "read_bytes": 262144,
+        "write_bytes": 0,
+        "loads": 256,
+        "stores": 0
+      },
+      "layer0/ln1_g": {
+        "read_bytes": 133120,
+        "write_bytes": 0,
+        "loads": 130,
+        "stores": 0
+      },
+      "layer0/ln1_b": {
+        "read_bytes": 133120,
+        "write_bytes": 0,
+        "loads": 130,
+        "stores": 0
+      },
+      "pb0l0_ln1": {
+        "read_bytes": 1572864,
+        "write_bytes": 65536,
+        "loads": 384,
+        "stores": 64
+      },
+      "layer0/wqkv": {
+        "read_bytes": 3145728,
+        "write_bytes": 0,
+        "loads": 960,
+        "stores": 0
+      },
+      "pb0l0_qkv": {
+        "read_bytes": 196608,
+        "write_bytes": 196608,
+        "loads": 1536,
+        "stores": 48
+      },
+      "layer0/new_k": {
+        "read_bytes": 4392960,
+        "write_bytes": 133120,
+        "loads": 2640,
+        "stores": 1040
+      },
+      "layer0/new_v": {
+        "read_bytes": 4392960,
+        "write_bytes": 133120,
+        "loads": 2640,
+        "stores": 1040
+      },
+      "pb0l0_ctx": {
+        "read_bytes": 524288,
+        "write_bytes": 65536,
+        "loads": 128,
+        "stores": 512
+      },
+      "layer0/wo": {
+        "read_bytes": 1048576,
+        "write_bytes": 0,
+        "loads": 320,
+        "stores": 0
+      },
+      "pb0l0_att": {
+        "read_bytes": 65536,
+        "write_bytes": 65536,
+        "loads": 64,
+        "stores": 16
+      },
+      "pb0l0_res": {
+        "read_bytes": 131072,
+        "write_bytes": 65536,
+        "loads": 128,
+        "stores": 64
+      },
+      "layer0/ln2_g": {
+        "read_bytes": 133120,
+        "write_bytes": 0,
+        "loads": 130,
+        "stores": 0
+      },
+      "layer0/ln2_b": {
+        "read_bytes": 133120,
+        "write_bytes": 0,
+        "loads": 130,
+        "stores": 0
+      },
+      "pb0l0_ln2": {
+        "read_bytes": 2097152,
+        "write_bytes": 65536,
+        "loads": 512,
+        "stores": 64
+      },
+      "layer0/w1": {
+        "read_bytes": 4194304,
+        "write_bytes": 0,
+        "loads": 1280,
+        "stores": 0
+      },
+      "pb0l0_ff1": {
+        "read_bytes": 262144,
+        "write_bytes": 262144,
+        "loads": 192,
+        "stores": 64
+      },
+      "layer0/b1": {
+        "read_bytes": 532480,
+        "write_bytes": 0,
+        "loads": 390,
+        "stores": 0
+      },
+      "pb0l0_gelu": {
+        "read_bytes": 2097152,
+        "write_bytes": 262144,
+        "loads": 512,
+        "stores": 192
+      },
+      "layer0/w2": {
+        "read_bytes": 4194304,
+        "write_bytes": 0,
+        "loads": 1216,
+        "stores": 0
+      },
+      "pb0l0_ff2": {
+        "read_bytes": 65536,
+        "write_bytes": 65536,
+        "loads": 64,
+        "stores": 16
+      },
+      "layer0/b2": {
+        "read_bytes": 133120,
+        "write_bytes": 0,
+        "loads": 130,
+        "stores": 0
+      },
+      "pb0l0_out": {
+        "read_bytes": 131072,
+        "write_bytes": 65536,
+        "loads": 128,
+        "stores": 64
+      },
+      "layer1/ln1_g": {
+        "read_bytes": 133120,
+        "write_bytes": 0,
+        "loads": 130,
+        "stores": 0
+      },
+      "layer1/ln1_b": {
+        "read_bytes": 133120,
+        "write_bytes": 0,
+        "loads": 130,
+        "stores": 0
+      },
+      "pb0l1_ln1": {
+        "read_bytes": 1572864,
+        "write_bytes": 65536,
+        "loads": 384,
+        "stores": 64
+      },
+      "layer1/wqkv": {
+        "read_bytes": 3145728,
+        "write_bytes": 0,
+        "loads": 960,
+        "stores": 0
+      },
+      "pb0l1_qkv": {
+        "read_bytes": 196608,
+        "write_bytes": 196608,
+        "loads": 1536,
+        "stores": 48
+      },
+      "layer1/new_k": {
+        "read_bytes": 4392960,
+        "write_bytes": 133120,
+        "loads": 2640,
+        "stores": 1040
+      },
+      "layer1/new_v": {
+        "read_bytes": 4392960,
+        "write_bytes": 133120,
+        "loads": 2640,
+        "stores": 1040
+      },
+      "pb0l1_ctx": {
+        "read_bytes": 524288,
+        "write_bytes": 65536,
+        "loads": 128,
+        "stores": 512
+      },
+      "layer1/wo": {
+        "read_bytes": 1048576,
+        "write_bytes": 0,
+        "loads": 320,
+        "stores": 0
+      },
+      "pb0l1_att": {
+        "read_bytes": 65536,
+        "write_bytes": 65536,
+        "loads": 64,
+        "stores": 16
+      },
+      "pb0l1_res": {
+        "read_bytes": 131072,
+        "write_bytes": 65536,
+        "loads": 128,
+        "stores": 64
+      },
+      "layer1/ln2_g": {
+        "read_bytes": 133120,
+        "write_bytes": 0,
+        "loads": 130,
+        "stores": 0
+      },
+      "layer1/ln2_b": {
+        "read_bytes": 133120,
+        "write_bytes": 0,
+        "loads": 130,
+        "stores": 0
+      },
+      "pb0l1_ln2": {
+        "read_bytes": 2097152,
+        "write_bytes": 65536,
+        "loads": 512,
+        "stores": 64
+      },
+      "layer1/w1": {
+        "read_bytes": 4194304,
+        "write_bytes": 0,
+        "loads": 1280,
+        "stores": 0
+      },
+      "pb0l1_ff1": {
+        "read_bytes": 262144,
+        "write_bytes": 262144,
+        "loads": 192,
+        "stores": 64
+      },
+      "layer1/b1": {
+        "read_bytes": 532480,
+        "write_bytes": 0,
+        "loads": 390,
+        "stores": 0
+      },
+      "pb0l1_gelu": {
+        "read_bytes": 2097152,
+        "write_bytes": 262144,
+        "loads": 512,
+        "stores": 192
+      },
+      "layer1/w2": {
+        "read_bytes": 4194304,
+        "write_bytes": 0,
+        "loads": 1216,
+        "stores": 0
+      },
+      "pb0l1_ff2": {
+        "read_bytes": 65536,
+        "write_bytes": 65536,
+        "loads": 64,
+        "stores": 16
+      },
+      "layer1/b2": {
+        "read_bytes": 133120,
+        "write_bytes": 0,
+        "loads": 130,
+        "stores": 0
+      },
+      "pb0l1_out": {
+        "read_bytes": 131072,
+        "write_bytes": 65536,
+        "loads": 128,
+        "stores": 64
+      },
+      "layer2/ln1_g": {
+        "read_bytes": 133120,
+        "write_bytes": 0,
+        "loads": 130,
+        "stores": 0
+      },
+      "layer2/ln1_b": {
+        "read_bytes": 133120,
+        "write_bytes": 0,
+        "loads": 130,
+        "stores": 0
+      },
+      "pb0l2_ln1": {
+        "read_bytes": 1572864,
+        "write_bytes": 65536,
+        "loads": 384,
+        "stores": 64
+      },
+      "layer2/wqkv": {
+        "read_bytes": 3145728,
+        "write_bytes": 0,
+        "loads": 960,
+        "stores": 0
+      },
+      "pb0l2_qkv": {
+        "read_bytes": 196608,
+        "write_bytes": 196608,
+        "loads": 1536,
+        "stores": 48
+      },
+      "layer2/new_k": {
+        "read_bytes": 4392960,
+        "write_bytes": 133120,
+        "loads": 2640,
+        "stores": 1040
+      },
+      "layer2/new_v": {
+        "read_bytes": 4392960,
+        "write_bytes": 133120,
+        "loads": 2640,
+        "stores": 1040
+      },
+      "pb0l2_ctx": {
+        "read_bytes": 524288,
+        "write_bytes": 65536,
+        "loads": 128,
+        "stores": 512
+      },
+      "layer2/wo": {
+        "read_bytes": 1048576,
+        "write_bytes": 0,
+        "loads": 320,
+        "stores": 0
+      },
+      "pb0l2_att": {
+        "read_bytes": 65536,
+        "write_bytes": 65536,
+        "loads": 64,
+        "stores": 16
+      },
+      "pb0l2_res": {
+        "read_bytes": 131072,
+        "write_bytes": 65536,
+        "loads": 128,
+        "stores": 64
+      },
+      "layer2/ln2_g": {
+        "read_bytes": 133120,
+        "write_bytes": 0,
+        "loads": 130,
+        "stores": 0
+      },
+      "layer2/ln2_b": {
+        "read_bytes": 133120,
+        "write_bytes": 0,
+        "loads": 130,
+        "stores": 0
+      },
+      "pb0l2_ln2": {
+        "read_bytes": 2097152,
+        "write_bytes": 65536,
+        "loads": 512,
+        "stores": 64
+      },
+      "layer2/w1": {
+        "read_bytes": 4194304,
+        "write_bytes": 0,
+        "loads": 1280,
+        "stores": 0
+      },
+      "pb0l2_ff1": {
+        "read_bytes": 262144,
+        "write_bytes": 262144,
+        "loads": 192,
+        "stores": 64
+      },
+      "layer2/b1": {
+        "read_bytes": 532480,
+        "write_bytes": 0,
+        "loads": 390,
+        "stores": 0
+      },
+      "pb0l2_gelu": {
+        "read_bytes": 2097152,
+        "write_bytes": 262144,
+        "loads": 512,
+        "stores": 192
+      },
+      "layer2/w2": {
+        "read_bytes": 4194304,
+        "write_bytes": 0,
+        "loads": 1216,
+        "stores": 0
+      },
+      "pb0l2_ff2": {
+        "read_bytes": 65536,
+        "write_bytes": 65536,
+        "loads": 64,
+        "stores": 16
+      },
+      "layer2/b2": {
+        "read_bytes": 133120,
+        "write_bytes": 0,
+        "loads": 130,
+        "stores": 0
+      },
+      "pb0l2_out": {
+        "read_bytes": 65536,
+        "write_bytes": 65536,
+        "loads": 64,
+        "stores": 64
+      },
+      "output/hidden": {
+        "read_bytes": 0,
+        "write_bytes": 133120,
+        "loads": 0,
+        "stores": 130
+      },
+      "pb1l0_ln1": {
+        "read_bytes": 1572864,
+        "write_bytes": 65536,
+        "loads": 384,
+        "stores": 64
+      },
+      "pb1l0_qkv": {
+        "read_bytes": 196608,
+        "write_bytes": 196608,
+        "loads": 1536,
+        "stores": 48
+      },
+      "pb1l0_ctx": {
+        "read_bytes": 524288,
+        "write_bytes": 65536,
+        "loads": 128,
+        "stores": 512
+      },
+      "pb1l0_att": {
+        "read_bytes": 65536,
+        "write_bytes": 65536,
+        "loads": 64,
+        "stores": 16
+      },
+      "pb1l0_res": {
+        "read_bytes": 131072,
+        "write_bytes": 65536,
+        "loads": 128,
+        "stores": 64
+      },
+      "pb1l0_ln2": {
+        "read_bytes": 2097152,
+        "write_bytes": 65536,
+        "loads": 512,
+        "stores": 64
+      },
+      "pb1l0_ff1": {
+        "read_bytes": 262144,
+        "write_bytes": 262144,
+        "loads": 192,
+        "stores": 64
+      },
+      "pb1l0_gelu": {
+        "read_bytes": 2097152,
+        "write_bytes": 262144,
+        "loads": 512,
+        "stores": 192
+      },
+      "pb1l0_ff2": {
+        "read_bytes": 65536,
+        "write_bytes": 65536,
+        "loads": 64,
+        "stores": 16
+      },
+      "pb1l0_out": {
+        "read_bytes": 131072,
+        "write_bytes": 65536,
+        "loads": 128,
+        "stores": 64
+      },
+      "pb1l1_ln1": {
+        "read_bytes": 1572864,
+        "write_bytes": 65536,
+        "loads": 384,
+        "stores": 64
+      },
+      "pb1l1_qkv": {
+        "read_bytes": 196608,
+        "write_bytes": 196608,
+        "loads": 1536,
+        "stores": 48
+      },
+      "pb1l1_ctx": {
+        "read_bytes": 524288,
+        "write_bytes": 65536,
+        "loads": 128,
+        "stores": 512
+      },
+      "pb1l1_att": {
+        "read_bytes": 65536,
+        "write_bytes": 65536,
+        "loads": 64,
+        "stores": 16
+      },
+      "pb1l1_res": {
+        "read_bytes": 131072,
+        "write_bytes": 65536,
+        "loads": 128,
+        "stores": 64
+      },
+      "pb1l1_ln2": {
+        "read_bytes": 2097152,
+        "write_bytes": 65536,
+        "loads": 512,
+        "stores": 64
+      },
+      "pb1l1_ff1": {
+        "read_bytes": 262144,
+        "write_bytes": 262144,
+        "loads": 192,
+        "stores": 64
+      },
+      "pb1l1_gelu": {
+        "read_bytes": 2097152,
+        "write_bytes": 262144,
+        "loads": 512,
+        "stores": 192
+      },
+      "pb1l1_ff2": {
+        "read_bytes": 65536,
+        "write_bytes": 65536,
+        "loads": 64,
+        "stores": 16
+      },
+      "pb1l1_out": {
+        "read_bytes": 131072,
+        "write_bytes": 65536,
+        "loads": 128,
+        "stores": 64
+      },
+      "pb1l2_ln1": {
+        "read_bytes": 1572864,
+        "write_bytes": 65536,
+        "loads": 384,
+        "stores": 64
+      },
+      "pb1l2_qkv": {
+        "read_bytes": 196608,
+        "write_bytes": 196608,
+        "loads": 1536,
+        "stores": 48
+      },
+      "pb1l2_ctx": {
+        "read_bytes": 524288,
+        "write_bytes": 65536,
+        "loads": 128,
+        "stores": 512
+      },
+      "pb1l2_att": {
+        "read_bytes": 65536,
+        "write_bytes": 65536,
+        "loads": 64,
+        "stores": 16
+      },
+      "pb1l2_res": {
+        "read_bytes": 131072,
+        "write_bytes": 65536,
+        "loads": 128,
+        "stores": 64
+      },
+      "pb1l2_ln2": {
+        "read_bytes": 2097152,
+        "write_bytes": 65536,
+        "loads": 512,
+        "stores": 64
+      },
+      "pb1l2_ff1": {
+        "read_bytes": 262144,
+        "write_bytes": 262144,
+        "loads": 192,
+        "stores": 64
+      },
+      "pb1l2_gelu": {
+        "read_bytes": 2097152,
+        "write_bytes": 262144,
+        "loads": 512,
+        "stores": 192
+      },
+      "pb1l2_ff2": {
+        "read_bytes": 65536,
+        "write_bytes": 65536,
+        "loads": 64,
+        "stores": 16
+      },
+      "pb1l2_out": {
+        "read_bytes": 65536,
+        "write_bytes": 65536,
+        "loads": 64,
+        "stores": 64
+      },
+      "input/step0": {
+        "read_bytes": 4096,
+        "write_bytes": 0,
+        "loads": 4,
+        "stores": 0
+      },
+      "sb0l0_ln1": {
+        "read_bytes": 49152,
+        "write_bytes": 1024,
+        "loads": 288,
+        "stores": 1
+      },
+      "sb0l0_qkv": {
+        "read_bytes": 3072,
+        "write_bytes": 3072,
+        "loads": 24,
+        "stores": 48
+      },
+      "sb0l0_ctx": {
+        "read_bytes": 16384,
+        "write_bytes": 1024,
+        "loads": 96,
+        "stores": 8
+      },
+      "sb0l0_att": {
+        "read_bytes": 1024,
+        "write_bytes": 1024,
+        "loads": 1,
+        "stores": 16
+      },
+      "sb0l0_res": {
+        "read_bytes": 2048,
+        "write_bytes": 1024,
+        "loads": 2,
+        "stores": 1
+      },
+      "sb0l0_ln2": {
+        "read_bytes": 65536,
+        "write_bytes": 1024,
+        "loads": 384,
+        "stores": 1
+      },
+      "sb0l0_ff1": {
+        "read_bytes": 4096,
+        "write_bytes": 4096,
+        "loads": 3,
+        "stores": 64
+      },
+      "sb0l0_gelu": {
+        "read_bytes": 65536,
+        "write_bytes": 4096,
+        "loads": 352,
+        "stores": 3
+      },
+      "sb0l0_ff2": {
+        "read_bytes": 1024,
+        "write_bytes": 1024,
+        "loads": 1,
+        "stores": 16
+      },
+      "sb0l0_out": {
+        "read_bytes": 2048,
+        "write_bytes": 1024,
+        "loads": 2,
+        "stores": 1
+      },
+      "sb0l1_ln1": {
+        "read_bytes": 49152,
+        "write_bytes": 1024,
+        "loads": 288,
+        "stores": 1
+      },
+      "sb0l1_qkv": {
+        "read_bytes": 3072,
+        "write_bytes": 3072,
+        "loads": 24,
+        "stores": 48
+      },
+      "sb0l1_ctx": {
+        "read_bytes": 16384,
+        "write_bytes": 1024,
+        "loads": 96,
+        "stores": 8
+      },
+      "sb0l1_att": {
+        "read_bytes": 1024,
+        "write_bytes": 1024,
+        "loads": 1,
+        "stores": 16
+      },
+      "sb0l1_res": {
+        "read_bytes": 2048,
+        "write_bytes": 1024,
+        "loads": 2,
+        "stores": 1
+      },
+      "sb0l1_ln2": {
+        "read_bytes": 65536,
+        "write_bytes": 1024,
+        "loads": 384,
+        "stores": 1
+      },
+      "sb0l1_ff1": {
+        "read_bytes": 4096,
+        "write_bytes": 4096,
+        "loads": 3,
+        "stores": 64
+      },
+      "sb0l1_gelu": {
+        "read_bytes": 65536,
+        "write_bytes": 4096,
+        "loads": 352,
+        "stores": 3
+      },
+      "sb0l1_ff2": {
+        "read_bytes": 1024,
+        "write_bytes": 1024,
+        "loads": 1,
+        "stores": 16
+      },
+      "sb0l1_out": {
+        "read_bytes": 2048,
+        "write_bytes": 1024,
+        "loads": 2,
+        "stores": 1
+      },
+      "sb0l2_ln1": {
+        "read_bytes": 49152,
+        "write_bytes": 1024,
+        "loads": 288,
+        "stores": 1
+      },
+      "sb0l2_qkv": {
+        "read_bytes": 3072,
+        "write_bytes": 3072,
+        "loads": 24,
+        "stores": 48
+      },
+      "sb0l2_ctx": {
+        "read_bytes": 16384,
+        "write_bytes": 1024,
+        "loads": 96,
+        "stores": 8
+      },
+      "sb0l2_att": {
+        "read_bytes": 1024,
+        "write_bytes": 1024,
+        "loads": 1,
+        "stores": 16
+      },
+      "sb0l2_res": {
+        "read_bytes": 2048,
+        "write_bytes": 1024,
+        "loads": 2,
+        "stores": 1
+      },
+      "sb0l2_ln2": {
+        "read_bytes": 65536,
+        "write_bytes": 1024,
+        "loads": 384,
+        "stores": 1
+      },
+      "sb0l2_ff1": {
+        "read_bytes": 4096,
+        "write_bytes": 4096,
+        "loads": 3,
+        "stores": 64
+      },
+      "sb0l2_gelu": {
+        "read_bytes": 65536,
+        "write_bytes": 4096,
+        "loads": 352,
+        "stores": 3
+      },
+      "sb0l2_ff2": {
+        "read_bytes": 1024,
+        "write_bytes": 1024,
+        "loads": 1,
+        "stores": 16
+      },
+      "sb0l2_out": {
+        "read_bytes": 1024,
+        "write_bytes": 1024,
+        "loads": 1,
+        "stores": 1
+      },
+      "sb1l0_ln1": {
+        "read_bytes": 49152,
+        "write_bytes": 1024,
+        "loads": 288,
+        "stores": 1
+      },
+      "sb1l0_qkv": {
+        "read_bytes": 3072,
+        "write_bytes": 3072,
+        "loads": 24,
+        "stores": 48
+      },
+      "sb1l0_ctx": {
+        "read_bytes": 16384,
+        "write_bytes": 1024,
+        "loads": 96,
+        "stores": 8
+      },
+      "sb1l0_att": {
+        "read_bytes": 1024,
+        "write_bytes": 1024,
+        "loads": 1,
+        "stores": 16
+      },
+      "sb1l0_res": {
+        "read_bytes": 2048,
+        "write_bytes": 1024,
+        "loads": 2,
+        "stores": 1
+      },
+      "sb1l0_ln2": {
+        "read_bytes": 65536,
+        "write_bytes": 1024,
+        "loads": 384,
+        "stores": 1
+      },
+      "sb1l0_ff1": {
+        "read_bytes": 4096,
+        "write_bytes": 4096,
+        "loads": 3,
+        "stores": 64
+      },
+      "sb1l0_gelu": {
+        "read_bytes": 65536,
+        "write_bytes": 4096,
+        "loads": 352,
+        "stores": 3
+      },
+      "sb1l0_ff2": {
+        "read_bytes": 1024,
+        "write_bytes": 1024,
+        "loads": 1,
+        "stores": 16
+      },
+      "sb1l0_out": {
+        "read_bytes": 2048,
+        "write_bytes": 1024,
+        "loads": 2,
+        "stores": 1
+      },
+      "sb1l1_ln1": {
+        "read_bytes": 49152,
+        "write_bytes": 1024,
+        "loads": 288,
+        "stores": 1
+      },
+      "sb1l1_qkv": {
+        "read_bytes": 3072,
+        "write_bytes": 3072,
+        "loads": 24,
+        "stores": 48
+      },
+      "sb1l1_ctx": {
+        "read_bytes": 16384,
+        "write_bytes": 1024,
+        "loads": 96,
+        "stores": 8
+      },
+      "sb1l1_att": {
+        "read_bytes": 1024,
+        "write_bytes": 1024,
+        "loads": 1,
+        "stores": 16
+      },
+      "sb1l1_res": {
+        "read_bytes": 2048,
+        "write_bytes": 1024,
+        "loads": 2,
+        "stores": 1
+      },
+      "sb1l1_ln2": {
+        "read_bytes": 65536,
+        "write_bytes": 1024,
+        "loads": 384,
+        "stores": 1
+      },
+      "sb1l1_ff1": {
+        "read_bytes": 4096,
+        "write_bytes": 4096,
+        "loads": 3,
+        "stores": 64
+      },
+      "sb1l1_gelu": {
+        "read_bytes": 65536,
+        "write_bytes": 4096,
+        "loads": 352,
+        "stores": 3
+      },
+      "sb1l1_ff2": {
+        "read_bytes": 1024,
+        "write_bytes": 1024,
+        "loads": 1,
+        "stores": 16
+      },
+      "sb1l1_out": {
+        "read_bytes": 2048,
+        "write_bytes": 1024,
+        "loads": 2,
+        "stores": 1
+      },
+      "sb1l2_ln1": {
+        "read_bytes": 49152,
+        "write_bytes": 1024,
+        "loads": 288,
+        "stores": 1
+      },
+      "sb1l2_qkv": {
+        "read_bytes": 3072,
+        "write_bytes": 3072,
+        "loads": 24,
+        "stores": 48
+      },
+      "sb1l2_ctx": {
+        "read_bytes": 16384,
+        "write_bytes": 1024,
+        "loads": 96,
+        "stores": 8
+      },
+      "sb1l2_att": {
+        "read_bytes": 1024,
+        "write_bytes": 1024,
+        "loads": 1,
+        "stores": 16
+      },
+      "sb1l2_res": {
+        "read_bytes": 2048,
+        "write_bytes": 1024,
+        "loads": 2,
+        "stores": 1
+      },
+      "sb1l2_ln2": {
+        "read_bytes": 65536,
+        "write_bytes": 1024,
+        "loads": 384,
+        "stores": 1
+      },
+      "sb1l2_ff1": {
+        "read_bytes": 4096,
+        "write_bytes": 4096,
+        "loads": 3,
+        "stores": 64
+      },
+      "sb1l2_gelu": {
+        "read_bytes": 65536,
+        "write_bytes": 4096,
+        "loads": 352,
+        "stores": 3
+      },
+      "sb1l2_ff2": {
+        "read_bytes": 1024,
+        "write_bytes": 1024,
+        "loads": 1,
+        "stores": 16
+      },
+      "sb1l2_out": {
+        "read_bytes": 1024,
+        "write_bytes": 1024,
+        "loads": 1,
+        "stores": 1
+      }
+    }
+  },
+  "M2_D1": {
+    "ops": {
+      "WG.BEGIN": 1,
+      "LD": 7736,
+      "REDUCE": 192,
+      "VEC": 2192,
+      "SFU": 128,
+      "ST": 584,
+      "MMA.ACC": 4224,
+      "STEP.COMMIT": 8,
+      "WG.END": 1
+    },
+    "aggregates": {
+      "step0": {
+        "read_bytes": 1024,
+        "write_bytes": 0,
+        "loads": 2,
+        "stores": 0
+      },
+      "ln1_g": {
+        "read_bytes": 8192,
+        "write_bytes": 0,
+        "loads": 16,
+        "stores": 0
+      },
+      "ln1_b": {
+        "read_bytes": 8192,
+        "write_bytes": 0,
+        "loads": 16,
+        "stores": 0
+      },
+      "ln1": {
+        "read_bytes": 49152,
+        "write_bytes": 8192,
+        "loads": 768,
+        "stores": 16
+      },
+      "wqkv": {
+        "read_bytes": 3145728,
+        "write_bytes": 0,
+        "loads": 768,
+        "stores": 0
+      },
+      "qkv": {
+        "read_bytes": 24576,
+        "write_bytes": 24576,
+        "loads": 192,
+        "stores": 96
+      },
+      "new_k": {
+        "read_bytes": 36864,
+        "write_bytes": 8192,
+        "loads": 64,
+        "stores": 64
+      },
+      "new_v": {
+        "read_bytes": 36864,
+        "write_bytes": 8192,
+        "loads": 64,
+        "stores": 64
+      },
+      "history_k": {
+        "read_bytes": 1048576,
+        "write_bytes": 0,
+        "loads": 512,
+        "stores": 0
+      },
+      "history_v": {
+        "read_bytes": 1048576,
+        "write_bytes": 0,
+        "loads": 512,
+        "stores": 0
+      },
+      "ctx": {
+        "read_bytes": 16384,
+        "write_bytes": 8192,
+        "loads": 256,
+        "stores": 64
+      },
+      "wo": {
+        "read_bytes": 1048576,
+        "write_bytes": 0,
+        "loads": 256,
+        "stores": 0
+      },
+      "att": {
+        "read_bytes": 8192,
+        "write_bytes": 8192,
+        "loads": 16,
+        "stores": 32
+      },
+      "res": {
+        "read_bytes": 16384,
+        "write_bytes": 8192,
+        "loads": 32,
+        "stores": 16
+      },
+      "ln2_g": {
+        "read_bytes": 8192,
+        "write_bytes": 0,
+        "loads": 16,
+        "stores": 0
+      },
+      "ln2_b": {
+        "read_bytes": 8192,
+        "write_bytes": 0,
+        "loads": 16,
+        "stores": 0
+      },
+      "ln2": {
+        "read_bytes": 65536,
+        "write_bytes": 8192,
+        "loads": 1024,
+        "stores": 16
+      },
+      "w1": {
+        "read_bytes": 4194304,
+        "write_bytes": 0,
+        "loads": 1024,
+        "stores": 0
+      },
+      "ff1": {
+        "read_bytes": 32768,
+        "write_bytes": 32768,
+        "loads": 32,
+        "stores": 128
+      },
+      "b1": {
+        "read_bytes": 32768,
+        "write_bytes": 0,
+        "loads": 32,
+        "stores": 0
+      },
+      "gelu": {
+        "read_bytes": 65536,
+        "write_bytes": 32768,
+        "loads": 1024,
+        "stores": 32
+      },
+      "w2": {
+        "read_bytes": 4194304,
+        "write_bytes": 0,
+        "loads": 1024,
+        "stores": 0
+      },
+      "ff2": {
+        "read_bytes": 8192,
+        "write_bytes": 8192,
+        "loads": 16,
+        "stores": 32
+      },
+      "b2": {
+        "read_bytes": 8192,
+        "write_bytes": 0,
+        "loads": 16,
+        "stores": 0
+      },
+      "out": {
+        "read_bytes": 12288,
+        "write_bytes": 8192,
+        "loads": 24,
+        "stores": 16
+      },
+      "hidden": {
+        "read_bytes": 0,
+        "write_bytes": 4096,
+        "loads": 0,
+        "stores": 8
+      },
+      "step1": {
+        "read_bytes": 1024,
+        "write_bytes": 0,
+        "loads": 2,
+        "stores": 0
+      },
+      "step2": {
+        "read_bytes": 1024,
+        "write_bytes": 0,
+        "loads": 2,
+        "stores": 0
+      },
+      "step3": {
+        "read_bytes": 1024,
+        "write_bytes": 0,
+        "loads": 2,
+        "stores": 0
+      },
+      "step4": {
+        "read_bytes": 1024,
+        "write_bytes": 0,
+        "loads": 2,
+        "stores": 0
+      },
+      "step5": {
+        "read_bytes": 1024,
+        "write_bytes": 0,
+        "loads": 2,
+        "stores": 0
+      },
+      "step6": {
+        "read_bytes": 1024,
+        "write_bytes": 0,
+        "loads": 2,
+        "stores": 0
+      },
+      "step7": {
+        "read_bytes": 1024,
+        "write_bytes": 0,
+        "loads": 2,
+        "stores": 0
+      }
+    },
+    "weights_read_bytes": 12656640,
+    "unique_weight_bytes": 1582080,
+    "weights": {
+      "layer0/ln1_g": {
+        "read_bytes": 4096,
+        "write_bytes": 0,
+        "loads": 8,
+        "stores": 0
+      },
+      "layer0/ln1_b": {
+        "read_bytes": 4096,
+        "write_bytes": 0,
+        "loads": 8,
+        "stores": 0
+      },
+      "layer0/wqkv": {
+        "read_bytes": 1572864,
+        "write_bytes": 0,
+        "loads": 384,
+        "stores": 0
+      },
+      "layer0/wo": {
+        "read_bytes": 524288,
+        "write_bytes": 0,
+        "loads": 128,
+        "stores": 0
+      },
+      "layer0/ln2_g": {
+        "read_bytes": 4096,
+        "write_bytes": 0,
+        "loads": 8,
+        "stores": 0
+      },
+      "layer0/ln2_b": {
+        "read_bytes": 4096,
+        "write_bytes": 0,
+        "loads": 8,
+        "stores": 0
+      },
+      "layer0/w1": {
+        "read_bytes": 2097152,
+        "write_bytes": 0,
+        "loads": 512,
+        "stores": 0
+      },
+      "layer0/b1": {
+        "read_bytes": 16384,
+        "write_bytes": 0,
+        "loads": 16,
+        "stores": 0
+      },
+      "layer0/w2": {
+        "read_bytes": 2097152,
+        "write_bytes": 0,
+        "loads": 512,
+        "stores": 0
+      },
+      "layer0/b2": {
+        "read_bytes": 4096,
+        "write_bytes": 0,
+        "loads": 8,
+        "stores": 0
+      },
+      "layer1/ln1_g": {
+        "read_bytes": 4096,
+        "write_bytes": 0,
+        "loads": 8,
+        "stores": 0
+      },
+      "layer1/ln1_b": {
+        "read_bytes": 4096,
+        "write_bytes": 0,
+        "loads": 8,
+        "stores": 0
+      },
+      "layer1/wqkv": {
+        "read_bytes": 1572864,
+        "write_bytes": 0,
+        "loads": 384,
+        "stores": 0
+      },
+      "layer1/wo": {
+        "read_bytes": 524288,
+        "write_bytes": 0,
+        "loads": 128,
+        "stores": 0
+      },
+      "layer1/ln2_g": {
+        "read_bytes": 4096,
+        "write_bytes": 0,
+        "loads": 8,
+        "stores": 0
+      },
+      "layer1/ln2_b": {
+        "read_bytes": 4096,
+        "write_bytes": 0,
+        "loads": 8,
+        "stores": 0
+      },
+      "layer1/w1": {
+        "read_bytes": 2097152,
+        "write_bytes": 0,
+        "loads": 512,
+        "stores": 0
+      },
+      "layer1/b1": {
+        "read_bytes": 16384,
+        "write_bytes": 0,
+        "loads": 16,
+        "stores": 0
+      },
+      "layer1/w2": {
+        "read_bytes": 2097152,
+        "write_bytes": 0,
+        "loads": 512,
+        "stores": 0
+      },
+      "layer1/b2": {
+        "read_bytes": 4096,
+        "write_bytes": 0,
+        "loads": 8,
+        "stores": 0
+      }
+    },
+    "tensors": {
+      "input/step0": {
+        "read_bytes": 1024,
+        "write_bytes": 0,
+        "loads": 2,
+        "stores": 0
+      },
+      "layer0/ln1_g": {
+        "read_bytes": 4096,
+        "write_bytes": 0,
+        "loads": 8,
+        "stores": 0
+      },
+      "layer0/ln1_b": {
+        "read_bytes": 4096,
+        "write_bytes": 0,
+        "loads": 8,
+        "stores": 0
+      },
+      "d0l0_ln1": {
+        "read_bytes": 3072,
+        "write_bytes": 512,
+        "loads": 48,
+        "stores": 1
+      },
+      "layer0/wqkv": {
+        "read_bytes": 1572864,
+        "write_bytes": 0,
+        "loads": 384,
+        "stores": 0
+      },
+      "d0l0_qkv": {
+        "read_bytes": 1536,
+        "write_bytes": 1536,
+        "loads": 12,
+        "stores": 6
+      },
+      "layer0/new_k": {
+        "read_bytes": 18432,
+        "write_bytes": 4096,
+        "loads": 32,
+        "stores": 32
+      },
+      "layer0/new_v": {
+        "read_bytes": 18432,
+        "write_bytes": 4096,
+        "loads": 32,
+        "stores": 32
+      },
+      "layer0/history_k": {
+        "read_bytes": 524288,
+        "write_bytes": 0,
+        "loads": 256,
+        "stores": 0
+      },
+      "layer0/history_v": {
+        "read_bytes": 524288,
+        "write_bytes": 0,
+        "loads": 256,
+        "stores": 0
+      },
+      "d0l0_ctx": {
+        "read_bytes": 1024,
+        "write_bytes": 512,
+        "loads": 16,
+        "stores": 4
+      },
+      "layer0/wo": {
+        "read_bytes": 524288,
+        "write_bytes": 0,
+        "loads": 128,
+        "stores": 0
+      },
+      "d0l0_att": {
+        "read_bytes": 512,
+        "write_bytes": 512,
+        "loads": 1,
+        "stores": 2
+      },
+      "d0l0_res": {
+        "read_bytes": 1024,
+        "write_bytes": 512,
+        "loads": 2,
+        "stores": 1
+      },
+      "layer0/ln2_g": {
+        "read_bytes": 4096,
+        "write_bytes": 0,
+        "loads": 8,
+        "stores": 0
+      },
+      "layer0/ln2_b": {
+        "read_bytes": 4096,
+        "write_bytes": 0,
+        "loads": 8,
+        "stores": 0
+      },
+      "d0l0_ln2": {
+        "read_bytes": 4096,
+        "write_bytes": 512,
+        "loads": 64,
+        "stores": 1
+      },
+      "layer0/w1": {
+        "read_bytes": 2097152,
+        "write_bytes": 0,
+        "loads": 512,
+        "stores": 0
+      },
+      "d0l0_ff1": {
+        "read_bytes": 2048,
+        "write_bytes": 2048,
+        "loads": 2,
+        "stores": 8
+      },
+      "layer0/b1": {
+        "read_bytes": 16384,
+        "write_bytes": 0,
+        "loads": 16,
+        "stores": 0
+      },
+      "d0l0_gelu": {
+        "read_bytes": 4096,
+        "write_bytes": 2048,
+        "loads": 64,
+        "stores": 2
+      },
+      "layer0/w2": {
+        "read_bytes": 2097152,
+        "write_bytes": 0,
+        "loads": 512,
+        "stores": 0
+      },
+      "d0l0_ff2": {
+        "read_bytes": 512,
+        "write_bytes": 512,
+        "loads": 1,
+        "stores": 2
+      },
+      "layer0/b2": {
+        "read_bytes": 4096,
+        "write_bytes": 0,
+        "loads": 8,
+        "stores": 0
+      },
+      "d0l0_out": {
+        "read_bytes": 1024,
+        "write_bytes": 512,
+        "loads": 2,
+        "stores": 1
+      },
+      "layer1/ln1_g": {
+        "read_bytes": 4096,
+        "write_bytes": 0,
+        "loads": 8,
+        "stores": 0
+      },
+      "layer1/ln1_b": {
+        "read_bytes": 4096,
+        "write_bytes": 0,
+        "loads": 8,
+        "stores": 0
+      },
+      "d0l1_ln1": {
+        "read_bytes": 3072,
+        "write_bytes": 512,
+        "loads": 48,
+        "stores": 1
+      },
+      "layer1/wqkv": {
+        "read_bytes": 1572864,
+        "write_bytes": 0,
+        "loads": 384,
+        "stores": 0
+      },
+      "d0l1_qkv": {
+        "read_bytes": 1536,
+        "write_bytes": 1536,
+        "loads": 12,
+        "stores": 6
+      },
+      "layer1/new_k": {
+        "read_bytes": 18432,
+        "write_bytes": 4096,
+        "loads": 32,
+        "stores": 32
+      },
+      "layer1/new_v": {
+        "read_bytes": 18432,
+        "write_bytes": 4096,
+        "loads": 32,
+        "stores": 32
+      },
+      "layer1/history_k": {
+        "read_bytes": 524288,
+        "write_bytes": 0,
+        "loads": 256,
+        "stores": 0
+      },
+      "layer1/history_v": {
+        "read_bytes": 524288,
+        "write_bytes": 0,
+        "loads": 256,
+        "stores": 0
+      },
+      "d0l1_ctx": {
+        "read_bytes": 1024,
+        "write_bytes": 512,
+        "loads": 16,
+        "stores": 4
+      },
+      "layer1/wo": {
+        "read_bytes": 524288,
+        "write_bytes": 0,
+        "loads": 128,
+        "stores": 0
+      },
+      "d0l1_att": {
+        "read_bytes": 512,
+        "write_bytes": 512,
+        "loads": 1,
+        "stores": 2
+      },
+      "d0l1_res": {
+        "read_bytes": 1024,
+        "write_bytes": 512,
+        "loads": 2,
+        "stores": 1
+      },
+      "layer1/ln2_g": {
+        "read_bytes": 4096,
+        "write_bytes": 0,
+        "loads": 8,
+        "stores": 0
+      },
+      "layer1/ln2_b": {
+        "read_bytes": 4096,
+        "write_bytes": 0,
+        "loads": 8,
+        "stores": 0
+      },
+      "d0l1_ln2": {
+        "read_bytes": 4096,
+        "write_bytes": 512,
+        "loads": 64,
+        "stores": 1
+      },
+      "layer1/w1": {
+        "read_bytes": 2097152,
+        "write_bytes": 0,
+        "loads": 512,
+        "stores": 0
+      },
+      "d0l1_ff1": {
+        "read_bytes": 2048,
+        "write_bytes": 2048,
+        "loads": 2,
+        "stores": 8
+      },
+      "layer1/b1": {
+        "read_bytes": 16384,
+        "write_bytes": 0,
+        "loads": 16,
+        "stores": 0
+      },
+      "d0l1_gelu": {
+        "read_bytes": 4096,
+        "write_bytes": 2048,
+        "loads": 64,
+        "stores": 2
+      },
+      "layer1/w2": {
+        "read_bytes": 2097152,
+        "write_bytes": 0,
+        "loads": 512,
+        "stores": 0
+      },
+      "d0l1_ff2": {
+        "read_bytes": 512,
+        "write_bytes": 512,
+        "loads": 1,
+        "stores": 2
+      },
+      "layer1/b2": {
+        "read_bytes": 4096,
+        "write_bytes": 0,
+        "loads": 8,
+        "stores": 0
+      },
+      "d0l1_out": {
+        "read_bytes": 512,
+        "write_bytes": 512,
+        "loads": 1,
+        "stores": 1
+      },
+      "output/hidden": {
+        "read_bytes": 0,
+        "write_bytes": 4096,
+        "loads": 0,
+        "stores": 8
+      },
+      "input/step1": {
+        "read_bytes": 1024,
+        "write_bytes": 0,
+        "loads": 2,
+        "stores": 0
+      },
+      "d1l0_ln1": {
+        "read_bytes": 3072,
+        "write_bytes": 512,
+        "loads": 48,
+        "stores": 1
+      },
+      "d1l0_qkv": {
+        "read_bytes": 1536,
+        "write_bytes": 1536,
+        "loads": 12,
+        "stores": 6
+      },
+      "d1l0_ctx": {
+        "read_bytes": 1024,
+        "write_bytes": 512,
+        "loads": 16,
+        "stores": 4
+      },
+      "d1l0_att": {
+        "read_bytes": 512,
+        "write_bytes": 512,
+        "loads": 1,
+        "stores": 2
+      },
+      "d1l0_res": {
+        "read_bytes": 1024,
+        "write_bytes": 512,
+        "loads": 2,
+        "stores": 1
+      },
+      "d1l0_ln2": {
+        "read_bytes": 4096,
+        "write_bytes": 512,
+        "loads": 64,
+        "stores": 1
+      },
+      "d1l0_ff1": {
+        "read_bytes": 2048,
+        "write_bytes": 2048,
+        "loads": 2,
+        "stores": 8
+      },
+      "d1l0_gelu": {
+        "read_bytes": 4096,
+        "write_bytes": 2048,
+        "loads": 64,
+        "stores": 2
+      },
+      "d1l0_ff2": {
+        "read_bytes": 512,
+        "write_bytes": 512,
+        "loads": 1,
+        "stores": 2
+      },
+      "d1l0_out": {
+        "read_bytes": 1024,
+        "write_bytes": 512,
+        "loads": 2,
+        "stores": 1
+      },
+      "d1l1_ln1": {
+        "read_bytes": 3072,
+        "write_bytes": 512,
+        "loads": 48,
+        "stores": 1
+      },
+      "d1l1_qkv": {
+        "read_bytes": 1536,
+        "write_bytes": 1536,
+        "loads": 12,
+        "stores": 6
+      },
+      "d1l1_ctx": {
+        "read_bytes": 1024,
+        "write_bytes": 512,
+        "loads": 16,
+        "stores": 4
+      },
+      "d1l1_att": {
+        "read_bytes": 512,
+        "write_bytes": 512,
+        "loads": 1,
+        "stores": 2
+      },
+      "d1l1_res": {
+        "read_bytes": 1024,
+        "write_bytes": 512,
+        "loads": 2,
+        "stores": 1
+      },
+      "d1l1_ln2": {
+        "read_bytes": 4096,
+        "write_bytes": 512,
+        "loads": 64,
+        "stores": 1
+      },
+      "d1l1_ff1": {
+        "read_bytes": 2048,
+        "write_bytes": 2048,
+        "loads": 2,
+        "stores": 8
+      },
+      "d1l1_gelu": {
+        "read_bytes": 4096,
+        "write_bytes": 2048,
+        "loads": 64,
+        "stores": 2
+      },
+      "d1l1_ff2": {
+        "read_bytes": 512,
+        "write_bytes": 512,
+        "loads": 1,
+        "stores": 2
+      },
+      "d1l1_out": {
+        "read_bytes": 512,
+        "write_bytes": 512,
+        "loads": 1,
+        "stores": 1
+      },
+      "input/step2": {
+        "read_bytes": 1024,
+        "write_bytes": 0,
+        "loads": 2,
+        "stores": 0
+      },
+      "d2l0_ln1": {
+        "read_bytes": 3072,
+        "write_bytes": 512,
+        "loads": 48,
+        "stores": 1
+      },
+      "d2l0_qkv": {
+        "read_bytes": 1536,
+        "write_bytes": 1536,
+        "loads": 12,
+        "stores": 6
+      },
+      "d2l0_ctx": {
+        "read_bytes": 1024,
+        "write_bytes": 512,
+        "loads": 16,
+        "stores": 4
+      },
+      "d2l0_att": {
+        "read_bytes": 512,
+        "write_bytes": 512,
+        "loads": 1,
+        "stores": 2
+      },
+      "d2l0_res": {
+        "read_bytes": 1024,
+        "write_bytes": 512,
+        "loads": 2,
+        "stores": 1
+      },
+      "d2l0_ln2": {
+        "read_bytes": 4096,
+        "write_bytes": 512,
+        "loads": 64,
+        "stores": 1
+      },
+      "d2l0_ff1": {
+        "read_bytes": 2048,
+        "write_bytes": 2048,
+        "loads": 2,
+        "stores": 8
+      },
+      "d2l0_gelu": {
+        "read_bytes": 4096,
+        "write_bytes": 2048,
+        "loads": 64,
+        "stores": 2
+      },
+      "d2l0_ff2": {
+        "read_bytes": 512,
+        "write_bytes": 512,
+        "loads": 1,
+        "stores": 2
+      },
+      "d2l0_out": {
+        "read_bytes": 1024,
+        "write_bytes": 512,
+        "loads": 2,
+        "stores": 1
+      },
+      "d2l1_ln1": {
+        "read_bytes": 3072,
+        "write_bytes": 512,
+        "loads": 48,
+        "stores": 1
+      },
+      "d2l1_qkv": {
+        "read_bytes": 1536,
+        "write_bytes": 1536,
+        "loads": 12,
+        "stores": 6
+      },
+      "d2l1_ctx": {
+        "read_bytes": 1024,
+        "write_bytes": 512,
+        "loads": 16,
+        "stores": 4
+      },
+      "d2l1_att": {
+        "read_bytes": 512,
+        "write_bytes": 512,
+        "loads": 1,
+        "stores": 2
+      },
+      "d2l1_res": {
+        "read_bytes": 1024,
+        "write_bytes": 512,
+        "loads": 2,
+        "stores": 1
+      },
+      "d2l1_ln2": {
+        "read_bytes": 4096,
+        "write_bytes": 512,
+        "loads": 64,
+        "stores": 1
+      },
+      "d2l1_ff1": {
+        "read_bytes": 2048,
+        "write_bytes": 2048,
+        "loads": 2,
+        "stores": 8
+      },
+      "d2l1_gelu": {
+        "read_bytes": 4096,
+        "write_bytes": 2048,
+        "loads": 64,
+        "stores": 2
+      },
+      "d2l1_ff2": {
+        "read_bytes": 512,
+        "write_bytes": 512,
+        "loads": 1,
+        "stores": 2
+      },
+      "d2l1_out": {
+        "read_bytes": 512,
+        "write_bytes": 512,
+        "loads": 1,
+        "stores": 1
+      },
+      "input/step3": {
+        "read_bytes": 1024,
+        "write_bytes": 0,
+        "loads": 2,
+        "stores": 0
+      },
+      "d3l0_ln1": {
+        "read_bytes": 3072,
+        "write_bytes": 512,
+        "loads": 48,
+        "stores": 1
+      },
+      "d3l0_qkv": {
+        "read_bytes": 1536,
+        "write_bytes": 1536,
+        "loads": 12,
+        "stores": 6
+      },
+      "d3l0_ctx": {
+        "read_bytes": 1024,
+        "write_bytes": 512,
+        "loads": 16,
+        "stores": 4
+      },
+      "d3l0_att": {
+        "read_bytes": 512,
+        "write_bytes": 512,
+        "loads": 1,
+        "stores": 2
+      },
+      "d3l0_res": {
+        "read_bytes": 1024,
+        "write_bytes": 512,
+        "loads": 2,
+        "stores": 1
+      },
+      "d3l0_ln2": {
+        "read_bytes": 4096,
+        "write_bytes": 512,
+        "loads": 64,
+        "stores": 1
+      },
+      "d3l0_ff1": {
+        "read_bytes": 2048,
+        "write_bytes": 2048,
+        "loads": 2,
+        "stores": 8
+      },
+      "d3l0_gelu": {
+        "read_bytes": 4096,
+        "write_bytes": 2048,
+        "loads": 64,
+        "stores": 2
+      },
+      "d3l0_ff2": {
+        "read_bytes": 512,
+        "write_bytes": 512,
+        "loads": 1,
+        "stores": 2
+      },
+      "d3l0_out": {
+        "read_bytes": 1024,
+        "write_bytes": 512,
+        "loads": 2,
+        "stores": 1
+      },
+      "d3l1_ln1": {
+        "read_bytes": 3072,
+        "write_bytes": 512,
+        "loads": 48,
+        "stores": 1
+      },
+      "d3l1_qkv": {
+        "read_bytes": 1536,
+        "write_bytes": 1536,
+        "loads": 12,
+        "stores": 6
+      },
+      "d3l1_ctx": {
+        "read_bytes": 1024,
+        "write_bytes": 512,
+        "loads": 16,
+        "stores": 4
+      },
+      "d3l1_att": {
+        "read_bytes": 512,
+        "write_bytes": 512,
+        "loads": 1,
+        "stores": 2
+      },
+      "d3l1_res": {
+        "read_bytes": 1024,
+        "write_bytes": 512,
+        "loads": 2,
+        "stores": 1
+      },
+      "d3l1_ln2": {
+        "read_bytes": 4096,
+        "write_bytes": 512,
+        "loads": 64,
+        "stores": 1
+      },
+      "d3l1_ff1": {
+        "read_bytes": 2048,
+        "write_bytes": 2048,
+        "loads": 2,
+        "stores": 8
+      },
+      "d3l1_gelu": {
+        "read_bytes": 4096,
+        "write_bytes": 2048,
+        "loads": 64,
+        "stores": 2
+      },
+      "d3l1_ff2": {
+        "read_bytes": 512,
+        "write_bytes": 512,
+        "loads": 1,
+        "stores": 2
+      },
+      "d3l1_out": {
+        "read_bytes": 512,
+        "write_bytes": 512,
+        "loads": 1,
+        "stores": 1
+      },
+      "input/step4": {
+        "read_bytes": 1024,
+        "write_bytes": 0,
+        "loads": 2,
+        "stores": 0
+      },
+      "d4l0_ln1": {
+        "read_bytes": 3072,
+        "write_bytes": 512,
+        "loads": 48,
+        "stores": 1
+      },
+      "d4l0_qkv": {
+        "read_bytes": 1536,
+        "write_bytes": 1536,
+        "loads": 12,
+        "stores": 6
+      },
+      "d4l0_ctx": {
+        "read_bytes": 1024,
+        "write_bytes": 512,
+        "loads": 16,
+        "stores": 4
+      },
+      "d4l0_att": {
+        "read_bytes": 512,
+        "write_bytes": 512,
+        "loads": 1,
+        "stores": 2
+      },
+      "d4l0_res": {
+        "read_bytes": 1024,
+        "write_bytes": 512,
+        "loads": 2,
+        "stores": 1
+      },
+      "d4l0_ln2": {
+        "read_bytes": 4096,
+        "write_bytes": 512,
+        "loads": 64,
+        "stores": 1
+      },
+      "d4l0_ff1": {
+        "read_bytes": 2048,
+        "write_bytes": 2048,
+        "loads": 2,
+        "stores": 8
+      },
+      "d4l0_gelu": {
+        "read_bytes": 4096,
+        "write_bytes": 2048,
+        "loads": 64,
+        "stores": 2
+      },
+      "d4l0_ff2": {
+        "read_bytes": 512,
+        "write_bytes": 512,
+        "loads": 1,
+        "stores": 2
+      },
+      "d4l0_out": {
+        "read_bytes": 1024,
+        "write_bytes": 512,
+        "loads": 2,
+        "stores": 1
+      },
+      "d4l1_ln1": {
+        "read_bytes": 3072,
+        "write_bytes": 512,
+        "loads": 48,
+        "stores": 1
+      },
+      "d4l1_qkv": {
+        "read_bytes": 1536,
+        "write_bytes": 1536,
+        "loads": 12,
+        "stores": 6
+      },
+      "d4l1_ctx": {
+        "read_bytes": 1024,
+        "write_bytes": 512,
+        "loads": 16,
+        "stores": 4
+      },
+      "d4l1_att": {
+        "read_bytes": 512,
+        "write_bytes": 512,
+        "loads": 1,
+        "stores": 2
+      },
+      "d4l1_res": {
+        "read_bytes": 1024,
+        "write_bytes": 512,
+        "loads": 2,
+        "stores": 1
+      },
+      "d4l1_ln2": {
+        "read_bytes": 4096,
+        "write_bytes": 512,
+        "loads": 64,
+        "stores": 1
+      },
+      "d4l1_ff1": {
+        "read_bytes": 2048,
+        "write_bytes": 2048,
+        "loads": 2,
+        "stores": 8
+      },
+      "d4l1_gelu": {
+        "read_bytes": 4096,
+        "write_bytes": 2048,
+        "loads": 64,
+        "stores": 2
+      },
+      "d4l1_ff2": {
+        "read_bytes": 512,
+        "write_bytes": 512,
+        "loads": 1,
+        "stores": 2
+      },
+      "d4l1_out": {
+        "read_bytes": 512,
+        "write_bytes": 512,
+        "loads": 1,
+        "stores": 1
+      },
+      "input/step5": {
+        "read_bytes": 1024,
+        "write_bytes": 0,
+        "loads": 2,
+        "stores": 0
+      },
+      "d5l0_ln1": {
+        "read_bytes": 3072,
+        "write_bytes": 512,
+        "loads": 48,
+        "stores": 1
+      },
+      "d5l0_qkv": {
+        "read_bytes": 1536,
+        "write_bytes": 1536,
+        "loads": 12,
+        "stores": 6
+      },
+      "d5l0_ctx": {
+        "read_bytes": 1024,
+        "write_bytes": 512,
+        "loads": 16,
+        "stores": 4
+      },
+      "d5l0_att": {
+        "read_bytes": 512,
+        "write_bytes": 512,
+        "loads": 1,
+        "stores": 2
+      },
+      "d5l0_res": {
+        "read_bytes": 1024,
+        "write_bytes": 512,
+        "loads": 2,
+        "stores": 1
+      },
+      "d5l0_ln2": {
+        "read_bytes": 4096,
+        "write_bytes": 512,
+        "loads": 64,
+        "stores": 1
+      },
+      "d5l0_ff1": {
+        "read_bytes": 2048,
+        "write_bytes": 2048,
+        "loads": 2,
+        "stores": 8
+      },
+      "d5l0_gelu": {
+        "read_bytes": 4096,
+        "write_bytes": 2048,
+        "loads": 64,
+        "stores": 2
+      },
+      "d5l0_ff2": {
+        "read_bytes": 512,
+        "write_bytes": 512,
+        "loads": 1,
+        "stores": 2
+      },
+      "d5l0_out": {
+        "read_bytes": 1024,
+        "write_bytes": 512,
+        "loads": 2,
+        "stores": 1
+      },
+      "d5l1_ln1": {
+        "read_bytes": 3072,
+        "write_bytes": 512,
+        "loads": 48,
+        "stores": 1
+      },
+      "d5l1_qkv": {
+        "read_bytes": 1536,
+        "write_bytes": 1536,
+        "loads": 12,
+        "stores": 6
+      },
+      "d5l1_ctx": {
+        "read_bytes": 1024,
+        "write_bytes": 512,
+        "loads": 16,
+        "stores": 4
+      },
+      "d5l1_att": {
+        "read_bytes": 512,
+        "write_bytes": 512,
+        "loads": 1,
+        "stores": 2
+      },
+      "d5l1_res": {
+        "read_bytes": 1024,
+        "write_bytes": 512,
+        "loads": 2,
+        "stores": 1
+      },
+      "d5l1_ln2": {
+        "read_bytes": 4096,
+        "write_bytes": 512,
+        "loads": 64,
+        "stores": 1
+      },
+      "d5l1_ff1": {
+        "read_bytes": 2048,
+        "write_bytes": 2048,
+        "loads": 2,
+        "stores": 8
+      },
+      "d5l1_gelu": {
+        "read_bytes": 4096,
+        "write_bytes": 2048,
+        "loads": 64,
+        "stores": 2
+      },
+      "d5l1_ff2": {
+        "read_bytes": 512,
+        "write_bytes": 512,
+        "loads": 1,
+        "stores": 2
+      },
+      "d5l1_out": {
+        "read_bytes": 512,
+        "write_bytes": 512,
+        "loads": 1,
+        "stores": 1
+      },
+      "input/step6": {
+        "read_bytes": 1024,
+        "write_bytes": 0,
+        "loads": 2,
+        "stores": 0
+      },
+      "d6l0_ln1": {
+        "read_bytes": 3072,
+        "write_bytes": 512,
+        "loads": 48,
+        "stores": 1
+      },
+      "d6l0_qkv": {
+        "read_bytes": 1536,
+        "write_bytes": 1536,
+        "loads": 12,
+        "stores": 6
+      },
+      "d6l0_ctx": {
+        "read_bytes": 1024,
+        "write_bytes": 512,
+        "loads": 16,
+        "stores": 4
+      },
+      "d6l0_att": {
+        "read_bytes": 512,
+        "write_bytes": 512,
+        "loads": 1,
+        "stores": 2
+      },
+      "d6l0_res": {
+        "read_bytes": 1024,
+        "write_bytes": 512,
+        "loads": 2,
+        "stores": 1
+      },
+      "d6l0_ln2": {
+        "read_bytes": 4096,
+        "write_bytes": 512,
+        "loads": 64,
+        "stores": 1
+      },
+      "d6l0_ff1": {
+        "read_bytes": 2048,
+        "write_bytes": 2048,
+        "loads": 2,
+        "stores": 8
+      },
+      "d6l0_gelu": {
+        "read_bytes": 4096,
+        "write_bytes": 2048,
+        "loads": 64,
+        "stores": 2
+      },
+      "d6l0_ff2": {
+        "read_bytes": 512,
+        "write_bytes": 512,
+        "loads": 1,
+        "stores": 2
+      },
+      "d6l0_out": {
+        "read_bytes": 1024,
+        "write_bytes": 512,
+        "loads": 2,
+        "stores": 1
+      },
+      "d6l1_ln1": {
+        "read_bytes": 3072,
+        "write_bytes": 512,
+        "loads": 48,
+        "stores": 1
+      },
+      "d6l1_qkv": {
+        "read_bytes": 1536,
+        "write_bytes": 1536,
+        "loads": 12,
+        "stores": 6
+      },
+      "d6l1_ctx": {
+        "read_bytes": 1024,
+        "write_bytes": 512,
+        "loads": 16,
+        "stores": 4
+      },
+      "d6l1_att": {
+        "read_bytes": 512,
+        "write_bytes": 512,
+        "loads": 1,
+        "stores": 2
+      },
+      "d6l1_res": {
+        "read_bytes": 1024,
+        "write_bytes": 512,
+        "loads": 2,
+        "stores": 1
+      },
+      "d6l1_ln2": {
+        "read_bytes": 4096,
+        "write_bytes": 512,
+        "loads": 64,
+        "stores": 1
+      },
+      "d6l1_ff1": {
+        "read_bytes": 2048,
+        "write_bytes": 2048,
+        "loads": 2,
+        "stores": 8
+      },
+      "d6l1_gelu": {
+        "read_bytes": 4096,
+        "write_bytes": 2048,
+        "loads": 64,
+        "stores": 2
+      },
+      "d6l1_ff2": {
+        "read_bytes": 512,
+        "write_bytes": 512,
+        "loads": 1,
+        "stores": 2
+      },
+      "d6l1_out": {
+        "read_bytes": 512,
+        "write_bytes": 512,
+        "loads": 1,
+        "stores": 1
+      },
+      "input/step7": {
+        "read_bytes": 1024,
+        "write_bytes": 0,
+        "loads": 2,
+        "stores": 0
+      },
+      "d7l0_ln1": {
+        "read_bytes": 3072,
+        "write_bytes": 512,
+        "loads": 48,
+        "stores": 1
+      },
+      "d7l0_qkv": {
+        "read_bytes": 1536,
+        "write_bytes": 1536,
+        "loads": 12,
+        "stores": 6
+      },
+      "d7l0_ctx": {
+        "read_bytes": 1024,
+        "write_bytes": 512,
+        "loads": 16,
+        "stores": 4
+      },
+      "d7l0_att": {
+        "read_bytes": 512,
+        "write_bytes": 512,
+        "loads": 1,
+        "stores": 2
+      },
+      "d7l0_res": {
+        "read_bytes": 1024,
+        "write_bytes": 512,
+        "loads": 2,
+        "stores": 1
+      },
+      "d7l0_ln2": {
+        "read_bytes": 4096,
+        "write_bytes": 512,
+        "loads": 64,
+        "stores": 1
+      },
+      "d7l0_ff1": {
+        "read_bytes": 2048,
+        "write_bytes": 2048,
+        "loads": 2,
+        "stores": 8
+      },
+      "d7l0_gelu": {
+        "read_bytes": 4096,
+        "write_bytes": 2048,
+        "loads": 64,
+        "stores": 2
+      },
+      "d7l0_ff2": {
+        "read_bytes": 512,
+        "write_bytes": 512,
+        "loads": 1,
+        "stores": 2
+      },
+      "d7l0_out": {
+        "read_bytes": 1024,
+        "write_bytes": 512,
+        "loads": 2,
+        "stores": 1
+      },
+      "d7l1_ln1": {
+        "read_bytes": 3072,
+        "write_bytes": 512,
+        "loads": 48,
+        "stores": 1
+      },
+      "d7l1_qkv": {
+        "read_bytes": 1536,
+        "write_bytes": 1536,
+        "loads": 12,
+        "stores": 6
+      },
+      "d7l1_ctx": {
+        "read_bytes": 1024,
+        "write_bytes": 512,
+        "loads": 16,
+        "stores": 4
+      },
+      "d7l1_att": {
+        "read_bytes": 512,
+        "write_bytes": 512,
+        "loads": 1,
+        "stores": 2
+      },
+      "d7l1_res": {
+        "read_bytes": 1024,
+        "write_bytes": 512,
+        "loads": 2,
+        "stores": 1
+      },
+      "d7l1_ln2": {
+        "read_bytes": 4096,
+        "write_bytes": 512,
+        "loads": 64,
+        "stores": 1
+      },
+      "d7l1_ff1": {
+        "read_bytes": 2048,
+        "write_bytes": 2048,
+        "loads": 2,
+        "stores": 8
+      },
+      "d7l1_gelu": {
+        "read_bytes": 4096,
+        "write_bytes": 2048,
+        "loads": 64,
+        "stores": 2
+      },
+      "d7l1_ff2": {
+        "read_bytes": 512,
+        "write_bytes": 512,
+        "loads": 1,
+        "stores": 2
+      },
+      "d7l1_out": {
+        "read_bytes": 512,
+        "write_bytes": 512,
+        "loads": 1,
+        "stores": 1
+      }
+    }
+  }
+}

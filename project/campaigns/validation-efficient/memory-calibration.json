@@ -1,0 +1,12 @@
+{
+  "samples": [
+    {
+      "visited": 10000,
+      "observed_set_bytes": 2048903752,
+      "lower_bound": 462703624,
+      "ratio": 4.428112609725313
+    }
+  ],
+  "full_event_set_bytes_if_same_ratio": 512776147428.9124,
+  "caveat": "Single-prefix extrapolation of logical event-set bytes, NOT measured full peak memory; unions and hash-table capacity changes can change ratio."
+}

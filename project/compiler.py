@@ -725,6 +725,42 @@ class Builder:
         return "\n".join(self.lines) + "\n"
 
 
+class IncrementalP1Builder(Builder):
+    """Keep the mature P1 path; distribute selected prompt GEMMs by output column.
+
+    Four persistent WG tapes, two coarse joins per selected GEMM, no per-tile
+    cross-WG events/WAITs. All other stages remain on the primary WG.
+    """
+    def __init__(self, layout, recipe, shared_bytes=0):
+        config = recipe["p1_schedule"]
+        shards = int(config.get("shards", 4))
+        stages = set(config["gemms"])
+        if shards not in (2, 4) or not stages or not stages <= {"qkv", "w1", "w2"}:
+            raise ValueError("Unsupported incremental P1 partition")
+        if recipe.get("gemm_kernels"):
+            raise ValueError("Incremental P1 uses the mature ordinary GEMM primitive")
+        self.parallel_gemms = stages
+        super().__init__(layout, recipe, shared_bytes=shared_bytes, groups=shards)
+
+    def gemm(self, a, b, out, m_extent, k_extent, n_extent, name, col_start=0, col_stop=None):
+        stage = next((key for key in self.parallel_gemms if name.endswith(key)), None)
+        if self.stage != "p1_prompt" or stage is None:
+            return super().gemm(a, b, out, m_extent, k_extent, n_extent, name, col_start, col_stop)
+        if col_start or col_stop is not None:
+            raise ValueError("Nested partition unsupported")
+        self.emit("BARRIER", wgs=self.groups, events=[])
+        stem = name[:-len(stage)]
+        for index, wg in enumerate(self.groups):
+            self.wg = wg
+            self.label = f"{stem}_{stage}_sm{index}_"
+            super().gemm(a, b, out, m_extent, k_extent, n_extent,
+                         f"{stem}g{index}{stage}", n_extent*index//len(self.groups),
+                         n_extent*(index+1)//len(self.groups))
+        self.wg = self.groups[0]
+        self.label = ""
+        self.emit("BARRIER", wgs=self.groups, events=[])
+
+
 def generate_m1_p1(recipe: dict | None = None) -> tuple[str, Layout, int]:
     recipe = recipe or load_recipe()
     if recipe.get("p1_schedule", {}).get("kind") == "column_head":
@@ -736,7 +772,8 @@ def generate_m1_p1(recipe: dict | None = None) -> tuple[str, Layout, int]:
     recipe = recipe or load_recipe()
     kernel = recipe.get("gemm_kernels", {}).get("p1_prompt_w1")
     shared_bytes = 256 * int(kernel["n_panel"]) * 4 if kernel else 0
-    b = Builder(layout, recipe, shared_bytes=shared_bytes)
+    builder = IncrementalP1Builder if recipe.get("p1_schedule", {}).get("kind") == "incremental_gemm" else Builder
+    b = builder(layout, recipe, shared_bytes=shared_bytes)
     prompt = b.symbol("input/prompt")
     step = b.symbol("input/step0")
     output = b.symbol("output/hidden")

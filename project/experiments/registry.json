@@ -3665,6 +3665,174 @@
       "status": "reverted",
       "struct_sig": "p1-column-head-4-serial"
     },
+    "cand-101": {
+      "bias": "p1",
+      "cache_source": null,
+      "deltas": {
+        "prior_head": "cand-095",
+        "vs_parent": {
+          "parent": "cand-098"
+        }
+      },
+      "elapsed": 40.45312208402902,
+      "evaluation_attempts": 1,
+      "failure_class": "memory_limit",
+      "family": "p1_incremental",
+      "fingerprint": "b4951821de94bb05",
+      "hypothesis": "Incremental full P1: w1 prompt GEMMs on 4 persistent SMs; mature Attention/LN/residual, D1 and hardware unchanged",
+      "kind": "manual",
+      "ops": [
+        {
+          "gemms": [
+            "w1"
+          ],
+          "kind": "incremental_gemm",
+          "op": "p1_schedule",
+          "shards": 4
+        }
+      ],
+      "outer_sig": "59be80d82cf41566",
+      "parent": "cand-098",
+      "result_logged": true,
+      "round": 12,
+      "status": "not_verified",
+      "struct_sig": "p1-incremental-w1"
+    },
+    "cand-102": {
+      "bias": "p1",
+      "cache_source": null,
+      "deltas": {
+        "prior_head": "cand-095",
+        "vs_parent": {
+          "parent": "cand-098"
+        }
+      },
+      "elapsed": 36.1319438329665,
+      "evaluation_attempts": 1,
+      "failure_class": "memory_limit",
+      "family": "p1_incremental",
+      "fingerprint": "3c46cfb80904d994",
+      "hypothesis": "Incremental full P1: w2 prompt GEMMs on 4 persistent SMs; mature Attention/LN/residual, D1 and hardware unchanged",
+      "kind": "manual",
+      "ops": [
+        {
+          "gemms": [
+            "w2"
+          ],
+          "kind": "incremental_gemm",
+          "op": "p1_schedule",
+          "shards": 4
+        }
+      ],
+      "outer_sig": "640ed29529f026bd",
+      "parent": "cand-098",
+      "result_logged": true,
+      "round": 12,
+      "status": "not_verified",
+      "struct_sig": "p1-incremental-w2"
+    },
+    "cand-103": {
+      "bias": "p1",
+      "cache_source": null,
+      "deltas": {
+        "prior_head": "cand-095",
+        "vs_parent": {
+          "parent": "cand-098"
+        }
+      },
+      "elapsed": 36.62482658296358,
+      "evaluation_attempts": 1,
+      "failure_class": "memory_limit",
+      "family": "p1_incremental",
+      "fingerprint": "21f05dcb007f40f1",
+      "hypothesis": "Incremental full P1: w1,w2 prompt GEMMs on 4 persistent SMs; mature Attention/LN/residual, D1 and hardware unchanged",
+      "kind": "manual",
+      "ops": [
+        {
+          "gemms": [
+            "w1",
+            "w2"
+          ],
+          "kind": "incremental_gemm",
+          "op": "p1_schedule",
+          "shards": 4
+        }
+      ],
+      "outer_sig": "869691945190c3f5",
+      "parent": "cand-098",
+      "result_logged": true,
+      "round": 12,
+      "status": "not_verified",
+      "struct_sig": "p1-incremental-w1,w2"
+    },
+    "cand-104": {
+      "bias": "p1",
+      "cache_source": null,
+      "deltas": {
+        "prior_head": "cand-095",
+        "vs_parent": {
+          "parent": "cand-098"
+        }
+      },
+      "elapsed": 40.494623915990815,
+      "evaluation_attempts": 1,
+      "failure_class": "memory_limit",
+      "family": "p1_incremental",
+      "fingerprint": "8e79d7597de3a373",
+      "hypothesis": "Incremental full P1: qkv prompt GEMMs on 4 persistent SMs; mature Attention/LN/residual, D1 and hardware unchanged",
+      "kind": "manual",
+      "ops": [
+        {
+          "gemms": [
+            "qkv"
+          ],
+          "kind": "incremental_gemm",
+          "op": "p1_schedule",
+          "shards": 4
+        }
+      ],
+      "outer_sig": "5d13b1040b5a6074",
+      "parent": "cand-098",
+      "result_logged": true,
+      "round": 12,
+      "status": "not_verified",
+      "struct_sig": "p1-incremental-qkv"
+    },
+    "cand-105": {
+      "bias": "p1",
+      "cache_source": null,
+      "deltas": {
+        "prior_head": "cand-095",
+        "vs_parent": {
+          "parent": "cand-098"
+        }
+      },
+      "elapsed": 37.36708070896566,
+      "evaluation_attempts": 1,
+      "failure_class": "memory_limit",
+      "family": "p1_incremental",
+      "fingerprint": "c851c34791b14513",
+      "hypothesis": "Incremental full P1: qkv,w1,w2 prompt GEMMs on 4 persistent SMs; mature Attention/LN/residual, D1 and hardware unchanged",
+      "kind": "manual",
+      "ops": [
+        {
+          "gemms": [
+            "qkv",
+            "w1",
+            "w2"
+          ],
+          "kind": "incremental_gemm",
+          "op": "p1_schedule",
+          "shards": 4
+        }
+      ],
+      "outer_sig": "2811da366d4cf9a0",
+      "parent": "cand-098",
+      "result_logged": true,
+      "round": 12,
+      "status": "not_verified",
+      "struct_sig": "p1-incremental-qkv,w1,w2"
+    },
     "drun-001": {
       "bias": "balanced",
       "failure_class": "dry_run",
@@ -4296,7 +4464,7 @@
       "struct_sig": "hw:sm_count=32+nkm+nofuse+nopf+s:hbm"
     }
   },
-  "counter": 100,
+  "counter": 105,
   "dry_counter": 27,
   "fingerprints": {
     "062742f6b8fbbde1": "cand-036",
@@ -4308,6 +4476,7 @@
     "15dcc438f76ab5b8": "cand-013",
     "19039ac31e1e14e2": "cand-014",
     "195ec88606acde60": "cand-046",
+    "21f05dcb007f40f1": "cand-103",
     "2e4feb59f56b0539": "cand-019",
     "30fd2cc2cedd6be3": "cand-025",
     "31a72fe4aede9d1d": "cand-096",
@@ -4316,6 +4485,7 @@
     "351d373ed57d786c": "cand-083",
     "3661bda877c83bf0": "cand-011",
     "3988387fd58a7e71": "cand-095",
+    "3c46cfb80904d994": "cand-102",
     "3c52c7255de1758c": "cand-060",
     "3ed983a6780dce16": "cand-016",
     "45ecec5211e523f3": "cand-064",
@@ -4352,6 +4522,7 @@
     "88fb3c82307e84b4": "cand-084",
     "8a7c84d9a7be1c97": "cand-026",
     "8c85c43dcdc09a36": "cand-000",
+    "8e79d7597de3a373": "cand-104",
     "8facf25ee9a64750": "cand-069",
     "90c3b702310f4a0d": "cand-087",
     "94bc9c7b5d9d25cf": "cand-044",
@@ -4361,6 +4532,7 @@
     "ac572e82f17a050f": "cand-022",
     "b3503608c839b8de": "cand-049",
     "b3c122bf8a968893": "cand-017",
+    "b4951821de94bb05": "cand-101",
     "b67451a5d1242cf5": "cand-078",
     "b8865c9d9198b3a6": "cand-072",
     "ba589197c1958cef": "cand-081",
@@ -4371,6 +4543,7 @@
     "c3a05a00e8785bef": "cand-010",
     "c6152b1c5747f74a": "cand-007",
     "c72def168724372d": "cand-003",
+    "c851c34791b14513": "cand-105",
     "cd40d6a34502fa0f": "cand-062",
     "d084471571e40788": "cand-065",
     "d0ae7c9cd4adadcd": "cand-053",
@@ -4395,6 +4568,14 @@
     "best_score": 2567.954051821853,
     "bottleneck": "M1_P1 sm0.rf_read=2818280, sm0.rf_write=2788264, sm0.dma=1876160; M2_D1 sm0.rf_write=261248, sm0.dma=239104, shared.noc=226521 (overlapping service counts)",
     "explore_ratio": 0.54,
+    "hierarchy": {
+      "enabled": true,
+      "minimum_gain": 0.1,
+      "objective": "score",
+      "patience": 3,
+      "policy": "Stop an inner structure after three eligible <10% parent-relative score gains; unverified/memory failures are not performance observations.",
+      "start_after_id": 100
+    },
     "need_new_operator": false,
     "phase": 2,
     "plateau_rounds": 0,

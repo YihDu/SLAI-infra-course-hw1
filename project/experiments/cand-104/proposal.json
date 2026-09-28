@@ -1,0 +1,77 @@
+{
+  "bias": "p1",
+  "calibration_reason": "User requested one complete grade attempt for each of five incremental integration structures; bounded at 3 GiB, not a successful cost-screen result.",
+  "compiler_path": "/Users/yihdu/Codefield/SLAI-infra-Code/transformer-codesign-starter/project/compiler.py",
+  "family": "p1_incremental",
+  "fingerprint": "8e79d7597de3a373",
+  "hardware": {
+    "cache_mib": 2,
+    "dma_depth": 2,
+    "dma_engines": 2,
+    "hbm_channels": 4,
+    "multicast": false,
+    "noc_bytes_per_cycle": 256,
+    "reduction_units": 0,
+    "rf_ports": "8R4W",
+    "sfu_lanes": 8,
+    "shared_banks": 4,
+    "shared_kib": 128,
+    "shared_ports": "1R1W",
+    "sm_count": 4,
+    "sm_noc_bytes_per_cycle": 128,
+    "tc_array": "8x16",
+    "tc_count": 2,
+    "tc_k_parallel": 4,
+    "vector_lanes": 16,
+    "version": "challenge-hardware-v0.4"
+  },
+  "hypothesis": "Incremental full P1: qkv prompt GEMMs on 4 persistent SMs; mature Attention/LN/residual, D1 and hardware unchanged",
+  "kind": "manual",
+  "ops": [
+    {
+      "gemms": [
+        "qkv"
+      ],
+      "kind": "incremental_gemm",
+      "op": "p1_schedule",
+      "shards": 4
+    }
+  ],
+  "parent": "cand-098",
+  "recipe": {
+    "attention": {
+      "scores": "rf"
+    },
+    "fusion": {
+      "bias_gelu": 1
+    },
+    "gemm": {
+      "k_chunk": 48,
+      "m_tile": 8,
+      "n_tile": 16,
+      "order": "nkm",
+      "prefetch": 0
+    },
+    "gemm_stages": {
+      "d1": {
+        "k_chunk": 16,
+        "n_tile": 64
+      },
+      "p1_prompt": {
+        "k_chunk": 32,
+        "m_tile": 32,
+        "n_tile": 32,
+        "order": "nkm_lanes"
+      }
+    },
+    "p1_schedule": {
+      "gemms": [
+        "qkv"
+      ],
+      "kind": "incremental_gemm",
+      "shards": 4
+    }
+  },
+  "struct_sig": "p1-incremental-qkv",
+  "validation_cost_calibration": true
+}

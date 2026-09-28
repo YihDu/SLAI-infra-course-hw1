@@ -1,0 +1,323 @@
+{
+  "M1_P1": {
+    "expanded_instructions": 161537,
+    "source_lines": 2203,
+    "static_loops": 502,
+    "workgroup_lifetimes": 4,
+    "workgroup_names": 4,
+    "opcode_counts": {
+      "WG.BEGIN": 4,
+      "LD": 59224,
+      "REDUCE": 7800,
+      "VEC": 43698,
+      "SFU": 5070,
+      "ST": 13948,
+      "BARRIER": 12,
+      "MMA.ACC": 31776,
+      "STEP.COMMIT": 1,
+      "WG.END": 4
+    },
+    "events": 161516,
+    "graph_edges": 323108,
+    "named_cross_wg_sync_edges": 0,
+    "barrier_directed_pair_relations": 144,
+    "barrier_incidence_edges": 96,
+    "global_commit_incidence_edges": 161544,
+    "stages": {
+      "unknown/control": {
+        "instructions": 21,
+        "WG.BEGIN": 4,
+        "BARRIER": 12,
+        "STEP.COMMIT": 1,
+        "WG.END": 4
+      },
+      "prompt/ln1": {
+        "instructions": 5760,
+        "LD": 1152,
+        "events": 5760,
+        "REDUCE": 768,
+        "VEC": 3072,
+        "SFU": 384,
+        "ST": 384,
+        "sum_dependency_depth_lower_bound": 187041408
+      },
+      "prompt/qkv": {
+        "instructions": 6336,
+        "VEC": 288,
+        "events": 6336,
+        "LD": 3456,
+        "MMA.ACC": 2304,
+        "ST": 288,
+        "sum_dependency_depth_lower_bound": 208494576
+      },
+      "prompt/attention": {
+        "instructions": 82944,
+        "LD": 24576,
+        "events": 82944,
+        "ST": 9216,
+        "VEC": 24576,
+        "MMA.ACC": 15360,
+        "REDUCE": 6144,
+        "SFU": 3072,
+        "sum_dependency_depth_lower_bound": 3062356992
+      },
+      "prompt/wo": {
+        "instructions": 2112,
+        "VEC": 96,
+        "events": 2112,
+        "LD": 1152,
+        "MMA.ACC": 768,
+        "ST": 96,
+        "sum_dependency_depth_lower_bound": 86510352
+      },
+      "prompt/residual1": {
+        "instructions": 1536,
+        "LD": 768,
+        "events": 1536,
+        "VEC": 384,
+        "ST": 384,
+        "sum_dependency_depth_lower_bound": 63120000
+      },
+      "prompt/ln2": {
+        "instructions": 5760,
+        "LD": 1152,
+        "events": 5760,
+        "REDUCE": 768,
+        "VEC": 3072,
+        "SFU": 384,
+        "ST": 384,
+        "sum_dependency_depth_lower_bound": 239284608
+      },
+      "prompt/w1": {
+        "instructions": 8448,
+        "VEC": 384,
+        "events": 8448,
+        "LD": 4608,
+        "MMA.ACC": 3072,
+        "ST": 384,
+        "sum_dependency_depth_lower_bound": 356483136
+      },
+      "prompt/gelu": {
+        "instructions": 13824,
+        "LD": 2304,
+        "events": 13824,
+        "VEC": 9216,
+        "SFU": 1152,
+        "ST": 1152,
+        "sum_dependency_depth_lower_bound": 599046912
+      },
+      "prompt/w2": {
+        "instructions": 7872,
+        "VEC": 96,
+        "events": 7872,
+        "LD": 4608,
+        "MMA.ACC": 3072,
+        "ST": 96,
+        "sum_dependency_depth_lower_bound": 349967952
+      },
+      "prompt/residual2": {
+        "instructions": 2304,
+        "LD": 1152,
+        "events": 2304,
+        "VEC": 768,
+        "ST": 384,
+        "sum_dependency_depth_lower_bound": 103250688
+      },
+      "prompt/output": {
+        "instructions": 256,
+        "LD": 128,
+        "events": 256,
+        "ST": 128,
+        "sum_dependency_depth_lower_bound": 14787584
+      },
+      "step/ln1": {
+        "instructions": 90,
+        "LD": 18,
+        "events": 90,
+        "REDUCE": 12,
+        "VEC": 48,
+        "SFU": 6,
+        "ST": 6,
+        "sum_dependency_depth_lower_bound": 7274517
+      },
+      "step/qkv": {
+        "instructions": 5760,
+        "VEC": 288,
+        "events": 5760,
+        "LD": 3456,
+        "MMA.ACC": 1728,
+        "ST": 288,
+        "sum_dependency_depth_lower_bound": 466565184
+      },
+      "step/attention": {
+        "instructions": 2016,
+        "LD": 624,
+        "events": 2016,
+        "ST": 144,
+        "VEC": 624,
+        "MMA.ACC": 480,
+        "REDUCE": 96,
+        "SFU": 48,
+        "sum_dependency_depth_lower_bound": 163820304
+      },
+      "step/wo": {
+        "instructions": 1920,
+        "VEC": 96,
+        "events": 1920,
+        "LD": 1152,
+        "MMA.ACC": 576,
+        "ST": 96,
+        "sum_dependency_depth_lower_bound": 156305088
+      },
+      "step/residual1": {
+        "instructions": 24,
+        "LD": 12,
+        "events": 24,
+        "VEC": 6,
+        "ST": 6,
+        "sum_dependency_depth_lower_bound": 1955190
+      },
+      "step/ln2": {
+        "instructions": 90,
+        "LD": 18,
+        "events": 90,
+        "REDUCE": 12,
+        "VEC": 48,
+        "SFU": 6,
+        "ST": 6,
+        "sum_dependency_depth_lower_bound": 7332657
+      },
+      "step/w1": {
+        "instructions": 7680,
+        "VEC": 384,
+        "events": 7680,
+        "LD": 4608,
+        "MMA.ACC": 2304,
+        "ST": 384,
+        "sum_dependency_depth_lower_bound": 627478272
+      },
+      "step/gelu": {
+        "instructions": 216,
+        "LD": 36,
+        "events": 216,
+        "VEC": 144,
+        "SFU": 18,
+        "ST": 18,
+        "sum_dependency_depth_lower_bound": 17699220
+      },
+      "step/w2": {
+        "instructions": 6528,
+        "VEC": 96,
+        "events": 6528,
+        "LD": 4224,
+        "MMA.ACC": 2112,
+        "ST": 96,
+        "sum_dependency_depth_lower_bound": 536195904
+      },
+      "step/residual2": {
+        "instructions": 36,
+        "LD": 18,
+        "events": 36,
+        "VEC": 12,
+        "ST": 6,
+        "sum_dependency_depth_lower_bound": 2963652
+      },
+      "step/output": {
+        "instructions": 4,
+        "LD": 2,
+        "events": 4,
+        "ST": 2,
+        "sum_dependency_depth_lower_bound": 335320
+      }
+    },
+    "race_checker_single_wg_fast_path": false,
+    "max_dependency_depth_lower_bound": 86087,
+    "sum_dependency_depth_lower_bound": 7258269516,
+    "retained_event_sets_logical_bytes_lower_bound": 116156862688,
+    "decision": "prune_validation_cost",
+    "budget_mib": 3072,
+    "checkpoints": [
+      {
+        "visited": 10000,
+        "max_depth": 5494,
+        "sum_depth": 26209588
+      },
+      {
+        "visited": 20000,
+        "max_depth": 11265,
+        "sum_depth": 109550878
+      },
+      {
+        "visited": 30000,
+        "max_depth": 16661,
+        "sum_depth": 248879060
+      },
+      {
+        "visited": 40000,
+        "max_depth": 22476,
+        "sum_depth": 444362716
+      },
+      {
+        "visited": 50000,
+        "max_depth": 27728,
+        "sum_depth": 696614013
+      },
+      {
+        "visited": 60000,
+        "max_depth": 33618,
+        "sum_depth": 1004025699
+      },
+      {
+        "visited": 70000,
+        "max_depth": 39342,
+        "sum_depth": 1369226358
+      },
+      {
+        "visited": 80000,
+        "max_depth": 44840,
+        "sum_depth": 1788338178
+      },
+      {
+        "visited": 90000,
+        "max_depth": 50756,
+        "sum_depth": 2265325147
+      },
+      {
+        "visited": 100000,
+        "max_depth": 56037,
+        "sum_depth": 2797389242
+      },
+      {
+        "visited": 110000,
+        "max_depth": 61649,
+        "sum_depth": 3386328304
+      },
+      {
+        "visited": 120000,
+        "max_depth": 67168,
+        "sum_depth": 4031383917
+      },
+      {
+        "visited": 130000,
+        "max_depth": 72945,
+        "sum_depth": 4732365388
+      },
+      {
+        "visited": 140000,
+        "max_depth": 78130,
+        "sum_depth": 5489809992
+      },
+      {
+        "visited": 150000,
+        "max_depth": 81806,
+        "sum_depth": 6289591952
+      },
+      {
+        "visited": 160000,
+        "max_depth": 85546,
+        "sum_depth": 7126449035
+      }
+    ],
+    "caveat": "Lower bound on uncompressed CPython event-set allocation, not peak RSS prediction. Passing cost screen never establishes race correctness. Multi-path/HBM unions, tuples, prefixes and graph storage add memory."
+  }
+}

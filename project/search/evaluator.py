@@ -72,7 +72,7 @@ def prepare(cand, log=print, timeout_seconds=600, memory_mib=3072):
         return metrics
     # Parse in a bounded child: loop expansion itself can consume substantial memory.
     script = "from codesign.challenge.isa import parse; import json,pathlib; out={}; " + \
-        "\nfor n in ('M1_P1','M2_D1'):\n p=pathlib.Path('programs')/(n+'.asm'); ins=parse(p.read_text()); out[n]={'expanded_instructions':len(ins),'bytes':p.stat().st_size}\n" + \
+        "\nfor n in ('M1_P1','M2_D1'):\n p=pathlib.Path('programs')/(n+'.asm'); ins=parse(p.read_text()); out[n]={'expanded_instructions':len(ins),'bytes':p.stat().st_size,'workgroup_lifetimes':sum(i.op=='WG.BEGIN' for i in ins)}\n" + \
         "pathlib.Path('reports/static.json').write_text(json.dumps(out))"
     screen = runtime.run([python_exe(), "-c", script], cand.dir, cand.reports / "static",
                          max(.01, deadline-time.monotonic()), memory_mib, env)
@@ -82,6 +82,29 @@ def prepare(cand, log=print, timeout_seconds=600, memory_mib=3072):
     metrics["static"] = json.loads((cand.reports / "static.json").read_text())
     if any(v["expanded_instructions"] > 1000000 for v in metrics["static"].values()):
         metrics.update(verdict="pruned", failure_class="screen_pruned")
+    if not metrics.get("failure_class") and any(v.get("workgroup_lifetimes", 1) > 1 for v in metrics["static"].values()):
+        # This is a cost forecast only. The frozen grade still performs all checks.
+        script = ("import json,pathlib; from project.search.validation_cost import analyze; "
+                  "stats=json.loads(pathlib.Path('reports/static.json').read_text()); "
+                  f"out={{n:analyze((pathlib.Path('programs')/(n+'.asm')).read_text(),{memory_mib}) "
+                  "for n,v in stats.items() if v.get('workgroup_lifetimes',1)>1}; "
+                  "pathlib.Path('reports/validation-cost.json').write_text(json.dumps(out,indent=2))")
+        cost_run = runtime.run([python_exe(), "-c", script], cand.dir, cand.reports / "validation-cost",
+                               max(.01, deadline-time.monotonic()), memory_mib, env)
+        metrics["validation_cost_run"] = cost_run
+        if cost_run["failure_class"] or cost_run["exit_code"]:
+            metrics.update(verdict="not_verified", failure_class=cost_run["failure_class"] or "cost_model_error")
+        else:
+            cost = json.loads((cand.reports / "validation-cost.json").read_text())
+            metrics["validation_cost"] = cost
+            proposal_path = cand.dir / "proposal.json"
+            proposal = json.loads(proposal_path.read_text()) if proposal_path.exists() else {}
+            calibration = proposal.get("validation_cost_calibration") is True
+            if any(v["decision"] == "prune_validation_cost" for v in cost.values()):
+                if calibration:
+                    metrics["validation_cost_override"] = proposal.get("calibration_reason", "explicit calibration")
+                else:
+                    metrics.update(verdict="pruned", failure_class="validation_cost_pruned")
     return metrics
 
 

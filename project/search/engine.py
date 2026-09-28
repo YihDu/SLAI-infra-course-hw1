@@ -48,6 +48,9 @@ def _materialize(reg: dict, prop: dict, round_no: int, cid: str,
         round=round_no, struct_sig=prop["struct_sig"],
         fingerprint=prop["fingerprint"],
     )
+    from .hierarchy import outer_signature, outer_structure
+    prop.setdefault("outer_sig", outer_signature(prop["recipe"]))
+    prop.setdefault("outer_structure", outer_structure(prop["recipe"]))
     cand.save()
     parent_dir = EXPERIMENTS / prop["parent"] / "inputs"
     # Compiler changes follow the parent branch unless explicitly overridden.
@@ -67,6 +70,7 @@ def _materialize(reg: dict, prop: dict, round_no: int, cid: str,
         "family": prop["family"], "bias": prop["bias"],
         "kind": prop["kind"], "round": round_no,
         "struct_sig": prop["struct_sig"], "fingerprint": prop["fingerprint"],
+        "outer_sig": prop["outer_sig"],
     }
     if not dry:
         reg.setdefault("fingerprints", {})[prop["fingerprint"]] = cid
@@ -196,7 +200,7 @@ def run_search(rounds: int, per_round: int, seeds: list[int],
             s["round"] = round_no
             continue
         if not props:
-            history.append({"round": round_no, "diagnostics": diagnostics, "reason": "space_exhausted"})
+            history.append({"round": round_no, "diagnostics": diagnostics, "reason": "outer_structure_required" if diagnostics.get("rejection_reasons", {}).get("inner_plateau") else "space_exhausted"})
             break
         candidates = []
         for prop in props:

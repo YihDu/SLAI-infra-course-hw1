@@ -1,0 +1,35 @@
+{
+  "attention": {
+    "scores": "rf"
+  },
+  "fusion": {
+    "bias_gelu": 1
+  },
+  "gemm": {
+    "k_chunk": 48,
+    "m_tile": 8,
+    "n_tile": 16,
+    "order": "nkm",
+    "prefetch": 0
+  },
+  "gemm_stages": {
+    "d1": {
+      "k_chunk": 16,
+      "n_tile": 64
+    },
+    "p1_prompt": {
+      "k_chunk": 32,
+      "m_tile": 32,
+      "n_tile": 32,
+      "order": "nkm_lanes"
+    }
+  },
+  "p1_schedule": {
+    "gemms": [
+      "w1",
+      "w2"
+    ],
+    "kind": "incremental_gemm",
+    "shards": 4
+  }
+}

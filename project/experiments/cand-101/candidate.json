@@ -1,0 +1,27 @@
+{
+  "bias": "p1",
+  "created_at": "2026-09-28 19:37:24",
+  "failure_class": "memory_limit",
+  "family": "p1_incremental",
+  "fingerprint": "b4951821de94bb05",
+  "hypothesis": "Incremental full P1: w1 prompt GEMMs on 4 persistent SMs; mature Attention/LN/residual, D1 and hardware unchanged",
+  "id": "cand-101",
+  "kind": "manual",
+  "ops": [
+    {
+      "gemms": [
+        "w1"
+      ],
+      "kind": "incremental_gemm",
+      "op": "p1_schedule",
+      "shards": 4
+    }
+  ],
+  "parent": "cand-098",
+  "provenance_note": null,
+  "round": 12,
+  "status": "not_verified",
+  "struct_sig": "p1-incremental-w1",
+  "summary": "[{\"op\": \"p1_schedule\", \"kind\": \"incremental_gemm\", \"gemms\": [\"w1\"], \"shards\": 4}]",
+  "verdict_note": null
+}

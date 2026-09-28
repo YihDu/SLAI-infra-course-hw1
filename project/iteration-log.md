@@ -1265,3 +1265,56 @@ Traceback (most recent call last):
 - Decision: Keep cand-098 as default generated submission; retain opt-in multi-SM source/candidate for follow-up. Do not promote control or interpret validation failure as poor architectural scaling. Frozen checker event-set retention blocks the complete parallel experiment on this 16 GiB host. User success criteria not yet met. See `project/campaigns/p1-multism/REPORT.md`.
 
 ### cand-100 verdict: REVERTED — Numerical control passed but score regresses; preserve cand-098 default. Parallel cand-099 remains not_verified due frozen checker memory growth.
+
+## 2026-09-28 19:37:24 — cand-101: Incremental full P1: w1 prompt GEMMs on 4 persistent SMs; mature Attention/LN/residual, D1 and hardware unchanged
+- Change: parent=cand-098; [{"op": "p1_schedule", "kind": "incremental_gemm", "gemms": ["w1"], "shards": 4}]
+- Evidence: project/experiments/cand-101/metrics.json; reports/grade.json; attempts=1
+- Command (grade): ['/Users/yihdu/Codefield/SLAI-infra-Code/transformer-codesign-starter/.venv/bin/python', '/Users/yihdu/Codefield/SLAI-infra-Code/transformer-codesign-starter/challenge.py', 'grade', '--hardware', '/Users/yihdu/Codefield/SLAI-infra-Code/transformer-codesign-starter/project/experiments/cand-101/inputs/hardware.json', '--program-p1', '/Users/yihdu/Codefield/SLAI-infra-Code/transformer-codesign-starter/project/experiments/cand-101/programs/M1_P1.asm', '--program-d1', '/Users/yihdu/Codefield/SLAI-infra-Code/transformer-codesign-starter/project/experiments/cand-101/programs/M2_D1.asm', '--report', '/Users/yihdu/Codefield/SLAI-infra-Code/transformer-codesign-starter/project/experiments/cand-101/reports/grade.json', '--seed', '7', '--baseline', '/Users/yihdu/Codefield/SLAI-infra-Code/transformer-codesign-starter/baseline_manifest.json']; elapsed=40.452517415978946; peak MiB=3079.0182342529297
+- Inputs: compiler.py@77923d93 hardware.json@b92be26a recipe.json@07415acd
+- Verify: FAILED — failure_class=memory_limit; evidence=pipeline elapsed=40.45s
+- Result: status=not_verified, failure_class=memory_limit
+- Decision: reject/preserve failed candidate (status=not_verified)
+
+## 2026-09-28 19:37:24 — cand-102: Incremental full P1: w2 prompt GEMMs on 4 persistent SMs; mature Attention/LN/residual, D1 and hardware unchanged
+- Change: parent=cand-098; [{"op": "p1_schedule", "kind": "incremental_gemm", "gemms": ["w2"], "shards": 4}]
+- Evidence: project/experiments/cand-102/metrics.json; reports/grade.json; attempts=1
+- Command (grade): ['/Users/yihdu/Codefield/SLAI-infra-Code/transformer-codesign-starter/.venv/bin/python', '/Users/yihdu/Codefield/SLAI-infra-Code/transformer-codesign-starter/challenge.py', 'grade', '--hardware', '/Users/yihdu/Codefield/SLAI-infra-Code/transformer-codesign-starter/project/experiments/cand-102/inputs/hardware.json', '--program-p1', '/Users/yihdu/Codefield/SLAI-infra-Code/transformer-codesign-starter/project/experiments/cand-102/programs/M1_P1.asm', '--program-d1', '/Users/yihdu/Codefield/SLAI-infra-Code/transformer-codesign-starter/project/experiments/cand-102/programs/M2_D1.asm', '--report', '/Users/yihdu/Codefield/SLAI-infra-Code/transformer-codesign-starter/project/experiments/cand-102/reports/grade.json', '--seed', '7', '--baseline', '/Users/yihdu/Codefield/SLAI-infra-Code/transformer-codesign-starter/baseline_manifest.json']; elapsed=36.130835209041834; peak MiB=3072.346336364746
+- Inputs: compiler.py@77923d93 hardware.json@b92be26a recipe.json@4845157c
+- Verify: FAILED — failure_class=memory_limit; evidence=pipeline elapsed=36.13s
+- Result: status=not_verified, failure_class=memory_limit
+- Decision: reject/preserve failed candidate (status=not_verified)
+
+## 2026-09-28 19:37:24 — cand-103: Incremental full P1: w1,w2 prompt GEMMs on 4 persistent SMs; mature Attention/LN/residual, D1 and hardware unchanged
+- Change: parent=cand-098; [{"op": "p1_schedule", "kind": "incremental_gemm", "gemms": ["w1", "w2"], "shards": 4}]
+- Evidence: project/experiments/cand-103/metrics.json; reports/grade.json; attempts=1
+- Command (grade): ['/Users/yihdu/Codefield/SLAI-infra-Code/transformer-codesign-starter/.venv/bin/python', '/Users/yihdu/Codefield/SLAI-infra-Code/transformer-codesign-starter/challenge.py', 'grade', '--hardware', '/Users/yihdu/Codefield/SLAI-infra-Code/transformer-codesign-starter/project/experiments/cand-103/inputs/hardware.json', '--program-p1', '/Users/yihdu/Codefield/SLAI-infra-Code/transformer-codesign-starter/project/experiments/cand-103/programs/M1_P1.asm', '--program-d1', '/Users/yihdu/Codefield/SLAI-infra-Code/transformer-codesign-starter/project/experiments/cand-103/programs/M2_D1.asm', '--report', '/Users/yihdu/Codefield/SLAI-infra-Code/transformer-codesign-starter/project/experiments/cand-103/reports/grade.json', '--seed', '7', '--baseline', '/Users/yihdu/Codefield/SLAI-infra-Code/transformer-codesign-starter/baseline_manifest.json']; elapsed=36.624174332944676; peak MiB=3085.6901321411133
+- Inputs: compiler.py@77923d93 hardware.json@b92be26a recipe.json@3a876d88
+- Verify: FAILED — failure_class=memory_limit; evidence=pipeline elapsed=36.62s
+- Result: status=not_verified, failure_class=memory_limit
+- Decision: reject/preserve failed candidate (status=not_verified)
+
+## 2026-09-28 19:37:24 — cand-104: Incremental full P1: qkv prompt GEMMs on 4 persistent SMs; mature Attention/LN/residual, D1 and hardware unchanged
+- Change: parent=cand-098; [{"op": "p1_schedule", "kind": "incremental_gemm", "gemms": ["qkv"], "shards": 4}]
+- Evidence: project/experiments/cand-104/metrics.json; reports/grade.json; attempts=1
+- Command (grade): ['/Users/yihdu/Codefield/SLAI-infra-Code/transformer-codesign-starter/.venv/bin/python', '/Users/yihdu/Codefield/SLAI-infra-Code/transformer-codesign-starter/challenge.py', 'grade', '--hardware', '/Users/yihdu/Codefield/SLAI-infra-Code/transformer-codesign-starter/project/experiments/cand-104/inputs/hardware.json', '--program-p1', '/Users/yihdu/Codefield/SLAI-infra-Code/transformer-codesign-starter/project/experiments/cand-104/programs/M1_P1.asm', '--program-d1', '/Users/yihdu/Codefield/SLAI-infra-Code/transformer-codesign-starter/project/experiments/cand-104/programs/M2_D1.asm', '--report', '/Users/yihdu/Codefield/SLAI-infra-Code/transformer-codesign-starter/project/experiments/cand-104/reports/grade.json', '--seed', '7', '--baseline', '/Users/yihdu/Codefield/SLAI-infra-Code/transformer-codesign-starter/baseline_manifest.json']; elapsed=40.49411379103549; peak MiB=3078.2213592529297
+- Inputs: compiler.py@77923d93 hardware.json@b92be26a recipe.json@99a3aeb9
+- Verify: FAILED — failure_class=memory_limit; evidence=pipeline elapsed=40.49s
+- Result: status=not_verified, failure_class=memory_limit
+- Decision: reject/preserve failed candidate (status=not_verified)
+
+## 2026-09-28 19:37:24 — cand-105: Incremental full P1: qkv,w1,w2 prompt GEMMs on 4 persistent SMs; mature Attention/LN/residual, D1 and hardware unchanged
+- Change: parent=cand-098; [{"op": "p1_schedule", "kind": "incremental_gemm", "gemms": ["qkv", "w1", "w2"], "shards": 4}]
+- Evidence: project/experiments/cand-105/metrics.json; reports/grade.json; attempts=1
+- Command (grade): ['/Users/yihdu/Codefield/SLAI-infra-Code/transformer-codesign-starter/.venv/bin/python', '/Users/yihdu/Codefield/SLAI-infra-Code/transformer-codesign-starter/challenge.py', 'grade', '--hardware', '/Users/yihdu/Codefield/SLAI-infra-Code/transformer-codesign-starter/project/experiments/cand-105/inputs/hardware.json', '--program-p1', '/Users/yihdu/Codefield/SLAI-infra-Code/transformer-codesign-starter/project/experiments/cand-105/programs/M1_P1.asm', '--program-d1', '/Users/yihdu/Codefield/SLAI-infra-Code/transformer-codesign-starter/project/experiments/cand-105/programs/M2_D1.asm', '--report', '/Users/yihdu/Codefield/SLAI-infra-Code/transformer-codesign-starter/project/experiments/cand-105/reports/grade.json', '--seed', '7', '--baseline', '/Users/yihdu/Codefield/SLAI-infra-Code/transformer-codesign-starter/baseline_manifest.json']; elapsed=37.36664620798547; peak MiB=3080.0026092529297
+- Inputs: compiler.py@77923d93 hardware.json@b92be26a recipe.json@5b200d7b
+- Verify: FAILED — failure_class=memory_limit; evidence=pipeline elapsed=37.37s
+- Result: status=not_verified, failure_class=memory_limit
+- Decision: reject/preserve failed candidate (status=not_verified)
+
+## 2026-09-28 19:54 — Validation-cost diagnosis and session handoff
+- Change: Read-only expanded-program cost/traffic analysis; incremental prompt GEMM skeleton; validation-cost preflight; outer/inner plateau guard. Default emitted P1/D1 remain byte-identical to cand-098; hardware and frozen evaluator unchanged.
+- Verify: `.venv/bin/python -m unittest discover -s project/search/tests -v` -> `project/campaigns/validation-efficient/tests.stderr` -> 51 passed. `.venv/bin/python -m project.campaigns.p1-multism.verify_controls` -> passed.
+- Verify: Full grade attempts cand-101..105 all `not_verified / memory_limit`, each one attempt at 3072 MiB. No grade.json was produced; earlier generic log references denote intended report paths, not completed reports. Actual evidence: each metrics.json and grade.heartbeat.json.
+- Verify: Frozen race checker observation on complete cand-101 at 2560 MiB -> `project/campaigns/validation-efficient/only-w1-race-observation.json`, peak 2568.94 MiB; at PC 9999 still prompt Attention, before first parallel entry at PC 17412. No correctness/timing pass inferred.
+- Result: Incremental event counts all 161516, retained-set logical allocation lower bounds 102–108 GiB. Logical heap estimates are not measured peak RSS. Default score remains 2567.95405 (P1=8522411, D1=718132).
+- Decision: User explicitly requested documentation, Git commit, and new-session handoff. Stop experiments; no official submission. See `project/CURRENT_SESSION_HANDOFF.md` and `project/campaigns/validation-efficient/REPORT.md`. Remote resources and permission to advance algorithm compression remain unconfirmed.

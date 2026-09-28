@@ -9,3 +9,6 @@ grade-*.json
 
 # submission artifacts
 *.zip
+
+# local virtual environment
+.venv/

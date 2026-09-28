@@ -1,5 +1,7 @@
 # Agent Briefing: Transformer Hardware–Program Co-design
 
+For the abstract problem formulation, see `project/PROBLEM.md`.
+
 Read this file first. It formulates the whole assignment for an incoming agent
 session: what the problem is, what the rules are, how to iterate, and what must
 be logged. Authoritative sources: `README.md` (statement), `ISA.md` (instruction

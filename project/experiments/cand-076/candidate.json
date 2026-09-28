@@ -1,0 +1,24 @@
+{
+  "bias": "balanced",
+  "created_at": "2026-09-28 17:05:18",
+  "failure_class": "none",
+  "family": "hardware",
+  "fingerprint": "eabe00a465e8034c",
+  "hypothesis": "Hardware sensitivity: tc_k_parallel=4 against cand-073",
+  "id": "cand-076",
+  "kind": "manual",
+  "ops": [
+    {
+      "op": "hw_set",
+      "path": "tc_k_parallel",
+      "value": 4
+    }
+  ],
+  "parent": "cand-073",
+  "provenance_note": null,
+  "round": 13,
+  "status": "kept",
+  "struct_sig": "fuse+hw:cache_mib=2+hw:dma_depth=2+hw:rf_ports=8R4W+hw:sm_noc_bytes_per_cycle=128+hw:tc_k_parallel=4+nkm+nopf+s:rf+stage:d1",
+  "summary": "[{\"op\": \"hw_set\", \"path\": \"tc_k_parallel\", \"value\": 4}]",
+  "verdict_note": null
+}

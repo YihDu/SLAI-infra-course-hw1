@@ -1,0 +1,59 @@
+{
+  "bias": "balanced",
+  "compiler_path": "/Users/yihdu/Codefield/SLAI-infra-Code/transformer-codesign-starter/project/experiments/cand-073/inputs/compiler.py",
+  "family": "hardware",
+  "fingerprint": "6ee4b82778955948",
+  "hardware": {
+    "cache_mib": 2,
+    "dma_depth": 2,
+    "dma_engines": 1,
+    "hbm_channels": 4,
+    "multicast": false,
+    "noc_bytes_per_cycle": 256,
+    "reduction_units": 0,
+    "rf_ports": "8R4W",
+    "sfu_lanes": 8,
+    "shared_banks": 4,
+    "shared_kib": 128,
+    "shared_ports": "1R1W",
+    "sm_count": 8,
+    "sm_noc_bytes_per_cycle": 128,
+    "tc_array": "8x8",
+    "tc_count": 2,
+    "tc_k_parallel": 1,
+    "vector_lanes": 16,
+    "version": "challenge-hardware-v0.4"
+  },
+  "hypothesis": "Hardware sensitivity: tc_array=8x8 against cand-073",
+  "kind": "manual",
+  "ops": [
+    {
+      "op": "hw_set",
+      "path": "tc_array",
+      "value": "8x8"
+    }
+  ],
+  "parent": "cand-073",
+  "recipe": {
+    "attention": {
+      "scores": "rf"
+    },
+    "fusion": {
+      "bias_gelu": 1
+    },
+    "gemm": {
+      "k_chunk": 48,
+      "m_tile": 8,
+      "n_tile": 16,
+      "order": "nkm",
+      "prefetch": 0
+    },
+    "gemm_stages": {
+      "d1": {
+        "k_chunk": 24,
+        "n_tile": 32
+      }
+    }
+  },
+  "struct_sig": "fuse+hw:cache_mib=2+hw:dma_depth=2+hw:rf_ports=8R4W+hw:sm_noc_bytes_per_cycle=128+hw:tc_array=8x8+nkm+nopf+s:rf+stage:d1"
+}

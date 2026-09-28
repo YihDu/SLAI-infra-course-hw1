@@ -1,0 +1,370 @@
+{
+  "baseline": "cand-073",
+  "candidates": [
+    "cand-074",
+    "cand-075",
+    "cand-076",
+    "cand-077",
+    "cand-078",
+    "cand-079",
+    "cand-080",
+    "cand-081",
+    "cand-082",
+    "cand-083",
+    "cand-084",
+    "cand-085"
+  ],
+  "skipped": [],
+  "budget": {
+    "used": 12,
+    "maximum": 12,
+    "wall_seconds": 1739.169
+  },
+  "best": "cand-083",
+  "best_score": 2245.0389561884695,
+  "results": [
+    {
+      "id": "cand-074",
+      "parent": "cand-073",
+      "hypothesis": "Reproduce cand-073 with isolated single-grade runner",
+      "score": 2051.47741118116,
+      "cycles": {
+        "M1_P1": 12347819,
+        "M2_D1": 776636
+      },
+      "verdict": "evaluated",
+      "eligible": true,
+      "area_mm2": 7.85310091776,
+      "power": {
+        "M1_P1": 2.386782770976093,
+        "M2_D1": 1.979213370943878
+      },
+      "elapsed": 125.57865954202134,
+      "peak_memory_mib": 2246.7520599365234,
+      "evaluation_attempts": 1,
+      "cache_hit": false
+    },
+    {
+      "id": "cand-075",
+      "parent": "cand-073",
+      "hypothesis": "Hardware sensitivity: tc_k_parallel=2 against cand-073",
+      "score": 2011.1993372800794,
+      "cycles": {
+        "M1_P1": 13129883,
+        "M2_D1": 759924
+      },
+      "verdict": "evaluated",
+      "eligible": true,
+      "area_mm2": 9.32510091776,
+      "power": {
+        "M1_P1": 2.423582770969417,
+        "M2_D1": 2.0410726669439976
+      },
+      "elapsed": 249.7839122080477,
+      "peak_memory_mib": 2230.2520599365234,
+      "evaluation_attempts": 1,
+      "cache_hit": false
+    },
+    {
+      "id": "cand-076",
+      "parent": "cand-073",
+      "hypothesis": "Hardware sensitivity: tc_k_parallel=4 against cand-073",
+      "score": 2104.4624234432395,
+      "cycles": {
+        "M1_P1": 12093131,
+        "M2_D1": 753564
+      },
+      "verdict": "evaluated",
+      "eligible": true,
+      "area_mm2": 12.26910091776,
+      "power": {
+        "M1_P1": 2.4971827709760928,
+        "M2_D1": 2.1255136029440007
+      },
+      "elapsed": 247.75329262495507,
+      "peak_memory_mib": 2223.53328704834,
+      "evaluation_attempts": 1,
+      "cache_hit": false
+    },
+    {
+      "id": "cand-077",
+      "parent": "cand-073",
+      "hypothesis": "Hardware sensitivity: tc_array=8x8 against cand-073",
+      "score": 2075.4609403356135,
+      "cycles": {
+        "M1_P1": 12064091,
+        "M2_D1": 776636
+      },
+      "verdict": "evaluated",
+      "eligible": true,
+      "area_mm2": 9.52396875776,
+      "power": {
+        "M1_P1": 2.4285544669760926,
+        "M2_D1": 2.0318189869441854
+      },
+      "elapsed": 246.26141370809637,
+      "peak_memory_mib": 2235.9083099365234,
+      "evaluation_attempts": 1,
+      "cache_hit": false
+    },
+    {
+      "id": "cand-078",
+      "parent": "cand-073",
+      "hypothesis": "Hardware sensitivity: tc_array=8x16 against cand-073",
+      "score": 2153.6655079126076,
+      "cycles": {
+        "M1_P1": 11412395,
+        "M2_D1": 762444
+      },
+      "verdict": "evaluated",
+      "eligible": true,
+      "area_mm2": 12.86570443776,
+      "power": {
+        "M1_P1": 2.5120978589760927,
+        "M2_D1": 2.157010226944384
+      },
+      "elapsed": 246.00153170805424,
+      "peak_memory_mib": 2239.1895599365234,
+      "evaluation_attempts": 1,
+      "cache_hit": false
+    },
+    {
+      "id": "cand-079",
+      "parent": "cand-073",
+      "hypothesis": "Hardware sensitivity: tc_count=4 against cand-073",
+      "score": 1995.554860534254,
+      "cycles": {
+        "M1_P1": 13207115,
+        "M2_D1": 767372
+      },
+      "verdict": "evaluated",
+      "eligible": true,
+      "area_mm2": 9.52396875776,
+      "power": {
+        "M1_P1": 2.4285544669760926,
+        "M2_D1": 2.0489561469440005
+      },
+      "elapsed": 237.71824362501502,
+      "peak_memory_mib": 2229.2676849365234,
+      "evaluation_attempts": 1,
+      "cache_hit": false
+    },
+    {
+      "id": "cand-080",
+      "parent": "cand-073",
+      "hypothesis": "Hardware sensitivity: dma_engines=2 against cand-073",
+      "score": 2078.124801537899,
+      "cycles": {
+        "M1_P1": 12161525,
+        "M2_D1": 768440
+      },
+      "verdict": "evaluated",
+      "eligible": true,
+      "area_mm2": 8.25310091776,
+      "power": {
+        "M1_P1": 2.770928802982833,
+        "M2_D1": 2.012421234944003
+      },
+      "elapsed": 218.29715808306355,
+      "peak_memory_mib": 2202.5801391601562,
+      "evaluation_attempts": 1,
+      "cache_hit": false
+    },
+    {
+      "id": "cand-081",
+      "parent": "cand-073",
+      "hypothesis": "Hardware sensitivity: cache_mib=4 against cand-073",
+      "score": 2051.47741118116,
+      "cycles": {
+        "M1_P1": 12347819,
+        "M2_D1": 776636
+      },
+      "verdict": "evaluated",
+      "eligible": true,
+      "area_mm2": 8.692162421759999,
+      "power": {
+        "M1_P1": 2.4077593085760927,
+        "M2_D1": 2.000189908543878
+      },
+      "elapsed": 206.8984834169969,
+      "peak_memory_mib": 2248.3301849365234,
+      "evaluation_attempts": 1,
+      "cache_hit": false
+    },
+    {
+      "id": "cand-082",
+      "parent": "cand-076",
+      "hypothesis": "Compose beneficial control cand-080",
+      "score": 2131.1533261851882,
+      "cycles": {
+        "M1_P1": 11929847,
+        "M2_D1": 744864
+      },
+      "verdict": "evaluated",
+      "eligible": true,
+      "area_mm2": 12.66910091776,
+      "power": {
+        "M1_P1": 2.881328802982833,
+        "M2_D1": 2.1455940909440043
+      },
+      "elapsed": 134.0158600830473,
+      "peak_memory_mib": 2300.767707824707,
+      "evaluation_attempts": 1,
+      "cache_hit": false
+    },
+    {
+      "id": "cand-083",
+      "parent": "cand-082",
+      "hypothesis": "Compose beneficial control cand-077",
+      "score": 2245.0389561884695,
+      "cycles": {
+        "M1_P1": 10750199,
+        "M2_D1": 744864
+      },
+      "verdict": "evaluated",
+      "eligible": true,
+      "area_mm2": 18.75596875776,
+      "power": {
+        "M1_P1": 3.0335004989828334,
+        "M2_D1": 2.3104121869440033
+      },
+      "elapsed": 174.713290625019,
+      "peak_memory_mib": 2181.7676391601562,
+      "evaluation_attempts": 1,
+      "cache_hit": false
+    },
+    {
+      "id": "cand-084",
+      "parent": "cand-083",
+      "hypothesis": "Stage sensitivity: d1 k_chunk=16",
+      "score": 2206.2481983505695,
+      "cycles": {
+        "M1_P1": 10750199,
+        "M2_D1": 771287
+      },
+      "verdict": "evaluated",
+      "eligible": true,
+      "area_mm2": 18.75596875776,
+      "power": {
+        "M1_P1": 3.0335004989828334,
+        "M2_D1": 2.151740978944005
+      },
+      "elapsed": 167.2534545409726,
+      "peak_memory_mib": 2208.75203704834,
+      "evaluation_attempts": 1,
+      "cache_hit": false
+    },
+    {
+      "id": "cand-085",
+      "parent": "cand-083",
+      "hypothesis": "Archive mechanism expansion: reduction_units=1",
+      "score": 2245.0389561884695,
+      "cycles": {
+        "M1_P1": 10750199,
+        "M2_D1": 744864
+      },
+      "verdict": "evaluated",
+      "eligible": true,
+      "area_mm2": 18.99596875776,
+      "power": {
+        "M1_P1": 3.039500498982833,
+        "M2_D1": 2.316412186944003
+      },
+      "elapsed": 130.74643604201265,
+      "peak_memory_mib": 2207.45516204834,
+      "evaluation_attempts": 1,
+      "cache_hit": false
+    }
+  ],
+  "actual_launches": 12,
+  "cache_hits": 0,
+  "failures": 0,
+  "baseline_score": 2051.47741118116,
+  "score_gain_percent": 9.435226727447343,
+  "submission_snapshots_verified": true,
+  "cache_import": {
+    "indexed": [
+      "cand-000",
+      "cand-001",
+      "cand-002",
+      "cand-003",
+      "cand-004",
+      "cand-005",
+      "cand-006",
+      "cand-007",
+      "cand-008",
+      "cand-009",
+      "cand-010",
+      "cand-011",
+      "cand-012",
+      "cand-013",
+      "cand-014",
+      "cand-015",
+      "cand-016",
+      "cand-017",
+      "cand-018",
+      "cand-019",
+      "cand-020",
+      "cand-021",
+      "cand-022",
+      "cand-023",
+      "cand-024",
+      "cand-025",
+      "cand-026",
+      "cand-027",
+      "cand-028",
+      "cand-029",
+      "cand-030",
+      "cand-031",
+      "cand-032",
+      "cand-033",
+      "cand-034",
+      "cand-035",
+      "cand-036",
+      "cand-037",
+      "cand-038",
+      "cand-039",
+      "cand-040",
+      "cand-041",
+      "cand-042",
+      "cand-044",
+      "cand-045",
+      "cand-046",
+      "cand-047",
+      "cand-049",
+      "cand-050",
+      "cand-051",
+      "cand-052",
+      "cand-053",
+      "cand-056",
+      "cand-057",
+      "cand-058",
+      "cand-059",
+      "cand-060",
+      "cand-061",
+      "cand-062",
+      "cand-063",
+      "cand-064",
+      "cand-065",
+      "cand-066",
+      "cand-067",
+      "cand-070",
+      "cand-071",
+      "cand-072",
+      "cand-073",
+      "cand-074",
+      "cand-075",
+      "cand-076",
+      "cand-077",
+      "cand-078",
+      "cand-079",
+      "cand-080",
+      "cand-081",
+      "cand-082",
+      "cand-083",
+      "cand-084",
+      "cand-085"
+    ],
+    "skipped": []
+  }
+}

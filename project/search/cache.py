@@ -360,6 +360,9 @@ def index_history(seeds=(7,), validation='grade'):
                 raise ValueError('runtime mismatch')
             hardware = Hardware.from_dict(json.loads((cand.inputs / 'hardware.json').read_text()))
             programs = {name: (cand.programs / (name+'.asm')).read_text() for name in ('M1_P1','M2_D1')}
+            policy = {name: sha256_file(CODESIGN_DIR / "challenge" / name) for name in ("cli.py", "official.py", "release.py")}
+            if raw.get("trust_policy_sha256") != policy:
+                raise ValueError("validation policy mismatch")
             if raw.get('provenance') != provenance(hardware, programs):
                 raise ValueError('artifact or frozen evaluator provenance mismatch')
             metrics = {'candidate': cid, 'reports': {'grade': summarize(raw)}, 'verdict': 'evaluated',

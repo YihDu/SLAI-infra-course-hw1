@@ -1,0 +1,18 @@
+{
+  "bias": "balanced",
+  "created_at": "2026-09-28 17:03:07",
+  "failure_class": "none",
+  "family": "compute",
+  "fingerprint": "822689297bf11f0a",
+  "hypothesis": "Reproduce cand-073 with isolated single-grade runner",
+  "id": "cand-074",
+  "kind": "manual",
+  "ops": [],
+  "parent": "cand-073",
+  "provenance_note": null,
+  "round": 13,
+  "status": "evaluated",
+  "struct_sig": "fuse+hw:cache_mib=2+hw:dma_depth=2+hw:rf_ports=8R4W+hw:sm_noc_bytes_per_cycle=128+nkm+nopf+s:rf+stage:d1",
+  "summary": "[]",
+  "verdict_note": null
+}

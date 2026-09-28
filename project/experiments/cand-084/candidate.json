@@ -1,0 +1,24 @@
+{
+  "bias": "balanced",
+  "created_at": "2026-09-28 17:26:51",
+  "failure_class": "none",
+  "family": "compute",
+  "fingerprint": "88fb3c82307e84b4",
+  "hypothesis": "Stage sensitivity: d1 k_chunk=16",
+  "id": "cand-084",
+  "kind": "manual",
+  "ops": [
+    {
+      "k_chunk": 16,
+      "op": "stage_gemm_tiles",
+      "stage": "d1"
+    }
+  ],
+  "parent": "cand-083",
+  "provenance_note": null,
+  "round": 13,
+  "status": "evaluated",
+  "struct_sig": "fuse+hw:cache_mib=2+hw:dma_depth=2+hw:dma_engines=2+hw:rf_ports=8R4W+hw:sm_noc_bytes_per_cycle=128+hw:tc_array=8x8+hw:tc_k_parallel=4+nkm+nopf+s:rf+stage:d1",
+  "summary": "[{\"op\": \"stage_gemm_tiles\", \"stage\": \"d1\", \"k_chunk\": 16}]",
+  "verdict_note": null
+}

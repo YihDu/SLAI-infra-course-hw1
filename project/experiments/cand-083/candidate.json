@@ -1,0 +1,24 @@
+{
+  "bias": "balanced",
+  "created_at": "2026-09-28 17:23:51",
+  "failure_class": "none",
+  "family": "hardware",
+  "fingerprint": "351d373ed57d786c",
+  "hypothesis": "Compose beneficial control cand-077",
+  "id": "cand-083",
+  "kind": "manual",
+  "ops": [
+    {
+      "op": "hw_set",
+      "path": "tc_array",
+      "value": "8x8"
+    }
+  ],
+  "parent": "cand-082",
+  "provenance_note": null,
+  "round": 13,
+  "status": "kept",
+  "struct_sig": "fuse+hw:cache_mib=2+hw:dma_depth=2+hw:dma_engines=2+hw:rf_ports=8R4W+hw:sm_noc_bytes_per_cycle=128+hw:tc_array=8x8+hw:tc_k_parallel=4+nkm+nopf+s:rf+stage:d1",
+  "summary": "[{\"op\": \"hw_set\", \"path\": \"tc_array\", \"value\": \"8x8\"}]",
+  "verdict_note": null
+}

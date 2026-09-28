@@ -1,0 +1,24 @@
+{
+  "bias": "balanced",
+  "created_at": "2026-09-28 17:05:18",
+  "failure_class": "none",
+  "family": "hardware",
+  "fingerprint": "7a1c6dadac71186e",
+  "hypothesis": "Hardware sensitivity: tc_count=4 against cand-073",
+  "id": "cand-079",
+  "kind": "manual",
+  "ops": [
+    {
+      "op": "hw_set",
+      "path": "tc_count",
+      "value": 4
+    }
+  ],
+  "parent": "cand-073",
+  "provenance_note": null,
+  "round": 13,
+  "status": "evaluated",
+  "struct_sig": "fuse+hw:cache_mib=2+hw:dma_depth=2+hw:rf_ports=8R4W+hw:sm_noc_bytes_per_cycle=128+hw:tc_count=4+nkm+nopf+s:rf+stage:d1",
+  "summary": "[{\"op\": \"hw_set\", \"path\": \"tc_count\", \"value\": 4}]",
+  "verdict_note": null
+}

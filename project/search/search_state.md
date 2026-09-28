@@ -1,15 +1,15 @@
 # search_state (auto-generated; do not edit)
 
-- best: cand-073 score=2051.47741118116 (P1=12347819, D1=776636)
+- best: cand-083 score=2245.0389561884695 (P1=10750199, D1=744864)
 - phase=2 round=12 plateau_rounds=0 explore_ratio=0.54 need_new_operator=False
-- bottleneck: P1 sm0.issue_wait=12082940
+- bottleneck: M1_P1 sm0.rf_read=3353480, sm0.rf_write=3218344, sm0.dma=2465984; M2_D1 sm0.rf_write=263232, sm0.dma=244416, shared.noc=227385 (overlapping service counts)
 
 ## elite (score desc)
-- cand-073 score=2051.48 parent=cand-072 sig=hw:cache_mib=2 hyp=2 MiB cache reuses weights and activations across decode ste
-- cand-072 score=2004.67 parent=cand-071 sig=stage:d1 hyp=D1 stage-specific k_chunk 32 to 24 with n_tile 32
-- cand-071 score=1996.48 parent=cand-065 sig=stage:d1 hyp=D1-only GEMM tile n32 k32 with stage-specific recipe
-- cand-065 score=1965.99 parent=cand-059 sig=hw:dma_depth=2 hyp=expand cand-059: dma_depth=2 to make prefetch actually overl
-- cand-067 score=1894.93 parent=cand-056 sig=hw:hbm_channels=8 hyp=expand cand-056: double HBM channels [hbm_channels=8]
+- cand-083 score=2245.04 parent=cand-082 sig=fuse+hw:cache_mib=2+hw:dma_depth=2+hw:dma_engines=2+hw:rf_ports=8R4W+hw:sm_noc_bytes_per_cycle=128+hw:tc_array=8x8+hw:tc_k_parallel=4+nkm+nopf+s:rf+stage:d1 hyp=Compose beneficial control cand-077
+- cand-085 score=2245.04 parent=cand-083 sig=fuse+hw:cache_mib=2+hw:dma_depth=2+hw:dma_engines=2+hw:reduction_units=1+hw:rf_ports=8R4W+hw:sm_noc_bytes_per_cycle=128+hw:tc_array=8x8+hw:tc_k_parallel=4+nkm+nopf+s:rf+stage:d1 hyp=Archive mechanism expansion: reduction_units=1
+- cand-084 score=2206.25 parent=cand-083 sig=fuse+hw:cache_mib=2+hw:dma_depth=2+hw:dma_engines=2+hw:rf_ports=8R4W+hw:sm_noc_bytes_per_cycle=128+hw:tc_array=8x8+hw:tc_k_parallel=4+nkm+nopf+s:rf+stage:d1 hyp=Stage sensitivity: d1 k_chunk=16
+- cand-078 score=2153.67 parent=cand-073 sig=fuse+hw:cache_mib=2+hw:dma_depth=2+hw:rf_ports=8R4W+hw:sm_noc_bytes_per_cycle=128+hw:tc_array=8x16+nkm+nopf+s:rf+stage:d1 hyp=Hardware sensitivity: tc_array=8x16 against cand-073
+- cand-082 score=2131.15 parent=cand-076 sig=fuse+hw:cache_mib=2+hw:dma_depth=2+hw:dma_engines=2+hw:rf_ports=8R4W+hw:sm_noc_bytes_per_cycle=128+hw:tc_k_parallel=4+nkm+nopf+s:rf+stage:d1 hyp=Compose beneficial control cand-080
 
 ## failure classes
 - dry_run: 27
@@ -19,17 +19,28 @@
 - harness_noop: 9
 
 ## pareto front
-- cand-073 {'M1_P1': 12347819, 'M2_D1': 776636}
+- cand-083 {'M1_P1': 10750199, 'M2_D1': 744864}
 
 ## diversity cells
 - attention|balanced: cand-019
-- compute|balanced: cand-046
+- compute|balanced: cand-084
 - compute|d1: cand-072
 - compute|p1: cand-070
 - fusion|balanced: cand-009
-- hardware|balanced: cand-047
+- hardware|balanced: cand-083
 - memory|balanced: cand-073
 - sig:fuse: cand-009
+- sig:fuse+hw:cache_mib=2+hw:dma_depth=2+hw:dma_engines=2+hw:reduction_units=1+hw:rf_ports=8R4W+hw:sm_noc_bytes_per_cycle=128+hw:tc_array=8x8+hw:tc_k_parallel=4+nkm+nopf+s:rf+stage:d1: cand-085
+- sig:fuse+hw:cache_mib=2+hw:dma_depth=2+hw:dma_engines=2+hw:rf_ports=8R4W+hw:sm_noc_bytes_per_cycle=128+hw:tc_array=8x8+hw:tc_k_parallel=4+nkm+nopf+s:rf+stage:d1: cand-083
+- sig:fuse+hw:cache_mib=2+hw:dma_depth=2+hw:dma_engines=2+hw:rf_ports=8R4W+hw:sm_noc_bytes_per_cycle=128+hw:tc_k_parallel=4+nkm+nopf+s:rf+stage:d1: cand-082
+- sig:fuse+hw:cache_mib=2+hw:dma_depth=2+hw:dma_engines=2+hw:rf_ports=8R4W+hw:sm_noc_bytes_per_cycle=128+nkm+nopf+s:rf+stage:d1: cand-080
+- sig:fuse+hw:cache_mib=2+hw:dma_depth=2+hw:rf_ports=8R4W+hw:sm_noc_bytes_per_cycle=128+hw:tc_array=8x16+nkm+nopf+s:rf+stage:d1: cand-078
+- sig:fuse+hw:cache_mib=2+hw:dma_depth=2+hw:rf_ports=8R4W+hw:sm_noc_bytes_per_cycle=128+hw:tc_array=8x8+nkm+nopf+s:rf+stage:d1: cand-077
+- sig:fuse+hw:cache_mib=2+hw:dma_depth=2+hw:rf_ports=8R4W+hw:sm_noc_bytes_per_cycle=128+hw:tc_count=4+nkm+nopf+s:rf+stage:d1: cand-079
+- sig:fuse+hw:cache_mib=2+hw:dma_depth=2+hw:rf_ports=8R4W+hw:sm_noc_bytes_per_cycle=128+hw:tc_k_parallel=2+nkm+nopf+s:rf+stage:d1: cand-075
+- sig:fuse+hw:cache_mib=2+hw:dma_depth=2+hw:rf_ports=8R4W+hw:sm_noc_bytes_per_cycle=128+hw:tc_k_parallel=4+nkm+nopf+s:rf+stage:d1: cand-076
+- sig:fuse+hw:cache_mib=2+hw:dma_depth=2+hw:rf_ports=8R4W+hw:sm_noc_bytes_per_cycle=128+nkm+nopf+s:rf+stage:d1: cand-074
+- sig:fuse+hw:cache_mib=4+hw:dma_depth=2+hw:rf_ports=8R4W+hw:sm_noc_bytes_per_cycle=128+nkm+nopf+s:rf+stage:d1: cand-081
 - sig:fuse+hw:hbm_channels=1+nkm+pf+s:rf: cand-049
 - sig:fuse+mnk+nopf+s:hbm: cand-021
 - sig:fuse+nkm: cand-010

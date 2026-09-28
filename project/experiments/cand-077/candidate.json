@@ -1,0 +1,24 @@
+{
+  "bias": "balanced",
+  "created_at": "2026-09-28 17:05:18",
+  "failure_class": "none",
+  "family": "hardware",
+  "fingerprint": "6ee4b82778955948",
+  "hypothesis": "Hardware sensitivity: tc_array=8x8 against cand-073",
+  "id": "cand-077",
+  "kind": "manual",
+  "ops": [
+    {
+      "op": "hw_set",
+      "path": "tc_array",
+      "value": "8x8"
+    }
+  ],
+  "parent": "cand-073",
+  "provenance_note": null,
+  "round": 13,
+  "status": "evaluated",
+  "struct_sig": "fuse+hw:cache_mib=2+hw:dma_depth=2+hw:rf_ports=8R4W+hw:sm_noc_bytes_per_cycle=128+hw:tc_array=8x8+nkm+nopf+s:rf+stage:d1",
+  "summary": "[{\"op\": \"hw_set\", \"path\": \"tc_array\", \"value\": \"8x8\"}]",
+  "verdict_note": null
+}

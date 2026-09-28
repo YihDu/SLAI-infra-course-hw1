@@ -134,6 +134,8 @@ def run(max_evals=12, jobs=2, timeout_seconds=600, memory_mib=3072, wall_seconds
 
 
 def main():
+    from .runtime import install_signal_handlers
+    install_signal_handlers()
     p = argparse.ArgumentParser(description=__doc__)
     p.add_argument('--max-evals', type=int, default=12)
     p.add_argument('--jobs', type=int, choices=(1, 2), default=2)

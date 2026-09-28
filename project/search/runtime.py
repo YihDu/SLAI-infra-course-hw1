@@ -80,3 +80,27 @@ def run(cmd, cwd, prefix, timeout_seconds=600, memory_mib=3072, env=None):
                 _active.discard(proc)
     return {'command': cmd, 'exit_code': proc.returncode, 'elapsed': time.monotonic()-start,
             'peak_memory_mib': peak / 1024**2, 'failure_class': failure}
+
+
+def install_signal_handlers():
+    def terminate(signum, frame):
+        cancel_all()
+        raise KeyboardInterrupt(f"received signal {signum}")
+    signal.signal(signal.SIGTERM, terminate)
+
+
+def cleanup_stale(candidate):
+    """Reap a leftover child only when its current command names this candidate."""
+    for heartbeat in candidate.reports.glob('*.heartbeat.json'):
+        try:
+            saved = json.loads(heartbeat.read_text())
+            if saved.get('status') != 'running':
+                continue
+            pid = int(saved['pid'])
+            command = subprocess.check_output(['ps', '-p', str(pid), '-o', 'command='], text=True)
+            if str(candidate.dir) not in command:
+                continue
+            if os.getpgid(pid) == pid:
+                os.killpg(pid, signal.SIGKILL)
+        except (OSError, ValueError, KeyError, subprocess.CalledProcessError):
+            continue

@@ -63,6 +63,8 @@ def recover(reg):
         cand = Candidate.load(cid)
         if meta.get('status') != 'evaluating' and cand.status != 'evaluating':
             continue
+        from .runtime import cleanup_stale
+        cleanup_stale(cand)
         path = cand.dir / 'metrics.json'
         metrics = json.loads(path.read_text()) if path.exists() else {
             'candidate': cid, 'reports': {}, 'verdict': 'not_verified',
@@ -106,7 +108,9 @@ def evaluate_many(reg, candidates, seeds, budget, *, jobs=2, validation='grade',
                 cand.status = 'evaluating'; cand.save()
                 reg['candidates'][cand.id]['status'] = 'evaluating'; state.save(reg)
                 try:
-                    prepared = evaluator.prepare(cand, timeout_seconds=timeout_seconds, memory_mib=memory_mib)
+                    candidate_started = time.monotonic()
+                    limit = min(timeout_seconds, max(.01, budget.wall_seconds - (candidate_started-budget.started)))
+                    prepared = evaluator.prepare(cand, timeout_seconds=limit, memory_mib=memory_mib)
                     if prepared.get('failure_class') or prepared.get('verdict') in ('not_verified', 'pruned'):
                         finish(cand, prepared); continue
                     key = cache.execution_key(cand, seeds, validation)
@@ -123,7 +127,7 @@ def evaluate_many(reg, candidates, seeds, budget, *, jobs=2, validation='grade',
                         finish(cand, {'reports': {}, 'verdict': 'not_verified',
                                       'failure_class': 'budget_exhausted', 'evaluation_attempts': 0}); continue
                     fut = pool.submit(evaluator.evaluate, cand, seeds, validation=validation,
-                                      timeout_seconds=min(timeout_seconds, max(0.1, budget.wall_seconds - (time.monotonic() - budget.started))), memory_mib=memory_mib,
+                                      timeout_seconds=max(.01, limit - (time.monotonic() - candidate_started)), memory_mib=memory_mib,
                                       prepared=True, before_launch=lambda mode, cid=cand.id: budget.claim(mode, cid))
                     wave.append((cand, fut, key, False))
                 except Exception as exc:

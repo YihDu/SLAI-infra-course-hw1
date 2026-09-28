@@ -21,25 +21,21 @@ def is_admissible(meta: dict) -> bool:
     if failure_class not in (None, "none"):
         return False
     status = meta.get("status")
-    if status in ("incorrect", "pruned", "ineligible"):
+    if status in ("incorrect", "pruned", "ineligible", "not_verified", "created", "evaluating"):
         return False
 
     has_eligible = "eligible" in meta
     has_functional = "functional_passed" in meta or "functional" in meta
 
     if has_eligible or has_functional:
-        if has_eligible and meta.get("eligible") is not True:
+        if meta.get("eligible") is not True:
             return False
-        if "functional_passed" in meta and meta.get("functional_passed") is not True:
-            return False
-        if "functional" in meta:
-            fn = meta["functional"]
-            if isinstance(fn, dict):
-                if not fn or not all(v is True for v in fn.values()):
-                    return False
-            elif fn is not True:
-                return False
-        return True
+        functional = meta.get("functional")
+        if isinstance(functional, dict):
+            return (set(functional) == {"M1_P1", "M2_D1"}
+                    and all(v is True for v in functional.values())
+                    and meta.get("functional_passed", True) is True)
+        return meta.get("functional_passed") is True
 
     # Legacy valid entries without explicit eligible / functional fields
     return True

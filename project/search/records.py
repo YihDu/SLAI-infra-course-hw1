@@ -175,6 +175,9 @@ def record_result(reg: dict, cand: Any, metrics: dict, log_path: Path | None = N
     meta["failure_class"] = failure_class
     if failure_note:
         meta["failure_note"] = failure_note
+    meta["evaluation_attempts"] = metrics.get("evaluation_attempts", 0)
+    meta["elapsed"] = metrics.get("elapsed")
+    meta["cache_source"] = metrics.get("cache_source")
 
     # 7. Compute deltas vs prior head and parent
     prior_head = reg.get("head")
@@ -301,6 +304,9 @@ def append_iteration_log(
     try:
         path = log_path or DEFAULT_LOG
         path.parent.mkdir(parents=True, exist_ok=True)
+        marker = f" — {cand.id}: "
+        if path.exists() and any(line.startswith("## ") and marker in line for line in path.read_text().splitlines()):
+            return
         lines = _format_log_entry(cand, metrics, meta, promoted=promoted)
         with path.open("a", encoding="utf-8") as f:
             f.write("\n" + "\n".join(lines) + "\n")

@@ -45,73 +45,6 @@ def _append_log(text: str) -> None:
         f.write(text)
 
 
-def _fmt_cycles(case_cycles: dict) -> str:
-    parts = []
-    for case in ("M1_P1", "M2_D1"):
-        c = case_cycles.get(case, {})
-        if "cycles" in c:
-            ratio = BASELINE_CYCLES[case] / c["cycles"]
-            parts.append(f"{case}={c['cycles']} ({ratio:.3f}x)")
-        else:
-            parts.append(f"{case}=n/a")
-    return ", ".join(parts)
-
-
-def _log_evaluation(cand: Candidate, metrics: dict) -> None:
-    grade = metrics["reports"].get("grade", {})
-    check = metrics["reports"].get("check", {})
-    case_cycles = {
-        case: {"cycles": m.get("cycles")}
-        for case, m in grade.get("cases", {}).items()
-    }
-    hashes = cand.input_hashes()
-    errs = [
-        m.get("max_abs_error") for m in check.get("cases", {}).values()
-        if m.get("max_abs_error") is not None
-    ]
-    lines = [
-        f"## {cand.created_at} — {cand.id}: {cand.hypothesis}",
-        f"- Parent: {cand.parent or '(root)'}; Summary: {cand.summary or '-'}",
-        f"- Inputs: compiler@{hashes['compiler.py'][:8]} "
-        f"hardware@{hashes['hardware.json'][:8]}",
-        f"- Hypothesis: {cand.hypothesis}",
-    ]
-    if metrics.get("verdict") == "incorrect":
-        failed = [
-            case for case, m in check.get("cases", {}).items()
-            if not m.get("functional_passed")
-        ]
-        lines.append(f"- Verify: check FAILED on {failed} -> reports/check.json")
-        lines.append("- Result: correctness gate failed; timing not collected")
-        lines.append("- Decision: pending agent review (likely revert)")
-    else:
-        lines.append(
-            f"- Verify: check PASS (max err {max(errs):.2e}); "
-            f"estimate -> reports/estimate.json; grade -> reports/grade.json"
-        )
-        lines.append(
-            f"- Result: {_fmt_cycles(case_cycles)}; "
-            f"score={grade.get('score')}, eligible={grade.get('eligible')}"
-        )
-        for case, m in grade.get("cases", {}).items():
-            if "cycles" not in m:
-                continue
-            busy = m.get("busy_cycles", {})
-            top = sorted(
-                ((k, v) for k, v in busy.items() if isinstance(v, int) and v),
-                key=lambda kv: -kv[1],
-            )[:4]
-            tops = ", ".join(f"{k}={v}" for k, v in top)
-            lines.append(
-                f"  - {case}: hbm_r={m['hbm_read_bytes']/1e6:.1f}MB "
-                f"hbm_w={m['hbm_write_bytes']/1e6:.1f}MB "
-                f"instr={m['instruction_count']} peakW={m['peak_window_power_w']:.2f}; "
-                f"top busy: {tops}"
-            )
-        lines.append("- Decision: pending keep/revert")
-    _append_log("\n" + "\n".join(lines) + "\n")
-
-
 def cmd_init(_args) -> None:
     reg = state.load()
     state.save(reg)
@@ -187,12 +120,18 @@ def _verdict(args, verb: str) -> None:
     meta["status"] = status
     if status == "kept":
         reg["head"] = args.id
+        _stage_candidate(cand)
     elif reg["head"] == args.id:
         reg["head"] = cand.parent
         if cand.parent:
-            Candidate.load(cand.parent).stage_to_worktree()
+            _stage_candidate(Candidate.load(cand.parent))
             print(f"restored parent {cand.parent} inputs to worktree")
+    from . import archives, engine
+    archives.update(reg, cand.id)
+    best = archives.best_id(reg)
+    reg.setdefault("search", {}).update(best_id=best, best_score=reg["candidates"][best].get("score") if best else None)
     state.save(reg)
+    engine.write_search_state(reg)
     _append_log(
         f"\n### {cand.id} verdict: {status.upper()}"
         + (f" — {args.note}" if args.note else "")
@@ -201,13 +140,20 @@ def _verdict(args, verb: str) -> None:
     print(f"{args.id} -> {status}" + (f" (head={reg['head']})" if status == "kept" else ""))
 
 
-def cmd_checkout(args) -> None:
-    cand = Candidate.load(args.id)
+def _stage_candidate(cand):
     cand.stage_to_worktree()
-    for name in PROGRAM_FILES:
-        if (cand.programs / name).exists():
+    if all((cand.programs / name).exists() for name in PROGRAM_FILES):
+        for name in PROGRAM_FILES:
             (REPO / "programs" / name).write_bytes((cand.programs / name).read_bytes())
-    print(f"staged {args.id} inputs to worktree")
+    else:
+        import subprocess
+        from .evaluator import python_exe
+        subprocess.run([python_exe(), "-m", "project.compiler"], cwd=REPO, check=True, timeout=600)
+
+
+def cmd_checkout(args) -> None:
+    _stage_candidate(Candidate.load(args.id))
+    print(f"staged {args.id} inputs and generated programs to worktree")
 
 
 def cmd_status(_args) -> None:
@@ -249,7 +195,7 @@ def cmd_search_run(args) -> None:
     out = engine.run_search(rounds=args.rounds, per_round=args.per_round,
                             seeds=args.seed or [7], dry_run=False,
                             max_grades=args.max_grades,
-                            screen=args.screen, phase=args.phase,
+                            screen=False, phase=args.phase,
                             jobs=args.jobs, validation=args.validation,
                             timeout_seconds=args.timeout_seconds,
                             memory_mib=args.memory_mib,
@@ -268,6 +214,8 @@ def execution_options(parser, default_budget):
 
 
 def main(argv=None) -> int:
+    from .runtime import install_signal_handlers
+    install_signal_handlers()
     p = argparse.ArgumentParser(prog="project.search.controller")
     sub = p.add_subparsers(dest="cmd", required=True)
     sub.add_parser("init").set_defaults(fn=cmd_init)
@@ -313,8 +261,6 @@ def main(argv=None) -> int:
     execution_options(sr, 30)
     sr.add_argument("--phase", type=int, default=None,
                     help="operator unlock level: 1=recipe, 2=+hw_set, 3=+workgroups")
-    sr.add_argument("--screen", action="store_true",
-                    help="run estimate screen before grade when static screen is undecided")
     sr.add_argument("--seed", type=int, action="append")
     sr.set_defaults(fn=cmd_search_run)
     args = p.parse_args(argv)

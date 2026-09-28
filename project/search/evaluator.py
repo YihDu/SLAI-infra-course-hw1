@@ -8,6 +8,7 @@ import json
 import os
 import subprocess
 import sys
+import time
 from pathlib import Path
 
 REPO = Path(__file__).resolve().parents[2]
@@ -60,6 +61,7 @@ def summarize(report: dict) -> dict:
 
 def prepare(cand, log=print, timeout_seconds=600, memory_mib=3072):
     from . import runtime
+    deadline = time.monotonic() + timeout_seconds
     log(f"[{cand.id}] generate", flush=True) if log is print else log(f"[{cand.id}] generate")
     env = dict(os.environ, PYTHONPATH=str(REPO))
     result = runtime.run([python_exe(), str(cand.inputs / "compiler.py")], cand.dir,
@@ -73,7 +75,7 @@ def prepare(cand, log=print, timeout_seconds=600, memory_mib=3072):
         "\nfor n in ('M1_P1','M2_D1'):\n p=pathlib.Path('programs')/(n+'.asm'); ins=parse(p.read_text()); out[n]={'expanded_instructions':len(ins),'bytes':p.stat().st_size}\n" + \
         "pathlib.Path('reports/static.json').write_text(json.dumps(out))"
     screen = runtime.run([python_exe(), "-c", script], cand.dir, cand.reports / "static",
-                         timeout_seconds, memory_mib, env)
+                         max(.01, deadline-time.monotonic()), memory_mib, env)
     if screen["failure_class"] or screen["exit_code"]:
         metrics.update(verdict="not_verified", failure_class=screen["failure_class"] or "static_error", static_run=screen)
         return metrics
@@ -114,7 +116,8 @@ def evaluate(cand, seeds, log=print, *, validation="grade", timeout_seconds=600,
             metrics.update(verdict="not_verified", failure_class="budget_exhausted", failure_note=str(exc)); break
         metrics["evaluation_attempts"] += 1
         log(f"[{cand.id}] {mode}")
-        result = runtime.run(cmd, cand.dir, cand.reports / mode, timeout_seconds, memory_mib)
+        remaining = max(.01, timeout_seconds - (time.monotonic() - started))
+        result = runtime.run(cmd, cand.dir, cand.reports / mode, remaining, memory_mib)
         metrics["runs"][mode] = result
         if result["failure_class"] or not report.exists():
             metrics.update(verdict="not_verified", failure_class=result["failure_class"] or "evaluator_error",

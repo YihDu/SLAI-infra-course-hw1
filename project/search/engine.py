@@ -37,19 +37,6 @@ def _log(text: str = "") -> None:
 
 # ---------------------------------------------------------------- candidates
 
-def _shared_compiler() -> Path:
-    """Recipe-aware compiler baseline for DSL-only candidates.
-
-    New structural operators arrive as agent-edited compiler snapshots; a
-    proposal may then carry `compiler_path` to pin a different compiler.
-    """
-    shared = EXPERIMENTS / "_shared" / "compiler.py"
-    if not shared.exists():
-        shared.parent.mkdir(parents=True, exist_ok=True)
-        shutil.copy2(WORKTREE_PATHS["compiler.py"], shared)
-    return shared
-
-
 def _materialize(reg: dict, prop: dict, round_no: int, cid: str,
                  dry: bool = False) -> Candidate:
     if (EXPERIMENTS / cid).exists():

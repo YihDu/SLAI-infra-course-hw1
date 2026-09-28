@@ -1237,3 +1237,31 @@ Traceback (most recent call last):
 - Result: M1_P1=8522411 (3.637x), M2_D1=718132 (1.813x); score=2567.954, eligible=True
   - deltas vs head (cand-095): {'M1_P1': 0, 'M2_D1': 0}
 - Decision: evaluated; retained in Pareto/archives (head preserved)
+
+## 2026-09-28 19:16:08 — cand-099: P1 end-to-end column GEMMs, head attention and row vector stages on four SMs; D1/hardware unchanged
+- Change: parent=cand-098; [{"op": "p1_schedule", "kind": "column_head", "shards": 4}]
+- Evidence: project/experiments/cand-099/metrics.json; reports/grade.json; attempts=1
+- Command (grade): ['/Users/yihdu/Codefield/SLAI-infra-Code/transformer-codesign-starter/.venv/bin/python', '/Users/yihdu/Codefield/SLAI-infra-Code/transformer-codesign-starter/challenge.py', 'grade', '--hardware', '/Users/yihdu/Codefield/SLAI-infra-Code/transformer-codesign-starter/project/experiments/cand-099/inputs/hardware.json', '--program-p1', '/Users/yihdu/Codefield/SLAI-infra-Code/transformer-codesign-starter/project/experiments/cand-099/programs/M1_P1.asm', '--program-d1', '/Users/yihdu/Codefield/SLAI-infra-Code/transformer-codesign-starter/project/experiments/cand-099/programs/M2_D1.asm', '--report', '/Users/yihdu/Codefield/SLAI-infra-Code/transformer-codesign-starter/project/experiments/cand-099/reports/grade.json', '--seed', '7', '--baseline', '/Users/yihdu/Codefield/SLAI-infra-Code/transformer-codesign-starter/baseline_manifest.json']; elapsed=69.2560170419747; peak MiB=6214.3955001831055
+- Inputs: compiler.py@e9b475ad hardware.json@b92be26a recipe.json@74fdd7d6
+- Verify: FAILED — failure_class=memory_limit; evidence=pipeline elapsed=69.26s
+- Result: status=not_verified, failure_class=memory_limit
+- Decision: reject/preserve failed candidate (status=not_verified)
+
+## 2026-09-28 19:19:49 — cand-100: Numerical control: identical four-shard full P1 computation serialized in one WG; isolates arithmetic/ABI correctness from multi-WG validation memory
+- Change: parent=cand-099; [{"op": "p1_schedule", "kind": "column_head", "shards": 4, "placement": "serial"}]
+- Evidence: project/experiments/cand-100/metrics.json; reports/grade.json; attempts=1
+- Command (grade): ['/Users/yihdu/Codefield/SLAI-infra-Code/transformer-codesign-starter/.venv/bin/python', '/Users/yihdu/Codefield/SLAI-infra-Code/transformer-codesign-starter/challenge.py', 'grade', '--hardware', '/Users/yihdu/Codefield/SLAI-infra-Code/transformer-codesign-starter/project/experiments/cand-100/inputs/hardware.json', '--program-p1', '/Users/yihdu/Codefield/SLAI-infra-Code/transformer-codesign-starter/project/experiments/cand-100/programs/M1_P1.asm', '--program-d1', '/Users/yihdu/Codefield/SLAI-infra-Code/transformer-codesign-starter/project/experiments/cand-100/programs/M2_D1.asm', '--report', '/Users/yihdu/Codefield/SLAI-infra-Code/transformer-codesign-starter/project/experiments/cand-100/reports/grade.json', '--seed', '7', '--baseline', '/Users/yihdu/Codefield/SLAI-infra-Code/transformer-codesign-starter/baseline_manifest.json']; elapsed=145.83691100007854; peak MiB=1778.7829666137695
+- Inputs: compiler.py@d10d296a hardware.json@b92be26a recipe.json@555d37ea
+- Verify: PASS elapsed=145.84s
+- Result: M1_P1=8544671 (3.628x), M2_D1=718132 (1.813x); score=2564.607, eligible=True
+  - deltas vs head (cand-095): {'M1_P1': 22260, 'M2_D1': 0}
+- Decision: evaluated; retained in Pareto/archives (head preserved)
+
+## 2026-09-28 19:26 — P1 multi-SM complete-model attribution and validation diagnosis
+- Change: Observe existing cand-098 timing and cand-099 race-validation progress; no evaluator or candidate input changes. New compiler supports column/head/row P1 partitioning; numerical control cand-100 uses the same arithmetic/addresses in a single WG.
+- Verify: `.venv/bin/python -m project.campaigns.p1-multism.profile cand-098` -> `project/experiments/cand-098/reports/p1-profile.json`; reproduced P1=8522411. `observe_race.py` under existing runtime -> `project/campaigns/p1-multism/race-observation.json`, `race-progress.jsonl`; memory_limit at 3107.96 MiB, no validation pass claimed.
+- Verify: `.venv/bin/python -m project.campaigns.p1-multism.verify_controls` -> `project/campaigns/p1-multism/control-verification.json`: serial/parallel arithmetic and address equivalence, unchanged D1/hardware, default byte identity to cand-098 all passed.
+- Result: cand-099 full grade not_verified/memory_limit (6214.40 MiB); cand-100 full grade eligible, P1=8544671 D1=718132 score=2564.60694, area=16.25838297088, power=2.9710608543/2.3857896063 W. Baseline dense GEMM=62.60%, Attention=21.26%, GELU=10.62%; no actual parallel cycles/utilization available.
+- Decision: Keep cand-098 as default generated submission; retain opt-in multi-SM source/candidate for follow-up. Do not promote control or interpret validation failure as poor architectural scaling. Frozen checker event-set retention blocks the complete parallel experiment on this 16 GiB host. User success criteria not yet met. See `project/campaigns/p1-multism/REPORT.md`.
+
+### cand-100 verdict: REVERTED — Numerical control passed but score regresses; preserve cand-098 default. Parallel cand-099 remains not_verified due frozen checker memory growth.

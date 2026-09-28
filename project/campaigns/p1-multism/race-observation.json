@@ -1,0 +1,12 @@
+{
+  "command": [
+    "/Users/yihdu/Codefield/SLAI-infra-Code/transformer-codesign-starter/.venv/bin/python",
+    "/Users/yihdu/Codefield/SLAI-infra-Code/transformer-codesign-starter/project/campaigns/p1-multism/observe_race.py",
+    "/Users/yihdu/Codefield/SLAI-infra-Code/transformer-codesign-starter/project/experiments/cand-099",
+    "/Users/yihdu/Codefield/SLAI-infra-Code/transformer-codesign-starter/project/campaigns/p1-multism/race-progress.jsonl"
+  ],
+  "exit_code": -15,
+  "elapsed": 104.81428879196756,
+  "peak_memory_mib": 3107.955780029297,
+  "failure_class": "memory_limit"
+}

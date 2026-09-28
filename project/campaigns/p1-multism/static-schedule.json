@@ -1,0 +1,58 @@
+{
+  "candidate": "cand-099",
+  "sms": {
+    "0": {
+      "instructions": 41732,
+      "LD": 15052,
+      "hbm_requested_read_bytes": 28040704,
+      "REDUCE": 1968,
+      "VEC": 11790,
+      "SFU": 1374,
+      "ST": 3604,
+      "hbm_requested_write_bytes": 2050048,
+      "MMA.ACC": 7944,
+      "mma_flops": 156648960
+    },
+    "1": {
+      "instructions": 41488,
+      "LD": 14984,
+      "hbm_requested_read_bytes": 27971072,
+      "REDUCE": 1944,
+      "VEC": 11676,
+      "SFU": 1362,
+      "ST": 3578,
+      "hbm_requested_write_bytes": 2023424,
+      "MMA.ACC": 7944,
+      "mma_flops": 156648960
+    },
+    "2": {
+      "instructions": 41488,
+      "LD": 14984,
+      "hbm_requested_read_bytes": 27971072,
+      "REDUCE": 1944,
+      "VEC": 11676,
+      "SFU": 1362,
+      "ST": 3578,
+      "hbm_requested_write_bytes": 2023424,
+      "MMA.ACC": 7944,
+      "mma_flops": 156648960
+    },
+    "3": {
+      "instructions": 41488,
+      "LD": 14984,
+      "hbm_requested_read_bytes": 27971072,
+      "REDUCE": 1944,
+      "VEC": 11676,
+      "SFU": 1362,
+      "ST": 3578,
+      "hbm_requested_write_bytes": 2023424,
+      "MMA.ACC": 7944,
+      "mma_flops": 156648960
+    }
+  },
+  "synchronization": {
+    "BARRIER": 84,
+    "STEP.COMMIT": 1
+  },
+  "note": "Static ownership/request counts only; no measured utilization or cache-filtered HBM traffic."
+}

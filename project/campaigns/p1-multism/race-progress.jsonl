@@ -1,0 +1,17 @@
+{"visited": 0, "total": 166289, "saved_events": 0, "max_dependency_events": 0, "event_set_bytes": 0, "peak_rss_bytes": 268582912, "op": null, "pc": null}
+{"visited": 1000, "total": 166289, "saved_events": 994, "max_dependency_events": 918, "event_set_bytes": 6236848, "peak_rss_bytes": 268582912, "op": "LD", "pc": 1501}
+{"visited": 2000, "total": 166289, "saved_events": 1994, "max_dependency_events": 1158, "event_set_bytes": 57767536, "peak_rss_bytes": 268582912, "op": "LD", "pc": 1751}
+{"visited": 3000, "total": 166289, "saved_events": 2993, "max_dependency_events": 2093, "event_set_bytes": 147112280, "peak_rss_bytes": 268582912, "op": "LD", "pc": 5722}
+{"visited": 4000, "total": 166289, "saved_events": 3993, "max_dependency_events": 2220, "event_set_bytes": 278400280, "peak_rss_bytes": 268582912, "op": "LD", "pc": 5972}
+{"visited": 5000, "total": 166289, "saved_events": 4993, "max_dependency_events": 2477, "event_set_bytes": 409688280, "peak_rss_bytes": 268582912, "op": "REDUCE", "pc": 6222}
+{"visited": 6000, "total": 166289, "saved_events": 5993, "max_dependency_events": 2744, "event_set_bytes": 540976280, "peak_rss_bytes": 308035584, "op": "VEC", "pc": 6472}
+{"visited": 7000, "total": 166289, "saved_events": 6993, "max_dependency_events": 3006, "event_set_bytes": 672264280, "peak_rss_bytes": 452919296, "op": "VEC", "pc": 6722}
+{"visited": 8000, "total": 166289, "saved_events": 7993, "max_dependency_events": 3269, "event_set_bytes": 803552280, "peak_rss_bytes": 596443136, "op": "VEC", "pc": 6972}
+{"visited": 9000, "total": 166289, "saved_events": 8993, "max_dependency_events": 3531, "event_set_bytes": 934840280, "peak_rss_bytes": 707887104, "op": "VEC", "pc": 7222}
+{"visited": 10000, "total": 166289, "saved_events": 9993, "max_dependency_events": 3790, "event_set_bytes": 1066128280, "peak_rss_bytes": 775569408, "op": "VEC", "pc": 7472}
+{"visited": 11000, "total": 166289, "saved_events": 10993, "max_dependency_events": 4050, "event_set_bytes": 1197416280, "peak_rss_bytes": 775569408, "op": "MMA.ACC", "pc": 7722}
+{"visited": 12000, "total": 166289, "saved_events": 11993, "max_dependency_events": 4310, "event_set_bytes": 1436314392, "peak_rss_bytes": 775569408, "op": "MMA.ACC", "pc": 7972}
+{"visited": 13000, "total": 166289, "saved_events": 12993, "max_dependency_events": 4567, "event_set_bytes": 1698674392, "peak_rss_bytes": 775569408, "op": "MMA.ACC", "pc": 8222}
+{"visited": 14000, "total": 166289, "saved_events": 13993, "max_dependency_events": 4825, "event_set_bytes": 1961034392, "peak_rss_bytes": 775569408, "op": "VEC", "pc": 8472}
+{"visited": 15000, "total": 166289, "saved_events": 14993, "max_dependency_events": 5080, "event_set_bytes": 2223394392, "peak_rss_bytes": 775569408, "op": "VEC", "pc": 8722}
+{"visited": 16000, "total": 166289, "saved_events": 15992, "max_dependency_events": 15460, "event_set_bytes": 2525337920, "peak_rss_bytes": 775569408, "op": "LD", "pc": 15885}

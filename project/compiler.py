@@ -94,7 +94,7 @@ class Tensor:
 
 
 class Builder:
-    def __init__(self, layout: Layout, recipe: dict | None = None, shared_bytes: int = 0):
+    def __init__(self, layout: Layout, recipe: dict | None = None, shared_bytes: int = 0, groups: int = 1):
         recipe = recipe or load_recipe()
         self.recipe = recipe
         self.layout = layout
@@ -106,7 +106,11 @@ class Builder:
         self.serial = 0
         self.cursor = layout.symbols["scratch"].address // 4
         self.tensors = {}
-        self.emit("WG.BEGIN", wg="g", sm=0, shared_bytes=shared_bytes)
+        self.groups = ["g"] if groups == 1 else [f"g{i}" for i in range(groups)]
+        self.wg = self.groups[0]
+        self.label = ""
+        for sm, wg in enumerate(self.groups):
+            self.emit("WG.BEGIN", wg=wg, sm=sm, shared_bytes=shared_bytes)
 
     def set_gemm_stage(self, stage):
         self.stage = stage
@@ -138,7 +142,15 @@ class Builder:
         if "event" in args and args["event"] is None:
             self.serial += 1
             suffix = "".join(f"_{{{name}}}" for name in self.loops)
-            args["event"] = f"e{self.serial}{suffix}"
+            args["event"] = f"{self.label}e{self.serial}{suffix}"
+        def bind(value):
+            if isinstance(value, dict):
+                return {k: (self.wg if k == "wg" and v == "g" else bind(v))
+                        for k, v in value.items()}
+            if isinstance(value, list):
+                return [bind(v) for v in value]
+            return value
+        args = bind(args)
         self.lines.append(f"{op} {json.dumps(args, separators=(',', ':'))}")
 
     @contextmanager
@@ -173,7 +185,10 @@ class Builder:
         k_extent: int,
         n_extent: int,
         name: str,
+        col_start: int = 0,
+        col_stop: int | None = None,
     ):
+        col_stop = n_extent if col_stop is None else col_stop
         if b.shape != (k_extent, n_extent):
             raise ValueError("GEMM weight shape")
         kernel = self.recipe.get("gemm_kernels", {}).get("p1_prompt_w1")
@@ -185,13 +200,13 @@ class Builder:
         tile_n = self.gemm_n_tile
         m_tile = self.m_tile
         k_chunk = self.k_chunk
-        if n_extent % tile_n:
+        if not 0 <= col_start < col_stop <= n_extent or col_start % tile_n or col_stop % tile_n:
             raise ValueError("GEMM N extent does not fit tile")
         if self.order == "mnk":
             # Original baseline order: B tile re-loaded for every m-tile.
             with self.loop(f"{name}m", 0, m_extent, m_tile) as row:
                 rows = minimum(m_tile, sub(m_extent, row))
-                with self.loop(f"{name}n", 0, n_extent, tile_n) as col:
+                with self.loop(f"{name}n", col_start, col_stop, tile_n) as col:
                     cells = mul(rows, tile_n)
                     self.vec("add", [imm(0), imm(0)], rf(2, cells))
                     with self.loop(f"{name}k", 0, k_extent, k_chunk) as inner:
@@ -250,7 +265,7 @@ class Builder:
             return rf(2, mul(rows, tile_n), mul(row, tile_n))
 
         chunks = -(-k_extent // k_chunk)
-        with self.loop(f"{name}n", 0, n_extent, tile_n) as col:
+        with self.loop(f"{name}n", col_start, col_stop, tile_n) as col:
             with self.loop(f"{name}z", 0, m_extent, m_tile) as row:
                 rows = minimum(m_tile, sub(m_extent, row))
                 self.vec(
@@ -432,11 +447,12 @@ class Builder:
                 self.vec("add", [rf(0, n), rf(1, n)], rf(2, n))
                 self.st(rf(2, n), hbm(add(out.offset, mul(row, width), col), n))
 
-    def bias_gelu(self, source: Tensor, bias: Tensor, out: Tensor, rows: int, width: int, name: str):
+    def bias_gelu(self, source: Tensor, bias: Tensor, out: Tensor, rows: int, width: int, name: str, col_start=0, col_stop=None):
         """Fused `add_bias` + `gelu`: one read of `source`, no `biased` scratch."""
+        col_stop = width if col_stop is None else col_stop
         with self.loop(name, 0, rows) as row:
-            with self.loop(f"{name}c", 0, width, 384) as col:
-                n = minimum(384, sub(width, col))
+            with self.loop(f"{name}c", col_start, col_stop, 384) as col:
+                n = minimum(384, sub(col_stop, col))
                 addr = add(source.offset, mul(row, width), col)
                 self.ld(hbm(addr, n), rf(0, n))
                 self.ld(hbm(add(bias.offset, col), n), rf(2, n))
@@ -479,9 +495,12 @@ class Builder:
         h: int,
         hd: int,
         name: str,
+        head_start=0,
+        head_stop=None,
     ):
+        head_stop = h if head_stop is None else head_stop
         # Export every layer's K/V in the public head-major ABI.
-        with self.loop(f"{name}h", 0, h) as head:
+        with self.loop(f"{name}h", head_start, head_stop) as head:
             with self.loop(f"{name}r", 0, rows) as row:
                 for kind, target, component in (("k", k_out, 1), ("v", v_out, 2)):
                     source_addr = add(qkv.offset, mul(row, 3 * d), component * d, mul(head, hd))
@@ -497,7 +516,7 @@ class Builder:
             probs = self.alloc(f"{name}_probs", rows, total)
         with self.loop(f"{name}q", 0, rows) as row:
             limit = add(past, row, 1)
-            with self.loop(f"{name}head", 0, h) as head:
+            with self.loop(f"{name}head", head_start, head_stop) as head:
                 q_addr = add(qkv.offset, mul(row, 3 * d), mul(head, hd))
                 self.ld(hbm(q_addr, hd), rf(0, hd))
                 with self.loop(f"{name}key", 0, limit, 16) as key:
@@ -701,11 +720,15 @@ class Builder:
             self.st(rf(2, hd), hbm(add(context.offset, mul(head, hd)), hd))
 
     def finish(self):
-        self.emit("WG.END", wg="g")
+        for wg in self.groups:
+            self.emit("WG.END", wg=wg)
         return "\n".join(self.lines) + "\n"
 
 
 def generate_m1_p1(recipe: dict | None = None) -> tuple[str, Layout, int]:
+    recipe = recipe or load_recipe()
+    if recipe.get("p1_schedule", {}).get("kind") == "column_head":
+        return generate_m1_p1_multism(recipe)
     model = MODELS["M1"]
     d, f, h, hd = model.width, model.ffn, model.heads, model.head_width
     batch, prompt_rows, _ = SCENARIOS["P1"]
@@ -804,6 +827,108 @@ def generate_m1_p1(recipe: dict | None = None) -> tuple[str, Layout, int]:
             b.emit("STEP.COMMIT", step=0)
     program = b.finish()
     return program, layout, b.cursor
+
+
+def generate_m1_p1_multism(recipe):
+    """Column GEMMs + head attention + row vector stages, joined at dependencies."""
+    shards = int(recipe["p1_schedule"].get("shards", 4))
+    if shards not in (2, 4):
+        raise ValueError("P1 column/head schedule supports 2 or 4 SMs")
+    if recipe.get("gemm_kernels") or not recipe["fusion"]["bias_gelu"]:
+        raise ValueError("multi-SM skeleton requires ordinary GEMM and fused bias/GELU")
+    model = MODELS["M1"]
+    d, f, h, hd = model.width, model.ffn, model.heads, model.head_width
+    batch, prompt_rows, _ = SCENARIOS["P1"]
+    layout = build_layout(model, "P1")
+    serial_control = recipe["p1_schedule"].get("placement", "parallel") == "serial"
+    b = Builder(layout, recipe, groups=1 if serial_control else shards)
+    prompt, step, output = (b.symbol(key) for key in
+                            ("input/prompt", "input/step0", "output/hidden"))
+
+    def join():
+        b.emit("BARRIER", wgs=b.groups, events=[])
+
+    def group(index, label):
+        b.wg = b.groups[0 if serial_control else index]
+        b.label = label + f"_sm{index}_"
+
+    def sliced(tensor, start, count, width=d):
+        return Tensor(tensor.offset + start * width, (count, width))
+
+    def row_parts():
+        for i in range(shards):
+            start, stop = rows * i // shards, rows * (i + 1) // shards
+            # Single-token stages stay on SM0.
+            if rows == 1:
+                start, stop = (0, 1) if i == 0 else (1, 1)
+            if stop > start:
+                yield i, start, stop - start
+
+    def gemm_stage(a, weight, out, k, n, stage):
+        for i in range(shards):
+            group(i, name + "_" + stage)
+            b.gemm(a, weight, out, rows, k, n, name + f"g{i}" + stage,
+                   n * i // shards, n * (i + 1) // shards)
+
+    for phase, rows in (("p", prompt_rows), ("s", 1)):
+        b.set_gemm_stage("p1_prompt" if phase == "p" else "p1_step")
+        for member in range(batch):
+            x = Tensor(prompt.offset + member * prompt_rows * d, (rows, d)) if phase == "p" else Tensor(step.offset + member * d, (rows, d))
+            for layer in range(model.layers):
+                name = f"{phase}b{member}l{layer}"
+                prefix = f"layer{layer}/"
+                w = {key: b.symbol(prefix + key) for key in
+                     ("ln1_g", "ln1_b", "wqkv", "wo", "ln2_g", "ln2_b", "w1", "b1", "w2", "b2")}
+                t = {key: b.alloc(name + "_" + key, rows, width) for key, width in
+                     (("ln1", d), ("qkv", 3*d), ("ctx", d), ("att", d), ("res", d),
+                      ("ln2", d), ("ff1", f), ("gelu", f), ("ff2", d), ("out", d))}
+                for i, start, count in row_parts():
+                    group(i, name + "_ln1")
+                    b.layernorm(sliced(x, start, count), w["ln1_g"], w["ln1_b"],
+                                sliced(t["ln1"], start, count), count, d, name + f"g{i}ln1")
+                join()
+                gemm_stage(t["ln1"], w["wqkv"], t["qkv"], d, 3*d, "qkv")
+                join()
+                kv = [b.symbol(prefix + f"new_{kind}") for kind in ("k", "v")]
+                kv = [Tensor(v.offset + member*h*(prompt_rows+1)*hd, v.shape) for v in kv]
+                for i in range(shards):
+                    group(i, name + "_attention")
+                    b.attention(t["qkv"], t["ctx"], *kv, rows,
+                                0 if phase == "p" else prompt_rows, d, h, hd,
+                                name + f"g{i}a", h*i//shards, h*(i+1)//shards)
+                join()
+                gemm_stage(t["ctx"], w["wo"], t["att"], d, d, "wo")
+                join()
+                for i, start, count in row_parts():
+                    group(i, name + "_residual1")
+                    b.add_rows(sliced(x, start, count), sliced(t["att"], start, count),
+                               sliced(t["res"], start, count), count, d, name + f"g{i}res")
+                    group(i, name + "_ln2")
+                    b.layernorm(sliced(t["res"], start, count), w["ln2_g"], w["ln2_b"],
+                                sliced(t["ln2"], start, count), count, d, name + f"g{i}ln2")
+                join()
+                gemm_stage(t["ln2"], w["w1"], t["ff1"], d, f, "w1")
+                for i in range(shards):
+                    group(i, name + "_gelu")
+                    b.bias_gelu(t["ff1"], w["b1"], t["gelu"], rows, f, name + f"g{i}biasgelu",
+                                f*i//shards, f*(i+1)//shards)
+                join()
+                gemm_stage(t["gelu"], w["w2"], t["ff2"], f, d, "w2")
+                join()
+                for i, start, count in row_parts():
+                    group(i, name + "_residual2")
+                    b.add_rows(sliced(t["res"], start, count), sliced(t["ff2"], start, count),
+                               sliced(t["out"], start, count), count, d, name + f"g{i}out", w["b2"])
+                x = t["out"]
+            for i, start, count in row_parts():
+                group(i, f"{phase}b{member}_output")
+                with b.loop(f"{phase}b{member}g{i}output", start, start+count) as row:
+                    b.ld(hbm(add(x.offset, mul(row, d)), d), rf(0, d))
+                    b.st(rf(0, d), hbm(add(output.offset, member*(prompt_rows+1)*d,
+                         (0 if phase == "p" else prompt_rows)*d, mul(row, d)), d))
+        if phase == "p":
+            b.emit("STEP.COMMIT", step=0)
+    return b.finish(), layout, b.cursor
 
 
 def generate_m1_d1(gemm_n_tile: int | None = None, recipe: dict | None = None) -> tuple[str, Layout, int]:

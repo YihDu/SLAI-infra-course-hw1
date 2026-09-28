@@ -1,0 +1,7 @@
+{
+  "serial_parallel_same_arithmetic_and_addresses": true,
+  "d1_byte_identical": true,
+  "hardware_unchanged": true,
+  "default_programs_byte_identical_to_cand098": true,
+  "limitation": "Serialization equivalence does not certify cross-SM races, scheduling, timing, or power."
+}

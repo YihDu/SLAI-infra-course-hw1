@@ -7,9 +7,9 @@
 ## elite (score desc)
 - cand-095 score=2567.95 parent=cand-094 sig=fuse+hw:cache_mib=2+hw:dma_depth=2+hw:dma_engines=2+hw:rf_ports=8R4W+hw:sm_count=4+hw:sm_noc_bytes_per_cycle=128+hw:tc_array=8x16+hw:tc_k_parallel=4+nkm+nopf+s:rf+stage:d1:nkm+stage:p1_prompt:nkm_lanes hyp=Larger M tile reduces repeated B reads
 - cand-098 score=2567.95 parent=cand-095 sig=None hyp=Fresh full-grade score verification of current worktree subm
+- cand-100 score=2564.61 parent=cand-099 sig=p1-column-head-4-serial hyp=Numerical control: identical four-shard full P1 computation
 - cand-094 score=2547.92 parent=cand-093 sig=fuse+hw:cache_mib=2+hw:dma_depth=2+hw:dma_engines=2+hw:rf_ports=8R4W+hw:sm_count=4+hw:sm_noc_bytes_per_cycle=128+hw:tc_array=8x16+hw:tc_k_parallel=4+nkm+nopf+s:rf+stage:d1:nkm+stage:p1_prompt:nkm_lanes hyp=Expand decode N tile after prompt/hardware controls
 - cand-093 score=2512.22 parent=cand-087 sig=fuse+hw:cache_mib=2+hw:dma_depth=2+hw:dma_engines=2+hw:rf_ports=8R4W+hw:sm_count=4+hw:sm_noc_bytes_per_cycle=128+hw:tc_array=8x16+hw:tc_k_parallel=4+nkm+nopf+s:rf+stage:d1:nkm+stage:p1_prompt:nkm_lanes hyp=Compose best RF dataflow with measured area bridge
-- cand-097 score=2479.58 parent=cand-094 sig=fuse+hw:cache_mib=2+hw:dma_depth=2+hw:dma_engines=2+hw:rf_ports=8R4W+hw:sm_count=4+hw:sm_noc_bytes_per_cycle=128+hw:tc_array=8x16+hw:tc_k_parallel=4+hw:vector_lanes=8+nkm+nopf+s:rf+stage:d1:nkm+stage:p1_prompt:nkm_lanes hyp=Joint RF expansion: 8 vector partitions allow N128 with K16,
 
 ## failure classes
 - dry_run: 27
@@ -18,6 +18,7 @@
 - evaluator_error: 1
 - generate_error: 3
 - harness_noop: 9
+- memory_limit: 1
 
 ## pareto front
 - cand-095 {'M1_P1': 8522411, 'M2_D1': 718132}
@@ -32,6 +33,7 @@
 - hardware|balanced: cand-093
 - memory|balanced: cand-073
 - memory|p1: cand-086
+- p1_multism_control|p1: cand-100
 - sig:?|?: cand-098
 - sig:fuse: cand-009
 - sig:fuse+hw:cache_mib=2+hw:dma_depth=2+hw:dma_engines=2+hw:reduction_units=1+hw:rf_ports=8R4W+hw:sm_noc_bytes_per_cycle=128+hw:tc_array=8x8+hw:tc_k_parallel=4+nkm+nopf+s:rf+stage:d1: cand-085
@@ -72,6 +74,7 @@
 - sig:nkm+pf: cand-003
 - sig:nkm+pf+s:rf: cand-015
 - sig:nkm+s:rf: cand-017
+- sig:p1-column-head-4-serial: cand-100
 - sig:pf: cand-066
 - sig:s:rf: cand-019
 - sig:stage:d1: cand-072

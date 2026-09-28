@@ -1,5 +1,5 @@
 {
-  "cache_mib": 0,
+  "cache_mib": 2,
   "dma_depth": 2,
   "dma_engines": 1,
   "hbm_channels": 4,

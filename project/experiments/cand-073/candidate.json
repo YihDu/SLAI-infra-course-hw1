@@ -1,0 +1,18 @@
+{
+  "bias": null,
+  "created_at": "2026-09-28 16:26:10",
+  "failure_class": null,
+  "family": null,
+  "fingerprint": null,
+  "hypothesis": "2 MiB cache reuses weights and activations across decode steps and P1 GEMM tiles",
+  "id": "cand-073",
+  "kind": null,
+  "ops": null,
+  "parent": "cand-072",
+  "provenance_note": null,
+  "round": null,
+  "status": "kept",
+  "struct_sig": null,
+  "summary": "hardware.cache_mib 0->2; programs and recipe unchanged",
+  "verdict_note": "2 MiB cache improves both cases; completed during framework diagnosis; no further candidates queued"
+}

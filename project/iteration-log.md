@@ -932,3 +932,15 @@ Traceback (most recent call last):
 - Decision: pending keep/revert
 
 ### cand-072 verdict: KEPT — new best score 2004.67; D1-only k_chunk 24 improves decode
+
+## 2026-09-28 16:26:10 — cand-073: 2 MiB cache reuses weights and activations across decode steps and P1 GEMM tiles
+- Parent: cand-072; Summary: hardware.cache_mib 0->2; programs and recipe unchanged
+- Inputs: compiler@caef84c6 hardware@b8a39a17
+- Hypothesis: 2 MiB cache reuses weights and activations across decode steps and P1 GEMM tiles
+- Verify: check PASS (max err 4.72e-06); estimate -> reports/estimate.json; grade -> reports/grade.json
+- Result: M1_P1=12347819 (2.510x), M2_D1=776636 (1.677x); score=2051.47741118116, eligible=True
+  - M1_P1: hbm_r=47.2MB hbm_w=8.1MB instr=264815 peakW=2.39; top busy: sm0.issue_wait=12082940, sm0.tc=5625504, sm0.rf_read=4533128, sm0.rf_write=3218344
+  - M2_D1: hbm_r=2.0MB hbm_w=0.2MB instr=19866 peakW=1.98; top busy: sm0.issue_wait=756610, sm0.rf_write=263232, sm0.dma=244416, sm0.tc=243264
+- Decision: pending keep/revert
+
+### cand-073 verdict: KEPT — 2 MiB cache improves both cases; completed during framework diagnosis; no further candidates queued

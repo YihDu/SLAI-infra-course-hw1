@@ -1,15 +1,15 @@
 # search_state (auto-generated; do not edit)
 
-- best: cand-072 score=2004.670977306224 (P1=12522857, D1=801958)
+- best: cand-073 score=2051.47741118116 (P1=12347819, D1=776636)
 - phase=2 round=12 plateau_rounds=0 explore_ratio=0.54 need_new_operator=False
-- bottleneck: P1 sm0.issue_wait=12257978
+- bottleneck: P1 sm0.issue_wait=12082940
 
 ## elite (score desc)
+- cand-073 score=2051.48 parent=cand-072 sig=hw:cache_mib=2 hyp=2 MiB cache reuses weights and activations across decode ste
 - cand-072 score=2004.67 parent=cand-071 sig=stage:d1 hyp=D1 stage-specific k_chunk 32 to 24 with n_tile 32
 - cand-071 score=1996.48 parent=cand-065 sig=stage:d1 hyp=D1-only GEMM tile n32 k32 with stage-specific recipe
 - cand-065 score=1965.99 parent=cand-059 sig=hw:dma_depth=2 hyp=expand cand-059: dma_depth=2 to make prefetch actually overl
 - cand-067 score=1894.93 parent=cand-056 sig=hw:hbm_channels=8 hyp=expand cand-056: double HBM channels [hbm_channels=8]
-- cand-070 score=1875.68 parent=cand-059 sig=stage:p1_prompt hyp=P1 prompt m_tile 16 with stage-specific GEMM policy on dma_d
 
 ## failure classes
 - dry_run: 27
@@ -19,7 +19,7 @@
 - harness_noop: 9
 
 ## pareto front
-- cand-072 {'M1_P1': 12522857, 'M2_D1': 801958}
+- cand-073 {'M1_P1': 12347819, 'M2_D1': 776636}
 
 ## diversity cells
 - attention|balanced: cand-019
@@ -28,13 +28,14 @@
 - compute|p1: cand-070
 - fusion|balanced: cand-009
 - hardware|balanced: cand-047
-- memory|balanced: cand-065
+- memory|balanced: cand-073
 - sig:fuse: cand-009
 - sig:fuse+hw:hbm_channels=1+nkm+pf+s:rf: cand-049
 - sig:fuse+mnk+nopf+s:hbm: cand-021
 - sig:fuse+nkm: cand-010
 - sig:fuse+nkm+pf+s:rf: cand-033
 - sig:fuse+nkm+s:rf: cand-062
+- sig:hw:cache_mib=2: cand-073
 - sig:hw:dma_depth=2: cand-065
 - sig:hw:hbm_channels=8: cand-067
 - sig:hw:noc_bytes_per_cycle=128: cand-063

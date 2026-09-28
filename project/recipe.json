@@ -3,8 +3,36 @@
     "algorithm": "blocked_prompt",
     "scores": "rf"
   },
+  "d1_schedule": {
+    "kind": "column_head",
+    "partition": "panel_owners",
+    "projections": {
+      "qkv": {
+        "k_chunk": 32,
+        "n_tile": 32,
+        "owners": 4
+      },
+      "w1": {
+        "k_chunk": 16,
+        "n_tile": 64,
+        "owners": 4
+      },
+      "w2": {
+        "k_chunk": 32,
+        "n_tile": 32,
+        "owners": 4
+      },
+      "wo": {
+        "k_chunk": 32,
+        "n_tile": 32,
+        "owners": 4
+      }
+    },
+    "shards": 4
+  },
   "fusion": {
-    "bias_gelu": 1
+    "bias_gelu": 1,
+    "p1_mlp": "rf_stream"
   },
   "gemm": {
     "k_chunk": 48,
@@ -24,5 +52,8 @@
       "n_tile": 32,
       "order": "nkm_lanes"
     }
+  },
+  "persistent": {
+    "d1": "fixed_column_head_owners"
   }
 }

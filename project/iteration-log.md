@@ -1350,3 +1350,118 @@ Traceback (most recent call last):
 - Verify: PYTHONPATH=. .venv/bin/python project/campaigns/p1-multism/profile.py cand-106 -> cand-106/reports/p1-profile.json; reproduced P1 7292285 cycles; D1 byte-identical to cand-098.
 - Result: Attention attribution 1811460 -> 581682 cycles, full P1 1.1687x; HBM read/write unchanged. W1/GELU/W2 now 61.05% of P1.
 - Decision: keep cand-106; cand-107 preflight-only prune (41.31 GiB logical retained sets, not measured RSS), no full multi-SM result. Stop same-structure variations; next structural hypothesis persistent MLP, requiring ~2.203x region speedup for 1.5x full P1. See campaigns/blocked-attention/REPORT.md.
+
+## 2026-09-28 23:14:00 — cand-108: Persistent row-block W1/GELU/W2: activations and all W2 accumulators stay in RF; eliminate ff1/gelu HBM round trips. Trade additional weight reads for no materialization.
+- Change: parent=cand-106; []
+- Evidence: project/experiments/cand-108/metrics.json; reports/grade.json; attempts=1
+- Command (grade): ['/Users/yihdu/Codefield/SLAI-infra-Code/transformer-codesign-starter/.venv/bin/python', '/Users/yihdu/Codefield/SLAI-infra-Code/transformer-codesign-starter/challenge.py', 'grade', '--hardware', '/Users/yihdu/Codefield/SLAI-infra-Code/transformer-codesign-starter/project/experiments/cand-108/inputs/hardware.json', '--program-p1', '/Users/yihdu/Codefield/SLAI-infra-Code/transformer-codesign-starter/project/experiments/cand-108/programs/M1_P1.asm', '--program-d1', '/Users/yihdu/Codefield/SLAI-infra-Code/transformer-codesign-starter/project/experiments/cand-108/programs/M2_D1.asm', '--report', '/Users/yihdu/Codefield/SLAI-infra-Code/transformer-codesign-starter/project/experiments/cand-108/reports/grade.json', '--seed', '7', '--baseline', '/Users/yihdu/Codefield/SLAI-infra-Code/transformer-codesign-starter/baseline_manifest.json']; elapsed=18.275015250081196; peak MiB=207.00061798095703
+- Inputs: compiler.py@d9bf0464 hardware.json@b92be26a recipe.json@208993ce
+- Verify: FAILED — in())
+                     ^^^^^^
+  File "/Users/yihdu/Codefield/SLAI-infra-Code/transformer-codesign-starter/codesign/challenge/cli.py", line 344, in main
+    result = _evaluate(
+             ^^^^^^^^^^
+  File "/Users/yihdu/Codefield/SLAI-infra-Code/transformer-codesign-starter/codesign/challenge/cli.py", line 234, in _evaluate
+    report = evaluate_submission(mode, hardware, programs, seeds, baseline)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/yihdu/Codefield/SLAI-infra-Code/transformer-codesign-starter/codesign/challenge/runner.py", line 323, in evaluate_submission
+    report["cases"][case]["timing"] = estimate_case(case, hardware, programs[case])
+                                      ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/yihdu/Codefield/SLAI-infra-Code/transformer-codesign-starter/codesign/challenge/runner.py", line 274, in estimate_case
+    timing = estimate_pipeline(
+             ^^^^^^^^^^^^^^^^^^
+  File "/Users/yihdu/Codefield/SLAI-infra-Code/transformer-codesign-starter/codesign/challenge/pipeline.py", line 178, in estimate_pipeline
+    return estimate_global_events(
+           ^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/yihdu/Codefield/SLAI-infra-Code/transformer-codesign-starter/codesign/challenge/pipeline_events.py", line 1173, in estimate_global_events
+    ).run()
+      ^^^^^
+  File "/Users/yihdu/Codefield/SLAI-infra-Code/transformer-codesign-starter/codesign/challenge/pipeline_events.py", line 1063, in run
+    self._issue(next_instruction)
+  File "/Users/yihdu/Codefield/SLAI-infra-Code/transformer-codesign-starter/codesign/challenge/pipeline_events.py", line 594, in _issue
+    self._issue_transfer(tape, pc, ins, begin, sequence)
+  File "/Users/yihdu/Codefield/SLAI-infra-Code/transformer-codesign-starter/codesign/challenge/pipeline_events.py", line 701, in _issue_transfer
+    raise AssertionError("DMA slot changed after issue preview")
+AssertionError: DMA slot changed after issue preview
+; evidence=pipeline elapsed=18.28s
+- Result: status=not_verified, failure_class=evaluator_error
+- Decision: reject/preserve failed candidate (status=not_verified)
+
+## 2026-09-28 23:15:57 — cand-109: D1 four persistent SM owners: parallel projection columns and attention heads over eight steps; P1 unchanged. Preflight checker cost before complete grade.
+- Change: parent=cand-106; []
+- Evidence: project/experiments/cand-109/metrics.json; reports/grade.json; attempts=1
+- Command (grade): ['/Users/yihdu/Codefield/SLAI-infra-Code/transformer-codesign-starter/.venv/bin/python', '/Users/yihdu/Codefield/SLAI-infra-Code/transformer-codesign-starter/challenge.py', 'grade', '--hardware', '/Users/yihdu/Codefield/SLAI-infra-Code/transformer-codesign-starter/project/experiments/cand-109/inputs/hardware.json', '--program-p1', '/Users/yihdu/Codefield/SLAI-infra-Code/transformer-codesign-starter/project/experiments/cand-109/programs/M1_P1.asm', '--program-d1', '/Users/yihdu/Codefield/SLAI-infra-Code/transformer-codesign-starter/project/experiments/cand-109/programs/M2_D1.asm', '--report', '/Users/yihdu/Codefield/SLAI-infra-Code/transformer-codesign-starter/project/experiments/cand-109/reports/grade.json', '--seed', '7', '--baseline', '/Users/yihdu/Codefield/SLAI-infra-Code/transformer-codesign-starter/baseline_manifest.json']; elapsed=15.568582749925554; peak MiB=3094.7213821411133
+- Inputs: compiler.py@33d047d8 hardware.json@b92be26a recipe.json@7a69e229
+- Verify: FAILED — failure_class=memory_limit; evidence=pipeline elapsed=15.57s
+- Result: status=not_verified, failure_class=memory_limit
+- Decision: reject/preserve failed candidate (status=not_verified)
+
+## 2026-09-28 23:16:30 — cand-110: RF persistent MLP with completion waits on final output store burst; cand-108 hit frozen DMA issue-preview assertion on eighth ST. No evaluator change.
+- Change: parent=cand-108; []
+- Evidence: project/experiments/cand-110/metrics.json; reports/grade.json; attempts=1
+- Command (grade): ['/Users/yihdu/Codefield/SLAI-infra-Code/transformer-codesign-starter/.venv/bin/python', '/Users/yihdu/Codefield/SLAI-infra-Code/transformer-codesign-starter/challenge.py', 'grade', '--hardware', '/Users/yihdu/Codefield/SLAI-infra-Code/transformer-codesign-starter/project/experiments/cand-110/inputs/hardware.json', '--program-p1', '/Users/yihdu/Codefield/SLAI-infra-Code/transformer-codesign-starter/project/experiments/cand-110/programs/M1_P1.asm', '--program-d1', '/Users/yihdu/Codefield/SLAI-infra-Code/transformer-codesign-starter/project/experiments/cand-110/programs/M2_D1.asm', '--report', '/Users/yihdu/Codefield/SLAI-infra-Code/transformer-codesign-starter/project/experiments/cand-110/reports/grade.json', '--seed', '7', '--baseline', '/Users/yihdu/Codefield/SLAI-infra-Code/transformer-codesign-starter/baseline_manifest.json']; elapsed=120.50940462492872; peak MiB=1379.3764419555664
+- Inputs: compiler.py@3d4023cb hardware.json@b92be26a recipe.json@208993ce
+- Verify: PASS elapsed=120.52s
+- Result: M1_P1=7049767 (4.397x), M2_D1=718132 (1.813x); score=2823.457, eligible=True
+  - deltas vs head (cand-106): {'M1_P1': -242518, 'M2_D1': 0}
+- Decision: KEPT — new incumbent head (score=2823.457)
+
+## 2026-09-29 — Recover cand-111 registration before grade
+- cand-110 evaluation saved its earlier registry snapshot after cand-111 creation, removing cand-111 registry entry. Immutable cand-111 input/proposal files survived.
+- Restored only the missing registry record from candidate.json/proposal.json; no experiment evidence overwritten. cand-111 grade had not started. Future candidate creation/evaluation registry mutations are serialized.
+
+## 2026-09-28 23:17:26 — cand-111: D1 persistent parallel owners preserve native64-column panels: QKV3SM, WO/W2 2SM, W1/attention4SM. Avoid 65% event inflation seen in cand-109. Full grade bounded6GiB on local16GiB Mac.
+- Change: parent=cand-106; []
+- Evidence: project/experiments/cand-111/metrics.json; reports/grade.json; attempts=0
+- Inputs: compiler.py@35b8cfd3 hardware.json@b92be26a recipe.json@fd1c7264
+- Verify: FAILED — Recovered incomplete evaluation; evidence=pipeline
+- Result: status=not_verified, failure_class=interrupted
+- Decision: reject/preserve failed candidate (status=not_verified)
+
+## 2026-09-29 — Persistent MLP bottleneck attribution and DMA diagnosis
+- Verify: native estimate traceback diagnostic for cand-108 locates frozen assertion at PC8777, eighth final ST; diagnostic saved in campaigns/structural-mlp/cand-108-dma-diagnostic.txt. No evaluator edits.
+- Result: cand-110 complete grade passes after final-store completion waits: P1=7049767 D1=718132 score=2823.45652. HBM writes fall38.74%, but RF read/write busy cycles barely change.
+- Decision: retain validated improvement; materialization elimination alone is insufficient for large gains. Investigate actual SM parallelism and RF operand reuse; see campaigns/structural-mlp/REPORT.md.
+
+## 2026-09-29 00:40:06 — cand-112: D1 persistent parallel owners preserve native64-column panels: QKV3SM, WO/W2 2SM, W1/attention4SM. Avoid 65% event inflation seen in cand-109. Full grade bounded6GiB on local16GiB Mac. Recovery attempt after cand-111 registry interruption; no prior grade result.
+- Change: parent=cand-106; []
+- Evidence: project/experiments/cand-112/metrics.json; reports/grade.json; attempts=1
+- Command (grade): ['/Users/yihdu/Codefield/SLAI-infra-Code/transformer-codesign-starter/.venv/bin/python', '/Users/yihdu/Codefield/SLAI-infra-Code/transformer-codesign-starter/challenge.py', 'grade', '--hardware', '/Users/yihdu/Codefield/SLAI-infra-Code/transformer-codesign-starter/project/experiments/cand-112/inputs/hardware.json', '--program-p1', '/Users/yihdu/Codefield/SLAI-infra-Code/transformer-codesign-starter/project/experiments/cand-112/programs/M1_P1.asm', '--program-d1', '/Users/yihdu/Codefield/SLAI-infra-Code/transformer-codesign-starter/project/experiments/cand-112/programs/M2_D1.asm', '--report', '/Users/yihdu/Codefield/SLAI-infra-Code/transformer-codesign-starter/project/experiments/cand-112/reports/grade.json', '--seed', '7', '--baseline', '/Users/yihdu/Codefield/SLAI-infra-Code/transformer-codesign-starter/baseline_manifest.json']; elapsed=124.74917254201137; peak MiB=5393.301544189453
+- Inputs: compiler.py@35b8cfd3 hardware.json@b92be26a recipe.json@fd1c7264
+- Verify: PASS elapsed=124.75s
+- Result: M1_P1=7292285 (4.251x), M2_D1=278743 (4.671x); score=4455.914, eligible=True
+  - deltas vs head (cand-110): {'M1_P1': 242518, 'M2_D1': -439389}
+- Decision: KEPT — new incumbent head (score=4455.914)
+
+## 2026-09-29 — MILP D1 partition model (no score claim)
+- Change: bounded HiGHS1.15.1 multiple-choice integer model over four D1 projection stages; owner count1..4, RF-legal N/K panels, event cap15500. Solver environment /tmp/transformer-milp-env is separate from frozen grade environment.
+- Verify: PYTHONPATH=. /tmp/transformer-milp-env/bin/python project/campaigns/milp-d1/solve.py -> solution.json, options.json, model.lp. Exhaustive enumeration independently matches optimal service-proxy objective122624.
+- Result: selected QKV/WO/W2 four owners with N32/K32; W1 four owners with N64/K16. Predicted expanded compute/transfer events15376. Proxy objective is not simulated cycles; candidate113 goes through full cost screen and grade.
+- Decision: test solver proposal against verified heuristic cand-112; no broad hardware sweep or evaluator edits.
+
+## 2026-09-29 00:44:30 — cand-113: HiGHS MILP chooses D1 projection owner counts and RF panels under15500-event cap; compare actual full grade against heuristic cand-112. P1/hardware unchanged.
+- Change: parent=cand-112; []
+- Evidence: project/experiments/cand-113/metrics.json; reports/grade.json; attempts=1
+- Command (grade): ['/Users/yihdu/Codefield/SLAI-infra-Code/transformer-codesign-starter/.venv/bin/python', '/Users/yihdu/Codefield/SLAI-infra-Code/transformer-codesign-starter/challenge.py', 'grade', '--hardware', '/Users/yihdu/Codefield/SLAI-infra-Code/transformer-codesign-starter/project/experiments/cand-113/inputs/hardware.json', '--program-p1', '/Users/yihdu/Codefield/SLAI-infra-Code/transformer-codesign-starter/project/experiments/cand-113/programs/M1_P1.asm', '--program-d1', '/Users/yihdu/Codefield/SLAI-infra-Code/transformer-codesign-starter/project/experiments/cand-113/programs/M2_D1.asm', '--report', '/Users/yihdu/Codefield/SLAI-infra-Code/transformer-codesign-starter/project/experiments/cand-113/reports/grade.json', '--seed', '7', '--baseline', '/Users/yihdu/Codefield/SLAI-infra-Code/transformer-codesign-starter/baseline_manifest.json']; elapsed=122.78160633298103; peak MiB=5178.754554748535
+- Inputs: compiler.py@09b90e14 hardware.json@b92be26a recipe.json@77ff6593
+- Verify: PASS elapsed=122.78s
+- Result: M1_P1=7292285 (4.251x), M2_D1=212659 (6.123x); score=5101.489, eligible=True
+  - deltas vs head (cand-112): {'M1_P1': 0, 'M2_D1': -66084}
+- Decision: KEPT — new incumbent head (score=5101.489)
+
+## 2026-09-29 — MILP controlled comparison confirmed
+- Verify: cand-113 full frozen grade eligible; P1/hardware byte-identical to cand-112. D1=212659 versus278743 cycles; score5101.48865 versus4455.91424.
+- Result: D1 1.31075x, score+14.488%; peak5178.75MiB within6144MiB cap. Exact events15376 match MILP constraint count.
+- Decision: retain MILP proposal; its service objective is an approximate ranking model, not a cycle prediction or universal optimum. Compose with verified P1 fusion in fresh cand-114.
+
+## 2026-09-29 00:47:16 — cand-114: Compose independently verified P1 RF persistent MLP (cand-110) with MILP D1 projection plan (cand-113); complete frozen grade confirms shared hardware and both programs.
+- Change: parent=cand-113; []
+- Evidence: project/experiments/cand-114/metrics.json; reports/grade.json; attempts=1
+- Command (grade): ['/Users/yihdu/Codefield/SLAI-infra-Code/transformer-codesign-starter/.venv/bin/python', '/Users/yihdu/Codefield/SLAI-infra-Code/transformer-codesign-starter/challenge.py', 'grade', '--hardware', '/Users/yihdu/Codefield/SLAI-infra-Code/transformer-codesign-starter/project/experiments/cand-114/inputs/hardware.json', '--program-p1', '/Users/yihdu/Codefield/SLAI-infra-Code/transformer-codesign-starter/project/experiments/cand-114/programs/M1_P1.asm', '--program-d1', '/Users/yihdu/Codefield/SLAI-infra-Code/transformer-codesign-starter/project/experiments/cand-114/programs/M2_D1.asm', '--report', '/Users/yihdu/Codefield/SLAI-infra-Code/transformer-codesign-starter/project/experiments/cand-114/reports/grade.json', '--seed', '7', '--baseline', '/Users/yihdu/Codefield/SLAI-infra-Code/transformer-codesign-starter/baseline_manifest.json']; elapsed=110.82400549994782; peak MiB=5230.457633972168
+- Inputs: compiler.py@09b90e14 hardware.json@b92be26a recipe.json@dba49006
+- Verify: PASS elapsed=110.83s
+- Result: M1_P1=7049767 (4.397x), M2_D1=212659 (6.123x); score=5188.494, eligible=True
+  - deltas vs head (cand-113): {'M1_P1': -242518, 'M2_D1': 0}
+- Decision: KEPT — new incumbent head (score=5188.494)
+
+### cand-114 verdict: KEPT — Complete grade passes: RF resident P1 MLP plus MILP-balanced four-SM decode. Preserve full experiment and solver evidence; no official submission.

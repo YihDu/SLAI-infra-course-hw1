@@ -1,0 +1,8 @@
+{
+  "candidate": "cand-111",
+  "reports": {},
+  "verdict": "not_verified",
+  "failure_class": "interrupted",
+  "failure_note": "Recovered incomplete evaluation",
+  "evaluation_attempts": 0
+}

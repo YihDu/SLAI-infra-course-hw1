@@ -1,0 +1,20 @@
+738688 (1.763x); score=2512.220, eligible=True
+  - deltas vs head (cand-087): {'M1_P1': -827856, 'M2_D1': -6176}
+- Decision: KEPT — new incumbent head (score=2512.220)
+
+## 2026-09-28 18:17:32 — cand-094: Expand decode N tile after prompt/hardware controls
+- Change: parent=cand-093; [{"op": "stage_gemm_tiles", "stage": "d1", "n_tile": 64, "k_chunk": 16}]
+- Evidence: project/experiments/cand-094/metrics.json; reports/grade.json; attempts=1
+- Command (grade): ['/Users/yihdu/Codefield/SLAI-infra-Code/transformer-codesign-starter/.venv/bin/python', '/Users/yihdu/Codefield/SLAI-infra-Code/transformer-codesign-starter/challenge.py', 'grade', '--hardware', '/Users/yihdu/Codefield/SLAI-infra-Code/transformer-codesign-starter/project/experiments/cand-094/inputs/hardware.json', '--program-p1', '/Users/yihdu/Codefield/SLAI-infra-Code/transformer-codesign-starter/project/experiments/cand-094/programs/M1_P1.asm', '--program-d1', '/Users/yihdu/Codefield/SLAI-infra-Code/transformer-codesign-starter/project/experiments/cand-094/programs/M2_D1.asm', '--report', '/Users/yihdu/Codefield/SLAI-infra-Code/transformer-codesign-starter/project/experiments/cand-094/reports/grade.json', '--seed', '7', '--baseline', '/Users/yihdu/Codefield/SLAI-infra-Code/transformer-codesign-starter/baseline_manifest.json']; elapsed=103.43378408299759; peak MiB=1817.8298645019531
+- Inputs: compiler.py@cb8bf1a2 hardware.json@b92be26a recipe.json@0278fd0c
+- Verify: PASS elapsed=103.44s
+- Result: M1_P1=8656949 (3.581x), M2_D1=718132 (1.813x); score=2547.922, eligible=True
+  - deltas vs head (cand-093): {'M1_P1': 0, 'M2_D1': -20556}
+- Decision: KEPT — new incumbent head (score=2547.922)
+
+## 2026-09-28 18:19:35 — cand-095: Larger M tile reduces repeated B reads
+- Change: parent=cand-094; [{"op": "stage_gemm_tiles", "stage": "p1_prompt", "order": "nkm_lanes", "m_tile": 32, "n_tile": 32, "k_chunk": 32}]
+- Evidence: project/experiments/cand-095/metrics.json; reports/grade.json; attempts=1
+
+ERROR: Reconnecting... 1/5
+

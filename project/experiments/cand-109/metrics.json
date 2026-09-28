@@ -1,0 +1,121 @@
+{
+  "candidate": "cand-109",
+  "reports": {},
+  "evaluation_attempts": 1,
+  "runs": {
+    "grade": {
+      "command": [
+        "/Users/yihdu/Codefield/SLAI-infra-Code/transformer-codesign-starter/.venv/bin/python",
+        "/Users/yihdu/Codefield/SLAI-infra-Code/transformer-codesign-starter/challenge.py",
+        "grade",
+        "--hardware",
+        "/Users/yihdu/Codefield/SLAI-infra-Code/transformer-codesign-starter/project/experiments/cand-109/inputs/hardware.json",
+        "--program-p1",
+        "/Users/yihdu/Codefield/SLAI-infra-Code/transformer-codesign-starter/project/experiments/cand-109/programs/M1_P1.asm",
+        "--program-d1",
+        "/Users/yihdu/Codefield/SLAI-infra-Code/transformer-codesign-starter/project/experiments/cand-109/programs/M2_D1.asm",
+        "--report",
+        "/Users/yihdu/Codefield/SLAI-infra-Code/transformer-codesign-starter/project/experiments/cand-109/reports/grade.json",
+        "--seed",
+        "7",
+        "--baseline",
+        "/Users/yihdu/Codefield/SLAI-infra-Code/transformer-codesign-starter/baseline_manifest.json"
+      ],
+      "exit_code": -15,
+      "elapsed": 15.568582749925554,
+      "peak_memory_mib": 3094.7213821411133,
+      "failure_class": "memory_limit"
+    }
+  },
+  "static": {
+    "M1_P1": {
+      "expanded_instructions": 99839,
+      "bytes": 388610,
+      "workgroup_lifetimes": 1
+    },
+    "M2_D1": {
+      "expanded_instructions": 25024,
+      "bytes": 1511541,
+      "workgroup_lifetimes": 4
+    }
+  },
+  "validation_cost": {
+    "M2_D1": {
+      "expanded_instructions": 25024,
+      "source_lines": 7552,
+      "static_loops": 1856,
+      "workgroup_lifetimes": 4,
+      "workgroup_names": 4,
+      "opcode_counts": {
+        "WG.BEGIN": 4,
+        "LD": 13880,
+        "REDUCE": 192,
+        "VEC": 2480,
+        "SFU": 128,
+        "ST": 872,
+        "BARRIER": 160,
+        "MMA.ACC": 7296,
+        "STEP.COMMIT": 8,
+        "WG.END": 4
+      },
+      "events": 24848,
+      "graph_edges": 72429,
+      "named_cross_wg_sync_edges": 0,
+      "barrier_directed_pair_relations": 1920,
+      "barrier_incidence_edges": 1280,
+      "global_commit_incidence_edges": 46969,
+      "stages": {
+        "unknown/control": {
+          "instructions": 25024,
+          "WG.BEGIN": 4,
+          "LD": 13880,
+          "events": 24848,
+          "REDUCE": 192,
+          "VEC": 2480,
+          "SFU": 128,
+          "ST": 872,
+          "BARRIER": 160,
+          "MMA.ACC": 7296,
+          "STEP.COMMIT": 8,
+          "WG.END": 4,
+          "sum_dependency_depth_lower_bound": 37363440
+        }
+      },
+      "race_checker_single_wg_fast_path": false,
+      "max_dependency_depth_lower_bound": 3001,
+      "sum_dependency_depth_lower_bound": 37363440,
+      "retained_event_sets_logical_bytes_lower_bound": 601591936,
+      "decision": "within_lower_bound_only",
+      "budget_mib": 3072,
+      "checkpoints": [
+        {
+          "visited": 10000,
+          "max_depth": 1201,
+          "sum_depth": 5986491
+        },
+        {
+          "visited": 20000,
+          "max_depth": 2407,
+          "sum_depth": 23885799
+        }
+      ],
+      "caveat": "Lower bound on uncompressed CPython event-set allocation, not peak RSS prediction. Passing cost screen never establishes race correctness. Multi-path/HBM unions, tuples, prefixes and graph storage add memory."
+    }
+  },
+  "validation_cost_progress": {
+    "pid": 45805,
+    "status": "completed",
+    "elapsed": 1.0134669169783592,
+    "peak_memory_mib": 72.15670776367188,
+    "updated_at": 1790608561.41297,
+    "command": [
+      "/Users/yihdu/Codefield/SLAI-infra-Code/transformer-codesign-starter/.venv/bin/python",
+      "-c",
+      "import json,pathlib; from project.search.validation_cost import analyze; stats=json.loads(pathlib.Path('reports/static.json').read_text()); out={n:analyze((pathlib.Path('programs')/(n+'.asm')).read_text(),3072) for n,v in stats.items() if v.get('workgroup_lifetimes',1)>1}; pathlib.Path('reports/validation-cost.json').write_text(json.dumps(out,indent=2))"
+    ]
+  },
+  "verdict": "not_verified",
+  "failure_class": "memory_limit",
+  "failure_note": "",
+  "elapsed": 15.56942729104776
+}

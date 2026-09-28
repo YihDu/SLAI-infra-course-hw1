@@ -1,0 +1,18 @@
+{
+  "bias": "d1",
+  "created_at": "2026-09-28 23:17:26",
+  "failure_class": "registry_interruption",
+  "family": "persistent_decode",
+  "fingerprint": "a5fc7bf653486650",
+  "hypothesis": "D1 persistent parallel owners preserve native64-column panels: QKV3SM, WO/W2 2SM, W1/attention4SM. Avoid 65% event inflation seen in cand-109. Full grade bounded6GiB on local16GiB Mac.",
+  "id": "cand-111",
+  "kind": "manual",
+  "ops": [],
+  "parent": "cand-106",
+  "provenance_note": null,
+  "round": 12,
+  "status": "not_verified",
+  "struct_sig": "d1-panel-owners",
+  "summary": "[]",
+  "verdict_note": "Preparation preserved; grade never started after registry snapshot race. Fresh immutable retry cand-112 passed."
+}

@@ -1,0 +1,18 @@
+{
+  "bias": "d1",
+  "created_at": "2026-09-28 23:15:57",
+  "failure_class": "memory_limit",
+  "family": "persistent_decode",
+  "fingerprint": "c6665a567726cd82",
+  "hypothesis": "D1 four persistent SM owners: parallel projection columns and attention heads over eight steps; P1 unchanged. Preflight checker cost before complete grade.",
+  "id": "cand-109",
+  "kind": "manual",
+  "ops": [],
+  "parent": "cand-106",
+  "provenance_note": null,
+  "round": 12,
+  "status": "not_verified",
+  "struct_sig": "d1-4sm-column-head",
+  "summary": "[]",
+  "verdict_note": null
+}

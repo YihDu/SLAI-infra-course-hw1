@@ -1,5 +1,17 @@
 # 新 session 接手：P1 multi-SM 与 frozen checker 内存阻塞
 
+## 最新进展：2026-09-29
+
+- 当前默认/registry head：**cand-114**，完整 frozen grade eligible；P1=**7,049,767**，D1=**212,659**，score=**5188.49449**。硬件未改，未官方提交。
+- P1：分块 Attention + RF 驻留 W1/GELU/W2，仍是单 SM。
+- D1：四个 persistent WG，按 head/投影列分片；MILP 选择 QKV/WO/W2 N32/K32，W1 N64/K16，全部四 SM。峰值验证进程内存5230.46MiB（6GiB上限），本机可完成。
+- MILP 对照：手工 cand-112 score4455.91 / D1278743 → cand-113 score5101.49 / D1212659，完整 grade 证明score+14.49%。最终 cand-114 再合入 P1 驻留 MLP。
+- 证据：`project/campaigns/milp-d1/README.md`、`project/campaigns/structural-mlp/REPORT.md`、cand-108至114报告。模型/求解器仅用于编译期提案，未改 frozen evaluator。
+- **尚未实现 P1 multi-SM pass，也未达到10倍score。** 当前相对baseline1000为5.188倍，相对cand-106为1.869倍。
+- registry曾被并行运行的旧快照覆盖，cand-111保留部分prepare证据但未grade；恢复登记后以新cand-112完成实验。后续registry写入/候选创建必须串行。
+- 下文为历史记录，旧的“当前最优/未有multi-SM”描述按对应阶段理解。
+
+
 更新：2026-09-28。用户已恢复任务，并明确**继续在同一台16GiB Mac运行**；不再按下文历史建议寻求服务器。本轮新增复核见 `project/campaigns/validation-preflight-audit/REPORT.md`。
 
 用户已明确允许改写 Attention。cand-106 分块 Attention 完整 grade 通过并成为默认最优：P1=7,292,285，D1=718,132，score=2776.10999。cand-107 only-W1 多 SM 在验证成本预检被剪枝，逻辑存储下界41.31 GiB，未运行 grade。最新证据：`project/campaigns/blocked-attention/REPORT.md`。下文旧实验描述按历史阅读。

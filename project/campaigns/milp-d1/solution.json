@@ -1,0 +1,54 @@
+{
+  "solver": "HiGHS 1.15.1",
+  "status": "optimal_for_proxy_model",
+  "objective": 122624.0,
+  "enumeration_objective": 122624,
+  "selected": {
+    "qkv": {
+      "owners": 4,
+      "n_tile": 32,
+      "k_chunk": 32,
+      "cost_proxy": 1920,
+      "events": 2688,
+      "rf_words": 1024
+    },
+    "wo": {
+      "owners": 4,
+      "n_tile": 32,
+      "k_chunk": 32,
+      "cost_proxy": 640,
+      "events": 896,
+      "rf_words": 1024
+    },
+    "w1": {
+      "owners": 4,
+      "n_tile": 64,
+      "k_chunk": 16,
+      "cost_proxy": 2580,
+      "events": 3328,
+      "rf_words": 1024
+    },
+    "w2": {
+      "owners": 4,
+      "n_tile": 32,
+      "k_chunk": 32,
+      "cost_proxy": 2524,
+      "events": 3200,
+      "rf_words": 1024
+    }
+  },
+  "event_cap": 15500,
+  "estimated_events": 15376,
+  "fixed_events": 5264,
+  "options_per_stage": {
+    "qkv": 36,
+    "wo": 26,
+    "w1": 30,
+    "w2": 26
+  },
+  "caveats": [
+    "Objective is a service proxy, not full cycles.",
+    "Event budget is empirical; exact validation-cost model and bounded frozen grade remain required.",
+    "Placement uses SM0..owners-1; this first experiment does not solve general placement/fusion/residency."
+  ]
+}

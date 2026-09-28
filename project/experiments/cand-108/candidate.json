@@ -1,0 +1,18 @@
+{
+  "bias": "p1",
+  "created_at": "2026-09-28 23:14:00",
+  "failure_class": "evaluator_error",
+  "family": "persistent_mlp",
+  "fingerprint": "5ba4b1c3d6911c3b",
+  "hypothesis": "Persistent row-block W1/GELU/W2: activations and all W2 accumulators stay in RF; eliminate ff1/gelu HBM round trips. Trade additional weight reads for no materialization.",
+  "id": "cand-108",
+  "kind": "manual",
+  "ops": [],
+  "parent": "cand-106",
+  "provenance_note": null,
+  "round": 12,
+  "status": "not_verified",
+  "struct_sig": "rf-streamed-mlp",
+  "summary": "[]",
+  "verdict_note": null
+}

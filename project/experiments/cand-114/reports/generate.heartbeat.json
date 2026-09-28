@@ -1,0 +1,1 @@
+{"pid": 47219, "status": "completed", "elapsed": 0.25774729100521654, "peak_memory_mib": 0.21886444091796875, "updated_at": 1790614037.960311, "command": ["/Users/yihdu/Codefield/SLAI-infra-Code/transformer-codesign-starter/.venv/bin/python", "/Users/yihdu/Codefield/SLAI-infra-Code/transformer-codesign-starter/project/experiments/cand-114/inputs/compiler.py"]}

@@ -1,0 +1,29 @@
+Traceback (most recent call last):
+  File "/Users/yihdu/Codefield/SLAI-infra-Code/transformer-codesign-starter/challenge.py", line 6, in <module>
+    raise SystemExit(main())
+                     ^^^^^^
+  File "/Users/yihdu/Codefield/SLAI-infra-Code/transformer-codesign-starter/codesign/challenge/cli.py", line 344, in main
+    result = _evaluate(
+             ^^^^^^^^^^
+  File "/Users/yihdu/Codefield/SLAI-infra-Code/transformer-codesign-starter/codesign/challenge/cli.py", line 234, in _evaluate
+    report = evaluate_submission(mode, hardware, programs, seeds, baseline)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/yihdu/Codefield/SLAI-infra-Code/transformer-codesign-starter/codesign/challenge/runner.py", line 323, in evaluate_submission
+    report["cases"][case]["timing"] = estimate_case(case, hardware, programs[case])
+                                      ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/yihdu/Codefield/SLAI-infra-Code/transformer-codesign-starter/codesign/challenge/runner.py", line 274, in estimate_case
+    timing = estimate_pipeline(
+             ^^^^^^^^^^^^^^^^^^
+  File "/Users/yihdu/Codefield/SLAI-infra-Code/transformer-codesign-starter/codesign/challenge/pipeline.py", line 178, in estimate_pipeline
+    return estimate_global_events(
+           ^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/yihdu/Codefield/SLAI-infra-Code/transformer-codesign-starter/codesign/challenge/pipeline_events.py", line 1173, in estimate_global_events
+    ).run()
+      ^^^^^
+  File "/Users/yihdu/Codefield/SLAI-infra-Code/transformer-codesign-starter/codesign/challenge/pipeline_events.py", line 1063, in run
+    self._issue(next_instruction)
+  File "/Users/yihdu/Codefield/SLAI-infra-Code/transformer-codesign-starter/codesign/challenge/pipeline_events.py", line 594, in _issue
+    self._issue_transfer(tape, pc, ins, begin, sequence)
+  File "/Users/yihdu/Codefield/SLAI-infra-Code/transformer-codesign-starter/codesign/challenge/pipeline_events.py", line 701, in _issue_transfer
+    raise AssertionError("DMA slot changed after issue preview")
+AssertionError: DMA slot changed after issue preview

@@ -1,0 +1,954 @@
+{
+  "qkv": [
+    {
+      "owners": 1,
+      "n_tile": 16,
+      "k_chunk": 8,
+      "cost_proxy": 13680,
+      "events": 19200,
+      "rf_words": 128
+    },
+    {
+      "owners": 2,
+      "n_tile": 16,
+      "k_chunk": 8,
+      "cost_proxy": 6840,
+      "events": 19200,
+      "rf_words": 128
+    },
+    {
+      "owners": 3,
+      "n_tile": 16,
+      "k_chunk": 8,
+      "cost_proxy": 4560,
+      "events": 19200,
+      "rf_words": 128
+    },
+    {
+      "owners": 4,
+      "n_tile": 16,
+      "k_chunk": 8,
+      "cost_proxy": 3420,
+      "events": 19200,
+      "rf_words": 128
+    },
+    {
+      "owners": 1,
+      "n_tile": 16,
+      "k_chunk": 16,
+      "cost_proxy": 10416,
+      "events": 9984,
+      "rf_words": 256
+    },
+    {
+      "owners": 2,
+      "n_tile": 16,
+      "k_chunk": 16,
+      "cost_proxy": 5208,
+      "events": 9984,
+      "rf_words": 256
+    },
+    {
+      "owners": 3,
+      "n_tile": 16,
+      "k_chunk": 16,
+      "cost_proxy": 3472,
+      "events": 9984,
+      "rf_words": 256
+    },
+    {
+      "owners": 4,
+      "n_tile": 16,
+      "k_chunk": 16,
+      "cost_proxy": 2604,
+      "events": 9984,
+      "rf_words": 256
+    },
+    {
+      "owners": 1,
+      "n_tile": 16,
+      "k_chunk": 32,
+      "cost_proxy": 8976,
+      "events": 5376,
+      "rf_words": 512
+    },
+    {
+      "owners": 2,
+      "n_tile": 16,
+      "k_chunk": 32,
+      "cost_proxy": 4488,
+      "events": 5376,
+      "rf_words": 512
+    },
+    {
+      "owners": 3,
+      "n_tile": 16,
+      "k_chunk": 32,
+      "cost_proxy": 2992,
+      "events": 5376,
+      "rf_words": 512
+    },
+    {
+      "owners": 4,
+      "n_tile": 16,
+      "k_chunk": 32,
+      "cost_proxy": 2244,
+      "events": 5376,
+      "rf_words": 512
+    },
+    {
+      "owners": 1,
+      "n_tile": 16,
+      "k_chunk": 64,
+      "cost_proxy": 8256,
+      "events": 3072,
+      "rf_words": 1024
+    },
+    {
+      "owners": 2,
+      "n_tile": 16,
+      "k_chunk": 64,
+      "cost_proxy": 4128,
+      "events": 3072,
+      "rf_words": 1024
+    },
+    {
+      "owners": 3,
+      "n_tile": 16,
+      "k_chunk": 64,
+      "cost_proxy": 2752,
+      "events": 3072,
+      "rf_words": 1024
+    },
+    {
+      "owners": 4,
+      "n_tile": 16,
+      "k_chunk": 64,
+      "cost_proxy": 2064,
+      "events": 3072,
+      "rf_words": 1024
+    },
+    {
+      "owners": 1,
+      "n_tile": 32,
+      "k_chunk": 8,
+      "cost_proxy": 10320,
+      "events": 9600,
+      "rf_words": 256
+    },
+    {
+      "owners": 2,
+      "n_tile": 32,
+      "k_chunk": 8,
+      "cost_proxy": 5160,
+      "events": 9600,
+      "rf_words": 256
+    },
+    {
+      "owners": 3,
+      "n_tile": 32,
+      "k_chunk": 8,
+      "cost_proxy": 3440,
+      "events": 9600,
+      "rf_words": 256
+    },
+    {
+      "owners": 4,
+      "n_tile": 32,
+      "k_chunk": 8,
+      "cost_proxy": 2580,
+      "events": 9600,
+      "rf_words": 256
+    },
+    {
+      "owners": 1,
+      "n_tile": 32,
+      "k_chunk": 16,
+      "cost_proxy": 8496,
+      "events": 4992,
+      "rf_words": 512
+    },
+    {
+      "owners": 2,
+      "n_tile": 32,
+      "k_chunk": 16,
+      "cost_proxy": 4248,
+      "events": 4992,
+      "rf_words": 512
+    },
+    {
+      "owners": 3,
+      "n_tile": 32,
+      "k_chunk": 16,
+      "cost_proxy": 2832,
+      "events": 4992,
+      "rf_words": 512
+    },
+    {
+      "owners": 4,
+      "n_tile": 32,
+      "k_chunk": 16,
+      "cost_proxy": 2124,
+      "events": 4992,
+      "rf_words": 512
+    },
+    {
+      "owners": 1,
+      "n_tile": 32,
+      "k_chunk": 32,
+      "cost_proxy": 7680,
+      "events": 2688,
+      "rf_words": 1024
+    },
+    {
+      "owners": 2,
+      "n_tile": 32,
+      "k_chunk": 32,
+      "cost_proxy": 3840,
+      "events": 2688,
+      "rf_words": 1024
+    },
+    {
+      "owners": 3,
+      "n_tile": 32,
+      "k_chunk": 32,
+      "cost_proxy": 2560,
+      "events": 2688,
+      "rf_words": 1024
+    },
+    {
+      "owners": 4,
+      "n_tile": 32,
+      "k_chunk": 32,
+      "cost_proxy": 1920,
+      "events": 2688,
+      "rf_words": 1024
+    },
+    {
+      "owners": 1,
+      "n_tile": 64,
+      "k_chunk": 8,
+      "cost_proxy": 8748,
+      "events": 4800,
+      "rf_words": 512
+    },
+    {
+      "owners": 2,
+      "n_tile": 64,
+      "k_chunk": 8,
+      "cost_proxy": 4374,
+      "events": 4800,
+      "rf_words": 512
+    },
+    {
+      "owners": 3,
+      "n_tile": 64,
+      "k_chunk": 8,
+      "cost_proxy": 2916,
+      "events": 4800,
+      "rf_words": 512
+    },
+    {
+      "owners": 1,
+      "n_tile": 64,
+      "k_chunk": 16,
+      "cost_proxy": 7740,
+      "events": 2496,
+      "rf_words": 1024
+    },
+    {
+      "owners": 2,
+      "n_tile": 64,
+      "k_chunk": 16,
+      "cost_proxy": 3870,
+      "events": 2496,
+      "rf_words": 1024
+    },
+    {
+      "owners": 3,
+      "n_tile": 64,
+      "k_chunk": 16,
+      "cost_proxy": 2580,
+      "events": 2496,
+      "rf_words": 1024
+    },
+    {
+      "owners": 1,
+      "n_tile": 128,
+      "k_chunk": 8,
+      "cost_proxy": 8010,
+      "events": 2400,
+      "rf_words": 1024
+    },
+    {
+      "owners": 3,
+      "n_tile": 128,
+      "k_chunk": 8,
+      "cost_proxy": 2670,
+      "events": 2400,
+      "rf_words": 1024
+    }
+  ],
+  "wo": [
+    {
+      "owners": 1,
+      "n_tile": 16,
+      "k_chunk": 8,
+      "cost_proxy": 4560,
+      "events": 6400,
+      "rf_words": 128
+    },
+    {
+      "owners": 2,
+      "n_tile": 16,
+      "k_chunk": 8,
+      "cost_proxy": 2280,
+      "events": 6400,
+      "rf_words": 128
+    },
+    {
+      "owners": 4,
+      "n_tile": 16,
+      "k_chunk": 8,
+      "cost_proxy": 1140,
+      "events": 6400,
+      "rf_words": 128
+    },
+    {
+      "owners": 1,
+      "n_tile": 16,
+      "k_chunk": 16,
+      "cost_proxy": 3472,
+      "events": 3328,
+      "rf_words": 256
+    },
+    {
+      "owners": 2,
+      "n_tile": 16,
+      "k_chunk": 16,
+      "cost_proxy": 1736,
+      "events": 3328,
+      "rf_words": 256
+    },
+    {
+      "owners": 4,
+      "n_tile": 16,
+      "k_chunk": 16,
+      "cost_proxy": 868,
+      "events": 3328,
+      "rf_words": 256
+    },
+    {
+      "owners": 1,
+      "n_tile": 16,
+      "k_chunk": 32,
+      "cost_proxy": 2992,
+      "events": 1792,
+      "rf_words": 512
+    },
+    {
+      "owners": 2,
+      "n_tile": 16,
+      "k_chunk": 32,
+      "cost_proxy": 1496,
+      "events": 1792,
+      "rf_words": 512
+    },
+    {
+      "owners": 4,
+      "n_tile": 16,
+      "k_chunk": 32,
+      "cost_proxy": 748,
+      "events": 1792,
+      "rf_words": 512
+    },
+    {
+      "owners": 1,
+      "n_tile": 16,
+      "k_chunk": 64,
+      "cost_proxy": 2752,
+      "events": 1024,
+      "rf_words": 1024
+    },
+    {
+      "owners": 2,
+      "n_tile": 16,
+      "k_chunk": 64,
+      "cost_proxy": 1376,
+      "events": 1024,
+      "rf_words": 1024
+    },
+    {
+      "owners": 4,
+      "n_tile": 16,
+      "k_chunk": 64,
+      "cost_proxy": 688,
+      "events": 1024,
+      "rf_words": 1024
+    },
+    {
+      "owners": 1,
+      "n_tile": 32,
+      "k_chunk": 8,
+      "cost_proxy": 3440,
+      "events": 3200,
+      "rf_words": 256
+    },
+    {
+      "owners": 2,
+      "n_tile": 32,
+      "k_chunk": 8,
+      "cost_proxy": 1720,
+      "events": 3200,
+      "rf_words": 256
+    },
+    {
+      "owners": 4,
+      "n_tile": 32,
+      "k_chunk": 8,
+      "cost_proxy": 860,
+      "events": 3200,
+      "rf_words": 256
+    },
+    {
+      "owners": 1,
+      "n_tile": 32,
+      "k_chunk": 16,
+      "cost_proxy": 2832,
+      "events": 1664,
+      "rf_words": 512
+    },
+    {
+      "owners": 2,
+      "n_tile": 32,
+      "k_chunk": 16,
+      "cost_proxy": 1416,
+      "events": 1664,
+      "rf_words": 512
+    },
+    {
+      "owners": 4,
+      "n_tile": 32,
+      "k_chunk": 16,
+      "cost_proxy": 708,
+      "events": 1664,
+      "rf_words": 512
+    },
+    {
+      "owners": 1,
+      "n_tile": 32,
+      "k_chunk": 32,
+      "cost_proxy": 2560,
+      "events": 896,
+      "rf_words": 1024
+    },
+    {
+      "owners": 2,
+      "n_tile": 32,
+      "k_chunk": 32,
+      "cost_proxy": 1280,
+      "events": 896,
+      "rf_words": 1024
+    },
+    {
+      "owners": 4,
+      "n_tile": 32,
+      "k_chunk": 32,
+      "cost_proxy": 640,
+      "events": 896,
+      "rf_words": 1024
+    },
+    {
+      "owners": 1,
+      "n_tile": 64,
+      "k_chunk": 8,
+      "cost_proxy": 2916,
+      "events": 1600,
+      "rf_words": 512
+    },
+    {
+      "owners": 2,
+      "n_tile": 64,
+      "k_chunk": 8,
+      "cost_proxy": 1458,
+      "events": 1600,
+      "rf_words": 512
+    },
+    {
+      "owners": 1,
+      "n_tile": 64,
+      "k_chunk": 16,
+      "cost_proxy": 2580,
+      "events": 832,
+      "rf_words": 1024
+    },
+    {
+      "owners": 2,
+      "n_tile": 64,
+      "k_chunk": 16,
+      "cost_proxy": 1290,
+      "events": 832,
+      "rf_words": 1024
+    },
+    {
+      "owners": 1,
+      "n_tile": 128,
+      "k_chunk": 8,
+      "cost_proxy": 2670,
+      "events": 800,
+      "rf_words": 1024
+    }
+  ],
+  "w1": [
+    {
+      "owners": 1,
+      "n_tile": 16,
+      "k_chunk": 8,
+      "cost_proxy": 18240,
+      "events": 25600,
+      "rf_words": 128
+    },
+    {
+      "owners": 2,
+      "n_tile": 16,
+      "k_chunk": 8,
+      "cost_proxy": 9120,
+      "events": 25600,
+      "rf_words": 128
+    },
+    {
+      "owners": 4,
+      "n_tile": 16,
+      "k_chunk": 8,
+      "cost_proxy": 4560,
+      "events": 25600,
+      "rf_words": 128
+    },
+    {
+      "owners": 1,
+      "n_tile": 16,
+      "k_chunk": 16,
+      "cost_proxy": 13888,
+      "events": 13312,
+      "rf_words": 256
+    },
+    {
+      "owners": 2,
+      "n_tile": 16,
+      "k_chunk": 16,
+      "cost_proxy": 6944,
+      "events": 13312,
+      "rf_words": 256
+    },
+    {
+      "owners": 4,
+      "n_tile": 16,
+      "k_chunk": 16,
+      "cost_proxy": 3472,
+      "events": 13312,
+      "rf_words": 256
+    },
+    {
+      "owners": 1,
+      "n_tile": 16,
+      "k_chunk": 32,
+      "cost_proxy": 11968,
+      "events": 7168,
+      "rf_words": 512
+    },
+    {
+      "owners": 2,
+      "n_tile": 16,
+      "k_chunk": 32,
+      "cost_proxy": 5984,
+      "events": 7168,
+      "rf_words": 512
+    },
+    {
+      "owners": 4,
+      "n_tile": 16,
+      "k_chunk": 32,
+      "cost_proxy": 2992,
+      "events": 7168,
+      "rf_words": 512
+    },
+    {
+      "owners": 1,
+      "n_tile": 16,
+      "k_chunk": 64,
+      "cost_proxy": 11008,
+      "events": 4096,
+      "rf_words": 1024
+    },
+    {
+      "owners": 2,
+      "n_tile": 16,
+      "k_chunk": 64,
+      "cost_proxy": 5504,
+      "events": 4096,
+      "rf_words": 1024
+    },
+    {
+      "owners": 4,
+      "n_tile": 16,
+      "k_chunk": 64,
+      "cost_proxy": 2752,
+      "events": 4096,
+      "rf_words": 1024
+    },
+    {
+      "owners": 1,
+      "n_tile": 32,
+      "k_chunk": 8,
+      "cost_proxy": 13760,
+      "events": 12800,
+      "rf_words": 256
+    },
+    {
+      "owners": 2,
+      "n_tile": 32,
+      "k_chunk": 8,
+      "cost_proxy": 6880,
+      "events": 12800,
+      "rf_words": 256
+    },
+    {
+      "owners": 4,
+      "n_tile": 32,
+      "k_chunk": 8,
+      "cost_proxy": 3440,
+      "events": 12800,
+      "rf_words": 256
+    },
+    {
+      "owners": 1,
+      "n_tile": 32,
+      "k_chunk": 16,
+      "cost_proxy": 11328,
+      "events": 6656,
+      "rf_words": 512
+    },
+    {
+      "owners": 2,
+      "n_tile": 32,
+      "k_chunk": 16,
+      "cost_proxy": 5664,
+      "events": 6656,
+      "rf_words": 512
+    },
+    {
+      "owners": 4,
+      "n_tile": 32,
+      "k_chunk": 16,
+      "cost_proxy": 2832,
+      "events": 6656,
+      "rf_words": 512
+    },
+    {
+      "owners": 1,
+      "n_tile": 32,
+      "k_chunk": 32,
+      "cost_proxy": 10240,
+      "events": 3584,
+      "rf_words": 1024
+    },
+    {
+      "owners": 2,
+      "n_tile": 32,
+      "k_chunk": 32,
+      "cost_proxy": 5120,
+      "events": 3584,
+      "rf_words": 1024
+    },
+    {
+      "owners": 4,
+      "n_tile": 32,
+      "k_chunk": 32,
+      "cost_proxy": 2560,
+      "events": 3584,
+      "rf_words": 1024
+    },
+    {
+      "owners": 1,
+      "n_tile": 64,
+      "k_chunk": 8,
+      "cost_proxy": 11664,
+      "events": 6400,
+      "rf_words": 512
+    },
+    {
+      "owners": 2,
+      "n_tile": 64,
+      "k_chunk": 8,
+      "cost_proxy": 5832,
+      "events": 6400,
+      "rf_words": 512
+    },
+    {
+      "owners": 4,
+      "n_tile": 64,
+      "k_chunk": 8,
+      "cost_proxy": 2916,
+      "events": 6400,
+      "rf_words": 512
+    },
+    {
+      "owners": 1,
+      "n_tile": 64,
+      "k_chunk": 16,
+      "cost_proxy": 10320,
+      "events": 3328,
+      "rf_words": 1024
+    },
+    {
+      "owners": 2,
+      "n_tile": 64,
+      "k_chunk": 16,
+      "cost_proxy": 5160,
+      "events": 3328,
+      "rf_words": 1024
+    },
+    {
+      "owners": 4,
+      "n_tile": 64,
+      "k_chunk": 16,
+      "cost_proxy": 2580,
+      "events": 3328,
+      "rf_words": 1024
+    },
+    {
+      "owners": 1,
+      "n_tile": 128,
+      "k_chunk": 8,
+      "cost_proxy": 10680,
+      "events": 3200,
+      "rf_words": 1024
+    },
+    {
+      "owners": 2,
+      "n_tile": 128,
+      "k_chunk": 8,
+      "cost_proxy": 5340,
+      "events": 3200,
+      "rf_words": 1024
+    },
+    {
+      "owners": 4,
+      "n_tile": 128,
+      "k_chunk": 8,
+      "cost_proxy": 2670,
+      "events": 3200,
+      "rf_words": 1024
+    }
+  ],
+  "w2": [
+    {
+      "owners": 1,
+      "n_tile": 16,
+      "k_chunk": 8,
+      "cost_proxy": 18000,
+      "events": 24832,
+      "rf_words": 128
+    },
+    {
+      "owners": 2,
+      "n_tile": 16,
+      "k_chunk": 8,
+      "cost_proxy": 9000,
+      "events": 24832,
+      "rf_words": 128
+    },
+    {
+      "owners": 4,
+      "n_tile": 16,
+      "k_chunk": 8,
+      "cost_proxy": 4500,
+      "events": 24832,
+      "rf_words": 128
+    },
+    {
+      "owners": 1,
+      "n_tile": 16,
+      "k_chunk": 16,
+      "cost_proxy": 13648,
+      "events": 12544,
+      "rf_words": 256
+    },
+    {
+      "owners": 2,
+      "n_tile": 16,
+      "k_chunk": 16,
+      "cost_proxy": 6824,
+      "events": 12544,
+      "rf_words": 256
+    },
+    {
+      "owners": 4,
+      "n_tile": 16,
+      "k_chunk": 16,
+      "cost_proxy": 3412,
+      "events": 12544,
+      "rf_words": 256
+    },
+    {
+      "owners": 1,
+      "n_tile": 16,
+      "k_chunk": 32,
+      "cost_proxy": 11728,
+      "events": 6400,
+      "rf_words": 512
+    },
+    {
+      "owners": 2,
+      "n_tile": 16,
+      "k_chunk": 32,
+      "cost_proxy": 5864,
+      "events": 6400,
+      "rf_words": 512
+    },
+    {
+      "owners": 4,
+      "n_tile": 16,
+      "k_chunk": 32,
+      "cost_proxy": 2932,
+      "events": 6400,
+      "rf_words": 512
+    },
+    {
+      "owners": 1,
+      "n_tile": 16,
+      "k_chunk": 64,
+      "cost_proxy": 10768,
+      "events": 3328,
+      "rf_words": 1024
+    },
+    {
+      "owners": 2,
+      "n_tile": 16,
+      "k_chunk": 64,
+      "cost_proxy": 5384,
+      "events": 3328,
+      "rf_words": 1024
+    },
+    {
+      "owners": 4,
+      "n_tile": 16,
+      "k_chunk": 64,
+      "cost_proxy": 2692,
+      "events": 3328,
+      "rf_words": 1024
+    },
+    {
+      "owners": 1,
+      "n_tile": 32,
+      "k_chunk": 8,
+      "cost_proxy": 13616,
+      "events": 12416,
+      "rf_words": 256
+    },
+    {
+      "owners": 2,
+      "n_tile": 32,
+      "k_chunk": 8,
+      "cost_proxy": 6808,
+      "events": 12416,
+      "rf_words": 256
+    },
+    {
+      "owners": 4,
+      "n_tile": 32,
+      "k_chunk": 8,
+      "cost_proxy": 3404,
+      "events": 12416,
+      "rf_words": 256
+    },
+    {
+      "owners": 1,
+      "n_tile": 32,
+      "k_chunk": 16,
+      "cost_proxy": 11184,
+      "events": 6272,
+      "rf_words": 512
+    },
+    {
+      "owners": 2,
+      "n_tile": 32,
+      "k_chunk": 16,
+      "cost_proxy": 5592,
+      "events": 6272,
+      "rf_words": 512
+    },
+    {
+      "owners": 4,
+      "n_tile": 32,
+      "k_chunk": 16,
+      "cost_proxy": 2796,
+      "events": 6272,
+      "rf_words": 512
+    },
+    {
+      "owners": 1,
+      "n_tile": 32,
+      "k_chunk": 32,
+      "cost_proxy": 10096,
+      "events": 3200,
+      "rf_words": 1024
+    },
+    {
+      "owners": 2,
+      "n_tile": 32,
+      "k_chunk": 32,
+      "cost_proxy": 5048,
+      "events": 3200,
+      "rf_words": 1024
+    },
+    {
+      "owners": 4,
+      "n_tile": 32,
+      "k_chunk": 32,
+      "cost_proxy": 2524,
+      "events": 3200,
+      "rf_words": 1024
+    },
+    {
+      "owners": 1,
+      "n_tile": 64,
+      "k_chunk": 8,
+      "cost_proxy": 11556,
+      "events": 6208,
+      "rf_words": 512
+    },
+    {
+      "owners": 2,
+      "n_tile": 64,
+      "k_chunk": 8,
+      "cost_proxy": 5778,
+      "events": 6208,
+      "rf_words": 512
+    },
+    {
+      "owners": 1,
+      "n_tile": 64,
+      "k_chunk": 16,
+      "cost_proxy": 10212,
+      "events": 3136,
+      "rf_words": 1024
+    },
+    {
+      "owners": 2,
+      "n_tile": 64,
+      "k_chunk": 16,
+      "cost_proxy": 5106,
+      "events": 3136,
+      "rf_words": 1024
+    },
+    {
+      "owners": 1,
+      "n_tile": 128,
+      "k_chunk": 8,
+      "cost_proxy": 10590,
+      "events": 3104,
+      "rf_words": 1024
+    }
+  ]
+}

@@ -1,0 +1,46 @@
+{
+  "candidate": "cand-108",
+  "reports": {},
+  "evaluation_attempts": 1,
+  "runs": {
+    "grade": {
+      "command": [
+        "/Users/yihdu/Codefield/SLAI-infra-Code/transformer-codesign-starter/.venv/bin/python",
+        "/Users/yihdu/Codefield/SLAI-infra-Code/transformer-codesign-starter/challenge.py",
+        "grade",
+        "--hardware",
+        "/Users/yihdu/Codefield/SLAI-infra-Code/transformer-codesign-starter/project/experiments/cand-108/inputs/hardware.json",
+        "--program-p1",
+        "/Users/yihdu/Codefield/SLAI-infra-Code/transformer-codesign-starter/project/experiments/cand-108/programs/M1_P1.asm",
+        "--program-d1",
+        "/Users/yihdu/Codefield/SLAI-infra-Code/transformer-codesign-starter/project/experiments/cand-108/programs/M2_D1.asm",
+        "--report",
+        "/Users/yihdu/Codefield/SLAI-infra-Code/transformer-codesign-starter/project/experiments/cand-108/reports/grade.json",
+        "--seed",
+        "7",
+        "--baseline",
+        "/Users/yihdu/Codefield/SLAI-infra-Code/transformer-codesign-starter/baseline_manifest.json"
+      ],
+      "exit_code": 1,
+      "elapsed": 18.275015250081196,
+      "peak_memory_mib": 207.00061798095703,
+      "failure_class": null
+    }
+  },
+  "static": {
+    "M1_P1": {
+      "expanded_instructions": 89483,
+      "bytes": 355412,
+      "workgroup_lifetimes": 1
+    },
+    "M2_D1": {
+      "expanded_instructions": 15066,
+      "bytes": 533511,
+      "workgroup_lifetimes": 1
+    }
+  },
+  "verdict": "not_verified",
+  "failure_class": "evaluator_error",
+  "failure_note": "in())\n                     ^^^^^^\n  File \"/Users/yihdu/Codefield/SLAI-infra-Code/transformer-codesign-starter/codesign/challenge/cli.py\", line 344, in main\n    result = _evaluate(\n             ^^^^^^^^^^\n  File \"/Users/yihdu/Codefield/SLAI-infra-Code/transformer-codesign-starter/codesign/challenge/cli.py\", line 234, in _evaluate\n    report = evaluate_submission(mode, hardware, programs, seeds, baseline)\n             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"/Users/yihdu/Codefield/SLAI-infra-Code/transformer-codesign-starter/codesign/challenge/runner.py\", line 323, in evaluate_submission\n    report[\"cases\"][case][\"timing\"] = estimate_case(case, hardware, programs[case])\n                                      ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"/Users/yihdu/Codefield/SLAI-infra-Code/transformer-codesign-starter/codesign/challenge/runner.py\", line 274, in estimate_case\n    timing = estimate_pipeline(\n             ^^^^^^^^^^^^^^^^^^\n  File \"/Users/yihdu/Codefield/SLAI-infra-Code/transformer-codesign-starter/codesign/challenge/pipeline.py\", line 178, in estimate_pipeline\n    return estimate_global_events(\n           ^^^^^^^^^^^^^^^^^^^^^^^\n  File \"/Users/yihdu/Codefield/SLAI-infra-Code/transformer-codesign-starter/codesign/challenge/pipeline_events.py\", line 1173, in estimate_global_events\n    ).run()\n      ^^^^^\n  File \"/Users/yihdu/Codefield/SLAI-infra-Code/transformer-codesign-starter/codesign/challenge/pipeline_events.py\", line 1063, in run\n    self._issue(next_instruction)\n  File \"/Users/yihdu/Codefield/SLAI-infra-Code/transformer-codesign-starter/codesign/challenge/pipeline_events.py\", line 594, in _issue\n    self._issue_transfer(tape, pc, ins, begin, sequence)\n  File \"/Users/yihdu/Codefield/SLAI-infra-Code/transformer-codesign-starter/codesign/challenge/pipeline_events.py\", line 701, in _issue_transfer\n    raise AssertionError(\"DMA slot changed after issue preview\")\nAssertionError: DMA slot changed after issue preview\n",
+  "elapsed": 18.27554316597525
+}

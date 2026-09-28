@@ -467,6 +467,57 @@ class Builder:
                 self.vec("mul", [rf(0, n), rf(1, n)], rf(0, n))
                 self.st(rf(0, n), hbm(add(out.offset, mul(row, width), col), n))
 
+    def mlp_rf_stream(self, source, w1, b1, w2, out, rows, d, f, name):
+        """Keep one 32-row MLP block on chip across W1 -> GELU -> W2.
+
+        RF2 is the current 32-neuron activation, RF3 its GELU temporary;
+        RF4..11 hold all 256 W2 output channels until the final store.
+        RF0/1 stream operands, RF12 holds ones for a bias outer product.
+        Reduction chunks remain in ascending order, as in the parent GEMMs.
+        """
+        if (rows, d, f) != (64, 256, 1024):
+            raise ValueError("RF streamed MLP requires M1 prompt dimensions")
+        tile = 32
+        with self.loop(name + "m", 0, rows, tile) as row:
+            self.vec("add", [imm(1), imm(0)], rf(12, tile))
+            with self.loop(name + "z", 0, d, tile) as col:
+                self.vec("add", [imm(0), imm(0)], rf(add(4, {"ceildiv": [col, tile]}), tile*tile))
+            with self.loop(name + "neuron", 0, f, tile) as neuron:
+                self.vec("add", [imm(0), imm(0)], rf(2, tile*tile))
+                with self.loop(name + "k", 0, d, tile) as inner:
+                    self.ld(hbm(add(source.offset, mul(row, d), inner), tile*tile,
+                                [tile, tile], [d, 1]), rf(0, tile*tile))
+                    self.ld(hbm(add(w1.offset, mul(inner, f), neuron), tile*tile,
+                                [tile, tile], [f, 1]), rf(1, tile*tile))
+                    self.emit("MMA.ACC", a=rf(0, tile*tile), b=rf(1, tile*tile),
+                              acc=rf(2, tile*tile), m=tile, n=tile, k=tile, event=None)
+                self.ld(hbm(add(b1.offset, neuron), tile), rf(0, tile))
+                self.emit("MMA.ACC", a=rf(12, tile), b=rf(0, tile),
+                          acc=rf(2, tile*tile), m=tile, n=tile, k=1, event=None)
+                self.vec("mul", [rf(2, tile*tile), rf(2, tile*tile)], rf(3, tile*tile))
+                self.vec("mul", [rf(3, tile*tile), rf(2, tile*tile)], rf(3, tile*tile))
+                self.vec("fma", [rf(3, tile*tile), imm(0.044715), rf(2, tile*tile)], rf(3, tile*tile))
+                self.vec("mul", [rf(3, tile*tile), imm(sqrt(2 / 3.141592653589793))], rf(3, tile*tile))
+                self.sfu("tanh", rf(3, tile*tile), rf(3, tile*tile))
+                self.vec("add", [rf(3, tile*tile), imm(1)], rf(3, tile*tile))
+                self.vec("mul", [rf(2, tile*tile), imm(0.5)], rf(2, tile*tile))
+                self.vec("mul", [rf(2, tile*tile), rf(3, tile*tile)], rf(2, tile*tile))
+                with self.loop(name + "o", 0, d, tile) as col:
+                    self.ld(hbm(add(w2.offset, mul(neuron, d), col), tile*tile,
+                                [tile, tile], [d, 1]), rf(1, tile*tile))
+                    self.emit("MMA.ACC", a=rf(2, tile*tile), b=rf(1, tile*tile),
+                              acc=rf(add(4, {"ceildiv": [col, tile]}), tile*tile),
+                              m=tile, n=tile, k=tile, event=None)
+            with self.loop(name + "store", 0, d, tile) as col:
+                self.st(rf(add(4, {"ceildiv": [col, tile]}), tile*tile),
+                        hbm(add(out.offset, mul(row, d), col), tile*tile,
+                            [tile, tile], [d, 1]))
+                # Bound the final store burst to one DMA completion at a time.
+                # The frozen scheduler cannot preview the last store of the
+                # original eight-transfer burst consistently (cand-108).
+                self.emit("WAIT", wg=self.wg,
+                          events=[json.loads(self.lines[-1].split(" ", 1)[1])["event"]])
+
     def gelu(self, source: Tensor, out: Tensor, rows: int, width: int, name: str):
         with self.loop(name, 0, rows) as row:
             with self.loop(f"{name}c", 0, width, 384) as col:
@@ -678,8 +729,11 @@ class Builder:
         h: int,
         hd: int,
         name: str,
+        head_start=0,
+        head_stop=None,
     ):
         """One decode step: score historical and newly generated KV separately."""
+        head_stop = h if head_stop is None else head_stop
         generated = step + 1
         total = past + generated
         rf_scores = self.scores_res == "rf"
@@ -687,12 +741,12 @@ class Builder:
             scores = self.alloc(f"{name}_scores", total)
             probs = self.alloc(f"{name}_probs", total)
         for kind, target, component in (("k", new_k, 1), ("v", new_v, 2)):
-            with self.loop(f"{name}{kind}h", 0, h) as head:
+            with self.loop(f"{name}{kind}h", head_start, head_stop) as head:
                 source = add(qkv.offset, component * d, mul(head, hd))
                 destination = add(target.offset, mul(head, target.shape[2] * hd), step * hd)
                 self.ld(hbm(source, hd), rf(0, hd))
                 self.st(rf(0, hd), hbm(destination, hd))
-        with self.loop(f"{name}head", 0, h) as head:
+        with self.loop(f"{name}head", head_start, head_stop) as head:
             self.ld(hbm(add(qkv.offset, mul(head, hd)), hd), rf(0, hd))
             for source, count, score_base, stride in (
                 (history_k, past, 0, past),
@@ -825,6 +879,57 @@ class IncrementalP1Builder(Builder):
         self.emit("BARRIER", wgs=self.groups, events=[])
 
 
+class ParallelD1Builder(Builder):
+    """Persistent column/head owners across all causally committed decode steps."""
+    def __init__(self, layout, recipe):
+        shards = int(recipe["d1_schedule"].get("shards", 4))
+        if shards not in (2, 4):
+            raise ValueError("D1 supports 2 or 4 column/head shards")
+        super().__init__(layout, recipe, groups=shards)
+
+    def gemm(self, a, b, out, m_extent, k_extent, n_extent, name, col_start=0, col_stop=None):
+        if col_start or col_stop is not None:
+            raise ValueError("Nested D1 partition unsupported")
+        self.emit("BARRIER", wgs=self.groups, events=[])
+        old_tile, old_chunk = self.gemm_n_tile, self.k_chunk
+        # Preserve 64-column panels: use 2 owners for width128, 3 for
+        # width384, and 4 for width512 instead of doubling all small MMAs.
+        panels = n_extent // old_tile
+        owners = max(n for n in range(1, len(self.groups)+1) if panels % n == 0)
+        stage = next(key for key in ("qkv", "wo", "w1", "w2") if name.endswith(key))
+        plan = self.recipe["d1_schedule"].get("projections", {}).get(stage)
+        if plan:
+            owners = int(plan["owners"])
+            self.gemm_n_tile, self.k_chunk = int(plan["n_tile"]), int(plan["k_chunk"])
+            if (not 1 <= owners <= len(self.groups)
+                    or self.gemm_n_tile <= 0 or self.k_chunk <= 0
+                    or n_extent % (owners*self.gemm_n_tile)
+                    or self.gemm_n_tile*self.k_chunk > 1024):
+                raise ValueError("Invalid D1 projection partition/RF capacity")
+        for index, wg in enumerate(self.groups[:owners]):
+            self.wg = wg
+            self.label = f"{name}_sm{index}_"
+            super().gemm(a, b, out, m_extent, k_extent, n_extent, name + f"g{index}",
+                         n_extent*index//owners, n_extent*(index+1)//owners)
+        self.gemm_n_tile, self.k_chunk = old_tile, old_chunk
+        self.wg = self.groups[0]
+        self.label = ""
+        self.emit("BARRIER", wgs=self.groups, events=[])
+
+    def attention_decode(self, qkv, context, history_k, history_v, new_k, new_v,
+                         step, past, d, h, hd, name):
+        self.emit("BARRIER", wgs=self.groups, events=[])
+        for index, wg in enumerate(self.groups):
+            self.wg = wg
+            self.label = f"{name}_sm{index}_"
+            super().attention_decode(qkv, context, history_k, history_v, new_k, new_v,
+                                     step, past, d, h, hd, name + f"g{index}",
+                                     h*index//len(self.groups), h*(index+1)//len(self.groups))
+        self.wg = self.groups[0]
+        self.label = ""
+        self.emit("BARRIER", wgs=self.groups, events=[])
+
+
 def generate_m1_p1(recipe: dict | None = None) -> tuple[str, Layout, int]:
     recipe = recipe or load_recipe()
     if recipe.get("p1_schedule", {}).get("kind") == "column_head":
@@ -901,13 +1006,17 @@ def generate_m1_p1(recipe: dict | None = None) -> tuple[str, Layout, int]:
                 b.gemm(ctx, weights["wo"], att, rows, d, d, name + "wo")
                 b.add_rows(x, att, res, rows, d, name + "res")
                 b.layernorm(res, weights["ln2_g"], weights["ln2_b"], ln2, rows, d, name + "ln2")
-                b.gemm(ln2, weights["w1"], ff1, rows, d, f, name + "w1")
-                if b.fuse_bias_gelu:
-                    b.bias_gelu(ff1, weights["b1"], activated, rows, f, name + "biasgelu")
+                if phase == "p" and recipe.get("fusion", {}).get("p1_mlp") == "rf_stream":
+                    b.mlp_rf_stream(ln2, weights["w1"], weights["b1"], weights["w2"],
+                                    ff2, rows, d, f, name + "mlp")
                 else:
-                    b.add_bias(ff1, weights["b1"], biased, rows, f, name + "bias1")
-                    b.gelu(biased, activated, rows, f, name + "gelu")
-                b.gemm(activated, weights["w2"], ff2, rows, f, d, name + "w2")
+                    b.gemm(ln2, weights["w1"], ff1, rows, d, f, name + "w1")
+                    if b.fuse_bias_gelu:
+                        b.bias_gelu(ff1, weights["b1"], activated, rows, f, name + "biasgelu")
+                    else:
+                        b.add_bias(ff1, weights["b1"], biased, rows, f, name + "bias1")
+                        b.gelu(biased, activated, rows, f, name + "gelu")
+                    b.gemm(activated, weights["w2"], ff2, rows, f, d, name + "w2")
                 b.add_rows(res, ff2, y, rows, d, name + "out", weights["b2"])
                 x = y
             with b.loop(f"{phase}b{member}output", 0, rows) as row:
@@ -1044,7 +1153,8 @@ def generate_m1_d1(gemm_n_tile: int | None = None, recipe: dict | None = None) -
         recipe = load_recipe()
     if gemm_n_tile is not None:
         recipe["gemm"]["n_tile"] = gemm_n_tile
-    b = Builder(layout, recipe)
+    builder = ParallelD1Builder if recipe.get("d1_schedule", {}).get("kind") == "column_head" else Builder
+    b = builder(layout, recipe)
     b.set_gemm_stage("d1")
     output = b.symbol("output/hidden")
     for step in range(steps):

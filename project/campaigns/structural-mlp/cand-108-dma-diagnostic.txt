@@ -1,0 +1,22 @@
+Traceback (most recent call last):
+  File "<stdin>", line 7, in <module>
+  File "/Users/yihdu/Codefield/SLAI-infra-Code/transformer-codesign-starter/codesign/challenge/runner.py", line 274, in estimate_case
+    timing = estimate_pipeline(
+             ^^^^^^^^^^^^^^^^^^
+  File "/Users/yihdu/Codefield/SLAI-infra-Code/transformer-codesign-starter/codesign/challenge/pipeline.py", line 178, in estimate_pipeline
+    return estimate_global_events(
+           ^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/yihdu/Codefield/SLAI-infra-Code/transformer-codesign-starter/codesign/challenge/pipeline_events.py", line 1173, in estimate_global_events
+    ).run()
+      ^^^^^
+  File "/Users/yihdu/Codefield/SLAI-infra-Code/transformer-codesign-starter/codesign/challenge/pipeline_events.py", line 1063, in run
+    self._issue(next_instruction)
+  File "/Users/yihdu/Codefield/SLAI-infra-Code/transformer-codesign-starter/codesign/challenge/pipeline_events.py", line 594, in _issue
+    self._issue_transfer(tape, pc, ins, begin, sequence)
+  File "/Users/yihdu/Codefield/SLAI-infra-Code/transformer-codesign-starter/codesign/challenge/pipeline_events.py", line 701, in _issue_transfer
+    raise AssertionError("DMA slot changed after issue preview")
+AssertionError: DMA slot changed after issue preview
+pc 8777
+ins Instruction(op='ST', args={'src': {'space': 'RF', 'offset': 0, 'count': 1024, 'wg': 'g', 'lane': 11}, 'dst': {'space': 'HBM', 'offset': 2960352, 'count': 1024, 'wg': None, 'lane': 0, 'shape': [32, 32], 'strides': [256, 1]}, 'event': 'e82_0_224'}, line=137)
+begin 674193
+slot_choice (674220, 1, 1)

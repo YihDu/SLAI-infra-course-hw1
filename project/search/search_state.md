@@ -1,28 +1,29 @@
 # search_state (auto-generated; do not edit)
 
-- best: cand-106 score=2776.1099913390285 (P1=7292285, D1=718132)
+- best: cand-114 score=5188.494494259971 (P1=7049767, D1=212659)
 - phase=2 round=12 plateau_rounds=0 explore_ratio=0.54 need_new_operator=False
 - bottleneck: M1_P1 sm0.rf_read=2818280, sm0.rf_write=2788264, sm0.dma=1876160; M2_D1 sm0.rf_write=261248, sm0.dma=239104, shared.noc=226521 (overlapping service counts)
 
 ## elite (score desc)
+- cand-114 score=5188.49 parent=cand-113 sig=rf-mlp-and-milp-decode hyp=Compose independently verified P1 RF persistent MLP (cand-11
+- cand-113 score=5101.49 parent=cand-112 sig=d1-milp-projections hyp=HiGHS MILP chooses D1 projection owner counts and RF panels
+- cand-112 score=4455.91 parent=cand-106 sig=d1-panel-owners hyp=D1 persistent parallel owners preserve native64-column panel
+- cand-110 score=2823.46 parent=cand-108 sig=rf-streamed-mlp-store-completion hyp=RF persistent MLP with completion waits on final output stor
 - cand-106 score=2776.11 parent=cand-098 sig=blocked-prompt-q16-k32 hyp=Block 16 prompt queries, stream 32-key/value panels, coalesc
-- cand-095 score=2567.95 parent=cand-094 sig=fuse+hw:cache_mib=2+hw:dma_depth=2+hw:dma_engines=2+hw:rf_ports=8R4W+hw:sm_count=4+hw:sm_noc_bytes_per_cycle=128+hw:tc_array=8x16+hw:tc_k_parallel=4+nkm+nopf+s:rf+stage:d1:nkm+stage:p1_prompt:nkm_lanes hyp=Larger M tile reduces repeated B reads
-- cand-098 score=2567.95 parent=cand-095 sig=None hyp=Fresh full-grade score verification of current worktree subm
-- cand-100 score=2564.61 parent=cand-099 sig=p1-column-head-4-serial hyp=Numerical control: identical four-shard full P1 computation
-- cand-094 score=2547.92 parent=cand-093 sig=fuse+hw:cache_mib=2+hw:dma_depth=2+hw:dma_engines=2+hw:rf_ports=8R4W+hw:sm_count=4+hw:sm_noc_bytes_per_cycle=128+hw:tc_array=8x16+hw:tc_k_parallel=4+nkm+nopf+s:rf+stage:d1:nkm+stage:p1_prompt:nkm_lanes hyp=Expand decode N tile after prompt/hardware controls
 
 ## failure classes
 - dry_run: 27
 - evaluation_resource_limit: 1
 - evaluator_assertion: 1
-- evaluator_error: 1
+- evaluator_error: 2
 - generate_error: 3
 - harness_noop: 9
-- memory_limit: 6
+- memory_limit: 7
+- registry_interruption: 1
 - validation_cost_pruned: 1
 
 ## pareto front
-- cand-106 {'M1_P1': 7292285, 'M2_D1': 718132}
+- cand-114 {'M1_P1': 7049767, 'M2_D1': 212659}
 
 ## diversity cells
 - ?|?: cand-098
@@ -36,8 +37,13 @@
 - memory|balanced: cand-073
 - memory|p1: cand-086
 - p1_multism_control|p1: cand-100
+- persistent_decode|d1: cand-113
+- persistent_mlp_decode|balanced: cand-114
+- persistent_mlp|p1: cand-110
 - sig:?|?: cand-098
 - sig:blocked-prompt-q16-k32: cand-106
+- sig:d1-milp-projections: cand-113
+- sig:d1-panel-owners: cand-112
 - sig:fuse: cand-009
 - sig:fuse+hw:cache_mib=2+hw:dma_depth=2+hw:dma_engines=2+hw:reduction_units=1+hw:rf_ports=8R4W+hw:sm_noc_bytes_per_cycle=128+hw:tc_array=8x8+hw:tc_k_parallel=4+nkm+nopf+s:rf+stage:d1: cand-085
 - sig:fuse+hw:cache_mib=2+hw:dma_depth=2+hw:dma_engines=2+hw:rf_ports=8R4W+hw:sm_count=4+hw:sm_noc_bytes_per_cycle=128+hw:tc_array=8x16+hw:tc_k_parallel=4+hw:vector_lanes=8+nkm+nopf+s:rf+stage:d1:nkm+stage:p1_prompt:nkm_lanes: cand-097
@@ -79,6 +85,8 @@
 - sig:nkm+s:rf: cand-017
 - sig:p1-column-head-4-serial: cand-100
 - sig:pf: cand-066
+- sig:rf-mlp-and-milp-decode: cand-114
+- sig:rf-streamed-mlp-store-completion: cand-110
 - sig:s:rf: cand-019
 - sig:stage:d1: cand-072
 - sig:stage:p1_prompt: cand-070

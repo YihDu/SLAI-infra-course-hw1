@@ -1,0 +1,18 @@
+{
+  "bias": "balanced",
+  "created_at": "2026-09-29 00:47:16",
+  "failure_class": "none",
+  "family": "persistent_mlp_decode",
+  "fingerprint": "ceeb06d002167f1a",
+  "hypothesis": "Compose independently verified P1 RF persistent MLP (cand-110) with MILP D1 projection plan (cand-113); complete frozen grade confirms shared hardware and both programs.",
+  "id": "cand-114",
+  "kind": "manual",
+  "ops": [],
+  "parent": "cand-113",
+  "provenance_note": null,
+  "round": 12,
+  "status": "kept",
+  "struct_sig": "rf-mlp-and-milp-decode",
+  "summary": "[]",
+  "verdict_note": "Complete grade passes: RF resident P1 MLP plus MILP-balanced four-SM decode. Preserve full experiment and solver evidence; no official submission."
+}

@@ -12,8 +12,13 @@
       "memory|balanced": "cand-073",
       "memory|p1": "cand-086",
       "p1_multism_control|p1": "cand-100",
+      "persistent_decode|d1": "cand-113",
+      "persistent_mlp_decode|balanced": "cand-114",
+      "persistent_mlp|p1": "cand-110",
       "sig:?|?": "cand-098",
       "sig:blocked-prompt-q16-k32": "cand-106",
+      "sig:d1-milp-projections": "cand-113",
+      "sig:d1-panel-owners": "cand-112",
       "sig:fuse": "cand-009",
       "sig:fuse+hw:cache_mib=2+hw:dma_depth=2+hw:dma_engines=2+hw:reduction_units=1+hw:rf_ports=8R4W+hw:sm_noc_bytes_per_cycle=128+hw:tc_array=8x8+hw:tc_k_parallel=4+nkm+nopf+s:rf+stage:d1": "cand-085",
       "sig:fuse+hw:cache_mib=2+hw:dma_depth=2+hw:dma_engines=2+hw:rf_ports=8R4W+hw:sm_count=4+hw:sm_noc_bytes_per_cycle=128+hw:tc_array=8x16+hw:tc_k_parallel=4+hw:vector_lanes=8+nkm+nopf+s:rf+stage:d1:nkm+stage:p1_prompt:nkm_lanes": "cand-097",
@@ -55,22 +60,24 @@
       "sig:nkm+s:rf": "cand-017",
       "sig:p1-column-head-4-serial": "cand-100",
       "sig:pf": "cand-066",
+      "sig:rf-mlp-and-milp-decode": "cand-114",
+      "sig:rf-streamed-mlp-store-completion": "cand-110",
       "sig:s:rf": "cand-019",
       "sig:stage:d1": "cand-072",
       "sig:stage:p1_prompt": "cand-070"
     },
     "elite": [
+      "cand-114",
+      "cand-113",
+      "cand-112",
+      "cand-110",
       "cand-106",
       "cand-095",
       "cand-098",
-      "cand-100",
-      "cand-094",
-      "cand-093",
-      "cand-097",
-      "cand-087"
+      "cand-100"
     ],
     "pareto": [
-      "cand-106"
+      "cand-114"
     ]
   },
   "candidates": {
@@ -3911,6 +3918,263 @@
       "status": "not_verified",
       "struct_sig": "blocked-attention-w1-4sm"
     },
+    "cand-108": {
+      "bias": "p1",
+      "cache_source": null,
+      "deltas": {
+        "prior_head": "cand-106",
+        "vs_parent": {
+          "parent": "cand-106"
+        }
+      },
+      "elapsed": 18.27554316597525,
+      "evaluation_attempts": 1,
+      "failure_class": "evaluator_error",
+      "failure_note": "in())\n                     ^^^^^^\n  File \"/Users/yihdu/Codefield/SLAI-infra-Code/transformer-codesign-starter/codesign/challenge/cli.py\", line 344, in main\n    result = _evaluate(\n             ^^^^^^^^^^\n  File \"/Users/yihdu/Codefield/SLAI-infra-Code/transformer-codesign-starter/codesign/challenge/cli.py\", line 234, in _evaluate\n    report = evaluate_submission(mode, hardware, programs, seeds, baseline)\n             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"/Users/yihdu/Codefield/SLAI-infra-Code/transformer-codesign-starter/codesign/challenge/runner.py\", line 323, in evaluate_submission\n    report[\"cases\"][case][\"timing\"] = estimate_case(case, hardware, programs[case])\n                                      ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"/Users/yihdu/Codefield/SLAI-infra-Code/transformer-codesign-starter/codesign/challenge/runner.py\", line 274, in estimate_case\n    timing = estimate_pipeline(\n             ^^^^^^^^^^^^^^^^^^\n  File \"/Users/yihdu/Codefield/SLAI-infra-Code/transformer-codesign-starter/codesign/challenge/pipeline.py\", line 178, in estimate_pipeline\n    return estimate_global_events(\n           ^^^^^^^^^^^^^^^^^^^^^^^\n  File \"/Users/yihdu/Codefield/SLAI-infra-Code/transformer-codesign-starter/codesign/challenge/pipeline_events.py\", line 1173, in estimate_global_events\n    ).run()\n      ^^^^^\n  File \"/Users/yihdu/Codefield/SLAI-infra-Code/transformer-codesign-starter/codesign/challenge/pipeline_events.py\", line 1063, in run\n    self._issue(next_instruction)\n  File \"/Users/yihdu/Codefield/SLAI-infra-Code/transformer-codesign-starter/codesign/challenge/pipeline_events.py\", line 594, in _issue\n    self._issue_transfer(tape, pc, ins, begin, sequence)\n  File \"/Users/yihdu/Codefield/SLAI-infra-Code/transformer-codesign-starter/codesign/challenge/pipeline_events.py\", line 701, in _issue_transfer\n    raise AssertionError(\"DMA slot changed after issue preview\")\nAssertionError: DMA slot changed after issue preview\n",
+      "family": "persistent_mlp",
+      "fingerprint": "5ba4b1c3d6911c3b",
+      "hypothesis": "Persistent row-block W1/GELU/W2: activations and all W2 accumulators stay in RF; eliminate ff1/gelu HBM round trips. Trade additional weight reads for no materialization.",
+      "kind": "manual",
+      "ops": [],
+      "outer_sig": "5260ca6244cf1d53",
+      "parent": "cand-106",
+      "result_logged": true,
+      "round": 12,
+      "status": "not_verified",
+      "struct_sig": "rf-streamed-mlp"
+    },
+    "cand-109": {
+      "bias": "d1",
+      "cache_source": null,
+      "deltas": {
+        "prior_head": "cand-106",
+        "vs_parent": {
+          "parent": "cand-106"
+        }
+      },
+      "elapsed": 15.56942729104776,
+      "evaluation_attempts": 1,
+      "failure_class": "memory_limit",
+      "family": "persistent_decode",
+      "fingerprint": "c6665a567726cd82",
+      "hypothesis": "D1 four persistent SM owners: parallel projection columns and attention heads over eight steps; P1 unchanged. Preflight checker cost before complete grade.",
+      "kind": "manual",
+      "ops": [],
+      "outer_sig": "16d355a03911c7e2",
+      "parent": "cand-106",
+      "result_logged": true,
+      "round": 12,
+      "status": "not_verified",
+      "struct_sig": "d1-4sm-column-head"
+    },
+    "cand-110": {
+      "area_mm2": 16.25838297088,
+      "bias": "p1",
+      "cache_source": null,
+      "cycles": {
+        "M1_P1": 7049767,
+        "M2_D1": 718132
+      },
+      "deltas": {
+        "cycles": {
+          "M1_P1": -242518,
+          "M2_D1": 0
+        },
+        "prior_head": "cand-106",
+        "score": 47.34652891113865,
+        "vs_parent": {
+          "parent": "cand-108"
+        }
+      },
+      "elapsed": 120.52162108302582,
+      "eligible": true,
+      "evaluation_attempts": 1,
+      "failure_class": "none",
+      "family": "persistent_mlp",
+      "fingerprint": "a560a79986b404d2",
+      "functional": {
+        "M1_P1": true,
+        "M2_D1": true
+      },
+      "functional_passed": true,
+      "hypothesis": "RF persistent MLP with completion waits on final output store burst; cand-108 hit frozen DMA issue-preview assertion on eighth ST. No evaluator change.",
+      "kind": "manual",
+      "ops": [],
+      "outer_sig": "5260ca6244cf1d53",
+      "parent": "cand-108",
+      "power_w": 3.2090927716329922,
+      "result_logged": true,
+      "round": 12,
+      "score": 2823.456520250167,
+      "status": "kept",
+      "struct_sig": "rf-streamed-mlp-store-completion"
+    },
+    "cand-111": {
+      "bias": "d1",
+      "cache_source": null,
+      "deltas": {
+        "prior_head": "cand-110",
+        "vs_parent": {
+          "parent": "cand-106"
+        }
+      },
+      "elapsed": null,
+      "evaluation_attempts": 0,
+      "failure_class": "registry_interruption",
+      "failure_note": "Recovered incomplete evaluation",
+      "family": "persistent_decode",
+      "fingerprint": "a5fc7bf653486650",
+      "hypothesis": "D1 persistent parallel owners preserve native64-column panels: QKV3SM, WO/W2 2SM, W1/attention4SM. Avoid 65% event inflation seen in cand-109. Full grade bounded6GiB on local16GiB Mac.",
+      "kind": "manual",
+      "ops": [],
+      "outer_sig": "16d355a03911c7e2",
+      "parent": "cand-106",
+      "result_logged": true,
+      "round": 12,
+      "status": "not_verified",
+      "struct_sig": "d1-panel-owners"
+    },
+    "cand-112": {
+      "area_mm2": 16.25838297088,
+      "bias": "d1",
+      "cache_source": null,
+      "cycles": {
+        "M1_P1": 7292285,
+        "M2_D1": 278743
+      },
+      "deltas": {
+        "cycles": {
+          "M1_P1": 242518,
+          "M2_D1": -439389
+        },
+        "prior_head": "cand-110",
+        "score": 1632.4577220936235,
+        "vs_parent": {
+          "cycles": {
+            "M1_P1": 0,
+            "M2_D1": -439389
+          },
+          "parent": "cand-106",
+          "score": 1679.8042510047621
+        }
+      },
+      "elapsed": 124.75209587498102,
+      "eligible": true,
+      "evaluation_attempts": 1,
+      "failure_class": "none",
+      "family": "persistent_decode",
+      "fingerprint": "a5fc7bf653486650",
+      "functional": {
+        "M1_P1": true,
+        "M2_D1": true
+      },
+      "functional_passed": true,
+      "hypothesis": "D1 persistent parallel owners preserve native64-column panels: QKV3SM, WO/W2 2SM, W1/attention4SM. Avoid 65% event inflation seen in cand-109. Full grade bounded6GiB on local16GiB Mac. Recovery attempt after cand-111 registry interruption; no prior grade result.",
+      "kind": "manual",
+      "ops": [],
+      "outer_sig": "16d355a03911c7e2",
+      "parent": "cand-106",
+      "power_w": 6.236953472693584,
+      "result_logged": true,
+      "round": 12,
+      "score": 4455.914242343791,
+      "status": "kept",
+      "struct_sig": "d1-panel-owners"
+    },
+    "cand-113": {
+      "area_mm2": 16.25838297088,
+      "bias": "d1",
+      "cache_source": null,
+      "cycles": {
+        "M1_P1": 7292285,
+        "M2_D1": 212659
+      },
+      "deltas": {
+        "cycles": {
+          "M1_P1": 0,
+          "M2_D1": -66084
+        },
+        "prior_head": "cand-112",
+        "score": 645.5744125076826,
+        "vs_parent": {
+          "cycles": {
+            "M1_P1": 0,
+            "M2_D1": -66084
+          },
+          "parent": "cand-112",
+          "score": 645.5744125076826
+        }
+      },
+      "elapsed": 122.78455112501979,
+      "eligible": true,
+      "evaluation_attempts": 1,
+      "failure_class": "none",
+      "family": "persistent_decode",
+      "fingerprint": "a8a769e1719a5b98",
+      "functional": {
+        "M1_P1": true,
+        "M2_D1": true
+      },
+      "functional_passed": true,
+      "hypothesis": "HiGHS MILP chooses D1 projection owner counts and RF panels under15500-event cap; compare actual full grade against heuristic cand-112. P1/hardware unchanged.",
+      "kind": "manual",
+      "ops": [],
+      "outer_sig": "16d355a03911c7e2",
+      "parent": "cand-112",
+      "power_w": 6.554400375727108,
+      "result_logged": true,
+      "round": 12,
+      "score": 5101.488654851473,
+      "status": "kept",
+      "struct_sig": "d1-milp-projections"
+    },
+    "cand-114": {
+      "area_mm2": 16.25838297088,
+      "bias": "balanced",
+      "cache_source": null,
+      "cycles": {
+        "M1_P1": 7049767,
+        "M2_D1": 212659
+      },
+      "deltas": {
+        "cycles": {
+          "M1_P1": -242518,
+          "M2_D1": 0
+        },
+        "prior_head": "cand-113",
+        "score": 87.0058394084981,
+        "vs_parent": {
+          "cycles": {
+            "M1_P1": -242518,
+            "M2_D1": 0
+          },
+          "parent": "cand-113",
+          "score": 87.0058394084981
+        }
+      },
+      "elapsed": 110.8275520830648,
+      "eligible": true,
+      "evaluation_attempts": 1,
+      "failure_class": "none",
+      "family": "persistent_mlp_decode",
+      "fingerprint": "ceeb06d002167f1a",
+      "functional": {
+        "M1_P1": true,
+        "M2_D1": true
+      },
+      "functional_passed": true,
+      "hypothesis": "Compose independently verified P1 RF persistent MLP (cand-110) with MILP D1 projection plan (cand-113); complete frozen grade confirms shared hardware and both programs.",
+      "kind": "manual",
+      "ops": [],
+      "outer_sig": "ef38d84af0f6e3b1",
+      "parent": "cand-113",
+      "power_w": 6.554400375727108,
+      "result_logged": true,
+      "round": 12,
+      "score": 5188.494494259971,
+      "status": "kept",
+      "struct_sig": "rf-mlp-and-milp-decode"
+    },
     "drun-001": {
       "bias": "balanced",
       "failure_class": "dry_run",
@@ -4542,7 +4806,7 @@
       "struct_sig": "hw:sm_count=32+nkm+nofuse+nopf+s:hbm"
     }
   },
-  "counter": 107,
+  "counter": 114,
   "dry_counter": 27,
   "fingerprints": {
     "062742f6b8fbbde1": "cand-036",
@@ -4580,6 +4844,7 @@
     "56a05cecf41c0696": "cand-005",
     "575a9376b6369130": "cand-090",
     "5aa16f9bbbaaa000": "cand-066",
+    "5ba4b1c3d6911c3b": "cand-108",
     "5bd0cc22e122250c": "cand-021",
     "5e60de2f5066b4dc": "cand-004",
     "6ab351a88bec5627": "cand-048",
@@ -4607,6 +4872,9 @@
     "90c3b702310f4a0d": "cand-087",
     "94bc9c7b5d9d25cf": "cand-044",
     "95e4af71401f8496": "cand-071",
+    "a560a79986b404d2": "cand-110",
+    "a5fc7bf653486650": "cand-112",
+    "a8a769e1719a5b98": "cand-113",
     "a9631f7a313e736a": "cand-002",
     "aa0e97af5d268445": "cand-051",
     "ac572e82f17a050f": "cand-022",
@@ -4622,9 +4890,11 @@
     "c16f062eaf2ae286": "cand-018",
     "c3a05a00e8785bef": "cand-010",
     "c6152b1c5747f74a": "cand-007",
+    "c6665a567726cd82": "cand-109",
     "c72def168724372d": "cand-003",
     "c851c34791b14513": "cand-105",
     "cd40d6a34502fa0f": "cand-062",
+    "ceeb06d002167f1a": "cand-114",
     "d084471571e40788": "cand-065",
     "d0ae7c9cd4adadcd": "cand-053",
     "d0db125e0ae8e4d8": "cand-088",
@@ -4642,10 +4912,10 @@
     "ff0c29904037c174": "cand-089",
     "ff6870b21f8f0ec7": "cand-055"
   },
-  "head": "cand-106",
+  "head": "cand-114",
   "search": {
-    "best_id": "cand-106",
-    "best_score": 2776.1099913390285,
+    "best_id": "cand-114",
+    "best_score": 5188.494494259971,
     "bottleneck": "M1_P1 sm0.rf_read=2818280, sm0.rf_write=2788264, sm0.dma=1876160; M2_D1 sm0.rf_write=261248, sm0.dma=239104, shared.noc=226521 (overlapping service counts)",
     "explore_ratio": 0.54,
     "hierarchy": {

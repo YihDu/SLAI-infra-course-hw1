@@ -1,7 +1,8 @@
 # Search space v2: program structure before local tuning
 
-Status: design proposal. The current v1 search and its candidate records remain
-valid. Do not start v2 evaluation until the in-flight v1 round finishes.
+Status: implementation in progress. The v1 candidate records remain valid.
+`stage_gemm_tiles` is implemented and has a passing candidate; the other
+structural operators below remain proposals.
 
 ## Why change the space
 
@@ -53,10 +54,23 @@ recipe and add a migration that maps every v1 recipe to byte-identical output.
 | `activation_residency` | HBM scratch; RF producer-consumer; shared-memory staging | Only fuse adjacent stages when live ranges fit in a 64 KiB workgroup RF slot or configured shared memory; wait for stores before reusing source storage. |
 | `attention_algorithm` | current RF scores; blocked/online softmax | Preserve FP32 accuracy and causal mask. Start with D1's 136-element key length and compare public checks before enabling P1. |
 
-The first operator is deliberately small: P1 batch parallelism can be isolated
-without changing attention math or the D1 program. The next two make D1's
-sequential steps internally parallel. Expose each operator only after its
-compiler implementation passes `check`; a DSL placeholder is not searchable.
+The first P1 batch-parallel attempt (cand-068) emitted two valid workgroup
+streams, but `check` did not finish after more than 11 minutes and its HBM race
+validation reached roughly 48 GiB of physical memory. It was interrupted and
+has no correctness or score verdict. Multi-workgroup operators therefore need
+a smaller scoped prototype and a practical validation-cost gate before they
+enter automated search. Expose each operator only after its compiler
+implementation passes `check`; a DSL placeholder is not searchable.
+
+The stage-specific GEMM operator is now implemented in the compiler and DSL.
+The compiler emits byte-identical output for v1 recipes. Cand-070 passed
+`check` with P1 prompt `m_tile=16` on `dma_depth=1` hardware and improved its
+parent score from 1861.33 to 1875.68. Cand-069 encountered an evaluator DMA
+scheduler assertion on `dma_depth=2`, so that combination has no score.
+Cand-071 passed `check` and `grade` with D1-only `n_tile=32, k_chunk=32`:
+P1=12,522,857, D1=808,550, score=1996.48, area=6.894 mm². Cand-072 then
+changed only the D1 `k_chunk` from 32 to 24 and passed the same full chain:
+P1=12,522,857, D1=801,958, score=2004.67. It is the current incumbent.
 
 ## Hardware is conditional on the program
 
@@ -93,10 +107,9 @@ candidate.
 
 ## Rollout and acceptance
 
-First finish the current v1 round and restore its best candidate to the
-worktree. Freeze a v1 reference snapshot. Implement recipe migration and
-`p1_batch_partition`, then run one candidate through generate, check, estimate,
-and grade using the existing harness. Log both passes and failures. Add D1
-column/head partitioning only after the P1 topology is correct. Keep v1
-candidates and reports unchanged, so provenance and score comparisons survive
-the compiler transition.
+The v1 reference is cand-065. Next, search a small legal grid around cand-072's
+D1 tile while preserving the stage-specific policy. Then prototype one small
+producer-consumer HBM elimination in a single workgroup. Revisit D1 head or
+column workgroups only after a small multi-workgroup program completes the
+frozen `check` within practical time and memory. Keep all earlier candidate
+snapshots and reports unchanged.

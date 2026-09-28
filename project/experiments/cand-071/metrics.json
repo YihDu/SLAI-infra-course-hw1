@@ -1,0 +1,189 @@
+{
+  "candidate": "cand-071",
+  "reports": {
+    "check": {
+      "mode": "check",
+      "cases": {
+        "M1_P1": {
+          "functional_passed": true,
+          "max_abs_error": 4.721705174404178e-06,
+          "cycles": 12522857,
+          "instruction_count": 264815,
+          "hbm_read_bytes": 149702656,
+          "hbm_write_bytes": 8120320,
+          "peak_window_power_w": 2.629855153361387,
+          "busy_cycles": {
+            "sm0.dma": 2465984,
+            "sm0.issue": 264815,
+            "sm0.noc_in": 1939708,
+            "sm0.noc_out": 126880,
+            "sm0.rf_read": 4533128,
+            "sm0.rf_write": 3218344,
+            "sm0.sfu": 269964,
+            "sm0.shared_read": 0,
+            "sm0.shared_write": 0,
+            "sm0.tc": 5625504,
+            "sm0.vec": 577080,
+            "sm0.issue_wait": 12257978,
+            "shared.hbm_channel_0": 1232992,
+            "shared.hbm_channel_1": 1232992,
+            "shared.hbm_channel_2": 1232992,
+            "shared.hbm_channel_3": 1232992,
+            "shared.noc": 2063516
+          }
+        },
+        "M2_D1": {
+          "functional_passed": true,
+          "max_abs_error": 2.9756341235476214e-06,
+          "cycles": 808550,
+          "instruction_count": 15642,
+          "hbm_read_bytes": 15331328,
+          "hbm_write_bytes": 167936,
+          "peak_window_power_w": 2.146777961343862,
+          "busy_cycles": {
+            "sm0.dma": 242176,
+            "sm0.issue": 15642,
+            "sm0.noc_in": 157944,
+            "sm0.noc_out": 2624,
+            "sm0.rf_read": 142880,
+            "sm0.rf_write": 258176,
+            "sm0.sfu": 8832,
+            "sm0.shared_read": 0,
+            "sm0.shared_write": 0,
+            "sm0.tc": 240448,
+            "sm0.vec": 17920,
+            "sm0.issue_wait": 792748,
+            "shared.hbm_channel_0": 121440,
+            "shared.hbm_channel_1": 121184,
+            "shared.hbm_channel_2": 120992,
+            "shared.hbm_channel_3": 120736,
+            "shared.noc": 160536
+          }
+        }
+      }
+    },
+    "estimate": {
+      "mode": "estimate",
+      "cases": {
+        "M1_P1": {
+          "functional_passed": false,
+          "cycles": 12522857,
+          "instruction_count": 264815,
+          "hbm_read_bytes": 149702656,
+          "hbm_write_bytes": 8120320,
+          "peak_window_power_w": 2.629855153361387,
+          "busy_cycles": {
+            "sm0.dma": 2465984,
+            "sm0.issue": 264815,
+            "sm0.noc_in": 1939708,
+            "sm0.noc_out": 126880,
+            "sm0.rf_read": 4533128,
+            "sm0.rf_write": 3218344,
+            "sm0.sfu": 269964,
+            "sm0.shared_read": 0,
+            "sm0.shared_write": 0,
+            "sm0.tc": 5625504,
+            "sm0.vec": 577080,
+            "sm0.issue_wait": 12257978,
+            "shared.hbm_channel_0": 1232992,
+            "shared.hbm_channel_1": 1232992,
+            "shared.hbm_channel_2": 1232992,
+            "shared.hbm_channel_3": 1232992,
+            "shared.noc": 2063516
+          }
+        },
+        "M2_D1": {
+          "functional_passed": false,
+          "cycles": 808550,
+          "instruction_count": 15642,
+          "hbm_read_bytes": 15331328,
+          "hbm_write_bytes": 167936,
+          "peak_window_power_w": 2.146777961343862,
+          "busy_cycles": {
+            "sm0.dma": 242176,
+            "sm0.issue": 15642,
+            "sm0.noc_in": 157944,
+            "sm0.noc_out": 2624,
+            "sm0.rf_read": 142880,
+            "sm0.rf_write": 258176,
+            "sm0.sfu": 8832,
+            "sm0.shared_read": 0,
+            "sm0.shared_write": 0,
+            "sm0.tc": 240448,
+            "sm0.vec": 17920,
+            "sm0.issue_wait": 792748,
+            "shared.hbm_channel_0": 121440,
+            "shared.hbm_channel_1": 121184,
+            "shared.hbm_channel_2": 120992,
+            "shared.hbm_channel_3": 120736,
+            "shared.noc": 160536
+          }
+        }
+      }
+    },
+    "grade": {
+      "mode": "grade",
+      "cases": {
+        "M1_P1": {
+          "functional_passed": true,
+          "max_abs_error": 4.721705174404178e-06,
+          "cycles": 12522857,
+          "instruction_count": 264815,
+          "hbm_read_bytes": 149702656,
+          "hbm_write_bytes": 8120320,
+          "peak_window_power_w": 2.629855153361387,
+          "busy_cycles": {
+            "sm0.dma": 2465984,
+            "sm0.issue": 264815,
+            "sm0.noc_in": 1939708,
+            "sm0.noc_out": 126880,
+            "sm0.rf_read": 4533128,
+            "sm0.rf_write": 3218344,
+            "sm0.sfu": 269964,
+            "sm0.shared_read": 0,
+            "sm0.shared_write": 0,
+            "sm0.tc": 5625504,
+            "sm0.vec": 577080,
+            "sm0.issue_wait": 12257978,
+            "shared.hbm_channel_0": 1232992,
+            "shared.hbm_channel_1": 1232992,
+            "shared.hbm_channel_2": 1232992,
+            "shared.hbm_channel_3": 1232992,
+            "shared.noc": 2063516
+          }
+        },
+        "M2_D1": {
+          "functional_passed": true,
+          "max_abs_error": 2.9756341235476214e-06,
+          "cycles": 808550,
+          "instruction_count": 15642,
+          "hbm_read_bytes": 15331328,
+          "hbm_write_bytes": 167936,
+          "peak_window_power_w": 2.146777961343862,
+          "busy_cycles": {
+            "sm0.dma": 242176,
+            "sm0.issue": 15642,
+            "sm0.noc_in": 157944,
+            "sm0.noc_out": 2624,
+            "sm0.rf_read": 142880,
+            "sm0.rf_write": 258176,
+            "sm0.sfu": 8832,
+            "sm0.shared_read": 0,
+            "sm0.shared_write": 0,
+            "sm0.tc": 240448,
+            "sm0.vec": 17920,
+            "sm0.issue_wait": 792748,
+            "shared.hbm_channel_0": 121440,
+            "shared.hbm_channel_1": 121184,
+            "shared.hbm_channel_2": 120992,
+            "shared.hbm_channel_3": 120736,
+            "shared.noc": 160536
+          }
+        }
+      },
+      "score": 1996.4823457755592,
+      "eligible": true,
+      "area_mm2": 6.89403941376
+    }
+  }
+}

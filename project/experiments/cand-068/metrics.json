@@ -1,0 +1,8 @@
+{
+  "candidate": "cand-068",
+  "verdict": "not_verified",
+  "failure_class": "evaluation_resource_limit",
+  "check_elapsed_seconds_approx": 685,
+  "report": null,
+  "evidence": "check-process-sample.txt"
+}

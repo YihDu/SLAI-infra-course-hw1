@@ -33,6 +33,11 @@ STRUCTURES = {
     "nkm_pf_rf":    ("memory",    [{"op": "gemm_order", "order": "nkm"},
                                    {"op": "gemm_prefetch", "enabled": 1},
                                    {"op": "scores_residency", "space": "rf"}]),
+    "stage_p1_prompt_m16": ("compute", [{"op": "stage_gemm_tiles",
+                                         "stage": "p1_prompt", "m_tile": 16}]),
+    "stage_d1_n32": ("compute", [{"op": "stage_gemm_tiles",
+                                  "stage": "d1", "n_tile": 32,
+                                  "k_chunk": 32}]),
 }
 
 
@@ -72,6 +77,8 @@ def struct_sig(ops: list[dict]) -> str:
             parts.append(op["order"])
         elif op["op"] == "gemm_tiles":
             continue
+        elif op["op"] == "stage_gemm_tiles":
+            parts.append(f"stage:{op['stage']}")
         elif op["op"] == "gemm_prefetch":
             parts.append("pf" if op.get("enabled", 1) else "nopf")
         elif op["op"] == "scores_residency":

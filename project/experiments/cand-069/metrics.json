@@ -1,0 +1,7 @@
+{
+  "candidate": "cand-069",
+  "verdict": "not_verified",
+  "failure_class": "evaluator_assertion",
+  "report": null,
+  "failure_note": "check produced no report: AssertionError DMA slot changed after issue preview in pipeline_events.py:701"
+}

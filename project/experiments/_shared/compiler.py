@@ -89,15 +89,9 @@ class Tensor:
 class Builder:
     def __init__(self, layout: Layout, recipe: dict | None = None):
         recipe = recipe or load_recipe()
-        g = recipe["gemm"]
-        if int(g["n_tile"]) <= 0 or int(g["k_chunk"]) <= 0 or int(g["m_tile"]) <= 0:
-            raise ValueError("GEMM tiles must be positive")
+        self.recipe = recipe
         self.layout = layout
-        self.gemm_n_tile = int(g["n_tile"])
-        self.m_tile = int(g["m_tile"])
-        self.k_chunk = int(g["k_chunk"])
-        self.order = g["order"]
-        self.prefetch = int(g["prefetch"])
+        self.set_gemm_stage(None)
         self.scores_res = recipe["attention"]["scores"]
         self.fuse_bias_gelu = int(recipe["fusion"]["bias_gelu"])
         self.lines = []
@@ -106,6 +100,18 @@ class Builder:
         self.cursor = layout.symbols["scratch"].address // 4
         self.tensors = {}
         self.emit("WG.BEGIN", wg="g", sm=0, shared_bytes=0)
+
+    def set_gemm_stage(self, stage):
+        g = dict(self.recipe["gemm"])
+        if stage is not None:
+            g.update(self.recipe.get("gemm_stages", {}).get(stage, {}))
+        if int(g["n_tile"]) <= 0 or int(g["k_chunk"]) <= 0 or int(g["m_tile"]) <= 0:
+            raise ValueError("GEMM tiles must be positive")
+        self.gemm_n_tile = int(g["n_tile"])
+        self.m_tile = int(g["m_tile"])
+        self.k_chunk = int(g["k_chunk"])
+        self.order = g["order"]
+        self.prefetch = int(g["prefetch"])
 
     def symbol(self, name):
         item = self.layout.symbols[name]
@@ -644,6 +650,7 @@ def generate_m1_p1() -> tuple[str, Layout, int]:
     output = b.symbol("output/hidden")
     # All prompts finish before STEP.COMMIT releases either batch member's first new token.
     for phase, rows in (("p", prompt_rows), ("s", 1)):
+        b.set_gemm_stage("p1_prompt" if phase == "p" else "p1_step")
         for member in range(batch):
             initial = (
                 Tensor(prompt.offset + member * prompt_rows * d, (rows, d))
@@ -743,6 +750,7 @@ def generate_m1_d1(gemm_n_tile: int | None = None, recipe: dict | None = None) -
     if gemm_n_tile is not None:
         recipe["gemm"]["n_tile"] = gemm_n_tile
     b = Builder(layout, recipe)
+    b.set_gemm_stage("d1")
     output = b.symbol("output/hidden")
     for step in range(steps):
         x = b.symbol(f"input/step{step}")

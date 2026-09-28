@@ -1,0 +1,18 @@
+{
+  "bias": null,
+  "created_at": "2026-09-28 15:46:30",
+  "failure_class": "evaluation_resource_limit",
+  "family": null,
+  "fingerprint": null,
+  "hypothesis": "P1 batch members as independent workgroups on SM0 and SM1",
+  "id": "cand-068",
+  "kind": null,
+  "ops": null,
+  "parent": "cand-065",
+  "provenance_note": null,
+  "round": null,
+  "status": "pruned",
+  "struct_sig": null,
+  "summary": "schedule.p1_batch_partition serial->batch; keep D1 and hardware",
+  "verdict_note": "check interrupted after 11m25s and ~48 GiB footprint while validate_hbm_races compared cross-workgroup HBM accesses; no correctness verdict"
+}

@@ -3,6 +3,8 @@
     "diversity": {
       "attention|balanced": "cand-019",
       "compute|balanced": "cand-046",
+      "compute|d1": "cand-072",
+      "compute|p1": "cand-070",
       "fusion|balanced": "cand-009",
       "hardware|balanced": "cand-047",
       "memory|balanced": "cand-065",
@@ -28,20 +30,22 @@
       "sig:nkm+pf+s:rf": "cand-015",
       "sig:nkm+s:rf": "cand-017",
       "sig:pf": "cand-066",
-      "sig:s:rf": "cand-019"
+      "sig:s:rf": "cand-019",
+      "sig:stage:d1": "cand-072",
+      "sig:stage:p1_prompt": "cand-070"
     },
     "elite": [
+      "cand-072",
+      "cand-071",
       "cand-065",
       "cand-067",
+      "cand-070",
       "cand-047",
       "cand-063",
-      "cand-059",
-      "cand-052",
-      "cand-062",
-      "cand-056"
+      "cand-059"
     ],
     "pareto": [
-      "cand-065"
+      "cand-072"
     ]
   },
   "candidates": {
@@ -2200,6 +2204,90 @@
       "status": "evaluated",
       "struct_sig": "hw:hbm_channels=8"
     },
+    "cand-068": {
+      "failure_class": "evaluation_resource_limit",
+      "failure_note": "check interrupted after 11m25s and ~48 GiB footprint while validate_hbm_races compared cross-workgroup HBM accesses; no correctness verdict",
+      "hypothesis": "P1 batch members as independent workgroups on SM0 and SM1",
+      "parent": "cand-065",
+      "status": "pruned"
+    },
+    "cand-069": {
+      "failure_class": "evaluator_assertion",
+      "failure_note": "check produced no report: AssertionError DMA slot changed after issue preview in pipeline_events.py:701",
+      "fingerprint": "8facf25ee9a64750",
+      "hypothesis": "Use m_tile 16 for P1 prompt GEMMs while retaining m_tile 8 for steps and D1",
+      "parent": "cand-065",
+      "status": "pruned"
+    },
+    "cand-070": {
+      "area_mm2": 6.774039413760001,
+      "baseline_cycles": {
+        "M1_P1": 12909227,
+        "M2_D1": 888634
+      },
+      "bias": "p1",
+      "cycles": {
+        "M1_P1": 12909227,
+        "M2_D1": 888634
+      },
+      "failure_class": "none",
+      "family": "compute",
+      "fingerprint": "4992e0944079052f",
+      "hypothesis": "P1 prompt m_tile 16 with stage-specific GEMM policy on dma_depth 1",
+      "improved": true,
+      "kind": "manual",
+      "parent": "cand-059",
+      "power_w": 2.3305919133597084,
+      "score": 1875.6812796394786,
+      "status": "evaluated",
+      "struct_sig": "stage:p1_prompt"
+    },
+    "cand-071": {
+      "area_mm2": 6.89403941376,
+      "baseline_cycles": {
+        "M1_P1": 12522857,
+        "M2_D1": 808550
+      },
+      "bias": "d1",
+      "cycles": {
+        "M1_P1": 12522857,
+        "M2_D1": 808550
+      },
+      "failure_class": "none",
+      "family": "compute",
+      "fingerprint": "95e4af71401f8496",
+      "hypothesis": "D1-only GEMM tile n32 k32 with stage-specific recipe",
+      "improved": true,
+      "kind": "manual",
+      "parent": "cand-065",
+      "power_w": 2.629855153361387,
+      "score": 1996.4823457755592,
+      "status": "kept",
+      "struct_sig": "stage:d1"
+    },
+    "cand-072": {
+      "area_mm2": 6.89403941376,
+      "baseline_cycles": {
+        "M1_P1": 12522857,
+        "M2_D1": 801958
+      },
+      "bias": "d1",
+      "cycles": {
+        "M1_P1": 12522857,
+        "M2_D1": 801958
+      },
+      "failure_class": "none",
+      "family": "compute",
+      "fingerprint": "b8865c9d9198b3a6",
+      "hypothesis": "D1 stage-specific k_chunk 32 to 24 with n_tile 32",
+      "improved": true,
+      "kind": "manual",
+      "parent": "cand-071",
+      "power_w": 2.629855153361387,
+      "score": 2004.670977306224,
+      "status": "kept",
+      "struct_sig": "stage:d1"
+    },
     "drun-001": {
       "bias": "balanced",
       "failure_class": "dry_run",
@@ -2851,6 +2939,7 @@
     "3ed983a6780dce16": "cand-016",
     "45ecec5211e523f3": "cand-064",
     "46b7b004577c04fd": "cand-015",
+    "4992e0944079052f": "cand-070",
     "4db087d2863f570d": "cand-023",
     "4f0084c3f43a4af2": "cand-001",
     "52b8df7fb6990c4f": "cand-024",
@@ -2871,12 +2960,15 @@
     "88a1c49c01abc017": "cand-061",
     "8a7c84d9a7be1c97": "cand-026",
     "8c85c43dcdc09a36": "cand-000",
+    "8facf25ee9a64750": "cand-069",
     "94bc9c7b5d9d25cf": "cand-044",
+    "95e4af71401f8496": "cand-071",
     "a9631f7a313e736a": "cand-002",
     "aa0e97af5d268445": "cand-051",
     "ac572e82f17a050f": "cand-022",
     "b3503608c839b8de": "cand-049",
     "b3c122bf8a968893": "cand-017",
+    "b8865c9d9198b3a6": "cand-072",
     "bc9f80dc971510a2": "cand-052",
     "c0c82030ca9ad779": "cand-050",
     "c16f062eaf2ae286": "cand-018",
@@ -2894,10 +2986,10 @@
     "f820976715786740": "cand-054",
     "ff6870b21f8f0ec7": "cand-055"
   },
-  "head": "cand-065",
+  "head": "cand-072",
   "search": {
-    "best_id": "cand-065",
-    "best_score": 1965.9942357374484,
+    "best_id": "cand-072",
+    "best_score": 2004.670977306224,
     "bottleneck": "P1 sm0.issue_wait=12257978",
     "explore_ratio": 0.54,
     "need_new_operator": false,

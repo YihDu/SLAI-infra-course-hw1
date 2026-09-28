@@ -22,9 +22,9 @@ PHASE_UNLOCKED_OPS = {
     1: {"gemm_order", "gemm_tiles", "gemm_prefetch", "scores_residency",
         "fuse_bias_gelu"},
     2: {"gemm_order", "gemm_tiles", "gemm_prefetch", "scores_residency",
-        "fuse_bias_gelu", "hw_set"},
+        "fuse_bias_gelu", "hw_set", "stage_gemm_tiles"},
     3: {"gemm_order", "gemm_tiles", "gemm_prefetch", "scores_residency",
-        "fuse_bias_gelu", "hw_set", "workgroups"},
+        "fuse_bias_gelu", "hw_set", "workgroups", "stage_gemm_tiles"},
 }
 
 # Legal hardware menu values (mirrors codesign/challenge/hardware.py).
@@ -100,6 +100,23 @@ def _op_gemm_tiles(recipe, _hw, op):
             recipe["gemm"][key] = v
 
 
+def _op_stage_gemm_tiles(recipe, _hw, op):
+    stage = op.get("stage")
+    if stage not in ("p1_prompt", "p1_step", "d1"):
+        raise DslError(f"stage_gemm_tiles: bad stage {stage!r}")
+    override = recipe.setdefault("gemm_stages", {}).setdefault(stage, {})
+    for key, choices in (("m_tile", M_TILE_CHOICES),
+                         ("n_tile", N_TILE_CHOICES),
+                         ("k_chunk", K_CHUNK_CHOICES)):
+        if key in op:
+            value = op[key]
+            if type(value) is not int or value not in choices:
+                raise DslError(f"stage_gemm_tiles: {key}={value!r} not in {choices}")
+            override[key] = value
+    if not override:
+        raise DslError("stage_gemm_tiles: no tile field")
+
+
 def _op_gemm_prefetch(recipe, _hw, op):
     recipe["gemm"]["prefetch"] = int(bool(op.get("enabled", 1)))
 
@@ -134,6 +151,7 @@ def _op_workgroups(_recipe, _hw, _op):
 OPERATORS = {
     "gemm_order": _op_gemm_order,
     "gemm_tiles": _op_gemm_tiles,
+    "stage_gemm_tiles": _op_stage_gemm_tiles,
     "gemm_prefetch": _op_gemm_prefetch,
     "scores_residency": _op_scores_residency,
     "fuse_bias_gelu": _op_fuse_bias_gelu,
@@ -203,6 +221,22 @@ def validate_recipe(recipe: dict, hw: dict | None = None) -> list[str]:
         errs.append(f"m_tile={m_t}: >32 m-iterations, instruction explosion")
     if recipe["attention"]["scores"] not in SCORES_SPACES:
         errs.append("bad scores space")
+    for stage, override in recipe.get("gemm_stages", {}).items():
+        if stage not in ("p1_prompt", "p1_step", "d1"):
+            errs.append(f"bad GEMM stage {stage!r}")
+            continue
+        if set(override) - {"m_tile", "n_tile", "k_chunk"}:
+            errs.append(f"unsupported GEMM stage fields: {set(override) - {'m_tile', 'n_tile', 'k_chunk'}}")
+            continue
+        effective = {**g, **override}
+        st_m, st_n, st_k = (effective[k] for k in ("m_tile", "n_tile", "k_chunk"))
+        max_rows = 64 if stage == "p1_prompt" else 1
+        if effective["order"] == "nkm" and max_rows * st_n > lw:
+            errs.append(f"{stage}: accumulators exceed RF lane")
+        if st_m * st_k > lw or st_k * st_n > lw:
+            errs.append(f"{stage}: operand tile exceeds RF lane")
+        if max_rows // max(st_m, 1) > 32:
+            errs.append(f"{stage}: too many m iterations")
     return errs
 
 

@@ -886,3 +886,49 @@ Traceback (most recent call last):
 - Decision: status=evaluated failure_class=none
 
 ### round 12 summary: best=cand-065 score=1965.994 gain=1.0486 plateau=0 explore=0.54
+
+## 2026-09-28 15:58:25 — cand-068: P1 batch workgroups on SM0/SM1
+- Change: schedule.p1_batch_partition serial→batch; D1 and hardware inherited from cand-065.
+- Verify: controller run cand-068 --seed 7 → check produced no report; interrupted after ~11m25s at codesign/challenge/hbm_race.py:462 with ~48 GiB physical footprint (sample: project/experiments/cand-068/check-process-sample.txt).
+- Result: correctness unknown; no cycles, score, area/power result.
+- Decision: reject this emitted structure as unverified under practical evaluator resources; preserve candidate and investigate lower-cost parallel partitioning.
+
+## 2026-09-28 15:59:49 — cand-069: P1 prompt-only m_tile 16
+- Change: stage-specific GEMM policy; P1 prompt m_tile 8→16, P1 step and D1 retain 8, hardware inherited from cand-065 (dma_depth=2).
+- Verify: controller run cand-069 --seed 7 → no check report; evaluator raised AssertionError: DMA slot changed after issue preview (pipeline_events.py:701).
+- Result: correctness and score unknown; no valid timing report.
+- Decision: reject this combination pending separate run on dma_depth=1; preserve failed candidate.
+
+## 2026-09-28 15:59:49 — cand-070: P1 prompt m_tile 16 with stage-specific GEMM policy on dma_depth 1
+- Parent: cand-059; Summary: p1_prompt.m_tile 8->16; P1 step/D1 remain 8; hardware from cand-059
+- Inputs: compiler@caef84c6 hardware@9b093b55
+- Hypothesis: P1 prompt m_tile 16 with stage-specific GEMM policy on dma_depth 1
+- Verify: check PASS (max err 4.72e-06); estimate -> reports/estimate.json; grade -> reports/grade.json
+- Result: M1_P1=12909227 (2.401x), M2_D1=888634 (1.465x); score=1875.6812796394786, eligible=True
+  - M1_P1: hbm_r=149.7MB hbm_w=8.1MB instr=204143 peakW=2.33; top busy: sm0.issue_wait=12705020, sm0.tc=5571744, sm0.rf_read=4533128, sm0.rf_write=3218344
+  - M2_D1: hbm_r=15.7MB hbm_w=0.2MB instr=21018 peakW=1.95; top busy: sm0.issue_wait=867456, sm0.rf_write=262656, sm0.dma=248320, sm0.tc=243264
+- Decision: pending keep/revert
+
+## 2026-09-28 16:06:20 — cand-071: D1-only GEMM tile n32 k32 with stage-specific recipe
+- Parent: cand-065; Summary: D1 n_tile 16->32 and k_chunk 48->32; P1 unchanged
+- Inputs: compiler@caef84c6 hardware@5cb52af0
+- Hypothesis: D1-only GEMM tile n32 k32 with stage-specific recipe
+- Verify: check PASS (max err 4.72e-06); estimate -> reports/estimate.json; grade -> reports/grade.json
+- Result: M1_P1=12522857 (2.475x), M2_D1=808550 (1.610x); score=1996.4823457755592, eligible=True
+  - M1_P1: hbm_r=149.7MB hbm_w=8.1MB instr=264815 peakW=2.63; top busy: sm0.issue_wait=12257978, sm0.tc=5625504, sm0.rf_read=4533128, sm0.rf_write=3218344
+  - M2_D1: hbm_r=15.3MB hbm_w=0.2MB instr=15642 peakW=2.15; top busy: sm0.issue_wait=792748, sm0.rf_write=258176, sm0.dma=242176, sm0.tc=240448
+- Decision: pending keep/revert
+
+### cand-071 verdict: KEPT — new best score 1996.48; D1 stage tile n32/k32 improves decode, P1 unchanged
+
+## 2026-09-28 16:16:46 — cand-072: D1 stage-specific k_chunk 32 to 24 with n_tile 32
+- Parent: cand-071; Summary: Only D1 k_chunk 32->24; all other recipe and hardware fields unchanged
+- Inputs: compiler@caef84c6 hardware@5cb52af0
+- Hypothesis: D1 stage-specific k_chunk 32 to 24 with n_tile 32
+- Verify: check PASS (max err 4.72e-06); estimate -> reports/estimate.json; grade -> reports/grade.json
+- Result: M1_P1=12522857 (2.475x), M2_D1=801958 (1.624x); score=2004.670977306224, eligible=True
+  - M1_P1: hbm_r=149.7MB hbm_w=8.1MB instr=264815 peakW=2.63; top busy: sm0.issue_wait=12257978, sm0.tc=5625504, sm0.rf_read=4533128, sm0.rf_write=3218344
+  - M2_D1: hbm_r=15.5MB hbm_w=0.2MB instr=19866 peakW=2.17; top busy: sm0.issue_wait=781932, sm0.rf_write=263232, sm0.dma=244416, sm0.tc=243264
+- Decision: pending keep/revert
+
+### cand-072 verdict: KEPT — new best score 2004.67; D1-only k_chunk 24 improves decode

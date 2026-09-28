@@ -1,0 +1,18 @@
+{
+  "bias": null,
+  "created_at": "2026-09-28 16:06:20",
+  "failure_class": null,
+  "family": null,
+  "fingerprint": null,
+  "hypothesis": "D1-only GEMM tile n32 k32 with stage-specific recipe",
+  "id": "cand-071",
+  "kind": null,
+  "ops": null,
+  "parent": "cand-065",
+  "provenance_note": null,
+  "round": null,
+  "status": "kept",
+  "struct_sig": null,
+  "summary": "D1 n_tile 16->32 and k_chunk 48->32; P1 unchanged",
+  "verdict_note": "new best score 1996.48; D1 stage tile n32/k32 improves decode, P1 unchanged"
+}

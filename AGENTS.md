@@ -145,13 +145,15 @@ programs/M1_P1.asm
 programs/M2_D1.asm
 project/iteration-log.md
 project/<generator sources, scripts, experiment reports>
-agent-trace/<all agent session exports, native format, ≥1 nonempty>
+agent-trace/<one complete primary conversation export, native format>
 ```
 
-`agent-trace/` must contain the traces of **every agent session used on this
-project, across all tools** (e.g. Devin transcripts from
-`~/.local/share/devin/cli/transcripts/*.json` or `devin --export` ATIF files;
-Codex session JSONL). Include dead ends. Deadlines: milestone 1 = **2026-10-07
+**User override (2026-09-28):** Keep only one complete native export of the
+current primary conversation in `agent-trace/`. Do not separately collect worker
+or additional session exports. This supersedes the earlier all-session trace
+collection instruction. Keep experiment reports and iteration logs as usual.
+
+Deadlines: milestone 1 = **2026-10-07
 12:00 Beijing**; milestone 2 (final) = **2026-10-12 12:00 Beijing**.
 
 ## 10. Repo map and current state

@@ -1,13 +1,7 @@
-# Agent traces
+# Conversation trace
 
-Submission requires at least one nonempty exported agent session trace in this folder.
+按用户 2026-09-28 的最新要求，此目录只保留当前主对话的一份完整原生 JSONL 导出（截至导出时）。不再逐个收集、保存 worker 或额外 session 的导出。
 
-Devin CLI exports sessions in ATIF format:
+当前对话 ID：`01a0e6d4-9d27-7a32-88e3-90317a994125`。
 
-```sh
-devin list                          # find session ids for this directory
-devin -r <session-id> --export agent-trace/<session-id>.json
-```
-
-Resuming with `--export` writes the full conversation after each turn. Export every
-session used for this project before packaging the submission ZIP.
+后续交接以 `project/CURRENT_SESSION_HANDOFF.md` 和实验报告为准；需要更新对话导出时直接替换这一份，不生成重复快照。

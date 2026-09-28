@@ -112,4 +112,4 @@ Baseline HBM read/write：47,165,440 / 8,120,320 B；NoC/DMA bytes：120,074,240
   --timeout-seconds 900 --wall-time-seconds 1000 --memory-mib 6144 --max-grades 1
 ```
 
-Gemini 的归因研究原稿带有数值/单位错误，已标注，不能作为结果依据；另一个研究 worker 被中断。两者完整 session traces 均保留，包括死路。最终结论来自主 agent 对 frozen 源码、原始 grade、完整程序 trace 和内存进度的直接核验。
+Gemini 的归因研究原稿带有数值/单位错误，已标注，不能作为结果依据；另一个研究 worker 被中断。两者 traces 曾随实验提交；按用户后续要求，当前工作区只保留主对话的一份完整导出，额外导出仍可在 Git 历史查阅。最终结论来自主 agent 对 frozen 源码、原始 grade、完整程序 trace 和内存进度的直接核验。

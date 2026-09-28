@@ -38,12 +38,14 @@ def main():
             stage=getattr(self,'_profile_stage','output')
             event_stage[event.split('_{')[0]]=stage
     compiler.Builder.emit=emit
-    for method in ('layernorm','gemm','attention','add_rows','add_bias','bias_gelu','gelu'):
+    for method in ('layernorm','gemm','attention','add_rows','add_bias','bias_gelu','gelu',
+                   'mlp_rf_stream'):
         original=getattr(compiler.Builder,method)
         def wrap(self,*a,_method=method,_original=original,**kw):
             bound=inspect.signature(_original).bind(self,*a,**kw)
             name=bound.arguments['name']
-            stage= {'attention':'attention','bias_gelu':'gelu','add_bias':'bias','gelu':'gelu'}.get(_method)
+            stage= {'attention':'attention','bias_gelu':'gelu','add_bias':'bias',
+                    'gelu':'gelu','mlp_rf_stream':'mlp'}.get(_method)
             if _method=='gemm': stage=next(k for k in ('qkv','wo','w1','w2') if name.endswith(k))
             if _method=='layernorm': stage='ln1' if name.endswith('ln1') else 'ln2'
             if _method=='add_rows': stage='residual1' if name.endswith('res') else 'residual2'

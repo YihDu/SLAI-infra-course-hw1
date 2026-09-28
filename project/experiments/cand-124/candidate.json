@@ -1,0 +1,18 @@
+{
+  "bias": null,
+  "created_at": "2026-09-29 01:46:59",
+  "failure_class": "none",
+  "family": null,
+  "fingerprint": null,
+  "hypothesis": "Compose the only measured post-pipeline hardware gains: 16 MiB cache, 16 SFU lanes, 8 HBM channels, and 2 reduction units; preserve verified cand-122 programs.",
+  "id": "cand-124",
+  "kind": null,
+  "ops": null,
+  "parent": "cand-122",
+  "provenance_note": null,
+  "round": null,
+  "status": "kept",
+  "struct_sig": null,
+  "summary": "Bounded hardware combination selected by fixed-program estimate screen.",
+  "verdict_note": "Full grade passes exactly at estimate: best bounded hardware composition; new incumbent after post-pipeline screen."
+}

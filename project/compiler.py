@@ -191,6 +191,17 @@ class Builder:
         col_stop = n_extent if col_stop is None else col_stop
         if b.shape != (k_extent, n_extent):
             raise ValueError("GEMM weight shape")
+        pipelines = self.recipe.get("gemm_stages", {}).get("p1_prompt", {}).get(
+            "operand_pipeline", []
+        )
+        pipeline_stage = next(
+            (candidate for candidate in pipelines if name.endswith(candidate)), None
+        )
+        if self.stage == "p1_prompt" and pipeline_stage:
+            self.gemm_operand_pipeline(
+                a, b, out, m_extent, k_extent, n_extent, name, col_start, col_stop
+            )
+            return
         kernel = self.recipe.get("gemm_kernels", {}).get("p1_prompt_w1")
         if self.stage == "p1_prompt" and name.endswith("w1") and kernel:
             if kernel.get("kind") != "shared_weight_panel":
@@ -348,6 +359,79 @@ class Builder:
                         [rows, tile_n],
                         [n_extent, 1],
                     ),
+                )
+
+    def gemm_operand_pipeline(
+        self, a, b, out, m_extent, k_extent, n_extent, name,
+        col_start=0, col_stop=None,
+    ):
+        """Double-buffer both operands for 64-row P1 projection GEMMs.
+
+        The mature N/K/M kernel reuses RF0 for both row blocks, forcing each
+        following A load to wait for the preceding MMA read.  Here RF0/RF2 and
+        RF6/RF8 alternate between K chunks while RF1/RF3 alternate B. RF4/RF5
+        remain the two accumulators.  MMA shapes and ascending K order match the
+        parent program exactly.
+        """
+        col_stop = n_extent if col_stop is None else col_stop
+        tile_n, m_tile, k_chunk = self.gemm_n_tile, self.m_tile, self.k_chunk
+        if (m_extent, m_tile, tile_n, k_chunk) != (64, 32, 32, 32):
+            raise ValueError("P1 operand pipeline requires M64/Mtile32/N32/K32")
+        if not 0 <= col_start < col_stop <= n_extent or col_start % tile_n or col_stop % tile_n:
+            raise ValueError("P1 operand pipeline N extent does not fit tile")
+
+        def accumulator(row):
+            return rf(add(4, {"ceildiv": [row, m_tile]}), m_tile * tile_n)
+
+        def a_lane(row, parity):
+            return add(mul(6, parity), mul(2, {"ceildiv": [row, m_tile]}))
+
+        with self.loop(f"{name}n", col_start, col_stop, tile_n) as col:
+            with self.loop(f"{name}z", 0, m_extent, m_tile) as row:
+                self.vec("add", [imm(0), imm(0)], accumulator(row))
+
+            # Seed K=0 operands. All extents divide exactly for the supported
+            # prompt projections, so the descriptor sizes stay constant.
+            self.ld(
+                hbm(add(b.offset, col), k_chunk * tile_n,
+                    [k_chunk, tile_n], [n_extent, 1]),
+                rf(1, k_chunk * tile_n),
+            )
+            with self.loop(f"{name}seedm", 0, m_extent, m_tile) as row:
+                self.ld(
+                    hbm(add(a.offset, mul(row, k_extent)), m_tile * k_chunk,
+                        [m_tile, k_chunk], [k_extent, 1]),
+                    rf(a_lane(row, 0), m_tile * k_chunk),
+                )
+
+            with self.loop(f"{name}k", 0, k_extent, k_chunk) as inner:
+                parity = mod({"ceildiv": [inner, k_chunk]}, 2)
+                next_parity = sub(1, parity)
+                with self.loop(f"{name}nextb", add(inner, k_chunk), k_extent, k_extent) as nxt:
+                    self.ld(
+                        hbm(add(b.offset, mul(nxt, n_extent), col), k_chunk * tile_n,
+                            [k_chunk, tile_n], [n_extent, 1]),
+                        rf(add(1, mul(2, next_parity)), k_chunk * tile_n),
+                    )
+                with self.loop(f"{name}m", 0, m_extent, m_tile) as row:
+                    self.emit(
+                        "MMA.ACC",
+                        a=rf(a_lane(row, parity), m_tile * k_chunk),
+                        b=rf(add(1, mul(2, parity)), k_chunk * tile_n),
+                        acc=accumulator(row), m=m_tile, n=tile_n, k=k_chunk,
+                        event=None,
+                    )
+                    with self.loop(f"{name}nexta", add(inner, k_chunk), k_extent, k_extent) as nxt:
+                        self.ld(
+                            hbm(add(a.offset, mul(row, k_extent), nxt), m_tile * k_chunk,
+                                [m_tile, k_chunk], [k_extent, 1]),
+                            rf(a_lane(row, next_parity), m_tile * k_chunk),
+                        )
+            with self.loop(f"{name}s", 0, m_extent, m_tile) as row:
+                self.st(
+                    accumulator(row),
+                    hbm(add(out.offset, mul(row, n_extent), col), m_tile * tile_n,
+                        [m_tile, tile_n], [n_extent, 1]),
                 )
 
     def gemm_shared_weight_panel(self, a, b, out, m_extent, k_extent, n_extent, name, kernel):
@@ -550,6 +634,86 @@ class Builder:
                 self.emit("WAIT", wg=self.wg,
                           events=[json.loads(self.lines[-1].split(" ", 1)[1])["event"]])
 
+    def mlp_sh_resident(self, source, w1, b1, w2, out, rows, d, f, name):
+        """Keep one 32x1024 activation block in SH and reuse LN2 from RF.
+
+        W1 keeps the complete 32x256 input block in RF0..7, eliminating its
+        reload for every neuron panel. GELU writes the 128 KiB activation to
+        shared memory. W2 then streams it back panel by panel while RF4..11
+        retain all 256 output channels. Arithmetic shapes and reduction order
+        match the RF-streamed parent.
+        """
+        if (rows, d, f) != (64, 256, 1024):
+            raise ValueError("SH resident MLP requires M1 prompt dimensions")
+        tile = 32
+        with self.loop(name + "m", 0, rows, tile) as row:
+            self.vec("add", [imm(1), imm(0)], rf(12, tile))
+            # LN2 input is invariant across all W1 neuron panels.
+            with self.loop(name + "inputk", 0, d, tile) as inner:
+                self.ld(
+                    hbm(add(source.offset, mul(row, d), inner), tile*tile,
+                        [tile, tile], [d, 1]),
+                    rf({"ceildiv": [inner, tile]}, tile*tile),
+                )
+            with self.loop(name + "neuron", 0, f, tile) as neuron:
+                self.vec("add", [imm(0), imm(0)], rf(8, tile*tile))
+                with self.loop(name + "k", 0, d, tile) as inner:
+                    self.ld(
+                        hbm(add(w1.offset, mul(inner, f), neuron), tile*tile,
+                            [tile, tile], [f, 1]),
+                        rf(10, tile*tile),
+                    )
+                    self.emit(
+                        "MMA.ACC", a=rf({"ceildiv": [inner, tile]}, tile*tile),
+                        b=rf(10, tile*tile), acc=rf(8, tile*tile),
+                        m=tile, n=tile, k=tile, event=None,
+                    )
+                self.ld(hbm(add(b1.offset, neuron), tile), rf(10, tile))
+                self.emit("MMA.ACC", a=rf(12, tile), b=rf(10, tile),
+                          acc=rf(8, tile*tile), m=tile, n=tile, k=1, event=None)
+                self.vec("mul", [rf(8, tile*tile), rf(8, tile*tile)], rf(9, tile*tile))
+                self.vec("mul", [rf(9, tile*tile), rf(8, tile*tile)], rf(9, tile*tile))
+                self.vec("fma", [rf(9, tile*tile), imm(0.044715), rf(8, tile*tile)],
+                         rf(9, tile*tile))
+                self.vec("mul", [rf(9, tile*tile), imm(sqrt(2 / 3.141592653589793))],
+                         rf(9, tile*tile))
+                self.sfu("tanh", rf(9, tile*tile), rf(9, tile*tile))
+                self.vec("add", [rf(9, tile*tile), imm(1)], rf(9, tile*tile))
+                self.vec("mul", [rf(8, tile*tile), imm(0.5)], rf(8, tile*tile))
+                self.vec("mul", [rf(8, tile*tile), rf(9, tile*tile)], rf(8, tile*tile))
+                self.st(
+                    rf(8, tile*tile),
+                    sh(neuron, tile*tile, [tile, tile], [f, 1]),
+                )
+
+            with self.loop(name + "z", 0, d, tile) as col:
+                self.vec("add", [imm(0), imm(0)],
+                         rf(add(4, {"ceildiv": [col, tile]}), tile*tile))
+            with self.loop(name + "w2k", 0, f, tile) as neuron:
+                self.ld(
+                    sh(neuron, tile*tile, [tile, tile], [f, 1]),
+                    rf(0, tile*tile),
+                )
+                with self.loop(name + "o", 0, d, tile) as col:
+                    self.ld(
+                        hbm(add(w2.offset, mul(neuron, d), col), tile*tile,
+                            [tile, tile], [d, 1]),
+                        rf(1, tile*tile),
+                    )
+                    self.emit(
+                        "MMA.ACC", a=rf(0, tile*tile), b=rf(1, tile*tile),
+                        acc=rf(add(4, {"ceildiv": [col, tile]}), tile*tile),
+                        m=tile, n=tile, k=tile, event=None,
+                    )
+            with self.loop(name + "store", 0, d, tile) as col:
+                self.st(
+                    rf(add(4, {"ceildiv": [col, tile]}), tile*tile),
+                    hbm(add(out.offset, mul(row, d), col), tile*tile,
+                        [tile, tile], [d, 1]),
+                )
+                self.emit("WAIT", wg=self.wg,
+                          events=[json.loads(self.lines[-1].split(" ", 1)[1])["event"]])
+
     def gelu(self, source: Tensor, out: Tensor, rows: int, width: int, name: str):
         with self.loop(name, 0, rows) as row:
             with self.loop(f"{name}c", 0, width, 384) as col:
@@ -581,7 +745,8 @@ class Builder:
         head_start=0,
         head_stop=None,
     ):
-        if (self.recipe.get("attention", {}).get("algorithm") == "blocked_prompt"
+        if (self.recipe.get("attention", {}).get("algorithm") in
+                ("blocked_prompt", "blocked_prompt_pipeline")
                 and rows == 64 and past == 0):
             return self.attention_blocked(qkv, context, k_out, v_out, rows, past,
                                           d, h, hd, name, head_start, head_stop)
@@ -700,6 +865,9 @@ class Builder:
             raise ValueError("Blocked prompt attention requires 64 rows, head width 32 and RF scores")
         head_stop = h if head_stop is None else head_stop
         qm, kn = 16, 32
+        pipeline_panels = (
+            self.recipe.get("attention", {}).get("algorithm") == "blocked_prompt_pipeline"
+        )
 
         def matrix(lane, m, n, stride, offset=0):
             view = rf(lane, mul(m, n), offset)
@@ -719,11 +887,31 @@ class Builder:
                 self.ld(hbm(add(qkv.offset, mul(first, 3*d), mul(head, hd)),
                             qm*hd, [qm, hd], [3*d, 1]), rf(0, qm*hd))
                 self.vec("add", [imm(0), imm(0)], rf(4, qm*rows))
+                if pipeline_panels:
+                    self.ld(
+                        hbm(add(k_out.offset, mul(head, k_out.shape[2]*hd)),
+                            hd*kn, [hd, kn], [1, hd]),
+                        rf(1, hd*kn),
+                    )
                 with self.loop(f"{name}keys", 0, rows, kn) as key:
-                    self.ld(hbm(add(k_out.offset, mul(head, k_out.shape[2]*hd), mul(key, hd)),
-                                hd*kn, [hd, kn], [1, hd]), rf(1, hd*kn))
-                    self.emit("MMA.ACC", a=rf(0, qm*hd), b=rf(1, hd*kn),
-                              acc=matrix(4, qm, kn, rows, key), m=qm, n=kn, k=hd, event=None)
+                    if pipeline_panels:
+                        parity = {"ceildiv": [key, kn]}
+                        self.emit("MMA.ACC", a=rf(0, qm*hd),
+                                  b=rf(add(1, mul(4, parity)), hd*kn),
+                                  acc=matrix(4, qm, kn, rows, key),
+                                  m=qm, n=kn, k=hd, event=None)
+                        with self.loop(f"{name}nextkey", add(key, kn), rows, rows) as nxt:
+                            self.ld(
+                                hbm(add(k_out.offset, mul(head, k_out.shape[2]*hd),
+                                        mul(nxt, hd)), hd*kn, [hd, kn], [1, hd]),
+                                rf(add(5, mul(-4, parity)), hd*kn),
+                            )
+                    else:
+                        self.ld(hbm(add(k_out.offset, mul(head, k_out.shape[2]*hd), mul(key, hd)),
+                                    hd*kn, [hd, kn], [1, hd]), rf(1, hd*kn))
+                        self.emit("MMA.ACC", a=rf(0, qm*hd), b=rf(1, hd*kn),
+                                  acc=matrix(4, qm, kn, rows, key), m=qm, n=kn, k=hd,
+                                  event=None)
                 self.vec("mul", [rf(4, qm*rows), imm(1/sqrt(hd))], rf(4, qm*rows))
                 with self.loop(f"{name}softrow", 0, qm) as local:
                     limit = add(first, local, 1)
@@ -739,11 +927,28 @@ class Builder:
                         self.vec("add", [imm(0), imm(0)],
                                  rf(4, sub(rows, tail), add(offset, tail)))
                 self.vec("add", [imm(0), imm(0)], rf(2, qm*hd))
+                if pipeline_panels:
+                    self.ld(
+                        hbm(add(v_out.offset, mul(head, v_out.shape[2]*hd)), kn*hd),
+                        rf(1, kn*hd),
+                    )
                 with self.loop(f"{name}values", 0, rows, kn) as key:
-                    self.ld(hbm(add(v_out.offset, mul(head, v_out.shape[2]*hd), mul(key, hd)),
-                                kn*hd), rf(1, kn*hd))
-                    self.emit("MMA.ACC", a=matrix(4, qm, kn, rows, key), b=rf(1, kn*hd),
-                              acc=rf(2, qm*hd), m=qm, n=hd, k=kn, event=None)
+                    if pipeline_panels:
+                        parity = {"ceildiv": [key, kn]}
+                        self.emit("MMA.ACC", a=matrix(4, qm, kn, rows, key),
+                                  b=rf(add(1, mul(4, parity)), kn*hd),
+                                  acc=rf(2, qm*hd), m=qm, n=hd, k=kn, event=None)
+                        with self.loop(f"{name}nextvalue", add(key, kn), rows, rows) as nxt:
+                            self.ld(
+                                hbm(add(v_out.offset, mul(head, v_out.shape[2]*hd),
+                                        mul(nxt, hd)), kn*hd),
+                                rf(add(5, mul(-4, parity)), kn*hd),
+                            )
+                    else:
+                        self.ld(hbm(add(v_out.offset, mul(head, v_out.shape[2]*hd), mul(key, hd)),
+                                    kn*hd), rf(1, kn*hd))
+                        self.emit("MMA.ACC", a=matrix(4, qm, kn, rows, key), b=rf(1, kn*hd),
+                                  acc=rf(2, qm*hd), m=qm, n=hd, k=kn, event=None)
                 self.st(rf(2, qm*hd), hbm(add(context.offset, mul(first, d), mul(head, hd)),
                                         qm*hd, [qm, hd], [d, 1]))
 
@@ -972,7 +1177,10 @@ def generate_m1_p1(recipe: dict | None = None) -> tuple[str, Layout, int]:
     layout = build_layout(model, "P1")
     recipe = recipe or load_recipe()
     kernel = recipe.get("gemm_kernels", {}).get("p1_prompt_w1")
-    shared_bytes = 256 * int(kernel["n_panel"]) * 4 if kernel else 0
+    if recipe.get("fusion", {}).get("p1_mlp") == "sh_resident":
+        shared_bytes = 128 * 1024
+    else:
+        shared_bytes = 256 * int(kernel["n_panel"]) * 4 if kernel else 0
     builder = IncrementalP1Builder if recipe.get("p1_schedule", {}).get("kind") == "incremental_gemm" else Builder
     b = builder(layout, recipe, shared_bytes=shared_bytes)
     prompt = b.symbol("input/prompt")
@@ -1038,9 +1246,15 @@ def generate_m1_p1(recipe: dict | None = None) -> tuple[str, Layout, int]:
                 b.gemm(ctx, weights["wo"], att, rows, d, d, name + "wo")
                 b.add_rows(x, att, res, rows, d, name + "res")
                 b.layernorm(res, weights["ln2_g"], weights["ln2_b"], ln2, rows, d, name + "ln2")
-                if phase == "p" and recipe.get("fusion", {}).get("p1_mlp") in ("rf_stream", "rf_pipeline"):
-                    b.mlp_rf_stream(ln2, weights["w1"], weights["b1"], weights["w2"],
-                                    ff2, rows, d, f, name + "mlp")
+                if phase == "p" and recipe.get("fusion", {}).get("p1_mlp") in (
+                    "rf_stream", "rf_pipeline", "sh_resident"
+                ):
+                    if recipe["fusion"]["p1_mlp"] == "sh_resident":
+                        b.mlp_sh_resident(ln2, weights["w1"], weights["b1"], weights["w2"],
+                                          ff2, rows, d, f, name + "mlp")
+                    else:
+                        b.mlp_rf_stream(ln2, weights["w1"], weights["b1"], weights["w2"],
+                                        ff2, rows, d, f, name + "mlp")
                 else:
                     b.gemm(ln2, weights["w1"], ff1, rows, d, f, name + "w1")
                     if b.fuse_bias_gelu:

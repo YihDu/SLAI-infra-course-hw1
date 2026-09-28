@@ -1,0 +1,18 @@
+{
+  "bias": "p1",
+  "created_at": "2026-09-29 01:26:27",
+  "failure_class": "none",
+  "family": "persistent_mlp_sh",
+  "fingerprint": "a2e70966fdaf7263",
+  "hypothesis": "P1 prompt MLP: keep complete 32x256 LN2 input block in RF for W1, store 32x1024 GELU activation in 128KiB SH, then consume it in W2; preserve reduction order and D1.",
+  "id": "cand-123",
+  "kind": "manual",
+  "ops": [],
+  "parent": "cand-122",
+  "provenance_note": null,
+  "round": 12,
+  "status": "reverted",
+  "struct_sig": "p1-mlp-sh-activation-a-resident",
+  "summary": "[]",
+  "verdict_note": "Correct but slower: SH activation residency and LN2 RF reuse lose current W1/W2 overlap; reject despite fewer instructions."
+}

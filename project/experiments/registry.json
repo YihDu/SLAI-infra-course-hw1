@@ -1,7 +1,8 @@
 {
   "archives": {
     "diversity": {
-      "?|?": "cand-098",
+      "?|?": "cand-124",
+      "attention_blocked_pipeline|p1": "cand-122",
       "attention_blocked|p1": "cand-106",
       "attention|balanced": "cand-019",
       "compute|balanced": "cand-095",
@@ -12,12 +13,16 @@
       "memory|balanced": "cand-073",
       "memory|p1": "cand-086",
       "p1_multism_control|p1": "cand-100",
+      "p1_projection_pipeline|p1": "cand-120",
       "persistent_decode|d1": "cand-115",
       "persistent_mlp_decode|balanced": "cand-114",
       "persistent_mlp_pipeline|p1": "cand-118",
+      "persistent_mlp_sh|p1": "cand-123",
       "persistent_mlp|p1": "cand-110",
-      "sig:?|?": "cand-098",
+      "sig:?|?": "cand-124",
       "sig:blocked-prompt-q16-k32": "cand-106",
+      "sig:blocked-prompt-q16-k32-panel-pipeline": "cand-121",
+      "sig:blocked-prompt-q16-k32-panel-pipeline-v2": "cand-122",
       "sig:d1-milp-projections": "cand-115",
       "sig:d1-panel-owners": "cand-112",
       "sig:fuse": "cand-009",
@@ -60,6 +65,9 @@
       "sig:nkm+pf+s:rf": "cand-015",
       "sig:nkm+s:rf": "cand-017",
       "sig:p1-column-head-4-serial": "cand-100",
+      "sig:p1-mlp-sh-activation-a-resident": "cand-123",
+      "sig:p1-qkv-double-buffered-operands": "cand-119",
+      "sig:p1-qkv-wo-double-buffered-operands": "cand-120",
       "sig:pf": "cand-066",
       "sig:rf-mlp-and-milp-decode": "cand-114",
       "sig:rf-mlp-double-buffered-operands": "cand-118",
@@ -69,17 +77,17 @@
       "sig:stage:p1_prompt": "cand-070"
     },
     "elite": [
+      "cand-124",
+      "cand-122",
+      "cand-120",
+      "cand-119",
       "cand-118",
-      "cand-115",
-      "cand-114",
-      "cand-116",
-      "cand-113",
-      "cand-117",
-      "cand-112",
-      "cand-110"
+      "cand-123",
+      "cand-121",
+      "cand-115"
     ],
     "pareto": [
-      "cand-118"
+      "cand-124"
     ]
   },
   "candidates": {
@@ -4365,6 +4373,296 @@
       "status": "kept",
       "struct_sig": "rf-mlp-double-buffered-operands"
     },
+    "cand-119": {
+      "area_mm2": 16.25838297088,
+      "bias": "p1",
+      "cache_source": null,
+      "cycles": {
+        "M1_P1": 5737061,
+        "M2_D1": 210849
+      },
+      "deltas": {
+        "cycles": {
+          "M1_P1": -464280,
+          "M2_D1": 0
+        },
+        "prior_head": "cand-118",
+        "score": 220.43032512552963,
+        "vs_parent": {
+          "cycles": {
+            "M1_P1": -464280,
+            "M2_D1": 0
+          },
+          "parent": "cand-118",
+          "score": 220.43032512552963
+        }
+      },
+      "elapsed": 112.93192529096268,
+      "eligible": true,
+      "evaluation_attempts": 1,
+      "failure_class": "none",
+      "family": "p1_projection_pipeline",
+      "fingerprint": "5d418afa850dcfa1",
+      "functional": {
+        "M1_P1": true,
+        "M2_D1": true
+      },
+      "functional_passed": true,
+      "hypothesis": "P1 QKV only: double-buffer A row tiles and B K panels so next HBM-to-RF loads overlap current 32x32 MMA; preserve arithmetic order and D1.",
+      "kind": "manual",
+      "ops": [],
+      "outer_sig": "2872c8d7ec2150c0",
+      "parent": "cand-118",
+      "power_w": 6.673966939606509,
+      "result_logged": true,
+      "round": 12,
+      "score": 5776.172027407479,
+      "status": "kept",
+      "struct_sig": "p1-qkv-double-buffered-operands"
+    },
+    "cand-120": {
+      "area_mm2": 16.25838297088,
+      "bias": "p1",
+      "cache_source": null,
+      "cycles": {
+        "M1_P1": 5580809,
+        "M2_D1": 210849
+      },
+      "deltas": {
+        "cycles": {
+          "M1_P1": -156252,
+          "M2_D1": 0
+        },
+        "prior_head": "cand-119",
+        "score": 80.30269555434643,
+        "vs_parent": {
+          "cycles": {
+            "M1_P1": -156252,
+            "M2_D1": 0
+          },
+          "parent": "cand-119",
+          "score": 80.30269555434643
+        }
+      },
+      "elapsed": 113.55073241703212,
+      "eligible": true,
+      "evaluation_attempts": 1,
+      "failure_class": "none",
+      "family": "p1_projection_pipeline",
+      "fingerprint": "6757675a9dd876d1",
+      "functional": {
+        "M1_P1": true,
+        "M2_D1": true
+      },
+      "functional_passed": true,
+      "hypothesis": "Compose verified P1 QKV operand pipeline with identical WO A/B double buffering; preserve arithmetic order and D1.",
+      "kind": "manual",
+      "ops": [],
+      "outer_sig": "2872c8d7ec2150c0",
+      "parent": "cand-119",
+      "power_w": 6.673966939606509,
+      "result_logged": true,
+      "round": 12,
+      "score": 5856.474722961825,
+      "status": "kept",
+      "struct_sig": "p1-qkv-wo-double-buffered-operands"
+    },
+    "cand-121": {
+      "area_mm2": 16.25838297088,
+      "bias": "p1",
+      "cache_source": null,
+      "cycles": {
+        "M1_P1": 6810587,
+        "M2_D1": 210849
+      },
+      "deltas": {
+        "cycles": {
+          "M1_P1": 1229778,
+          "M2_D1": 0
+        },
+        "prior_head": "cand-120",
+        "score": -555.0502293417403,
+        "vs_parent": {
+          "cycles": {
+            "M1_P1": 1229778,
+            "M2_D1": 0
+          },
+          "parent": "cand-120",
+          "score": -555.0502293417403
+        }
+      },
+      "elapsed": 128.46672424999997,
+      "eligible": true,
+      "evaluation_attempts": 1,
+      "failure_class": "none",
+      "family": "attention_blocked_pipeline",
+      "fingerprint": "ecdc7070ae45e2b6",
+      "functional": {
+        "M1_P1": true,
+        "M2_D1": true
+      },
+      "functional_passed": true,
+      "hypothesis": "P1 blocked Attention: double-buffer two K and V panels so next HBM-to-RF load overlaps current QK/PV MMA; preserve softmax, causal mask, MMA order and D1.",
+      "kind": "manual",
+      "ops": [],
+      "outer_sig": "dc886e79c7637485",
+      "parent": "cand-120",
+      "power_w": 6.673966939606509,
+      "result_logged": true,
+      "round": 12,
+      "score": 5301.424493620085,
+      "status": "reverted",
+      "struct_sig": "blocked-prompt-q16-k32-panel-pipeline"
+    },
+    "cand-122": {
+      "area_mm2": 16.25838297088,
+      "bias": "p1",
+      "cache_source": null,
+      "cycles": {
+        "M1_P1": 5571113,
+        "M2_D1": 210849
+      },
+      "deltas": {
+        "cycles": {
+          "M1_P1": -9696,
+          "M2_D1": 0
+        },
+        "prior_head": "cand-120",
+        "score": 5.094107175556019,
+        "vs_parent": {
+          "cycles": {
+            "M1_P1": -9696,
+            "M2_D1": 0
+          },
+          "parent": "cand-120",
+          "score": 5.094107175556019
+        }
+      },
+      "elapsed": 113.684063707944,
+      "eligible": true,
+      "evaluation_attempts": 1,
+      "failure_class": "none",
+      "family": "attention_blocked_pipeline",
+      "fingerprint": "44cc2a4b67598e49",
+      "functional": {
+        "M1_P1": true,
+        "M2_D1": true
+      },
+      "functional_passed": true,
+      "hypothesis": "Corrected generator snapshot: blocked P1 Attention double-buffers two K/V panels while preserving softmax, causal mask, MMA order and D1.",
+      "kind": "manual",
+      "ops": [],
+      "outer_sig": "dc886e79c7637485",
+      "parent": "cand-120",
+      "power_w": 6.673966939606509,
+      "result_logged": true,
+      "round": 12,
+      "score": 5861.568830137381,
+      "status": "kept",
+      "struct_sig": "blocked-prompt-q16-k32-panel-pipeline-v2"
+    },
+    "cand-123": {
+      "area_mm2": 16.25838297088,
+      "bias": "p1",
+      "cache_source": null,
+      "cycles": {
+        "M1_P1": 6358501,
+        "M2_D1": 210849
+      },
+      "deltas": {
+        "cycles": {
+          "M1_P1": 787388,
+          "M2_D1": 0
+        },
+        "prior_head": "cand-122",
+        "score": -374.91600093943,
+        "vs_parent": {
+          "cycles": {
+            "M1_P1": 787388,
+            "M2_D1": 0
+          },
+          "parent": "cand-122",
+          "score": -374.91600093943
+        }
+      },
+      "elapsed": 108.60769895801786,
+      "eligible": true,
+      "evaluation_attempts": 1,
+      "failure_class": "none",
+      "family": "persistent_mlp_sh",
+      "fingerprint": "a2e70966fdaf7263",
+      "functional": {
+        "M1_P1": true,
+        "M2_D1": true
+      },
+      "functional_passed": true,
+      "hypothesis": "P1 prompt MLP: keep complete 32x256 LN2 input block in RF for W1, store 32x1024 GELU activation in 128KiB SH, then consume it in W2; preserve reduction order and D1.",
+      "kind": "manual",
+      "ops": [],
+      "outer_sig": "6c4c29397e328bbf",
+      "parent": "cand-122",
+      "power_w": 6.673966939606509,
+      "result_logged": true,
+      "round": 12,
+      "score": 5486.652829197951,
+      "status": "reverted",
+      "struct_sig": "p1-mlp-sh-activation-a-resident"
+    },
+    "cand-124": {
+      "area_mm2": 22.69981349888,
+      "cache_source": null,
+      "cycles": {
+        "M1_P1": 5072661,
+        "M2_D1": 207673
+      },
+      "deltas": {
+        "cycles": {
+          "M1_P1": -498452,
+          "M2_D1": -3176
+        },
+        "prior_head": "cand-122",
+        "score": 328.0326448504966,
+        "vs_parent": {
+          "cycles": {
+            "M1_P1": -498452,
+            "M2_D1": -3176
+          },
+          "parent": "cand-122",
+          "score": 328.0326448504966
+        }
+      },
+      "elapsed": 103.72236200002953,
+      "eligible": true,
+      "evaluation_attempts": 1,
+      "failure_class": "none",
+      "functional": {
+        "M1_P1": true,
+        "M2_D1": true
+      },
+      "functional_passed": true,
+      "hypothesis": "Compose the only measured post-pipeline hardware gains: 16 MiB cache, 16 SFU lanes, 8 HBM channels, and 2 reduction units; preserve verified cand-122 programs.",
+      "parent": "cand-122",
+      "power_w": 6.707200513472132,
+      "result_logged": true,
+      "score": 6189.601474987878,
+      "status": "kept"
+    },
+    "cand-125": {
+      "cache_source": null,
+      "deltas": {
+        "prior_head": "cand-124",
+        "vs_parent": {
+          "parent": "cand-124"
+        }
+      },
+      "elapsed": null,
+      "evaluation_attempts": 0,
+      "failure_class": "validation_cost_pruned",
+      "hypothesis": "Assign each independent P1 batch member end-to-end to one persistent WG/SM, with no per-layer cross-WG barriers and only the required STEP.COMMIT join.",
+      "parent": "cand-124",
+      "result_logged": true,
+      "status": "reverted"
+    },
     "drun-001": {
       "bias": "balanced",
       "failure_class": "dry_run",
@@ -4996,7 +5294,7 @@
       "struct_sig": "hw:sm_count=32+nkm+nofuse+nopf+s:hbm"
     }
   },
-  "counter": 118,
+  "counter": 123,
   "dry_counter": 27,
   "fingerprints": {
     "062742f6b8fbbde1": "cand-036",
@@ -5024,6 +5322,7 @@
     "3d660e0a3a34d881": "cand-116",
     "3ed983a6780dce16": "cand-016",
     "3fe27c0a3b50b890": "cand-106",
+    "44cc2a4b67598e49": "cand-122",
     "45ecec5211e523f3": "cand-064",
     "46b7b004577c04fd": "cand-015",
     "4992e0944079052f": "cand-070",
@@ -5039,7 +5338,9 @@
     "5aa16f9bbbaaa000": "cand-066",
     "5ba4b1c3d6911c3b": "cand-108",
     "5bd0cc22e122250c": "cand-021",
+    "5d418afa850dcfa1": "cand-119",
     "5e60de2f5066b4dc": "cand-004",
+    "6757675a9dd876d1": "cand-120",
     "6ab351a88bec5627": "cand-048",
     "6bea8860b230f000": "cand-099",
     "6de9256553383d73": "cand-020",
@@ -5066,6 +5367,7 @@
     "90c3b702310f4a0d": "cand-087",
     "94bc9c7b5d9d25cf": "cand-044",
     "95e4af71401f8496": "cand-071",
+    "a2e70966fdaf7263": "cand-123",
     "a560a79986b404d2": "cand-110",
     "a5fc7bf653486650": "cand-112",
     "a8a769e1719a5b98": "cand-113",
@@ -5097,6 +5399,7 @@
     "d87d0d1b64b14e36": "cand-100",
     "eabe00a465e8034c": "cand-076",
     "eabfb4cb7a34b3a6": "cand-082",
+    "ecdc7070ae45e2b6": "cand-121",
     "ed7d495f64a422b4": "cand-063",
     "f0ee74fb076a59aa": "cand-033",
     "f314351fb378b9e5": "cand-012",
@@ -5106,11 +5409,11 @@
     "ff0c29904037c174": "cand-089",
     "ff6870b21f8f0ec7": "cand-055"
   },
-  "head": "cand-118",
-  "revision": 15,
+  "head": "cand-124",
+  "revision": 50,
   "search": {
-    "best_id": "cand-118",
-    "best_score": 5555.741702281949,
+    "best_id": "cand-124",
+    "best_score": 6189.601474987878,
     "bottleneck": "M1_P1 sm0.rf_read=2818280, sm0.rf_write=2788264, sm0.dma=1876160; M2_D1 sm0.rf_write=261248, sm0.dma=239104, shared.noc=226521 (overlapping service counts)",
     "explore_ratio": 0.54,
     "hierarchy": {

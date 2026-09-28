@@ -1,15 +1,15 @@
 # search_state (auto-generated; do not edit)
 
-- best: cand-118 score=5555.741702281949 (P1=6201341, D1=210849)
+- best: cand-124 score=6189.601474987878 (P1=5072661, D1=207673)
 - phase=2 round=12 plateau_rounds=0 explore_ratio=0.54 need_new_operator=False
 - bottleneck: M1_P1 sm0.rf_read=2818280, sm0.rf_write=2788264, sm0.dma=1876160; M2_D1 sm0.rf_write=261248, sm0.dma=239104, shared.noc=226521 (overlapping service counts)
 
 ## elite (score desc)
+- cand-124 score=6189.60 parent=cand-122 sig=None hyp=Compose the only measured post-pipeline hardware gains: 16 M
+- cand-122 score=5861.57 parent=cand-120 sig=blocked-prompt-q16-k32-panel-pipeline-v2 hyp=Corrected generator snapshot: blocked P1 Attention double-bu
+- cand-120 score=5856.47 parent=cand-119 sig=p1-qkv-wo-double-buffered-operands hyp=Compose verified P1 QKV operand pipeline with identical WO A
+- cand-119 score=5776.17 parent=cand-118 sig=p1-qkv-double-buffered-operands hyp=P1 QKV only: double-buffer A row tiles and B K panels so nex
 - cand-118 score=5555.74 parent=cand-115 sig=rf-mlp-double-buffered-operands hyp=After D1 MILP plateau, change outer P1 MLP issue schedule: a
-- cand-115 score=5210.72 parent=cand-114 sig=d1-milp-projections hyp=Automatic MILP D1 projection proposal with measured feedback
-- cand-114 score=5188.49 parent=cand-113 sig=rf-mlp-and-milp-decode hyp=Compose independently verified P1 RF persistent MLP (cand-11
-- cand-116 score=5148.96 parent=cand-115 sig=d1-milp-projections hyp=Automatic MILP D1 projection proposal with measured feedback
-- cand-113 score=5101.49 parent=cand-112 sig=d1-milp-projections hyp=HiGHS MILP chooses D1 projection owner counts and RF panels
 
 ## failure classes
 - dry_run: 27
@@ -20,13 +20,14 @@
 - harness_noop: 9
 - memory_limit: 7
 - registry_interruption: 1
-- validation_cost_pruned: 1
+- validation_cost_pruned: 2
 
 ## pareto front
-- cand-118 {'M1_P1': 6201341, 'M2_D1': 210849}
+- cand-124 {'M1_P1': 5072661, 'M2_D1': 207673}
 
 ## diversity cells
-- ?|?: cand-098
+- ?|?: cand-124
+- attention_blocked_pipeline|p1: cand-122
 - attention_blocked|p1: cand-106
 - attention|balanced: cand-019
 - compute|balanced: cand-095
@@ -37,12 +38,16 @@
 - memory|balanced: cand-073
 - memory|p1: cand-086
 - p1_multism_control|p1: cand-100
+- p1_projection_pipeline|p1: cand-120
 - persistent_decode|d1: cand-115
 - persistent_mlp_decode|balanced: cand-114
 - persistent_mlp_pipeline|p1: cand-118
+- persistent_mlp_sh|p1: cand-123
 - persistent_mlp|p1: cand-110
-- sig:?|?: cand-098
+- sig:?|?: cand-124
 - sig:blocked-prompt-q16-k32: cand-106
+- sig:blocked-prompt-q16-k32-panel-pipeline: cand-121
+- sig:blocked-prompt-q16-k32-panel-pipeline-v2: cand-122
 - sig:d1-milp-projections: cand-115
 - sig:d1-panel-owners: cand-112
 - sig:fuse: cand-009
@@ -85,6 +90,9 @@
 - sig:nkm+pf+s:rf: cand-015
 - sig:nkm+s:rf: cand-017
 - sig:p1-column-head-4-serial: cand-100
+- sig:p1-mlp-sh-activation-a-resident: cand-123
+- sig:p1-qkv-double-buffered-operands: cand-119
+- sig:p1-qkv-wo-double-buffered-operands: cand-120
 - sig:pf: cand-066
 - sig:rf-mlp-and-milp-decode: cand-114
 - sig:rf-mlp-double-buffered-operands: cand-118

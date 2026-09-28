@@ -1,0 +1,18 @@
+{
+  "bias": "p1",
+  "created_at": "2026-09-29 01:18:45",
+  "failure_class": "none",
+  "family": "attention_blocked_pipeline",
+  "fingerprint": "ecdc7070ae45e2b6",
+  "hypothesis": "P1 blocked Attention: double-buffer two K and V panels so next HBM-to-RF load overlaps current QK/PV MMA; preserve softmax, causal mask, MMA order and D1.",
+  "id": "cand-121",
+  "kind": "manual",
+  "ops": [],
+  "parent": "cand-120",
+  "provenance_note": null,
+  "round": 12,
+  "status": "reverted",
+  "struct_sig": "blocked-prompt-q16-k32-panel-pipeline",
+  "summary": "[]",
+  "verdict_note": "Rejected: candidate snapshot predates blocked_prompt_pipeline implementation; recipe label fell back to old attention path, so result is not evidence about panel pipelining."
+}

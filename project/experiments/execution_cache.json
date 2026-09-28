@@ -76,7 +76,7 @@
     },
     "score": 1875.6812796394786,
     "status": "evaluated",
-    "stored_at": "2026-09-29 01:04:57"
+    "stored_at": "2026-09-29 01:52:07"
   },
   "04f904bdd8d9d19b0d8083a810381608f93259631bc95cf6e4bdcadf22c4146d": {
     "candidate_id": "cand-085",
@@ -165,7 +165,130 @@
     },
     "score": 2245.0389561884695,
     "status": "evaluated",
-    "stored_at": "2026-09-29 01:04:57"
+    "stored_at": "2026-09-29 01:52:07"
+  },
+  "05b22fd2da0bab4d3ff92ad05aa04b65196651dccc7fd5d6d1bf83119d678c2a": {
+    "candidate_id": "cand-122",
+    "eligible": true,
+    "functional_passed": true,
+    "metrics": {
+      "candidate": "cand-122",
+      "historical_import": true,
+      "reports": {
+        "grade": {
+          "area_mm2": 16.25838297088,
+          "cases": {
+            "M1_P1": {
+              "busy_cycles": {
+                "shared.cache_bank_0": 515901,
+                "shared.cache_bank_1": 515901,
+                "shared.cache_bank_2": 515901,
+                "shared.cache_bank_3": 515901,
+                "shared.hbm_channel_0": 395292,
+                "shared.hbm_channel_1": 395352,
+                "shared.hbm_channel_2": 395352,
+                "shared.hbm_channel_3": 395292,
+                "shared.noc": 1160749,
+                "sm0.dma": 1428416,
+                "sm0.issue": 89579,
+                "sm0.issue_wait": 5462630,
+                "sm0.noc_in": 1106489,
+                "sm0.noc_out": 77728,
+                "sm0.rf_read": 2637800,
+                "sm0.rf_write": 2407936,
+                "sm0.sfu": 268428,
+                "sm0.shared_read": 0,
+                "sm0.shared_write": 0,
+                "sm0.tc": 455472,
+                "sm0.vec": 514440
+              },
+              "cycles": 5571113,
+              "functional_passed": true,
+              "hbm_read_bytes": 45626624,
+              "hbm_write_bytes": 4974592,
+              "instruction_count": 89579,
+              "max_abs_error": 2.793004260981391e-06,
+              "peak_window_power_w": 3.2090927716329922
+            },
+            "M2_D1": {
+              "busy_cycles": {
+                "shared.cache_bank_0": 68161,
+                "shared.cache_bank_1": 68162,
+                "shared.cache_bank_2": 67739,
+                "shared.cache_bank_3": 67742,
+                "shared.hbm_channel_0": 18046,
+                "shared.hbm_channel_1": 18002,
+                "shared.hbm_channel_2": 17888,
+                "shared.hbm_channel_3": 17864,
+                "shared.noc": 77816,
+                "sm0.dma": 62976,
+                "sm0.issue": 4762,
+                "sm0.issue_wait": 203142,
+                "sm0.noc_in": 56657,
+                "sm0.noc_out": 1472,
+                "sm0.rf_read": 39184,
+                "sm0.rf_write": 72544,
+                "sm0.sfu": 5472,
+                "sm0.shared_read": 0,
+                "sm0.shared_write": 0,
+                "sm0.tc": 12056,
+                "sm0.vec": 10432,
+                "sm1.dma": 59392,
+                "sm1.issue": 3722,
+                "sm1.issue_wait": 173829,
+                "sm1.noc_in": 54376,
+                "sm1.noc_out": 384,
+                "sm1.rf_read": 33200,
+                "sm1.rf_write": 63584,
+                "sm1.sfu": 1120,
+                "sm1.shared_read": 0,
+                "sm1.shared_write": 0,
+                "sm1.tc": 12056,
+                "sm1.vec": 2368,
+                "sm2.dma": 59392,
+                "sm2.issue": 3722,
+                "sm2.issue_wait": 173720,
+                "sm2.noc_in": 54097,
+                "sm2.noc_out": 384,
+                "sm2.rf_read": 33200,
+                "sm2.rf_write": 63584,
+                "sm2.sfu": 1120,
+                "sm2.shared_read": 0,
+                "sm2.shared_write": 0,
+                "sm2.tc": 12056,
+                "sm2.vec": 2368,
+                "sm3.dma": 59392,
+                "sm3.issue": 3722,
+                "sm3.issue_wait": 174194,
+                "sm3.noc_in": 54434,
+                "sm3.noc_out": 384,
+                "sm3.rf_read": 33200,
+                "sm3.rf_write": 63584,
+                "sm3.sfu": 1120,
+                "sm3.shared_read": 0,
+                "sm3.shared_write": 0,
+                "sm3.tc": 12056,
+                "sm3.vec": 2368
+              },
+              "cycles": 210849,
+              "functional_passed": true,
+              "hbm_read_bytes": 2129664,
+              "hbm_write_bytes": 167936,
+              "instruction_count": 15424,
+              "max_abs_error": 1.1209758654651125e-06,
+              "peak_window_power_w": 6.673966939606509
+            }
+          },
+          "eligible": true,
+          "mode": "grade",
+          "score": 5861.568830137381
+        }
+      },
+      "verdict": "evaluated"
+    },
+    "score": 5861.568830137381,
+    "status": "evaluated",
+    "stored_at": "2026-09-29 01:52:07"
   },
   "11075cdc58a3664900580649dd4d5ea6368c048edaf99c259e71cc5fa664572b": {
     "candidate_id": "cand-088",
@@ -252,7 +375,7 @@
     },
     "score": 2329.2938717469783,
     "status": "evaluated",
-    "stored_at": "2026-09-29 01:04:58"
+    "stored_at": "2026-09-29 01:52:07"
   },
   "128824ced63b281c5368574e5ba42e8a5584d891de912c0d22fc49cf51fdbd67": {
     "candidate_id": "cand-091",
@@ -339,7 +462,7 @@
     },
     "score": 2245.0389561884695,
     "status": "evaluated",
-    "stored_at": "2026-09-29 01:04:58"
+    "stored_at": "2026-09-29 01:52:07"
   },
   "13fe1098f24130d731c12c74f80c8748374c70fc4c95d023cf06c2e482923dac": {
     "candidate_id": "cand-117",
@@ -462,7 +585,7 @@
     },
     "score": 5007.7282231030185,
     "status": "evaluated",
-    "stored_at": "2026-09-29 01:04:58"
+    "stored_at": "2026-09-29 01:52:07"
   },
   "1f7b93fb8ef7644bc70ef02da1e9cd594542d7fa7c03e765a87e080086a90f27": {
     "candidate_id": "cand-028",
@@ -541,7 +664,7 @@
     },
     "score": 1098.3125106615971,
     "status": "evaluated",
-    "stored_at": "2026-09-29 01:04:57"
+    "stored_at": "2026-09-29 01:52:07"
   },
   "2247370a6bf1a8273c10cda8c8f1c6f5844d9b62dc9338bea9c11ca97201c4fd": {
     "candidate_id": "cand-005",
@@ -620,7 +743,7 @@
     },
     "score": 1105.2478525385854,
     "status": "evaluated",
-    "stored_at": "2026-09-29 01:04:57"
+    "stored_at": "2026-09-29 01:52:06"
   },
   "2542b6c025b4f06a9b293e37960ded9ddd0e5cb1f2e6e74f77dbe619cc63bee0": {
     "candidate_id": "cand-037",
@@ -699,7 +822,7 @@
     },
     "score": 1193.4042900831387,
     "status": "evaluated",
-    "stored_at": "2026-09-29 01:04:57"
+    "stored_at": "2026-09-29 01:52:07"
   },
   "273c090f8ffa0059a2d16b4afb0461073f37b0cc58c8204963e781ff9924366e": {
     "candidate_id": "cand-110",
@@ -786,7 +909,7 @@
     },
     "score": 2823.456520250167,
     "status": "evaluated",
-    "stored_at": "2026-09-29 01:04:58"
+    "stored_at": "2026-09-29 01:52:07"
   },
   "27caa5d78ce48519918a551779fb7a9d4b78264b8fcd2d4e39aa69178684ef32": {
     "candidate_id": "cand-066",
@@ -865,7 +988,7 @@
     },
     "score": 1752.9808817511307,
     "status": "evaluated",
-    "stored_at": "2026-09-29 01:04:57"
+    "stored_at": "2026-09-29 01:52:07"
   },
   "2ce1edc6968b354c9ba5435ce7a44e364b257528aa068ab75be84258e01913f7": {
     "candidate_id": "cand-047",
@@ -944,7 +1067,7 @@
     },
     "score": 1874.814304538389,
     "status": "evaluated",
-    "stored_at": "2026-09-29 01:04:57"
+    "stored_at": "2026-09-29 01:52:07"
   },
   "30c6f90903c6c322a6ab5a812d3fd0e81f25e2849e15958de3ebdbfcc0ab14cf": {
     "candidate_id": "cand-027",
@@ -1023,7 +1146,130 @@
     },
     "score": 1087.11373917888,
     "status": "evaluated",
-    "stored_at": "2026-09-29 01:04:57"
+    "stored_at": "2026-09-29 01:52:06"
+  },
+  "3151eeaa6af24b544199928cc719d8d01349bed47020932f06804052c541b663": {
+    "candidate_id": "cand-121",
+    "eligible": true,
+    "functional_passed": true,
+    "metrics": {
+      "candidate": "cand-121",
+      "historical_import": true,
+      "reports": {
+        "grade": {
+          "area_mm2": 16.25838297088,
+          "cases": {
+            "M1_P1": {
+              "busy_cycles": {
+                "shared.cache_bank_0": 603453,
+                "shared.cache_bank_1": 603453,
+                "shared.cache_bank_2": 603453,
+                "shared.cache_bank_3": 603453,
+                "shared.hbm_channel_0": 395292,
+                "shared.hbm_channel_1": 395352,
+                "shared.hbm_channel_2": 395352,
+                "shared.hbm_channel_3": 395292,
+                "shared.noc": 1520707,
+                "sm0.dma": 1778624,
+                "sm0.issue": 151259,
+                "sm0.issue_wait": 6640424,
+                "sm0.noc_in": 1457333,
+                "sm0.noc_out": 77692,
+                "sm0.rf_read": 2783720,
+                "sm0.rf_write": 2739904,
+                "sm0.sfu": 268428,
+                "sm0.shared_read": 0,
+                "sm0.shared_write": 0,
+                "sm0.tc": 589104,
+                "sm0.vec": 527400
+              },
+              "cycles": 6810587,
+              "functional_passed": true,
+              "hbm_read_bytes": 45626624,
+              "hbm_write_bytes": 4974592,
+              "instruction_count": 151259,
+              "max_abs_error": 2.793004260981391e-06,
+              "peak_window_power_w": 3.1533075396197665
+            },
+            "M2_D1": {
+              "busy_cycles": {
+                "shared.cache_bank_0": 68161,
+                "shared.cache_bank_1": 68162,
+                "shared.cache_bank_2": 67739,
+                "shared.cache_bank_3": 67742,
+                "shared.hbm_channel_0": 18046,
+                "shared.hbm_channel_1": 18002,
+                "shared.hbm_channel_2": 17888,
+                "shared.hbm_channel_3": 17864,
+                "shared.noc": 77816,
+                "sm0.dma": 62976,
+                "sm0.issue": 4762,
+                "sm0.issue_wait": 203142,
+                "sm0.noc_in": 56657,
+                "sm0.noc_out": 1472,
+                "sm0.rf_read": 39184,
+                "sm0.rf_write": 72544,
+                "sm0.sfu": 5472,
+                "sm0.shared_read": 0,
+                "sm0.shared_write": 0,
+                "sm0.tc": 12056,
+                "sm0.vec": 10432,
+                "sm1.dma": 59392,
+                "sm1.issue": 3722,
+                "sm1.issue_wait": 173829,
+                "sm1.noc_in": 54376,
+                "sm1.noc_out": 384,
+                "sm1.rf_read": 33200,
+                "sm1.rf_write": 63584,
+                "sm1.sfu": 1120,
+                "sm1.shared_read": 0,
+                "sm1.shared_write": 0,
+                "sm1.tc": 12056,
+                "sm1.vec": 2368,
+                "sm2.dma": 59392,
+                "sm2.issue": 3722,
+                "sm2.issue_wait": 173720,
+                "sm2.noc_in": 54097,
+                "sm2.noc_out": 384,
+                "sm2.rf_read": 33200,
+                "sm2.rf_write": 63584,
+                "sm2.sfu": 1120,
+                "sm2.shared_read": 0,
+                "sm2.shared_write": 0,
+                "sm2.tc": 12056,
+                "sm2.vec": 2368,
+                "sm3.dma": 59392,
+                "sm3.issue": 3722,
+                "sm3.issue_wait": 174194,
+                "sm3.noc_in": 54434,
+                "sm3.noc_out": 384,
+                "sm3.rf_read": 33200,
+                "sm3.rf_write": 63584,
+                "sm3.sfu": 1120,
+                "sm3.shared_read": 0,
+                "sm3.shared_write": 0,
+                "sm3.tc": 12056,
+                "sm3.vec": 2368
+              },
+              "cycles": 210849,
+              "functional_passed": true,
+              "hbm_read_bytes": 2129664,
+              "hbm_write_bytes": 167936,
+              "instruction_count": 15424,
+              "max_abs_error": 1.1209758654651125e-06,
+              "peak_window_power_w": 6.673966939606509
+            }
+          },
+          "eligible": true,
+          "mode": "grade",
+          "score": 5301.424493620085
+        }
+      },
+      "verdict": "evaluated"
+    },
+    "score": 5301.424493620085,
+    "status": "evaluated",
+    "stored_at": "2026-09-29 01:52:07"
   },
   "33b016dae7fa35aa899b447d7a7780410614fbd2c57846272018eb6fda2df28b": {
     "candidate_id": "cand-097",
@@ -1110,7 +1356,7 @@
     },
     "score": 2479.583625689317,
     "status": "evaluated",
-    "stored_at": "2026-09-29 01:04:58"
+    "stored_at": "2026-09-29 01:52:07"
   },
   "33d6c5a23aa8b7b94fecad5c1ae6afcbefbf23edc806dfca6faa0194b1a8a91b": {
     "candidate_id": "cand-004",
@@ -1189,7 +1435,7 @@
     },
     "score": 1077.4312710849626,
     "status": "evaluated",
-    "stored_at": "2026-09-29 01:04:57"
+    "stored_at": "2026-09-29 01:52:06"
   },
   "36a05c88b55a4d11508c93350f26d2ee0ce016f7726fc56fd654e942d842e475": {
     "candidate_id": "cand-010",
@@ -1268,7 +1514,7 @@
     },
     "score": 1174.2540289231054,
     "status": "evaluated",
-    "stored_at": "2026-09-29 01:04:57"
+    "stored_at": "2026-09-29 01:52:06"
   },
   "36ff468e1dc98d5ce9d623d5840e2737ba11b267f1545587faadcdba6609d22f": {
     "candidate_id": "cand-100",
@@ -1355,7 +1601,7 @@
     },
     "score": 2564.606940222133,
     "status": "evaluated",
-    "stored_at": "2026-09-29 01:04:58"
+    "stored_at": "2026-09-29 01:52:07"
   },
   "37053aef61688a517595fea11a846f22c32865d1ed054f2bbd6aac87516435ff": {
     "candidate_id": "cand-050",
@@ -1434,7 +1680,130 @@
     },
     "score": 1296.9228571905599,
     "status": "evaluated",
-    "stored_at": "2026-09-29 01:04:57"
+    "stored_at": "2026-09-29 01:52:07"
+  },
+  "373317b487332c985ba4d7b7fb66da188a8221a81380402ba17eac7c312fcc60": {
+    "candidate_id": "cand-120",
+    "eligible": true,
+    "functional_passed": true,
+    "metrics": {
+      "candidate": "cand-120",
+      "historical_import": true,
+      "reports": {
+        "grade": {
+          "area_mm2": 16.25838297088,
+          "cases": {
+            "M1_P1": {
+              "busy_cycles": {
+                "shared.cache_bank_0": 515901,
+                "shared.cache_bank_1": 515901,
+                "shared.cache_bank_2": 515901,
+                "shared.cache_bank_3": 515901,
+                "shared.hbm_channel_0": 395292,
+                "shared.hbm_channel_1": 395352,
+                "shared.hbm_channel_2": 395352,
+                "shared.hbm_channel_3": 395292,
+                "shared.noc": 1160749,
+                "sm0.dma": 1428416,
+                "sm0.issue": 89579,
+                "sm0.issue_wait": 5472326,
+                "sm0.noc_in": 1106489,
+                "sm0.noc_out": 77728,
+                "sm0.rf_read": 2637800,
+                "sm0.rf_write": 2407936,
+                "sm0.sfu": 268428,
+                "sm0.shared_read": 0,
+                "sm0.shared_write": 0,
+                "sm0.tc": 455472,
+                "sm0.vec": 514440
+              },
+              "cycles": 5580809,
+              "functional_passed": true,
+              "hbm_read_bytes": 45626624,
+              "hbm_write_bytes": 4974592,
+              "instruction_count": 89579,
+              "max_abs_error": 2.793004260981391e-06,
+              "peak_window_power_w": 3.2090927716329922
+            },
+            "M2_D1": {
+              "busy_cycles": {
+                "shared.cache_bank_0": 68161,
+                "shared.cache_bank_1": 68162,
+                "shared.cache_bank_2": 67739,
+                "shared.cache_bank_3": 67742,
+                "shared.hbm_channel_0": 18046,
+                "shared.hbm_channel_1": 18002,
+                "shared.hbm_channel_2": 17888,
+                "shared.hbm_channel_3": 17864,
+                "shared.noc": 77816,
+                "sm0.dma": 62976,
+                "sm0.issue": 4762,
+                "sm0.issue_wait": 203142,
+                "sm0.noc_in": 56657,
+                "sm0.noc_out": 1472,
+                "sm0.rf_read": 39184,
+                "sm0.rf_write": 72544,
+                "sm0.sfu": 5472,
+                "sm0.shared_read": 0,
+                "sm0.shared_write": 0,
+                "sm0.tc": 12056,
+                "sm0.vec": 10432,
+                "sm1.dma": 59392,
+                "sm1.issue": 3722,
+                "sm1.issue_wait": 173829,
+                "sm1.noc_in": 54376,
+                "sm1.noc_out": 384,
+                "sm1.rf_read": 33200,
+                "sm1.rf_write": 63584,
+                "sm1.sfu": 1120,
+                "sm1.shared_read": 0,
+                "sm1.shared_write": 0,
+                "sm1.tc": 12056,
+                "sm1.vec": 2368,
+                "sm2.dma": 59392,
+                "sm2.issue": 3722,
+                "sm2.issue_wait": 173720,
+                "sm2.noc_in": 54097,
+                "sm2.noc_out": 384,
+                "sm2.rf_read": 33200,
+                "sm2.rf_write": 63584,
+                "sm2.sfu": 1120,
+                "sm2.shared_read": 0,
+                "sm2.shared_write": 0,
+                "sm2.tc": 12056,
+                "sm2.vec": 2368,
+                "sm3.dma": 59392,
+                "sm3.issue": 3722,
+                "sm3.issue_wait": 174194,
+                "sm3.noc_in": 54434,
+                "sm3.noc_out": 384,
+                "sm3.rf_read": 33200,
+                "sm3.rf_write": 63584,
+                "sm3.sfu": 1120,
+                "sm3.shared_read": 0,
+                "sm3.shared_write": 0,
+                "sm3.tc": 12056,
+                "sm3.vec": 2368
+              },
+              "cycles": 210849,
+              "functional_passed": true,
+              "hbm_read_bytes": 2129664,
+              "hbm_write_bytes": 167936,
+              "instruction_count": 15424,
+              "max_abs_error": 1.1209758654651125e-06,
+              "peak_window_power_w": 6.673966939606509
+            }
+          },
+          "eligible": true,
+          "mode": "grade",
+          "score": 5856.474722961825
+        }
+      },
+      "verdict": "evaluated"
+    },
+    "score": 5856.474722961825,
+    "status": "evaluated",
+    "stored_at": "2026-09-29 01:52:07"
   },
   "3765bee76dfd7960bfbf1535b7e29d65b4b0c1a5f78912b8da6b88b25c16ecdb": {
     "candidate_id": "cand-084",
@@ -1521,7 +1890,7 @@
     },
     "score": 2206.2481983505695,
     "status": "evaluated",
-    "stored_at": "2026-09-29 01:04:57"
+    "stored_at": "2026-09-29 01:52:07"
   },
   "398d683332443e2b3d49216616ee095933e21ff5202dae6d341c1dc8bba3d891": {
     "candidate_id": "cand-036",
@@ -1600,7 +1969,7 @@
     },
     "score": 1107.569130887403,
     "status": "evaluated",
-    "stored_at": "2026-09-29 01:04:57"
+    "stored_at": "2026-09-29 01:52:07"
   },
   "3a574934650fc97583112c5b9b01a29befce3880a2a1f28935c9563ca136b7ec": {
     "candidate_id": "cand-087",
@@ -1687,7 +2056,7 @@
     },
     "score": 2390.1102253707836,
     "status": "evaluated",
-    "stored_at": "2026-09-29 01:04:58"
+    "stored_at": "2026-09-29 01:52:07"
   },
   "3db9fdc5b740e0e7f43f460f38da52f1251ffd07031a889479a1494c770abc98": {
     "candidate_id": "cand-026",
@@ -1766,7 +2135,7 @@
     },
     "score": 1128.088530457202,
     "status": "evaluated",
-    "stored_at": "2026-09-29 01:04:57"
+    "stored_at": "2026-09-29 01:52:06"
   },
   "3e2dd500d53c5f236651d927b8c93621ea1079df901ddefbd4a033fd62d0e224": {
     "candidate_id": "cand-094",
@@ -1853,7 +2222,7 @@
     },
     "score": 2547.9215759712715,
     "status": "evaluated",
-    "stored_at": "2026-09-29 01:04:58"
+    "stored_at": "2026-09-29 01:52:07"
   },
   "4120cbbd9f4d5346e20513602486bf8339aee19c5a22f5184839c65b2b518e09": {
     "candidate_id": "cand-025",
@@ -1932,7 +2301,7 @@
     },
     "score": 1130.3388047148876,
     "status": "evaluated",
-    "stored_at": "2026-09-29 01:04:57"
+    "stored_at": "2026-09-29 01:52:06"
   },
   "42a335b925edf5dfb5ed18befa02078c9f8d6219193ec548bc4c0375bf291742": {
     "candidate_id": "cand-092",
@@ -2019,7 +2388,7 @@
     },
     "score": 2322.689428598885,
     "status": "evaluated",
-    "stored_at": "2026-09-29 01:04:58"
+    "stored_at": "2026-09-29 01:52:07"
   },
   "43e7a9cfda14106cf0f184a7155c3923a99fe14aacc6fe7fadcc25fea4309b7c": {
     "candidate_id": "cand-006",
@@ -2098,7 +2467,7 @@
     },
     "score": 1147.6394407423866,
     "status": "evaluated",
-    "stored_at": "2026-09-29 01:04:57"
+    "stored_at": "2026-09-29 01:52:06"
   },
   "48f97f5cb7b606c51c19c89944f9fb2036672ec160732dd47e4b979bc19f46f9": {
     "candidate_id": "cand-056",
@@ -2177,7 +2546,130 @@
     },
     "score": 1835.555492983374,
     "status": "evaluated",
-    "stored_at": "2026-09-29 01:04:57"
+    "stored_at": "2026-09-29 01:52:07"
+  },
+  "4cae5da79070b98a069e850c4f2cc6fbf292cebfaf9c96ca1a69a34f091372f0": {
+    "candidate_id": "cand-123",
+    "eligible": true,
+    "functional_passed": true,
+    "metrics": {
+      "candidate": "cand-123",
+      "historical_import": true,
+      "reports": {
+        "grade": {
+          "area_mm2": 16.25838297088,
+          "cases": {
+            "M1_P1": {
+              "busy_cycles": {
+                "shared.cache_bank_0": 465496,
+                "shared.cache_bank_1": 465496,
+                "shared.cache_bank_2": 465496,
+                "shared.cache_bank_3": 465496,
+                "shared.hbm_channel_0": 389744,
+                "shared.hbm_channel_1": 389744,
+                "shared.hbm_channel_2": 389744,
+                "shared.hbm_channel_3": 389744,
+                "shared.noc": 1097430,
+                "sm0.dma": 1237952,
+                "sm0.issue": 87371,
+                "sm0.issue_wait": 6252682,
+                "sm0.noc_in": 1043206,
+                "sm0.noc_out": 77728,
+                "sm0.rf_read": 2650088,
+                "sm0.rf_write": 2242048,
+                "sm0.sfu": 268428,
+                "sm0.shared_read": 98304,
+                "sm0.shared_write": 98304,
+                "sm0.tc": 455472,
+                "sm0.vec": 514440
+              },
+              "cycles": 6358501,
+              "functional_passed": true,
+              "hbm_read_bytes": 44912640,
+              "hbm_write_bytes": 4974592,
+              "instruction_count": 87371,
+              "max_abs_error": 2.793004260981391e-06,
+              "peak_window_power_w": 3.5802887182704435
+            },
+            "M2_D1": {
+              "busy_cycles": {
+                "shared.cache_bank_0": 68161,
+                "shared.cache_bank_1": 68162,
+                "shared.cache_bank_2": 67739,
+                "shared.cache_bank_3": 67742,
+                "shared.hbm_channel_0": 18046,
+                "shared.hbm_channel_1": 18002,
+                "shared.hbm_channel_2": 17888,
+                "shared.hbm_channel_3": 17864,
+                "shared.noc": 77816,
+                "sm0.dma": 62976,
+                "sm0.issue": 4762,
+                "sm0.issue_wait": 203142,
+                "sm0.noc_in": 56657,
+                "sm0.noc_out": 1472,
+                "sm0.rf_read": 39184,
+                "sm0.rf_write": 72544,
+                "sm0.sfu": 5472,
+                "sm0.shared_read": 0,
+                "sm0.shared_write": 0,
+                "sm0.tc": 12056,
+                "sm0.vec": 10432,
+                "sm1.dma": 59392,
+                "sm1.issue": 3722,
+                "sm1.issue_wait": 173829,
+                "sm1.noc_in": 54376,
+                "sm1.noc_out": 384,
+                "sm1.rf_read": 33200,
+                "sm1.rf_write": 63584,
+                "sm1.sfu": 1120,
+                "sm1.shared_read": 0,
+                "sm1.shared_write": 0,
+                "sm1.tc": 12056,
+                "sm1.vec": 2368,
+                "sm2.dma": 59392,
+                "sm2.issue": 3722,
+                "sm2.issue_wait": 173720,
+                "sm2.noc_in": 54097,
+                "sm2.noc_out": 384,
+                "sm2.rf_read": 33200,
+                "sm2.rf_write": 63584,
+                "sm2.sfu": 1120,
+                "sm2.shared_read": 0,
+                "sm2.shared_write": 0,
+                "sm2.tc": 12056,
+                "sm2.vec": 2368,
+                "sm3.dma": 59392,
+                "sm3.issue": 3722,
+                "sm3.issue_wait": 174194,
+                "sm3.noc_in": 54434,
+                "sm3.noc_out": 384,
+                "sm3.rf_read": 33200,
+                "sm3.rf_write": 63584,
+                "sm3.sfu": 1120,
+                "sm3.shared_read": 0,
+                "sm3.shared_write": 0,
+                "sm3.tc": 12056,
+                "sm3.vec": 2368
+              },
+              "cycles": 210849,
+              "functional_passed": true,
+              "hbm_read_bytes": 2129664,
+              "hbm_write_bytes": 167936,
+              "instruction_count": 15424,
+              "max_abs_error": 1.1209758654651125e-06,
+              "peak_window_power_w": 6.673966939606509
+            }
+          },
+          "eligible": true,
+          "mode": "grade",
+          "score": 5486.652829197951
+        }
+      },
+      "verdict": "evaluated"
+    },
+    "score": 5486.652829197951,
+    "status": "evaluated",
+    "stored_at": "2026-09-29 01:52:07"
   },
   "4cb836390050fd3c8f4a87e903bb5c4d932e56f43d17ac0fa2f3ef04f0883076": {
     "candidate_id": "cand-114",
@@ -2300,7 +2792,7 @@
     },
     "score": 5188.494494259971,
     "status": "evaluated",
-    "stored_at": "2026-09-29 01:04:58"
+    "stored_at": "2026-09-29 01:52:07"
   },
   "4f053f14b0646964203ee6cd2056e1dec9ff7163e1bb454b6b8513dc8e5f880e": {
     "candidate_id": "cand-046",
@@ -2381,7 +2873,7 @@
     },
     "score": 1107.569130887403,
     "status": "evaluated",
-    "stored_at": "2026-09-29 01:04:57"
+    "stored_at": "2026-09-29 01:52:07"
   },
   "52492a70b7fdcdf7a00cc144b9ac41f6c846bbca5528ebea124a41266e0d2e61": {
     "candidate_id": "cand-042",
@@ -2460,7 +2952,7 @@
     },
     "score": 1197.5985984332774,
     "status": "evaluated",
-    "stored_at": "2026-09-29 01:04:57"
+    "stored_at": "2026-09-29 01:52:07"
   },
   "5693414c79fef5522ecca3c233f2657d2ade6018da14a64a97c7105218e310ce": {
     "candidate_id": "cand-049",
@@ -2533,7 +3025,7 @@
     },
     "score": 794.5991478350456,
     "status": "evaluated",
-    "stored_at": "2026-09-29 01:04:57"
+    "stored_at": "2026-09-29 01:52:07"
   },
   "56ea54bc8ceb2fbab2ef5c02d1f0b65cbb75da3973f2724fc06d1380f6bf2d96": {
     "candidate_id": "cand-113",
@@ -2656,7 +3148,7 @@
     },
     "score": 5101.488654851473,
     "status": "evaluated",
-    "stored_at": "2026-09-29 01:04:58"
+    "stored_at": "2026-09-29 01:52:07"
   },
   "5adb81102e129554064951880cc4156627a997fd800504e088b67c7590feaeab": {
     "candidate_id": "cand-008",
@@ -2735,7 +3227,7 @@
     },
     "score": 1115.972170751516,
     "status": "evaluated",
-    "stored_at": "2026-09-29 01:04:57"
+    "stored_at": "2026-09-29 01:52:06"
   },
   "5c004a3de437a6a373eaae2213d803a7595484227ca18c5bddf71a49316da9c9": {
     "candidate_id": "cand-074",
@@ -2822,7 +3314,7 @@
     },
     "score": 2051.47741118116,
     "status": "evaluated",
-    "stored_at": "2026-09-29 01:04:57"
+    "stored_at": "2026-09-29 01:52:07"
   },
   "5c2b5fa7bdf362ae4410c6f425ff8291f79d5542eb89d2a4d320ee183e80202b": {
     "candidate_id": "cand-106",
@@ -2909,7 +3401,7 @@
     },
     "score": 2776.1099913390285,
     "status": "evaluated",
-    "stored_at": "2026-09-29 01:04:58"
+    "stored_at": "2026-09-29 01:52:07"
   },
   "5ee884f5894a72f3d5338163e3a3035299b4a38a7d81df92fb82da131c739313": {
     "candidate_id": "cand-076",
@@ -2996,7 +3488,7 @@
     },
     "score": 2104.4624234432395,
     "status": "evaluated",
-    "stored_at": "2026-09-29 01:04:57"
+    "stored_at": "2026-09-29 01:52:07"
   },
   "61082682175200ff1f198f9ab83522e64f8237ca8c641392c9772507725b215d": {
     "candidate_id": "cand-032",
@@ -3075,7 +3567,7 @@
     },
     "score": 1124.0376356259756,
     "status": "evaluated",
-    "stored_at": "2026-09-29 01:04:57"
+    "stored_at": "2026-09-29 01:52:07"
   },
   "618d8be54cdea7aff4ec1951bdc6ed67c2ef77c344be5a7940965b92aba7f36f": {
     "candidate_id": "cand-052",
@@ -3154,7 +3646,7 @@
     },
     "score": 1860.4743007003888,
     "status": "evaluated",
-    "stored_at": "2026-09-29 01:04:57"
+    "stored_at": "2026-09-29 01:52:07"
   },
   "62390bd6d85c59ff991ef8ebb3d41edb0175523204aca688576d65f08a7b5439": {
     "candidate_id": "cand-039",
@@ -3233,7 +3725,7 @@
     },
     "score": 916.4904172822608,
     "status": "evaluated",
-    "stored_at": "2026-09-29 01:04:57"
+    "stored_at": "2026-09-29 01:52:07"
   },
   "6f210797a8205dae777897e9008547c11bf20cc281ccd168dcad82e38e789fa1": {
     "candidate_id": "cand-075",
@@ -3320,7 +3812,7 @@
     },
     "score": 2011.1993372800794,
     "status": "evaluated",
-    "stored_at": "2026-09-29 01:04:57"
+    "stored_at": "2026-09-29 01:52:07"
   },
   "6f473ca829976d3ba32358d28bfb8fbc36c790298966b7789f6227dff6cafcc8": {
     "candidate_id": "cand-079",
@@ -3407,7 +3899,7 @@
     },
     "score": 1995.554860534254,
     "status": "evaluated",
-    "stored_at": "2026-09-29 01:04:57"
+    "stored_at": "2026-09-29 01:52:07"
   },
   "7079e6867892a858c30414f98adcff3626f682715b4f6e8934a73e0403adb736": {
     "candidate_id": "cand-013",
@@ -3486,7 +3978,7 @@
     },
     "score": 1003.5673543192571,
     "status": "evaluated",
-    "stored_at": "2026-09-29 01:04:57"
+    "stored_at": "2026-09-29 01:52:06"
   },
   "7772605611ef49f476e89b0f53cfa5ee48d11adf7402fe731e218e4bfa2a8f54": {
     "candidate_id": "cand-003",
@@ -3565,7 +4057,7 @@
     },
     "score": 1111.1503617194342,
     "status": "evaluated",
-    "stored_at": "2026-09-29 01:04:57"
+    "stored_at": "2026-09-29 01:52:06"
   },
   "78b672dd2ff398261291dea4b0383ae754d3377cdcc6571e6fb5b9b810b745f6": {
     "candidate_id": "cand-062",
@@ -3644,7 +4136,7 @@
     },
     "score": 1840.1107341264512,
     "status": "evaluated",
-    "stored_at": "2026-09-29 01:04:57"
+    "stored_at": "2026-09-29 01:52:07"
   },
   "79b4344fb69c439a7cee0acf27366fd97928202cacafd2c5981cf8849c89d9a1": {
     "candidate_id": "cand-015",
@@ -3723,7 +4215,7 @@
     },
     "score": 1133.0546914360318,
     "status": "evaluated",
-    "stored_at": "2026-09-29 01:04:57"
+    "stored_at": "2026-09-29 01:52:06"
   },
   "7b1415a290edb5ba177f937dc98fc0ecddd5f3a880358a1ca338ecd9e93aabd4": {
     "candidate_id": "cand-081",
@@ -3810,7 +4302,7 @@
     },
     "score": 2051.47741118116,
     "status": "evaluated",
-    "stored_at": "2026-09-29 01:04:57"
+    "stored_at": "2026-09-29 01:52:07"
   },
   "7d3a74e434b1cc38185f41594e4b24f92483de2e97d4140717991a395d455a89": {
     "candidate_id": "cand-098",
@@ -3897,7 +4389,7 @@
     },
     "score": 2567.954051821853,
     "status": "evaluated",
-    "stored_at": "2026-09-29 01:04:58"
+    "stored_at": "2026-09-29 01:52:07"
   },
   "7ea9984b85bc986d76c008f8e37a6ebf452f37d6885beb61e45c17be90a91c25": {
     "candidate_id": "cand-090",
@@ -3984,7 +4476,7 @@
     },
     "score": 2287.4851157230846,
     "status": "evaluated",
-    "stored_at": "2026-09-29 01:04:58"
+    "stored_at": "2026-09-29 01:52:07"
   },
   "80601b99e33dd64e8b1d91cd98f14cf7b5ce8d194c7756044423a862114e63c2": {
     "candidate_id": "cand-077",
@@ -4071,7 +4563,7 @@
     },
     "score": 2075.4609403356135,
     "status": "evaluated",
-    "stored_at": "2026-09-29 01:04:57"
+    "stored_at": "2026-09-29 01:52:07"
   },
   "8088cd3a7c69fa051588b82a8cd545b9c3dcc16a439b420b0eb170ed857049c4": {
     "candidate_id": "cand-065",
@@ -4150,7 +4642,7 @@
     },
     "score": 1965.9942357374484,
     "status": "evaluated",
-    "stored_at": "2026-09-29 01:04:57"
+    "stored_at": "2026-09-29 01:52:07"
   },
   "87d2bef22d12f5cab2c830315c6df7a16ab76bc713ef5c67ccdfd7442dcd6c52": {
     "candidate_id": "cand-012",
@@ -4229,7 +4721,7 @@
     },
     "score": 914.1264889348438,
     "status": "evaluated",
-    "stored_at": "2026-09-29 01:04:57"
+    "stored_at": "2026-09-29 01:52:06"
   },
   "9034fc0355651c516a0c03a349a745de0c5273165ec23594ea529b72cef3fcbd": {
     "candidate_id": "cand-022",
@@ -4308,7 +4800,7 @@
     },
     "score": 1126.6638611979947,
     "status": "evaluated",
-    "stored_at": "2026-09-29 01:04:57"
+    "stored_at": "2026-09-29 01:52:06"
   },
   "9156acb1acaa15978eb515d3e37ad8b607116a178b3d0140bd8db0362620104f": {
     "candidate_id": "cand-016",
@@ -4387,7 +4879,7 @@
     },
     "score": 1136.0626036140557,
     "status": "evaluated",
-    "stored_at": "2026-09-29 01:04:57"
+    "stored_at": "2026-09-29 01:52:06"
   },
   "91eb27ab492c258c24d6f4c0f8f2d145b6fba17678ac660f1bf159f9ac7001bc": {
     "candidate_id": "cand-051",
@@ -4466,7 +4958,7 @@
     },
     "score": 1761.5596139891823,
     "status": "evaluated",
-    "stored_at": "2026-09-29 01:04:57"
+    "stored_at": "2026-09-29 01:52:07"
   },
   "929439425a0280c4cfb02cba8a90f301ae6956d7a49fe9645613457d713005b0": {
     "candidate_id": "cand-086",
@@ -4553,7 +5045,7 @@
     },
     "score": 2141.3022952147,
     "status": "evaluated",
-    "stored_at": "2026-09-29 01:04:58"
+    "stored_at": "2026-09-29 01:52:07"
   },
   "98bc67dedd2222f09a72cedd81579862f4571c1cc1f53677c4fbb3f7df7ea49c": {
     "candidate_id": "cand-071",
@@ -4632,7 +5124,7 @@
     },
     "score": 1996.4823457755592,
     "status": "evaluated",
-    "stored_at": "2026-09-29 01:04:57"
+    "stored_at": "2026-09-29 01:52:07"
   },
   "9c33051d881e3cf831c1cc454d38cf29bc7026de196731405e4683426131cb69": {
     "candidate_id": "cand-045",
@@ -4711,7 +5203,7 @@
     },
     "score": 1185.9408933569387,
     "status": "evaluated",
-    "stored_at": "2026-09-29 01:04:57"
+    "stored_at": "2026-09-29 01:52:07"
   },
   "9c442d50b6ddc8be94caa003b6e80f10de6a1d815d16931f8ecf72a58f9c056a": {
     "candidate_id": "cand-023",
@@ -4790,7 +5282,7 @@
     },
     "score": 1140.8975242069364,
     "status": "evaluated",
-    "stored_at": "2026-09-29 01:04:57"
+    "stored_at": "2026-09-29 01:52:06"
   },
   "9fc06c370a7befb039c0d7acd1c887c4e3e33714ae277c7caec12935eee325a7": {
     "candidate_id": "cand-057",
@@ -4869,7 +5361,130 @@
     },
     "score": 1666.9684198231182,
     "status": "evaluated",
-    "stored_at": "2026-09-29 01:04:57"
+    "stored_at": "2026-09-29 01:52:07"
+  },
+  "a18b3060153cad675e04952d7b15de9339c69602586e2352f287fc0f86810f99": {
+    "candidate_id": "cand-119",
+    "eligible": true,
+    "functional_passed": true,
+    "metrics": {
+      "candidate": "cand-119",
+      "historical_import": true,
+      "reports": {
+        "grade": {
+          "area_mm2": 16.25838297088,
+          "cases": {
+            "M1_P1": {
+              "busy_cycles": {
+                "shared.cache_bank_0": 515901,
+                "shared.cache_bank_1": 515901,
+                "shared.cache_bank_2": 515901,
+                "shared.cache_bank_3": 515901,
+                "shared.hbm_channel_0": 395292,
+                "shared.hbm_channel_1": 395352,
+                "shared.hbm_channel_2": 395352,
+                "shared.hbm_channel_3": 395292,
+                "shared.noc": 1168597,
+                "sm0.dma": 1428416,
+                "sm0.issue": 89579,
+                "sm0.issue_wait": 5628578,
+                "sm0.noc_in": 1114337,
+                "sm0.noc_out": 77728,
+                "sm0.rf_read": 2637800,
+                "sm0.rf_write": 2407936,
+                "sm0.sfu": 268428,
+                "sm0.shared_read": 0,
+                "sm0.shared_write": 0,
+                "sm0.tc": 455472,
+                "sm0.vec": 514440
+              },
+              "cycles": 5737061,
+              "functional_passed": true,
+              "hbm_read_bytes": 45626624,
+              "hbm_write_bytes": 4974592,
+              "instruction_count": 89579,
+              "max_abs_error": 2.793004260981391e-06,
+              "peak_window_power_w": 3.2090927716329922
+            },
+            "M2_D1": {
+              "busy_cycles": {
+                "shared.cache_bank_0": 68161,
+                "shared.cache_bank_1": 68162,
+                "shared.cache_bank_2": 67739,
+                "shared.cache_bank_3": 67742,
+                "shared.hbm_channel_0": 18046,
+                "shared.hbm_channel_1": 18002,
+                "shared.hbm_channel_2": 17888,
+                "shared.hbm_channel_3": 17864,
+                "shared.noc": 77816,
+                "sm0.dma": 62976,
+                "sm0.issue": 4762,
+                "sm0.issue_wait": 203142,
+                "sm0.noc_in": 56657,
+                "sm0.noc_out": 1472,
+                "sm0.rf_read": 39184,
+                "sm0.rf_write": 72544,
+                "sm0.sfu": 5472,
+                "sm0.shared_read": 0,
+                "sm0.shared_write": 0,
+                "sm0.tc": 12056,
+                "sm0.vec": 10432,
+                "sm1.dma": 59392,
+                "sm1.issue": 3722,
+                "sm1.issue_wait": 173829,
+                "sm1.noc_in": 54376,
+                "sm1.noc_out": 384,
+                "sm1.rf_read": 33200,
+                "sm1.rf_write": 63584,
+                "sm1.sfu": 1120,
+                "sm1.shared_read": 0,
+                "sm1.shared_write": 0,
+                "sm1.tc": 12056,
+                "sm1.vec": 2368,
+                "sm2.dma": 59392,
+                "sm2.issue": 3722,
+                "sm2.issue_wait": 173720,
+                "sm2.noc_in": 54097,
+                "sm2.noc_out": 384,
+                "sm2.rf_read": 33200,
+                "sm2.rf_write": 63584,
+                "sm2.sfu": 1120,
+                "sm2.shared_read": 0,
+                "sm2.shared_write": 0,
+                "sm2.tc": 12056,
+                "sm2.vec": 2368,
+                "sm3.dma": 59392,
+                "sm3.issue": 3722,
+                "sm3.issue_wait": 174194,
+                "sm3.noc_in": 54434,
+                "sm3.noc_out": 384,
+                "sm3.rf_read": 33200,
+                "sm3.rf_write": 63584,
+                "sm3.sfu": 1120,
+                "sm3.shared_read": 0,
+                "sm3.shared_write": 0,
+                "sm3.tc": 12056,
+                "sm3.vec": 2368
+              },
+              "cycles": 210849,
+              "functional_passed": true,
+              "hbm_read_bytes": 2129664,
+              "hbm_write_bytes": 167936,
+              "instruction_count": 15424,
+              "max_abs_error": 1.1209758654651125e-06,
+              "peak_window_power_w": 6.673966939606509
+            }
+          },
+          "eligible": true,
+          "mode": "grade",
+          "score": 5776.172027407479
+        }
+      },
+      "verdict": "evaluated"
+    },
+    "score": 5776.172027407479,
+    "status": "evaluated",
+    "stored_at": "2026-09-29 01:52:07"
   },
   "a27a81d8e9ef2776dd8b942d2baa84b3ef3a58559b1083d727d0155d9eda326b": {
     "candidate_id": "cand-033",
@@ -4948,7 +5563,7 @@
     },
     "score": 643.1375334157768,
     "status": "evaluated",
-    "stored_at": "2026-09-29 01:04:57"
+    "stored_at": "2026-09-29 01:52:07"
   },
   "a338c0e1385a7c26a41c8b9ae30e3138928aeee50ead5baf5b7c936052d9d278": {
     "candidate_id": "cand-021",
@@ -5027,7 +5642,7 @@
     },
     "score": 955.2915117902414,
     "status": "evaluated",
-    "stored_at": "2026-09-29 01:04:57"
+    "stored_at": "2026-09-29 01:52:06"
   },
   "a45be73eb7cdc5ebf0388261def1eb6ec18cb1f16837c98f45df477d500df3b6": {
     "candidate_id": "cand-017",
@@ -5106,7 +5721,7 @@
     },
     "score": 1188.0346056227518,
     "status": "evaluated",
-    "stored_at": "2026-09-29 01:04:57"
+    "stored_at": "2026-09-29 01:52:06"
   },
   "a7dcd351cb804d64bcb3791ceba04f9ec336d9d05baca42a54d48c0817fc6637": {
     "candidate_id": "cand-001",
@@ -5185,7 +5800,7 @@
     },
     "score": 1173.0811006016247,
     "status": "evaluated",
-    "stored_at": "2026-09-29 01:04:57"
+    "stored_at": "2026-09-29 01:52:06"
   },
   "ae023c571217791815b6d6e075e992a317865200c70a394b8cbddd38f53ebfaa": {
     "candidate_id": "cand-000",
@@ -5264,7 +5879,7 @@
     },
     "score": 1000.0,
     "status": "evaluated",
-    "stored_at": "2026-09-29 01:04:57"
+    "stored_at": "2026-09-29 01:52:06"
   },
   "b09b9f59319ea4802f1f8c8834b0d1c83dcdbf383fe1492e23cc4d7e2c9b3546": {
     "candidate_id": "cand-029",
@@ -5343,7 +5958,7 @@
     },
     "score": 1168.5307558154386,
     "status": "evaluated",
-    "stored_at": "2026-09-29 01:04:57"
+    "stored_at": "2026-09-29 01:52:07"
   },
   "b1f588c1ffdd5c20fd3645e04d19ae27755efed1e4b8c25825b9a456e7532f87": {
     "candidate_id": "cand-112",
@@ -5466,7 +6081,7 @@
     },
     "score": 4455.914242343791,
     "status": "evaluated",
-    "stored_at": "2026-09-29 01:04:58"
+    "stored_at": "2026-09-29 01:52:07"
   },
   "b376889c016a1c16a896a4948639e6cb1aa5f3b961a2e32537402aef911e29b1": {
     "candidate_id": "cand-082",
@@ -5553,7 +6168,7 @@
     },
     "score": 2131.1533261851882,
     "status": "evaluated",
-    "stored_at": "2026-09-29 01:04:57"
+    "stored_at": "2026-09-29 01:52:07"
   },
   "b6edbbff79d0b9a3e1e7ab92b648d7ec386dd171aa96b6cf814af5f9e0c96c71": {
     "candidate_id": "cand-059",
@@ -5632,7 +6247,7 @@
     },
     "score": 1861.325996168528,
     "status": "evaluated",
-    "stored_at": "2026-09-29 01:04:57"
+    "stored_at": "2026-09-29 01:52:07"
   },
   "b9fb41d19c35aa4e336287664441e9c91b3cba553a9cc75b998058750b2da4a9": {
     "candidate_id": "cand-018",
@@ -5711,7 +6326,7 @@
     },
     "score": 923.5334757991376,
     "status": "evaluated",
-    "stored_at": "2026-09-29 01:04:57"
+    "stored_at": "2026-09-29 01:52:06"
   },
   "bb1ad199f8c0f6eb3a463a0269ab16a274f0aa4d8967d25f7469a91121b28980": {
     "candidate_id": "cand-083",
@@ -5798,7 +6413,7 @@
     },
     "score": 2245.0389561884695,
     "status": "evaluated",
-    "stored_at": "2026-09-29 01:04:57"
+    "stored_at": "2026-09-29 01:52:07"
   },
   "bb576af806f358e962e8fb279fcd9bc01dc6b84d53d7f9fe6e7bd9b648f09c55": {
     "candidate_id": "cand-061",
@@ -5885,7 +6500,7 @@
     },
     "score": 1338.1757908815193,
     "status": "evaluated",
-    "stored_at": "2026-09-29 01:04:57"
+    "stored_at": "2026-09-29 01:52:07"
   },
   "bd3c2bf486873f7450ac08f1be2b7ef60811570af85a83e88713185305448c7d": {
     "candidate_id": "cand-044",
@@ -5966,7 +6581,7 @@
     },
     "score": 1197.5985984332774,
     "status": "evaluated",
-    "stored_at": "2026-09-29 01:04:57"
+    "stored_at": "2026-09-29 01:52:07"
   },
   "c4cf0a1423e378f252e2033cfb0a6781fcc6fed4e385b54fd409e1480ddc1dbf": {
     "candidate_id": "cand-118",
@@ -5974,8 +6589,7 @@
     "functional_passed": true,
     "metrics": {
       "candidate": "cand-118",
-      "elapsed": 109.24233925004955,
-      "evaluation_attempts": 1,
+      "historical_import": true,
       "reports": {
         "grade": {
           "area_mm2": 16.25838297088,
@@ -6086,118 +6700,11 @@
           "score": 5555.741702281949
         }
       },
-      "runs": {
-        "grade": {
-          "command": [
-            "/Users/yihdu/Codefield/SLAI-infra-Code/transformer-codesign-starter/.venv/bin/python",
-            "/Users/yihdu/Codefield/SLAI-infra-Code/transformer-codesign-starter/challenge.py",
-            "grade",
-            "--hardware",
-            "/Users/yihdu/Codefield/SLAI-infra-Code/transformer-codesign-starter/project/experiments/cand-118/inputs/hardware.json",
-            "--program-p1",
-            "/Users/yihdu/Codefield/SLAI-infra-Code/transformer-codesign-starter/project/experiments/cand-118/programs/M1_P1.asm",
-            "--program-d1",
-            "/Users/yihdu/Codefield/SLAI-infra-Code/transformer-codesign-starter/project/experiments/cand-118/programs/M2_D1.asm",
-            "--report",
-            "/Users/yihdu/Codefield/SLAI-infra-Code/transformer-codesign-starter/project/experiments/cand-118/reports/grade.json",
-            "--seed",
-            "7",
-            "--baseline",
-            "/Users/yihdu/Codefield/SLAI-infra-Code/transformer-codesign-starter/baseline_manifest.json"
-          ],
-          "elapsed": 109.23450200003572,
-          "exit_code": 0,
-          "failure_class": null,
-          "peak_memory_mib": 5459.535873413086
-        }
-      },
-      "static": {
-        "M1_P1": {
-          "bytes": 365151,
-          "expanded_instructions": 89579,
-          "workgroup_lifetimes": 1
-        },
-        "M2_D1": {
-          "bytes": 1511797,
-          "expanded_instructions": 15424,
-          "workgroup_lifetimes": 4
-        }
-      },
-      "validation_cost": {
-        "M2_D1": {
-          "barrier_directed_pair_relations": 1920,
-          "barrier_incidence_edges": 1280,
-          "budget_mib": 6144,
-          "caveat": "Lower bound on uncompressed CPython event-set allocation, not peak RSS prediction. Passing cost screen never establishes race correctness. Multi-path/HBM unions, tuples, prefixes and graph storage add memory.",
-          "checkpoints": [
-            {
-              "max_depth": 1416,
-              "sum_depth": 7018808,
-              "visited": 10000
-            }
-          ],
-          "decision": "within_lower_bound_only",
-          "events": 15248,
-          "expanded_instructions": 15424,
-          "global_commit_incidence_edges": 28969,
-          "graph_edges": 44829,
-          "max_dependency_depth_lower_bound": 2185,
-          "named_cross_wg_sync_edges": 0,
-          "opcode_counts": {
-            "BARRIER": 160,
-            "LD": 7736,
-            "MMA.ACC": 4224,
-            "REDUCE": 192,
-            "SFU": 128,
-            "ST": 680,
-            "STEP.COMMIT": 8,
-            "VEC": 2288,
-            "WG.BEGIN": 4,
-            "WG.END": 4
-          },
-          "race_checker_single_wg_fast_path": false,
-          "retained_event_sets_logical_bytes_lower_bound": 269133696,
-          "source_lines": 7552,
-          "stages": {
-            "unknown/control": {
-              "BARRIER": 160,
-              "LD": 7736,
-              "MMA.ACC": 4224,
-              "REDUCE": 192,
-              "SFU": 128,
-              "ST": 680,
-              "STEP.COMMIT": 8,
-              "VEC": 2288,
-              "WG.BEGIN": 4,
-              "WG.END": 4,
-              "events": 15248,
-              "instructions": 15424,
-              "sum_dependency_depth_lower_bound": 16676000
-            }
-          },
-          "static_loops": 1856,
-          "sum_dependency_depth_lower_bound": 16676000,
-          "workgroup_lifetimes": 4,
-          "workgroup_names": 4
-        }
-      },
-      "validation_cost_progress": {
-        "command": [
-          "/Users/yihdu/Codefield/SLAI-infra-Code/transformer-codesign-starter/.venv/bin/python",
-          "-c",
-          "import json,pathlib; from project.search.validation_cost import analyze; stats=json.loads(pathlib.Path('reports/static.json').read_text()); out={n:analyze((pathlib.Path('programs')/(n+'.asm')).read_text(),6144) for n,v in stats.items() if v.get('workgroup_lifetimes',1)>1}; pathlib.Path('reports/validation-cost.json').write_text(json.dumps(out,indent=2))"
-        ],
-        "elapsed": 0.7692962499568239,
-        "peak_memory_mib": 59.812957763671875,
-        "pid": 49144,
-        "status": "completed",
-        "updated_at": 1790615100.778116
-      },
       "verdict": "evaluated"
     },
     "score": 5555.741702281949,
     "status": "evaluated",
-    "stored_at": "2026-09-29 01:06:50"
+    "stored_at": "2026-09-29 01:52:07"
   },
   "c5606389ab2d8e7e873f8652bc32cc53ca80b07801f052e9eacc70b9d622ba7d": {
     "candidate_id": "cand-067",
@@ -6284,7 +6791,7 @@
     },
     "score": 1894.931033551575,
     "status": "evaluated",
-    "stored_at": "2026-09-29 01:04:57"
+    "stored_at": "2026-09-29 01:52:07"
   },
   "c77a0a71246c95d25fbdedf884b4957a6dde6553f217d27f318d59d09c164a67": {
     "candidate_id": "cand-064",
@@ -6363,7 +6870,7 @@
     },
     "score": 1598.6569175780114,
     "status": "evaluated",
-    "stored_at": "2026-09-29 01:04:57"
+    "stored_at": "2026-09-29 01:52:07"
   },
   "c7c0b39be5c6f457f04e19cf264374f8c6f3df03d89cf0f59e425acd75b2ba1d": {
     "candidate_id": "cand-096",
@@ -6450,7 +6957,7 @@
     },
     "score": 2375.7262879581485,
     "status": "evaluated",
-    "stored_at": "2026-09-29 01:04:58"
+    "stored_at": "2026-09-29 01:52:07"
   },
   "cb886b84bd1645ca36c26abf210749550f315abb7c1f353ac21f85cf177dffa6": {
     "candidate_id": "cand-053",
@@ -6531,7 +7038,7 @@
     },
     "score": 1245.0300554926546,
     "status": "evaluated",
-    "stored_at": "2026-09-29 01:04:57"
+    "stored_at": "2026-09-29 01:52:07"
   },
   "cc0619f205c9e1deeac539dbc90bc2fc0ed7aa04c82b805460c38a07651ca374": {
     "candidate_id": "cand-009",
@@ -6610,7 +7117,143 @@
     },
     "score": 1178.3304547853895,
     "status": "evaluated",
-    "stored_at": "2026-09-29 01:04:57"
+    "stored_at": "2026-09-29 01:52:06"
+  },
+  "cd987d27b724357d890ab429f9c503e2ef4e1584bbd7fb667965738c9a258c3f": {
+    "candidate_id": "cand-124",
+    "eligible": true,
+    "functional_passed": true,
+    "metrics": {
+      "candidate": "cand-124",
+      "historical_import": true,
+      "reports": {
+        "grade": {
+          "area_mm2": 22.69981349888,
+          "cases": {
+            "M1_P1": {
+              "busy_cycles": {
+                "shared.cache_bank_0": 394123,
+                "shared.cache_bank_1": 394123,
+                "shared.cache_bank_2": 394124,
+                "shared.cache_bank_3": 394124,
+                "shared.hbm_channel_0": 75888,
+                "shared.hbm_channel_1": 75888,
+                "shared.hbm_channel_2": 75888,
+                "shared.hbm_channel_3": 75888,
+                "shared.hbm_channel_4": 75876,
+                "shared.hbm_channel_5": 75880,
+                "shared.hbm_channel_6": 75880,
+                "shared.hbm_channel_7": 75880,
+                "shared.noc": 1082566,
+                "sm0.dma": 1428416,
+                "sm0.issue": 89579,
+                "sm0.issue_wait": 4969878,
+                "sm0.noc_in": 1035930,
+                "sm0.noc_out": 77728,
+                "sm0.reduce": 81552,
+                "sm0.rf_read": 2637800,
+                "sm0.rf_write": 2407936,
+                "sm0.sfu": 143244,
+                "sm0.shared_read": 0,
+                "sm0.shared_write": 0,
+                "sm0.tc": 455472,
+                "sm0.vec": 414072
+              },
+              "cycles": 5072661,
+              "functional_passed": true,
+              "hbm_read_bytes": 14451584,
+              "hbm_write_bytes": 4974592,
+              "instruction_count": 89579,
+              "max_abs_error": 2.793004260981391e-06,
+              "peak_window_power_w": 4.014955333925761
+            },
+            "M2_D1": {
+              "busy_cycles": {
+                "shared.cache_bank_0": 68196,
+                "shared.cache_bank_1": 68196,
+                "shared.cache_bank_2": 67748,
+                "shared.cache_bank_3": 67748,
+                "shared.hbm_channel_0": 9032,
+                "shared.hbm_channel_1": 9032,
+                "shared.hbm_channel_2": 8968,
+                "shared.hbm_channel_3": 8968,
+                "shared.hbm_channel_4": 9024,
+                "shared.hbm_channel_5": 9024,
+                "shared.hbm_channel_6": 8960,
+                "shared.hbm_channel_7": 8960,
+                "shared.noc": 74568,
+                "sm0.dma": 62976,
+                "sm0.issue": 4762,
+                "sm0.issue_wait": 200446,
+                "sm0.noc_in": 56952,
+                "sm0.noc_out": 1472,
+                "sm0.reduce": 1312,
+                "sm0.rf_read": 39184,
+                "sm0.rf_write": 72544,
+                "sm0.sfu": 2912,
+                "sm0.shared_read": 0,
+                "sm0.shared_write": 0,
+                "sm0.tc": 12056,
+                "sm0.vec": 8736,
+                "sm1.dma": 59392,
+                "sm1.issue": 3722,
+                "sm1.issue_wait": 173376,
+                "sm1.noc_in": 54798,
+                "sm1.noc_out": 384,
+                "sm1.reduce": 480,
+                "sm1.rf_read": 33200,
+                "sm1.rf_write": 63584,
+                "sm1.sfu": 608,
+                "sm1.shared_read": 0,
+                "sm1.shared_write": 0,
+                "sm1.tc": 12056,
+                "sm1.vec": 1760,
+                "sm2.dma": 59392,
+                "sm2.issue": 3722,
+                "sm2.issue_wait": 173466,
+                "sm2.noc_in": 54409,
+                "sm2.noc_out": 384,
+                "sm2.reduce": 480,
+                "sm2.rf_read": 33200,
+                "sm2.rf_write": 63584,
+                "sm2.sfu": 608,
+                "sm2.shared_read": 0,
+                "sm2.shared_write": 0,
+                "sm2.tc": 12056,
+                "sm2.vec": 1760,
+                "sm3.dma": 59392,
+                "sm3.issue": 3722,
+                "sm3.issue_wait": 173538,
+                "sm3.noc_in": 54654,
+                "sm3.noc_out": 384,
+                "sm3.reduce": 480,
+                "sm3.rf_read": 33200,
+                "sm3.rf_write": 63584,
+                "sm3.sfu": 608,
+                "sm3.shared_read": 0,
+                "sm3.shared_write": 0,
+                "sm3.tc": 12056,
+                "sm3.vec": 1760
+              },
+              "cycles": 207673,
+              "functional_passed": true,
+              "hbm_read_bytes": 2135040,
+              "hbm_write_bytes": 167936,
+              "instruction_count": 15424,
+              "max_abs_error": 1.1209758654651125e-06,
+              "peak_window_power_w": 6.707200513472132
+            }
+          },
+          "eligible": true,
+          "mode": "grade",
+          "score": 6189.601474987878
+        }
+      },
+      "verdict": "evaluated"
+    },
+    "score": 6189.601474987878,
+    "status": "evaluated",
+    "stored_at": "2026-09-29 01:52:07"
   },
   "ce13232f2cae8b11c68e8bd50ee78e7ad3d5f59988b842be7b8e1e124950fbc6": {
     "candidate_id": "cand-116",
@@ -6733,7 +7376,7 @@
     },
     "score": 5148.962302010063,
     "status": "evaluated",
-    "stored_at": "2026-09-29 01:04:58"
+    "stored_at": "2026-09-29 01:52:07"
   },
   "cf6fe60305c3104f54c1086385aacd862e2fcf08860834c340f4cfba41e33fc8": {
     "candidate_id": "cand-078",
@@ -6820,7 +7463,7 @@
     },
     "score": 2153.6655079126076,
     "status": "evaluated",
-    "stored_at": "2026-09-29 01:04:57"
+    "stored_at": "2026-09-29 01:52:07"
   },
   "d4b1ef4ae96295f72c3b5e4c6f56bc84a0461de62707ecfb7430038a04ffe385": {
     "candidate_id": "cand-002",
@@ -6899,7 +7542,7 @@
     },
     "score": 910.920963143551,
     "status": "evaluated",
-    "stored_at": "2026-09-29 01:04:57"
+    "stored_at": "2026-09-29 01:52:06"
   },
   "d69890967a6d8bde0311d43600717add03d35763139b30204cd549525fde795d": {
     "candidate_id": "cand-093",
@@ -6986,7 +7629,7 @@
     },
     "score": 2512.2200312594855,
     "status": "evaluated",
-    "stored_at": "2026-09-29 01:04:58"
+    "stored_at": "2026-09-29 01:52:07"
   },
   "d9ca67360481fed3f2093feabe0a7f91aa068472a8e9ba7418e4fe17ae2be9d8": {
     "candidate_id": "cand-030",
@@ -7065,7 +7708,7 @@
     },
     "score": 926.8247918622404,
     "status": "evaluated",
-    "stored_at": "2026-09-29 01:04:57"
+    "stored_at": "2026-09-29 01:52:07"
   },
   "dd8f3085a8f60210b3b34445b237866c43a1b8d9a1264118a9cfc64dae197df9": {
     "candidate_id": "cand-011",
@@ -7144,7 +7787,7 @@
     },
     "score": 1122.2175843408888,
     "status": "evaluated",
-    "stored_at": "2026-09-29 01:04:57"
+    "stored_at": "2026-09-29 01:52:06"
   },
   "e3bec8a6d7cd57459b9ff5a84672cdf25dbfc49690d749672b07ee40608ad551": {
     "candidate_id": "cand-080",
@@ -7231,7 +7874,7 @@
     },
     "score": 2078.124801537899,
     "status": "evaluated",
-    "stored_at": "2026-09-29 01:04:57"
+    "stored_at": "2026-09-29 01:52:07"
   },
   "e624d2b5a240dc8bb11513718f568cfd2345097ddb8a3e7071b07a32c0144b22": {
     "candidate_id": "cand-058",
@@ -7310,7 +7953,7 @@
     },
     "score": 1824.400503955544,
     "status": "evaluated",
-    "stored_at": "2026-09-29 01:04:57"
+    "stored_at": "2026-09-29 01:52:07"
   },
   "ea8d5070df435122fea480bae04f68d2d8693f89f851344ac268f0d6d2e58985": {
     "candidate_id": "cand-063",
@@ -7389,7 +8032,7 @@
     },
     "score": 1874.814304538389,
     "status": "evaluated",
-    "stored_at": "2026-09-29 01:04:57"
+    "stored_at": "2026-09-29 01:52:07"
   },
   "ebf6fa0ba7187acaad6ce3c03d634598899bea9ac1102c284e937e957d68a8ba": {
     "candidate_id": "cand-024",
@@ -7468,7 +8111,7 @@
     },
     "score": 1188.7989042667773,
     "status": "evaluated",
-    "stored_at": "2026-09-29 01:04:57"
+    "stored_at": "2026-09-29 01:52:06"
   },
   "f2b1ef9f1991ab31be847a1c26971ad68ad817d76f1ffbcc09e074fbccd9d89e": {
     "candidate_id": "cand-072",
@@ -7547,7 +8190,7 @@
     },
     "score": 2004.670977306224,
     "status": "evaluated",
-    "stored_at": "2026-09-29 01:04:57"
+    "stored_at": "2026-09-29 01:52:07"
   },
   "f33a7b18973510ecdf22ed86ec3022c3658211a267180da564f204538251015b": {
     "candidate_id": "cand-115",
@@ -7670,7 +8313,7 @@
     },
     "score": 5210.716811684826,
     "status": "evaluated",
-    "stored_at": "2026-09-29 01:04:58"
+    "stored_at": "2026-09-29 01:52:07"
   },
   "f7ba703d86620627643e78e438fa612068d60a39330b11eed54407f13e780b09": {
     "candidate_id": "cand-060",
@@ -7749,7 +8392,7 @@
     },
     "score": 1726.161168219366,
     "status": "evaluated",
-    "stored_at": "2026-09-29 01:04:57"
+    "stored_at": "2026-09-29 01:52:07"
   },
   "fa97668120b1e97dacef29416f89c5e13abe795cc6fe814caa08b29a56749300": {
     "candidate_id": "cand-038",
@@ -7828,7 +8471,7 @@
     },
     "score": 1192.1825329196229,
     "status": "evaluated",
-    "stored_at": "2026-09-29 01:04:57"
+    "stored_at": "2026-09-29 01:52:07"
   },
   "ff0da3b22e0f91a1e9171e7472051c4e4aa547c95a414c8cf2634cb1f17312d2": {
     "candidate_id": "cand-031",
@@ -7907,6 +8550,6 @@
     },
     "score": 1103.1808039751736,
     "status": "evaluated",
-    "stored_at": "2026-09-29 01:04:57"
+    "stored_at": "2026-09-29 01:52:07"
   }
 }

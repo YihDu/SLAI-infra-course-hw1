@@ -1,0 +1,18 @@
+{
+  "bias": "p1",
+  "created_at": "2026-09-29 01:16:23",
+  "failure_class": "none",
+  "family": "p1_projection_pipeline",
+  "fingerprint": "6757675a9dd876d1",
+  "hypothesis": "Compose verified P1 QKV operand pipeline with identical WO A/B double buffering; preserve arithmetic order and D1.",
+  "id": "cand-120",
+  "kind": "manual",
+  "ops": [],
+  "parent": "cand-119",
+  "provenance_note": null,
+  "round": 12,
+  "status": "kept",
+  "struct_sig": "p1-qkv-wo-double-buffered-operands",
+  "summary": "[]",
+  "verdict_note": "Full grade passes: compose QKV and WO operand double buffering; instruction counts and D1 unchanged."
+}

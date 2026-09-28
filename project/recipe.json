@@ -1,6 +1,6 @@
 {
   "attention": {
-    "algorithm": "blocked_prompt",
+    "algorithm": "blocked_prompt_pipeline",
     "scores": "rf"
   },
   "d1_schedule": {
@@ -50,6 +50,10 @@
       "k_chunk": 32,
       "m_tile": 32,
       "n_tile": 32,
+      "operand_pipeline": [
+        "qkv",
+        "wo"
+      ],
       "order": "nkm_lanes"
     }
   },

@@ -1,4 +1,4 @@
-"""Deterministic evaluator wrapper: generate -> check -> estimate -> grade.
+"""Isolated evaluator: generate -> expanded static screen -> grade.
 
 The only ground truth is challenge.py. This module runs it as a subprocess and
 parses the written report files; it never interprets or scores anything itself.
@@ -20,44 +20,6 @@ def python_exe() -> str:
         return exe
     venv = REPO / ".venv" / "bin" / "python"
     return str(venv) if venv.exists() else sys.executable
-
-
-def generate() -> None:
-    """Regenerate programs/*.asm from the staged project/compiler.py."""
-    proc = subprocess.run(
-        [python_exe(), "-m", "project.compiler"],
-        cwd=REPO, capture_output=True, text=True,
-    )
-    if proc.returncode != 0:
-        raise RuntimeError(f"generate failed:\n{proc.stdout}\n{proc.stderr}")
-
-
-def run_challenge(mode: str, report: Path, seeds: list[int] | None = None) -> dict:
-    """Run `challenge.py <mode>` and return the parsed report it wrote."""
-    if mode not in ("check", "estimate", "grade"):
-        raise ValueError(f"unknown mode {mode}")
-    if report.exists():
-        raise FileExistsError(f"report exists: {report}")
-    cmd = [
-        python_exe(), "challenge.py", mode,
-        "--hardware", "hardware.json",
-        "--program-p1", "programs/M1_P1.asm",
-        "--program-d1", "programs/M2_D1.asm",
-        "--report", str(report),
-    ]
-    for seed in seeds or []:
-        cmd += ["--seed", str(seed)]
-    if mode == "grade":
-        cmd += ["--baseline", str(BASELINE_MANIFEST)]
-    proc = subprocess.run(cmd, cwd=REPO, capture_output=True, text=True)
-    if not report.exists():
-        raise RuntimeError(
-            f"{mode} produced no report (rc={proc.returncode}):\n"
-            f"{proc.stdout[-3000:]}\n{proc.stderr[-3000:]}"
-        )
-    result = json.loads(report.read_text())
-    result["_exit_code"] = proc.returncode
-    return result
 
 
 def summarize(report: dict) -> dict:
@@ -96,102 +58,84 @@ def summarize(report: dict) -> dict:
     return out
 
 
-def static_screen(p1: Path, d1: Path) -> dict:
-    """Free pre-eval screen on generated asm: line/opcode counts.
-
-    Returns counts and a rough instruction volume proxy. Used to prune
-    absurd candidates before paying simulator time, and to flag borderline
-    ones for an optional `estimate` pass.
-    """
-    def counts(path: Path) -> dict:
-        ops = {}
-        n = 0
-        for line in path.read_text().splitlines():
-            line = line.strip()
-            if not line:
-                continue
-            op = line.split(" ", 1)[0]
-            ops[op] = ops.get(op, 0) + 1
-            n += 1
-        return {"lines": n, "ops": ops}
-    return {"M1_P1": counts(p1), "M2_D1": counts(d1)}
-
-
-def evaluate_search(cand, seeds: list[int], log=print,
-                    screen_floor: float | None = None) -> dict:
-    """Search-path evaluation: generate -> static screen -> [estimate] -> grade.
-
-    `grade` already contains per-case functional_passed + timing + score, so a
-    single grade run serves as both the correctness gate and the score. The
-    optional `estimate` pass only runs when static screening cannot decide and
-    a `screen_floor` score was supplied.
-    """
-    log(f"[{cand.id}] generate")
-    generate()
-    for name in ("M1_P1.asm", "M2_D1.asm"):
-        (cand.programs / name).write_bytes((REPO / "programs" / name).read_bytes())
-
-    metrics = {"candidate": cand.id, "reports": {}}
-    metrics["static"] = static_screen(cand.programs / "M1_P1.asm",
-                                      cand.programs / "M2_D1.asm")
-
-    if screen_floor is not None:
-        est = run_challenge("estimate", cand.reports / "estimate.json")
-        metrics["reports"]["estimate"] = summarize(est)
-        cyc = {c: m.get("cycles") for c, m in
-               metrics["reports"]["estimate"]["cases"].items()}
-        if all(cyc.values()):
-            est_score = 1000.0 * (
-                (30996995 / cyc["M1_P1"]) * (1302032 / cyc["M2_D1"])) ** 0.5
-            metrics["est_score"] = est_score
-            if est_score < screen_floor:
-                metrics["verdict"] = "screen_pruned"
-                (cand.dir / "metrics.json").write_text(
-                    json.dumps(metrics, indent=2) + "\n")
-                return metrics
-
-    grade = run_challenge("grade", cand.reports / "grade.json", seeds)
-    metrics["reports"]["grade"] = summarize(grade)
-    cases = metrics["reports"]["grade"]["cases"]
-    if any(m.get("functional_passed") is False for m in cases.values()):
-        metrics["verdict"] = "incorrect"
-    elif metrics["reports"]["grade"].get("eligible") is False:
-        metrics["verdict"] = "ineligible"
-    else:
-        metrics["verdict"] = "evaluated"
-    (cand.dir / "metrics.json").write_text(json.dumps(metrics, indent=2) + "\n")
-    return metrics
-
-
-def evaluate(cand, seeds: list[int], log=print) -> dict:
-    """Full pipeline for a staged candidate. Returns merged metrics."""
-    log(f"[{cand.id}] generate")
-    generate()
-    for name in ("M1_P1.asm", "M2_D1.asm"):
-        (cand.programs / name).write_bytes((REPO / "programs" / name).read_bytes())
-
-    metrics = {"candidate": cand.id, "reports": {}}
-
-    check = run_challenge("check", cand.reports / "check.json", seeds)
-    metrics["reports"]["check"] = summarize(check)
-    passed = all(
-        c.get("functional_passed") for c in check["cases"].values()
-    )
-    if not passed:
-        metrics["verdict"] = "incorrect"
-        (cand.dir / "metrics.json").write_text(json.dumps(metrics, indent=2) + "\n")
+def prepare(cand, log=print, timeout_seconds=600, memory_mib=3072):
+    from . import runtime
+    log(f"[{cand.id}] generate", flush=True) if log is print else log(f"[{cand.id}] generate")
+    env = dict(os.environ, PYTHONPATH=str(REPO))
+    result = runtime.run([python_exe(), str(cand.inputs / "compiler.py")], cand.dir,
+                         cand.reports / "generate", timeout_seconds, memory_mib, env)
+    metrics = {"candidate": cand.id, "reports": {}, "evaluation_attempts": 0, "generation": result}
+    if result["failure_class"] or result["exit_code"]:
+        metrics.update(verdict="not_verified", failure_class=result["failure_class"] or "generation_error")
         return metrics
-
-    est = run_challenge("estimate", cand.reports / "estimate.json")
-    metrics["reports"]["estimate"] = summarize(est)
-
-    grade = run_challenge("grade", cand.reports / "grade.json", seeds)
-    metrics["reports"]["grade"] = summarize(grade)
-
-    for case in metrics["reports"]["grade"]["cases"]:
-        m = metrics["reports"]["grade"]["cases"][case]
-        c = metrics["reports"]["check"]["cases"].get(case, {})
-        m["functional_passed"] = c.get("functional_passed")
-        m["max_abs_error"] = c.get("max_abs_error")
-    (cand.dir / "metrics.json").write_text(json.dumps(metrics, indent=2) + "\n")
+    # Parse in a bounded child: loop expansion itself can consume substantial memory.
+    script = "from codesign.challenge.isa import parse; import json,pathlib; out={}; " + \
+        "\nfor n in ('M1_P1','M2_D1'):\n p=pathlib.Path('programs')/(n+'.asm'); ins=parse(p.read_text()); out[n]={'expanded_instructions':len(ins),'bytes':p.stat().st_size}\n" + \
+        "pathlib.Path('reports/static.json').write_text(json.dumps(out))"
+    screen = runtime.run([python_exe(), "-c", script], cand.dir, cand.reports / "static",
+                         timeout_seconds, memory_mib, env)
+    if screen["failure_class"] or screen["exit_code"]:
+        metrics.update(verdict="not_verified", failure_class=screen["failure_class"] or "static_error", static_run=screen)
+        return metrics
+    metrics["static"] = json.loads((cand.reports / "static.json").read_text())
+    if any(v["expanded_instructions"] > 1000000 for v in metrics["static"].values()):
+        metrics.update(verdict="pruned", failure_class="screen_pruned")
     return metrics
+
+
+def evaluate(cand, seeds, log=print, *, validation="grade", timeout_seconds=600,
+             memory_mib=3072, prepared=False, before_launch=None):
+    from . import runtime
+    import time
+    if validation not in ("grade", "full"):
+        raise ValueError(validation)
+    started = time.monotonic()
+    metrics = {"candidate": cand.id, "reports": {}, "evaluation_attempts": 0, "runs": {}}
+    if not prepared:
+        metrics.update(prepare(cand, log, timeout_seconds, memory_mib))
+        if metrics.get("failure_class"):
+            return metrics
+    for mode in (["check", "grade"] if validation == "full" else ["grade"]):
+        report = cand.reports / (mode + ".json")
+        if report.exists():
+            raise FileExistsError(report)
+        cmd = [python_exe(), str(REPO / "challenge.py"), mode,
+               "--hardware", str(cand.inputs / "hardware.json"),
+               "--program-p1", str(cand.programs / "M1_P1.asm"),
+               "--program-d1", str(cand.programs / "M2_D1.asm"), "--report", str(report)]
+        for seed in seeds:
+            cmd += ["--seed", str(seed)]
+        if mode == "grade":
+            cmd += ["--baseline", str(BASELINE_MANIFEST)]
+        try:
+            if before_launch:
+                before_launch(mode)
+        except RuntimeError as exc:
+            metrics.update(verdict="not_verified", failure_class="budget_exhausted", failure_note=str(exc)); break
+        metrics["evaluation_attempts"] += 1
+        log(f"[{cand.id}] {mode}")
+        result = runtime.run(cmd, cand.dir, cand.reports / mode, timeout_seconds, memory_mib)
+        metrics["runs"][mode] = result
+        if result["failure_class"] or not report.exists():
+            metrics.update(verdict="not_verified", failure_class=result["failure_class"] or "evaluator_error",
+                           failure_note=(cand.reports / (mode+".stderr")).read_text()[-2000:]); break
+        raw = json.loads(report.read_text())
+        reduced = summarize(raw); metrics["reports"][mode] = reduced
+        cases = reduced.get("cases", {})
+        if set(cases) != {"M1_P1", "M2_D1"} or any(c.get("functional_passed") is not True for c in cases.values()):
+            metrics.update(verdict="incorrect", failure_class="incorrect"); break
+        if mode == "grade":
+            if reduced.get("eligible") is not True:
+                metrics.update(verdict="ineligible", failure_class="ineligible")
+            elif result["exit_code"]:
+                metrics.update(verdict="not_verified", failure_class="evaluator_error")
+            else:
+                metrics["verdict"] = "evaluated"
+    metrics["elapsed"] = time.monotonic() - started
+    (cand.dir / "metrics.json").write_text(json.dumps(metrics, indent=2)+"\n")
+    return metrics
+
+
+def evaluate_search(cand, seeds, log=print, **kwargs):
+    kwargs.pop("screen_floor", None)
+    return evaluate(cand, seeds, log, **kwargs)

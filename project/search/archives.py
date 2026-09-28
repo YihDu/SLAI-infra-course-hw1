@@ -6,17 +6,56 @@ Stored inside registry.json under "archives"; only correct candidates enter.
 ELITE_K = 8
 
 
+def is_admissible(meta: dict) -> bool:
+    """Return True if candidate metadata qualifies for archive inclusion.
+
+    Only admits explicit eligible successful functional metrics metadata;
+    preserves legacy valid entries via failure_class none/score where no new fields exist.
+    """
+    if not isinstance(meta, dict):
+        return False
+    score = meta.get("score")
+    if score is None:
+        return False
+    failure_class = meta.get("failure_class")
+    if failure_class not in (None, "none"):
+        return False
+    status = meta.get("status")
+    if status in ("incorrect", "pruned", "ineligible"):
+        return False
+
+    has_eligible = "eligible" in meta
+    has_functional = "functional_passed" in meta or "functional" in meta
+
+    if has_eligible or has_functional:
+        if has_eligible and meta.get("eligible") is not True:
+            return False
+        if "functional_passed" in meta and meta.get("functional_passed") is not True:
+            return False
+        if "functional" in meta:
+            fn = meta["functional"]
+            if isinstance(fn, dict):
+                if not fn or not all(v is True for v in fn.values()):
+                    return False
+            elif fn is not True:
+                return False
+        return True
+
+    # Legacy valid entries without explicit eligible / functional fields
+    return True
+
+
 def _correct(meta: dict) -> bool:
-    return meta.get("score") is not None and meta.get("failure_class") in (
-        None, "none")
+    """Backward compatibility alias for is_admissible."""
+    return is_admissible(meta)
 
 
 def update(reg: dict, cid: str) -> None:
-    """Recompute archives after candidate `cid` got metrics."""
+    """Recompute archives after candidate cid got metrics."""
     reg.setdefault("archives", {"elite": [], "pareto": [], "diversity": {}})
     arch = reg["archives"]
-    cands = reg["candidates"]
-    scored = {c: m for c, m in cands.items() if _correct(m)}
+    cands = reg.get("candidates", {})
+    scored = {c: m for c, m in cands.items() if is_admissible(m)}
 
     arch["elite"] = [
         c for c, _ in sorted(
@@ -32,9 +71,10 @@ def update(reg: dict, cid: str) -> None:
     front = []
     best_d1 = 1 << 62
     for c, m in pts:
-        if cycles(m)[1] < best_d1:
+        p1, d1 = cycles(m)
+        if d1 < best_d1:
             front.append(c)
-            best_d1 = cycles(m)[1]
+            best_d1 = d1
     arch["pareto"] = front
 
     # Diversity: best scorer per (family, bias) cell and per structural sig.
@@ -49,4 +89,10 @@ def update(reg: dict, cid: str) -> None:
 
 def best_id(reg: dict) -> str | None:
     elite = reg.get("archives", {}).get("elite") or []
-    return elite[0] if elite else reg.get("head")
+    if elite:
+        return elite[0]
+    head = reg.get("head")
+    if head and head in reg.get("candidates", {}):
+        if is_admissible(reg["candidates"][head]):
+            return head
+    return None

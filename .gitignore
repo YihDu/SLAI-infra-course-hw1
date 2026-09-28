@@ -13,3 +13,6 @@ grade-*.json
 # local virtual environment
 .venv/
 recipe.json
+
+# Transient coordinator lock
+project/experiments/.controller.lock

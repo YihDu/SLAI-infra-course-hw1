@@ -27,7 +27,7 @@ WORKTREE_PATHS = {
 }
 PROGRAM_FILES = ("M1_P1.asm", "M2_D1.asm")
 STATUSES = ("created", "evaluating", "incorrect", "evaluated", "kept",
-            "reverted", "pruned", "dominated")
+            "reverted", "pruned", "dominated", "not_verified", "ineligible")
 
 
 def sha256(path: Path) -> str:

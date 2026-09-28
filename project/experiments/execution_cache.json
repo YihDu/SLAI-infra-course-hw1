@@ -76,7 +76,7 @@
     },
     "score": 1875.6812796394786,
     "status": "evaluated",
-    "stored_at": "2026-09-28 17:33:38"
+    "stored_at": "2026-09-28 17:58:44"
   },
   "04f904bdd8d9d19b0d8083a810381608f93259631bc95cf6e4bdcadf22c4146d": {
     "candidate_id": "cand-085",
@@ -165,7 +165,7 @@
     },
     "score": 2245.0389561884695,
     "status": "evaluated",
-    "stored_at": "2026-09-28 17:33:38"
+    "stored_at": "2026-09-28 17:58:44"
   },
   "1f7b93fb8ef7644bc70ef02da1e9cd594542d7fa7c03e765a87e080086a90f27": {
     "candidate_id": "cand-028",
@@ -244,7 +244,7 @@
     },
     "score": 1098.3125106615971,
     "status": "evaluated",
-    "stored_at": "2026-09-28 17:33:37"
+    "stored_at": "2026-09-28 17:58:44"
   },
   "2247370a6bf1a8273c10cda8c8f1c6f5844d9b62dc9338bea9c11ca97201c4fd": {
     "candidate_id": "cand-005",
@@ -323,7 +323,7 @@
     },
     "score": 1105.2478525385854,
     "status": "evaluated",
-    "stored_at": "2026-09-28 17:33:37"
+    "stored_at": "2026-09-28 17:58:43"
   },
   "2542b6c025b4f06a9b293e37960ded9ddd0e5cb1f2e6e74f77dbe619cc63bee0": {
     "candidate_id": "cand-037",
@@ -402,7 +402,7 @@
     },
     "score": 1193.4042900831387,
     "status": "evaluated",
-    "stored_at": "2026-09-28 17:33:37"
+    "stored_at": "2026-09-28 17:58:44"
   },
   "27caa5d78ce48519918a551779fb7a9d4b78264b8fcd2d4e39aa69178684ef32": {
     "candidate_id": "cand-066",
@@ -481,7 +481,7 @@
     },
     "score": 1752.9808817511307,
     "status": "evaluated",
-    "stored_at": "2026-09-28 17:33:38"
+    "stored_at": "2026-09-28 17:58:44"
   },
   "2ce1edc6968b354c9ba5435ce7a44e364b257528aa068ab75be84258e01913f7": {
     "candidate_id": "cand-047",
@@ -560,7 +560,7 @@
     },
     "score": 1874.814304538389,
     "status": "evaluated",
-    "stored_at": "2026-09-28 17:33:37"
+    "stored_at": "2026-09-28 17:58:44"
   },
   "30c6f90903c6c322a6ab5a812d3fd0e81f25e2849e15958de3ebdbfcc0ab14cf": {
     "candidate_id": "cand-027",
@@ -639,7 +639,7 @@
     },
     "score": 1087.11373917888,
     "status": "evaluated",
-    "stored_at": "2026-09-28 17:33:37"
+    "stored_at": "2026-09-28 17:58:44"
   },
   "33d6c5a23aa8b7b94fecad5c1ae6afcbefbf23edc806dfca6faa0194b1a8a91b": {
     "candidate_id": "cand-004",
@@ -718,7 +718,7 @@
     },
     "score": 1077.4312710849626,
     "status": "evaluated",
-    "stored_at": "2026-09-28 17:33:37"
+    "stored_at": "2026-09-28 17:58:43"
   },
   "36a05c88b55a4d11508c93350f26d2ee0ce016f7726fc56fd654e942d842e475": {
     "candidate_id": "cand-010",
@@ -797,7 +797,7 @@
     },
     "score": 1174.2540289231054,
     "status": "evaluated",
-    "stored_at": "2026-09-28 17:33:37"
+    "stored_at": "2026-09-28 17:58:43"
   },
   "37053aef61688a517595fea11a846f22c32865d1ed054f2bbd6aac87516435ff": {
     "candidate_id": "cand-050",
@@ -876,7 +876,7 @@
     },
     "score": 1296.9228571905599,
     "status": "evaluated",
-    "stored_at": "2026-09-28 17:33:38"
+    "stored_at": "2026-09-28 17:58:44"
   },
   "3765bee76dfd7960bfbf1535b7e29d65b4b0c1a5f78912b8da6b88b25c16ecdb": {
     "candidate_id": "cand-084",
@@ -963,7 +963,7 @@
     },
     "score": 2206.2481983505695,
     "status": "evaluated",
-    "stored_at": "2026-09-28 17:33:38"
+    "stored_at": "2026-09-28 17:58:44"
   },
   "398d683332443e2b3d49216616ee095933e21ff5202dae6d341c1dc8bba3d891": {
     "candidate_id": "cand-036",
@@ -1042,7 +1042,7 @@
     },
     "score": 1107.569130887403,
     "status": "evaluated",
-    "stored_at": "2026-09-28 17:33:37"
+    "stored_at": "2026-09-28 17:58:44"
   },
   "3db9fdc5b740e0e7f43f460f38da52f1251ffd07031a889479a1494c770abc98": {
     "candidate_id": "cand-026",
@@ -1121,7 +1121,7 @@
     },
     "score": 1128.088530457202,
     "status": "evaluated",
-    "stored_at": "2026-09-28 17:33:37"
+    "stored_at": "2026-09-28 17:58:44"
   },
   "4120cbbd9f4d5346e20513602486bf8339aee19c5a22f5184839c65b2b518e09": {
     "candidate_id": "cand-025",
@@ -1200,7 +1200,7 @@
     },
     "score": 1130.3388047148876,
     "status": "evaluated",
-    "stored_at": "2026-09-28 17:33:37"
+    "stored_at": "2026-09-28 17:58:44"
   },
   "43e7a9cfda14106cf0f184a7155c3923a99fe14aacc6fe7fadcc25fea4309b7c": {
     "candidate_id": "cand-006",
@@ -1279,7 +1279,7 @@
     },
     "score": 1147.6394407423866,
     "status": "evaluated",
-    "stored_at": "2026-09-28 17:33:37"
+    "stored_at": "2026-09-28 17:58:43"
   },
   "48f97f5cb7b606c51c19c89944f9fb2036672ec160732dd47e4b979bc19f46f9": {
     "candidate_id": "cand-056",
@@ -1358,7 +1358,7 @@
     },
     "score": 1835.555492983374,
     "status": "evaluated",
-    "stored_at": "2026-09-28 17:33:38"
+    "stored_at": "2026-09-28 17:58:44"
   },
   "4f053f14b0646964203ee6cd2056e1dec9ff7163e1bb454b6b8513dc8e5f880e": {
     "candidate_id": "cand-046",
@@ -1439,7 +1439,7 @@
     },
     "score": 1107.569130887403,
     "status": "evaluated",
-    "stored_at": "2026-09-28 17:33:37"
+    "stored_at": "2026-09-28 17:58:44"
   },
   "52492a70b7fdcdf7a00cc144b9ac41f6c846bbca5528ebea124a41266e0d2e61": {
     "candidate_id": "cand-042",
@@ -1518,7 +1518,7 @@
     },
     "score": 1197.5985984332774,
     "status": "evaluated",
-    "stored_at": "2026-09-28 17:33:37"
+    "stored_at": "2026-09-28 17:58:44"
   },
   "5693414c79fef5522ecca3c233f2657d2ade6018da14a64a97c7105218e310ce": {
     "candidate_id": "cand-049",
@@ -1591,7 +1591,7 @@
     },
     "score": 794.5991478350456,
     "status": "evaluated",
-    "stored_at": "2026-09-28 17:33:37"
+    "stored_at": "2026-09-28 17:58:44"
   },
   "5adb81102e129554064951880cc4156627a997fd800504e088b67c7590feaeab": {
     "candidate_id": "cand-008",
@@ -1670,7 +1670,7 @@
     },
     "score": 1115.972170751516,
     "status": "evaluated",
-    "stored_at": "2026-09-28 17:33:37"
+    "stored_at": "2026-09-28 17:58:43"
   },
   "5c004a3de437a6a373eaae2213d803a7595484227ca18c5bddf71a49316da9c9": {
     "candidate_id": "cand-074",
@@ -1757,7 +1757,7 @@
     },
     "score": 2051.47741118116,
     "status": "evaluated",
-    "stored_at": "2026-09-28 17:33:38"
+    "stored_at": "2026-09-28 17:58:44"
   },
   "5ee884f5894a72f3d5338163e3a3035299b4a38a7d81df92fb82da131c739313": {
     "candidate_id": "cand-076",
@@ -1844,7 +1844,7 @@
     },
     "score": 2104.4624234432395,
     "status": "evaluated",
-    "stored_at": "2026-09-28 17:33:38"
+    "stored_at": "2026-09-28 17:58:44"
   },
   "61082682175200ff1f198f9ab83522e64f8237ca8c641392c9772507725b215d": {
     "candidate_id": "cand-032",
@@ -1923,7 +1923,7 @@
     },
     "score": 1124.0376356259756,
     "status": "evaluated",
-    "stored_at": "2026-09-28 17:33:37"
+    "stored_at": "2026-09-28 17:58:44"
   },
   "618d8be54cdea7aff4ec1951bdc6ed67c2ef77c344be5a7940965b92aba7f36f": {
     "candidate_id": "cand-052",
@@ -2002,7 +2002,7 @@
     },
     "score": 1860.4743007003888,
     "status": "evaluated",
-    "stored_at": "2026-09-28 17:33:38"
+    "stored_at": "2026-09-28 17:58:44"
   },
   "62390bd6d85c59ff991ef8ebb3d41edb0175523204aca688576d65f08a7b5439": {
     "candidate_id": "cand-039",
@@ -2081,7 +2081,7 @@
     },
     "score": 916.4904172822608,
     "status": "evaluated",
-    "stored_at": "2026-09-28 17:33:37"
+    "stored_at": "2026-09-28 17:58:44"
   },
   "6f210797a8205dae777897e9008547c11bf20cc281ccd168dcad82e38e789fa1": {
     "candidate_id": "cand-075",
@@ -2168,7 +2168,7 @@
     },
     "score": 2011.1993372800794,
     "status": "evaluated",
-    "stored_at": "2026-09-28 17:33:38"
+    "stored_at": "2026-09-28 17:58:44"
   },
   "6f473ca829976d3ba32358d28bfb8fbc36c790298966b7789f6227dff6cafcc8": {
     "candidate_id": "cand-079",
@@ -2255,7 +2255,7 @@
     },
     "score": 1995.554860534254,
     "status": "evaluated",
-    "stored_at": "2026-09-28 17:33:38"
+    "stored_at": "2026-09-28 17:58:44"
   },
   "7079e6867892a858c30414f98adcff3626f682715b4f6e8934a73e0403adb736": {
     "candidate_id": "cand-013",
@@ -2334,7 +2334,7 @@
     },
     "score": 1003.5673543192571,
     "status": "evaluated",
-    "stored_at": "2026-09-28 17:33:37"
+    "stored_at": "2026-09-28 17:58:43"
   },
   "7772605611ef49f476e89b0f53cfa5ee48d11adf7402fe731e218e4bfa2a8f54": {
     "candidate_id": "cand-003",
@@ -2413,7 +2413,7 @@
     },
     "score": 1111.1503617194342,
     "status": "evaluated",
-    "stored_at": "2026-09-28 17:33:37"
+    "stored_at": "2026-09-28 17:58:43"
   },
   "78b672dd2ff398261291dea4b0383ae754d3377cdcc6571e6fb5b9b810b745f6": {
     "candidate_id": "cand-062",
@@ -2492,7 +2492,7 @@
     },
     "score": 1840.1107341264512,
     "status": "evaluated",
-    "stored_at": "2026-09-28 17:33:38"
+    "stored_at": "2026-09-28 17:58:44"
   },
   "79b4344fb69c439a7cee0acf27366fd97928202cacafd2c5981cf8849c89d9a1": {
     "candidate_id": "cand-015",
@@ -2571,7 +2571,7 @@
     },
     "score": 1133.0546914360318,
     "status": "evaluated",
-    "stored_at": "2026-09-28 17:33:37"
+    "stored_at": "2026-09-28 17:58:44"
   },
   "7b1415a290edb5ba177f937dc98fc0ecddd5f3a880358a1ca338ecd9e93aabd4": {
     "candidate_id": "cand-081",
@@ -2658,7 +2658,7 @@
     },
     "score": 2051.47741118116,
     "status": "evaluated",
-    "stored_at": "2026-09-28 17:33:38"
+    "stored_at": "2026-09-28 17:58:44"
   },
   "80601b99e33dd64e8b1d91cd98f14cf7b5ce8d194c7756044423a862114e63c2": {
     "candidate_id": "cand-077",
@@ -2745,7 +2745,7 @@
     },
     "score": 2075.4609403356135,
     "status": "evaluated",
-    "stored_at": "2026-09-28 17:33:38"
+    "stored_at": "2026-09-28 17:58:44"
   },
   "8088cd3a7c69fa051588b82a8cd545b9c3dcc16a439b420b0eb170ed857049c4": {
     "candidate_id": "cand-065",
@@ -2824,7 +2824,7 @@
     },
     "score": 1965.9942357374484,
     "status": "evaluated",
-    "stored_at": "2026-09-28 17:33:38"
+    "stored_at": "2026-09-28 17:58:44"
   },
   "87d2bef22d12f5cab2c830315c6df7a16ab76bc713ef5c67ccdfd7442dcd6c52": {
     "candidate_id": "cand-012",
@@ -2903,7 +2903,7 @@
     },
     "score": 914.1264889348438,
     "status": "evaluated",
-    "stored_at": "2026-09-28 17:33:37"
+    "stored_at": "2026-09-28 17:58:43"
   },
   "9034fc0355651c516a0c03a349a745de0c5273165ec23594ea529b72cef3fcbd": {
     "candidate_id": "cand-022",
@@ -2982,7 +2982,7 @@
     },
     "score": 1126.6638611979947,
     "status": "evaluated",
-    "stored_at": "2026-09-28 17:33:37"
+    "stored_at": "2026-09-28 17:58:44"
   },
   "9156acb1acaa15978eb515d3e37ad8b607116a178b3d0140bd8db0362620104f": {
     "candidate_id": "cand-016",
@@ -3061,7 +3061,7 @@
     },
     "score": 1136.0626036140557,
     "status": "evaluated",
-    "stored_at": "2026-09-28 17:33:37"
+    "stored_at": "2026-09-28 17:58:44"
   },
   "91eb27ab492c258c24d6f4c0f8f2d145b6fba17678ac660f1bf159f9ac7001bc": {
     "candidate_id": "cand-051",
@@ -3140,7 +3140,120 @@
     },
     "score": 1761.5596139891823,
     "status": "evaluated",
-    "stored_at": "2026-09-28 17:33:38"
+    "stored_at": "2026-09-28 17:58:44"
+  },
+  "929439425a0280c4cfb02cba8a90f301ae6956d7a49fe9645613457d713005b0": {
+    "candidate_id": "cand-086",
+    "eligible": true,
+    "functional_passed": true,
+    "metrics": {
+      "candidate": "cand-086",
+      "elapsed": 105.69664616696537,
+      "evaluation_attempts": 1,
+      "reports": {
+        "grade": {
+          "area_mm2": 18.75596875776,
+          "cases": {
+            "M1_P1": {
+              "busy_cycles": {
+                "shared.cache_bank_0": 695288,
+                "shared.cache_bank_1": 695288,
+                "shared.cache_bank_2": 695288,
+                "shared.cache_bank_3": 695288,
+                "shared.hbm_channel_0": 431920,
+                "shared.hbm_channel_1": 431920,
+                "shared.hbm_channel_2": 431920,
+                "shared.hbm_channel_3": 431920,
+                "shared.noc": 2042916,
+                "sm0.dma": 2171072,
+                "sm0.issue": 243407,
+                "sm0.issue_wait": 11573558,
+                "sm0.noc_in": 1945024,
+                "sm0.noc_out": 114976,
+                "sm0.rf_read": 3353480,
+                "sm0.rf_write": 3218344,
+                "sm0.sfu": 269964,
+                "sm0.shared_read": 1572864,
+                "sm0.shared_write": 393216,
+                "sm0.tc": 1049184,
+                "sm0.vec": 574008
+              },
+              "cycles": 11817029,
+              "functional_passed": true,
+              "hbm_read_bytes": 47165440,
+              "hbm_write_bytes": 8120320,
+              "instruction_count": 243407,
+              "max_abs_error": 2.793004260981391e-06,
+              "peak_window_power_w": 3.1393904109548796
+            },
+            "M2_D1": {
+              "busy_cycles": {
+                "shared.cache_bank_0": 68484,
+                "shared.cache_bank_1": 68484,
+                "shared.cache_bank_2": 67844,
+                "shared.cache_bank_3": 68420,
+                "shared.hbm_channel_0": 17032,
+                "shared.hbm_channel_1": 17032,
+                "shared.hbm_channel_2": 17032,
+                "shared.hbm_channel_3": 17032,
+                "shared.noc": 227385,
+                "sm0.dma": 244416,
+                "sm0.issue": 19866,
+                "sm0.issue_wait": 724838,
+                "sm0.noc_in": 224897,
+                "sm0.noc_out": 2624,
+                "sm0.rf_read": 144288,
+                "sm0.rf_write": 263232,
+                "sm0.sfu": 8832,
+                "sm0.shared_read": 0,
+                "sm0.shared_write": 0,
+                "sm0.tc": 80576,
+                "sm0.vec": 17920
+              },
+              "cycles": 744864,
+              "functional_passed": true,
+              "hbm_read_bytes": 2012160,
+              "hbm_write_bytes": 167936,
+              "instruction_count": 19866,
+              "max_abs_error": 1.1209758654651125e-06,
+              "peak_window_power_w": 2.3104121869440033
+            }
+          },
+          "eligible": true,
+          "mode": "grade",
+          "score": 2141.3022952147
+        }
+      },
+      "runs": {
+        "grade": {
+          "command": [
+            "/Users/yihdu/Codefield/SLAI-infra-Code/transformer-codesign-starter/.venv/bin/python",
+            "/Users/yihdu/Codefield/SLAI-infra-Code/transformer-codesign-starter/challenge.py",
+            "grade",
+            "--hardware",
+            "/Users/yihdu/Codefield/SLAI-infra-Code/transformer-codesign-starter/project/experiments/cand-086/inputs/hardware.json",
+            "--program-p1",
+            "/Users/yihdu/Codefield/SLAI-infra-Code/transformer-codesign-starter/project/experiments/cand-086/programs/M1_P1.asm",
+            "--program-d1",
+            "/Users/yihdu/Codefield/SLAI-infra-Code/transformer-codesign-starter/project/experiments/cand-086/programs/M2_D1.asm",
+            "--report",
+            "/Users/yihdu/Codefield/SLAI-infra-Code/transformer-codesign-starter/project/experiments/cand-086/reports/grade.json",
+            "--seed",
+            "7",
+            "--baseline",
+            "/Users/yihdu/Codefield/SLAI-infra-Code/transformer-codesign-starter/baseline_manifest.json"
+          ],
+          "elapsed": 105.69506037503015,
+          "exit_code": 0,
+          "failure_class": null,
+          "peak_memory_mib": 2056.626922607422
+        }
+      },
+      "verdict": "evaluated"
+    },
+    "score": 2141.3022952147,
+    "status": "evaluated",
+    "stored_at": "2026-09-28 18:00:34"
   },
   "98bc67dedd2222f09a72cedd81579862f4571c1cc1f53677c4fbb3f7df7ea49c": {
     "candidate_id": "cand-071",
@@ -3219,7 +3332,7 @@
     },
     "score": 1996.4823457755592,
     "status": "evaluated",
-    "stored_at": "2026-09-28 17:33:38"
+    "stored_at": "2026-09-28 17:58:44"
   },
   "9c33051d881e3cf831c1cc454d38cf29bc7026de196731405e4683426131cb69": {
     "candidate_id": "cand-045",
@@ -3298,7 +3411,7 @@
     },
     "score": 1185.9408933569387,
     "status": "evaluated",
-    "stored_at": "2026-09-28 17:33:37"
+    "stored_at": "2026-09-28 17:58:44"
   },
   "9c442d50b6ddc8be94caa003b6e80f10de6a1d815d16931f8ecf72a58f9c056a": {
     "candidate_id": "cand-023",
@@ -3377,7 +3490,7 @@
     },
     "score": 1140.8975242069364,
     "status": "evaluated",
-    "stored_at": "2026-09-28 17:33:37"
+    "stored_at": "2026-09-28 17:58:44"
   },
   "9fc06c370a7befb039c0d7acd1c887c4e3e33714ae277c7caec12935eee325a7": {
     "candidate_id": "cand-057",
@@ -3456,7 +3569,7 @@
     },
     "score": 1666.9684198231182,
     "status": "evaluated",
-    "stored_at": "2026-09-28 17:33:38"
+    "stored_at": "2026-09-28 17:58:44"
   },
   "a27a81d8e9ef2776dd8b942d2baa84b3ef3a58559b1083d727d0155d9eda326b": {
     "candidate_id": "cand-033",
@@ -3535,7 +3648,7 @@
     },
     "score": 643.1375334157768,
     "status": "evaluated",
-    "stored_at": "2026-09-28 17:33:37"
+    "stored_at": "2026-09-28 17:58:44"
   },
   "a338c0e1385a7c26a41c8b9ae30e3138928aeee50ead5baf5b7c936052d9d278": {
     "candidate_id": "cand-021",
@@ -3614,7 +3727,7 @@
     },
     "score": 955.2915117902414,
     "status": "evaluated",
-    "stored_at": "2026-09-28 17:33:37"
+    "stored_at": "2026-09-28 17:58:44"
   },
   "a45be73eb7cdc5ebf0388261def1eb6ec18cb1f16837c98f45df477d500df3b6": {
     "candidate_id": "cand-017",
@@ -3693,7 +3806,7 @@
     },
     "score": 1188.0346056227518,
     "status": "evaluated",
-    "stored_at": "2026-09-28 17:33:37"
+    "stored_at": "2026-09-28 17:58:44"
   },
   "a7dcd351cb804d64bcb3791ceba04f9ec336d9d05baca42a54d48c0817fc6637": {
     "candidate_id": "cand-001",
@@ -3772,7 +3885,7 @@
     },
     "score": 1173.0811006016247,
     "status": "evaluated",
-    "stored_at": "2026-09-28 17:33:37"
+    "stored_at": "2026-09-28 17:58:43"
   },
   "ae023c571217791815b6d6e075e992a317865200c70a394b8cbddd38f53ebfaa": {
     "candidate_id": "cand-000",
@@ -3851,7 +3964,7 @@
     },
     "score": 1000.0,
     "status": "evaluated",
-    "stored_at": "2026-09-28 17:33:37"
+    "stored_at": "2026-09-28 17:58:43"
   },
   "b09b9f59319ea4802f1f8c8834b0d1c83dcdbf383fe1492e23cc4d7e2c9b3546": {
     "candidate_id": "cand-029",
@@ -3930,7 +4043,7 @@
     },
     "score": 1168.5307558154386,
     "status": "evaluated",
-    "stored_at": "2026-09-28 17:33:37"
+    "stored_at": "2026-09-28 17:58:44"
   },
   "b376889c016a1c16a896a4948639e6cb1aa5f3b961a2e32537402aef911e29b1": {
     "candidate_id": "cand-082",
@@ -4017,7 +4130,7 @@
     },
     "score": 2131.1533261851882,
     "status": "evaluated",
-    "stored_at": "2026-09-28 17:33:38"
+    "stored_at": "2026-09-28 17:58:44"
   },
   "b6edbbff79d0b9a3e1e7ab92b648d7ec386dd171aa96b6cf814af5f9e0c96c71": {
     "candidate_id": "cand-059",
@@ -4096,7 +4209,7 @@
     },
     "score": 1861.325996168528,
     "status": "evaluated",
-    "stored_at": "2026-09-28 17:33:38"
+    "stored_at": "2026-09-28 17:58:44"
   },
   "b9fb41d19c35aa4e336287664441e9c91b3cba553a9cc75b998058750b2da4a9": {
     "candidate_id": "cand-018",
@@ -4175,7 +4288,7 @@
     },
     "score": 923.5334757991376,
     "status": "evaluated",
-    "stored_at": "2026-09-28 17:33:37"
+    "stored_at": "2026-09-28 17:58:44"
   },
   "bb1ad199f8c0f6eb3a463a0269ab16a274f0aa4d8967d25f7469a91121b28980": {
     "candidate_id": "cand-083",
@@ -4262,7 +4375,7 @@
     },
     "score": 2245.0389561884695,
     "status": "evaluated",
-    "stored_at": "2026-09-28 17:33:38"
+    "stored_at": "2026-09-28 17:58:44"
   },
   "bb576af806f358e962e8fb279fcd9bc01dc6b84d53d7f9fe6e7bd9b648f09c55": {
     "candidate_id": "cand-061",
@@ -4349,7 +4462,7 @@
     },
     "score": 1338.1757908815193,
     "status": "evaluated",
-    "stored_at": "2026-09-28 17:33:38"
+    "stored_at": "2026-09-28 17:58:44"
   },
   "bd3c2bf486873f7450ac08f1be2b7ef60811570af85a83e88713185305448c7d": {
     "candidate_id": "cand-044",
@@ -4430,7 +4543,7 @@
     },
     "score": 1197.5985984332774,
     "status": "evaluated",
-    "stored_at": "2026-09-28 17:33:37"
+    "stored_at": "2026-09-28 17:58:44"
   },
   "c5606389ab2d8e7e873f8652bc32cc53ca80b07801f052e9eacc70b9d622ba7d": {
     "candidate_id": "cand-067",
@@ -4517,7 +4630,7 @@
     },
     "score": 1894.931033551575,
     "status": "evaluated",
-    "stored_at": "2026-09-28 17:33:38"
+    "stored_at": "2026-09-28 17:58:44"
   },
   "c77a0a71246c95d25fbdedf884b4957a6dde6553f217d27f318d59d09c164a67": {
     "candidate_id": "cand-064",
@@ -4596,7 +4709,7 @@
     },
     "score": 1598.6569175780114,
     "status": "evaluated",
-    "stored_at": "2026-09-28 17:33:38"
+    "stored_at": "2026-09-28 17:58:44"
   },
   "cb886b84bd1645ca36c26abf210749550f315abb7c1f353ac21f85cf177dffa6": {
     "candidate_id": "cand-053",
@@ -4677,7 +4790,7 @@
     },
     "score": 1245.0300554926546,
     "status": "evaluated",
-    "stored_at": "2026-09-28 17:33:38"
+    "stored_at": "2026-09-28 17:58:44"
   },
   "cc0619f205c9e1deeac539dbc90bc2fc0ed7aa04c82b805460c38a07651ca374": {
     "candidate_id": "cand-009",
@@ -4756,7 +4869,7 @@
     },
     "score": 1178.3304547853895,
     "status": "evaluated",
-    "stored_at": "2026-09-28 17:33:37"
+    "stored_at": "2026-09-28 17:58:43"
   },
   "cf6fe60305c3104f54c1086385aacd862e2fcf08860834c340f4cfba41e33fc8": {
     "candidate_id": "cand-078",
@@ -4843,7 +4956,7 @@
     },
     "score": 2153.6655079126076,
     "status": "evaluated",
-    "stored_at": "2026-09-28 17:33:38"
+    "stored_at": "2026-09-28 17:58:44"
   },
   "d4b1ef4ae96295f72c3b5e4c6f56bc84a0461de62707ecfb7430038a04ffe385": {
     "candidate_id": "cand-002",
@@ -4922,7 +5035,7 @@
     },
     "score": 910.920963143551,
     "status": "evaluated",
-    "stored_at": "2026-09-28 17:33:37"
+    "stored_at": "2026-09-28 17:58:43"
   },
   "d9ca67360481fed3f2093feabe0a7f91aa068472a8e9ba7418e4fe17ae2be9d8": {
     "candidate_id": "cand-030",
@@ -5001,7 +5114,7 @@
     },
     "score": 926.8247918622404,
     "status": "evaluated",
-    "stored_at": "2026-09-28 17:33:37"
+    "stored_at": "2026-09-28 17:58:44"
   },
   "dd8f3085a8f60210b3b34445b237866c43a1b8d9a1264118a9cfc64dae197df9": {
     "candidate_id": "cand-011",
@@ -5080,7 +5193,7 @@
     },
     "score": 1122.2175843408888,
     "status": "evaluated",
-    "stored_at": "2026-09-28 17:33:37"
+    "stored_at": "2026-09-28 17:58:43"
   },
   "e3bec8a6d7cd57459b9ff5a84672cdf25dbfc49690d749672b07ee40608ad551": {
     "candidate_id": "cand-080",
@@ -5167,7 +5280,7 @@
     },
     "score": 2078.124801537899,
     "status": "evaluated",
-    "stored_at": "2026-09-28 17:33:38"
+    "stored_at": "2026-09-28 17:58:44"
   },
   "e624d2b5a240dc8bb11513718f568cfd2345097ddb8a3e7071b07a32c0144b22": {
     "candidate_id": "cand-058",
@@ -5246,7 +5359,7 @@
     },
     "score": 1824.400503955544,
     "status": "evaluated",
-    "stored_at": "2026-09-28 17:33:38"
+    "stored_at": "2026-09-28 17:58:44"
   },
   "ea8d5070df435122fea480bae04f68d2d8693f89f851344ac268f0d6d2e58985": {
     "candidate_id": "cand-063",
@@ -5325,7 +5438,7 @@
     },
     "score": 1874.814304538389,
     "status": "evaluated",
-    "stored_at": "2026-09-28 17:33:38"
+    "stored_at": "2026-09-28 17:58:44"
   },
   "ebf6fa0ba7187acaad6ce3c03d634598899bea9ac1102c284e937e957d68a8ba": {
     "candidate_id": "cand-024",
@@ -5404,7 +5517,7 @@
     },
     "score": 1188.7989042667773,
     "status": "evaluated",
-    "stored_at": "2026-09-28 17:33:37"
+    "stored_at": "2026-09-28 17:58:44"
   },
   "f2b1ef9f1991ab31be847a1c26971ad68ad817d76f1ffbcc09e074fbccd9d89e": {
     "candidate_id": "cand-072",
@@ -5483,7 +5596,7 @@
     },
     "score": 2004.670977306224,
     "status": "evaluated",
-    "stored_at": "2026-09-28 17:33:38"
+    "stored_at": "2026-09-28 17:58:44"
   },
   "f7ba703d86620627643e78e438fa612068d60a39330b11eed54407f13e780b09": {
     "candidate_id": "cand-060",
@@ -5562,7 +5675,7 @@
     },
     "score": 1726.161168219366,
     "status": "evaluated",
-    "stored_at": "2026-09-28 17:33:38"
+    "stored_at": "2026-09-28 17:58:44"
   },
   "fa97668120b1e97dacef29416f89c5e13abe795cc6fe814caa08b29a56749300": {
     "candidate_id": "cand-038",
@@ -5641,7 +5754,7 @@
     },
     "score": 1192.1825329196229,
     "status": "evaluated",
-    "stored_at": "2026-09-28 17:33:37"
+    "stored_at": "2026-09-28 17:58:44"
   },
   "ff0da3b22e0f91a1e9171e7472051c4e4aa547c95a414c8cf2634cb1f17312d2": {
     "candidate_id": "cand-031",
@@ -5720,6 +5833,6 @@
     },
     "score": 1103.1808039751736,
     "status": "evaluated",
-    "stored_at": "2026-09-28 17:33:37"
+    "stored_at": "2026-09-28 17:58:44"
   }
 }

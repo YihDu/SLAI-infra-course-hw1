@@ -76,6 +76,13 @@ def rf(lane, count, offset=0):
     return {"space": "RF", "offset": offset, "count": count, "wg": "g", "lane": lane}
 
 
+def sh(offset, count, shape=None, strides=None):
+    result = {"space": "SH", "offset": offset, "count": count, "wg": "g", "lane": 0}
+    if shape is not None:
+        result.update(shape=shape, strides=strides)
+    return result
+
+
 def imm(value):
     return {"imm": value}
 
@@ -87,7 +94,7 @@ class Tensor:
 
 
 class Builder:
-    def __init__(self, layout: Layout, recipe: dict | None = None):
+    def __init__(self, layout: Layout, recipe: dict | None = None, shared_bytes: int = 0):
         recipe = recipe or load_recipe()
         self.recipe = recipe
         self.layout = layout
@@ -99,9 +106,10 @@ class Builder:
         self.serial = 0
         self.cursor = layout.symbols["scratch"].address // 4
         self.tensors = {}
-        self.emit("WG.BEGIN", wg="g", sm=0, shared_bytes=0)
+        self.emit("WG.BEGIN", wg="g", sm=0, shared_bytes=shared_bytes)
 
     def set_gemm_stage(self, stage):
+        self.stage = stage
         g = dict(self.recipe["gemm"])
         if stage is not None:
             g.update(self.recipe.get("gemm_stages", {}).get(stage, {}))
@@ -168,6 +176,12 @@ class Builder:
     ):
         if b.shape != (k_extent, n_extent):
             raise ValueError("GEMM weight shape")
+        kernel = self.recipe.get("gemm_kernels", {}).get("p1_prompt_w1")
+        if self.stage == "p1_prompt" and name.endswith("w1") and kernel:
+            if kernel.get("kind") != "shared_weight_panel":
+                raise ValueError("unsupported P1 W1 kernel")
+            self.gemm_shared_weight_panel(a, b, out, m_extent, k_extent, n_extent, name, kernel)
+            return
         tile_n = self.gemm_n_tile
         m_tile = self.m_tile
         k_chunk = self.k_chunk
@@ -313,6 +327,51 @@ class Builder:
                         [n_extent, 1],
                     ),
                 )
+
+    def gemm_shared_weight_panel(self, a, b, out, m_extent, k_extent, n_extent, name, kernel):
+        """Stage a W1 weight panel in SH, then reuse A across its 16-column subtiles."""
+        m_panel = int(kernel["m_panel"])
+        n_panel = int(kernel["n_panel"])
+        sub_n = 16
+        k_chunk = 48
+        if (m_panel, n_panel, k_extent, n_extent) != (16, 64, 256, 1024):
+            raise ValueError("unsupported shared W1 panel shape")
+        with self.loop(f"{name}pn", 0, n_extent, n_panel) as panel_col:
+            self.ld(
+                hbm(add(b.offset, panel_col), k_extent * n_panel,
+                    [k_extent, n_panel], [n_extent, 1]),
+                sh(0, k_extent * n_panel),
+            )
+            with self.loop(f"{name}pm", 0, m_extent, m_panel) as row:
+                rows = minimum(m_panel, sub(m_extent, row))
+                with self.loop(f"{name}zi", 0, n_panel, sub_n) as subcol:
+                    self.vec("add", [imm(0), imm(0)],
+                             rf(2, mul(rows, sub_n), mul(subcol, m_panel)))
+                with self.loop(f"{name}pk", 0, k_extent, k_chunk) as inner:
+                    depth = minimum(k_chunk, sub(k_extent, inner))
+                    self.ld(
+                        hbm(add(a.offset, mul(row, k_extent), inner), mul(rows, depth),
+                            [rows, depth], [k_extent, 1]),
+                        rf(0, mul(rows, depth)),
+                    )
+                    with self.loop(f"{name}pc", 0, n_panel, sub_n) as subcol:
+                        self.ld(
+                            sh(add(mul(inner, n_panel), subcol), mul(depth, sub_n),
+                               [depth, sub_n], [n_panel, 1]),
+                            rf(1, mul(depth, sub_n)),
+                        )
+                        self.emit(
+                            "MMA.ACC", a=rf(0, mul(rows, depth)),
+                            b=rf(1, mul(depth, sub_n)),
+                            acc=rf(2, mul(rows, sub_n), mul(subcol, m_panel)),
+                            m=rows, n=sub_n, k=depth, event=None,
+                        )
+                with self.loop(f"{name}ps", 0, n_panel, sub_n) as subcol:
+                    self.st(
+                        rf(2, mul(rows, sub_n), mul(subcol, m_panel)),
+                        hbm(add(out.offset, mul(row, n_extent), panel_col, subcol),
+                            mul(rows, sub_n), [rows, sub_n], [n_extent, 1]),
+                    )
 
     def layernorm(
         self, source: Tensor, gamma: Tensor, beta: Tensor, out: Tensor, rows: int, d: int, name: str
@@ -639,12 +698,15 @@ class Builder:
         return "\n".join(self.lines) + "\n"
 
 
-def generate_m1_p1() -> tuple[str, Layout, int]:
+def generate_m1_p1(recipe: dict | None = None) -> tuple[str, Layout, int]:
     model = MODELS["M1"]
     d, f, h, hd = model.width, model.ffn, model.heads, model.head_width
     batch, prompt_rows, _ = SCENARIOS["P1"]
     layout = build_layout(model, "P1")
-    b = Builder(layout)
+    recipe = recipe or load_recipe()
+    kernel = recipe.get("gemm_kernels", {}).get("p1_prompt_w1")
+    shared_bytes = 256 * int(kernel["n_panel"]) * 4 if kernel else 0
+    b = Builder(layout, recipe, shared_bytes=shared_bytes)
     prompt = b.symbol("input/prompt")
     step = b.symbol("input/step0")
     output = b.symbol("output/hidden")

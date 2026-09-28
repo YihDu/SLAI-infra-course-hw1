@@ -28,3 +28,19 @@ The controller proposes candidates, then executes this chain:
 ## Repair validation campaign
 
 `python -m project.search.campaign --max-evals 12 --jobs 2` reproduces cand-073 before proceeding to seven isolated hardware controls (K parallelism 2/4, TC array 8x8/8x16, TC count 4, DMA engines 2, cache 4 MiB). Remaining budget permits at most two beneficial combinations, one stage neighbor and one archive expansion. The campaign restores the best complete submission triple and writes a launch ledger plus summary under `project/campaigns/`.
+
+# P1 W1 shared panel operator
+
+`w1_shared_panel` enables a distinct GEMM schedule for prompt W1 only. It stages
+one 256×64 FP32 weight panel (64 KiB) in workgroup shared memory, accumulates
+16 prompt rows across four 16-column subtiles, and reuses the A tile within
+each K chunk. The compiler reserves 64 KiB of shared memory only for P1;
+decode remains on the previous path. The DSL requires at least 64 KiB of
+shared memory and 1024 RF words per lane. Candidates using this operator pin
+the current `project/compiler.py` in their immutable input snapshots, because
+older candidate compilers do not implement it. Its first measured candidate
+is `cand-086`. It passed correctness but raised P1 from 10,750,199 to
+11,817,029 cycles while D1 stayed at 744,864, so the candidate was reverted.
+HBM bytes were unchanged; extra shared memory service and the new scheduling
+order are the likely sources of the regression. The full verdict is in
+`project/iteration-log.md`.

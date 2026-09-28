@@ -1088,3 +1088,15 @@ Traceback (most recent call last):
 | cand-083 | 18.755969 | 3.033500 | 2.310412 |
 | cand-084 | 18.755969 | 3.033500 | 2.151741 |
 | cand-085 | 18.995969 | 3.039500 | 2.316412 |
+
+## 2026-09-28 17:58:32 — cand-086: Stage each P1 prompt W1 64-column weight panel in shared memory and reuse A across four subtiles
+- Change: parent=cand-083; [{"op": "w1_shared_panel", "enabled": 1}]
+- Evidence: project/experiments/cand-086/metrics.json; reports/grade.json; attempts=1
+- Command (grade): ['/Users/yihdu/Codefield/SLAI-infra-Code/transformer-codesign-starter/.venv/bin/python', '/Users/yihdu/Codefield/SLAI-infra-Code/transformer-codesign-starter/challenge.py', 'grade', '--hardware', '/Users/yihdu/Codefield/SLAI-infra-Code/transformer-codesign-starter/project/experiments/cand-086/inputs/hardware.json', '--program-p1', '/Users/yihdu/Codefield/SLAI-infra-Code/transformer-codesign-starter/project/experiments/cand-086/programs/M1_P1.asm', '--program-d1', '/Users/yihdu/Codefield/SLAI-infra-Code/transformer-codesign-starter/project/experiments/cand-086/programs/M2_D1.asm', '--report', '/Users/yihdu/Codefield/SLAI-infra-Code/transformer-codesign-starter/project/experiments/cand-086/reports/grade.json', '--seed', '7', '--baseline', '/Users/yihdu/Codefield/SLAI-infra-Code/transformer-codesign-starter/baseline_manifest.json']; elapsed=105.69506037503015; peak MiB=2056.626922607422
+- Inputs: compiler.py@5e139b9e hardware.json@08e9950e recipe.json@12e71e12
+- Verify: PASS elapsed=105.70s
+- Result: M1_P1=11817029 (2.623x), M2_D1=744864 (1.748x); score=2141.302, eligible=True
+  - deltas vs head (cand-083): {'M1_P1': 1066830, 'M2_D1': 0}
+- Decision: evaluated; retained in Pareto/archives (head preserved)
+
+### cand-086 verdict: REVERTED — Correct, but P1 rose 10,750,199 to 11,817,029 cycles; D1 unchanged, shared-panel transfer overhead outweighed RF reuse

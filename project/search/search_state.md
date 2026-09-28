@@ -9,7 +9,7 @@
 - cand-085 score=2245.04 parent=cand-083 sig=fuse+hw:cache_mib=2+hw:dma_depth=2+hw:dma_engines=2+hw:reduction_units=1+hw:rf_ports=8R4W+hw:sm_noc_bytes_per_cycle=128+hw:tc_array=8x8+hw:tc_k_parallel=4+nkm+nopf+s:rf+stage:d1 hyp=Archive mechanism expansion: reduction_units=1
 - cand-084 score=2206.25 parent=cand-083 sig=fuse+hw:cache_mib=2+hw:dma_depth=2+hw:dma_engines=2+hw:rf_ports=8R4W+hw:sm_noc_bytes_per_cycle=128+hw:tc_array=8x8+hw:tc_k_parallel=4+nkm+nopf+s:rf+stage:d1 hyp=Stage sensitivity: d1 k_chunk=16
 - cand-078 score=2153.67 parent=cand-073 sig=fuse+hw:cache_mib=2+hw:dma_depth=2+hw:rf_ports=8R4W+hw:sm_noc_bytes_per_cycle=128+hw:tc_array=8x16+nkm+nopf+s:rf+stage:d1 hyp=Hardware sensitivity: tc_array=8x16 against cand-073
-- cand-082 score=2131.15 parent=cand-076 sig=fuse+hw:cache_mib=2+hw:dma_depth=2+hw:dma_engines=2+hw:rf_ports=8R4W+hw:sm_noc_bytes_per_cycle=128+hw:tc_k_parallel=4+nkm+nopf+s:rf+stage:d1 hyp=Compose beneficial control cand-080
+- cand-086 score=2141.30 parent=cand-083 sig=fuse+hw:cache_mib=2+hw:dma_depth=2+hw:dma_engines=2+hw:rf_ports=8R4W+hw:sm_noc_bytes_per_cycle=128+hw:tc_array=8x8+hw:tc_k_parallel=4+kernel:p1_w1_shared+nkm+nopf+s:rf+stage:d1 hyp=Stage each P1 prompt W1 64-column weight panel in shared mem
 
 ## failure classes
 - dry_run: 27
@@ -29,8 +29,10 @@
 - fusion|balanced: cand-009
 - hardware|balanced: cand-083
 - memory|balanced: cand-073
+- memory|p1: cand-086
 - sig:fuse: cand-009
 - sig:fuse+hw:cache_mib=2+hw:dma_depth=2+hw:dma_engines=2+hw:reduction_units=1+hw:rf_ports=8R4W+hw:sm_noc_bytes_per_cycle=128+hw:tc_array=8x8+hw:tc_k_parallel=4+nkm+nopf+s:rf+stage:d1: cand-085
+- sig:fuse+hw:cache_mib=2+hw:dma_depth=2+hw:dma_engines=2+hw:rf_ports=8R4W+hw:sm_noc_bytes_per_cycle=128+hw:tc_array=8x8+hw:tc_k_parallel=4+kernel:p1_w1_shared+nkm+nopf+s:rf+stage:d1: cand-086
 - sig:fuse+hw:cache_mib=2+hw:dma_depth=2+hw:dma_engines=2+hw:rf_ports=8R4W+hw:sm_noc_bytes_per_cycle=128+hw:tc_array=8x8+hw:tc_k_parallel=4+nkm+nopf+s:rf+stage:d1: cand-083
 - sig:fuse+hw:cache_mib=2+hw:dma_depth=2+hw:dma_engines=2+hw:rf_ports=8R4W+hw:sm_noc_bytes_per_cycle=128+hw:tc_k_parallel=4+nkm+nopf+s:rf+stage:d1: cand-082
 - sig:fuse+hw:cache_mib=2+hw:dma_depth=2+hw:dma_engines=2+hw:rf_ports=8R4W+hw:sm_noc_bytes_per_cycle=128+nkm+nopf+s:rf+stage:d1: cand-080

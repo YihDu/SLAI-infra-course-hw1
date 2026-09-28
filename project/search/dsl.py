@@ -20,11 +20,11 @@ BIASES = ("p1", "d1", "balanced")
 # 3 = + workgroup partition/placement (needs compiler support).
 PHASE_UNLOCKED_OPS = {
     1: {"gemm_order", "gemm_tiles", "gemm_prefetch", "scores_residency",
-        "fuse_bias_gelu", "stage_gemm_tiles"},
+        "fuse_bias_gelu", "stage_gemm_tiles", "w1_shared_panel"},
     2: {"gemm_order", "gemm_tiles", "gemm_prefetch", "scores_residency",
-        "fuse_bias_gelu", "hw_set", "stage_gemm_tiles"},
+        "fuse_bias_gelu", "hw_set", "stage_gemm_tiles", "w1_shared_panel"},
     3: {"gemm_order", "gemm_tiles", "gemm_prefetch", "scores_residency",
-        "fuse_bias_gelu", "hw_set", "workgroups", "stage_gemm_tiles"},
+        "fuse_bias_gelu", "hw_set", "workgroups", "stage_gemm_tiles", "w1_shared_panel"},
 }
 
 # Legal hardware menu values (mirrors codesign/challenge/hardware.py).
@@ -162,6 +162,16 @@ def _op_fuse_bias_gelu(recipe, _hw, op):
     recipe["fusion"]["bias_gelu"] = int(bool(op.get("enabled", 1)))
 
 
+def _op_w1_shared_panel(recipe, _hw, op):
+    kernels = recipe.setdefault("gemm_kernels", {})
+    if op.get("enabled", 1):
+        kernels["p1_prompt_w1"] = {"kind": "shared_weight_panel", "m_panel": 16, "n_panel": 64}
+    else:
+        kernels.pop("p1_prompt_w1", None)
+        if not kernels:
+            recipe.pop("gemm_kernels")
+
+
 def _op_hw_set(_recipe, hw, op):
     # Phase-2 operator: single-field hardware mutation.
     path = op.get("path")
@@ -225,6 +235,7 @@ OPERATORS = {
     "gemm_prefetch": _op_gemm_prefetch,
     "scores_residency": _op_scores_residency,
     "fuse_bias_gelu": _op_fuse_bias_gelu,
+    "w1_shared_panel": _op_w1_shared_panel,
     "hw_set": _op_hw_set,
     "workgroups": _op_workgroups,
 }
@@ -357,6 +368,16 @@ def validate_recipe(recipe: dict, hw: dict | None = None) -> list[str]:
             errs.append(f"{stage}: operand tile B exceeds RF lane")
         if max_rows // max(st_m, 1) > 32:
             errs.append(f"{stage}: too many m iterations")
+    kernels = recipe.get("gemm_kernels", {})
+    if kernels:
+        if set(kernels) != {"p1_prompt_w1"} or kernels["p1_prompt_w1"] != {
+            "kind": "shared_weight_panel", "m_panel": 16, "n_panel": 64,
+        }:
+            errs.append("unsupported GEMM kernel configuration")
+        if (hw or {}).get("shared_kib", 0) < 64:
+            errs.append("W1 shared panel needs at least 64 KiB shared memory")
+        if lw < 1024:
+            errs.append("W1 shared panel needs at least 1024 RF words per lane")
     return errs
 
 
@@ -398,6 +419,8 @@ def structure_signature(recipe: dict, hw: dict | None = None) -> str:
     parts.append("fuse" if bias_gelu else "nofuse")
     for st in sorted(recipe.get("gemm_stages", {})):
         parts.append(f"stage:{st}")
+    if recipe.get("gemm_kernels", {}).get("p1_prompt_w1"):
+        parts.append("kernel:p1_w1_shared")
 
     if hw:
         tc_cnt = hw.get("tc_count", BASELINE_HW["tc_count"])

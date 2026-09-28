@@ -17,7 +17,7 @@ import hashlib
 from pathlib import Path
 
 from . import dsl
-from .candidate import EXPERIMENTS, Candidate
+from .candidate import EXPERIMENTS, REPO, Candidate
 
 structure_signature = dsl.structure_signature
 
@@ -41,6 +41,7 @@ STRUCTURES = {
     "stage_d1_n32": ("compute", [{"op": "stage_gemm_tiles",
                                   "stage": "d1", "n_tile": 32,
                                   "k_chunk": 32}]),
+    "p1_w1_shared": ("memory", [{"op": "w1_shared_panel", "enabled": 1}]),
 }
 
 
@@ -264,7 +265,12 @@ def propose_round(reg: dict, round_no: int, count: int,
         if hw_errs:
             record_rejection(f"hardware_invalid: {'; '.join(hw_errs)}", kind, ops, parent)
             return False
-        fp = dsl.fingerprint(recipe, hw, compiler=_compiler_identity(parent))
+        compiler_path = None
+        if recipe.get("gemm_kernels", {}).get("p1_prompt_w1"):
+            compiler_path = str(REPO / "project" / "compiler.py")
+        compiler_id = (hashlib.sha256(Path(compiler_path).read_bytes()).hexdigest()
+                       if compiler_path else _compiler_identity(parent))
+        fp = dsl.fingerprint(recipe, hw, compiler=compiler_id)
         if fp in tried:
             record_rejection(f"duplicate_fingerprint: {fp}", kind, ops, parent)
             return False
@@ -274,7 +280,7 @@ def propose_round(reg: dict, round_no: int, count: int,
             "parent": parent, "ops": ops, "family": family, "bias": bias,
             "kind": kind, "hypothesis": hypothesis,
             "recipe": recipe, "hardware": hw, "fingerprint": fp,
-            "struct_sig": sig,
+            "struct_sig": sig, "compiler_path": compiler_path,
         })
         return True
 

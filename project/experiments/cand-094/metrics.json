@@ -1,0 +1,115 @@
+{
+  "candidate": "cand-094",
+  "reports": {
+    "grade": {
+      "mode": "grade",
+      "cases": {
+        "M1_P1": {
+          "functional_passed": true,
+          "max_abs_error": 2.793004260981391e-06,
+          "cycles": 8656949,
+          "instruction_count": 181679,
+          "hbm_read_bytes": 47165440,
+          "hbm_write_bytes": 8120320,
+          "peak_window_power_w": 2.971060854310833,
+          "busy_cycles": {
+            "sm0.dma": 1876160,
+            "sm0.issue": 181679,
+            "sm0.noc_in": 1634710,
+            "sm0.noc_out": 113044,
+            "sm0.rf_read": 2818280,
+            "sm0.rf_write": 2788264,
+            "sm0.sfu": 269964,
+            "sm0.shared_read": 0,
+            "sm0.shared_write": 0,
+            "sm0.tc": 622896,
+            "sm0.vec": 566712,
+            "sm0.issue_wait": 8475206,
+            "shared.cache_bank_0": 621560,
+            "shared.cache_bank_1": 621560,
+            "shared.cache_bank_2": 621560,
+            "shared.cache_bank_3": 621560,
+            "shared.hbm_channel_0": 431920,
+            "shared.hbm_channel_1": 431920,
+            "shared.hbm_channel_2": 431920,
+            "shared.hbm_channel_3": 431920,
+            "shared.noc": 1730082
+          }
+        },
+        "M2_D1": {
+          "functional_passed": true,
+          "max_abs_error": 1.1209758654651125e-06,
+          "cycles": 718132,
+          "instruction_count": 15066,
+          "hbm_read_bytes": 2012160,
+          "hbm_write_bytes": 167936,
+          "peak_window_power_w": 2.385789606272184,
+          "busy_cycles": {
+            "sm0.dma": 239104,
+            "sm0.issue": 15066,
+            "sm0.noc_in": 224033,
+            "sm0.noc_out": 2624,
+            "sm0.rf_read": 138784,
+            "sm0.rf_write": 261248,
+            "sm0.sfu": 8832,
+            "sm0.shared_read": 0,
+            "sm0.shared_write": 0,
+            "sm0.tc": 48224,
+            "sm0.vec": 17344,
+            "sm0.issue_wait": 702906,
+            "shared.cache_bank_0": 67012,
+            "shared.cache_bank_1": 67012,
+            "shared.cache_bank_2": 66948,
+            "shared.cache_bank_3": 66948,
+            "shared.hbm_channel_0": 17032,
+            "shared.hbm_channel_1": 17032,
+            "shared.hbm_channel_2": 17032,
+            "shared.hbm_channel_3": 17032,
+            "shared.noc": 226521
+          }
+        }
+      },
+      "score": 2547.9215759712715,
+      "eligible": true,
+      "area_mm2": 16.25838297088
+    }
+  },
+  "evaluation_attempts": 1,
+  "runs": {
+    "grade": {
+      "command": [
+        "/Users/yihdu/Codefield/SLAI-infra-Code/transformer-codesign-starter/.venv/bin/python",
+        "/Users/yihdu/Codefield/SLAI-infra-Code/transformer-codesign-starter/challenge.py",
+        "grade",
+        "--hardware",
+        "/Users/yihdu/Codefield/SLAI-infra-Code/transformer-codesign-starter/project/experiments/cand-094/inputs/hardware.json",
+        "--program-p1",
+        "/Users/yihdu/Codefield/SLAI-infra-Code/transformer-codesign-starter/project/experiments/cand-094/programs/M1_P1.asm",
+        "--program-d1",
+        "/Users/yihdu/Codefield/SLAI-infra-Code/transformer-codesign-starter/project/experiments/cand-094/programs/M2_D1.asm",
+        "--report",
+        "/Users/yihdu/Codefield/SLAI-infra-Code/transformer-codesign-starter/project/experiments/cand-094/reports/grade.json",
+        "--seed",
+        "7",
+        "--baseline",
+        "/Users/yihdu/Codefield/SLAI-infra-Code/transformer-codesign-starter/baseline_manifest.json"
+      ],
+      "exit_code": 0,
+      "elapsed": 103.43378408299759,
+      "peak_memory_mib": 1817.8298645019531,
+      "failure_class": null
+    }
+  },
+  "static": {
+    "M1_P1": {
+      "expanded_instructions": 181679,
+      "bytes": 388682
+    },
+    "M2_D1": {
+      "expanded_instructions": 15066,
+      "bytes": 533511
+    }
+  },
+  "verdict": "evaluated",
+  "elapsed": 103.43679700000212
+}

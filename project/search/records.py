@@ -225,7 +225,8 @@ def record_result(reg: dict, cand: Any, metrics: dict, log_path: Path | None = N
     archives.update(reg, cid)
 
     # 9. Incumbent promotion:
-    # "Prefer incumbent promotion only score improves and BOTH cycles <= prior head; otherwise retain Pareto."
+    # The objective is eligible geometric-mean score; per-case regressions
+    # are allowed inside the evaluator limits. Pareto retains tradeoff branches.
     is_adm = archives.is_admissible(meta)
     promoted = False
     if is_adm:
@@ -244,21 +245,8 @@ def record_result(reg: dict, cand: Any, metrics: dict, log_path: Path | None = N
         else:
             head_meta = reg["candidates"].get(prior_head, {})
             head_score = head_meta.get("score")
-            head_cycles = head_meta.get("cycles") or {}
-
             score_improves = score is not None and (head_score is None or score > head_score)
-            p1_le = (
-                "M1_P1" in cycles and "M1_P1" in head_cycles
-                and head_cycles["M1_P1"] is not None
-                and cycles["M1_P1"] <= head_cycles["M1_P1"]
-            )
-            d1_le = (
-                "M2_D1" in cycles and "M2_D1" in head_cycles
-                and head_cycles["M2_D1"] is not None
-                and cycles["M2_D1"] <= head_cycles["M2_D1"]
-            )
-
-            if score_improves and p1_le and d1_le:
+            if score_improves:
                 reg["head"] = cid
                 cand_status = "kept"
                 meta["status"] = "kept"

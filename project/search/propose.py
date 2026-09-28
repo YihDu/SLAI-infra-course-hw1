@@ -41,6 +41,10 @@ STRUCTURES = {
     "stage_d1_n32": ("compute", [{"op": "stage_gemm_tiles",
                                   "stage": "d1", "n_tile": 32,
                                   "k_chunk": 32}]),
+    "p1_rf_lanes_n32": ("memory", [{"op": "stage_gemm_tiles", "stage": "p1_prompt", "order": "nkm_lanes", "m_tile": 16, "n_tile": 32, "k_chunk": 32}]),
+    "p1_rf_lanes_n64": ("memory", [{"op": "stage_gemm_tiles", "stage": "p1_prompt", "order": "nkm_lanes", "m_tile": 16, "n_tile": 64, "k_chunk": 16}]),
+    "p1_rf_lanes_n128": ("memory", [{"op": "hw_set", "path": "vector_lanes", "value": 8}, {"op": "stage_gemm_tiles", "stage": "p1_prompt", "order": "nkm_lanes", "m_tile": 16, "n_tile": 128, "k_chunk": 16}]),
+    "area_bridge_tc": ("hardware", [{"op": "hw_set", "path": "sm_count", "value": 4}, {"op": "hw_set", "path": "tc_array", "value": "8x16"}]),
     "p1_w1_shared": ("memory", [{"op": "w1_shared_panel", "enabled": 1}]),
 }
 
@@ -162,6 +166,19 @@ def stage_tile_neighborhood(recipe: dict, hw: dict | None = None) -> list[dict]:
     return nbr_ops
 
 
+def stage_space(recipe: dict, hw: dict, stage: str) -> list[dict]:
+    """Enumerate complete implemented stage layouts, then prune by actual resources."""
+    legal = []
+    for order, m, n, k in itertools.product(dsl.GEMM_ORDERS, dsl.M_TILE_CHOICES,
+                                           dsl.N_TILE_CHOICES, dsl.K_CHUNK_CHOICES):
+        op = {"op": "stage_gemm_tiles", "stage": stage, "order": order,
+              "m_tile": m, "n_tile": n, "k_chunk": k}
+        r, h = dsl.apply_ops(recipe, hw, [op])
+        if not dsl.validate_recipe(r, h):
+            legal.append(op)
+    return legal
+
+
 def _compiler_identity(cid):
     path = EXPERIMENTS / cid / "inputs/compiler.py"
     return hashlib.sha256(path.read_bytes()).hexdigest() if path.exists() else "missing"
@@ -261,12 +278,18 @@ def propose_round(reg: dict, round_no: int, count: int,
         if r_errs:
             record_rejection(f"recipe_invalid: {'; '.join(r_errs)}", kind, ops, parent)
             return False
+        cost_reasons = dsl.evaluation_cost_reasons(recipe)
+        if cost_reasons:
+            record_rejection(f"evaluation_cost: {'; '.join(cost_reasons)}", kind, ops, parent)
+            return False
         hw_errs = dsl.validate_hardware(hw)
         if hw_errs:
             record_rejection(f"hardware_invalid: {'; '.join(hw_errs)}", kind, ops, parent)
             return False
         compiler_path = None
-        if recipe.get("gemm_kernels", {}).get("p1_prompt_w1"):
+        if (recipe.get("gemm_kernels", {}).get("p1_prompt_w1")
+                or recipe["gemm"].get("order") == "nkm_lanes"
+                or any(v.get("order") == "nkm_lanes" for v in recipe.get("gemm_stages", {}).values())):
             compiler_path = str(REPO / "project" / "compiler.py")
         compiler_id = (hashlib.sha256(Path(compiler_path).read_bytes()).hexdigest()
                        if compiler_path else _compiler_identity(parent))
@@ -284,16 +307,11 @@ def propose_round(reg: dict, round_no: int, count: int,
         })
         return True
 
-    # Quota allocation
-    if count == 6:
-        target_exploit = 2
-        target_expand = 2
-        target_novelty = 2
-    else:
-        target_novelty = max(1, int(round(count * explore_ratio)))
-        rem = count - target_novelty
-        target_expand = max(1, rem // 2) if rem > 1 else max(0, rem)
-        target_exploit = max(0, count - target_novelty - target_expand)
+    # Let plateau-driven exploration change the allocation at every batch size.
+    target_novelty = min(count, max(1, int(round(count * explore_ratio))))
+    rem = count - target_novelty
+    target_expand = max(1, rem // 2) if rem > 1 else max(0, rem)
+    target_exploit = max(0, count - target_novelty - target_expand)
 
     # --- 1. EXPLOIT: single-param neighbourhood of incumbent ---
     base_recipe, base_hw = _load_parent_inputs(best)
@@ -326,7 +344,7 @@ def propose_round(reg: dict, round_no: int, count: int,
 
     stage_nbrs = [
         ([op], "compute", f"stage tile {op['stage']}")
-        for op in stage_tile_neighborhood(base_recipe)
+        for op in stage_tile_neighborhood(base_recipe, base_hw)
     ]
 
     hw_nbrs = []
@@ -427,7 +445,7 @@ def propose_round(reg: dict, round_no: int, count: int,
              f"expand {parent}: double-buffer B tiles"),
         ]
         # Include stage tile toggles in expand
-        for st_op in stage_tile_neighborhood(pr)[:4]:
+        for st_op in stage_tile_neighborhood(pr, phw)[:4]:
             toggles.append(([st_op], "compute", f"expand {parent}: stage tile {st_op['stage']}"))
 
         if phase >= 2:
@@ -465,10 +483,14 @@ def propose_round(reg: dict, round_no: int, count: int,
     for p in exploit_proposals + expand_proposals:
         sigs_tried.add(p["struct_sig"])
 
-    candidates_structs = [
-        (s, fam, ops) for s, (fam, ops) in STRUCTURES.items()
-        if struct_sig(ops) not in sigs_tried
-    ]
+    candidates_structs = []
+    for name, (family, ops) in STRUCTURES.items():
+        try:
+            r, h = dsl.apply_ops(base_recipe, base_hw, ops, phase=phase)
+        except dsl.DslError:
+            continue
+        if dsl.structure_signature(r, h) not in sigs_tried:
+            candidates_structs.append((name, family, ops))
     rng.shuffle(candidates_structs)
     novelty_attempts = 0
     for sname, fam, ops in candidates_structs:
@@ -490,13 +512,10 @@ def propose_round(reg: dict, round_no: int, count: int,
         ]
         if rng.random() < 0.5:
             stg = rng.choice(["p1_prompt", "d1", "p1_step"])
-            if stg == "p1_prompt":
-                extra_ops.append({"op": "stage_gemm_tiles", "stage": stg,
-                                  "m_tile": rng.choice([8, 16, 32])})
-            else:
-                extra_ops.append({"op": "stage_gemm_tiles", "stage": stg,
-                                  "n_tile": rng.choice([16, 32, 64]),
-                                  "k_chunk": rng.choice([16, 32, 64])})
+            # Sample the whole legal stage space, including alternative layouts.
+            stage_ops = stage_space(base_recipe, base_hw, stg)
+            if stage_ops:
+                extra_ops.append(rng.choice(stage_ops))
         ops = _mk_ops(order, tiles, extra_ops)
         if phase >= 2 and rng.random() < 0.5:
             field = rng.choice(list(dsl.HW_MENU))

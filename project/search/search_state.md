@@ -1,39 +1,45 @@
 # search_state (auto-generated; do not edit)
 
-- best: cand-083 score=2245.0389561884695 (P1=10750199, D1=744864)
+- best: cand-095 score=2567.954051821853 (P1=8522411, D1=718132)
 - phase=2 round=12 plateau_rounds=0 explore_ratio=0.54 need_new_operator=False
-- bottleneck: M1_P1 sm0.rf_read=3353480, sm0.rf_write=3218344, sm0.dma=2465984; M2_D1 sm0.rf_write=263232, sm0.dma=244416, shared.noc=227385 (overlapping service counts)
+- bottleneck: M1_P1 sm0.rf_read=2818280, sm0.rf_write=2788264, sm0.dma=1876160; M2_D1 sm0.rf_write=261248, sm0.dma=239104, shared.noc=226521 (overlapping service counts)
 
 ## elite (score desc)
-- cand-083 score=2245.04 parent=cand-082 sig=fuse+hw:cache_mib=2+hw:dma_depth=2+hw:dma_engines=2+hw:rf_ports=8R4W+hw:sm_noc_bytes_per_cycle=128+hw:tc_array=8x8+hw:tc_k_parallel=4+nkm+nopf+s:rf+stage:d1 hyp=Compose beneficial control cand-077
-- cand-085 score=2245.04 parent=cand-083 sig=fuse+hw:cache_mib=2+hw:dma_depth=2+hw:dma_engines=2+hw:reduction_units=1+hw:rf_ports=8R4W+hw:sm_noc_bytes_per_cycle=128+hw:tc_array=8x8+hw:tc_k_parallel=4+nkm+nopf+s:rf+stage:d1 hyp=Archive mechanism expansion: reduction_units=1
-- cand-084 score=2206.25 parent=cand-083 sig=fuse+hw:cache_mib=2+hw:dma_depth=2+hw:dma_engines=2+hw:rf_ports=8R4W+hw:sm_noc_bytes_per_cycle=128+hw:tc_array=8x8+hw:tc_k_parallel=4+nkm+nopf+s:rf+stage:d1 hyp=Stage sensitivity: d1 k_chunk=16
-- cand-078 score=2153.67 parent=cand-073 sig=fuse+hw:cache_mib=2+hw:dma_depth=2+hw:rf_ports=8R4W+hw:sm_noc_bytes_per_cycle=128+hw:tc_array=8x16+nkm+nopf+s:rf+stage:d1 hyp=Hardware sensitivity: tc_array=8x16 against cand-073
-- cand-086 score=2141.30 parent=cand-083 sig=fuse+hw:cache_mib=2+hw:dma_depth=2+hw:dma_engines=2+hw:rf_ports=8R4W+hw:sm_noc_bytes_per_cycle=128+hw:tc_array=8x8+hw:tc_k_parallel=4+kernel:p1_w1_shared+nkm+nopf+s:rf+stage:d1 hyp=Stage each P1 prompt W1 64-column weight panel in shared mem
+- cand-095 score=2567.95 parent=cand-094 sig=fuse+hw:cache_mib=2+hw:dma_depth=2+hw:dma_engines=2+hw:rf_ports=8R4W+hw:sm_count=4+hw:sm_noc_bytes_per_cycle=128+hw:tc_array=8x16+hw:tc_k_parallel=4+nkm+nopf+s:rf+stage:d1:nkm+stage:p1_prompt:nkm_lanes hyp=Larger M tile reduces repeated B reads
+- cand-094 score=2547.92 parent=cand-093 sig=fuse+hw:cache_mib=2+hw:dma_depth=2+hw:dma_engines=2+hw:rf_ports=8R4W+hw:sm_count=4+hw:sm_noc_bytes_per_cycle=128+hw:tc_array=8x16+hw:tc_k_parallel=4+nkm+nopf+s:rf+stage:d1:nkm+stage:p1_prompt:nkm_lanes hyp=Expand decode N tile after prompt/hardware controls
+- cand-093 score=2512.22 parent=cand-087 sig=fuse+hw:cache_mib=2+hw:dma_depth=2+hw:dma_engines=2+hw:rf_ports=8R4W+hw:sm_count=4+hw:sm_noc_bytes_per_cycle=128+hw:tc_array=8x16+hw:tc_k_parallel=4+nkm+nopf+s:rf+stage:d1:nkm+stage:p1_prompt:nkm_lanes hyp=Compose best RF dataflow with measured area bridge
+- cand-097 score=2479.58 parent=cand-094 sig=fuse+hw:cache_mib=2+hw:dma_depth=2+hw:dma_engines=2+hw:rf_ports=8R4W+hw:sm_count=4+hw:sm_noc_bytes_per_cycle=128+hw:tc_array=8x16+hw:tc_k_parallel=4+hw:vector_lanes=8+nkm+nopf+s:rf+stage:d1:nkm+stage:p1_prompt:nkm_lanes hyp=Joint RF expansion: 8 vector partitions allow N128 with K16,
+- cand-087 score=2390.11 parent=cand-083 sig=fuse+hw:cache_mib=2+hw:dma_depth=2+hw:dma_engines=2+hw:rf_ports=8R4W+hw:sm_noc_bytes_per_cycle=128+hw:tc_array=8x8+hw:tc_k_parallel=4+nkm+nopf+s:rf+stage:d1:nkm+stage:p1_prompt:nkm_lanes hyp=RF accumulator partitions: P1 prompt M=16, N=32, K=32; prese
 
 ## failure classes
 - dry_run: 27
 - evaluation_resource_limit: 1
 - evaluator_assertion: 1
+- evaluator_error: 1
 - generate_error: 3
 - harness_noop: 9
 
 ## pareto front
-- cand-083 {'M1_P1': 10750199, 'M2_D1': 744864}
+- cand-095 {'M1_P1': 8522411, 'M2_D1': 718132}
 
 ## diversity cells
 - attention|balanced: cand-019
-- compute|balanced: cand-084
+- compute|balanced: cand-095
 - compute|d1: cand-072
 - compute|p1: cand-070
 - fusion|balanced: cand-009
-- hardware|balanced: cand-083
+- hardware|balanced: cand-093
 - memory|balanced: cand-073
 - memory|p1: cand-086
 - sig:fuse: cand-009
 - sig:fuse+hw:cache_mib=2+hw:dma_depth=2+hw:dma_engines=2+hw:reduction_units=1+hw:rf_ports=8R4W+hw:sm_noc_bytes_per_cycle=128+hw:tc_array=8x8+hw:tc_k_parallel=4+nkm+nopf+s:rf+stage:d1: cand-085
+- sig:fuse+hw:cache_mib=2+hw:dma_depth=2+hw:dma_engines=2+hw:rf_ports=8R4W+hw:sm_count=4+hw:sm_noc_bytes_per_cycle=128+hw:tc_array=8x16+hw:tc_k_parallel=4+hw:vector_lanes=8+nkm+nopf+s:rf+stage:d1:nkm+stage:p1_prompt:nkm_lanes: cand-097
+- sig:fuse+hw:cache_mib=2+hw:dma_depth=2+hw:dma_engines=2+hw:rf_ports=8R4W+hw:sm_count=4+hw:sm_noc_bytes_per_cycle=128+hw:tc_array=8x16+hw:tc_k_parallel=4+nkm+nopf+s:rf+stage:d1:nkm: cand-092
+- sig:fuse+hw:cache_mib=2+hw:dma_depth=2+hw:dma_engines=2+hw:rf_ports=8R4W+hw:sm_count=4+hw:sm_noc_bytes_per_cycle=128+hw:tc_array=8x16+hw:tc_k_parallel=4+nkm+nopf+s:rf+stage:d1:nkm+stage:p1_prompt:nkm_lanes: cand-095
+- sig:fuse+hw:cache_mib=2+hw:dma_depth=2+hw:dma_engines=2+hw:rf_ports=8R4W+hw:sm_count=4+hw:sm_noc_bytes_per_cycle=128+hw:tc_array=8x8+hw:tc_k_parallel=4+nkm+nopf+s:rf+stage:d1:nkm: cand-091
 - sig:fuse+hw:cache_mib=2+hw:dma_depth=2+hw:dma_engines=2+hw:rf_ports=8R4W+hw:sm_noc_bytes_per_cycle=128+hw:tc_array=8x8+hw:tc_k_parallel=4+kernel:p1_w1_shared+nkm+nopf+s:rf+stage:d1: cand-086
 - sig:fuse+hw:cache_mib=2+hw:dma_depth=2+hw:dma_engines=2+hw:rf_ports=8R4W+hw:sm_noc_bytes_per_cycle=128+hw:tc_array=8x8+hw:tc_k_parallel=4+nkm+nopf+s:rf+stage:d1: cand-083
+- sig:fuse+hw:cache_mib=2+hw:dma_depth=2+hw:dma_engines=2+hw:rf_ports=8R4W+hw:sm_noc_bytes_per_cycle=128+hw:tc_array=8x8+hw:tc_k_parallel=4+nkm+nopf+s:rf+stage:d1:nkm+stage:p1_prompt:nkm_lanes: cand-087
 - sig:fuse+hw:cache_mib=2+hw:dma_depth=2+hw:dma_engines=2+hw:rf_ports=8R4W+hw:sm_noc_bytes_per_cycle=128+hw:tc_k_parallel=4+nkm+nopf+s:rf+stage:d1: cand-082
 - sig:fuse+hw:cache_mib=2+hw:dma_depth=2+hw:dma_engines=2+hw:rf_ports=8R4W+hw:sm_noc_bytes_per_cycle=128+nkm+nopf+s:rf+stage:d1: cand-080
 - sig:fuse+hw:cache_mib=2+hw:dma_depth=2+hw:rf_ports=8R4W+hw:sm_noc_bytes_per_cycle=128+hw:tc_array=8x16+nkm+nopf+s:rf+stage:d1: cand-078

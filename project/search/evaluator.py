@@ -97,6 +97,8 @@ def evaluate(cand, seeds, log=print, *, validation="grade", timeout_seconds=600,
         metrics.update(prepare(cand, log, timeout_seconds, memory_mib))
         if metrics.get("failure_class"):
             return metrics
+    elif (cand.reports / "static.json").exists():
+        metrics["static"] = json.loads((cand.reports / "static.json").read_text())
     for mode in (["check", "grade"] if validation == "full" else ["grade"]):
         report = cand.reports / (mode + ".json")
         if report.exists():

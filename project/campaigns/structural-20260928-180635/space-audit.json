@@ -1,0 +1,154 @@
+{
+  "base": "cand-083",
+  "enumerated": 840,
+  "static_rejected": 622,
+  "legal": 218,
+  "legal_by_layout": {
+    "mnk": 97,
+    "nkm": 66,
+    "nkm_lanes": 55
+  },
+  "cost_deprioritized": 50,
+  "preferred": 168,
+  "reasons": {
+    "p1_prompt: too many m iterations": 120,
+    "p1_prompt: operand tile B exceeds RF lane": 399,
+    "p1_prompt: operand tile A exceeds RF lane": 180,
+    "p1_prompt: accumulators exceed RF lane (2048>1024)": 104,
+    "p1_prompt: accumulators exceed RF lane (4096>1024)": 88,
+    "p1_prompt: accumulators exceed RF lane (8192>1024)": 72,
+    "p1_prompt: accumulator partitions exceed vector lanes": 120
+  },
+  "examples": [
+    {
+      "op": {
+        "op": "stage_gemm_tiles",
+        "stage": "p1_prompt",
+        "order": "mnk",
+        "m_tile": 1,
+        "n_tile": 8,
+        "k_chunk": 8
+      },
+      "reasons": [
+        "p1_prompt: too many m iterations"
+      ]
+    },
+    {
+      "op": {
+        "op": "stage_gemm_tiles",
+        "stage": "p1_prompt",
+        "order": "mnk",
+        "m_tile": 1,
+        "n_tile": 8,
+        "k_chunk": 16
+      },
+      "reasons": [
+        "p1_prompt: too many m iterations"
+      ]
+    },
+    {
+      "op": {
+        "op": "stage_gemm_tiles",
+        "stage": "p1_prompt",
+        "order": "mnk",
+        "m_tile": 1,
+        "n_tile": 8,
+        "k_chunk": 24
+      },
+      "reasons": [
+        "p1_prompt: too many m iterations"
+      ]
+    },
+    {
+      "op": {
+        "op": "stage_gemm_tiles",
+        "stage": "p1_prompt",
+        "order": "mnk",
+        "m_tile": 1,
+        "n_tile": 8,
+        "k_chunk": 32
+      },
+      "reasons": [
+        "p1_prompt: too many m iterations"
+      ]
+    },
+    {
+      "op": {
+        "op": "stage_gemm_tiles",
+        "stage": "p1_prompt",
+        "order": "mnk",
+        "m_tile": 1,
+        "n_tile": 8,
+        "k_chunk": 48
+      },
+      "reasons": [
+        "p1_prompt: too many m iterations"
+      ]
+    },
+    {
+      "op": {
+        "op": "stage_gemm_tiles",
+        "stage": "p1_prompt",
+        "order": "mnk",
+        "m_tile": 1,
+        "n_tile": 8,
+        "k_chunk": 64
+      },
+      "reasons": [
+        "p1_prompt: too many m iterations"
+      ]
+    },
+    {
+      "op": {
+        "op": "stage_gemm_tiles",
+        "stage": "p1_prompt",
+        "order": "mnk",
+        "m_tile": 1,
+        "n_tile": 8,
+        "k_chunk": 96
+      },
+      "reasons": [
+        "p1_prompt: too many m iterations"
+      ]
+    },
+    {
+      "op": {
+        "op": "stage_gemm_tiles",
+        "stage": "p1_prompt",
+        "order": "mnk",
+        "m_tile": 1,
+        "n_tile": 8,
+        "k_chunk": 128
+      },
+      "reasons": [
+        "p1_prompt: too many m iterations"
+      ]
+    },
+    {
+      "op": {
+        "op": "stage_gemm_tiles",
+        "stage": "p1_prompt",
+        "order": "mnk",
+        "m_tile": 1,
+        "n_tile": 16,
+        "k_chunk": 8
+      },
+      "reasons": [
+        "p1_prompt: too many m iterations"
+      ]
+    },
+    {
+      "op": {
+        "op": "stage_gemm_tiles",
+        "stage": "p1_prompt",
+        "order": "mnk",
+        "m_tile": 1,
+        "n_tile": 16,
+        "k_chunk": 16
+      },
+      "reasons": [
+        "p1_prompt: too many m iterations"
+      ]
+    }
+  ]
+}

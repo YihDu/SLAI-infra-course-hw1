@@ -1,0 +1,7 @@
+{
+  "reason": "Frozen micro._mma uses scalar Python loops for k<16; stop costly full P1 trial after active CPU sampling",
+  "elapsed_seconds": 197.0871411249973,
+  "correctness": "not_verified",
+  "source": "codesign/challenge/micro.py:345-378",
+  "time": 1790590284.893929
+}

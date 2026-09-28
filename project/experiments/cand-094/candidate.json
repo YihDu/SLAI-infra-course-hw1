@@ -1,0 +1,25 @@
+{
+  "bias": "balanced",
+  "created_at": "2026-09-28 18:17:32",
+  "failure_class": "none",
+  "family": "compute",
+  "fingerprint": "08a16a882a4e64fa",
+  "hypothesis": "Expand decode N tile after prompt/hardware controls",
+  "id": "cand-094",
+  "kind": "manual",
+  "ops": [
+    {
+      "k_chunk": 16,
+      "n_tile": 64,
+      "op": "stage_gemm_tiles",
+      "stage": "d1"
+    }
+  ],
+  "parent": "cand-093",
+  "provenance_note": null,
+  "round": 13,
+  "status": "kept",
+  "struct_sig": "fuse+hw:cache_mib=2+hw:dma_depth=2+hw:dma_engines=2+hw:rf_ports=8R4W+hw:sm_count=4+hw:sm_noc_bytes_per_cycle=128+hw:tc_array=8x16+hw:tc_k_parallel=4+nkm+nopf+s:rf+stage:d1:nkm+stage:p1_prompt:nkm_lanes",
+  "summary": "[{\"op\": \"stage_gemm_tiles\", \"stage\": \"d1\", \"n_tile\": 64, \"k_chunk\": 16}]",
+  "verdict_note": null
+}

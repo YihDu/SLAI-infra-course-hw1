@@ -14,8 +14,14 @@
   },
   "gemm_stages": {
     "d1": {
-      "k_chunk": 24,
-      "n_tile": 32
+      "k_chunk": 16,
+      "n_tile": 64
+    },
+    "p1_prompt": {
+      "k_chunk": 32,
+      "m_tile": 32,
+      "n_tile": 32,
+      "order": "nkm_lanes"
     }
   }
 }

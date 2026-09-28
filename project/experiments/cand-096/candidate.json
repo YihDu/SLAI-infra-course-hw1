@@ -1,0 +1,27 @@
+{
+  "bias": "balanced",
+  "created_at": "2026-09-28 18:19:35",
+  "failure_class": "none",
+  "family": "compute",
+  "fingerprint": "31a72fe4aede9d1d",
+  "hypothesis": "Full-M tile trades N reuse for B reuse",
+  "id": "cand-096",
+  "kind": "manual",
+  "ops": [
+    {
+      "k_chunk": 16,
+      "m_tile": 64,
+      "n_tile": 16,
+      "op": "stage_gemm_tiles",
+      "order": "nkm_lanes",
+      "stage": "p1_prompt"
+    }
+  ],
+  "parent": "cand-094",
+  "provenance_note": null,
+  "round": 13,
+  "status": "evaluated",
+  "struct_sig": "fuse+hw:cache_mib=2+hw:dma_depth=2+hw:dma_engines=2+hw:rf_ports=8R4W+hw:sm_count=4+hw:sm_noc_bytes_per_cycle=128+hw:tc_array=8x16+hw:tc_k_parallel=4+nkm+nopf+s:rf+stage:d1:nkm+stage:p1_prompt:nkm_lanes",
+  "summary": "[{\"op\": \"stage_gemm_tiles\", \"stage\": \"p1_prompt\", \"order\": \"nkm_lanes\", \"m_tile\": 64, \"n_tile\": 16, \"k_chunk\": 16}]",
+  "verdict_note": null
+}

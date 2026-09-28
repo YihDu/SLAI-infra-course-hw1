@@ -1100,3 +1100,118 @@ Traceback (most recent call last):
 - Decision: evaluated; retained in Pareto/archives (head preserved)
 
 ### cand-086 verdict: REVERTED — Correct, but P1 rose 10,750,199 to 11,817,029 cycles; D1 unchanged, shared-panel transfer overhead outweighed RF reuse
+
+## 2026-09-28 18:06:35 — cand-087: RF accumulator partitions: P1 prompt M=16, N=32, K=32; preserve B reuse
+- Change: parent=cand-083; [{"op": "stage_gemm_tiles", "stage": "p1_prompt", "order": "nkm_lanes", "m_tile": 16, "n_tile": 32, "k_chunk": 32}]
+- Evidence: project/experiments/cand-087/metrics.json; reports/grade.json; attempts=1
+- Command (grade): ['/Users/yihdu/Codefield/SLAI-infra-Code/transformer-codesign-starter/.venv/bin/python', '/Users/yihdu/Codefield/SLAI-infra-Code/transformer-codesign-starter/challenge.py', 'grade', '--hardware', '/Users/yihdu/Codefield/SLAI-infra-Code/transformer-codesign-starter/project/experiments/cand-087/inputs/hardware.json', '--program-p1', '/Users/yihdu/Codefield/SLAI-infra-Code/transformer-codesign-starter/project/experiments/cand-087/programs/M1_P1.asm', '--program-d1', '/Users/yihdu/Codefield/SLAI-infra-Code/transformer-codesign-starter/project/experiments/cand-087/programs/M2_D1.asm', '--report', '/Users/yihdu/Codefield/SLAI-infra-Code/transformer-codesign-starter/project/experiments/cand-087/reports/grade.json', '--seed', '7', '--baseline', '/Users/yihdu/Codefield/SLAI-infra-Code/transformer-codesign-starter/baseline_manifest.json']; elapsed=84.15203645895235; peak MiB=1809.7204895019531
+- Inputs: compiler.py@cb8bf1a2 hardware.json@08e9950e recipe.json@fdf6e2dd
+- Verify: PASS elapsed=84.15s
+- Result: M1_P1=9484805 (3.268x), M2_D1=744864 (1.748x); score=2390.110, eligible=True
+  - deltas vs head (cand-083): {'M1_P1': -1265394, 'M2_D1': 0}
+- Decision: KEPT — new incumbent head (score=2390.110)
+
+## 2026-09-28 18:06:35 — cand-088: RF accumulator partitions: P1 prompt M=16, N=64, K=16; preserve B reuse
+- Change: parent=cand-083; [{"op": "stage_gemm_tiles", "stage": "p1_prompt", "order": "nkm_lanes", "m_tile": 16, "n_tile": 64, "k_chunk": 16}]
+- Evidence: project/experiments/cand-088/metrics.json; reports/grade.json; attempts=1
+- Command (grade): ['/Users/yihdu/Codefield/SLAI-infra-Code/transformer-codesign-starter/.venv/bin/python', '/Users/yihdu/Codefield/SLAI-infra-Code/transformer-codesign-starter/challenge.py', 'grade', '--hardware', '/Users/yihdu/Codefield/SLAI-infra-Code/transformer-codesign-starter/project/experiments/cand-088/inputs/hardware.json', '--program-p1', '/Users/yihdu/Codefield/SLAI-infra-Code/transformer-codesign-starter/project/experiments/cand-088/programs/M1_P1.asm', '--program-d1', '/Users/yihdu/Codefield/SLAI-infra-Code/transformer-codesign-starter/project/experiments/cand-088/programs/M2_D1.asm', '--report', '/Users/yihdu/Codefield/SLAI-infra-Code/transformer-codesign-starter/project/experiments/cand-088/reports/grade.json', '--seed', '7', '--baseline', '/Users/yihdu/Codefield/SLAI-infra-Code/transformer-codesign-starter/baseline_manifest.json']; elapsed=77.21067199995741; peak MiB=1623.4235000610352
+- Inputs: compiler.py@cb8bf1a2 hardware.json@08e9950e recipe.json@670b9fea
+- Verify: PASS elapsed=77.21s
+- Result: M1_P1=9986555 (3.104x), M2_D1=744864 (1.748x); score=2329.294, eligible=True
+  - deltas vs head (cand-087): {'M1_P1': 501750, 'M2_D1': 0}
+- Decision: evaluated; retained in Pareto/archives (head preserved)
+
+## 2026-09-28 18:06:35 — cand-089: RF accumulator partitions: P1 prompt M=8, N=128, K=8; preserve B reuse
+- Change: parent=cand-083; [{"op": "stage_gemm_tiles", "stage": "p1_prompt", "order": "nkm_lanes", "m_tile": 8, "n_tile": 128, "k_chunk": 8}]
+- Evidence: project/experiments/cand-089/metrics.json; reports/grade.json; attempts=1
+- Command (grade): ['/Users/yihdu/Codefield/SLAI-infra-Code/transformer-codesign-starter/.venv/bin/python', '/Users/yihdu/Codefield/SLAI-infra-Code/transformer-codesign-starter/challenge.py', 'grade', '--hardware', '/Users/yihdu/Codefield/SLAI-infra-Code/transformer-codesign-starter/project/experiments/cand-089/inputs/hardware.json', '--program-p1', '/Users/yihdu/Codefield/SLAI-infra-Code/transformer-codesign-starter/project/experiments/cand-089/programs/M1_P1.asm', '--program-d1', '/Users/yihdu/Codefield/SLAI-infra-Code/transformer-codesign-starter/project/experiments/cand-089/programs/M2_D1.asm', '--report', '/Users/yihdu/Codefield/SLAI-infra-Code/transformer-codesign-starter/project/experiments/cand-089/reports/grade.json', '--seed', '7', '--baseline', '/Users/yihdu/Codefield/SLAI-infra-Code/transformer-codesign-starter/baseline_manifest.json']; elapsed=198.10664862510748; peak MiB=178.00059509277344
+- Inputs: compiler.py@cb8bf1a2 hardware.json@08e9950e recipe.json@33efd04e
+- Verify: FAILED — failure_class=evaluator_error; evidence=pipeline elapsed=198.11s
+- Result: status=not_verified, failure_class=evaluator_error
+- Decision: reject/preserve failed candidate (status=not_verified)
+
+## 2026-09-28 18:06:35 — cand-090: RF accumulator partitions: P1 prompt M=8, N=64, K=16; preserve B reuse
+- Change: parent=cand-083; [{"op": "stage_gemm_tiles", "stage": "p1_prompt", "order": "nkm_lanes", "m_tile": 8, "n_tile": 64, "k_chunk": 16}]
+- Evidence: project/experiments/cand-090/metrics.json; reports/grade.json; attempts=1
+- Command (grade): ['/Users/yihdu/Codefield/SLAI-infra-Code/transformer-codesign-starter/.venv/bin/python', '/Users/yihdu/Codefield/SLAI-infra-Code/transformer-codesign-starter/challenge.py', 'grade', '--hardware', '/Users/yihdu/Codefield/SLAI-infra-Code/transformer-codesign-starter/project/experiments/cand-090/inputs/hardware.json', '--program-p1', '/Users/yihdu/Codefield/SLAI-infra-Code/transformer-codesign-starter/project/experiments/cand-090/programs/M1_P1.asm', '--program-d1', '/Users/yihdu/Codefield/SLAI-infra-Code/transformer-codesign-starter/project/experiments/cand-090/programs/M2_D1.asm', '--report', '/Users/yihdu/Codefield/SLAI-infra-Code/transformer-codesign-starter/project/experiments/cand-090/reports/grade.json', '--seed', '7', '--baseline', '/Users/yihdu/Codefield/SLAI-infra-Code/transformer-codesign-starter/baseline_manifest.json']; elapsed=93.7008055410115; peak MiB=1679.3766479492188
+- Inputs: compiler.py@cb8bf1a2 hardware.json@08e9950e recipe.json@00f6827e
+- Verify: PASS elapsed=93.70s
+- Result: M1_P1=10354943 (2.993x), M2_D1=744864 (1.748x); score=2287.485, eligible=True
+  - deltas vs head (cand-087): {'M1_P1': 870138, 'M2_D1': 0}
+- Decision: evaluated; retained in Pareto/archives (head preserved)
+
+## 2026-09-28 18:11:24 — cand-091: Area bridge: remove four idle SMs before widening TC
+- Change: parent=cand-083; [{"op": "hw_set", "path": "sm_count", "value": 4}]
+- Evidence: project/experiments/cand-091/metrics.json; reports/grade.json; attempts=1
+- Command (grade): ['/Users/yihdu/Codefield/SLAI-infra-Code/transformer-codesign-starter/.venv/bin/python', '/Users/yihdu/Codefield/SLAI-infra-Code/transformer-codesign-starter/challenge.py', 'grade', '--hardware', '/Users/yihdu/Codefield/SLAI-infra-Code/transformer-codesign-starter/project/experiments/cand-091/inputs/hardware.json', '--program-p1', '/Users/yihdu/Codefield/SLAI-infra-Code/transformer-codesign-starter/project/experiments/cand-091/programs/M1_P1.asm', '--program-d1', '/Users/yihdu/Codefield/SLAI-infra-Code/transformer-codesign-starter/project/experiments/cand-091/programs/M2_D1.asm', '--report', '/Users/yihdu/Codefield/SLAI-infra-Code/transformer-codesign-starter/project/experiments/cand-091/reports/grade.json', '--seed', '7', '--baseline', '/Users/yihdu/Codefield/SLAI-infra-Code/transformer-codesign-starter/baseline_manifest.json']; elapsed=133.4245033749612; peak MiB=2035.0956497192383
+- Inputs: compiler.py@cb8bf1a2 hardware.json@74084fc2 recipe.json@70cf2ca5
+- Verify: PASS elapsed=133.43s
+- Result: M1_P1=10750199 (2.883x), M2_D1=744864 (1.748x); score=2245.039, eligible=True
+  - deltas vs head (cand-087): {'M1_P1': 1265394, 'M2_D1': 0}
+- Decision: evaluated; retained in Pareto/archives (head preserved)
+
+## 2026-09-28 18:13:43 — cand-092: Area bridge successor: wider TC with four SMs
+- Change: parent=cand-091; [{"op": "hw_set", "path": "tc_array", "value": "8x16"}]
+- Evidence: project/experiments/cand-092/metrics.json; reports/grade.json; attempts=1
+- Command (grade): ['/Users/yihdu/Codefield/SLAI-infra-Code/transformer-codesign-starter/.venv/bin/python', '/Users/yihdu/Codefield/SLAI-infra-Code/transformer-codesign-starter/challenge.py', 'grade', '--hardware', '/Users/yihdu/Codefield/SLAI-infra-Code/transformer-codesign-starter/project/experiments/cand-092/inputs/hardware.json', '--program-p1', '/Users/yihdu/Codefield/SLAI-infra-Code/transformer-codesign-starter/project/experiments/cand-092/programs/M1_P1.asm', '--program-d1', '/Users/yihdu/Codefield/SLAI-infra-Code/transformer-codesign-starter/project/experiments/cand-092/programs/M2_D1.asm', '--report', '/Users/yihdu/Codefield/SLAI-infra-Code/transformer-codesign-starter/project/experiments/cand-092/reports/grade.json', '--seed', '7', '--baseline', '/Users/yihdu/Codefield/SLAI-infra-Code/transformer-codesign-starter/baseline_manifest.json']; elapsed=126.49249624996446; peak MiB=2188.7832641601562
+- Inputs: compiler.py@cb8bf1a2 hardware.json@b92be26a recipe.json@70cf2ca5
+- Verify: PASS elapsed=126.50s
+- Result: M1_P1=10127399 (3.061x), M2_D1=738688 (1.763x); score=2322.689, eligible=True
+  - deltas vs head (cand-087): {'M1_P1': 642594, 'M2_D1': -6176}
+- Decision: evaluated; retained in Pareto/archives (head preserved)
+
+## 2026-09-28 18:15:57 — cand-093: Compose best RF dataflow with measured area bridge
+- Change: parent=cand-087; [{"op": "hw_set", "path": "sm_count", "value": 4}, {"op": "hw_set", "path": "tc_array", "value": "8x16"}]
+- Evidence: project/experiments/cand-093/metrics.json; reports/grade.json; attempts=1
+- Command (grade): ['/Users/yihdu/Codefield/SLAI-infra-Code/transformer-codesign-starter/.venv/bin/python', '/Users/yihdu/Codefield/SLAI-infra-Code/transformer-codesign-starter/challenge.py', 'grade', '--hardware', '/Users/yihdu/Codefield/SLAI-infra-Code/transformer-codesign-starter/project/experiments/cand-093/inputs/hardware.json', '--program-p1', '/Users/yihdu/Codefield/SLAI-infra-Code/transformer-codesign-starter/project/experiments/cand-093/programs/M1_P1.asm', '--program-d1', '/Users/yihdu/Codefield/SLAI-infra-Code/transformer-codesign-starter/project/experiments/cand-093/programs/M2_D1.asm', '--report', '/Users/yihdu/Codefield/SLAI-infra-Code/transformer-codesign-starter/project/experiments/cand-093/reports/grade.json', '--seed', '7', '--baseline', '/Users/yihdu/Codefield/SLAI-infra-Code/transformer-codesign-starter/baseline_manifest.json']; elapsed=92.48771350004245; peak MiB=1816.5798645019531
+- Inputs: compiler.py@cb8bf1a2 hardware.json@b92be26a recipe.json@fdf6e2dd
+- Verify: PASS elapsed=92.49s
+- Result: M1_P1=8656949 (3.581x), M2_D1=738688 (1.763x); score=2512.220, eligible=True
+  - deltas vs head (cand-087): {'M1_P1': -827856, 'M2_D1': -6176}
+- Decision: KEPT — new incumbent head (score=2512.220)
+
+## 2026-09-28 18:17:32 — cand-094: Expand decode N tile after prompt/hardware controls
+- Change: parent=cand-093; [{"op": "stage_gemm_tiles", "stage": "d1", "n_tile": 64, "k_chunk": 16}]
+- Evidence: project/experiments/cand-094/metrics.json; reports/grade.json; attempts=1
+- Command (grade): ['/Users/yihdu/Codefield/SLAI-infra-Code/transformer-codesign-starter/.venv/bin/python', '/Users/yihdu/Codefield/SLAI-infra-Code/transformer-codesign-starter/challenge.py', 'grade', '--hardware', '/Users/yihdu/Codefield/SLAI-infra-Code/transformer-codesign-starter/project/experiments/cand-094/inputs/hardware.json', '--program-p1', '/Users/yihdu/Codefield/SLAI-infra-Code/transformer-codesign-starter/project/experiments/cand-094/programs/M1_P1.asm', '--program-d1', '/Users/yihdu/Codefield/SLAI-infra-Code/transformer-codesign-starter/project/experiments/cand-094/programs/M2_D1.asm', '--report', '/Users/yihdu/Codefield/SLAI-infra-Code/transformer-codesign-starter/project/experiments/cand-094/reports/grade.json', '--seed', '7', '--baseline', '/Users/yihdu/Codefield/SLAI-infra-Code/transformer-codesign-starter/baseline_manifest.json']; elapsed=103.43378408299759; peak MiB=1817.8298645019531
+- Inputs: compiler.py@cb8bf1a2 hardware.json@b92be26a recipe.json@0278fd0c
+- Verify: PASS elapsed=103.44s
+- Result: M1_P1=8656949 (3.581x), M2_D1=718132 (1.813x); score=2547.922, eligible=True
+  - deltas vs head (cand-093): {'M1_P1': 0, 'M2_D1': -20556}
+- Decision: KEPT — new incumbent head (score=2547.922)
+
+## 2026-09-28 18:19:35 — cand-095: Larger M tile reduces repeated B reads
+- Change: parent=cand-094; [{"op": "stage_gemm_tiles", "stage": "p1_prompt", "order": "nkm_lanes", "m_tile": 32, "n_tile": 32, "k_chunk": 32}]
+- Evidence: project/experiments/cand-095/metrics.json; reports/grade.json; attempts=1
+- Command (grade): ['/Users/yihdu/Codefield/SLAI-infra-Code/transformer-codesign-starter/.venv/bin/python', '/Users/yihdu/Codefield/SLAI-infra-Code/transformer-codesign-starter/challenge.py', 'grade', '--hardware', '/Users/yihdu/Codefield/SLAI-infra-Code/transformer-codesign-starter/project/experiments/cand-095/inputs/hardware.json', '--program-p1', '/Users/yihdu/Codefield/SLAI-infra-Code/transformer-codesign-starter/project/experiments/cand-095/programs/M1_P1.asm', '--program-d1', '/Users/yihdu/Codefield/SLAI-infra-Code/transformer-codesign-starter/project/experiments/cand-095/programs/M2_D1.asm', '--report', '/Users/yihdu/Codefield/SLAI-infra-Code/transformer-codesign-starter/project/experiments/cand-095/reports/grade.json', '--seed', '7', '--baseline', '/Users/yihdu/Codefield/SLAI-infra-Code/transformer-codesign-starter/baseline_manifest.json']; elapsed=145.9133948329836; peak MiB=1776.0485916137695
+- Inputs: compiler.py@cb8bf1a2 hardware.json@b92be26a recipe.json@de007d24
+- Verify: PASS elapsed=145.92s
+- Result: M1_P1=8522411 (3.637x), M2_D1=718132 (1.813x); score=2567.954, eligible=True
+  - deltas vs head (cand-094): {'M1_P1': -134538, 'M2_D1': 0}
+- Decision: KEPT — new incumbent head (score=2567.954)
+
+## 2026-09-28 18:19:35 — cand-096: Full-M tile trades N reuse for B reuse
+- Change: parent=cand-094; [{"op": "stage_gemm_tiles", "stage": "p1_prompt", "order": "nkm_lanes", "m_tile": 64, "n_tile": 16, "k_chunk": 16}]
+- Evidence: project/experiments/cand-096/metrics.json; reports/grade.json; attempts=1
+- Command (grade): ['/Users/yihdu/Codefield/SLAI-infra-Code/transformer-codesign-starter/.venv/bin/python', '/Users/yihdu/Codefield/SLAI-infra-Code/transformer-codesign-starter/challenge.py', 'grade', '--hardware', '/Users/yihdu/Codefield/SLAI-infra-Code/transformer-codesign-starter/project/experiments/cand-096/inputs/hardware.json', '--program-p1', '/Users/yihdu/Codefield/SLAI-infra-Code/transformer-codesign-starter/project/experiments/cand-096/programs/M1_P1.asm', '--program-d1', '/Users/yihdu/Codefield/SLAI-infra-Code/transformer-codesign-starter/project/experiments/cand-096/programs/M2_D1.asm', '--report', '/Users/yihdu/Codefield/SLAI-infra-Code/transformer-codesign-starter/project/experiments/cand-096/reports/grade.json', '--seed', '7', '--baseline', '/Users/yihdu/Codefield/SLAI-infra-Code/transformer-codesign-starter/baseline_manifest.json']; elapsed=167.49343241704628; peak MiB=1890.8924560546875
+- Inputs: compiler.py@cb8bf1a2 hardware.json@b92be26a recipe.json@b1ea161c
+- Verify: PASS elapsed=167.50s
+- Result: M1_P1=9957359 (3.113x), M2_D1=718132 (1.813x); score=2375.726, eligible=True
+  - deltas vs head (cand-095): {'M1_P1': 1434948, 'M2_D1': 0}
+- Decision: evaluated; retained in Pareto/archives (head preserved)
+
+## 2026-09-28 18:19:35 — cand-097: Joint RF expansion: 8 vector partitions allow N128 with K16, avoiding scalar checker
+- Change: parent=cand-094; [{"op": "hw_set", "path": "vector_lanes", "value": 8}, {"op": "stage_gemm_tiles", "stage": "p1_prompt", "order": "nkm_lanes", "m_tile": 16, "n_tile": 128, "k_chunk": 16}]
+- Evidence: project/experiments/cand-097/metrics.json; reports/grade.json; attempts=1
+- Command (grade): ['/Users/yihdu/Codefield/SLAI-infra-Code/transformer-codesign-starter/.venv/bin/python', '/Users/yihdu/Codefield/SLAI-infra-Code/transformer-codesign-starter/challenge.py', 'grade', '--hardware', '/Users/yihdu/Codefield/SLAI-infra-Code/transformer-codesign-starter/project/experiments/cand-097/inputs/hardware.json', '--program-p1', '/Users/yihdu/Codefield/SLAI-infra-Code/transformer-codesign-starter/project/experiments/cand-097/programs/M1_P1.asm', '--program-d1', '/Users/yihdu/Codefield/SLAI-infra-Code/transformer-codesign-starter/project/experiments/cand-097/programs/M2_D1.asm', '--report', '/Users/yihdu/Codefield/SLAI-infra-Code/transformer-codesign-starter/project/experiments/cand-097/reports/grade.json', '--seed', '7', '--baseline', '/Users/yihdu/Codefield/SLAI-infra-Code/transformer-codesign-starter/baseline_manifest.json']; elapsed=82.39935512503143; peak MiB=1463.5327835083008
+- Inputs: compiler.py@cb8bf1a2 hardware.json@95d6433f recipe.json@e47e8b42
+- Verify: PASS elapsed=82.40s
+- Result: M1_P1=9043631 (3.427x), M2_D1=725840 (1.794x); score=2479.584, eligible=True
+  - deltas vs head (cand-095): {'M1_P1': 521220, 'M2_D1': 7708}
+- Decision: evaluated; retained in Pareto/archives (head preserved)
+
+### 2026-09-28 18:26 — structural campaign summary
+- Decision: keep cand-095 at 2567.954052; 10 eligible passes / 11 launches.
+- cand-089: stopped scalar K<16 checker path based on source inspection and CPU sampling; correctness remains unverified. Original runtime report preserved.
+- Evidence: project/campaigns/structural-20260928-180635/RESULTS.md and space-audit.json; structural-refine campaign summary.
+- Policy: promote by eligible composite score; permit per-case tradeoffs. Next: multi-SM prototypes and RF-resident operator chains; see project/search/STRATEGY_NEXT.md.

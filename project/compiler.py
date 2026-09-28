@@ -234,20 +234,27 @@ class Builder:
                         ),
                     )
             return
-        if self.order != "nkm":
+        if self.order not in ("nkm", "nkm_lanes"):
             raise ValueError(f"Unsupported GEMM order {self.order}")
         # B-stationary order: each weight tile is loaded once per (n, k) chunk
         # and reused across all m-tiles.  All m-tile accumulators for one
         # n-tile stay live in lane 2, which requires m_extent * tile_n <= the
         # lane capacity (1024 FP32 words at 16 vector lanes).
-        if m_extent * tile_n > 1024:
+        if self.order == "nkm" and m_extent * tile_n > 1024:
             raise ValueError("GEMM accumulators exceed RF lane capacity")
+        def accumulator(row, rows):
+            if self.order == "nkm_lanes":
+                # Reserve 0/1 for operands and 3 for B prefetch. Each M tile
+                # gets a separate partition, so N is not limited by all M rows.
+                return rf(add(4, {"ceildiv": [row, m_tile]}), mul(rows, tile_n))
+            return rf(2, mul(rows, tile_n), mul(row, tile_n))
+
         chunks = -(-k_extent // k_chunk)
         with self.loop(f"{name}n", 0, n_extent, tile_n) as col:
             with self.loop(f"{name}z", 0, m_extent, m_tile) as row:
                 rows = minimum(m_tile, sub(m_extent, row))
                 self.vec(
-                    "add", [imm(0), imm(0)], rf(2, mul(rows, tile_n), mul(row, tile_n))
+                    "add", [imm(0), imm(0)], accumulator(row, rows)
                 )
             if self.prefetch:
                 # Double-buffer B in lanes 1/3: inside iteration i, issue the
@@ -309,7 +316,7 @@ class Builder:
                         "MMA.ACC",
                         a=rf(0, mul(rows, depth)),
                         b=rf(lane_cur, mul(depth, tile_n)),
-                        acc=rf(2, mul(rows, tile_n), mul(row, tile_n)),
+                        acc=accumulator(row, rows),
                         m=rows,
                         n=tile_n,
                         k=depth,
@@ -319,7 +326,7 @@ class Builder:
                 rows = minimum(m_tile, sub(m_extent, row))
                 cells = mul(rows, tile_n)
                 self.st(
-                    rf(2, cells, mul(row, tile_n)),
+                    accumulator(row, rows),
                     hbm(
                         add(out.offset, mul(row, n_extent), col),
                         cells,

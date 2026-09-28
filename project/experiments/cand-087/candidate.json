@@ -1,0 +1,27 @@
+{
+  "bias": "balanced",
+  "created_at": "2026-09-28 18:06:35",
+  "failure_class": "none",
+  "family": "compute",
+  "fingerprint": "90c3b702310f4a0d",
+  "hypothesis": "RF accumulator partitions: P1 prompt M=16, N=32, K=32; preserve B reuse",
+  "id": "cand-087",
+  "kind": "manual",
+  "ops": [
+    {
+      "k_chunk": 32,
+      "m_tile": 16,
+      "n_tile": 32,
+      "op": "stage_gemm_tiles",
+      "order": "nkm_lanes",
+      "stage": "p1_prompt"
+    }
+  ],
+  "parent": "cand-083",
+  "provenance_note": null,
+  "round": 13,
+  "status": "kept",
+  "struct_sig": "fuse+hw:cache_mib=2+hw:dma_depth=2+hw:dma_engines=2+hw:rf_ports=8R4W+hw:sm_noc_bytes_per_cycle=128+hw:tc_array=8x8+hw:tc_k_parallel=4+nkm+nopf+s:rf+stage:d1:nkm+stage:p1_prompt:nkm_lanes",
+  "summary": "[{\"op\": \"stage_gemm_tiles\", \"stage\": \"p1_prompt\", \"order\": \"nkm_lanes\", \"m_tile\": 16, \"n_tile\": 32, \"k_chunk\": 32}]",
+  "verdict_note": null
+}

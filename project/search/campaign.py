@@ -1,5 +1,6 @@
 """Bounded repair-validation campaign: reproduction, hardware controls, adaptation."""
 import argparse
+import hashlib
 import json
 import random
 import shutil
@@ -24,7 +25,7 @@ def make_candidate(reg, parent, ops, hypothesis, compiler_path=None):
     prop = {'parent': parent, 'ops': ops, 'hypothesis': hypothesis,
             'family': 'hardware' if ops and ops[0]['op'] == 'hw_set' else 'compute',
             'bias': 'balanced', 'kind': 'manual', 'recipe': recipe, 'hardware': hw,
-            'fingerprint': dsl.fingerprint(recipe, hw),
+            'fingerprint': dsl.fingerprint(recipe, hw, compiler=hashlib.sha256(Path(compiler_path or EXPERIMENTS / parent / 'inputs/compiler.py').read_bytes()).hexdigest()),
             'struct_sig': propose.structure_signature(recipe, hw),
             'compiler_path': str(compiler_path or EXPERIMENTS / parent / 'inputs/compiler.py')}
     cand = engine._materialize(reg, prop, reg['search'].get('round', 12) + 1, state.next_id(reg))

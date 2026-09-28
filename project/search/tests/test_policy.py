@@ -376,3 +376,43 @@ class TestProposalQuotaAndPolicy(unittest.TestCase):
 
 if __name__ == "__main__":
     unittest.main()
+
+class TestRfAccumulatorSpace(unittest.TestCase):
+    def stage(self, **values):
+        op = dict(op='stage_gemm_tiles', stage='p1_prompt', order='nkm_lanes',
+                  m_tile=16, n_tile=64, k_chunk=16)
+        op.update(values)
+        return dsl.apply_ops(dsl.DEFAULT_RECIPE, dsl.BASELINE_HW, [op])
+
+    def test_wide_n_requires_distributed_accumulators(self):
+        recipe, hw = self.stage()
+        self.assertEqual(dsl.validate_recipe(recipe, hw), [])
+        recipe['gemm_stages']['p1_prompt']['order'] = 'nkm'
+        self.assertTrue(any('accumulators' in e for e in dsl.validate_recipe(recipe, hw)))
+
+    def test_partition_count_and_partition_capacity_are_separate_limits(self):
+        recipe, hw = self.stage(m_tile=8)
+        hw['vector_lanes'] = 8
+        self.assertTrue(any('partitions' in e for e in dsl.validate_recipe(recipe, hw)))
+        recipe, hw = self.stage()
+        hw['vector_lanes'] = 32
+        self.assertTrue(any('RF lane' in e for e in dsl.validate_recipe(recipe, hw)))
+
+    def test_full_space_retains_wide_tiles_and_prunes_impossible_ones(self):
+        ops = propose.stage_space(dsl.DEFAULT_RECIPE, dsl.BASELINE_HW, 'p1_prompt')
+        self.assertTrue(any(o['order'] == 'nkm_lanes' and o['n_tile'] == 128 for o in ops))
+        self.assertFalse(any(o['order'] == 'nkm' and o['n_tile'] > 16 for o in ops))
+
+    def test_each_accumulator_partition_must_fit(self):
+        recipe, hw = self.stage(m_tile=32, n_tile=64, k_chunk=16)
+        self.assertTrue(any('accumulators' in e for e in dsl.validate_recipe(recipe, hw)))
+
+    def test_unused_global_prompt_shape_does_not_prune_stage_override(self):
+        recipe, hw = self.stage(m_tile=16, n_tile=32, k_chunk=32)
+        recipe['gemm'].update(n_tile=64, k_chunk=16)
+        self.assertEqual(dsl.validate_recipe(recipe, hw), [])
+
+    def test_slow_check_path_is_cost_pruning_not_illegal_isa(self):
+        recipe, hw = self.stage(m_tile=8, n_tile=128, k_chunk=8)
+        self.assertEqual(dsl.validate_recipe(recipe, hw), [])
+        self.assertTrue(dsl.evaluation_cost_reasons(recipe))

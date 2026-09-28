@@ -136,7 +136,7 @@ class TestRecords(unittest.TestCase):
         }
 
         # Case 1: Candidate cand-002 improves score, but M2_D1 cycles are SLOWER (1050 > 1000)
-        # Should NOT promote to head; retains Pareto
+        # Higher eligible objective promotes, even with a per-case tradeoff.
         cand2 = SimpleNamespace(id="cand-002", parent="cand-001", hypothesis="tradeoff", summary="", status="created")
         metrics2 = {
             "verdict": "evaluated",
@@ -152,8 +152,8 @@ class TestRecords(unittest.TestCase):
             },
         }
         records.record_result(reg, cand2, metrics2, log_path=self.log_path)
-        self.assertEqual(reg["head"], "cand-001")  # head not promoted
-        self.assertEqual(reg["candidates"]["cand-002"]["status"], "evaluated")
+        self.assertEqual(reg["head"], "cand-002")
+        self.assertEqual(reg["candidates"]["cand-002"]["status"], "kept")
         self.assertIn("cand-002", reg["archives"]["pareto"])
         self.assertEqual(reg["search"]["best_id"], "cand-002")  # best score updated in search
 

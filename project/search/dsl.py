@@ -94,7 +94,7 @@ LEGACY_RECIPES = {
 LANE_WORDS = 1024
 # Worst-case m_extent per case: P1 prompt GEMMs run m=64, D1 runs m=1.
 MAX_M = 64
-GEMM_ORDERS = ("mnk", "nkm")
+GEMM_ORDERS = ("mnk", "nkm", "nkm_lanes")
 SCORES_SPACES = ("hbm", "rf")
 # n_tile must divide every n_extent used by P1 (768,256,1024) and D1 (384,128,512).
 N_TILE_CHOICES = (8, 16, 32, 64, 128)
@@ -143,6 +143,11 @@ def _op_stage_gemm_tiles(recipe, _hw, op):
                 raise DslError(f"stage_gemm_tiles: {key}={value!r} not in {choices}")
             override[key] = value
             keys_found += 1
+    if "order" in op:
+        if op["order"] not in GEMM_ORDERS:
+            raise DslError("unsupported stage GEMM order")
+        override["order"] = op["order"]
+        keys_found += 1
     if keys_found == 0:
         raise DslError("stage_gemm_tiles: no valid tile field provided")
 
@@ -296,7 +301,7 @@ def apply_ops(base_recipe: dict, base_hw: dict, ops: list[dict],
         OPERATORS[op["op"]](recipe, hw, op)
     # Canonicalize: fields the compiler ignores must not create distinct
     # fingerprints (e.g. prefetch is only implemented in the nkm path).
-    if recipe.get("gemm", {}).get("order") != "nkm":
+    if recipe.get("gemm", {}).get("order") not in ("nkm", "nkm_lanes"):
         if "gemm" in recipe and "prefetch" in recipe["gemm"]:
             recipe["gemm"]["prefetch"] = 0
     hw = canonicalize_hardware(hw)
@@ -315,58 +320,52 @@ def validate_recipe(recipe: dict, hw: dict | None = None) -> list[str]:
     if "gemm" not in recipe:
         return ["missing gemm in recipe"]
     g = recipe["gemm"]
-    order = g.get("order")
-    m_t = g.get("m_tile", 0)
-    n_t = g.get("n_tile", 0)
-    k_c = g.get("k_chunk", 0)
     lw = lane_words(hw)
-    if order == "nkm":
-        # All m accumulators for one n-tile are simultaneously live in lane 2.
-        if MAX_M * n_t > lw:
-            errs.append(f"nkm: m_extent*n_tile={MAX_M*n_t}>{lw}")
-    elif order == "mnk":
-        if m_t * n_t > lw:
-            errs.append(f"mnk: m_tile*n_tile={m_t*n_t}>{lw}")
-    else:
-        errs.append(f"unknown order {order!r}")
-    if k_c * n_t > lw:
-        errs.append(f"B tile k_chunk*n_tile={k_c*n_t}>{lw}")
-    if m_t * k_c > lw:
-        errs.append(f"A tile m_tile*k_chunk={m_t*k_c}>{lw}")
-    # scores live in lane 4; worst case row length = 136 (D1 past+8).
-    if recipe.get("attention", {}).get("scores") == "rf" and 136 > lw:
-        errs.append(f"scores_rf: 136>{lw} lane words")
-    # m_tile<=2 explodes expanded instruction count (cand-033 pathology).
-    if MAX_M // max(m_t, 1) > 32:
-        errs.append(f"m_tile={m_t}: >32 m-iterations, instruction explosion")
+    lanes = (hw or {}).get("vector_lanes", 16)
     if recipe.get("attention", {}).get("scores") not in SCORES_SPACES:
         errs.append("bad scores space")
-    for stage, override in recipe.get("gemm_stages", {}).items():
+    if recipe.get("attention", {}).get("scores") == "rf" and 136 > lw:
+        errs.append(f"scores_rf: 136>{lw} lane words")
+    overrides = recipe.get("gemm_stages", {})
+    for stage in overrides:
         if stage not in ("p1_prompt", "p1_step", "d1"):
             errs.append(f"bad GEMM stage {stage!r}")
-            continue
+    for stage, max_rows in (("p1_prompt", 64), ("p1_step", 1), ("d1", 1)):
+        override = overrides.get(stage, {})
         if not isinstance(override, dict):
             errs.append(f"stage {stage} override must be dict")
             continue
-        if set(override) - {"m_tile", "n_tile", "k_chunk"}:
-            errs.append(f"unsupported GEMM stage fields: {set(override) - {'m_tile', 'n_tile', 'k_chunk'}}")
+        if set(override) - {"m_tile", "n_tile", "k_chunk", "order"}:
+            errs.append(f"unsupported GEMM stage fields: {stage}")
             continue
-        for k, v in override.items():
-            choices = {"m_tile": M_TILE_CHOICES, "n_tile": N_TILE_CHOICES, "k_chunk": K_CHUNK_CHOICES}[k]
-            if type(v) is not int or v not in choices:
-                errs.append(f"{stage}: {k}={v!r} not in {choices}")
         effective = {**g, **override}
-        st_m, st_n, st_k = (effective["m_tile"], effective["n_tile"], effective["k_chunk"])
-        max_rows = 64 if stage == "p1_prompt" else 1
-        if effective.get("order") == "nkm" and max_rows * st_n > lw:
-            errs.append(f"{stage}: accumulators exceed RF lane")
-        elif effective.get("order") == "mnk" and st_m * st_n > lw:
-            errs.append(f"{stage}: accumulators exceed RF lane")
-        if st_m * st_k > lw:
+        invalid = False
+        for key, choices in (("m_tile", M_TILE_CHOICES), ("n_tile", N_TILE_CHOICES),
+                             ("k_chunk", K_CHUNK_CHOICES)):
+            value = effective.get(key)
+            if type(value) is not int or value not in choices:
+                errs.append(f"{stage}: {key}={value!r} not in {choices}")
+                invalid = True
+        if invalid:
+            continue
+        order = effective.get("order")
+        if order not in GEMM_ORDERS:
+            errs.append(f"{stage}: unknown order {order!r}")
+            continue
+        m, n, k = effective["m_tile"], effective["n_tile"], effective["k_chunk"]
+        rows = min(m, max_rows)
+        acc_words = max_rows*n if order == "nkm" else rows*n
+        # Existing single-partition emitter additionally caps nkm at 1024.
+        acc_limit = min(lw, 1024) if order == "nkm" else lw
+        if acc_words > acc_limit:
+            errs.append(f"{stage}: accumulators exceed RF lane ({acc_words}>{acc_limit})")
+        if order == "nkm_lanes" and 4 + (max_rows + m - 1)//m > lanes:
+            errs.append(f"{stage}: accumulator partitions exceed vector lanes")
+        if rows*k > lw:
             errs.append(f"{stage}: operand tile A exceeds RF lane")
-        if st_k * st_n > lw:
+        if k*n > lw:
             errs.append(f"{stage}: operand tile B exceeds RF lane")
-        if max_rows // max(st_m, 1) > 32:
+        if max_rows // m > 32:
             errs.append(f"{stage}: too many m iterations")
     kernels = recipe.get("gemm_kernels", {})
     if kernels:
@@ -379,6 +378,14 @@ def validate_recipe(recipe: dict, hw: dict | None = None) -> list[str]:
         if lw < 1024:
             errs.append("W1 shared panel needs at least 1024 RF words per lane")
     return errs
+
+
+def evaluation_cost_reasons(recipe: dict) -> list[str]:
+    """Scheduling heuristic, not ISA legality: P1 K<16 hits scalar functional MMA."""
+    prompt = {**recipe.get("gemm", {}), **recipe.get("gemm_stages", {}).get("p1_prompt", {})}
+    if prompt.get("k_chunk", 16) < 16:
+        return ["P1 k_chunk<16 uses scalar Python MMA in the frozen checker"]
+    return []
 
 
 def validate_hardware(hw: dict) -> list[str]:
@@ -418,7 +425,7 @@ def structure_signature(recipe: dict, hw: dict | None = None) -> str:
     bias_gelu = recipe.get("fusion", {}).get("bias_gelu", 0)
     parts.append("fuse" if bias_gelu else "nofuse")
     for st in sorted(recipe.get("gemm_stages", {})):
-        parts.append(f"stage:{st}")
+        parts.append(f"stage:{st}:{recipe['gemm_stages'][st].get('order', order)}")
     if recipe.get("gemm_kernels", {}).get("p1_prompt_w1"):
         parts.append("kernel:p1_w1_shared")
 

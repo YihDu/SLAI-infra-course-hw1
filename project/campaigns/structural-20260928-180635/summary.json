@@ -1,0 +1,433 @@
+{
+  "baseline": "cand-083",
+  "candidates": [
+    "cand-087",
+    "cand-088",
+    "cand-089",
+    "cand-090",
+    "cand-091",
+    "cand-092",
+    "cand-093",
+    "cand-094"
+  ],
+  "pruned": [],
+  "budget": {
+    "used": 8,
+    "maximum": 8,
+    "wall_seconds": 763.997
+  },
+  "best": "cand-094",
+  "results": {
+    "cand-087": {
+      "parent": "cand-083",
+      "status": "kept",
+      "hypothesis": "RF accumulator partitions: P1 prompt M=16, N=32, K=32; preserve B reuse",
+      "ops": [
+        {
+          "op": "stage_gemm_tiles",
+          "stage": "p1_prompt",
+          "order": "nkm_lanes",
+          "m_tile": 16,
+          "n_tile": 32,
+          "k_chunk": 32
+        }
+      ],
+      "family": "compute",
+      "bias": "balanced",
+      "kind": "manual",
+      "round": 13,
+      "struct_sig": "fuse+hw:cache_mib=2+hw:dma_depth=2+hw:dma_engines=2+hw:rf_ports=8R4W+hw:sm_noc_bytes_per_cycle=128+hw:tc_array=8x8+hw:tc_k_parallel=4+nkm+nopf+s:rf+stage:d1:nkm+stage:p1_prompt:nkm_lanes",
+      "fingerprint": "90c3b702310f4a0d",
+      "cycles": {
+        "M1_P1": 9484805,
+        "M2_D1": 744864
+      },
+      "score": 2390.1102253707836,
+      "eligible": true,
+      "functional": {
+        "M1_P1": true,
+        "M2_D1": true
+      },
+      "functional_passed": true,
+      "area_mm2": 18.75596875776,
+      "power_w": 3.0335004989828334,
+      "failure_class": "none",
+      "evaluation_attempts": 1,
+      "elapsed": 84.15424041601364,
+      "cache_source": null,
+      "deltas": {
+        "cycles": {
+          "M1_P1": -1265394,
+          "M2_D1": 0
+        },
+        "score": 145.07126918231415,
+        "prior_head": "cand-083",
+        "vs_parent": {
+          "parent": "cand-083",
+          "cycles": {
+            "M1_P1": -1265394,
+            "M2_D1": 0
+          },
+          "score": 145.07126918231415
+        }
+      },
+      "result_logged": true
+    },
+    "cand-088": {
+      "parent": "cand-083",
+      "status": "evaluated",
+      "hypothesis": "RF accumulator partitions: P1 prompt M=16, N=64, K=16; preserve B reuse",
+      "ops": [
+        {
+          "op": "stage_gemm_tiles",
+          "stage": "p1_prompt",
+          "order": "nkm_lanes",
+          "m_tile": 16,
+          "n_tile": 64,
+          "k_chunk": 16
+        }
+      ],
+      "family": "compute",
+      "bias": "balanced",
+      "kind": "manual",
+      "round": 13,
+      "struct_sig": "fuse+hw:cache_mib=2+hw:dma_depth=2+hw:dma_engines=2+hw:rf_ports=8R4W+hw:sm_noc_bytes_per_cycle=128+hw:tc_array=8x8+hw:tc_k_parallel=4+nkm+nopf+s:rf+stage:d1:nkm+stage:p1_prompt:nkm_lanes",
+      "fingerprint": "d0db125e0ae8e4d8",
+      "cycles": {
+        "M1_P1": 9986555,
+        "M2_D1": 744864
+      },
+      "score": 2329.2938717469783,
+      "eligible": true,
+      "functional": {
+        "M1_P1": true,
+        "M2_D1": true
+      },
+      "functional_passed": true,
+      "area_mm2": 18.75596875776,
+      "power_w": 3.0335004989828334,
+      "failure_class": "none",
+      "evaluation_attempts": 1,
+      "elapsed": 77.2124533340102,
+      "cache_source": null,
+      "deltas": {
+        "cycles": {
+          "M1_P1": 501750,
+          "M2_D1": 0
+        },
+        "score": -60.8163536238053,
+        "prior_head": "cand-087",
+        "vs_parent": {
+          "parent": "cand-083",
+          "cycles": {
+            "M1_P1": -763644,
+            "M2_D1": 0
+          },
+          "score": 84.25491555850886
+        }
+      },
+      "result_logged": true
+    },
+    "cand-089": {
+      "parent": "cand-083",
+      "status": "not_verified",
+      "hypothesis": "RF accumulator partitions: P1 prompt M=8, N=128, K=8; preserve B reuse",
+      "ops": [
+        {
+          "op": "stage_gemm_tiles",
+          "stage": "p1_prompt",
+          "order": "nkm_lanes",
+          "m_tile": 8,
+          "n_tile": 128,
+          "k_chunk": 8
+        }
+      ],
+      "family": "compute",
+      "bias": "balanced",
+      "kind": "manual",
+      "round": 13,
+      "struct_sig": "fuse+hw:cache_mib=2+hw:dma_depth=2+hw:dma_engines=2+hw:rf_ports=8R4W+hw:sm_noc_bytes_per_cycle=128+hw:tc_array=8x8+hw:tc_k_parallel=4+nkm+nopf+s:rf+stage:d1:nkm+stage:p1_prompt:nkm_lanes",
+      "fingerprint": "ff0c29904037c174",
+      "failure_class": "evaluator_error",
+      "evaluation_attempts": 1,
+      "elapsed": 198.1106316249352,
+      "cache_source": null,
+      "deltas": {
+        "prior_head": "cand-087",
+        "vs_parent": {
+          "parent": "cand-083"
+        }
+      },
+      "result_logged": true
+    },
+    "cand-090": {
+      "parent": "cand-083",
+      "status": "evaluated",
+      "hypothesis": "RF accumulator partitions: P1 prompt M=8, N=64, K=16; preserve B reuse",
+      "ops": [
+        {
+          "op": "stage_gemm_tiles",
+          "stage": "p1_prompt",
+          "order": "nkm_lanes",
+          "m_tile": 8,
+          "n_tile": 64,
+          "k_chunk": 16
+        }
+      ],
+      "family": "compute",
+      "bias": "balanced",
+      "kind": "manual",
+      "round": 13,
+      "struct_sig": "fuse+hw:cache_mib=2+hw:dma_depth=2+hw:dma_engines=2+hw:rf_ports=8R4W+hw:sm_noc_bytes_per_cycle=128+hw:tc_array=8x8+hw:tc_k_parallel=4+nkm+nopf+s:rf+stage:d1:nkm+stage:p1_prompt:nkm_lanes",
+      "fingerprint": "575a9376b6369130",
+      "cycles": {
+        "M1_P1": 10354943,
+        "M2_D1": 744864
+      },
+      "score": 2287.4851157230846,
+      "eligible": true,
+      "functional": {
+        "M1_P1": true,
+        "M2_D1": true
+      },
+      "functional_passed": true,
+      "area_mm2": 18.75596875776,
+      "power_w": 3.0335004989828334,
+      "failure_class": "none",
+      "evaluation_attempts": 1,
+      "elapsed": 93.70267470902763,
+      "cache_source": null,
+      "deltas": {
+        "cycles": {
+          "M1_P1": 870138,
+          "M2_D1": 0
+        },
+        "score": -102.62510964769899,
+        "prior_head": "cand-087",
+        "vs_parent": {
+          "parent": "cand-083",
+          "cycles": {
+            "M1_P1": -395256,
+            "M2_D1": 0
+          },
+          "score": 42.44615953461516
+        }
+      },
+      "result_logged": true
+    },
+    "cand-091": {
+      "parent": "cand-083",
+      "status": "evaluated",
+      "hypothesis": "Area bridge: remove four idle SMs before widening TC",
+      "ops": [
+        {
+          "op": "hw_set",
+          "path": "sm_count",
+          "value": 4
+        }
+      ],
+      "family": "hardware",
+      "bias": "balanced",
+      "kind": "manual",
+      "round": 13,
+      "struct_sig": "fuse+hw:cache_mib=2+hw:dma_depth=2+hw:dma_engines=2+hw:rf_ports=8R4W+hw:sm_count=4+hw:sm_noc_bytes_per_cycle=128+hw:tc_array=8x8+hw:tc_k_parallel=4+nkm+nopf+s:rf+stage:d1:nkm",
+      "fingerprint": "49a489892c124d47",
+      "cycles": {
+        "M1_P1": 10750199,
+        "M2_D1": 744864
+      },
+      "score": 2245.0389561884695,
+      "eligible": true,
+      "functional": {
+        "M1_P1": true,
+        "M2_D1": true
+      },
+      "functional_passed": true,
+      "area_mm2": 10.17151513088,
+      "power_w": 2.8188891583108333,
+      "failure_class": "none",
+      "evaluation_attempts": 1,
+      "elapsed": 133.42732866702136,
+      "cache_source": null,
+      "deltas": {
+        "cycles": {
+          "M1_P1": 1265394,
+          "M2_D1": 0
+        },
+        "score": -145.07126918231415,
+        "prior_head": "cand-087",
+        "vs_parent": {
+          "parent": "cand-083",
+          "cycles": {
+            "M1_P1": 0,
+            "M2_D1": 0
+          },
+          "score": 0.0
+        }
+      },
+      "result_logged": true
+    },
+    "cand-092": {
+      "parent": "cand-091",
+      "status": "evaluated",
+      "hypothesis": "Area bridge successor: wider TC with four SMs",
+      "ops": [
+        {
+          "op": "hw_set",
+          "path": "tc_array",
+          "value": "8x16"
+        }
+      ],
+      "family": "hardware",
+      "bias": "balanced",
+      "kind": "manual",
+      "round": 13,
+      "struct_sig": "fuse+hw:cache_mib=2+hw:dma_depth=2+hw:dma_engines=2+hw:rf_ports=8R4W+hw:sm_count=4+hw:sm_noc_bytes_per_cycle=128+hw:tc_array=8x16+hw:tc_k_parallel=4+nkm+nopf+s:rf+stage:d1:nkm",
+      "fingerprint": "87fc1a7715c50c4c",
+      "cycles": {
+        "M1_P1": 10127399,
+        "M2_D1": 738688
+      },
+      "score": 2322.689428598885,
+      "eligible": true,
+      "functional": {
+        "M1_P1": true,
+        "M2_D1": true
+      },
+      "functional_passed": true,
+      "area_mm2": 16.25838297088,
+      "power_w": 2.971060854310833,
+      "failure_class": "none",
+      "evaluation_attempts": 1,
+      "elapsed": 126.49600737495348,
+      "cache_source": null,
+      "deltas": {
+        "cycles": {
+          "M1_P1": 642594,
+          "M2_D1": -6176
+        },
+        "score": -67.4207967718985,
+        "prior_head": "cand-087",
+        "vs_parent": {
+          "parent": "cand-091",
+          "cycles": {
+            "M1_P1": -622800,
+            "M2_D1": -6176
+          },
+          "score": 77.65047241041566
+        }
+      },
+      "result_logged": true
+    },
+    "cand-093": {
+      "parent": "cand-087",
+      "status": "kept",
+      "hypothesis": "Compose best RF dataflow with measured area bridge",
+      "ops": [
+        {
+          "op": "hw_set",
+          "path": "sm_count",
+          "value": 4
+        },
+        {
+          "op": "hw_set",
+          "path": "tc_array",
+          "value": "8x16"
+        }
+      ],
+      "family": "hardware",
+      "bias": "balanced",
+      "kind": "manual",
+      "round": 13,
+      "struct_sig": "fuse+hw:cache_mib=2+hw:dma_depth=2+hw:dma_engines=2+hw:rf_ports=8R4W+hw:sm_count=4+hw:sm_noc_bytes_per_cycle=128+hw:tc_array=8x16+hw:tc_k_parallel=4+nkm+nopf+s:rf+stage:d1:nkm+stage:p1_prompt:nkm_lanes",
+      "fingerprint": "865a2669b9f5b852",
+      "cycles": {
+        "M1_P1": 8656949,
+        "M2_D1": 738688
+      },
+      "score": 2512.2200312594855,
+      "eligible": true,
+      "functional": {
+        "M1_P1": true,
+        "M2_D1": true
+      },
+      "functional_passed": true,
+      "area_mm2": 16.25838297088,
+      "power_w": 2.971060854310833,
+      "failure_class": "none",
+      "evaluation_attempts": 1,
+      "elapsed": 92.49027512501925,
+      "cache_source": null,
+      "deltas": {
+        "cycles": {
+          "M1_P1": -827856,
+          "M2_D1": -6176
+        },
+        "score": 122.10980588870189,
+        "prior_head": "cand-087",
+        "vs_parent": {
+          "parent": "cand-087",
+          "cycles": {
+            "M1_P1": -827856,
+            "M2_D1": -6176
+          },
+          "score": 122.10980588870189
+        }
+      },
+      "result_logged": true
+    },
+    "cand-094": {
+      "parent": "cand-093",
+      "status": "kept",
+      "hypothesis": "Expand decode N tile after prompt/hardware controls",
+      "ops": [
+        {
+          "op": "stage_gemm_tiles",
+          "stage": "d1",
+          "n_tile": 64,
+          "k_chunk": 16
+        }
+      ],
+      "family": "compute",
+      "bias": "balanced",
+      "kind": "manual",
+      "round": 13,
+      "struct_sig": "fuse+hw:cache_mib=2+hw:dma_depth=2+hw:dma_engines=2+hw:rf_ports=8R4W+hw:sm_count=4+hw:sm_noc_bytes_per_cycle=128+hw:tc_array=8x16+hw:tc_k_parallel=4+nkm+nopf+s:rf+stage:d1:nkm+stage:p1_prompt:nkm_lanes",
+      "fingerprint": "08a16a882a4e64fa",
+      "cycles": {
+        "M1_P1": 8656949,
+        "M2_D1": 718132
+      },
+      "score": 2547.9215759712715,
+      "eligible": true,
+      "functional": {
+        "M1_P1": true,
+        "M2_D1": true
+      },
+      "functional_passed": true,
+      "area_mm2": 16.25838297088,
+      "power_w": 2.971060854310833,
+      "failure_class": "none",
+      "evaluation_attempts": 1,
+      "elapsed": 103.43679700000212,
+      "cache_source": null,
+      "deltas": {
+        "cycles": {
+          "M1_P1": 0,
+          "M2_D1": -20556
+        },
+        "score": 35.70154471178603,
+        "prior_head": "cand-093",
+        "vs_parent": {
+          "parent": "cand-093",
+          "cycles": {
+            "M1_P1": 0,
+            "M2_D1": -20556
+          },
+          "score": 35.70154471178603
+        }
+      },
+      "result_logged": true
+    }
+  }
+}

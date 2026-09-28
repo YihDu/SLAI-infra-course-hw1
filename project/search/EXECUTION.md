@@ -44,3 +44,19 @@ is `cand-086`. It passed correctness but raised P1 from 10,750,199 to
 HBM bytes were unchanged; extra shared memory service and the new scheduling
 order are the likely sources of the regression. The full verdict is in
 `project/iteration-log.md`.
+
+## RF accumulator layouts and structural campaigns
+
+`stage_gemm_tiles` now accepts `order`, including `nkm_lanes`. This layout
+spreads live accumulators across RF partitions, allowing wider N tiles while
+retaining B reuse. `propose.stage_space` enumerates all implemented layouts
+and tile choices, with stage-specific capacity checks. P1 K chunks below 16
+remain legal but automatic proposals skip their scalar functional-check path.
+Joint templates include an SM/TC area bridge and a vector-width/RF-capacity
+change. See `DIAGNOSIS_V4.md` for the equations, observations and limits.
+
+Run a bounded expansion with `python -m project.search.structural_campaign
+--max-evals 8 --jobs 2`, then adapt around its verified winner with
+`python -m project.search.structural_campaign --refine --max-evals 3 --jobs 2`.
+Both commands record snapshots, grades, pruning and launch budgets, then
+restore the best submission while retaining the current compiler capability.

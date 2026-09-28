@@ -1,0 +1,28 @@
+{
+  "attention": {
+    "scores": "rf"
+  },
+  "fusion": {
+    "bias_gelu": 1
+  },
+  "gemm": {
+    "k_chunk": 48,
+    "m_tile": 8,
+    "n_tile": 16,
+    "order": "nkm",
+    "prefetch": 0
+  },
+  "gemm_kernels": {
+    "p1_prompt_w1": {
+      "kind": "shared_weight_panel",
+      "m_panel": 16,
+      "n_panel": 64
+    }
+  },
+  "gemm_stages": {
+    "d1": {
+      "k_chunk": 24,
+      "n_tile": 32
+    }
+  }
+}

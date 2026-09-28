@@ -1,6 +1,7 @@
 {
   "archives": {
     "diversity": {
+      "?|?": "cand-098",
       "attention|balanced": "cand-019",
       "compute|balanced": "cand-095",
       "compute|d1": "cand-072",
@@ -9,6 +10,7 @@
       "hardware|balanced": "cand-093",
       "memory|balanced": "cand-073",
       "memory|p1": "cand-086",
+      "sig:?|?": "cand-098",
       "sig:fuse": "cand-009",
       "sig:fuse+hw:cache_mib=2+hw:dma_depth=2+hw:dma_engines=2+hw:reduction_units=1+hw:rf_ports=8R4W+hw:sm_noc_bytes_per_cycle=128+hw:tc_array=8x8+hw:tc_k_parallel=4+nkm+nopf+s:rf+stage:d1": "cand-085",
       "sig:fuse+hw:cache_mib=2+hw:dma_depth=2+hw:dma_engines=2+hw:rf_ports=8R4W+hw:sm_count=4+hw:sm_noc_bytes_per_cycle=128+hw:tc_array=8x16+hw:tc_k_parallel=4+hw:vector_lanes=8+nkm+nopf+s:rf+stage:d1:nkm+stage:p1_prompt:nkm_lanes": "cand-097",
@@ -55,13 +57,13 @@
     },
     "elite": [
       "cand-095",
+      "cand-098",
       "cand-094",
       "cand-093",
       "cand-097",
       "cand-087",
       "cand-096",
-      "cand-088",
-      "cand-092"
+      "cand-088"
     ],
     "pareto": [
       "cand-095"
@@ -3545,6 +3547,45 @@
       "status": "evaluated",
       "struct_sig": "fuse+hw:cache_mib=2+hw:dma_depth=2+hw:dma_engines=2+hw:rf_ports=8R4W+hw:sm_count=4+hw:sm_noc_bytes_per_cycle=128+hw:tc_array=8x16+hw:tc_k_parallel=4+hw:vector_lanes=8+nkm+nopf+s:rf+stage:d1:nkm+stage:p1_prompt:nkm_lanes"
     },
+    "cand-098": {
+      "area_mm2": 16.25838297088,
+      "cache_source": null,
+      "cycles": {
+        "M1_P1": 8522411,
+        "M2_D1": 718132
+      },
+      "deltas": {
+        "cycles": {
+          "M1_P1": 0,
+          "M2_D1": 0
+        },
+        "prior_head": "cand-095",
+        "score": 0.0,
+        "vs_parent": {
+          "cycles": {
+            "M1_P1": 0,
+            "M2_D1": 0
+          },
+          "parent": "cand-095",
+          "score": 0.0
+        }
+      },
+      "elapsed": 85.38407579204068,
+      "eligible": true,
+      "evaluation_attempts": 1,
+      "failure_class": "none",
+      "functional": {
+        "M1_P1": true,
+        "M2_D1": true
+      },
+      "functional_passed": true,
+      "hypothesis": "Fresh full-grade score verification of current worktree submission",
+      "parent": "cand-095",
+      "power_w": 2.971060854310833,
+      "result_logged": true,
+      "score": 2567.954051821853,
+      "status": "evaluated"
+    },
     "drun-001": {
       "bias": "balanced",
       "failure_class": "dry_run",
@@ -4176,7 +4217,7 @@
       "struct_sig": "hw:sm_count=32+nkm+nofuse+nopf+s:hbm"
     }
   },
-  "counter": 97,
+  "counter": 98,
   "dry_counter": 27,
   "fingerprints": {
     "062742f6b8fbbde1": "cand-036",

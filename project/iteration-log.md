@@ -1227,3 +1227,13 @@ Traceback (most recent call last):
 - Verify: pinned Python reruns in project/campaigns/gemini-fusion-review/verified-results.json; failed attempts and worker commands retained in worker-experiments.json.
 - Result: baseline/A/B=28970/28646/28639 cycles; synthetic functional checks pass. Savings about 1.1% of this FFN kernel; no full-grade score claimed.
 - Decision: retain prototypes for later composition; prioritize multi-SM integration. Reject worker claim of universal RF capacity: weight tile is 1024 words and does not fit 32/64 vector-lane hardware.
+
+## 2026-09-28 18:42:31 — cand-098: Fresh full-grade score verification of current worktree submission
+- Change: parent=cand-095; Reproduce current hardware/compiler/recipe; bypass evaluation cache
+- Evidence: project/experiments/cand-098/metrics.json; reports/grade.json; attempts=1
+- Command (grade): ['/Users/yihdu/Codefield/SLAI-infra-Code/transformer-codesign-starter/.venv/bin/python', '/Users/yihdu/Codefield/SLAI-infra-Code/transformer-codesign-starter/challenge.py', 'grade', '--hardware', '/Users/yihdu/Codefield/SLAI-infra-Code/transformer-codesign-starter/project/experiments/cand-098/inputs/hardware.json', '--program-p1', '/Users/yihdu/Codefield/SLAI-infra-Code/transformer-codesign-starter/project/experiments/cand-098/programs/M1_P1.asm', '--program-d1', '/Users/yihdu/Codefield/SLAI-infra-Code/transformer-codesign-starter/project/experiments/cand-098/programs/M2_D1.asm', '--report', '/Users/yihdu/Codefield/SLAI-infra-Code/transformer-codesign-starter/project/experiments/cand-098/reports/grade.json', '--seed', '7', '--baseline', '/Users/yihdu/Codefield/SLAI-infra-Code/transformer-codesign-starter/baseline_manifest.json']; elapsed=85.38173337490298; peak MiB=1773.0954895019531
+- Inputs: compiler.py@cb8bf1a2 hardware.json@b92be26a recipe.json@de007d24
+- Verify: PASS elapsed=85.38s
+- Result: M1_P1=8522411 (3.637x), M2_D1=718132 (1.813x); score=2567.954, eligible=True
+  - deltas vs head (cand-095): {'M1_P1': 0, 'M2_D1': 0}
+- Decision: evaluated; retained in Pareto/archives (head preserved)

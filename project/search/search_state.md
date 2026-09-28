@@ -6,10 +6,10 @@
 
 ## elite (score desc)
 - cand-095 score=2567.95 parent=cand-094 sig=fuse+hw:cache_mib=2+hw:dma_depth=2+hw:dma_engines=2+hw:rf_ports=8R4W+hw:sm_count=4+hw:sm_noc_bytes_per_cycle=128+hw:tc_array=8x16+hw:tc_k_parallel=4+nkm+nopf+s:rf+stage:d1:nkm+stage:p1_prompt:nkm_lanes hyp=Larger M tile reduces repeated B reads
+- cand-098 score=2567.95 parent=cand-095 sig=None hyp=Fresh full-grade score verification of current worktree subm
 - cand-094 score=2547.92 parent=cand-093 sig=fuse+hw:cache_mib=2+hw:dma_depth=2+hw:dma_engines=2+hw:rf_ports=8R4W+hw:sm_count=4+hw:sm_noc_bytes_per_cycle=128+hw:tc_array=8x16+hw:tc_k_parallel=4+nkm+nopf+s:rf+stage:d1:nkm+stage:p1_prompt:nkm_lanes hyp=Expand decode N tile after prompt/hardware controls
 - cand-093 score=2512.22 parent=cand-087 sig=fuse+hw:cache_mib=2+hw:dma_depth=2+hw:dma_engines=2+hw:rf_ports=8R4W+hw:sm_count=4+hw:sm_noc_bytes_per_cycle=128+hw:tc_array=8x16+hw:tc_k_parallel=4+nkm+nopf+s:rf+stage:d1:nkm+stage:p1_prompt:nkm_lanes hyp=Compose best RF dataflow with measured area bridge
 - cand-097 score=2479.58 parent=cand-094 sig=fuse+hw:cache_mib=2+hw:dma_depth=2+hw:dma_engines=2+hw:rf_ports=8R4W+hw:sm_count=4+hw:sm_noc_bytes_per_cycle=128+hw:tc_array=8x16+hw:tc_k_parallel=4+hw:vector_lanes=8+nkm+nopf+s:rf+stage:d1:nkm+stage:p1_prompt:nkm_lanes hyp=Joint RF expansion: 8 vector partitions allow N128 with K16,
-- cand-087 score=2390.11 parent=cand-083 sig=fuse+hw:cache_mib=2+hw:dma_depth=2+hw:dma_engines=2+hw:rf_ports=8R4W+hw:sm_noc_bytes_per_cycle=128+hw:tc_array=8x8+hw:tc_k_parallel=4+nkm+nopf+s:rf+stage:d1:nkm+stage:p1_prompt:nkm_lanes hyp=RF accumulator partitions: P1 prompt M=16, N=32, K=32; prese
 
 ## failure classes
 - dry_run: 27
@@ -23,6 +23,7 @@
 - cand-095 {'M1_P1': 8522411, 'M2_D1': 718132}
 
 ## diversity cells
+- ?|?: cand-098
 - attention|balanced: cand-019
 - compute|balanced: cand-095
 - compute|d1: cand-072
@@ -31,6 +32,7 @@
 - hardware|balanced: cand-093
 - memory|balanced: cand-073
 - memory|p1: cand-086
+- sig:?|?: cand-098
 - sig:fuse: cand-009
 - sig:fuse+hw:cache_mib=2+hw:dma_depth=2+hw:dma_engines=2+hw:reduction_units=1+hw:rf_ports=8R4W+hw:sm_noc_bytes_per_cycle=128+hw:tc_array=8x8+hw:tc_k_parallel=4+nkm+nopf+s:rf+stage:d1: cand-085
 - sig:fuse+hw:cache_mib=2+hw:dma_depth=2+hw:dma_engines=2+hw:rf_ports=8R4W+hw:sm_count=4+hw:sm_noc_bytes_per_cycle=128+hw:tc_array=8x16+hw:tc_k_parallel=4+hw:vector_lanes=8+nkm+nopf+s:rf+stage:d1:nkm+stage:p1_prompt:nkm_lanes: cand-097

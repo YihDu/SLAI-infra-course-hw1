@@ -1,0 +1,18 @@
+{
+  "bias": null,
+  "created_at": "2026-09-28 18:42:31",
+  "failure_class": "none",
+  "family": null,
+  "fingerprint": null,
+  "hypothesis": "Fresh full-grade score verification of current worktree submission",
+  "id": "cand-098",
+  "kind": null,
+  "ops": null,
+  "parent": "cand-095",
+  "provenance_note": null,
+  "round": null,
+  "status": "evaluated",
+  "struct_sig": null,
+  "summary": "Reproduce current hardware/compiler/recipe; bypass evaluation cache",
+  "verdict_note": null
+}

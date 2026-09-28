@@ -1,0 +1,18 @@
+{
+  "bias": null,
+  "created_at": "2026-09-29 02:13:56",
+  "failure_class": "none",
+  "family": null,
+  "fingerprint": null,
+  "hypothesis": "Place each prompt LN2 activation in 64 KiB shared memory and feed the existing double-buffered RF MLP from SH, eliminating repeated cache/NoC source loads without changing GELU/W2 scheduling.",
+  "id": "cand-132",
+  "kind": null,
+  "ops": null,
+  "parent": "cand-131",
+  "provenance_note": null,
+  "round": null,
+  "status": "kept",
+  "struct_sig": null,
+  "summary": "LN2-to-W1 shared-resident source with existing RF-pipelined fused MLP.",
+  "verdict_note": "Full grade passes with a marginal positive result; retain best score but stop this SH-input neighborhood because 16 MiB cache already captures most reuse."
+}

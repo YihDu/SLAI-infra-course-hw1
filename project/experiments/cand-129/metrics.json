@@ -1,0 +1,203 @@
+{
+  "candidate": "cand-129",
+  "reports": {
+    "grade": {
+      "mode": "grade",
+      "cases": {
+        "M1_P1": {
+          "functional_passed": false
+        },
+        "M2_D1": {
+          "functional_passed": true,
+          "max_abs_error": 1.1209758654651125e-06,
+          "cycles": 207673,
+          "instruction_count": 15424,
+          "hbm_read_bytes": 2135040,
+          "hbm_write_bytes": 167936,
+          "peak_window_power_w": 6.707200513472132,
+          "busy_cycles": {
+            "sm0.dma": 62976,
+            "sm0.issue": 4762,
+            "sm0.noc_in": 56952,
+            "sm0.noc_out": 1472,
+            "sm0.reduce": 1312,
+            "sm0.rf_read": 39184,
+            "sm0.rf_write": 72544,
+            "sm0.sfu": 2912,
+            "sm0.shared_read": 0,
+            "sm0.shared_write": 0,
+            "sm0.tc": 12056,
+            "sm0.vec": 8736,
+            "sm0.issue_wait": 200446,
+            "sm1.dma": 59392,
+            "sm1.issue": 3722,
+            "sm1.noc_in": 54798,
+            "sm1.noc_out": 384,
+            "sm1.reduce": 480,
+            "sm1.rf_read": 33200,
+            "sm1.rf_write": 63584,
+            "sm1.sfu": 608,
+            "sm1.shared_read": 0,
+            "sm1.shared_write": 0,
+            "sm1.tc": 12056,
+            "sm1.vec": 1760,
+            "sm1.issue_wait": 173376,
+            "sm2.dma": 59392,
+            "sm2.issue": 3722,
+            "sm2.noc_in": 54409,
+            "sm2.noc_out": 384,
+            "sm2.reduce": 480,
+            "sm2.rf_read": 33200,
+            "sm2.rf_write": 63584,
+            "sm2.sfu": 608,
+            "sm2.shared_read": 0,
+            "sm2.shared_write": 0,
+            "sm2.tc": 12056,
+            "sm2.vec": 1760,
+            "sm2.issue_wait": 173466,
+            "sm3.dma": 59392,
+            "sm3.issue": 3722,
+            "sm3.noc_in": 54654,
+            "sm3.noc_out": 384,
+            "sm3.reduce": 480,
+            "sm3.rf_read": 33200,
+            "sm3.rf_write": 63584,
+            "sm3.sfu": 608,
+            "sm3.shared_read": 0,
+            "sm3.shared_write": 0,
+            "sm3.tc": 12056,
+            "sm3.vec": 1760,
+            "sm3.issue_wait": 173538,
+            "shared.cache_bank_0": 68196,
+            "shared.cache_bank_1": 68196,
+            "shared.cache_bank_2": 67748,
+            "shared.cache_bank_3": 67748,
+            "shared.hbm_channel_0": 9032,
+            "shared.hbm_channel_1": 9032,
+            "shared.hbm_channel_2": 8968,
+            "shared.hbm_channel_3": 8968,
+            "shared.hbm_channel_4": 9024,
+            "shared.hbm_channel_5": 9024,
+            "shared.hbm_channel_6": 8960,
+            "shared.hbm_channel_7": 8960,
+            "shared.noc": 74568
+          }
+        }
+      },
+      "score": null,
+      "eligible": false,
+      "area_mm2": null
+    }
+  },
+  "evaluation_attempts": 1,
+  "runs": {
+    "grade": {
+      "command": [
+        "/Users/yihdu/Codefield/SLAI-infra-Code/transformer-codesign-starter/.venv/bin/python",
+        "/Users/yihdu/Codefield/SLAI-infra-Code/transformer-codesign-starter/challenge.py",
+        "grade",
+        "--hardware",
+        "/Users/yihdu/Codefield/SLAI-infra-Code/transformer-codesign-starter/project/experiments/cand-129/inputs/hardware.json",
+        "--program-p1",
+        "/Users/yihdu/Codefield/SLAI-infra-Code/transformer-codesign-starter/project/experiments/cand-129/programs/M1_P1.asm",
+        "--program-d1",
+        "/Users/yihdu/Codefield/SLAI-infra-Code/transformer-codesign-starter/project/experiments/cand-129/programs/M2_D1.asm",
+        "--report",
+        "/Users/yihdu/Codefield/SLAI-infra-Code/transformer-codesign-starter/project/experiments/cand-129/reports/grade.json",
+        "--seed",
+        "7",
+        "--baseline",
+        "/Users/yihdu/Codefield/SLAI-infra-Code/transformer-codesign-starter/baseline_manifest.json"
+      ],
+      "exit_code": 1,
+      "elapsed": 58.83156325004529,
+      "peak_memory_mib": 5046.6602783203125,
+      "failure_class": null
+    }
+  },
+  "static": {
+    "M1_P1": {
+      "expanded_instructions": 80027,
+      "bytes": 366001,
+      "workgroup_lifetimes": 1
+    },
+    "M2_D1": {
+      "expanded_instructions": 15424,
+      "bytes": 1511797,
+      "workgroup_lifetimes": 4
+    }
+  },
+  "validation_cost": {
+    "M2_D1": {
+      "expanded_instructions": 15424,
+      "source_lines": 7552,
+      "static_loops": 1856,
+      "workgroup_lifetimes": 4,
+      "workgroup_names": 4,
+      "opcode_counts": {
+        "WG.BEGIN": 4,
+        "LD": 7736,
+        "REDUCE": 192,
+        "VEC": 2288,
+        "SFU": 128,
+        "ST": 680,
+        "BARRIER": 160,
+        "MMA.ACC": 4224,
+        "STEP.COMMIT": 8,
+        "WG.END": 4
+      },
+      "events": 15248,
+      "graph_edges": 44829,
+      "named_cross_wg_sync_edges": 0,
+      "barrier_directed_pair_relations": 1920,
+      "barrier_incidence_edges": 1280,
+      "global_commit_incidence_edges": 28969,
+      "stages": {
+        "unknown/control": {
+          "instructions": 15424,
+          "WG.BEGIN": 4,
+          "LD": 7736,
+          "events": 15248,
+          "REDUCE": 192,
+          "VEC": 2288,
+          "SFU": 128,
+          "ST": 680,
+          "BARRIER": 160,
+          "MMA.ACC": 4224,
+          "STEP.COMMIT": 8,
+          "WG.END": 4,
+          "sum_dependency_depth_lower_bound": 16676000
+        }
+      },
+      "race_checker_single_wg_fast_path": false,
+      "max_dependency_depth_lower_bound": 2185,
+      "sum_dependency_depth_lower_bound": 16676000,
+      "retained_event_sets_logical_bytes_lower_bound": 269133696,
+      "decision": "within_lower_bound_only",
+      "budget_mib": 6144,
+      "checkpoints": [
+        {
+          "visited": 10000,
+          "max_depth": 1416,
+          "sum_depth": 7018808
+        }
+      ],
+      "caveat": "Lower bound on uncompressed CPython event-set allocation, not peak RSS prediction. Passing cost screen never establishes race correctness. Multi-path/HBM unions, tuples, prefixes and graph storage add memory."
+    }
+  },
+  "validation_cost_progress": {
+    "pid": 53350,
+    "status": "completed",
+    "elapsed": 0.7828103329520673,
+    "peak_memory_mib": 59.67230987548828,
+    "updated_at": 1790618681.9672089,
+    "command": [
+      "/Users/yihdu/Codefield/SLAI-infra-Code/transformer-codesign-starter/.venv/bin/python",
+      "-c",
+      "import json,pathlib; from project.search.validation_cost import analyze; stats=json.loads(pathlib.Path('reports/static.json').read_text()); out={n:analyze((pathlib.Path('programs')/(n+'.asm')).read_text(),6144) for n,v in stats.items() if v.get('workgroup_lifetimes',1)>1}; pathlib.Path('reports/validation-cost.json').write_text(json.dumps(out,indent=2))"
+    ]
+  },
+  "verdict": "incorrect",
+  "failure_class": "incorrect",
+  "elapsed": 58.83511912508402
+}

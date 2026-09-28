@@ -1,0 +1,18 @@
+{
+  "bias": null,
+  "created_at": "2026-09-29 02:54:11",
+  "failure_class": "none",
+  "family": null,
+  "fingerprint": null,
+  "hypothesis": "Keep each single-token D1 activation vector resident in one RF partition across all output panels; retain B double buffering and identical ascending-K arithmetic.",
+  "id": "cand-139",
+  "kind": null,
+  "ops": null,
+  "parent": "cand-138",
+  "provenance_note": null,
+  "round": null,
+  "status": "kept",
+  "struct_sig": null,
+  "summary": "D1 A-resident projection pipeline.",
+  "verdict_note": "Full grade passes: RF-resident D1 activation removes repeated A loads, improves decode and lowers validation work."
+}

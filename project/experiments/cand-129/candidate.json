@@ -1,0 +1,18 @@
+{
+  "bias": null,
+  "created_at": "2026-09-29 02:04:38",
+  "failure_class": "incorrect",
+  "family": null,
+  "fingerprint": null,
+  "hypothesis": "Keep W2 accumulators in RF through residual2 and b2, broadcasting bias into RF and storing final prompt output directly; remove ff2 HBM materialization and row-wise residual epilogue.",
+  "id": "cand-129",
+  "kind": null,
+  "ops": null,
+  "parent": "cand-126",
+  "provenance_note": null,
+  "round": null,
+  "status": "reverted",
+  "struct_sig": null,
+  "summary": "Fuse RF-persistent prompt MLP W2 with residual+bias output epilogue.",
+  "verdict_note": "Rejected: invalid stride-zero HBM bias broadcast; repair with verified K=1 outer-product bias epilogue in cand-130."
+}

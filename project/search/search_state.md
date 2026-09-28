@@ -1,15 +1,15 @@
 # search_state (auto-generated; do not edit)
 
-- best: cand-124 score=6189.601474987878 (P1=5072661, D1=207673)
+- best: cand-143 score=7013.610245245844 (P1=4897135, D1=167539)
 - phase=2 round=12 plateau_rounds=0 explore_ratio=0.54 need_new_operator=False
 - bottleneck: M1_P1 sm0.rf_read=2818280, sm0.rf_write=2788264, sm0.dma=1876160; M2_D1 sm0.rf_write=261248, sm0.dma=239104, shared.noc=226521 (overlapping service counts)
 
 ## elite (score desc)
-- cand-124 score=6189.60 parent=cand-122 sig=None hyp=Compose the only measured post-pipeline hardware gains: 16 M
-- cand-122 score=5861.57 parent=cand-120 sig=blocked-prompt-q16-k32-panel-pipeline-v2 hyp=Corrected generator snapshot: blocked P1 Attention double-bu
-- cand-120 score=5856.47 parent=cand-119 sig=p1-qkv-wo-double-buffered-operands hyp=Compose verified P1 QKV operand pipeline with identical WO A
-- cand-119 score=5776.17 parent=cand-118 sig=p1-qkv-double-buffered-operands hyp=P1 QKV only: double-buffer A row tiles and B K panels so nex
-- cand-118 score=5555.74 parent=cand-115 sig=rf-mlp-double-buffered-operands hyp=After D1 MILP plateau, change outer P1 MLP issue schedule: a
+- cand-143 score=7013.61 parent=cand-142 sig=None hyp=Prefetch each next P1 QKV/WO output column’s K0 B/A operands
+- cand-142 score=6986.35 parent=cand-139 sig=None hyp=Prefetch the next prompt MLP neuron panel’s first W1 A/B ope
+- cand-139 score=6969.54 parent=cand-138 sig=None hyp=Keep each single-token D1 activation vector resident in one
+- cand-138 score=6939.29 parent=cand-137 sig=None hyp=Reuse the existing 64 KiB prompt shared allocation for LN1 o
+- cand-137 score=6938.23 parent=cand-136 sig=None hyp=Double-buffer only the 128-token D1 history K/V panels insid
 
 ## failure classes
 - dry_run: 27
@@ -18,15 +18,16 @@
 - evaluator_error: 2
 - generate_error: 3
 - harness_noop: 9
+- incorrect: 1
 - memory_limit: 7
 - registry_interruption: 1
-- validation_cost_pruned: 2
+- validation_cost_pruned: 3
 
 ## pareto front
-- cand-124 {'M1_P1': 5072661, 'M2_D1': 207673}
+- cand-143 {'M1_P1': 4897135, 'M2_D1': 167539}
 
 ## diversity cells
-- ?|?: cand-124
+- ?|?: cand-143
 - attention_blocked_pipeline|p1: cand-122
 - attention_blocked|p1: cand-106
 - attention|balanced: cand-019
@@ -44,7 +45,7 @@
 - persistent_mlp_pipeline|p1: cand-118
 - persistent_mlp_sh|p1: cand-123
 - persistent_mlp|p1: cand-110
-- sig:?|?: cand-124
+- sig:?|?: cand-143
 - sig:blocked-prompt-q16-k32: cand-106
 - sig:blocked-prompt-q16-k32-panel-pipeline: cand-121
 - sig:blocked-prompt-q16-k32-panel-pipeline-v2: cand-122

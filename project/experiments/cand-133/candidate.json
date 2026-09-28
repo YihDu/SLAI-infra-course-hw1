@@ -1,0 +1,18 @@
+{
+  "bias": null,
+  "created_at": "2026-09-29 02:21:48",
+  "failure_class": "none",
+  "family": null,
+  "fingerprint": null,
+  "hypothesis": "Enable multicast, the only positive remaining legal hardware field in the fixed cand-132 screen; preserve programs and all other hardware.",
+  "id": "cand-133",
+  "kind": null,
+  "ops": null,
+  "parent": "cand-132",
+  "provenance_note": null,
+  "round": null,
+  "status": "kept",
+  "struct_sig": null,
+  "summary": "Final bounded hardware refinement: multicast only.",
+  "verdict_note": "Full grade matches screen: multicast gives the only remaining positive hardware delta; close bounded hardware search."
+}

@@ -202,6 +202,12 @@ class Builder:
                 a, b, out, m_extent, k_extent, n_extent, name, col_start, col_stop
             )
             return
+        if (self.stage == "d1"
+                and self.recipe.get("d1_schedule", {}).get("operand_pipeline")):
+            self.gemm_d1_operand_pipeline(
+                a, b, out, m_extent, k_extent, n_extent, name, col_start, col_stop
+            )
+            return
         kernel = self.recipe.get("gemm_kernels", {}).get("p1_prompt_w1")
         if self.stage == "p1_prompt" and name.endswith("w1") and kernel:
             if kernel.get("kind") != "shared_weight_panel":
@@ -379,6 +385,16 @@ class Builder:
             raise ValueError("P1 operand pipeline requires M64/Mtile32/N32/K32")
         if not 0 <= col_start < col_stop <= n_extent or col_start % tile_n or col_stop % tile_n:
             raise ValueError("P1 operand pipeline N extent does not fit tile")
+        a_memory = (
+            sh if (name.endswith("qkv")
+                   and self.recipe.get("fusion", {}).get("p1_ln1_sh"))
+            else hbm
+        )
+        col_lookahead = bool(
+            self.recipe.get("gemm_stages", {}).get("p1_prompt", {}).get(
+                "column_lookahead"
+            )
+        )
 
         def accumulator(row):
             return rf(add(4, {"ceildiv": [row, m_tile]}), m_tile * tile_n)
@@ -386,23 +402,37 @@ class Builder:
         def a_lane(row, parity):
             return add(mul(6, parity), mul(2, {"ceildiv": [row, m_tile]}))
 
+        if col_lookahead:
+            self.ld(
+                hbm(add(b.offset, col_start), k_chunk * tile_n,
+                    [k_chunk, tile_n], [n_extent, 1]),
+                rf(1, k_chunk * tile_n),
+            )
+            with self.loop(f"{name}seedfirstm", 0, m_extent, m_tile) as row:
+                self.ld(
+                    a_memory(add(a.offset, mul(row, k_extent)), m_tile * k_chunk,
+                             [m_tile, k_chunk], [k_extent, 1]),
+                    rf(a_lane(row, 0), m_tile * k_chunk),
+                )
+
         with self.loop(f"{name}n", col_start, col_stop, tile_n) as col:
             with self.loop(f"{name}z", 0, m_extent, m_tile) as row:
                 self.vec("add", [imm(0), imm(0)], accumulator(row))
 
             # Seed K=0 operands. All extents divide exactly for the supported
             # prompt projections, so the descriptor sizes stay constant.
-            self.ld(
-                hbm(add(b.offset, col), k_chunk * tile_n,
-                    [k_chunk, tile_n], [n_extent, 1]),
-                rf(1, k_chunk * tile_n),
-            )
-            with self.loop(f"{name}seedm", 0, m_extent, m_tile) as row:
+            if not col_lookahead:
                 self.ld(
-                    hbm(add(a.offset, mul(row, k_extent)), m_tile * k_chunk,
-                        [m_tile, k_chunk], [k_extent, 1]),
-                    rf(a_lane(row, 0), m_tile * k_chunk),
+                    hbm(add(b.offset, col), k_chunk * tile_n,
+                        [k_chunk, tile_n], [n_extent, 1]),
+                    rf(1, k_chunk * tile_n),
                 )
+                with self.loop(f"{name}seedm", 0, m_extent, m_tile) as row:
+                    self.ld(
+                        a_memory(add(a.offset, mul(row, k_extent)), m_tile * k_chunk,
+                                 [m_tile, k_chunk], [k_extent, 1]),
+                        rf(a_lane(row, 0), m_tile * k_chunk),
+                    )
 
             with self.loop(f"{name}k", 0, k_extent, k_chunk) as inner:
                 parity = mod({"ceildiv": [inner, k_chunk]}, 2)
@@ -423,9 +453,23 @@ class Builder:
                     )
                     with self.loop(f"{name}nexta", add(inner, k_chunk), k_extent, k_extent) as nxt:
                         self.ld(
-                            hbm(add(a.offset, mul(row, k_extent), nxt), m_tile * k_chunk,
-                                [m_tile, k_chunk], [k_extent, 1]),
+                            a_memory(add(a.offset, mul(row, k_extent), nxt), m_tile * k_chunk,
+                                     [m_tile, k_chunk], [k_extent, 1]),
                             rf(a_lane(row, next_parity), m_tile * k_chunk),
+                        )
+            if col_lookahead:
+                with self.loop(f"{name}nextcol", add(col, tile_n),
+                               col_stop, col_stop) as next_col:
+                    self.ld(
+                        hbm(add(b.offset, next_col), k_chunk * tile_n,
+                            [k_chunk, tile_n], [n_extent, 1]),
+                        rf(1, k_chunk * tile_n),
+                    )
+                    with self.loop(f"{name}nextcolm", 0, m_extent, m_tile) as row:
+                        self.ld(
+                            a_memory(add(a.offset, mul(row, k_extent)), m_tile*k_chunk,
+                                     [m_tile, k_chunk], [k_extent, 1]),
+                            rf(a_lane(row, 0), m_tile*k_chunk),
                         )
             with self.loop(f"{name}s", 0, m_extent, m_tile) as row:
                 self.st(
@@ -433,6 +477,66 @@ class Builder:
                     hbm(add(out.offset, mul(row, n_extent), col), m_tile * tile_n,
                         [m_tile, tile_n], [n_extent, 1]),
                 )
+
+    def gemm_d1_operand_pipeline(
+        self, a, b, out, m_extent, k_extent, n_extent, name,
+        col_start=0, col_stop=None,
+    ):
+        """Double-buffer single-row D1 operands without changing K grouping."""
+        col_stop = n_extent if col_stop is None else col_stop
+        tile_n, k_chunk = self.gemm_n_tile, self.k_chunk
+        a_resident = (
+            self.recipe.get("d1_schedule", {}).get("operand_pipeline")
+            == "a_resident"
+        )
+        if (m_extent != 1 or b.shape != (k_extent, n_extent)
+                or col_start % tile_n or col_stop % tile_n
+                or k_extent % k_chunk or k_chunk * tile_n > 1024
+                or (a_resident and k_extent > 1024)):
+            raise ValueError("unsupported D1 operand pipeline shape")
+        if a_resident:
+            self.ld(hbm(a.offset, k_extent), rf(0, k_extent))
+        with self.loop(f"{name}n", col_start, col_stop, tile_n) as col:
+            acc_lane = 3 if a_resident else 4
+            self.vec("add", [imm(0), imm(0)], rf(acc_lane, tile_n))
+            if not a_resident:
+                self.ld(hbm(a.offset, k_chunk), rf(0, k_chunk))
+            self.ld(
+                hbm(add(b.offset, col), k_chunk * tile_n,
+                    [k_chunk, tile_n], [n_extent, 1]),
+                rf(1, k_chunk * tile_n),
+            )
+            with self.loop(f"{name}k", 0, k_extent, k_chunk) as inner:
+                parity = mod({"ceildiv": [inner, k_chunk]}, 2)
+                a_view = (
+                    rf(0, k_chunk, inner)
+                    if a_resident else rf(mul(2, parity), k_chunk)
+                )
+                b_lane = (
+                    add(1, parity)
+                    if a_resident else add(1, mul(2, parity))
+                )
+                self.emit(
+                    "MMA.ACC",
+                    a=a_view, b=rf(b_lane, k_chunk * tile_n),
+                    acc=rf(acc_lane, tile_n), m=1, n=tile_n, k=k_chunk,
+                    event=None,
+                )
+                with self.loop(f"{name}prefetch", add(inner, k_chunk),
+                               k_extent, k_extent) as nxt:
+                    next_parity = sub(1, parity)
+                    if not a_resident:
+                        self.ld(
+                            hbm(add(a.offset, nxt), k_chunk),
+                            rf(mul(2, next_parity), k_chunk),
+                        )
+                    self.ld(
+                        hbm(add(b.offset, mul(nxt, n_extent), col),
+                            k_chunk * tile_n, [k_chunk, tile_n], [n_extent, 1]),
+                        rf((add(1, next_parity) if a_resident
+                            else add(1, mul(2, next_parity))), k_chunk * tile_n),
+                    )
+            self.st(rf(acc_lane, tile_n), hbm(add(out.offset, col), tile_n))
 
     def gemm_shared_weight_panel(self, a, b, out, m_extent, k_extent, n_extent, name, kernel):
         """Stage a W1 weight panel in SH, then reuse A across its 16-column subtiles."""
@@ -501,6 +605,58 @@ class Builder:
             self.vec("add", [rf(2, d), rf(3, d)], rf(2, d))
             self.st(rf(2, d), hbm(target, d))
 
+    def layernorm_cached_params(
+        self, source: Tensor, gamma: Tensor, beta: Tensor, out: Tensor,
+        rows: int, d: int, name: str, out_shared=False,
+    ):
+        """Keep prompt LayerNorm affine parameters in RF across all rows."""
+        self.ld(hbm(gamma.offset, d), rf(4, d))
+        self.ld(hbm(beta.offset, d), rf(5, d))
+        with self.loop(name, 0, rows) as row:
+            base = add(source.offset, mul(row, d))
+            target = add(out.offset, mul(row, d))
+            self.ld(hbm(base, d), rf(0, d))
+            self.reduce("sum", rf(0, d), rf(1, 1))
+            self.vec("mul", [rf(1, 1), imm(1 / d)], rf(1, 1))
+            self.vec("sub", [rf(0, d), rf(1, 1)], rf(2, d))
+            self.vec("mul", [rf(2, d), rf(2, d)], rf(3, d))
+            self.reduce("sum", rf(3, d), rf(1, 1))
+            self.vec("mul", [rf(1, 1), imm(1 / d)], rf(1, 1))
+            self.vec("add", [rf(1, 1), imm(1e-5)], rf(1, 1))
+            self.sfu("rsqrt", rf(1, 1), rf(1, 1))
+            self.vec("mul", [rf(2, d), rf(1, 1)], rf(2, d))
+            self.vec("mul", [rf(2, d), rf(4, d)], rf(2, d))
+            self.vec("add", [rf(2, d), rf(5, d)], rf(2, d))
+            self.st(rf(2, d), (sh if out_shared else hbm)(target, d))
+
+    def residual_layernorm_cached(
+        self, left: Tensor, right: Tensor, residual: Tensor,
+        gamma: Tensor, beta: Tensor, out: Tensor,
+        rows: int, d: int, name: str, out_shared=False,
+    ):
+        """Write the residual once while carrying its RF row directly into LN."""
+        self.ld(hbm(gamma.offset, d), rf(4, d))
+        self.ld(hbm(beta.offset, d), rf(5, d))
+        with self.loop(name, 0, rows) as row:
+            base = add(residual.offset, mul(row, d))
+            self.ld(hbm(add(left.offset, mul(row, d)), d), rf(0, d))
+            self.ld(hbm(add(right.offset, mul(row, d)), d), rf(1, d))
+            self.vec("add", [rf(0, d), rf(1, d)], rf(2, d))
+            self.st(rf(2, d), hbm(base, d))
+            self.reduce("sum", rf(2, d), rf(1, 1))
+            self.vec("mul", [rf(1, 1), imm(1 / d)], rf(1, 1))
+            self.vec("sub", [rf(2, d), rf(1, 1)], rf(2, d))
+            self.vec("mul", [rf(2, d), rf(2, d)], rf(3, d))
+            self.reduce("sum", rf(3, d), rf(1, 1))
+            self.vec("mul", [rf(1, 1), imm(1 / d)], rf(1, 1))
+            self.vec("add", [rf(1, 1), imm(1e-5)], rf(1, 1))
+            self.sfu("rsqrt", rf(1, 1), rf(1, 1))
+            self.vec("mul", [rf(2, d), rf(1, 1)], rf(2, d))
+            self.vec("mul", [rf(2, d), rf(4, d)], rf(2, d))
+            self.vec("add", [rf(2, d), rf(5, d)], rf(2, d))
+            target = add(out.offset, mul(row, d))
+            self.st(rf(2, d), (sh if out_shared else hbm)(target, d))
+
     def add_rows(
         self,
         left: Tensor,
@@ -551,7 +707,10 @@ class Builder:
                 self.vec("mul", [rf(0, n), rf(1, n)], rf(0, n))
                 self.st(rf(0, n), hbm(add(out.offset, mul(row, width), col), n))
 
-    def mlp_rf_stream(self, source, w1, b1, w2, out, rows, d, f, name):
+    def mlp_rf_stream(
+        self, source, w1, b1, w2, out, rows, d, f, name,
+        residual=None, output_bias=None, source_shared=False,
+    ):
         """Keep one 32-row MLP block on chip across W1 -> GELU -> W2.
 
         RF2 is the current 32-neuron activation, RF3 its GELU temporary;
@@ -561,36 +720,60 @@ class Builder:
         """
         if (rows, d, f) != (64, 256, 1024):
             raise ValueError("RF streamed MLP requires M1 prompt dimensions")
+        mode = self.recipe['fusion']['p1_mlp']
+        pipeline = mode in (
+            'rf_pipeline', 'rf_pipeline_residual',
+            'rf_pipeline_residual_sh_input',
+        )
+        fused_residual = mode in (
+            'rf_pipeline_residual', 'rf_pipeline_residual_sh_input',
+        )
+        neuron_lookahead = bool(
+            pipeline and self.recipe.get('fusion', {}).get('p1_mlp_neuron_lookahead')
+        )
+        if fused_residual != (residual is not None and output_bias is not None):
+            raise ValueError("RF residual epilogue requires residual and output bias")
         tile = 32
+        def source_view(offset, count, shape, strides):
+            return (sh if source_shared else hbm)(offset, count, shape, strides)
         with self.loop(name + "m", 0, rows, tile) as row:
             self.vec("add", [imm(1), imm(0)], rf(12, tile))
             with self.loop(name + "z", 0, d, tile) as col:
                 self.vec("add", [imm(0), imm(0)], rf(add(4, {"ceildiv": [col, tile]}), tile*tile))
+            if neuron_lookahead:
+                self.ld(source_view(add(source.offset, mul(row, d)), tile*tile,
+                                    [tile,tile], [d,1]), rf(0,tile*tile))
+                self.ld(hbm(w1.offset, tile*tile, [tile,tile], [f,1]),
+                        rf(15,tile*tile))
             with self.loop(name + "neuron", 0, f, tile) as neuron:
                 self.vec("add", [imm(0), imm(0)], rf(2, tile*tile))
-                if self.recipe['fusion']['p1_mlp'] == 'rf_pipeline':
-                    self.ld(hbm(add(source.offset, mul(row, d)), tile*tile,
-                                [tile,tile], [d,1]), rf(0,tile*tile))
-                    self.ld(hbm(add(w1.offset, neuron), tile*tile,
-                                [tile,tile], [f,1]), rf(1,tile*tile))
+                if pipeline:
+                    if not neuron_lookahead:
+                        self.ld(source_view(add(source.offset, mul(row, d)), tile*tile,
+                                            [tile,tile], [d,1]), rf(0,tile*tile))
+                        self.ld(hbm(add(w1.offset, neuron), tile*tile,
+                                    [tile,tile], [f,1]), rf(1,tile*tile))
                     with self.loop(name + 'k', 0, d, tile) as inner:
                         parity=mod({'ceildiv':[inner,tile]},2)
                         lane_a=mul(13,parity)
-                        lane_b=add(1,mul(13,parity))
+                        lane_b=(add(15,mul(-1,parity)) if neuron_lookahead
+                                else add(1,mul(13,parity)))
                         self.emit('MMA.ACC',a=rf(lane_a,tile*tile),b=rf(lane_b,tile*tile),
                                   acc=rf(2,tile*tile),m=tile,n=tile,k=tile,event=None)
                         # Enqueue next operands after issuing this MMA; alternate
                         # RF partitions avoid overwrite dependencies on its inputs.
                         with self.loop(name + 'prefetchk', add(inner,tile), d, d) as nxt:
                             nxt_parity=sub(1,parity)
-                            self.ld(hbm(add(source.offset,mul(row,d),nxt),tile*tile,
-                                        [tile,tile],[d,1]),rf(mul(13,nxt_parity),tile*tile))
+                            self.ld(source_view(add(source.offset,mul(row,d),nxt),tile*tile,
+                                                [tile,tile],[d,1]),rf(mul(13,nxt_parity),tile*tile))
+                            next_b_lane=(add(15,mul(-1,nxt_parity)) if neuron_lookahead
+                                         else add(1,mul(13,nxt_parity)))
                             self.ld(hbm(add(w1.offset,mul(nxt,f),neuron),tile*tile,
-                                        [tile,tile],[f,1]),rf(add(1,mul(13,nxt_parity)),tile*tile))
+                                        [tile,tile],[f,1]),rf(next_b_lane,tile*tile))
                 else:
                     with self.loop(name + "k", 0, d, tile) as inner:
-                        self.ld(hbm(add(source.offset, mul(row, d), inner), tile*tile,
-                                    [tile, tile], [d, 1]), rf(0, tile*tile))
+                        self.ld(source_view(add(source.offset, mul(row, d), inner), tile*tile,
+                                            [tile, tile], [d, 1]), rf(0, tile*tile))
                         self.ld(hbm(add(w1.offset, mul(inner, f), neuron), tile*tile,
                                     [tile, tile], [f, 1]), rf(1, tile*tile))
                         self.emit("MMA.ACC", a=rf(0, tile*tile), b=rf(1, tile*tile),
@@ -606,9 +789,15 @@ class Builder:
                 self.vec("add", [rf(3, tile*tile), imm(1)], rf(3, tile*tile))
                 self.vec("mul", [rf(2, tile*tile), imm(0.5)], rf(2, tile*tile))
                 self.vec("mul", [rf(2, tile*tile), rf(3, tile*tile)], rf(2, tile*tile))
-                if self.recipe['fusion']['p1_mlp'] == 'rf_pipeline':
+                if pipeline:
                     self.ld(hbm(add(w2.offset,mul(neuron,d)),tile*tile,
                                 [tile,tile],[d,1]),rf(1,tile*tile))
+                    if neuron_lookahead:
+                        with self.loop(name + 'nextneuron', add(neuron,tile), f, f) as next_neuron:
+                            self.ld(source_view(add(source.offset,mul(row,d)),tile*tile,
+                                                [tile,tile],[d,1]),rf(0,tile*tile))
+                            self.ld(hbm(add(w1.offset,next_neuron),tile*tile,
+                                        [tile,tile],[f,1]),rf(15,tile*tile))
                     with self.loop(name + 'o',0,d,tile) as col:
                         parity=mod({'ceildiv':[col,tile]},2)
                         self.emit('MMA.ACC',a=rf(2,tile*tile),b=rf(add(1,mul(13,parity)),tile*tile),
@@ -625,6 +814,22 @@ class Builder:
                                   acc=rf(add(4, {"ceildiv": [col, tile]}), tile*tile),
                                   m=tile, n=tile, k=tile, event=None)
             with self.loop(name + "store", 0, d, tile) as col:
+                accumulator = rf(add(4, {"ceildiv": [col, tile]}), tile*tile)
+                if fused_residual:
+                    self.ld(
+                        hbm(add(residual.offset, mul(row, d), col), tile*tile,
+                            [tile, tile], [d, 1]),
+                        rf(0, tile*tile),
+                    )
+                    self.ld(
+                        hbm(add(output_bias.offset, col), tile),
+                        rf(1, tile),
+                    )
+                    self.vec("add", [accumulator, rf(0, tile*tile)], accumulator)
+                    self.emit(
+                        "MMA.ACC", a=rf(12, tile), b=rf(1, tile),
+                        acc=accumulator, m=tile, n=tile, k=1, event=None,
+                    )
                 self.st(rf(add(4, {"ceildiv": [col, tile]}), tile*tile),
                         hbm(add(out.offset, mul(row, d), col), tile*tile,
                             [tile, tile], [d, 1]))
@@ -974,6 +1179,10 @@ class Builder:
         generated = step + 1
         total = past + generated
         rf_scores = self.scores_res == "rf"
+        panel_pipeline = (
+            self.recipe.get("d1_schedule", {}).get("attention_pipeline")
+            and rf_scores
+        )
         if not rf_scores:
             scores = self.alloc(f"{name}_scores", total)
             probs = self.alloc(f"{name}_probs", total)
@@ -989,25 +1198,34 @@ class Builder:
                 (history_k, past, 0, past),
                 (new_k, generated, past, new_k.shape[2]),
             ):
+                if panel_pipeline and count >= 32:
+                    self.ld(
+                        hbm(add(source.offset, mul(head, stride * hd)), hd*16,
+                            [hd, 16], [1, hd]),
+                        rf(1, hd*16),
+                    )
                 with self.loop(f"{name}key{score_base}", 0, count, 16) as key:
                     n = minimum(16, sub(count, key))
                     cells = mul(hd, n)
-                    self.ld(
-                        hbm(
-                            add(source.offset, mul(head, stride * hd), mul(key, hd)),
-                            cells,
-                            [hd, n],
-                            [1, hd],
-                        ),
-                        rf(1, cells),
-                    )
+                    if panel_pipeline and count >= 32:
+                        parity = mod({"ceildiv": [key, 16]}, 2)
+                        key_lane = add(1, parity)
+                    else:
+                        key_lane = 1
+                        self.ld(
+                            hbm(
+                                add(source.offset, mul(head, stride * hd), mul(key, hd)),
+                                cells, [hd, n], [1, hd],
+                            ),
+                            rf(1, cells),
+                        )
                     if rf_scores:
                         acc = rf(4, n, add(score_base, key))
                         self.vec("add", [imm(0), imm(0)], acc)
                         self.emit(
                             "MMA.ACC",
                             a=rf(0, hd),
-                            b=rf(1, cells),
+                            b=rf(key_lane, cells),
                             acc=acc,
                             m=1,
                             n=n,
@@ -1020,7 +1238,7 @@ class Builder:
                         self.emit(
                             "MMA.ACC",
                             a=rf(0, hd),
-                            b=rf(1, cells),
+                            b=rf(key_lane, cells),
                             acc=rf(2, n),
                             m=1,
                             n=n,
@@ -1029,6 +1247,14 @@ class Builder:
                         )
                         self.vec("mul", [rf(2, n), imm(1 / sqrt(hd))], rf(2, n))
                         self.st(rf(2, n), hbm(add(scores.offset, score_base, key), n))
+                    if panel_pipeline and count >= 32:
+                        with self.loop(f"{name}nextkey{score_base}", add(key, 16),
+                                       count, count) as nxt:
+                            self.ld(
+                                hbm(add(source.offset, mul(head, stride*hd), mul(nxt, hd)),
+                                    hd*16, [hd, 16], [1, hd]),
+                                rf(add(1, sub(1, parity)), hd*16),
+                            )
             if rf_scores:
                 svec = rf(4, total)
             else:
@@ -1046,6 +1272,11 @@ class Builder:
                 (history_v, past, 0, past),
                 (new_v, generated, past, new_v.shape[2]),
             ):
+                if panel_pipeline and count >= 32:
+                    self.ld(
+                        hbm(add(source.offset, mul(head, stride * hd)), 16*hd),
+                        rf(1, 16*hd),
+                    )
                 with self.loop(f"{name}value{prob_base}", 0, count, 16) as key:
                     depth = minimum(16, sub(count, key))
                     if rf_scores:
@@ -1055,23 +1286,34 @@ class Builder:
                         self.ld(
                             hbm(add(probs.offset, prob_base, key), depth), probs_view
                         )
-                    self.ld(
-                        hbm(
-                            add(source.offset, mul(head, stride * hd), mul(key, hd)),
-                            mul(depth, hd),
-                        ),
-                        rf(1, mul(depth, hd)),
-                    )
+                    if panel_pipeline and count >= 32:
+                        parity = mod({"ceildiv": [key, 16]}, 2)
+                        value_lane = add(1, mul(2, parity))
+                    else:
+                        value_lane = 1
+                        self.ld(
+                            hbm(add(source.offset, mul(head, stride*hd), mul(key, hd)),
+                                mul(depth, hd)),
+                            rf(1, mul(depth, hd)),
+                        )
                     self.emit(
                         "MMA.ACC",
                         a=probs_view,
-                        b=rf(1, mul(depth, hd)),
+                        b=rf(value_lane, mul(depth, hd)),
                         acc=rf(2, hd),
                         m=1,
                         n=hd,
                         k=depth,
                         event=None,
                     )
+                    if panel_pipeline and count >= 32:
+                        with self.loop(f"{name}nextvalue{prob_base}", add(key, 16),
+                                       count, count) as nxt:
+                            self.ld(
+                                hbm(add(source.offset, mul(head, stride*hd), mul(nxt, hd)),
+                                    16*hd),
+                                rf(add(1, mul(2, sub(1, parity))), 16*hd),
+                            )
             self.st(rf(2, hd), hbm(add(context.offset, mul(head, hd)), hd))
 
     def finish(self):
@@ -1153,6 +1395,26 @@ class ParallelD1Builder(Builder):
         self.label = ""
         self.emit("BARRIER", wgs=self.groups, events=[])
 
+    def bias_gelu(self, source, bias, out, rows, width, name, col_start=0, col_stop=None):
+        if not self.recipe.get("d1_schedule", {}).get("parallel_gelu"):
+            return super().bias_gelu(
+                source, bias, out, rows, width, name, col_start, col_stop
+            )
+        if col_start or col_stop is not None or rows != 1 or width % len(self.groups):
+            raise ValueError("D1 parallel GELU requires a full divisible single row")
+        # W1's trailing barrier already releases every activation shard. W2's
+        # leading barrier joins these GELU shards, so no extra barrier is needed.
+        for index, wg in enumerate(self.groups):
+            self.wg = wg
+            self.label = f"{name}_sm{index}_"
+            super().bias_gelu(
+                source, bias, out, rows, width, name + f"g{index}",
+                width * index // len(self.groups),
+                width * (index + 1) // len(self.groups),
+            )
+        self.wg = self.groups[0]
+        self.label = ""
+
     def attention_decode(self, qkv, context, history_k, history_v, new_k, new_v,
                          step, past, d, h, hd, name):
         self.emit("BARRIER", wgs=self.groups, events=[])
@@ -1177,8 +1439,11 @@ def generate_m1_p1(recipe: dict | None = None) -> tuple[str, Layout, int]:
     layout = build_layout(model, "P1")
     recipe = recipe or load_recipe()
     kernel = recipe.get("gemm_kernels", {}).get("p1_prompt_w1")
-    if recipe.get("fusion", {}).get("p1_mlp") == "sh_resident":
+    mlp_mode = recipe.get("fusion", {}).get("p1_mlp")
+    if mlp_mode == "sh_resident":
         shared_bytes = 128 * 1024
+    elif mlp_mode == "rf_pipeline_residual_sh_input":
+        shared_bytes = 64 * 1024
     else:
         shared_bytes = 256 * int(kernel["n_panel"]) * 4 if kernel else 0
     builder = IncrementalP1Builder if recipe.get("p1_schedule", {}).get("kind") == "incremental_gemm" else Builder
@@ -1225,8 +1490,24 @@ def generate_m1_p1(recipe: dict | None = None) -> tuple[str, Layout, int]:
                 activated = b.alloc(f"{name}_gelu", rows, f)
                 ff2 = b.alloc(f"{name}_ff2", rows, d)
                 y = b.alloc(f"{name}_out", rows, d)
-                b.layernorm(x, weights["ln1_g"], weights["ln1_b"], ln1, rows, d, name + "ln1")
-                b.gemm(ln1, weights["wqkv"], qkv, rows, d, 3 * d, name + "qkv")
+                if phase == "p" and recipe.get("fusion", {}).get("p1_norm_residual"):
+                    ln1_target = (
+                        Tensor(0, (rows, d))
+                        if recipe.get("fusion", {}).get("p1_ln1_sh") else ln1
+                    )
+                    b.layernorm_cached_params(
+                        x, weights["ln1_g"], weights["ln1_b"], ln1_target,
+                        rows, d, name + "ln1",
+                        out_shared=bool(recipe.get("fusion", {}).get("p1_ln1_sh")),
+                    )
+                else:
+                    b.layernorm(x, weights["ln1_g"], weights["ln1_b"], ln1, rows, d, name + "ln1")
+                qkv_source = (
+                    Tensor(0, (rows, d))
+                    if phase == "p" and recipe.get("fusion", {}).get("p1_ln1_sh")
+                    else ln1
+                )
+                b.gemm(qkv_source, weights["wqkv"], qkv, rows, d, 3 * d, name + "qkv")
                 k_out, v_out = (b.symbol(prefix + f"new_{kind}") for kind in ("k", "v"))
                 kv_offset = member * h * (prompt_rows + 1) * hd
                 k_out = Tensor(k_out.offset + kv_offset, k_out.shape)
@@ -1244,14 +1525,41 @@ def generate_m1_p1(recipe: dict | None = None) -> tuple[str, Layout, int]:
                     name + "a",
                 )
                 b.gemm(ctx, weights["wo"], att, rows, d, d, name + "wo")
-                b.add_rows(x, att, res, rows, d, name + "res")
-                b.layernorm(res, weights["ln2_g"], weights["ln2_b"], ln2, rows, d, name + "ln2")
+                if phase == "p" and recipe.get("fusion", {}).get("p1_norm_residual"):
+                    ln2_target = (
+                        Tensor(0, (rows, d))
+                        if mlp_mode == "rf_pipeline_residual_sh_input"
+                        else ln2
+                    )
+                    b.residual_layernorm_cached(
+                        x, att, res, weights["ln2_g"], weights["ln2_b"], ln2_target,
+                        rows, d, name + "resln2",
+                        out_shared=mlp_mode == "rf_pipeline_residual_sh_input",
+                    )
+                else:
+                    b.add_rows(x, att, res, rows, d, name + "res")
+                    b.layernorm(res, weights["ln2_g"], weights["ln2_b"], ln2, rows, d, name + "ln2")
                 if phase == "p" and recipe.get("fusion", {}).get("p1_mlp") in (
-                    "rf_stream", "rf_pipeline", "sh_resident"
+                    "rf_stream", "rf_pipeline", "rf_pipeline_residual",
+                    "rf_pipeline_residual_sh_input", "sh_resident"
                 ):
                     if recipe["fusion"]["p1_mlp"] == "sh_resident":
                         b.mlp_sh_resident(ln2, weights["w1"], weights["b1"], weights["w2"],
                                           ff2, rows, d, f, name + "mlp")
+                    elif recipe["fusion"]["p1_mlp"] in (
+                        "rf_pipeline_residual", "rf_pipeline_residual_sh_input"
+                    ):
+                        source = (
+                            Tensor(0, (rows, d))
+                            if mlp_mode == "rf_pipeline_residual_sh_input"
+                            else ln2
+                        )
+                        b.mlp_rf_stream(
+                            source, weights["w1"], weights["b1"], weights["w2"],
+                            y, rows, d, f, name + "mlp",
+                            residual=res, output_bias=weights["b2"],
+                            source_shared=mlp_mode == "rf_pipeline_residual_sh_input",
+                        )
                     else:
                         b.mlp_rf_stream(ln2, weights["w1"], weights["b1"], weights["w2"],
                                         ff2, rows, d, f, name + "mlp")
@@ -1263,7 +1571,9 @@ def generate_m1_p1(recipe: dict | None = None) -> tuple[str, Layout, int]:
                         b.add_bias(ff1, weights["b1"], biased, rows, f, name + "bias1")
                         b.gelu(biased, activated, rows, f, name + "gelu")
                     b.gemm(activated, weights["w2"], ff2, rows, f, d, name + "w2")
-                b.add_rows(res, ff2, y, rows, d, name + "out", weights["b2"])
+                if not (phase == "p" and recipe.get("fusion", {}).get("p1_mlp")
+                        in ("rf_pipeline_residual", "rf_pipeline_residual_sh_input")):
+                    b.add_rows(res, ff2, y, rows, d, name + "out", weights["b2"])
                 x = y
             with b.loop(f"{phase}b{member}output", 0, rows) as row:
                 b.ld(hbm(add(x.offset, mul(row, d)), d), rf(0, d))

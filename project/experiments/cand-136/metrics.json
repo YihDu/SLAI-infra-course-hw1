@@ -1,0 +1,236 @@
+{
+  "candidate": "cand-136",
+  "reports": {
+    "grade": {
+      "mode": "grade",
+      "cases": {
+        "M1_P1": {
+          "functional_passed": true,
+          "max_abs_error": 2.793004260981391e-06,
+          "cycles": 4960771,
+          "instruction_count": 78131,
+          "hbm_read_bytes": 13652992,
+          "hbm_write_bytes": 4188160,
+          "peak_window_power_w": 4.018955333925762,
+          "busy_cycles": {
+            "sm0.dma": 1163264,
+            "sm0.issue": 78131,
+            "sm0.noc_in": 961672,
+            "sm0.noc_out": 65440,
+            "sm0.reduce": 81552,
+            "sm0.rf_read": 2637656,
+            "sm0.rf_write": 2363392,
+            "sm0.sfu": 143244,
+            "sm0.shared_read": 786432,
+            "sm0.shared_write": 24576,
+            "sm0.tc": 410928,
+            "sm0.vec": 405288,
+            "sm0.issue_wait": 4872784,
+            "shared.cache_bank_0": 327788,
+            "shared.cache_bank_1": 327788,
+            "shared.cache_bank_2": 327788,
+            "shared.cache_bank_3": 327788,
+            "shared.hbm_channel_0": 69696,
+            "shared.hbm_channel_1": 69696,
+            "shared.hbm_channel_2": 69696,
+            "shared.hbm_channel_3": 69696,
+            "shared.hbm_channel_4": 69688,
+            "shared.hbm_channel_5": 69688,
+            "shared.hbm_channel_6": 69688,
+            "shared.hbm_channel_7": 69688,
+            "shared.noc": 1006104
+          }
+        },
+        "M2_D1": {
+          "functional_passed": true,
+          "max_abs_error": 1.1209758654651125e-06,
+          "cycles": 171256,
+          "instruction_count": 15808,
+          "hbm_read_bytes": 2151168,
+          "hbm_write_bytes": 167936,
+          "peak_window_power_w": 7.251089705472849,
+          "busy_cycles": {
+            "sm0.dma": 61824,
+            "sm0.issue": 4570,
+            "sm0.noc_in": 55907,
+            "sm0.noc_out": 1088,
+            "sm0.reduce": 1312,
+            "sm0.rf_read": 36304,
+            "sm0.rf_write": 68320,
+            "sm0.sfu": 1344,
+            "sm0.shared_read": 0,
+            "sm0.shared_write": 0,
+            "sm0.tc": 12056,
+            "sm0.vec": 5408,
+            "sm0.issue_wait": 164047,
+            "sm1.dma": 59776,
+            "sm1.issue": 3914,
+            "sm1.noc_in": 54174,
+            "sm1.noc_out": 512,
+            "sm1.reduce": 480,
+            "sm1.rf_read": 34160,
+            "sm1.rf_write": 64992,
+            "sm1.sfu": 1152,
+            "sm1.shared_read": 0,
+            "sm1.shared_write": 0,
+            "sm1.tc": 12056,
+            "sm1.vec": 3040,
+            "sm1.issue_wait": 153566,
+            "sm2.dma": 59776,
+            "sm2.issue": 3914,
+            "sm2.noc_in": 53767,
+            "sm2.noc_out": 512,
+            "sm2.reduce": 480,
+            "sm2.rf_read": 34160,
+            "sm2.rf_write": 64992,
+            "sm2.sfu": 1152,
+            "sm2.shared_read": 0,
+            "sm2.shared_write": 0,
+            "sm2.tc": 12056,
+            "sm2.vec": 3040,
+            "sm2.issue_wait": 153514,
+            "sm3.dma": 59776,
+            "sm3.issue": 3914,
+            "sm3.noc_in": 53771,
+            "sm3.noc_out": 512,
+            "sm3.reduce": 480,
+            "sm3.rf_read": 34160,
+            "sm3.rf_write": 64992,
+            "sm3.sfu": 1152,
+            "sm3.shared_read": 0,
+            "sm3.shared_write": 0,
+            "sm3.tc": 12056,
+            "sm3.vec": 3040,
+            "sm3.issue_wait": 153830,
+            "shared.cache_bank_0": 67680,
+            "shared.cache_bank_1": 67776,
+            "shared.cache_bank_2": 68004,
+            "shared.cache_bank_3": 68004,
+            "shared.hbm_channel_0": 8904,
+            "shared.hbm_channel_1": 9260,
+            "shared.hbm_channel_2": 9048,
+            "shared.hbm_channel_3": 9040,
+            "shared.hbm_channel_4": 8896,
+            "shared.hbm_channel_5": 9252,
+            "shared.hbm_channel_6": 9040,
+            "shared.hbm_channel_7": 9032,
+            "shared.noc": 72552
+          }
+        }
+      },
+      "score": 6892.442279967131,
+      "eligible": true,
+      "area_mm2": 22.85981349888
+    }
+  },
+  "evaluation_attempts": 1,
+  "runs": {
+    "grade": {
+      "command": [
+        "/Users/yihdu/Codefield/SLAI-infra-Code/transformer-codesign-starter/.venv/bin/python",
+        "/Users/yihdu/Codefield/SLAI-infra-Code/transformer-codesign-starter/challenge.py",
+        "grade",
+        "--hardware",
+        "/Users/yihdu/Codefield/SLAI-infra-Code/transformer-codesign-starter/project/experiments/cand-136/inputs/hardware.json",
+        "--program-p1",
+        "/Users/yihdu/Codefield/SLAI-infra-Code/transformer-codesign-starter/project/experiments/cand-136/programs/M1_P1.asm",
+        "--program-d1",
+        "/Users/yihdu/Codefield/SLAI-infra-Code/transformer-codesign-starter/project/experiments/cand-136/programs/M2_D1.asm",
+        "--report",
+        "/Users/yihdu/Codefield/SLAI-infra-Code/transformer-codesign-starter/project/experiments/cand-136/reports/grade.json",
+        "--seed",
+        "7",
+        "--baseline",
+        "/Users/yihdu/Codefield/SLAI-infra-Code/transformer-codesign-starter/baseline_manifest.json"
+      ],
+      "exit_code": 0,
+      "elapsed": 107.64860445901286,
+      "peak_memory_mib": 5562.879600524902,
+      "failure_class": null
+    }
+  },
+  "static": {
+    "M1_P1": {
+      "expanded_instructions": 78131,
+      "bytes": 359753,
+      "workgroup_lifetimes": 1
+    },
+    "M2_D1": {
+      "expanded_instructions": 15808,
+      "bytes": 1562901,
+      "workgroup_lifetimes": 4
+    }
+  },
+  "validation_cost": {
+    "M2_D1": {
+      "expanded_instructions": 15808,
+      "source_lines": 7808,
+      "static_loops": 1440,
+      "workgroup_lifetimes": 4,
+      "workgroup_names": 4,
+      "opcode_counts": {
+        "WG.BEGIN": 4,
+        "LD": 7800,
+        "REDUCE": 192,
+        "VEC": 2544,
+        "SFU": 160,
+        "ST": 712,
+        "BARRIER": 160,
+        "MMA.ACC": 4224,
+        "STEP.COMMIT": 8,
+        "WG.END": 4
+      },
+      "events": 15632,
+      "graph_edges": 45933,
+      "named_cross_wg_sync_edges": 0,
+      "barrier_directed_pair_relations": 1920,
+      "barrier_incidence_edges": 1280,
+      "global_commit_incidence_edges": 29689,
+      "stages": {
+        "unknown/control": {
+          "instructions": 15808,
+          "WG.BEGIN": 4,
+          "LD": 7800,
+          "events": 15632,
+          "REDUCE": 192,
+          "VEC": 2544,
+          "SFU": 160,
+          "ST": 712,
+          "BARRIER": 160,
+          "MMA.ACC": 4224,
+          "STEP.COMMIT": 8,
+          "WG.END": 4,
+          "sum_dependency_depth_lower_bound": 16021936
+        }
+      },
+      "race_checker_single_wg_fast_path": false,
+      "max_dependency_depth_lower_bound": 2041,
+      "sum_dependency_depth_lower_bound": 16021936,
+      "retained_event_sets_logical_bytes_lower_bound": 258727040,
+      "decision": "within_lower_bound_only",
+      "budget_mib": 6144,
+      "checkpoints": [
+        {
+          "visited": 10000,
+          "max_depth": 1297,
+          "sum_depth": 6431591
+        }
+      ],
+      "caveat": "Lower bound on uncompressed CPython event-set allocation, not peak RSS prediction. Passing cost screen never establishes race correctness. Multi-path/HBM unions, tuples, prefixes and graph storage add memory."
+    }
+  },
+  "validation_cost_progress": {
+    "pid": 55099,
+    "status": "completed",
+    "elapsed": 0.781863582902588,
+    "peak_memory_mib": 57.50043487548828,
+    "updated_at": 1790620928.702719,
+    "command": [
+      "/Users/yihdu/Codefield/SLAI-infra-Code/transformer-codesign-starter/.venv/bin/python",
+      "-c",
+      "import json,pathlib; from project.search.validation_cost import analyze; stats=json.loads(pathlib.Path('reports/static.json').read_text()); out={n:analyze((pathlib.Path('programs')/(n+'.asm')).read_text(),6144) for n,v in stats.items() if v.get('workgroup_lifetimes',1)>1}; pathlib.Path('reports/validation-cost.json').write_text(json.dumps(out,indent=2))"
+    ]
+  },
+  "verdict": "evaluated",
+  "elapsed": 107.6582077499479
+}

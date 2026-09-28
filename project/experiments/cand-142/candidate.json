@@ -1,0 +1,18 @@
+{
+  "bias": null,
+  "created_at": "2026-09-29 03:03:11",
+  "failure_class": "none",
+  "family": null,
+  "fingerprint": null,
+  "hypothesis": "Prefetch the next prompt MLP neuron panel\u2019s first W1 A/B operands into idle RF0/RF15 during the current neuron\u2019s W2 phase; preserve events and arithmetic.",
+  "id": "cand-142",
+  "kind": null,
+  "ops": null,
+  "parent": "cand-139",
+  "provenance_note": null,
+  "round": null,
+  "status": "kept",
+  "struct_sig": null,
+  "summary": "Cross-neuron W1 seed lookahead inside RF-persistent prompt MLP.",
+  "verdict_note": "Full grade passes: cross-neuron W1 seed lookahead gives a final small P1 gain; close the current MLP pipeline neighborhood."
+}

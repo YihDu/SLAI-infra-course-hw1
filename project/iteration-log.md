@@ -1607,3 +1607,228 @@ AssertionError: DMA slot changed after issue preview
 - Verify: `PYTHONPATH=. .venv/bin/python project/campaigns/p1-multism/profile.py cand-124` -> `project/experiments/cand-124/reports/p1-profile.json` -> reproduced P1=5,072,661 cycles.
 - Result: prompt MLP=2,468,852 cycles (48.67%), QKV=794,736 (15.67%), Attention=506,960 (9.99%), WO=264,912 (5.22%); P1 still executes on SM0 only. D1 uses all four SMs.
 - Decision: stop the saturated hardware inner neighborhood. The next outer search must reduce prompt MLP/QKV event count and work before multi-WG validation; cand-125 proves barrier removal alone is insufficient.
+
+## 2026-09-29 01:55:58 — cand-126: Retile only P1 first-token GEMMs from N16/K48 to RF-legal N64/K16, reducing small-M QKV/W1/W2 panel count and event overhead; prompt path and D1 unchanged.
+- Change: parent=cand-124; P1 step projection retile N64 K16.
+- Evidence: project/experiments/cand-126/metrics.json; reports/grade.json; attempts=1
+- Command (grade): ['/Users/yihdu/Codefield/SLAI-infra-Code/transformer-codesign-starter/.venv/bin/python', '/Users/yihdu/Codefield/SLAI-infra-Code/transformer-codesign-starter/challenge.py', 'grade', '--hardware', '/Users/yihdu/Codefield/SLAI-infra-Code/transformer-codesign-starter/project/experiments/cand-126/inputs/hardware.json', '--program-p1', '/Users/yihdu/Codefield/SLAI-infra-Code/transformer-codesign-starter/project/experiments/cand-126/programs/M1_P1.asm', '--program-d1', '/Users/yihdu/Codefield/SLAI-infra-Code/transformer-codesign-starter/project/experiments/cand-126/programs/M2_D1.asm', '--report', '/Users/yihdu/Codefield/SLAI-infra-Code/transformer-codesign-starter/project/experiments/cand-126/reports/grade.json', '--seed', '7', '--baseline', '/Users/yihdu/Codefield/SLAI-infra-Code/transformer-codesign-starter/baseline_manifest.json']; elapsed=103.42327679193113; peak MiB=5398.692123413086
+- Inputs: compiler.py@751e9357 hardware.json@c324ea0d recipe.json@069653fb
+- Verify: PASS elapsed=103.43s
+- Result: M1_P1=5038371 (6.152x), M2_D1=207673 (6.270x); score=6210.628, eligible=True
+  - deltas vs head (cand-124): {'M1_P1': -34290, 'M2_D1': 0}
+- Decision: KEPT — new incumbent head (score=6210.628)
+
+### cand-126 verdict: KEPT — Full grade passes; small but certain P1 step retile gain with reduced expanded instructions and unchanged D1.
+
+## 2026-09-29 01:58:49 — cand-127: Retile only P1 first-token GEMMs from N64/K16 to the next RF-capacity-equivalent point N128/K8, reducing output-panel initialization/stores and repeated A traffic.
+- Change: parent=cand-126; P1 step projection retile N128 K8.
+- Evidence: project/experiments/cand-127/metrics.json; reports/grade.json; attempts=1
+- Command (grade): ['/Users/yihdu/Codefield/SLAI-infra-Code/transformer-codesign-starter/.venv/bin/python', '/Users/yihdu/Codefield/SLAI-infra-Code/transformer-codesign-starter/challenge.py', 'grade', '--hardware', '/Users/yihdu/Codefield/SLAI-infra-Code/transformer-codesign-starter/project/experiments/cand-127/inputs/hardware.json', '--program-p1', '/Users/yihdu/Codefield/SLAI-infra-Code/transformer-codesign-starter/project/experiments/cand-127/programs/M1_P1.asm', '--program-d1', '/Users/yihdu/Codefield/SLAI-infra-Code/transformer-codesign-starter/project/experiments/cand-127/programs/M2_D1.asm', '--report', '/Users/yihdu/Codefield/SLAI-infra-Code/transformer-codesign-starter/project/experiments/cand-127/reports/grade.json', '--seed', '7', '--baseline', '/Users/yihdu/Codefield/SLAI-infra-Code/transformer-codesign-starter/baseline_manifest.json']; elapsed=106.00069658295251; peak MiB=5396.3952713012695
+- Inputs: compiler.py@751e9357 hardware.json@c324ea0d recipe.json@8febb4c1
+- Verify: PASS elapsed=106.01s
+- Result: M1_P1=5045751 (6.143x), M2_D1=207673 (6.270x); score=6206.085, eligible=True
+  - deltas vs head (cand-126): {'M1_P1': 7380, 'M2_D1': 0}
+- Decision: evaluated; retained in Pareto/archives (head preserved)
+
+### cand-127 verdict: REVERTED — Correct full grade but slightly slower than cand-126; larger N128/K8 does not improve the step schedule.
+
+## 2026-09-29 02:01:06 — cand-128: Test the final RF-capacity-equivalent P1 first-token boundary N256/K4; minimize N panels while keeping B tiles at 1024 words and TC K groups exact.
+- Change: parent=cand-126; P1 step projection retile N256 K4; final point in bounded inner sweep.
+- Evidence: project/experiments/cand-128/metrics.json; reports/grade.json; attempts=1
+- Command (grade): ['/Users/yihdu/Codefield/SLAI-infra-Code/transformer-codesign-starter/.venv/bin/python', '/Users/yihdu/Codefield/SLAI-infra-Code/transformer-codesign-starter/challenge.py', 'grade', '--hardware', '/Users/yihdu/Codefield/SLAI-infra-Code/transformer-codesign-starter/project/experiments/cand-128/inputs/hardware.json', '--program-p1', '/Users/yihdu/Codefield/SLAI-infra-Code/transformer-codesign-starter/project/experiments/cand-128/programs/M1_P1.asm', '--program-d1', '/Users/yihdu/Codefield/SLAI-infra-Code/transformer-codesign-starter/project/experiments/cand-128/programs/M2_D1.asm', '--report', '/Users/yihdu/Codefield/SLAI-infra-Code/transformer-codesign-starter/project/experiments/cand-128/reports/grade.json', '--seed', '7', '--baseline', '/Users/yihdu/Codefield/SLAI-infra-Code/transformer-codesign-starter/baseline_manifest.json']; elapsed=107.06090270797722; peak MiB=5400.520225524902
+- Inputs: compiler.py@751e9357 hardware.json@c324ea0d recipe.json@02b69b16
+- Verify: PASS elapsed=107.07s
+- Result: M1_P1=5063367 (6.122x), M2_D1=207673 (6.270x); score=6195.279, eligible=True
+  - deltas vs head (cand-126): {'M1_P1': 24996, 'M2_D1': 0}
+- Decision: evaluated; retained in Pareto/archives (head preserved)
+
+### cand-128 verdict: REVERTED — Correct full grade but slower than cand-126; stop the three-point P1-step tile neighborhood and return to outer structural search.
+
+## 2026-09-29 02:04:38 — cand-129: Keep W2 accumulators in RF through residual2 and b2, broadcasting bias into RF and storing final prompt output directly; remove ff2 HBM materialization and row-wise residual epilogue.
+- Change: parent=cand-126; Fuse RF-persistent prompt MLP W2 with residual+bias output epilogue.
+- Evidence: project/experiments/cand-129/metrics.json; reports/grade.json; attempts=1
+- Command (grade): ['/Users/yihdu/Codefield/SLAI-infra-Code/transformer-codesign-starter/.venv/bin/python', '/Users/yihdu/Codefield/SLAI-infra-Code/transformer-codesign-starter/challenge.py', 'grade', '--hardware', '/Users/yihdu/Codefield/SLAI-infra-Code/transformer-codesign-starter/project/experiments/cand-129/inputs/hardware.json', '--program-p1', '/Users/yihdu/Codefield/SLAI-infra-Code/transformer-codesign-starter/project/experiments/cand-129/programs/M1_P1.asm', '--program-d1', '/Users/yihdu/Codefield/SLAI-infra-Code/transformer-codesign-starter/project/experiments/cand-129/programs/M2_D1.asm', '--report', '/Users/yihdu/Codefield/SLAI-infra-Code/transformer-codesign-starter/project/experiments/cand-129/reports/grade.json', '--seed', '7', '--baseline', '/Users/yihdu/Codefield/SLAI-infra-Code/transformer-codesign-starter/baseline_manifest.json']; elapsed=58.83156325004529; peak MiB=5046.6602783203125
+- Inputs: compiler.py@5db9cf0b hardware.json@c324ea0d recipe.json@38f6b0da
+- Verify: FAILED — failure_class=incorrect; evidence=reports/check.json elapsed=58.84s
+- Result: status=incorrect, failure_class=incorrect
+- Decision: reject/preserve failed candidate (status=incorrect)
+
+### cand-129 verdict: REVERTED — Rejected: invalid stride-zero HBM bias broadcast; repair with verified K=1 outer-product bias epilogue in cand-130.
+
+## 2026-09-29 02:06:29 — cand-130: Repair fused RF-resident W2 residual epilogue using the existing legal K=1 ones-by-bias MMA after ff2+residual VEC; eliminate ff2 round trip and row-wise residual2.
+- Change: parent=cand-126; Legal RF-persistent W2 residual+bias epilogue.
+- Evidence: project/experiments/cand-130/metrics.json; reports/grade.json; attempts=1
+- Command (grade): ['/Users/yihdu/Codefield/SLAI-infra-Code/transformer-codesign-starter/.venv/bin/python', '/Users/yihdu/Codefield/SLAI-infra-Code/transformer-codesign-starter/challenge.py', 'grade', '--hardware', '/Users/yihdu/Codefield/SLAI-infra-Code/transformer-codesign-starter/project/experiments/cand-130/inputs/hardware.json', '--program-p1', '/Users/yihdu/Codefield/SLAI-infra-Code/transformer-codesign-starter/project/experiments/cand-130/programs/M1_P1.asm', '--program-d1', '/Users/yihdu/Codefield/SLAI-infra-Code/transformer-codesign-starter/project/experiments/cand-130/programs/M2_D1.asm', '--report', '/Users/yihdu/Codefield/SLAI-infra-Code/transformer-codesign-starter/project/experiments/cand-130/reports/grade.json', '--seed', '7', '--baseline', '/Users/yihdu/Codefield/SLAI-infra-Code/transformer-codesign-starter/baseline_manifest.json']; elapsed=102.83081037492957; peak MiB=5434.5202713012695
+- Inputs: compiler.py@52a36d05 hardware.json@c324ea0d recipe.json@38f6b0da
+- Verify: PASS elapsed=102.84s
+- Result: M1_P1=5008053 (6.189x), M2_D1=207673 (6.270x); score=6229.399, eligible=True
+  - deltas vs head (cand-126): {'M1_P1': -30318, 'M2_D1': 0}
+- Decision: KEPT — new incumbent head (score=6229.399)
+
+### cand-130 verdict: KEPT — Full grade passes: W2 accumulators remain in RF through residual+bias; removes ff2 HBM round trip and row residual loop, small positive cycles and lower event count.
+
+## 2026-09-29 02:09:37 — cand-131: Cache prompt LN gamma/beta in RF and carry WO residual rows directly into LN2 while still writing the residual once; remove repeated affine loads and residual HBM reload.
+- Change: parent=cand-130; Fuse prompt residual1-LN2 and cache both prompt LayerNorm affine parameters.
+- Evidence: project/experiments/cand-131/metrics.json; reports/grade.json; attempts=1
+- Command (grade): ['/Users/yihdu/Codefield/SLAI-infra-Code/transformer-codesign-starter/.venv/bin/python', '/Users/yihdu/Codefield/SLAI-infra-Code/transformer-codesign-starter/challenge.py', 'grade', '--hardware', '/Users/yihdu/Codefield/SLAI-infra-Code/transformer-codesign-starter/project/experiments/cand-131/inputs/hardware.json', '--program-p1', '/Users/yihdu/Codefield/SLAI-infra-Code/transformer-codesign-starter/project/experiments/cand-131/programs/M1_P1.asm', '--program-d1', '/Users/yihdu/Codefield/SLAI-infra-Code/transformer-codesign-starter/project/experiments/cand-131/programs/M2_D1.asm', '--report', '/Users/yihdu/Codefield/SLAI-infra-Code/transformer-codesign-starter/project/experiments/cand-131/reports/grade.json', '--seed', '7', '--baseline', '/Users/yihdu/Codefield/SLAI-infra-Code/transformer-codesign-starter/baseline_manifest.json']; elapsed=102.18015029199887; peak MiB=5421.582748413086
+- Inputs: compiler.py@0c3dc51c hardware.json@c324ea0d recipe.json@59f06ab6
+- Verify: PASS elapsed=102.19s
+- Result: M1_P1=4963013 (6.246x), M2_D1=207673 (6.270x); score=6257.601, eligible=True
+  - deltas vs head (cand-130): {'M1_P1': -45040, 'M2_D1': 0}
+- Decision: KEPT — new incumbent head (score=6257.601)
+
+### cand-131 verdict: KEPT — Full grade passes: prompt affine parameters stay in RF and residual1 flows directly into LN2; lower cycles, traffic, and expanded events.
+
+## 2026-09-29 02:13:56 — cand-132: Place each prompt LN2 activation in 64 KiB shared memory and feed the existing double-buffered RF MLP from SH, eliminating repeated cache/NoC source loads without changing GELU/W2 scheduling.
+- Change: parent=cand-131; LN2-to-W1 shared-resident source with existing RF-pipelined fused MLP.
+- Evidence: project/experiments/cand-132/metrics.json; reports/grade.json; attempts=1
+- Command (grade): ['/Users/yihdu/Codefield/SLAI-infra-Code/transformer-codesign-starter/.venv/bin/python', '/Users/yihdu/Codefield/SLAI-infra-Code/transformer-codesign-starter/challenge.py', 'grade', '--hardware', '/Users/yihdu/Codefield/SLAI-infra-Code/transformer-codesign-starter/project/experiments/cand-132/inputs/hardware.json', '--program-p1', '/Users/yihdu/Codefield/SLAI-infra-Code/transformer-codesign-starter/project/experiments/cand-132/programs/M1_P1.asm', '--program-d1', '/Users/yihdu/Codefield/SLAI-infra-Code/transformer-codesign-starter/project/experiments/cand-132/programs/M2_D1.asm', '--report', '/Users/yihdu/Codefield/SLAI-infra-Code/transformer-codesign-starter/project/experiments/cand-132/reports/grade.json', '--seed', '7', '--baseline', '/Users/yihdu/Codefield/SLAI-infra-Code/transformer-codesign-starter/baseline_manifest.json']; elapsed=98.06765970797278; peak MiB=5341.520133972168
+- Inputs: compiler.py@97a2189c hardware.json@c324ea0d recipe.json@b65ba68d
+- Verify: PASS elapsed=98.08s
+- Result: M1_P1=4960771 (6.248x), M2_D1=207673 (6.270x); score=6259.015, eligible=True
+  - deltas vs head (cand-131): {'M1_P1': -2242, 'M2_D1': 0}
+- Decision: KEPT — new incumbent head (score=6259.015)
+
+### cand-132 verdict: KEPT — Full grade passes with a marginal positive result; retain best score but stop this SH-input neighborhood because 16 MiB cache already captures most reuse.
+
+## 2026-09-29 02:21:48 — cand-133: Enable multicast, the only positive remaining legal hardware field in the fixed cand-132 screen; preserve programs and all other hardware.
+- Change: parent=cand-132; Final bounded hardware refinement: multicast only.
+- Evidence: project/experiments/cand-133/metrics.json; reports/grade.json; attempts=1
+- Command (grade): ['/Users/yihdu/Codefield/SLAI-infra-Code/transformer-codesign-starter/.venv/bin/python', '/Users/yihdu/Codefield/SLAI-infra-Code/transformer-codesign-starter/challenge.py', 'grade', '--hardware', '/Users/yihdu/Codefield/SLAI-infra-Code/transformer-codesign-starter/project/experiments/cand-133/inputs/hardware.json', '--program-p1', '/Users/yihdu/Codefield/SLAI-infra-Code/transformer-codesign-starter/project/experiments/cand-133/programs/M1_P1.asm', '--program-d1', '/Users/yihdu/Codefield/SLAI-infra-Code/transformer-codesign-starter/project/experiments/cand-133/programs/M2_D1.asm', '--report', '/Users/yihdu/Codefield/SLAI-infra-Code/transformer-codesign-starter/project/experiments/cand-133/reports/grade.json', '--seed', '7', '--baseline', '/Users/yihdu/Codefield/SLAI-infra-Code/transformer-codesign-starter/baseline_manifest.json']; elapsed=123.59193879098166; peak MiB=5411.020202636719
+- Inputs: compiler.py@97a2189c hardware.json@d362f61f recipe.json@b65ba68d
+- Verify: PASS elapsed=123.60s
+- Result: M1_P1=4960771 (6.248x), M2_D1=207315 (6.280x); score=6264.417, eligible=True
+  - deltas vs head (cand-132): {'M1_P1': 0, 'M2_D1': -358}
+- Decision: KEPT — new incumbent head (score=6264.417)
+
+### cand-133 verdict: KEPT — Full grade matches screen: multicast gives the only remaining positive hardware delta; close bounded hardware search.
+
+## 2026-09-29 02:31:34 — cand-134: Execute both P1 batch members layer-major so each layer weight set is reused immediately across the two independent members; preserve arithmetic and single-WG validation fast path.
+- Change: parent=cand-133; Layer-major batch ordering for cache reuse.
+- Evidence: project/experiments/cand-134/metrics.json; reports/grade.json; attempts=1
+- Command (grade): ['/Users/yihdu/Codefield/SLAI-infra-Code/transformer-codesign-starter/.venv/bin/python', '/Users/yihdu/Codefield/SLAI-infra-Code/transformer-codesign-starter/challenge.py', 'grade', '--hardware', '/Users/yihdu/Codefield/SLAI-infra-Code/transformer-codesign-starter/project/experiments/cand-134/inputs/hardware.json', '--program-p1', '/Users/yihdu/Codefield/SLAI-infra-Code/transformer-codesign-starter/project/experiments/cand-134/programs/M1_P1.asm', '--program-d1', '/Users/yihdu/Codefield/SLAI-infra-Code/transformer-codesign-starter/project/experiments/cand-134/programs/M2_D1.asm', '--report', '/Users/yihdu/Codefield/SLAI-infra-Code/transformer-codesign-starter/project/experiments/cand-134/reports/grade.json', '--seed', '7', '--baseline', '/Users/yihdu/Codefield/SLAI-infra-Code/transformer-codesign-starter/baseline_manifest.json']; elapsed=98.30359158292413; peak MiB=5363.223304748535
+- Inputs: compiler.py@ed0038ab hardware.json@d362f61f recipe.json@f583700d
+- Verify: PASS elapsed=98.31s
+- Result: M1_P1=4960924 (6.248x), M2_D1=207315 (6.280x); score=6264.321, eligible=True
+  - deltas vs head (cand-133): {'M1_P1': 153, 'M2_D1': 0}
+- Decision: evaluated; retained in Pareto/archives (head preserved)
+
+### cand-134 verdict: REVERTED — Correct but marginally slower on cache16/TC2; layer-major+TC3/cache4 estimate scores 6139.90, so immediate weight reuse does not recover lost cache capacity.
+
+## 2026-09-29 02:38:25 — cand-135: Shard each single-row D1 GELU across the four persistent owners, reusing the existing W1 trailing and W2 leading barriers; remove the SM0-only GELU bottleneck without new sync boundaries.
+- Change: parent=cand-133; Four-way persistent D1 GELU column partition.
+- Evidence: project/experiments/cand-135/metrics.json; reports/grade.json; attempts=1
+- Command (grade): ['/Users/yihdu/Codefield/SLAI-infra-Code/transformer-codesign-starter/.venv/bin/python', '/Users/yihdu/Codefield/SLAI-infra-Code/transformer-codesign-starter/challenge.py', 'grade', '--hardware', '/Users/yihdu/Codefield/SLAI-infra-Code/transformer-codesign-starter/project/experiments/cand-135/inputs/hardware.json', '--program-p1', '/Users/yihdu/Codefield/SLAI-infra-Code/transformer-codesign-starter/project/experiments/cand-135/programs/M1_P1.asm', '--program-d1', '/Users/yihdu/Codefield/SLAI-infra-Code/transformer-codesign-starter/project/experiments/cand-135/programs/M2_D1.asm', '--report', '/Users/yihdu/Codefield/SLAI-infra-Code/transformer-codesign-starter/project/experiments/cand-135/reports/grade.json', '--seed', '7', '--baseline', '/Users/yihdu/Codefield/SLAI-infra-Code/transformer-codesign-starter/baseline_manifest.json']; elapsed=100.37200987502001; peak MiB=5549.957748413086
+- Inputs: compiler.py@afae0815 hardware.json@d362f61f recipe.json@5f490ed2
+- Verify: PASS elapsed=100.38s
+- Result: M1_P1=4960771 (6.248x), M2_D1=195174 (6.671x); score=6456.320, eligible=True
+  - deltas vs head (cand-133): {'M1_P1': 0, 'M2_D1': -12141}
+- Decision: KEPT — new incumbent head (score=6456.320)
+
+### cand-135 verdict: KEPT — Full grade passes: four-way D1 GELU partition removes the SM0-only segment and gives the largest gain in this continuation.
+
+## 2026-09-29 02:42:05 — cand-136: Double-buffer A/B K panels for every sharded single-row D1 projection while preserving owner counts, tile shapes, event count, and ascending K arithmetic.
+- Change: parent=cand-135; Four-owner D1 GEMM operand pipeline.
+- Evidence: project/experiments/cand-136/metrics.json; reports/grade.json; attempts=1
+- Command (grade): ['/Users/yihdu/Codefield/SLAI-infra-Code/transformer-codesign-starter/.venv/bin/python', '/Users/yihdu/Codefield/SLAI-infra-Code/transformer-codesign-starter/challenge.py', 'grade', '--hardware', '/Users/yihdu/Codefield/SLAI-infra-Code/transformer-codesign-starter/project/experiments/cand-136/inputs/hardware.json', '--program-p1', '/Users/yihdu/Codefield/SLAI-infra-Code/transformer-codesign-starter/project/experiments/cand-136/programs/M1_P1.asm', '--program-d1', '/Users/yihdu/Codefield/SLAI-infra-Code/transformer-codesign-starter/project/experiments/cand-136/programs/M2_D1.asm', '--report', '/Users/yihdu/Codefield/SLAI-infra-Code/transformer-codesign-starter/project/experiments/cand-136/reports/grade.json', '--seed', '7', '--baseline', '/Users/yihdu/Codefield/SLAI-infra-Code/transformer-codesign-starter/baseline_manifest.json']; elapsed=107.64860445901286; peak MiB=5562.879600524902
+- Inputs: compiler.py@6dfa0f02 hardware.json@d362f61f recipe.json@8e8a84cd
+- Verify: PASS elapsed=107.66s
+- Result: M1_P1=4960771 (6.248x), M2_D1=171256 (7.603x); score=6892.442, eligible=True
+  - deltas vs head (cand-135): {'M1_P1': 0, 'M2_D1': -23918}
+- Decision: KEPT — new incumbent head (score=6892.442)
+
+### cand-136 verdict: KEPT — Full grade passes: double-buffered D1 projection operands overlap LD and MMA, producing a material end-to-end decode improvement with the same arithmetic.
+
+## 2026-09-29 02:46:39 — cand-137: Double-buffer only the 128-token D1 history K/V panels inside each persistent attention head owner; preserve RF softmax, generated-tail path, event count, and arithmetic.
+- Change: parent=cand-136; D1 history K/V panel pipeline.
+- Evidence: project/experiments/cand-137/metrics.json; reports/grade.json; attempts=1
+- Command (grade): ['/Users/yihdu/Codefield/SLAI-infra-Code/transformer-codesign-starter/.venv/bin/python', '/Users/yihdu/Codefield/SLAI-infra-Code/transformer-codesign-starter/challenge.py', 'grade', '--hardware', '/Users/yihdu/Codefield/SLAI-infra-Code/transformer-codesign-starter/project/experiments/cand-137/inputs/hardware.json', '--program-p1', '/Users/yihdu/Codefield/SLAI-infra-Code/transformer-codesign-starter/project/experiments/cand-137/programs/M1_P1.asm', '--program-d1', '/Users/yihdu/Codefield/SLAI-infra-Code/transformer-codesign-starter/project/experiments/cand-137/programs/M2_D1.asm', '--report', '/Users/yihdu/Codefield/SLAI-infra-Code/transformer-codesign-starter/project/experiments/cand-137/reports/grade.json', '--seed', '7', '--baseline', '/Users/yihdu/Codefield/SLAI-infra-Code/transformer-codesign-starter/baseline_manifest.json']; elapsed=105.46414175000973; peak MiB=5592.223442077637
+- Inputs: compiler.py@94110064 hardware.json@d362f61f recipe.json@ab2388f7
+- Verify: PASS elapsed=105.47s
+- Result: M1_P1=4960771 (6.248x), M2_D1=169003 (7.704x); score=6938.232, eligible=True
+  - deltas vs head (cand-136): {'M1_P1': 0, 'M2_D1': -2253}
+- Decision: KEPT — new incumbent head (score=6938.232)
+
+### cand-137 verdict: KEPT — Full grade passes: history K/V double buffering gives a small positive D1 gain; stop attention panel tuning.
+
+## 2026-09-29 02:50:39 — cand-138: Reuse the existing 64 KiB prompt shared allocation for LN1 output, and feed the unchanged QKV operand pipeline from SH instead of repeated cache/NoC activation reads.
+- Change: parent=cand-137; LN1-to-QKV shared-resident activation.
+- Evidence: project/experiments/cand-138/metrics.json; reports/grade.json; attempts=1
+- Command (grade): ['/Users/yihdu/Codefield/SLAI-infra-Code/transformer-codesign-starter/.venv/bin/python', '/Users/yihdu/Codefield/SLAI-infra-Code/transformer-codesign-starter/challenge.py', 'grade', '--hardware', '/Users/yihdu/Codefield/SLAI-infra-Code/transformer-codesign-starter/project/experiments/cand-138/inputs/hardware.json', '--program-p1', '/Users/yihdu/Codefield/SLAI-infra-Code/transformer-codesign-starter/project/experiments/cand-138/programs/M1_P1.asm', '--program-d1', '/Users/yihdu/Codefield/SLAI-infra-Code/transformer-codesign-starter/project/experiments/cand-138/programs/M2_D1.asm', '--report', '/Users/yihdu/Codefield/SLAI-infra-Code/transformer-codesign-starter/project/experiments/cand-138/reports/grade.json', '--seed', '7', '--baseline', '/Users/yihdu/Codefield/SLAI-infra-Code/transformer-codesign-starter/baseline_manifest.json']; elapsed=99.85473783290945; peak MiB=5509.348419189453
+- Inputs: compiler.py@136be636 hardware.json@d362f61f recipe.json@8a06dffb
+- Verify: PASS elapsed=99.86s
+- Result: M1_P1=4959259 (6.250x), M2_D1=169003 (7.704x); score=6939.290, eligible=True
+  - deltas vs head (cand-137): {'M1_P1': -1512, 'M2_D1': 0}
+- Decision: KEPT — new incumbent head (score=6939.290)
+
+### cand-138 verdict: KEPT — Full grade passes with a marginal positive LN1-to-QKV SH result; retain best score and stop SH residency expansion.
+
+## 2026-09-29 02:54:11 — cand-139: Keep each single-token D1 activation vector resident in one RF partition across all output panels; retain B double buffering and identical ascending-K arithmetic.
+- Change: parent=cand-138; D1 A-resident projection pipeline.
+- Evidence: project/experiments/cand-139/metrics.json; reports/grade.json; attempts=1
+- Command (grade): ['/Users/yihdu/Codefield/SLAI-infra-Code/transformer-codesign-starter/.venv/bin/python', '/Users/yihdu/Codefield/SLAI-infra-Code/transformer-codesign-starter/challenge.py', 'grade', '--hardware', '/Users/yihdu/Codefield/SLAI-infra-Code/transformer-codesign-starter/project/experiments/cand-139/inputs/hardware.json', '--program-p1', '/Users/yihdu/Codefield/SLAI-infra-Code/transformer-codesign-starter/project/experiments/cand-139/programs/M1_P1.asm', '--program-d1', '/Users/yihdu/Codefield/SLAI-infra-Code/transformer-codesign-starter/project/experiments/cand-139/programs/M2_D1.asm', '--report', '/Users/yihdu/Codefield/SLAI-infra-Code/transformer-codesign-starter/project/experiments/cand-139/reports/grade.json', '--seed', '7', '--baseline', '/Users/yihdu/Codefield/SLAI-infra-Code/transformer-codesign-starter/baseline_manifest.json']; elapsed=76.88162470795214; peak MiB=4066.6442642211914
+- Inputs: compiler.py@d0d6c993 hardware.json@d362f61f recipe.json@6a8b7871
+- Verify: PASS elapsed=76.89s
+- Result: M1_P1=4959259 (6.250x), M2_D1=167539 (7.772x); score=6969.543, eligible=True
+  - deltas vs head (cand-138): {'M1_P1': 0, 'M2_D1': -1464}
+- Decision: KEPT — new incumbent head (score=6969.543)
+
+### cand-139 verdict: KEPT — Full grade passes: RF-resident D1 activation removes repeated A loads, improves decode and lowers validation work.
+
+## 2026-09-29 02:58:35 — cand-140: Preload each owner’s two 128x128 D1 W1 weight shards into its 128 KiB private SH once, then reuse them across all eight committed decode steps.
+- Change: parent=cand-139; Persistent two-layer D1 W1 weight shards in SH.
+- Evidence: project/experiments/cand-140/metrics.json; reports/grade.json; attempts=1
+- Command (grade): ['/Users/yihdu/Codefield/SLAI-infra-Code/transformer-codesign-starter/.venv/bin/python', '/Users/yihdu/Codefield/SLAI-infra-Code/transformer-codesign-starter/challenge.py', 'grade', '--hardware', '/Users/yihdu/Codefield/SLAI-infra-Code/transformer-codesign-starter/project/experiments/cand-140/inputs/hardware.json', '--program-p1', '/Users/yihdu/Codefield/SLAI-infra-Code/transformer-codesign-starter/project/experiments/cand-140/programs/M1_P1.asm', '--program-d1', '/Users/yihdu/Codefield/SLAI-infra-Code/transformer-codesign-starter/project/experiments/cand-140/programs/M2_D1.asm', '--report', '/Users/yihdu/Codefield/SLAI-infra-Code/transformer-codesign-starter/project/experiments/cand-140/reports/grade.json', '--seed', '7', '--baseline', '/Users/yihdu/Codefield/SLAI-infra-Code/transformer-codesign-starter/baseline_manifest.json']; elapsed=75.13695241592359; peak MiB=4080.2223205566406
+- Inputs: compiler.py@77d2e3e5 hardware.json@d362f61f recipe.json@a1b7ade1
+- Verify: PASS elapsed=75.14s
+- Result: M1_P1=4959259 (6.250x), M2_D1=169389 (7.687x); score=6931.379, eligible=True
+  - deltas vs head (cand-139): {'M1_P1': 0, 'M2_D1': 1850}
+- Decision: evaluated; retained in Pareto/archives (head preserved)
+
+### cand-140 verdict: REVERTED — Correct but slower: persistent W1 SH service plus preload loses to the 16 MiB cache path; reject and do not repeat the same-sized W2 shard experiment.
+
+## 2026-09-29 03:00:46 — cand-141: Re-evaluate the minimal two-WG end-to-end batch-parallel P1 skeleton after reducing the mature program to roughly 78k events; no per-layer barriers, validation preflight only unless within budget.
+- Change: parent=cand-139; Compressed-head batch-parallel validation-cost checkpoint.
+- Evidence: project/experiments/cand-141/metrics.json; reports/grade.json; attempts=0
+- Inputs: compiler.py@fc709d21 hardware.json@d362f61f recipe.json@622d3349
+- Verify: FAILED — failure_class=validation_cost_pruned; evidence=pipeline
+- Result: status=not_verified, failure_class=validation_cost_pruned
+- Decision: reject/preserve failed candidate (status=not_verified)
+
+### cand-141 verdict: REVERTED — Validation-cost pruned at 13.77 GB logical retained-event lower bound versus 6 GiB budget; compressed two-WG P1 remains locally unverifiable.
+
+## 2026-09-29 03:03:11 — cand-142: Prefetch the next prompt MLP neuron panel’s first W1 A/B operands into idle RF0/RF15 during the current neuron’s W2 phase; preserve events and arithmetic.
+- Change: parent=cand-139; Cross-neuron W1 seed lookahead inside RF-persistent prompt MLP.
+- Evidence: project/experiments/cand-142/metrics.json; reports/grade.json; attempts=1
+- Command (grade): ['/Users/yihdu/Codefield/SLAI-infra-Code/transformer-codesign-starter/.venv/bin/python', '/Users/yihdu/Codefield/SLAI-infra-Code/transformer-codesign-starter/challenge.py', 'grade', '--hardware', '/Users/yihdu/Codefield/SLAI-infra-Code/transformer-codesign-starter/project/experiments/cand-142/inputs/hardware.json', '--program-p1', '/Users/yihdu/Codefield/SLAI-infra-Code/transformer-codesign-starter/project/experiments/cand-142/programs/M1_P1.asm', '--program-d1', '/Users/yihdu/Codefield/SLAI-infra-Code/transformer-codesign-starter/project/experiments/cand-142/programs/M2_D1.asm', '--report', '/Users/yihdu/Codefield/SLAI-infra-Code/transformer-codesign-starter/project/experiments/cand-142/reports/grade.json', '--seed', '7', '--baseline', '/Users/yihdu/Codefield/SLAI-infra-Code/transformer-codesign-starter/baseline_manifest.json']; elapsed=76.68808820901904; peak MiB=4113.800537109375
+- Inputs: compiler.py@f8e92de2 hardware.json@d362f61f recipe.json@51179836
+- Verify: PASS elapsed=76.70s
+- Result: M1_P1=4935427 (6.281x), M2_D1=167539 (7.772x); score=6986.349, eligible=True
+  - deltas vs head (cand-139): {'M1_P1': -23832, 'M2_D1': 0}
+- Decision: KEPT — new incumbent head (score=6986.349)
+
+### cand-142 verdict: KEPT — Full grade passes: cross-neuron W1 seed lookahead gives a final small P1 gain; close the current MLP pipeline neighborhood.
+
+## 2026-09-29 03:05:51 — cand-143: Prefetch each next P1 QKV/WO output column’s K0 B/A operands into released parity-0 RF buffers before the current column’s final stores; preserve events and arithmetic.
+- Change: parent=cand-142; Cross-column seed lookahead for pipelined prompt projections.
+- Evidence: project/experiments/cand-143/metrics.json; reports/grade.json; attempts=1
+- Command (grade): ['/Users/yihdu/Codefield/SLAI-infra-Code/transformer-codesign-starter/.venv/bin/python', '/Users/yihdu/Codefield/SLAI-infra-Code/transformer-codesign-starter/challenge.py', 'grade', '--hardware', '/Users/yihdu/Codefield/SLAI-infra-Code/transformer-codesign-starter/project/experiments/cand-143/inputs/hardware.json', '--program-p1', '/Users/yihdu/Codefield/SLAI-infra-Code/transformer-codesign-starter/project/experiments/cand-143/programs/M1_P1.asm', '--program-d1', '/Users/yihdu/Codefield/SLAI-infra-Code/transformer-codesign-starter/project/experiments/cand-143/programs/M2_D1.asm', '--report', '/Users/yihdu/Codefield/SLAI-infra-Code/transformer-codesign-starter/project/experiments/cand-143/reports/grade.json', '--seed', '7', '--baseline', '/Users/yihdu/Codefield/SLAI-infra-Code/transformer-codesign-starter/baseline_manifest.json']; elapsed=76.33950995793566; peak MiB=4069.862991333008
+- Inputs: compiler.py@65f5e878 hardware.json@d362f61f recipe.json@68e04bd1
+- Verify: PASS elapsed=76.34s
+- Result: M1_P1=4897135 (6.330x), M2_D1=167539 (7.772x); score=7013.610, eligible=True
+  - deltas vs head (cand-142): {'M1_P1': -38292, 'M2_D1': 0}
+- Decision: KEPT — new incumbent head (score=7013.610)
+
+### cand-143 verdict: KEPT — Full grade passes: cross-column prompt projection lookahead yields another positive P1 gain and raises the verified score above 7000.
+
+## 2026-09-29 — Post-cand132 hardware and TC/cache exchange screens
+- Change: Hold verified programs fixed while testing SH banks8, SH 2R1W, multicast, their combination, and legal TC3/cache4-or-cache2 area exchanges. Also test layer-major batch ordering with TC3/cache4.
+- Verify: `project/campaigns/hardware-post-pipeline/cand132/results.json`, `tc-trade/results.json`, and `tc-trade/estimate-layer-major-tc3-cache4.json`; timing-only estimates, followed by full cand-133 grade for the only positive field.
+- Result: SH banks/ports changed no cycles; multicast improved D1 207,673→207,315 and passed full grade. TC3/cache4 and TC3/cache2 scored about6104.6 proxy; layer-major+TC3/cache4 scored6139.90, all below the incumbent. TC4/8x8 is service-equivalent for the active aligned tiles; TC4/8x16 is area-ineligible.
+- Decision: keep multicast only. Close the current hardware neighborhood; compute/cache area exchanges do not beat cache16+TC2.
+
+## 2026-09-29 — cand-143 current-design saturation audit
+- Change: Re-profile the final kept head and re-run the minimal two-WG batch-parallel P1 validation preflight after all event compression. No evaluator changes and no official submission.
+- Verify: `project/experiments/cand-143/reports/{p1-profile.json,d1-profile.json,grade.json}`; cand-141 `reports/validation-cost.json`; full evidence summarized in `project/campaigns/current-design-limit/REPORT.md`.
+- Result: cand-143 P1=4,897,135, D1=167,539, score=7013.610245, area=22.8598 mm², peak power=4.019/7.495 W, both functional passes. P1 is 50.77% prompt MLP; D1 W1/W2 are23.51%/23.56%. Compressed batch-parallel P1 still has78,032 events and13.773 GB retained-set logical lower bound versus6,144 MiB budget, so no grade was launched.
+- Decision: current implemented design family is saturated. Stop tile/SH/hardware/panel sweeps; a future campaign needs a different RF layout/event-compressed algorithm or a validation environment capable of the multi-SM skeleton.

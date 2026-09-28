@@ -1,0 +1,18 @@
+{
+  "bias": null,
+  "created_at": "2026-09-29 02:09:37",
+  "failure_class": "none",
+  "family": null,
+  "fingerprint": null,
+  "hypothesis": "Cache prompt LN gamma/beta in RF and carry WO residual rows directly into LN2 while still writing the residual once; remove repeated affine loads and residual HBM reload.",
+  "id": "cand-131",
+  "kind": null,
+  "ops": null,
+  "parent": "cand-130",
+  "provenance_note": null,
+  "round": null,
+  "status": "kept",
+  "struct_sig": null,
+  "summary": "Fuse prompt residual1-LN2 and cache both prompt LayerNorm affine parameters.",
+  "verdict_note": "Full grade passes: prompt affine parameters stay in RF and residual1 flows directly into LN2; lower cycles, traffic, and expanded events."
+}

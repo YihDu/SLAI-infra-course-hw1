@@ -1,0 +1,18 @@
+{
+  "bias": null,
+  "created_at": "2026-09-29 02:06:29",
+  "failure_class": "none",
+  "family": null,
+  "fingerprint": null,
+  "hypothesis": "Repair fused RF-resident W2 residual epilogue using the existing legal K=1 ones-by-bias MMA after ff2+residual VEC; eliminate ff2 round trip and row-wise residual2.",
+  "id": "cand-130",
+  "kind": null,
+  "ops": null,
+  "parent": "cand-126",
+  "provenance_note": null,
+  "round": null,
+  "status": "kept",
+  "struct_sig": null,
+  "summary": "Legal RF-persistent W2 residual+bias epilogue.",
+  "verdict_note": "Full grade passes: W2 accumulators remain in RF through residual+bias; removes ff2 HBM round trip and row residual loop, small positive cycles and lower event count."
+}

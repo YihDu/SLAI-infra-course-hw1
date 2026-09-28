@@ -1,0 +1,82 @@
+[
+  {
+    "name": "multicast",
+    "changes": {
+      "multicast": true
+    },
+    "cycles": {
+      "M1_P1": 4960771,
+      "M2_D1": 207315
+    },
+    "score_proxy": 6264.417193272886,
+    "area_mm2": 22.85981349888,
+    "peak_power_w": {
+      "M1_P1": 4.018955333925762,
+      "M2_D1": 6.699755653472125
+    }
+  },
+  {
+    "name": "all_three",
+    "changes": {
+      "shared_banks": 8,
+      "shared_ports": "2R1W",
+      "multicast": true
+    },
+    "cycles": {
+      "M1_P1": 4960771,
+      "M2_D1": 207315
+    },
+    "score_proxy": 6264.417193272886,
+    "area_mm2": 23.167013498880003,
+    "peak_power_w": {
+      "M1_P1": 4.0266353339257615,
+      "M2_D1": 6.707435653472125
+    }
+  },
+  {
+    "name": "current",
+    "changes": {},
+    "cycles": {
+      "M1_P1": 4960771,
+      "M2_D1": 207673
+    },
+    "score_proxy": 6259.015362751037,
+    "area_mm2": 22.69981349888,
+    "peak_power_w": {
+      "M1_P1": 4.014955333925761,
+      "M2_D1": 6.707200513472132
+    }
+  },
+  {
+    "name": "shared_banks8",
+    "changes": {
+      "shared_banks": 8
+    },
+    "cycles": {
+      "M1_P1": 4960771,
+      "M2_D1": 207673
+    },
+    "score_proxy": 6259.015362751037,
+    "area_mm2": 22.82781349888,
+    "peak_power_w": {
+      "M1_P1": 4.018155333925762,
+      "M2_D1": 6.710400513472132
+    }
+  },
+  {
+    "name": "shared_2r1w",
+    "changes": {
+      "shared_ports": "2R1W"
+    },
+    "cycles": {
+      "M1_P1": 4960771,
+      "M2_D1": 207673
+    },
+    "score_proxy": 6259.015362751037,
+    "area_mm2": 22.789413498880002,
+    "peak_power_w": {
+      "M1_P1": 4.017195333925762,
+      "M2_D1": 6.709440513472132
+    }
+  }
+]

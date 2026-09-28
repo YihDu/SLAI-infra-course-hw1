@@ -1,0 +1,18 @@
+{
+  "bias": null,
+  "created_at": "2026-09-29 01:55:58",
+  "failure_class": "none",
+  "family": null,
+  "fingerprint": null,
+  "hypothesis": "Retile only P1 first-token GEMMs from N16/K48 to RF-legal N64/K16, reducing small-M QKV/W1/W2 panel count and event overhead; prompt path and D1 unchanged.",
+  "id": "cand-126",
+  "kind": null,
+  "ops": null,
+  "parent": "cand-124",
+  "provenance_note": null,
+  "round": null,
+  "status": "kept",
+  "struct_sig": null,
+  "summary": "P1 step projection retile N64 K16.",
+  "verdict_note": "Full grade passes; small but certain P1 step retile gain with reduced expanded instructions and unchanged D1."
+}

@@ -1,0 +1,18 @@
+{
+  "bias": null,
+  "created_at": "2026-09-29 02:42:05",
+  "failure_class": "none",
+  "family": null,
+  "fingerprint": null,
+  "hypothesis": "Double-buffer A/B K panels for every sharded single-row D1 projection while preserving owner counts, tile shapes, event count, and ascending K arithmetic.",
+  "id": "cand-136",
+  "kind": null,
+  "ops": null,
+  "parent": "cand-135",
+  "provenance_note": null,
+  "round": null,
+  "status": "kept",
+  "struct_sig": null,
+  "summary": "Four-owner D1 GEMM operand pipeline.",
+  "verdict_note": "Full grade passes: double-buffered D1 projection operands overlap LD and MMA, producing a material end-to-end decode improvement with the same arithmetic."
+}

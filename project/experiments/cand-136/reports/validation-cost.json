@@ -1,0 +1,58 @@
+{
+  "M2_D1": {
+    "expanded_instructions": 15808,
+    "source_lines": 7808,
+    "static_loops": 1440,
+    "workgroup_lifetimes": 4,
+    "workgroup_names": 4,
+    "opcode_counts": {
+      "WG.BEGIN": 4,
+      "LD": 7800,
+      "REDUCE": 192,
+      "VEC": 2544,
+      "SFU": 160,
+      "ST": 712,
+      "BARRIER": 160,
+      "MMA.ACC": 4224,
+      "STEP.COMMIT": 8,
+      "WG.END": 4
+    },
+    "events": 15632,
+    "graph_edges": 45933,
+    "named_cross_wg_sync_edges": 0,
+    "barrier_directed_pair_relations": 1920,
+    "barrier_incidence_edges": 1280,
+    "global_commit_incidence_edges": 29689,
+    "stages": {
+      "unknown/control": {
+        "instructions": 15808,
+        "WG.BEGIN": 4,
+        "LD": 7800,
+        "events": 15632,
+        "REDUCE": 192,
+        "VEC": 2544,
+        "SFU": 160,
+        "ST": 712,
+        "BARRIER": 160,
+        "MMA.ACC": 4224,
+        "STEP.COMMIT": 8,
+        "WG.END": 4,
+        "sum_dependency_depth_lower_bound": 16021936
+      }
+    },
+    "race_checker_single_wg_fast_path": false,
+    "max_dependency_depth_lower_bound": 2041,
+    "sum_dependency_depth_lower_bound": 16021936,
+    "retained_event_sets_logical_bytes_lower_bound": 258727040,
+    "decision": "within_lower_bound_only",
+    "budget_mib": 6144,
+    "checkpoints": [
+      {
+        "visited": 10000,
+        "max_depth": 1297,
+        "sum_depth": 6431591
+      }
+    ],
+    "caveat": "Lower bound on uncompressed CPython event-set allocation, not peak RSS prediction. Passing cost screen never establishes race correctness. Multi-path/HBM unions, tuples, prefixes and graph storage add memory."
+  }
+}

@@ -1,0 +1,18 @@
+{
+  "bias": null,
+  "created_at": "2026-09-29 03:00:46",
+  "failure_class": "validation_cost_pruned",
+  "family": null,
+  "fingerprint": null,
+  "hypothesis": "Re-evaluate the minimal two-WG end-to-end batch-parallel P1 skeleton after reducing the mature program to roughly 78k events; no per-layer barriers, validation preflight only unless within budget.",
+  "id": "cand-141",
+  "kind": null,
+  "ops": null,
+  "parent": "cand-139",
+  "provenance_note": null,
+  "round": null,
+  "status": "reverted",
+  "struct_sig": null,
+  "summary": "Compressed-head batch-parallel validation-cost checkpoint.",
+  "verdict_note": "Validation-cost pruned at 13.77 GB logical retained-event lower bound versus 6 GiB budget; compressed two-WG P1 remains locally unverifiable."
+}

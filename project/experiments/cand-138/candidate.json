@@ -1,0 +1,18 @@
+{
+  "bias": null,
+  "created_at": "2026-09-29 02:50:39",
+  "failure_class": "none",
+  "family": null,
+  "fingerprint": null,
+  "hypothesis": "Reuse the existing 64 KiB prompt shared allocation for LN1 output, and feed the unchanged QKV operand pipeline from SH instead of repeated cache/NoC activation reads.",
+  "id": "cand-138",
+  "kind": null,
+  "ops": null,
+  "parent": "cand-137",
+  "provenance_note": null,
+  "round": null,
+  "status": "kept",
+  "struct_sig": null,
+  "summary": "LN1-to-QKV shared-resident activation.",
+  "verdict_note": "Full grade passes with a marginal positive LN1-to-QKV SH result; retain best score and stop SH residency expansion."
+}

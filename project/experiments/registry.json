@@ -1,7 +1,7 @@
 {
   "archives": {
     "diversity": {
-      "?|?": "cand-124",
+      "?|?": "cand-143",
       "attention_blocked_pipeline|p1": "cand-122",
       "attention_blocked|p1": "cand-106",
       "attention|balanced": "cand-019",
@@ -19,7 +19,7 @@
       "persistent_mlp_pipeline|p1": "cand-118",
       "persistent_mlp_sh|p1": "cand-123",
       "persistent_mlp|p1": "cand-110",
-      "sig:?|?": "cand-124",
+      "sig:?|?": "cand-143",
       "sig:blocked-prompt-q16-k32": "cand-106",
       "sig:blocked-prompt-q16-k32-panel-pipeline": "cand-121",
       "sig:blocked-prompt-q16-k32-panel-pipeline-v2": "cand-122",
@@ -77,17 +77,17 @@
       "sig:stage:p1_prompt": "cand-070"
     },
     "elite": [
-      "cand-124",
-      "cand-122",
-      "cand-120",
-      "cand-119",
-      "cand-118",
-      "cand-123",
-      "cand-121",
-      "cand-115"
+      "cand-143",
+      "cand-142",
+      "cand-139",
+      "cand-138",
+      "cand-137",
+      "cand-140",
+      "cand-136",
+      "cand-135"
     ],
     "pareto": [
-      "cand-124"
+      "cand-143"
     ]
   },
   "candidates": {
@@ -4663,6 +4663,678 @@
       "result_logged": true,
       "status": "reverted"
     },
+    "cand-126": {
+      "area_mm2": 22.69981349888,
+      "cache_source": null,
+      "cycles": {
+        "M1_P1": 5038371,
+        "M2_D1": 207673
+      },
+      "deltas": {
+        "cycles": {
+          "M1_P1": -34290,
+          "M2_D1": 0
+        },
+        "prior_head": "cand-124",
+        "score": 21.026790360981067,
+        "vs_parent": {
+          "cycles": {
+            "M1_P1": -34290,
+            "M2_D1": 0
+          },
+          "parent": "cand-124",
+          "score": 21.026790360981067
+        }
+      },
+      "elapsed": 103.42866208299529,
+      "eligible": true,
+      "evaluation_attempts": 1,
+      "failure_class": "none",
+      "functional": {
+        "M1_P1": true,
+        "M2_D1": true
+      },
+      "functional_passed": true,
+      "hypothesis": "Retile only P1 first-token GEMMs from N16/K48 to RF-legal N64/K16, reducing small-M QKV/W1/W2 panel count and event overhead; prompt path and D1 unchanged.",
+      "parent": "cand-124",
+      "power_w": 6.707200513472132,
+      "result_logged": true,
+      "score": 6210.628265348859,
+      "status": "kept"
+    },
+    "cand-127": {
+      "area_mm2": 22.69981349888,
+      "cache_source": null,
+      "cycles": {
+        "M1_P1": 5045751,
+        "M2_D1": 207673
+      },
+      "deltas": {
+        "cycles": {
+          "M1_P1": 7380,
+          "M2_D1": 0
+        },
+        "prior_head": "cand-126",
+        "score": -4.543546482948841,
+        "vs_parent": {
+          "cycles": {
+            "M1_P1": 7380,
+            "M2_D1": 0
+          },
+          "parent": "cand-126",
+          "score": -4.543546482948841
+        }
+      },
+      "elapsed": 106.00787270907313,
+      "eligible": true,
+      "evaluation_attempts": 1,
+      "failure_class": "none",
+      "functional": {
+        "M1_P1": true,
+        "M2_D1": true
+      },
+      "functional_passed": true,
+      "hypothesis": "Retile only P1 first-token GEMMs from N64/K16 to the next RF-capacity-equivalent point N128/K8, reducing output-panel initialization/stores and repeated A traffic.",
+      "parent": "cand-126",
+      "power_w": 6.707200513472132,
+      "result_logged": true,
+      "score": 6206.08471886591,
+      "status": "reverted"
+    },
+    "cand-128": {
+      "area_mm2": 22.69981349888,
+      "cache_source": null,
+      "cycles": {
+        "M1_P1": 5063367,
+        "M2_D1": 207673
+      },
+      "deltas": {
+        "cycles": {
+          "M1_P1": 24996,
+          "M2_D1": 0
+        },
+        "prior_head": "cand-126",
+        "score": -15.348771914585086,
+        "vs_parent": {
+          "cycles": {
+            "M1_P1": 24996,
+            "M2_D1": 0
+          },
+          "parent": "cand-126",
+          "score": -15.348771914585086
+        }
+      },
+      "elapsed": 107.06573595898226,
+      "eligible": true,
+      "evaluation_attempts": 1,
+      "failure_class": "none",
+      "functional": {
+        "M1_P1": true,
+        "M2_D1": true
+      },
+      "functional_passed": true,
+      "hypothesis": "Test the final RF-capacity-equivalent P1 first-token boundary N256/K4; minimize N panels while keeping B tiles at 1024 words and TC K groups exact.",
+      "parent": "cand-126",
+      "power_w": 6.707200513472132,
+      "result_logged": true,
+      "score": 6195.279493434274,
+      "status": "reverted"
+    },
+    "cand-129": {
+      "cache_source": null,
+      "cycles": {
+        "M2_D1": 207673
+      },
+      "deltas": {
+        "cycles": {
+          "M2_D1": 0
+        },
+        "prior_head": "cand-126",
+        "vs_parent": {
+          "cycles": {
+            "M2_D1": 0
+          },
+          "parent": "cand-126"
+        }
+      },
+      "elapsed": 58.83511912508402,
+      "eligible": false,
+      "evaluation_attempts": 1,
+      "failure_class": "incorrect",
+      "functional": {
+        "M1_P1": false,
+        "M2_D1": true
+      },
+      "functional_passed": false,
+      "hypothesis": "Keep W2 accumulators in RF through residual2 and b2, broadcasting bias into RF and storing final prompt output directly; remove ff2 HBM materialization and row-wise residual epilogue.",
+      "parent": "cand-126",
+      "power_w": 6.707200513472132,
+      "result_logged": true,
+      "status": "reverted"
+    },
+    "cand-130": {
+      "area_mm2": 22.69981349888,
+      "cache_source": null,
+      "cycles": {
+        "M1_P1": 5008053,
+        "M2_D1": 207673
+      },
+      "deltas": {
+        "cycles": {
+          "M1_P1": -30318,
+          "M2_D1": 0
+        },
+        "prior_head": "cand-126",
+        "score": 18.770738994467138,
+        "vs_parent": {
+          "cycles": {
+            "M1_P1": -30318,
+            "M2_D1": 0
+          },
+          "parent": "cand-126",
+          "score": 18.770738994467138
+        }
+      },
+      "elapsed": 102.84149599994998,
+      "eligible": true,
+      "evaluation_attempts": 1,
+      "failure_class": "none",
+      "functional": {
+        "M1_P1": true,
+        "M2_D1": true
+      },
+      "functional_passed": true,
+      "hypothesis": "Repair fused RF-resident W2 residual epilogue using the existing legal K=1 ones-by-bias MMA after ff2+residual VEC; eliminate ff2 round trip and row-wise residual2.",
+      "parent": "cand-126",
+      "power_w": 6.707200513472132,
+      "result_logged": true,
+      "score": 6229.399004343326,
+      "status": "kept"
+    },
+    "cand-131": {
+      "area_mm2": 22.69981349888,
+      "cache_source": null,
+      "cycles": {
+        "M1_P1": 4963013,
+        "M2_D1": 207673
+      },
+      "deltas": {
+        "cycles": {
+          "M1_P1": -45040,
+          "M2_D1": 0
+        },
+        "prior_head": "cand-130",
+        "score": 28.20246954708,
+        "vs_parent": {
+          "cycles": {
+            "M1_P1": -45040,
+            "M2_D1": 0
+          },
+          "parent": "cand-130",
+          "score": 28.20246954708
+        }
+      },
+      "elapsed": 102.19165687495843,
+      "eligible": true,
+      "evaluation_attempts": 1,
+      "failure_class": "none",
+      "functional": {
+        "M1_P1": true,
+        "M2_D1": true
+      },
+      "functional_passed": true,
+      "hypothesis": "Cache prompt LN gamma/beta in RF and carry WO residual rows directly into LN2 while still writing the residual once; remove repeated affine loads and residual HBM reload.",
+      "parent": "cand-130",
+      "power_w": 6.707200513472132,
+      "result_logged": true,
+      "score": 6257.601473890406,
+      "status": "kept"
+    },
+    "cand-132": {
+      "area_mm2": 22.69981349888,
+      "cache_source": null,
+      "cycles": {
+        "M1_P1": 4960771,
+        "M2_D1": 207673
+      },
+      "deltas": {
+        "cycles": {
+          "M1_P1": -2242,
+          "M2_D1": 0
+        },
+        "prior_head": "cand-131",
+        "score": 1.413888860631232,
+        "vs_parent": {
+          "cycles": {
+            "M1_P1": -2242,
+            "M2_D1": 0
+          },
+          "parent": "cand-131",
+          "score": 1.413888860631232
+        }
+      },
+      "elapsed": 98.07885470904876,
+      "eligible": true,
+      "evaluation_attempts": 1,
+      "failure_class": "none",
+      "functional": {
+        "M1_P1": true,
+        "M2_D1": true
+      },
+      "functional_passed": true,
+      "hypothesis": "Place each prompt LN2 activation in 64 KiB shared memory and feed the existing double-buffered RF MLP from SH, eliminating repeated cache/NoC source loads without changing GELU/W2 scheduling.",
+      "parent": "cand-131",
+      "power_w": 6.707200513472132,
+      "result_logged": true,
+      "score": 6259.015362751037,
+      "status": "kept"
+    },
+    "cand-133": {
+      "area_mm2": 22.85981349888,
+      "cache_source": null,
+      "cycles": {
+        "M1_P1": 4960771,
+        "M2_D1": 207315
+      },
+      "deltas": {
+        "cycles": {
+          "M1_P1": 0,
+          "M2_D1": -358
+        },
+        "prior_head": "cand-132",
+        "score": 5.401830521853299,
+        "vs_parent": {
+          "cycles": {
+            "M1_P1": 0,
+            "M2_D1": -358
+          },
+          "parent": "cand-132",
+          "score": 5.401830521853299
+        }
+      },
+      "elapsed": 123.59572108404245,
+      "eligible": true,
+      "evaluation_attempts": 1,
+      "failure_class": "none",
+      "functional": {
+        "M1_P1": true,
+        "M2_D1": true
+      },
+      "functional_passed": true,
+      "hypothesis": "Enable multicast, the only positive remaining legal hardware field in the fixed cand-132 screen; preserve programs and all other hardware.",
+      "parent": "cand-132",
+      "power_w": 6.699755653472125,
+      "result_logged": true,
+      "score": 6264.4171932728905,
+      "status": "kept"
+    },
+    "cand-134": {
+      "area_mm2": 22.85981349888,
+      "cache_source": null,
+      "cycles": {
+        "M1_P1": 4960924,
+        "M2_D1": 207315
+      },
+      "deltas": {
+        "cycles": {
+          "M1_P1": 153,
+          "M2_D1": 0
+        },
+        "prior_head": "cand-133",
+        "score": -0.09660128038922267,
+        "vs_parent": {
+          "cycles": {
+            "M1_P1": 153,
+            "M2_D1": 0
+          },
+          "parent": "cand-133",
+          "score": -0.09660128038922267
+        }
+      },
+      "elapsed": 98.31475750007667,
+      "eligible": true,
+      "evaluation_attempts": 1,
+      "failure_class": "none",
+      "functional": {
+        "M1_P1": true,
+        "M2_D1": true
+      },
+      "functional_passed": true,
+      "hypothesis": "Execute both P1 batch members layer-major so each layer weight set is reused immediately across the two independent members; preserve arithmetic and single-WG validation fast path.",
+      "parent": "cand-133",
+      "power_w": 6.699755653472125,
+      "result_logged": true,
+      "score": 6264.320591992501,
+      "status": "reverted"
+    },
+    "cand-135": {
+      "area_mm2": 22.85981349888,
+      "cache_source": null,
+      "cycles": {
+        "M1_P1": 4960771,
+        "M2_D1": 195174
+      },
+      "deltas": {
+        "cycles": {
+          "M1_P1": 0,
+          "M2_D1": -12141
+        },
+        "prior_head": "cand-133",
+        "score": 191.90290900312448,
+        "vs_parent": {
+          "cycles": {
+            "M1_P1": 0,
+            "M2_D1": -12141
+          },
+          "parent": "cand-133",
+          "score": 191.90290900312448
+        }
+      },
+      "elapsed": 100.38264062500093,
+      "eligible": true,
+      "evaluation_attempts": 1,
+      "failure_class": "none",
+      "functional": {
+        "M1_P1": true,
+        "M2_D1": true
+      },
+      "functional_passed": true,
+      "hypothesis": "Shard each single-row D1 GELU across the four persistent owners, reusing the existing W1 trailing and W2 leading barriers; remove the SM0-only GELU bottleneck without new sync boundaries.",
+      "parent": "cand-133",
+      "power_w": 6.699755653472125,
+      "result_logged": true,
+      "score": 6456.320102276015,
+      "status": "kept"
+    },
+    "cand-136": {
+      "area_mm2": 22.85981349888,
+      "cache_source": null,
+      "cycles": {
+        "M1_P1": 4960771,
+        "M2_D1": 171256
+      },
+      "deltas": {
+        "cycles": {
+          "M1_P1": 0,
+          "M2_D1": -23918
+        },
+        "prior_head": "cand-135",
+        "score": 436.1221776911161,
+        "vs_parent": {
+          "cycles": {
+            "M1_P1": 0,
+            "M2_D1": -23918
+          },
+          "parent": "cand-135",
+          "score": 436.1221776911161
+        }
+      },
+      "elapsed": 107.6582077499479,
+      "eligible": true,
+      "evaluation_attempts": 1,
+      "failure_class": "none",
+      "functional": {
+        "M1_P1": true,
+        "M2_D1": true
+      },
+      "functional_passed": true,
+      "hypothesis": "Double-buffer A/B K panels for every sharded single-row D1 projection while preserving owner counts, tile shapes, event count, and ascending K arithmetic.",
+      "parent": "cand-135",
+      "power_w": 7.251089705472849,
+      "result_logged": true,
+      "score": 6892.442279967131,
+      "status": "kept"
+    },
+    "cand-137": {
+      "area_mm2": 22.85981349888,
+      "cache_source": null,
+      "cycles": {
+        "M1_P1": 4960771,
+        "M2_D1": 169003
+      },
+      "deltas": {
+        "cycles": {
+          "M1_P1": 0,
+          "M2_D1": -2253
+        },
+        "prior_head": "cand-136",
+        "score": 45.789899914983835,
+        "vs_parent": {
+          "cycles": {
+            "M1_P1": 0,
+            "M2_D1": -2253
+          },
+          "parent": "cand-136",
+          "score": 45.789899914983835
+        }
+      },
+      "elapsed": 105.46901162504219,
+      "eligible": true,
+      "evaluation_attempts": 1,
+      "failure_class": "none",
+      "functional": {
+        "M1_P1": true,
+        "M2_D1": true
+      },
+      "functional_passed": true,
+      "hypothesis": "Double-buffer only the 128-token D1 history K/V panels inside each persistent attention head owner; preserve RF softmax, generated-tail path, event count, and arithmetic.",
+      "parent": "cand-136",
+      "power_w": 7.498402193472631,
+      "result_logged": true,
+      "score": 6938.232179882115,
+      "status": "kept"
+    },
+    "cand-138": {
+      "area_mm2": 22.85981349888,
+      "cache_source": null,
+      "cycles": {
+        "M1_P1": 4959259,
+        "M2_D1": 169003
+      },
+      "deltas": {
+        "cycles": {
+          "M1_P1": -1512,
+          "M2_D1": 0
+        },
+        "prior_head": "cand-137",
+        "score": 1.057598279564445,
+        "vs_parent": {
+          "cycles": {
+            "M1_P1": -1512,
+            "M2_D1": 0
+          },
+          "parent": "cand-137",
+          "score": 1.057598279564445
+        }
+      },
+      "elapsed": 99.85951154201757,
+      "eligible": true,
+      "evaluation_attempts": 1,
+      "failure_class": "none",
+      "functional": {
+        "M1_P1": true,
+        "M2_D1": true
+      },
+      "functional_passed": true,
+      "hypothesis": "Reuse the existing 64 KiB prompt shared allocation for LN1 output, and feed the unchanged QKV operand pipeline from SH instead of repeated cache/NoC activation reads.",
+      "parent": "cand-137",
+      "power_w": 7.498402193472631,
+      "result_logged": true,
+      "score": 6939.289778161679,
+      "status": "kept"
+    },
+    "cand-139": {
+      "area_mm2": 22.85981349888,
+      "cache_source": null,
+      "cycles": {
+        "M1_P1": 4959259,
+        "M2_D1": 167539
+      },
+      "deltas": {
+        "cycles": {
+          "M1_P1": 0,
+          "M2_D1": -1464
+        },
+        "prior_head": "cand-138",
+        "score": 30.25272744175345,
+        "vs_parent": {
+          "cycles": {
+            "M1_P1": 0,
+            "M2_D1": -1464
+          },
+          "parent": "cand-138",
+          "score": 30.25272744175345
+        }
+      },
+      "elapsed": 76.89111487497576,
+      "eligible": true,
+      "evaluation_attempts": 1,
+      "failure_class": "none",
+      "functional": {
+        "M1_P1": true,
+        "M2_D1": true
+      },
+      "functional_passed": true,
+      "hypothesis": "Keep each single-token D1 activation vector resident in one RF partition across all output panels; retain B double buffering and identical ascending-K arithmetic.",
+      "parent": "cand-138",
+      "power_w": 7.494538241472594,
+      "result_logged": true,
+      "score": 6969.542505603433,
+      "status": "kept"
+    },
+    "cand-140": {
+      "area_mm2": 22.85981349888,
+      "cache_source": null,
+      "cycles": {
+        "M1_P1": 4959259,
+        "M2_D1": 169389
+      },
+      "deltas": {
+        "cycles": {
+          "M1_P1": 0,
+          "M2_D1": 1850
+        },
+        "prior_head": "cand-139",
+        "score": -38.163788844926785,
+        "vs_parent": {
+          "cycles": {
+            "M1_P1": 0,
+            "M2_D1": 1850
+          },
+          "parent": "cand-139",
+          "score": -38.163788844926785
+        }
+      },
+      "elapsed": 75.14468916703481,
+      "eligible": true,
+      "evaluation_attempts": 1,
+      "failure_class": "none",
+      "functional": {
+        "M1_P1": true,
+        "M2_D1": true
+      },
+      "functional_passed": true,
+      "hypothesis": "Preload each owner\u2019s two 128x128 D1 W1 weight shards into its 128 KiB private SH once, then reuse them across all eight committed decode steps.",
+      "parent": "cand-139",
+      "power_w": 14.815082217472327,
+      "result_logged": true,
+      "score": 6931.378716758506,
+      "status": "reverted"
+    },
+    "cand-141": {
+      "cache_source": null,
+      "deltas": {
+        "prior_head": "cand-139",
+        "vs_parent": {
+          "parent": "cand-139"
+        }
+      },
+      "elapsed": null,
+      "evaluation_attempts": 0,
+      "failure_class": "validation_cost_pruned",
+      "hypothesis": "Re-evaluate the minimal two-WG end-to-end batch-parallel P1 skeleton after reducing the mature program to roughly 78k events; no per-layer barriers, validation preflight only unless within budget.",
+      "parent": "cand-139",
+      "result_logged": true,
+      "status": "reverted"
+    },
+    "cand-142": {
+      "area_mm2": 22.85981349888,
+      "cache_source": null,
+      "cycles": {
+        "M1_P1": 4935427,
+        "M2_D1": 167539
+      },
+      "deltas": {
+        "cycles": {
+          "M1_P1": -23832,
+          "M2_D1": 0
+        },
+        "prior_head": "cand-139",
+        "score": 16.806864692417548,
+        "vs_parent": {
+          "cycles": {
+            "M1_P1": -23832,
+            "M2_D1": 0
+          },
+          "parent": "cand-139",
+          "score": 16.806864692417548
+        }
+      },
+      "elapsed": 76.69728479103651,
+      "eligible": true,
+      "evaluation_attempts": 1,
+      "failure_class": "none",
+      "functional": {
+        "M1_P1": true,
+        "M2_D1": true
+      },
+      "functional_passed": true,
+      "hypothesis": "Prefetch the next prompt MLP neuron panel\u2019s first W1 A/B operands into idle RF0/RF15 during the current neuron\u2019s W2 phase; preserve events and arithmetic.",
+      "parent": "cand-139",
+      "power_w": 7.494538241472594,
+      "result_logged": true,
+      "score": 6986.34937029585,
+      "status": "kept"
+    },
+    "cand-143": {
+      "area_mm2": 22.85981349888,
+      "cache_source": null,
+      "cycles": {
+        "M1_P1": 4897135,
+        "M2_D1": 167539
+      },
+      "deltas": {
+        "cycles": {
+          "M1_P1": -38292,
+          "M2_D1": 0
+        },
+        "prior_head": "cand-142",
+        "score": 27.260874949994104,
+        "vs_parent": {
+          "cycles": {
+            "M1_P1": -38292,
+            "M2_D1": 0
+          },
+          "parent": "cand-142",
+          "score": 27.260874949994104
+        }
+      },
+      "elapsed": 76.34280387498438,
+      "eligible": true,
+      "evaluation_attempts": 1,
+      "failure_class": "none",
+      "functional": {
+        "M1_P1": true,
+        "M2_D1": true
+      },
+      "functional_passed": true,
+      "hypothesis": "Prefetch each next P1 QKV/WO output column\u2019s K0 B/A operands into released parity-0 RF buffers before the current column\u2019s final stores; preserve events and arithmetic.",
+      "parent": "cand-142",
+      "power_w": 7.494538241472594,
+      "result_logged": true,
+      "score": 7013.610245245844,
+      "status": "kept"
+    },
     "drun-001": {
       "bias": "balanced",
       "failure_class": "dry_run",
@@ -5409,11 +6081,11 @@
     "ff0c29904037c174": "cand-089",
     "ff6870b21f8f0ec7": "cand-055"
   },
-  "head": "cand-124",
-  "revision": 50,
+  "head": "cand-143",
+  "revision": 140,
   "search": {
-    "best_id": "cand-124",
-    "best_score": 6189.601474987878,
+    "best_id": "cand-143",
+    "best_score": 7013.610245245844,
     "bottleneck": "M1_P1 sm0.rf_read=2818280, sm0.rf_write=2788264, sm0.dma=1876160; M2_D1 sm0.rf_write=261248, sm0.dma=239104, shared.noc=226521 (overlapping service counts)",
     "explore_ratio": 0.54,
     "hierarchy": {

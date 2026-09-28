@@ -1,0 +1,18 @@
+{
+  "bias": null,
+  "created_at": "2026-09-29 02:38:25",
+  "failure_class": "none",
+  "family": null,
+  "fingerprint": null,
+  "hypothesis": "Shard each single-row D1 GELU across the four persistent owners, reusing the existing W1 trailing and W2 leading barriers; remove the SM0-only GELU bottleneck without new sync boundaries.",
+  "id": "cand-135",
+  "kind": null,
+  "ops": null,
+  "parent": "cand-133",
+  "provenance_note": null,
+  "round": null,
+  "status": "kept",
+  "struct_sig": null,
+  "summary": "Four-way persistent D1 GELU column partition.",
+  "verdict_note": "Full grade passes: four-way D1 GELU partition removes the SM0-only segment and gives the largest gain in this continuation."
+}

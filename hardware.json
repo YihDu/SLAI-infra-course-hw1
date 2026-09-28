@@ -3,7 +3,7 @@
   "dma_depth": 2,
   "dma_engines": 2,
   "hbm_channels": 8,
-  "multicast": false,
+  "multicast": true,
   "noc_bytes_per_cycle": 256,
   "reduction_units": 2,
   "rf_ports": "8R4W",

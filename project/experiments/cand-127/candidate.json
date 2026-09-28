@@ -1,0 +1,18 @@
+{
+  "bias": null,
+  "created_at": "2026-09-29 01:58:49",
+  "failure_class": "none",
+  "family": null,
+  "fingerprint": null,
+  "hypothesis": "Retile only P1 first-token GEMMs from N64/K16 to the next RF-capacity-equivalent point N128/K8, reducing output-panel initialization/stores and repeated A traffic.",
+  "id": "cand-127",
+  "kind": null,
+  "ops": null,
+  "parent": "cand-126",
+  "provenance_note": null,
+  "round": null,
+  "status": "reverted",
+  "struct_sig": null,
+  "summary": "P1 step projection retile N128 K8.",
+  "verdict_note": "Correct full grade but slightly slower than cand-126; larger N128/K8 does not improve the step schedule."
+}

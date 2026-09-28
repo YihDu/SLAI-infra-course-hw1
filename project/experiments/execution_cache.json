@@ -76,7 +76,7 @@
     },
     "score": 1875.6812796394786,
     "status": "evaluated",
-    "stored_at": "2026-09-29 01:52:07"
+    "stored_at": "2026-09-29 03:05:52"
   },
   "04f904bdd8d9d19b0d8083a810381608f93259631bc95cf6e4bdcadf22c4146d": {
     "candidate_id": "cand-085",
@@ -165,7 +165,7 @@
     },
     "score": 2245.0389561884695,
     "status": "evaluated",
-    "stored_at": "2026-09-29 01:52:07"
+    "stored_at": "2026-09-29 03:05:52"
   },
   "05b22fd2da0bab4d3ff92ad05aa04b65196651dccc7fd5d6d1bf83119d678c2a": {
     "candidate_id": "cand-122",
@@ -288,7 +288,143 @@
     },
     "score": 5861.568830137381,
     "status": "evaluated",
-    "stored_at": "2026-09-29 01:52:07"
+    "stored_at": "2026-09-29 03:05:53"
+  },
+  "0cbc902e58d16083d4d2344ea1e85b1f3403f31ea72ba44474fd92ce56f6ddf0": {
+    "candidate_id": "cand-127",
+    "eligible": true,
+    "functional_passed": true,
+    "metrics": {
+      "candidate": "cand-127",
+      "historical_import": true,
+      "reports": {
+        "grade": {
+          "area_mm2": 22.69981349888,
+          "cases": {
+            "M1_P1": {
+              "busy_cycles": {
+                "shared.cache_bank_0": 390667,
+                "shared.cache_bank_1": 390667,
+                "shared.cache_bank_2": 390668,
+                "shared.cache_bank_3": 390668,
+                "shared.hbm_channel_0": 75888,
+                "shared.hbm_channel_1": 75888,
+                "shared.hbm_channel_2": 75888,
+                "shared.hbm_channel_3": 75888,
+                "shared.hbm_channel_4": 75876,
+                "shared.hbm_channel_5": 75880,
+                "shared.hbm_channel_6": 75880,
+                "shared.hbm_channel_7": 75880,
+                "shared.noc": 1077946,
+                "sm0.dma": 1414592,
+                "sm0.issue": 81731,
+                "sm0.issue_wait": 4950816,
+                "sm0.noc_in": 1031346,
+                "sm0.noc_out": 77728,
+                "sm0.reduce": 81552,
+                "sm0.rf_read": 2652440,
+                "sm0.rf_write": 2424256,
+                "sm0.sfu": 143244,
+                "sm0.shared_read": 0,
+                "sm0.shared_write": 0,
+                "sm0.tc": 410160,
+                "sm0.vec": 412560
+              },
+              "cycles": 5045751,
+              "functional_passed": true,
+              "hbm_read_bytes": 14451584,
+              "hbm_write_bytes": 4974592,
+              "instruction_count": 81731,
+              "max_abs_error": 2.793004260981391e-06,
+              "peak_window_power_w": 4.014955333925761
+            },
+            "M2_D1": {
+              "busy_cycles": {
+                "shared.cache_bank_0": 68196,
+                "shared.cache_bank_1": 68196,
+                "shared.cache_bank_2": 67748,
+                "shared.cache_bank_3": 67748,
+                "shared.hbm_channel_0": 9032,
+                "shared.hbm_channel_1": 9032,
+                "shared.hbm_channel_2": 8968,
+                "shared.hbm_channel_3": 8968,
+                "shared.hbm_channel_4": 9024,
+                "shared.hbm_channel_5": 9024,
+                "shared.hbm_channel_6": 8960,
+                "shared.hbm_channel_7": 8960,
+                "shared.noc": 74568,
+                "sm0.dma": 62976,
+                "sm0.issue": 4762,
+                "sm0.issue_wait": 200446,
+                "sm0.noc_in": 56952,
+                "sm0.noc_out": 1472,
+                "sm0.reduce": 1312,
+                "sm0.rf_read": 39184,
+                "sm0.rf_write": 72544,
+                "sm0.sfu": 2912,
+                "sm0.shared_read": 0,
+                "sm0.shared_write": 0,
+                "sm0.tc": 12056,
+                "sm0.vec": 8736,
+                "sm1.dma": 59392,
+                "sm1.issue": 3722,
+                "sm1.issue_wait": 173376,
+                "sm1.noc_in": 54798,
+                "sm1.noc_out": 384,
+                "sm1.reduce": 480,
+                "sm1.rf_read": 33200,
+                "sm1.rf_write": 63584,
+                "sm1.sfu": 608,
+                "sm1.shared_read": 0,
+                "sm1.shared_write": 0,
+                "sm1.tc": 12056,
+                "sm1.vec": 1760,
+                "sm2.dma": 59392,
+                "sm2.issue": 3722,
+                "sm2.issue_wait": 173466,
+                "sm2.noc_in": 54409,
+                "sm2.noc_out": 384,
+                "sm2.reduce": 480,
+                "sm2.rf_read": 33200,
+                "sm2.rf_write": 63584,
+                "sm2.sfu": 608,
+                "sm2.shared_read": 0,
+                "sm2.shared_write": 0,
+                "sm2.tc": 12056,
+                "sm2.vec": 1760,
+                "sm3.dma": 59392,
+                "sm3.issue": 3722,
+                "sm3.issue_wait": 173538,
+                "sm3.noc_in": 54654,
+                "sm3.noc_out": 384,
+                "sm3.reduce": 480,
+                "sm3.rf_read": 33200,
+                "sm3.rf_write": 63584,
+                "sm3.sfu": 608,
+                "sm3.shared_read": 0,
+                "sm3.shared_write": 0,
+                "sm3.tc": 12056,
+                "sm3.vec": 1760
+              },
+              "cycles": 207673,
+              "functional_passed": true,
+              "hbm_read_bytes": 2135040,
+              "hbm_write_bytes": 167936,
+              "instruction_count": 15424,
+              "max_abs_error": 1.1209758654651125e-06,
+              "peak_window_power_w": 6.707200513472132
+            }
+          },
+          "eligible": true,
+          "mode": "grade",
+          "score": 6206.08471886591
+        }
+      },
+      "verdict": "evaluated"
+    },
+    "score": 6206.08471886591,
+    "status": "evaluated",
+    "stored_at": "2026-09-29 03:05:53"
   },
   "11075cdc58a3664900580649dd4d5ea6368c048edaf99c259e71cc5fa664572b": {
     "candidate_id": "cand-088",
@@ -375,7 +511,7 @@
     },
     "score": 2329.2938717469783,
     "status": "evaluated",
-    "stored_at": "2026-09-29 01:52:07"
+    "stored_at": "2026-09-29 03:05:52"
   },
   "128824ced63b281c5368574e5ba42e8a5584d891de912c0d22fc49cf51fdbd67": {
     "candidate_id": "cand-091",
@@ -462,7 +598,7 @@
     },
     "score": 2245.0389561884695,
     "status": "evaluated",
-    "stored_at": "2026-09-29 01:52:07"
+    "stored_at": "2026-09-29 03:05:52"
   },
   "13fe1098f24130d731c12c74f80c8748374c70fc4c95d023cf06c2e482923dac": {
     "candidate_id": "cand-117",
@@ -585,7 +721,143 @@
     },
     "score": 5007.7282231030185,
     "status": "evaluated",
-    "stored_at": "2026-09-29 01:52:07"
+    "stored_at": "2026-09-29 03:05:53"
+  },
+  "1a5adfd2b23af034bc5db8f8cb93497cbf5eed2123578a8b158ce01b1b80eff0": {
+    "candidate_id": "cand-128",
+    "eligible": true,
+    "functional_passed": true,
+    "metrics": {
+      "candidate": "cand-128",
+      "historical_import": true,
+      "reports": {
+        "grade": {
+          "area_mm2": 22.69981349888,
+          "cases": {
+            "M1_P1": {
+              "busy_cycles": {
+                "shared.cache_bank_0": 390667,
+                "shared.cache_bank_1": 390667,
+                "shared.cache_bank_2": 390668,
+                "shared.cache_bank_3": 390668,
+                "shared.hbm_channel_0": 75888,
+                "shared.hbm_channel_1": 75888,
+                "shared.hbm_channel_2": 75888,
+                "shared.hbm_channel_3": 75888,
+                "shared.hbm_channel_4": 75876,
+                "shared.hbm_channel_5": 75880,
+                "shared.hbm_channel_6": 75880,
+                "shared.hbm_channel_7": 75880,
+                "shared.noc": 1077730,
+                "sm0.dma": 1414592,
+                "sm0.issue": 81623,
+                "sm0.issue_wait": 4968540,
+                "sm0.noc_in": 1031334,
+                "sm0.noc_out": 77716,
+                "sm0.reduce": 81552,
+                "sm0.rf_read": 2670872,
+                "sm0.rf_write": 2461120,
+                "sm0.sfu": 143244,
+                "sm0.shared_read": 0,
+                "sm0.shared_write": 0,
+                "sm0.tc": 410160,
+                "sm0.vec": 412452
+              },
+              "cycles": 5063367,
+              "functional_passed": true,
+              "hbm_read_bytes": 14451584,
+              "hbm_write_bytes": 4974592,
+              "instruction_count": 81623,
+              "max_abs_error": 2.793004260981391e-06,
+              "peak_window_power_w": 4.014955333925761
+            },
+            "M2_D1": {
+              "busy_cycles": {
+                "shared.cache_bank_0": 68196,
+                "shared.cache_bank_1": 68196,
+                "shared.cache_bank_2": 67748,
+                "shared.cache_bank_3": 67748,
+                "shared.hbm_channel_0": 9032,
+                "shared.hbm_channel_1": 9032,
+                "shared.hbm_channel_2": 8968,
+                "shared.hbm_channel_3": 8968,
+                "shared.hbm_channel_4": 9024,
+                "shared.hbm_channel_5": 9024,
+                "shared.hbm_channel_6": 8960,
+                "shared.hbm_channel_7": 8960,
+                "shared.noc": 74568,
+                "sm0.dma": 62976,
+                "sm0.issue": 4762,
+                "sm0.issue_wait": 200446,
+                "sm0.noc_in": 56952,
+                "sm0.noc_out": 1472,
+                "sm0.reduce": 1312,
+                "sm0.rf_read": 39184,
+                "sm0.rf_write": 72544,
+                "sm0.sfu": 2912,
+                "sm0.shared_read": 0,
+                "sm0.shared_write": 0,
+                "sm0.tc": 12056,
+                "sm0.vec": 8736,
+                "sm1.dma": 59392,
+                "sm1.issue": 3722,
+                "sm1.issue_wait": 173376,
+                "sm1.noc_in": 54798,
+                "sm1.noc_out": 384,
+                "sm1.reduce": 480,
+                "sm1.rf_read": 33200,
+                "sm1.rf_write": 63584,
+                "sm1.sfu": 608,
+                "sm1.shared_read": 0,
+                "sm1.shared_write": 0,
+                "sm1.tc": 12056,
+                "sm1.vec": 1760,
+                "sm2.dma": 59392,
+                "sm2.issue": 3722,
+                "sm2.issue_wait": 173466,
+                "sm2.noc_in": 54409,
+                "sm2.noc_out": 384,
+                "sm2.reduce": 480,
+                "sm2.rf_read": 33200,
+                "sm2.rf_write": 63584,
+                "sm2.sfu": 608,
+                "sm2.shared_read": 0,
+                "sm2.shared_write": 0,
+                "sm2.tc": 12056,
+                "sm2.vec": 1760,
+                "sm3.dma": 59392,
+                "sm3.issue": 3722,
+                "sm3.issue_wait": 173538,
+                "sm3.noc_in": 54654,
+                "sm3.noc_out": 384,
+                "sm3.reduce": 480,
+                "sm3.rf_read": 33200,
+                "sm3.rf_write": 63584,
+                "sm3.sfu": 608,
+                "sm3.shared_read": 0,
+                "sm3.shared_write": 0,
+                "sm3.tc": 12056,
+                "sm3.vec": 1760
+              },
+              "cycles": 207673,
+              "functional_passed": true,
+              "hbm_read_bytes": 2135040,
+              "hbm_write_bytes": 167936,
+              "instruction_count": 15424,
+              "max_abs_error": 1.1209758654651125e-06,
+              "peak_window_power_w": 6.707200513472132
+            }
+          },
+          "eligible": true,
+          "mode": "grade",
+          "score": 6195.279493434274
+        }
+      },
+      "verdict": "evaluated"
+    },
+    "score": 6195.279493434274,
+    "status": "evaluated",
+    "stored_at": "2026-09-29 03:05:53"
   },
   "1f7b93fb8ef7644bc70ef02da1e9cd594542d7fa7c03e765a87e080086a90f27": {
     "candidate_id": "cand-028",
@@ -664,7 +936,143 @@
     },
     "score": 1098.3125106615971,
     "status": "evaluated",
-    "stored_at": "2026-09-29 01:52:07"
+    "stored_at": "2026-09-29 03:05:52"
+  },
+  "205d398414177bbc94f4dfdc80aa750bf743dda2ae33c548e2d3b63def8b2065": {
+    "candidate_id": "cand-135",
+    "eligible": true,
+    "functional_passed": true,
+    "metrics": {
+      "candidate": "cand-135",
+      "historical_import": true,
+      "reports": {
+        "grade": {
+          "area_mm2": 22.85981349888,
+          "cases": {
+            "M1_P1": {
+              "busy_cycles": {
+                "shared.cache_bank_0": 327788,
+                "shared.cache_bank_1": 327788,
+                "shared.cache_bank_2": 327788,
+                "shared.cache_bank_3": 327788,
+                "shared.hbm_channel_0": 69696,
+                "shared.hbm_channel_1": 69696,
+                "shared.hbm_channel_2": 69696,
+                "shared.hbm_channel_3": 69696,
+                "shared.hbm_channel_4": 69688,
+                "shared.hbm_channel_5": 69688,
+                "shared.hbm_channel_6": 69688,
+                "shared.hbm_channel_7": 69688,
+                "shared.noc": 1006104,
+                "sm0.dma": 1163264,
+                "sm0.issue": 78131,
+                "sm0.issue_wait": 4872784,
+                "sm0.noc_in": 961672,
+                "sm0.noc_out": 65440,
+                "sm0.reduce": 81552,
+                "sm0.rf_read": 2637656,
+                "sm0.rf_write": 2363392,
+                "sm0.sfu": 143244,
+                "sm0.shared_read": 786432,
+                "sm0.shared_write": 24576,
+                "sm0.tc": 410928,
+                "sm0.vec": 405288
+              },
+              "cycles": 4960771,
+              "functional_passed": true,
+              "hbm_read_bytes": 13652992,
+              "hbm_write_bytes": 4188160,
+              "instruction_count": 78131,
+              "max_abs_error": 2.793004260981391e-06,
+              "peak_window_power_w": 4.018955333925762
+            },
+            "M2_D1": {
+              "busy_cycles": {
+                "shared.cache_bank_0": 67488,
+                "shared.cache_bank_1": 67610,
+                "shared.cache_bank_2": 67804,
+                "shared.cache_bank_3": 67804,
+                "shared.hbm_channel_0": 8774,
+                "shared.hbm_channel_1": 9030,
+                "shared.hbm_channel_2": 8924,
+                "shared.hbm_channel_3": 8976,
+                "shared.hbm_channel_4": 8758,
+                "shared.hbm_channel_5": 9022,
+                "shared.hbm_channel_6": 8914,
+                "shared.hbm_channel_7": 8962,
+                "shared.noc": 72956,
+                "sm0.dma": 61824,
+                "sm0.issue": 4570,
+                "sm0.issue_wait": 187943,
+                "sm0.noc_in": 55228,
+                "sm0.noc_out": 1088,
+                "sm0.reduce": 1312,
+                "sm0.rf_read": 36304,
+                "sm0.rf_write": 68320,
+                "sm0.sfu": 1344,
+                "sm0.shared_read": 0,
+                "sm0.shared_write": 0,
+                "sm0.tc": 12056,
+                "sm0.vec": 5408,
+                "sm1.dma": 59776,
+                "sm1.issue": 3914,
+                "sm1.issue_wait": 177400,
+                "sm1.noc_in": 53576,
+                "sm1.noc_out": 512,
+                "sm1.reduce": 480,
+                "sm1.rf_read": 34160,
+                "sm1.rf_write": 64992,
+                "sm1.sfu": 1152,
+                "sm1.shared_read": 0,
+                "sm1.shared_write": 0,
+                "sm1.tc": 12056,
+                "sm1.vec": 3040,
+                "sm2.dma": 59776,
+                "sm2.issue": 3914,
+                "sm2.issue_wait": 177424,
+                "sm2.noc_in": 53199,
+                "sm2.noc_out": 512,
+                "sm2.reduce": 480,
+                "sm2.rf_read": 34160,
+                "sm2.rf_write": 64992,
+                "sm2.sfu": 1152,
+                "sm2.shared_read": 0,
+                "sm2.shared_write": 0,
+                "sm2.tc": 12056,
+                "sm2.vec": 3040,
+                "sm3.dma": 59776,
+                "sm3.issue": 3914,
+                "sm3.issue_wait": 177664,
+                "sm3.noc_in": 52657,
+                "sm3.noc_out": 512,
+                "sm3.reduce": 480,
+                "sm3.rf_read": 34160,
+                "sm3.rf_write": 64992,
+                "sm3.sfu": 1152,
+                "sm3.shared_read": 0,
+                "sm3.shared_write": 0,
+                "sm3.tc": 12056,
+                "sm3.vec": 3040
+              },
+              "cycles": 195174,
+              "functional_passed": true,
+              "hbm_read_bytes": 2115584,
+              "hbm_write_bytes": 167936,
+              "instruction_count": 15808,
+              "max_abs_error": 1.1209758654651125e-06,
+              "peak_window_power_w": 6.699755653472125
+            }
+          },
+          "eligible": true,
+          "mode": "grade",
+          "score": 6456.320102276015
+        }
+      },
+      "verdict": "evaluated"
+    },
+    "score": 6456.320102276015,
+    "status": "evaluated",
+    "stored_at": "2026-09-29 03:05:53"
   },
   "2247370a6bf1a8273c10cda8c8f1c6f5844d9b62dc9338bea9c11ca97201c4fd": {
     "candidate_id": "cand-005",
@@ -743,7 +1151,7 @@
     },
     "score": 1105.2478525385854,
     "status": "evaluated",
-    "stored_at": "2026-09-29 01:52:06"
+    "stored_at": "2026-09-29 03:05:52"
   },
   "2542b6c025b4f06a9b293e37960ded9ddd0e5cb1f2e6e74f77dbe619cc63bee0": {
     "candidate_id": "cand-037",
@@ -822,7 +1230,7 @@
     },
     "score": 1193.4042900831387,
     "status": "evaluated",
-    "stored_at": "2026-09-29 01:52:07"
+    "stored_at": "2026-09-29 03:05:52"
   },
   "273c090f8ffa0059a2d16b4afb0461073f37b0cc58c8204963e781ff9924366e": {
     "candidate_id": "cand-110",
@@ -909,7 +1317,7 @@
     },
     "score": 2823.456520250167,
     "status": "evaluated",
-    "stored_at": "2026-09-29 01:52:07"
+    "stored_at": "2026-09-29 03:05:53"
   },
   "27caa5d78ce48519918a551779fb7a9d4b78264b8fcd2d4e39aa69178684ef32": {
     "candidate_id": "cand-066",
@@ -988,7 +1396,7 @@
     },
     "score": 1752.9808817511307,
     "status": "evaluated",
-    "stored_at": "2026-09-29 01:52:07"
+    "stored_at": "2026-09-29 03:05:52"
   },
   "2ce1edc6968b354c9ba5435ce7a44e364b257528aa068ab75be84258e01913f7": {
     "candidate_id": "cand-047",
@@ -1067,7 +1475,7 @@
     },
     "score": 1874.814304538389,
     "status": "evaluated",
-    "stored_at": "2026-09-29 01:52:07"
+    "stored_at": "2026-09-29 03:05:52"
   },
   "30c6f90903c6c322a6ab5a812d3fd0e81f25e2849e15958de3ebdbfcc0ab14cf": {
     "candidate_id": "cand-027",
@@ -1146,7 +1554,7 @@
     },
     "score": 1087.11373917888,
     "status": "evaluated",
-    "stored_at": "2026-09-29 01:52:06"
+    "stored_at": "2026-09-29 03:05:52"
   },
   "3151eeaa6af24b544199928cc719d8d01349bed47020932f06804052c541b663": {
     "candidate_id": "cand-121",
@@ -1269,7 +1677,7 @@
     },
     "score": 5301.424493620085,
     "status": "evaluated",
-    "stored_at": "2026-09-29 01:52:07"
+    "stored_at": "2026-09-29 03:05:53"
   },
   "33b016dae7fa35aa899b447d7a7780410614fbd2c57846272018eb6fda2df28b": {
     "candidate_id": "cand-097",
@@ -1356,7 +1764,7 @@
     },
     "score": 2479.583625689317,
     "status": "evaluated",
-    "stored_at": "2026-09-29 01:52:07"
+    "stored_at": "2026-09-29 03:05:52"
   },
   "33d6c5a23aa8b7b94fecad5c1ae6afcbefbf23edc806dfca6faa0194b1a8a91b": {
     "candidate_id": "cand-004",
@@ -1435,7 +1843,7 @@
     },
     "score": 1077.4312710849626,
     "status": "evaluated",
-    "stored_at": "2026-09-29 01:52:06"
+    "stored_at": "2026-09-29 03:05:52"
   },
   "36a05c88b55a4d11508c93350f26d2ee0ce016f7726fc56fd654e942d842e475": {
     "candidate_id": "cand-010",
@@ -1514,7 +1922,7 @@
     },
     "score": 1174.2540289231054,
     "status": "evaluated",
-    "stored_at": "2026-09-29 01:52:06"
+    "stored_at": "2026-09-29 03:05:52"
   },
   "36ff468e1dc98d5ce9d623d5840e2737ba11b267f1545587faadcdba6609d22f": {
     "candidate_id": "cand-100",
@@ -1601,7 +2009,7 @@
     },
     "score": 2564.606940222133,
     "status": "evaluated",
-    "stored_at": "2026-09-29 01:52:07"
+    "stored_at": "2026-09-29 03:05:52"
   },
   "37053aef61688a517595fea11a846f22c32865d1ed054f2bbd6aac87516435ff": {
     "candidate_id": "cand-050",
@@ -1680,7 +2088,7 @@
     },
     "score": 1296.9228571905599,
     "status": "evaluated",
-    "stored_at": "2026-09-29 01:52:07"
+    "stored_at": "2026-09-29 03:05:52"
   },
   "373317b487332c985ba4d7b7fb66da188a8221a81380402ba17eac7c312fcc60": {
     "candidate_id": "cand-120",
@@ -1803,7 +2211,7 @@
     },
     "score": 5856.474722961825,
     "status": "evaluated",
-    "stored_at": "2026-09-29 01:52:07"
+    "stored_at": "2026-09-29 03:05:53"
   },
   "3765bee76dfd7960bfbf1535b7e29d65b4b0c1a5f78912b8da6b88b25c16ecdb": {
     "candidate_id": "cand-084",
@@ -1890,7 +2298,7 @@
     },
     "score": 2206.2481983505695,
     "status": "evaluated",
-    "stored_at": "2026-09-29 01:52:07"
+    "stored_at": "2026-09-29 03:05:52"
   },
   "398d683332443e2b3d49216616ee095933e21ff5202dae6d341c1dc8bba3d891": {
     "candidate_id": "cand-036",
@@ -1969,7 +2377,7 @@
     },
     "score": 1107.569130887403,
     "status": "evaluated",
-    "stored_at": "2026-09-29 01:52:07"
+    "stored_at": "2026-09-29 03:05:52"
   },
   "3a574934650fc97583112c5b9b01a29befce3880a2a1f28935c9563ca136b7ec": {
     "candidate_id": "cand-087",
@@ -2056,7 +2464,7 @@
     },
     "score": 2390.1102253707836,
     "status": "evaluated",
-    "stored_at": "2026-09-29 01:52:07"
+    "stored_at": "2026-09-29 03:05:52"
   },
   "3db9fdc5b740e0e7f43f460f38da52f1251ffd07031a889479a1494c770abc98": {
     "candidate_id": "cand-026",
@@ -2135,7 +2543,7 @@
     },
     "score": 1128.088530457202,
     "status": "evaluated",
-    "stored_at": "2026-09-29 01:52:06"
+    "stored_at": "2026-09-29 03:05:52"
   },
   "3e2dd500d53c5f236651d927b8c93621ea1079df901ddefbd4a033fd62d0e224": {
     "candidate_id": "cand-094",
@@ -2222,7 +2630,7 @@
     },
     "score": 2547.9215759712715,
     "status": "evaluated",
-    "stored_at": "2026-09-29 01:52:07"
+    "stored_at": "2026-09-29 03:05:52"
   },
   "4120cbbd9f4d5346e20513602486bf8339aee19c5a22f5184839c65b2b518e09": {
     "candidate_id": "cand-025",
@@ -2301,7 +2709,7 @@
     },
     "score": 1130.3388047148876,
     "status": "evaluated",
-    "stored_at": "2026-09-29 01:52:06"
+    "stored_at": "2026-09-29 03:05:52"
   },
   "42a335b925edf5dfb5ed18befa02078c9f8d6219193ec548bc4c0375bf291742": {
     "candidate_id": "cand-092",
@@ -2388,7 +2796,7 @@
     },
     "score": 2322.689428598885,
     "status": "evaluated",
-    "stored_at": "2026-09-29 01:52:07"
+    "stored_at": "2026-09-29 03:05:52"
   },
   "43e7a9cfda14106cf0f184a7155c3923a99fe14aacc6fe7fadcc25fea4309b7c": {
     "candidate_id": "cand-006",
@@ -2467,7 +2875,7 @@
     },
     "score": 1147.6394407423866,
     "status": "evaluated",
-    "stored_at": "2026-09-29 01:52:06"
+    "stored_at": "2026-09-29 03:05:52"
   },
   "48f97f5cb7b606c51c19c89944f9fb2036672ec160732dd47e4b979bc19f46f9": {
     "candidate_id": "cand-056",
@@ -2546,7 +2954,7 @@
     },
     "score": 1835.555492983374,
     "status": "evaluated",
-    "stored_at": "2026-09-29 01:52:07"
+    "stored_at": "2026-09-29 03:05:52"
   },
   "4cae5da79070b98a069e850c4f2cc6fbf292cebfaf9c96ca1a69a34f091372f0": {
     "candidate_id": "cand-123",
@@ -2669,7 +3077,7 @@
     },
     "score": 5486.652829197951,
     "status": "evaluated",
-    "stored_at": "2026-09-29 01:52:07"
+    "stored_at": "2026-09-29 03:05:53"
   },
   "4cb836390050fd3c8f4a87e903bb5c4d932e56f43d17ac0fa2f3ef04f0883076": {
     "candidate_id": "cand-114",
@@ -2792,7 +3200,143 @@
     },
     "score": 5188.494494259971,
     "status": "evaluated",
-    "stored_at": "2026-09-29 01:52:07"
+    "stored_at": "2026-09-29 03:05:53"
+  },
+  "4d95b3d969b91185ff7259ef6fe15551f1ac367dc9c6b358aec0e962cd965f70": {
+    "candidate_id": "cand-136",
+    "eligible": true,
+    "functional_passed": true,
+    "metrics": {
+      "candidate": "cand-136",
+      "historical_import": true,
+      "reports": {
+        "grade": {
+          "area_mm2": 22.85981349888,
+          "cases": {
+            "M1_P1": {
+              "busy_cycles": {
+                "shared.cache_bank_0": 327788,
+                "shared.cache_bank_1": 327788,
+                "shared.cache_bank_2": 327788,
+                "shared.cache_bank_3": 327788,
+                "shared.hbm_channel_0": 69696,
+                "shared.hbm_channel_1": 69696,
+                "shared.hbm_channel_2": 69696,
+                "shared.hbm_channel_3": 69696,
+                "shared.hbm_channel_4": 69688,
+                "shared.hbm_channel_5": 69688,
+                "shared.hbm_channel_6": 69688,
+                "shared.hbm_channel_7": 69688,
+                "shared.noc": 1006104,
+                "sm0.dma": 1163264,
+                "sm0.issue": 78131,
+                "sm0.issue_wait": 4872784,
+                "sm0.noc_in": 961672,
+                "sm0.noc_out": 65440,
+                "sm0.reduce": 81552,
+                "sm0.rf_read": 2637656,
+                "sm0.rf_write": 2363392,
+                "sm0.sfu": 143244,
+                "sm0.shared_read": 786432,
+                "sm0.shared_write": 24576,
+                "sm0.tc": 410928,
+                "sm0.vec": 405288
+              },
+              "cycles": 4960771,
+              "functional_passed": true,
+              "hbm_read_bytes": 13652992,
+              "hbm_write_bytes": 4188160,
+              "instruction_count": 78131,
+              "max_abs_error": 2.793004260981391e-06,
+              "peak_window_power_w": 4.018955333925762
+            },
+            "M2_D1": {
+              "busy_cycles": {
+                "shared.cache_bank_0": 67680,
+                "shared.cache_bank_1": 67776,
+                "shared.cache_bank_2": 68004,
+                "shared.cache_bank_3": 68004,
+                "shared.hbm_channel_0": 8904,
+                "shared.hbm_channel_1": 9260,
+                "shared.hbm_channel_2": 9048,
+                "shared.hbm_channel_3": 9040,
+                "shared.hbm_channel_4": 8896,
+                "shared.hbm_channel_5": 9252,
+                "shared.hbm_channel_6": 9040,
+                "shared.hbm_channel_7": 9032,
+                "shared.noc": 72552,
+                "sm0.dma": 61824,
+                "sm0.issue": 4570,
+                "sm0.issue_wait": 164047,
+                "sm0.noc_in": 55907,
+                "sm0.noc_out": 1088,
+                "sm0.reduce": 1312,
+                "sm0.rf_read": 36304,
+                "sm0.rf_write": 68320,
+                "sm0.sfu": 1344,
+                "sm0.shared_read": 0,
+                "sm0.shared_write": 0,
+                "sm0.tc": 12056,
+                "sm0.vec": 5408,
+                "sm1.dma": 59776,
+                "sm1.issue": 3914,
+                "sm1.issue_wait": 153566,
+                "sm1.noc_in": 54174,
+                "sm1.noc_out": 512,
+                "sm1.reduce": 480,
+                "sm1.rf_read": 34160,
+                "sm1.rf_write": 64992,
+                "sm1.sfu": 1152,
+                "sm1.shared_read": 0,
+                "sm1.shared_write": 0,
+                "sm1.tc": 12056,
+                "sm1.vec": 3040,
+                "sm2.dma": 59776,
+                "sm2.issue": 3914,
+                "sm2.issue_wait": 153514,
+                "sm2.noc_in": 53767,
+                "sm2.noc_out": 512,
+                "sm2.reduce": 480,
+                "sm2.rf_read": 34160,
+                "sm2.rf_write": 64992,
+                "sm2.sfu": 1152,
+                "sm2.shared_read": 0,
+                "sm2.shared_write": 0,
+                "sm2.tc": 12056,
+                "sm2.vec": 3040,
+                "sm3.dma": 59776,
+                "sm3.issue": 3914,
+                "sm3.issue_wait": 153830,
+                "sm3.noc_in": 53771,
+                "sm3.noc_out": 512,
+                "sm3.reduce": 480,
+                "sm3.rf_read": 34160,
+                "sm3.rf_write": 64992,
+                "sm3.sfu": 1152,
+                "sm3.shared_read": 0,
+                "sm3.shared_write": 0,
+                "sm3.tc": 12056,
+                "sm3.vec": 3040
+              },
+              "cycles": 171256,
+              "functional_passed": true,
+              "hbm_read_bytes": 2151168,
+              "hbm_write_bytes": 167936,
+              "instruction_count": 15808,
+              "max_abs_error": 1.1209758654651125e-06,
+              "peak_window_power_w": 7.251089705472849
+            }
+          },
+          "eligible": true,
+          "mode": "grade",
+          "score": 6892.442279967131
+        }
+      },
+      "verdict": "evaluated"
+    },
+    "score": 6892.442279967131,
+    "status": "evaluated",
+    "stored_at": "2026-09-29 03:05:53"
   },
   "4f053f14b0646964203ee6cd2056e1dec9ff7163e1bb454b6b8513dc8e5f880e": {
     "candidate_id": "cand-046",
@@ -2873,7 +3417,279 @@
     },
     "score": 1107.569130887403,
     "status": "evaluated",
-    "stored_at": "2026-09-29 01:52:07"
+    "stored_at": "2026-09-29 03:05:52"
+  },
+  "4f827186d566d1d9c8fdbc204d07726fb95cec6dc8cf82b676fe041375efa63a": {
+    "candidate_id": "cand-137",
+    "eligible": true,
+    "functional_passed": true,
+    "metrics": {
+      "candidate": "cand-137",
+      "historical_import": true,
+      "reports": {
+        "grade": {
+          "area_mm2": 22.85981349888,
+          "cases": {
+            "M1_P1": {
+              "busy_cycles": {
+                "shared.cache_bank_0": 327788,
+                "shared.cache_bank_1": 327788,
+                "shared.cache_bank_2": 327788,
+                "shared.cache_bank_3": 327788,
+                "shared.hbm_channel_0": 69696,
+                "shared.hbm_channel_1": 69696,
+                "shared.hbm_channel_2": 69696,
+                "shared.hbm_channel_3": 69696,
+                "shared.hbm_channel_4": 69688,
+                "shared.hbm_channel_5": 69688,
+                "shared.hbm_channel_6": 69688,
+                "shared.hbm_channel_7": 69688,
+                "shared.noc": 1006104,
+                "sm0.dma": 1163264,
+                "sm0.issue": 78131,
+                "sm0.issue_wait": 4872784,
+                "sm0.noc_in": 961672,
+                "sm0.noc_out": 65440,
+                "sm0.reduce": 81552,
+                "sm0.rf_read": 2637656,
+                "sm0.rf_write": 2363392,
+                "sm0.sfu": 143244,
+                "sm0.shared_read": 786432,
+                "sm0.shared_write": 24576,
+                "sm0.tc": 410928,
+                "sm0.vec": 405288
+              },
+              "cycles": 4960771,
+              "functional_passed": true,
+              "hbm_read_bytes": 13652992,
+              "hbm_write_bytes": 4188160,
+              "instruction_count": 78131,
+              "max_abs_error": 2.793004260981391e-06,
+              "peak_window_power_w": 4.018955333925762
+            },
+            "M2_D1": {
+              "busy_cycles": {
+                "shared.cache_bank_0": 67680,
+                "shared.cache_bank_1": 67776,
+                "shared.cache_bank_2": 68004,
+                "shared.cache_bank_3": 68004,
+                "shared.hbm_channel_0": 8904,
+                "shared.hbm_channel_1": 9260,
+                "shared.hbm_channel_2": 9048,
+                "shared.hbm_channel_3": 9040,
+                "shared.hbm_channel_4": 8896,
+                "shared.hbm_channel_5": 9252,
+                "shared.hbm_channel_6": 9040,
+                "shared.hbm_channel_7": 9032,
+                "shared.noc": 72561,
+                "sm0.dma": 61824,
+                "sm0.issue": 4570,
+                "sm0.issue_wait": 161840,
+                "sm0.noc_in": 55973,
+                "sm0.noc_out": 1088,
+                "sm0.reduce": 1312,
+                "sm0.rf_read": 36304,
+                "sm0.rf_write": 68320,
+                "sm0.sfu": 1344,
+                "sm0.shared_read": 0,
+                "sm0.shared_write": 0,
+                "sm0.tc": 12056,
+                "sm0.vec": 5408,
+                "sm1.dma": 59776,
+                "sm1.issue": 3914,
+                "sm1.issue_wait": 151330,
+                "sm1.noc_in": 54183,
+                "sm1.noc_out": 512,
+                "sm1.reduce": 480,
+                "sm1.rf_read": 34160,
+                "sm1.rf_write": 64992,
+                "sm1.sfu": 1152,
+                "sm1.shared_read": 0,
+                "sm1.shared_write": 0,
+                "sm1.tc": 12056,
+                "sm1.vec": 3040,
+                "sm2.dma": 59776,
+                "sm2.issue": 3914,
+                "sm2.issue_wait": 151232,
+                "sm2.noc_in": 53769,
+                "sm2.noc_out": 512,
+                "sm2.reduce": 480,
+                "sm2.rf_read": 34160,
+                "sm2.rf_write": 64992,
+                "sm2.sfu": 1152,
+                "sm2.shared_read": 0,
+                "sm2.shared_write": 0,
+                "sm2.tc": 12056,
+                "sm2.vec": 3040,
+                "sm3.dma": 59776,
+                "sm3.issue": 3914,
+                "sm3.issue_wait": 151577,
+                "sm3.noc_in": 53767,
+                "sm3.noc_out": 512,
+                "sm3.reduce": 480,
+                "sm3.rf_read": 34160,
+                "sm3.rf_write": 64992,
+                "sm3.sfu": 1152,
+                "sm3.shared_read": 0,
+                "sm3.shared_write": 0,
+                "sm3.tc": 12056,
+                "sm3.vec": 3040
+              },
+              "cycles": 169003,
+              "functional_passed": true,
+              "hbm_read_bytes": 2151168,
+              "hbm_write_bytes": 167936,
+              "instruction_count": 15808,
+              "max_abs_error": 1.1209758654651125e-06,
+              "peak_window_power_w": 7.498402193472631
+            }
+          },
+          "eligible": true,
+          "mode": "grade",
+          "score": 6938.232179882115
+        }
+      },
+      "verdict": "evaluated"
+    },
+    "score": 6938.232179882115,
+    "status": "evaluated",
+    "stored_at": "2026-09-29 03:05:53"
+  },
+  "500e99bba47ad89e4fe6e954f3bb74d763e85e8e985e4699ad44d8b999c211e7": {
+    "candidate_id": "cand-133",
+    "eligible": true,
+    "functional_passed": true,
+    "metrics": {
+      "candidate": "cand-133",
+      "historical_import": true,
+      "reports": {
+        "grade": {
+          "area_mm2": 22.85981349888,
+          "cases": {
+            "M1_P1": {
+              "busy_cycles": {
+                "shared.cache_bank_0": 327788,
+                "shared.cache_bank_1": 327788,
+                "shared.cache_bank_2": 327788,
+                "shared.cache_bank_3": 327788,
+                "shared.hbm_channel_0": 69696,
+                "shared.hbm_channel_1": 69696,
+                "shared.hbm_channel_2": 69696,
+                "shared.hbm_channel_3": 69696,
+                "shared.hbm_channel_4": 69688,
+                "shared.hbm_channel_5": 69688,
+                "shared.hbm_channel_6": 69688,
+                "shared.hbm_channel_7": 69688,
+                "shared.noc": 1006104,
+                "sm0.dma": 1163264,
+                "sm0.issue": 78131,
+                "sm0.issue_wait": 4872784,
+                "sm0.noc_in": 961672,
+                "sm0.noc_out": 65440,
+                "sm0.reduce": 81552,
+                "sm0.rf_read": 2637656,
+                "sm0.rf_write": 2363392,
+                "sm0.sfu": 143244,
+                "sm0.shared_read": 786432,
+                "sm0.shared_write": 24576,
+                "sm0.tc": 410928,
+                "sm0.vec": 405288
+              },
+              "cycles": 4960771,
+              "functional_passed": true,
+              "hbm_read_bytes": 13652992,
+              "hbm_write_bytes": 4188160,
+              "instruction_count": 78131,
+              "max_abs_error": 2.793004260981391e-06,
+              "peak_window_power_w": 4.018955333925762
+            },
+            "M2_D1": {
+              "busy_cycles": {
+                "shared.cache_bank_0": 67488,
+                "shared.cache_bank_1": 67610,
+                "shared.cache_bank_2": 67804,
+                "shared.cache_bank_3": 67804,
+                "shared.hbm_channel_0": 8774,
+                "shared.hbm_channel_1": 9030,
+                "shared.hbm_channel_2": 8924,
+                "shared.hbm_channel_3": 8976,
+                "shared.hbm_channel_4": 8758,
+                "shared.hbm_channel_5": 9022,
+                "shared.hbm_channel_6": 8914,
+                "shared.hbm_channel_7": 8962,
+                "shared.noc": 73417,
+                "sm0.dma": 62976,
+                "sm0.issue": 4762,
+                "sm0.issue_wait": 199968,
+                "sm0.noc_in": 55640,
+                "sm0.noc_out": 1472,
+                "sm0.reduce": 1312,
+                "sm0.rf_read": 39184,
+                "sm0.rf_write": 72544,
+                "sm0.sfu": 2912,
+                "sm0.shared_read": 0,
+                "sm0.shared_write": 0,
+                "sm0.tc": 12056,
+                "sm0.vec": 8736,
+                "sm1.dma": 59392,
+                "sm1.issue": 3722,
+                "sm1.issue_wait": 173008,
+                "sm1.noc_in": 53365,
+                "sm1.noc_out": 384,
+                "sm1.reduce": 480,
+                "sm1.rf_read": 33200,
+                "sm1.rf_write": 63584,
+                "sm1.sfu": 608,
+                "sm1.shared_read": 0,
+                "sm1.shared_write": 0,
+                "sm1.tc": 12056,
+                "sm1.vec": 1760,
+                "sm2.dma": 59392,
+                "sm2.issue": 3722,
+                "sm2.issue_wait": 173002,
+                "sm2.noc_in": 53017,
+                "sm2.noc_out": 384,
+                "sm2.reduce": 480,
+                "sm2.rf_read": 33200,
+                "sm2.rf_write": 63584,
+                "sm2.sfu": 608,
+                "sm2.shared_read": 0,
+                "sm2.shared_write": 0,
+                "sm2.tc": 12056,
+                "sm2.vec": 1760,
+                "sm3.dma": 59392,
+                "sm3.issue": 3722,
+                "sm3.issue_wait": 173212,
+                "sm3.noc_in": 52462,
+                "sm3.noc_out": 384,
+                "sm3.reduce": 480,
+                "sm3.rf_read": 33200,
+                "sm3.rf_write": 63584,
+                "sm3.sfu": 608,
+                "sm3.shared_read": 0,
+                "sm3.shared_write": 0,
+                "sm3.tc": 12056,
+                "sm3.vec": 1760
+              },
+              "cycles": 207315,
+              "functional_passed": true,
+              "hbm_read_bytes": 2115584,
+              "hbm_write_bytes": 167936,
+              "instruction_count": 15424,
+              "max_abs_error": 1.1209758654651125e-06,
+              "peak_window_power_w": 6.699755653472125
+            }
+          },
+          "eligible": true,
+          "mode": "grade",
+          "score": 6264.4171932728905
+        }
+      },
+      "verdict": "evaluated"
+    },
+    "score": 6264.4171932728905,
+    "status": "evaluated",
+    "stored_at": "2026-09-29 03:05:53"
   },
   "52492a70b7fdcdf7a00cc144b9ac41f6c846bbca5528ebea124a41266e0d2e61": {
     "candidate_id": "cand-042",
@@ -2952,7 +3768,7 @@
     },
     "score": 1197.5985984332774,
     "status": "evaluated",
-    "stored_at": "2026-09-29 01:52:07"
+    "stored_at": "2026-09-29 03:05:52"
   },
   "5693414c79fef5522ecca3c233f2657d2ade6018da14a64a97c7105218e310ce": {
     "candidate_id": "cand-049",
@@ -3025,7 +3841,7 @@
     },
     "score": 794.5991478350456,
     "status": "evaluated",
-    "stored_at": "2026-09-29 01:52:07"
+    "stored_at": "2026-09-29 03:05:52"
   },
   "56ea54bc8ceb2fbab2ef5c02d1f0b65cbb75da3973f2724fc06d1380f6bf2d96": {
     "candidate_id": "cand-113",
@@ -3148,7 +3964,7 @@
     },
     "score": 5101.488654851473,
     "status": "evaluated",
-    "stored_at": "2026-09-29 01:52:07"
+    "stored_at": "2026-09-29 03:05:53"
   },
   "5adb81102e129554064951880cc4156627a997fd800504e088b67c7590feaeab": {
     "candidate_id": "cand-008",
@@ -3227,7 +4043,7 @@
     },
     "score": 1115.972170751516,
     "status": "evaluated",
-    "stored_at": "2026-09-29 01:52:06"
+    "stored_at": "2026-09-29 03:05:52"
   },
   "5c004a3de437a6a373eaae2213d803a7595484227ca18c5bddf71a49316da9c9": {
     "candidate_id": "cand-074",
@@ -3314,7 +4130,7 @@
     },
     "score": 2051.47741118116,
     "status": "evaluated",
-    "stored_at": "2026-09-29 01:52:07"
+    "stored_at": "2026-09-29 03:05:52"
   },
   "5c2b5fa7bdf362ae4410c6f425ff8291f79d5542eb89d2a4d320ee183e80202b": {
     "candidate_id": "cand-106",
@@ -3401,7 +4217,7 @@
     },
     "score": 2776.1099913390285,
     "status": "evaluated",
-    "stored_at": "2026-09-29 01:52:07"
+    "stored_at": "2026-09-29 03:05:53"
   },
   "5ee884f5894a72f3d5338163e3a3035299b4a38a7d81df92fb82da131c739313": {
     "candidate_id": "cand-076",
@@ -3488,7 +4304,7 @@
     },
     "score": 2104.4624234432395,
     "status": "evaluated",
-    "stored_at": "2026-09-29 01:52:07"
+    "stored_at": "2026-09-29 03:05:52"
   },
   "61082682175200ff1f198f9ab83522e64f8237ca8c641392c9772507725b215d": {
     "candidate_id": "cand-032",
@@ -3567,7 +4383,7 @@
     },
     "score": 1124.0376356259756,
     "status": "evaluated",
-    "stored_at": "2026-09-29 01:52:07"
+    "stored_at": "2026-09-29 03:05:52"
   },
   "618d8be54cdea7aff4ec1951bdc6ed67c2ef77c344be5a7940965b92aba7f36f": {
     "candidate_id": "cand-052",
@@ -3646,7 +4462,7 @@
     },
     "score": 1860.4743007003888,
     "status": "evaluated",
-    "stored_at": "2026-09-29 01:52:07"
+    "stored_at": "2026-09-29 03:05:52"
   },
   "62390bd6d85c59ff991ef8ebb3d41edb0175523204aca688576d65f08a7b5439": {
     "candidate_id": "cand-039",
@@ -3725,7 +4541,251 @@
     },
     "score": 916.4904172822608,
     "status": "evaluated",
-    "stored_at": "2026-09-29 01:52:07"
+    "stored_at": "2026-09-29 03:05:52"
+  },
+  "6728bd26a4eabe94e8b23007984cf64f1c6d02649e5500aa1da91aee4cb68b82": {
+    "candidate_id": "cand-143",
+    "eligible": true,
+    "functional_passed": true,
+    "metrics": {
+      "candidate": "cand-143",
+      "elapsed": 76.34280387498438,
+      "evaluation_attempts": 1,
+      "reports": {
+        "grade": {
+          "area_mm2": 22.85981349888,
+          "cases": {
+            "M1_P1": {
+              "busy_cycles": {
+                "shared.cache_bank_0": 289388,
+                "shared.cache_bank_1": 289388,
+                "shared.cache_bank_2": 289388,
+                "shared.cache_bank_3": 289388,
+                "shared.hbm_channel_0": 66624,
+                "shared.hbm_channel_1": 66624,
+                "shared.hbm_channel_2": 66624,
+                "shared.hbm_channel_3": 66624,
+                "shared.hbm_channel_4": 66616,
+                "shared.hbm_channel_5": 66616,
+                "shared.hbm_channel_6": 66616,
+                "shared.hbm_channel_7": 66616,
+                "shared.noc": 884990,
+                "sm0.dma": 1009664,
+                "sm0.issue": 78131,
+                "sm0.issue_wait": 4809148,
+                "sm0.noc_in": 844761,
+                "sm0.noc_out": 59296,
+                "sm0.reduce": 81552,
+                "sm0.rf_read": 2637656,
+                "sm0.rf_write": 2363392,
+                "sm0.sfu": 143244,
+                "sm0.shared_read": 1376256,
+                "sm0.shared_write": 49152,
+                "sm0.tc": 410928,
+                "sm0.vec": 405288
+              },
+              "cycles": 4897135,
+              "functional_passed": true,
+              "hbm_read_bytes": 13259776,
+              "hbm_write_bytes": 3794944,
+              "instruction_count": 78131,
+              "max_abs_error": 2.793004260981391e-06,
+              "peak_window_power_w": 4.018955333925762
+            },
+            "M2_D1": {
+              "busy_cycles": {
+                "shared.cache_bank_0": 66468,
+                "shared.cache_bank_1": 66468,
+                "shared.cache_bank_2": 66404,
+                "shared.cache_bank_3": 66404,
+                "shared.hbm_channel_0": 8520,
+                "shared.hbm_channel_1": 8520,
+                "shared.hbm_channel_2": 8520,
+                "shared.hbm_channel_3": 8520,
+                "shared.hbm_channel_4": 8512,
+                "shared.hbm_channel_5": 8512,
+                "shared.hbm_channel_6": 8512,
+                "shared.hbm_channel_7": 8512,
+                "shared.noc": 69637,
+                "sm0.dma": 61440,
+                "sm0.issue": 3866,
+                "sm0.issue_wait": 161038,
+                "sm0.noc_in": 58660,
+                "sm0.noc_out": 1088,
+                "sm0.reduce": 1312,
+                "sm0.rf_read": 36304,
+                "sm0.rf_write": 67936,
+                "sm0.sfu": 1344,
+                "sm0.shared_read": 0,
+                "sm0.shared_write": 0,
+                "sm0.tc": 12056,
+                "sm0.vec": 5408,
+                "sm1.dma": 59392,
+                "sm1.issue": 3210,
+                "sm1.issue_wait": 150516,
+                "sm1.noc_in": 57032,
+                "sm1.noc_out": 512,
+                "sm1.reduce": 480,
+                "sm1.rf_read": 34160,
+                "sm1.rf_write": 64608,
+                "sm1.sfu": 1152,
+                "sm1.shared_read": 0,
+                "sm1.shared_write": 0,
+                "sm1.tc": 12056,
+                "sm1.vec": 3040,
+                "sm2.dma": 59392,
+                "sm2.issue": 3210,
+                "sm2.issue_wait": 150472,
+                "sm2.noc_in": 57008,
+                "sm2.noc_out": 512,
+                "sm2.reduce": 480,
+                "sm2.rf_read": 34160,
+                "sm2.rf_write": 64608,
+                "sm2.sfu": 1152,
+                "sm2.shared_read": 0,
+                "sm2.shared_write": 0,
+                "sm2.tc": 12056,
+                "sm2.vec": 3040,
+                "sm3.dma": 59392,
+                "sm3.issue": 3210,
+                "sm3.issue_wait": 150721,
+                "sm3.noc_in": 57027,
+                "sm3.noc_out": 512,
+                "sm3.reduce": 480,
+                "sm3.rf_read": 34160,
+                "sm3.rf_write": 64608,
+                "sm3.sfu": 1152,
+                "sm3.shared_read": 0,
+                "sm3.shared_write": 0,
+                "sm3.tc": 12056,
+                "sm3.vec": 3040
+              },
+              "cycles": 167539,
+              "functional_passed": true,
+              "hbm_read_bytes": 2012160,
+              "hbm_write_bytes": 167936,
+              "instruction_count": 12992,
+              "max_abs_error": 1.1209758654651125e-06,
+              "peak_window_power_w": 7.494538241472594
+            }
+          },
+          "eligible": true,
+          "mode": "grade",
+          "score": 7013.610245245844
+        }
+      },
+      "runs": {
+        "grade": {
+          "command": [
+            "/Users/yihdu/Codefield/SLAI-infra-Code/transformer-codesign-starter/.venv/bin/python",
+            "/Users/yihdu/Codefield/SLAI-infra-Code/transformer-codesign-starter/challenge.py",
+            "grade",
+            "--hardware",
+            "/Users/yihdu/Codefield/SLAI-infra-Code/transformer-codesign-starter/project/experiments/cand-143/inputs/hardware.json",
+            "--program-p1",
+            "/Users/yihdu/Codefield/SLAI-infra-Code/transformer-codesign-starter/project/experiments/cand-143/programs/M1_P1.asm",
+            "--program-d1",
+            "/Users/yihdu/Codefield/SLAI-infra-Code/transformer-codesign-starter/project/experiments/cand-143/programs/M2_D1.asm",
+            "--report",
+            "/Users/yihdu/Codefield/SLAI-infra-Code/transformer-codesign-starter/project/experiments/cand-143/reports/grade.json",
+            "--seed",
+            "7",
+            "--baseline",
+            "/Users/yihdu/Codefield/SLAI-infra-Code/transformer-codesign-starter/baseline_manifest.json"
+          ],
+          "elapsed": 76.33950995793566,
+          "exit_code": 0,
+          "failure_class": null,
+          "peak_memory_mib": 4069.862991333008
+        }
+      },
+      "static": {
+        "M1_P1": {
+          "bytes": 372428,
+          "expanded_instructions": 78131,
+          "workgroup_lifetimes": 1
+        },
+        "M2_D1": {
+          "bytes": 1506133,
+          "expanded_instructions": 12992,
+          "workgroup_lifetimes": 4
+        }
+      },
+      "validation_cost": {
+        "M2_D1": {
+          "barrier_directed_pair_relations": 1920,
+          "barrier_incidence_edges": 1280,
+          "budget_mib": 6144,
+          "caveat": "Lower bound on uncompressed CPython event-set allocation, not peak RSS prediction. Passing cost screen never establishes race correctness. Multi-path/HBM unions, tuples, prefixes and graph storage add memory.",
+          "checkpoints": [
+            {
+              "max_depth": 1572,
+              "sum_depth": 7774774,
+              "visited": 10000
+            }
+          ],
+          "decision": "within_lower_bound_only",
+          "events": 12816,
+          "expanded_instructions": 12992,
+          "global_commit_incidence_edges": 24409,
+          "graph_edges": 37837,
+          "max_dependency_depth_lower_bound": 2041,
+          "named_cross_wg_sync_edges": 0,
+          "opcode_counts": {
+            "BARRIER": 160,
+            "LD": 4984,
+            "MMA.ACC": 4224,
+            "REDUCE": 192,
+            "SFU": 160,
+            "ST": 712,
+            "STEP.COMMIT": 8,
+            "VEC": 2544,
+            "WG.BEGIN": 4,
+            "WG.END": 4
+          },
+          "race_checker_single_wg_fast_path": false,
+          "retained_event_sets_logical_bytes_lower_bound": 211635328,
+          "source_lines": 7936,
+          "stages": {
+            "unknown/control": {
+              "BARRIER": 160,
+              "LD": 4984,
+              "MMA.ACC": 4224,
+              "REDUCE": 192,
+              "SFU": 160,
+              "ST": 712,
+              "STEP.COMMIT": 8,
+              "VEC": 2544,
+              "WG.BEGIN": 4,
+              "WG.END": 4,
+              "events": 12816,
+              "instructions": 12992,
+              "sum_dependency_depth_lower_bound": 13105456
+            }
+          },
+          "static_loops": 1568,
+          "sum_dependency_depth_lower_bound": 13105456,
+          "workgroup_lifetimes": 4,
+          "workgroup_names": 4
+        }
+      },
+      "validation_cost_progress": {
+        "command": [
+          "/Users/yihdu/Codefield/SLAI-infra-Code/transformer-codesign-starter/.venv/bin/python",
+          "-c",
+          "import json,pathlib; from project.search.validation_cost import analyze; stats=json.loads(pathlib.Path('reports/static.json').read_text()); out={n:analyze((pathlib.Path('programs')/(n+'.asm')).read_text(),6144) for n,v in stats.items() if v.get('workgroup_lifetimes',1)>1}; pathlib.Path('reports/validation-cost.json').write_text(json.dumps(out,indent=2))"
+        ],
+        "elapsed": 0.5086587090045214,
+        "peak_memory_mib": 53.76605987548828,
+        "pid": 56125,
+        "status": "completed",
+        "updated_at": 1790622355.1980212
+      },
+      "verdict": "evaluated"
+    },
+    "score": 7013.610245245844,
+    "status": "evaluated",
+    "stored_at": "2026-09-29 03:07:11"
   },
   "6f210797a8205dae777897e9008547c11bf20cc281ccd168dcad82e38e789fa1": {
     "candidate_id": "cand-075",
@@ -3812,7 +4872,7 @@
     },
     "score": 2011.1993372800794,
     "status": "evaluated",
-    "stored_at": "2026-09-29 01:52:07"
+    "stored_at": "2026-09-29 03:05:52"
   },
   "6f473ca829976d3ba32358d28bfb8fbc36c790298966b7789f6227dff6cafcc8": {
     "candidate_id": "cand-079",
@@ -3899,7 +4959,7 @@
     },
     "score": 1995.554860534254,
     "status": "evaluated",
-    "stored_at": "2026-09-29 01:52:07"
+    "stored_at": "2026-09-29 03:05:52"
   },
   "7079e6867892a858c30414f98adcff3626f682715b4f6e8934a73e0403adb736": {
     "candidate_id": "cand-013",
@@ -3978,7 +5038,143 @@
     },
     "score": 1003.5673543192571,
     "status": "evaluated",
-    "stored_at": "2026-09-29 01:52:06"
+    "stored_at": "2026-09-29 03:05:52"
+  },
+  "7670f66597e612f2f9411669d1e194b2d8f777e73a396834b6aedc04058bb62c": {
+    "candidate_id": "cand-140",
+    "eligible": true,
+    "functional_passed": true,
+    "metrics": {
+      "candidate": "cand-140",
+      "historical_import": true,
+      "reports": {
+        "grade": {
+          "area_mm2": 22.85981349888,
+          "cases": {
+            "M1_P1": {
+              "busy_cycles": {
+                "shared.cache_bank_0": 289388,
+                "shared.cache_bank_1": 289388,
+                "shared.cache_bank_2": 289388,
+                "shared.cache_bank_3": 289388,
+                "shared.hbm_channel_0": 66624,
+                "shared.hbm_channel_1": 66624,
+                "shared.hbm_channel_2": 66624,
+                "shared.hbm_channel_3": 66624,
+                "shared.hbm_channel_4": 66616,
+                "shared.hbm_channel_5": 66616,
+                "shared.hbm_channel_6": 66616,
+                "shared.hbm_channel_7": 66616,
+                "shared.noc": 901363,
+                "sm0.dma": 1009664,
+                "sm0.issue": 78131,
+                "sm0.issue_wait": 4871272,
+                "sm0.noc_in": 861133,
+                "sm0.noc_out": 59296,
+                "sm0.reduce": 81552,
+                "sm0.rf_read": 2637656,
+                "sm0.rf_write": 2363392,
+                "sm0.sfu": 143244,
+                "sm0.shared_read": 1376256,
+                "sm0.shared_write": 49152,
+                "sm0.tc": 410928,
+                "sm0.vec": 405288
+              },
+              "cycles": 4959259,
+              "functional_passed": true,
+              "hbm_read_bytes": 13259776,
+              "hbm_write_bytes": 3794944,
+              "instruction_count": 78131,
+              "max_abs_error": 2.793004260981391e-06,
+              "peak_window_power_w": 4.018955333925762
+            },
+            "M2_D1": {
+              "busy_cycles": {
+                "shared.cache_bank_0": 52132,
+                "shared.cache_bank_1": 52132,
+                "shared.cache_bank_2": 52068,
+                "shared.cache_bank_3": 52068,
+                "shared.hbm_channel_0": 8520,
+                "shared.hbm_channel_1": 8520,
+                "shared.hbm_channel_2": 8520,
+                "shared.hbm_channel_3": 8520,
+                "shared.hbm_channel_4": 8512,
+                "shared.hbm_channel_5": 8512,
+                "shared.hbm_channel_6": 8512,
+                "shared.hbm_channel_7": 8512,
+                "shared.noc": 54721,
+                "sm0.dma": 47104,
+                "sm0.issue": 3868,
+                "sm0.issue_wait": 161142,
+                "sm0.noc_in": 44681,
+                "sm0.noc_out": 1088,
+                "sm0.reduce": 1312,
+                "sm0.rf_read": 36304,
+                "sm0.rf_write": 67936,
+                "sm0.sfu": 1344,
+                "sm0.shared_read": 65536,
+                "sm0.shared_write": 8192,
+                "sm0.tc": 12056,
+                "sm0.vec": 5408,
+                "sm1.dma": 45056,
+                "sm1.issue": 3212,
+                "sm1.issue_wait": 146524,
+                "sm1.noc_in": 43056,
+                "sm1.noc_out": 512,
+                "sm1.reduce": 480,
+                "sm1.rf_read": 34160,
+                "sm1.rf_write": 64608,
+                "sm1.sfu": 1152,
+                "sm1.shared_read": 65536,
+                "sm1.shared_write": 8192,
+                "sm1.tc": 12056,
+                "sm1.vec": 3040,
+                "sm2.dma": 45056,
+                "sm2.issue": 3212,
+                "sm2.issue_wait": 146464,
+                "sm2.noc_in": 43001,
+                "sm2.noc_out": 512,
+                "sm2.reduce": 480,
+                "sm2.rf_read": 34160,
+                "sm2.rf_write": 64608,
+                "sm2.sfu": 1152,
+                "sm2.shared_read": 65536,
+                "sm2.shared_write": 8192,
+                "sm2.tc": 12056,
+                "sm2.vec": 3040,
+                "sm3.dma": 45056,
+                "sm3.issue": 3212,
+                "sm3.issue_wait": 146697,
+                "sm3.noc_in": 43004,
+                "sm3.noc_out": 512,
+                "sm3.reduce": 480,
+                "sm3.rf_read": 34160,
+                "sm3.rf_write": 64608,
+                "sm3.sfu": 1152,
+                "sm3.shared_read": 65536,
+                "sm3.shared_write": 8192,
+                "sm3.tc": 12056,
+                "sm3.vec": 3040
+              },
+              "cycles": 169389,
+              "functional_passed": true,
+              "hbm_read_bytes": 2012160,
+              "hbm_write_bytes": 167936,
+              "instruction_count": 13000,
+              "max_abs_error": 1.1209758654651125e-06,
+              "peak_window_power_w": 14.815082217472327
+            }
+          },
+          "eligible": true,
+          "mode": "grade",
+          "score": 6931.378716758506
+        }
+      },
+      "verdict": "evaluated"
+    },
+    "score": 6931.378716758506,
+    "status": "evaluated",
+    "stored_at": "2026-09-29 03:05:53"
   },
   "7772605611ef49f476e89b0f53cfa5ee48d11adf7402fe731e218e4bfa2a8f54": {
     "candidate_id": "cand-003",
@@ -4057,7 +5253,143 @@
     },
     "score": 1111.1503617194342,
     "status": "evaluated",
-    "stored_at": "2026-09-29 01:52:06"
+    "stored_at": "2026-09-29 03:05:52"
+  },
+  "77baf5124e0afa98597feec71336cf6aec4d8a5f21b90a62985347c556cd628e": {
+    "candidate_id": "cand-130",
+    "eligible": true,
+    "functional_passed": true,
+    "metrics": {
+      "candidate": "cand-130",
+      "historical_import": true,
+      "reports": {
+        "grade": {
+          "area_mm2": 22.69981349888,
+          "cases": {
+            "M1_P1": {
+              "busy_cycles": {
+                "shared.cache_bank_0": 386107,
+                "shared.cache_bank_1": 386107,
+                "shared.cache_bank_2": 386108,
+                "shared.cache_bank_3": 386108,
+                "shared.hbm_channel_0": 72816,
+                "shared.hbm_channel_1": 72816,
+                "shared.hbm_channel_2": 72816,
+                "shared.hbm_channel_3": 72816,
+                "shared.hbm_channel_4": 72804,
+                "shared.hbm_channel_5": 72808,
+                "shared.hbm_channel_6": 72808,
+                "shared.hbm_channel_7": 72808,
+                "shared.noc": 1067140,
+                "sm0.dma": 1396352,
+                "sm0.issue": 80027,
+                "sm0.issue_wait": 4918170,
+                "sm0.noc_in": 1022460,
+                "sm0.noc_out": 71584,
+                "sm0.reduce": 81552,
+                "sm0.rf_read": 2637656,
+                "sm0.rf_write": 2393728,
+                "sm0.sfu": 143244,
+                "sm0.shared_read": 0,
+                "sm0.shared_write": 0,
+                "sm0.tc": 410928,
+                "sm0.vec": 405288
+              },
+              "cycles": 5008053,
+              "functional_passed": true,
+              "hbm_read_bytes": 14058368,
+              "hbm_write_bytes": 4581376,
+              "instruction_count": 80027,
+              "max_abs_error": 2.793004260981391e-06,
+              "peak_window_power_w": 4.014955333926715
+            },
+            "M2_D1": {
+              "busy_cycles": {
+                "shared.cache_bank_0": 68196,
+                "shared.cache_bank_1": 68196,
+                "shared.cache_bank_2": 67748,
+                "shared.cache_bank_3": 67748,
+                "shared.hbm_channel_0": 9032,
+                "shared.hbm_channel_1": 9032,
+                "shared.hbm_channel_2": 8968,
+                "shared.hbm_channel_3": 8968,
+                "shared.hbm_channel_4": 9024,
+                "shared.hbm_channel_5": 9024,
+                "shared.hbm_channel_6": 8960,
+                "shared.hbm_channel_7": 8960,
+                "shared.noc": 74568,
+                "sm0.dma": 62976,
+                "sm0.issue": 4762,
+                "sm0.issue_wait": 200446,
+                "sm0.noc_in": 56952,
+                "sm0.noc_out": 1472,
+                "sm0.reduce": 1312,
+                "sm0.rf_read": 39184,
+                "sm0.rf_write": 72544,
+                "sm0.sfu": 2912,
+                "sm0.shared_read": 0,
+                "sm0.shared_write": 0,
+                "sm0.tc": 12056,
+                "sm0.vec": 8736,
+                "sm1.dma": 59392,
+                "sm1.issue": 3722,
+                "sm1.issue_wait": 173376,
+                "sm1.noc_in": 54798,
+                "sm1.noc_out": 384,
+                "sm1.reduce": 480,
+                "sm1.rf_read": 33200,
+                "sm1.rf_write": 63584,
+                "sm1.sfu": 608,
+                "sm1.shared_read": 0,
+                "sm1.shared_write": 0,
+                "sm1.tc": 12056,
+                "sm1.vec": 1760,
+                "sm2.dma": 59392,
+                "sm2.issue": 3722,
+                "sm2.issue_wait": 173466,
+                "sm2.noc_in": 54409,
+                "sm2.noc_out": 384,
+                "sm2.reduce": 480,
+                "sm2.rf_read": 33200,
+                "sm2.rf_write": 63584,
+                "sm2.sfu": 608,
+                "sm2.shared_read": 0,
+                "sm2.shared_write": 0,
+                "sm2.tc": 12056,
+                "sm2.vec": 1760,
+                "sm3.dma": 59392,
+                "sm3.issue": 3722,
+                "sm3.issue_wait": 173538,
+                "sm3.noc_in": 54654,
+                "sm3.noc_out": 384,
+                "sm3.reduce": 480,
+                "sm3.rf_read": 33200,
+                "sm3.rf_write": 63584,
+                "sm3.sfu": 608,
+                "sm3.shared_read": 0,
+                "sm3.shared_write": 0,
+                "sm3.tc": 12056,
+                "sm3.vec": 1760
+              },
+              "cycles": 207673,
+              "functional_passed": true,
+              "hbm_read_bytes": 2135040,
+              "hbm_write_bytes": 167936,
+              "instruction_count": 15424,
+              "max_abs_error": 1.1209758654651125e-06,
+              "peak_window_power_w": 6.707200513472132
+            }
+          },
+          "eligible": true,
+          "mode": "grade",
+          "score": 6229.399004343326
+        }
+      },
+      "verdict": "evaluated"
+    },
+    "score": 6229.399004343326,
+    "status": "evaluated",
+    "stored_at": "2026-09-29 03:05:53"
   },
   "78b672dd2ff398261291dea4b0383ae754d3377cdcc6571e6fb5b9b810b745f6": {
     "candidate_id": "cand-062",
@@ -4136,7 +5468,7 @@
     },
     "score": 1840.1107341264512,
     "status": "evaluated",
-    "stored_at": "2026-09-29 01:52:07"
+    "stored_at": "2026-09-29 03:05:52"
   },
   "79b4344fb69c439a7cee0acf27366fd97928202cacafd2c5981cf8849c89d9a1": {
     "candidate_id": "cand-015",
@@ -4215,7 +5547,7 @@
     },
     "score": 1133.0546914360318,
     "status": "evaluated",
-    "stored_at": "2026-09-29 01:52:06"
+    "stored_at": "2026-09-29 03:05:52"
   },
   "7b1415a290edb5ba177f937dc98fc0ecddd5f3a880358a1ca338ecd9e93aabd4": {
     "candidate_id": "cand-081",
@@ -4302,7 +5634,7 @@
     },
     "score": 2051.47741118116,
     "status": "evaluated",
-    "stored_at": "2026-09-29 01:52:07"
+    "stored_at": "2026-09-29 03:05:52"
   },
   "7d3a74e434b1cc38185f41594e4b24f92483de2e97d4140717991a395d455a89": {
     "candidate_id": "cand-098",
@@ -4389,7 +5721,7 @@
     },
     "score": 2567.954051821853,
     "status": "evaluated",
-    "stored_at": "2026-09-29 01:52:07"
+    "stored_at": "2026-09-29 03:05:52"
   },
   "7ea9984b85bc986d76c008f8e37a6ebf452f37d6885beb61e45c17be90a91c25": {
     "candidate_id": "cand-090",
@@ -4476,7 +5808,7 @@
     },
     "score": 2287.4851157230846,
     "status": "evaluated",
-    "stored_at": "2026-09-29 01:52:07"
+    "stored_at": "2026-09-29 03:05:52"
   },
   "80601b99e33dd64e8b1d91cd98f14cf7b5ce8d194c7756044423a862114e63c2": {
     "candidate_id": "cand-077",
@@ -4563,7 +5895,7 @@
     },
     "score": 2075.4609403356135,
     "status": "evaluated",
-    "stored_at": "2026-09-29 01:52:07"
+    "stored_at": "2026-09-29 03:05:52"
   },
   "8088cd3a7c69fa051588b82a8cd545b9c3dcc16a439b420b0eb170ed857049c4": {
     "candidate_id": "cand-065",
@@ -4642,7 +5974,7 @@
     },
     "score": 1965.9942357374484,
     "status": "evaluated",
-    "stored_at": "2026-09-29 01:52:07"
+    "stored_at": "2026-09-29 03:05:52"
   },
   "87d2bef22d12f5cab2c830315c6df7a16ab76bc713ef5c67ccdfd7442dcd6c52": {
     "candidate_id": "cand-012",
@@ -4721,7 +6053,143 @@
     },
     "score": 914.1264889348438,
     "status": "evaluated",
-    "stored_at": "2026-09-29 01:52:06"
+    "stored_at": "2026-09-29 03:05:52"
+  },
+  "8d731fec81e2428f2133977e94a706db2b1b1d16783f3325ca83f65cbe4dc939": {
+    "candidate_id": "cand-139",
+    "eligible": true,
+    "functional_passed": true,
+    "metrics": {
+      "candidate": "cand-139",
+      "historical_import": true,
+      "reports": {
+        "grade": {
+          "area_mm2": 22.85981349888,
+          "cases": {
+            "M1_P1": {
+              "busy_cycles": {
+                "shared.cache_bank_0": 289388,
+                "shared.cache_bank_1": 289388,
+                "shared.cache_bank_2": 289388,
+                "shared.cache_bank_3": 289388,
+                "shared.hbm_channel_0": 66624,
+                "shared.hbm_channel_1": 66624,
+                "shared.hbm_channel_2": 66624,
+                "shared.hbm_channel_3": 66624,
+                "shared.hbm_channel_4": 66616,
+                "shared.hbm_channel_5": 66616,
+                "shared.hbm_channel_6": 66616,
+                "shared.hbm_channel_7": 66616,
+                "shared.noc": 901363,
+                "sm0.dma": 1009664,
+                "sm0.issue": 78131,
+                "sm0.issue_wait": 4871272,
+                "sm0.noc_in": 861133,
+                "sm0.noc_out": 59296,
+                "sm0.reduce": 81552,
+                "sm0.rf_read": 2637656,
+                "sm0.rf_write": 2363392,
+                "sm0.sfu": 143244,
+                "sm0.shared_read": 1376256,
+                "sm0.shared_write": 49152,
+                "sm0.tc": 410928,
+                "sm0.vec": 405288
+              },
+              "cycles": 4959259,
+              "functional_passed": true,
+              "hbm_read_bytes": 13259776,
+              "hbm_write_bytes": 3794944,
+              "instruction_count": 78131,
+              "max_abs_error": 2.793004260981391e-06,
+              "peak_window_power_w": 4.018955333925762
+            },
+            "M2_D1": {
+              "busy_cycles": {
+                "shared.cache_bank_0": 66468,
+                "shared.cache_bank_1": 66468,
+                "shared.cache_bank_2": 66404,
+                "shared.cache_bank_3": 66404,
+                "shared.hbm_channel_0": 8520,
+                "shared.hbm_channel_1": 8520,
+                "shared.hbm_channel_2": 8520,
+                "shared.hbm_channel_3": 8520,
+                "shared.hbm_channel_4": 8512,
+                "shared.hbm_channel_5": 8512,
+                "shared.hbm_channel_6": 8512,
+                "shared.hbm_channel_7": 8512,
+                "shared.noc": 69637,
+                "sm0.dma": 61440,
+                "sm0.issue": 3866,
+                "sm0.issue_wait": 161038,
+                "sm0.noc_in": 58660,
+                "sm0.noc_out": 1088,
+                "sm0.reduce": 1312,
+                "sm0.rf_read": 36304,
+                "sm0.rf_write": 67936,
+                "sm0.sfu": 1344,
+                "sm0.shared_read": 0,
+                "sm0.shared_write": 0,
+                "sm0.tc": 12056,
+                "sm0.vec": 5408,
+                "sm1.dma": 59392,
+                "sm1.issue": 3210,
+                "sm1.issue_wait": 150516,
+                "sm1.noc_in": 57032,
+                "sm1.noc_out": 512,
+                "sm1.reduce": 480,
+                "sm1.rf_read": 34160,
+                "sm1.rf_write": 64608,
+                "sm1.sfu": 1152,
+                "sm1.shared_read": 0,
+                "sm1.shared_write": 0,
+                "sm1.tc": 12056,
+                "sm1.vec": 3040,
+                "sm2.dma": 59392,
+                "sm2.issue": 3210,
+                "sm2.issue_wait": 150472,
+                "sm2.noc_in": 57008,
+                "sm2.noc_out": 512,
+                "sm2.reduce": 480,
+                "sm2.rf_read": 34160,
+                "sm2.rf_write": 64608,
+                "sm2.sfu": 1152,
+                "sm2.shared_read": 0,
+                "sm2.shared_write": 0,
+                "sm2.tc": 12056,
+                "sm2.vec": 3040,
+                "sm3.dma": 59392,
+                "sm3.issue": 3210,
+                "sm3.issue_wait": 150721,
+                "sm3.noc_in": 57027,
+                "sm3.noc_out": 512,
+                "sm3.reduce": 480,
+                "sm3.rf_read": 34160,
+                "sm3.rf_write": 64608,
+                "sm3.sfu": 1152,
+                "sm3.shared_read": 0,
+                "sm3.shared_write": 0,
+                "sm3.tc": 12056,
+                "sm3.vec": 3040
+              },
+              "cycles": 167539,
+              "functional_passed": true,
+              "hbm_read_bytes": 2012160,
+              "hbm_write_bytes": 167936,
+              "instruction_count": 12992,
+              "max_abs_error": 1.1209758654651125e-06,
+              "peak_window_power_w": 7.494538241472594
+            }
+          },
+          "eligible": true,
+          "mode": "grade",
+          "score": 6969.542505603433
+        }
+      },
+      "verdict": "evaluated"
+    },
+    "score": 6969.542505603433,
+    "status": "evaluated",
+    "stored_at": "2026-09-29 03:05:53"
   },
   "9034fc0355651c516a0c03a349a745de0c5273165ec23594ea529b72cef3fcbd": {
     "candidate_id": "cand-022",
@@ -4800,7 +6268,7 @@
     },
     "score": 1126.6638611979947,
     "status": "evaluated",
-    "stored_at": "2026-09-29 01:52:06"
+    "stored_at": "2026-09-29 03:05:52"
   },
   "9156acb1acaa15978eb515d3e37ad8b607116a178b3d0140bd8db0362620104f": {
     "candidate_id": "cand-016",
@@ -4879,7 +6347,7 @@
     },
     "score": 1136.0626036140557,
     "status": "evaluated",
-    "stored_at": "2026-09-29 01:52:06"
+    "stored_at": "2026-09-29 03:05:52"
   },
   "91eb27ab492c258c24d6f4c0f8f2d145b6fba17678ac660f1bf159f9ac7001bc": {
     "candidate_id": "cand-051",
@@ -4958,7 +6426,7 @@
     },
     "score": 1761.5596139891823,
     "status": "evaluated",
-    "stored_at": "2026-09-29 01:52:07"
+    "stored_at": "2026-09-29 03:05:52"
   },
   "929439425a0280c4cfb02cba8a90f301ae6956d7a49fe9645613457d713005b0": {
     "candidate_id": "cand-086",
@@ -5045,7 +6513,7 @@
     },
     "score": 2141.3022952147,
     "status": "evaluated",
-    "stored_at": "2026-09-29 01:52:07"
+    "stored_at": "2026-09-29 03:05:52"
   },
   "98bc67dedd2222f09a72cedd81579862f4571c1cc1f53677c4fbb3f7df7ea49c": {
     "candidate_id": "cand-071",
@@ -5124,7 +6592,7 @@
     },
     "score": 1996.4823457755592,
     "status": "evaluated",
-    "stored_at": "2026-09-29 01:52:07"
+    "stored_at": "2026-09-29 03:05:52"
   },
   "9c33051d881e3cf831c1cc454d38cf29bc7026de196731405e4683426131cb69": {
     "candidate_id": "cand-045",
@@ -5203,7 +6671,7 @@
     },
     "score": 1185.9408933569387,
     "status": "evaluated",
-    "stored_at": "2026-09-29 01:52:07"
+    "stored_at": "2026-09-29 03:05:52"
   },
   "9c442d50b6ddc8be94caa003b6e80f10de6a1d815d16931f8ecf72a58f9c056a": {
     "candidate_id": "cand-023",
@@ -5282,7 +6750,143 @@
     },
     "score": 1140.8975242069364,
     "status": "evaluated",
-    "stored_at": "2026-09-29 01:52:06"
+    "stored_at": "2026-09-29 03:05:52"
+  },
+  "9d7e7f20593342dd3970fe72bf71d4ce21c9efbc137daffca61fffba91c4d9eb": {
+    "candidate_id": "cand-131",
+    "eligible": true,
+    "functional_passed": true,
+    "metrics": {
+      "candidate": "cand-131",
+      "historical_import": true,
+      "reports": {
+        "grade": {
+          "area_mm2": 22.69981349888,
+          "cases": {
+            "M1_P1": {
+              "busy_cycles": {
+                "shared.cache_bank_0": 378523,
+                "shared.cache_bank_1": 378523,
+                "shared.cache_bank_2": 378524,
+                "shared.cache_bank_3": 378524,
+                "shared.hbm_channel_0": 72816,
+                "shared.hbm_channel_1": 72816,
+                "shared.hbm_channel_2": 72816,
+                "shared.hbm_channel_3": 72816,
+                "shared.hbm_channel_4": 72804,
+                "shared.hbm_channel_5": 72808,
+                "shared.hbm_channel_6": 72808,
+                "shared.hbm_channel_7": 72808,
+                "shared.noc": 1037980,
+                "sm0.dma": 1366016,
+                "sm0.issue": 78131,
+                "sm0.issue_wait": 4875026,
+                "sm0.noc_in": 991562,
+                "sm0.noc_out": 71584,
+                "sm0.reduce": 81552,
+                "sm0.rf_read": 2637656,
+                "sm0.rf_write": 2363392,
+                "sm0.sfu": 143244,
+                "sm0.shared_read": 0,
+                "sm0.shared_write": 0,
+                "sm0.tc": 410928,
+                "sm0.vec": 405288
+              },
+              "cycles": 4963013,
+              "functional_passed": true,
+              "hbm_read_bytes": 14058368,
+              "hbm_write_bytes": 4581376,
+              "instruction_count": 78131,
+              "max_abs_error": 2.793004260981391e-06,
+              "peak_window_power_w": 4.014955333925761
+            },
+            "M2_D1": {
+              "busy_cycles": {
+                "shared.cache_bank_0": 68196,
+                "shared.cache_bank_1": 68196,
+                "shared.cache_bank_2": 67748,
+                "shared.cache_bank_3": 67748,
+                "shared.hbm_channel_0": 9032,
+                "shared.hbm_channel_1": 9032,
+                "shared.hbm_channel_2": 8968,
+                "shared.hbm_channel_3": 8968,
+                "shared.hbm_channel_4": 9024,
+                "shared.hbm_channel_5": 9024,
+                "shared.hbm_channel_6": 8960,
+                "shared.hbm_channel_7": 8960,
+                "shared.noc": 74568,
+                "sm0.dma": 62976,
+                "sm0.issue": 4762,
+                "sm0.issue_wait": 200446,
+                "sm0.noc_in": 56952,
+                "sm0.noc_out": 1472,
+                "sm0.reduce": 1312,
+                "sm0.rf_read": 39184,
+                "sm0.rf_write": 72544,
+                "sm0.sfu": 2912,
+                "sm0.shared_read": 0,
+                "sm0.shared_write": 0,
+                "sm0.tc": 12056,
+                "sm0.vec": 8736,
+                "sm1.dma": 59392,
+                "sm1.issue": 3722,
+                "sm1.issue_wait": 173376,
+                "sm1.noc_in": 54798,
+                "sm1.noc_out": 384,
+                "sm1.reduce": 480,
+                "sm1.rf_read": 33200,
+                "sm1.rf_write": 63584,
+                "sm1.sfu": 608,
+                "sm1.shared_read": 0,
+                "sm1.shared_write": 0,
+                "sm1.tc": 12056,
+                "sm1.vec": 1760,
+                "sm2.dma": 59392,
+                "sm2.issue": 3722,
+                "sm2.issue_wait": 173466,
+                "sm2.noc_in": 54409,
+                "sm2.noc_out": 384,
+                "sm2.reduce": 480,
+                "sm2.rf_read": 33200,
+                "sm2.rf_write": 63584,
+                "sm2.sfu": 608,
+                "sm2.shared_read": 0,
+                "sm2.shared_write": 0,
+                "sm2.tc": 12056,
+                "sm2.vec": 1760,
+                "sm3.dma": 59392,
+                "sm3.issue": 3722,
+                "sm3.issue_wait": 173538,
+                "sm3.noc_in": 54654,
+                "sm3.noc_out": 384,
+                "sm3.reduce": 480,
+                "sm3.rf_read": 33200,
+                "sm3.rf_write": 63584,
+                "sm3.sfu": 608,
+                "sm3.shared_read": 0,
+                "sm3.shared_write": 0,
+                "sm3.tc": 12056,
+                "sm3.vec": 1760
+              },
+              "cycles": 207673,
+              "functional_passed": true,
+              "hbm_read_bytes": 2135040,
+              "hbm_write_bytes": 167936,
+              "instruction_count": 15424,
+              "max_abs_error": 1.1209758654651125e-06,
+              "peak_window_power_w": 6.707200513472132
+            }
+          },
+          "eligible": true,
+          "mode": "grade",
+          "score": 6257.601473890406
+        }
+      },
+      "verdict": "evaluated"
+    },
+    "score": 6257.601473890406,
+    "status": "evaluated",
+    "stored_at": "2026-09-29 03:05:53"
   },
   "9fc06c370a7befb039c0d7acd1c887c4e3e33714ae277c7caec12935eee325a7": {
     "candidate_id": "cand-057",
@@ -5361,7 +6965,7 @@
     },
     "score": 1666.9684198231182,
     "status": "evaluated",
-    "stored_at": "2026-09-29 01:52:07"
+    "stored_at": "2026-09-29 03:05:52"
   },
   "a18b3060153cad675e04952d7b15de9339c69602586e2352f287fc0f86810f99": {
     "candidate_id": "cand-119",
@@ -5484,7 +7088,7 @@
     },
     "score": 5776.172027407479,
     "status": "evaluated",
-    "stored_at": "2026-09-29 01:52:07"
+    "stored_at": "2026-09-29 03:05:53"
   },
   "a27a81d8e9ef2776dd8b942d2baa84b3ef3a58559b1083d727d0155d9eda326b": {
     "candidate_id": "cand-033",
@@ -5563,7 +7167,7 @@
     },
     "score": 643.1375334157768,
     "status": "evaluated",
-    "stored_at": "2026-09-29 01:52:07"
+    "stored_at": "2026-09-29 03:05:52"
   },
   "a338c0e1385a7c26a41c8b9ae30e3138928aeee50ead5baf5b7c936052d9d278": {
     "candidate_id": "cand-021",
@@ -5642,7 +7246,7 @@
     },
     "score": 955.2915117902414,
     "status": "evaluated",
-    "stored_at": "2026-09-29 01:52:06"
+    "stored_at": "2026-09-29 03:05:52"
   },
   "a45be73eb7cdc5ebf0388261def1eb6ec18cb1f16837c98f45df477d500df3b6": {
     "candidate_id": "cand-017",
@@ -5721,7 +7325,7 @@
     },
     "score": 1188.0346056227518,
     "status": "evaluated",
-    "stored_at": "2026-09-29 01:52:06"
+    "stored_at": "2026-09-29 03:05:52"
   },
   "a7dcd351cb804d64bcb3791ceba04f9ec336d9d05baca42a54d48c0817fc6637": {
     "candidate_id": "cand-001",
@@ -5800,7 +7404,7 @@
     },
     "score": 1173.0811006016247,
     "status": "evaluated",
-    "stored_at": "2026-09-29 01:52:06"
+    "stored_at": "2026-09-29 03:05:52"
   },
   "ae023c571217791815b6d6e075e992a317865200c70a394b8cbddd38f53ebfaa": {
     "candidate_id": "cand-000",
@@ -5879,7 +7483,7 @@
     },
     "score": 1000.0,
     "status": "evaluated",
-    "stored_at": "2026-09-29 01:52:06"
+    "stored_at": "2026-09-29 03:05:52"
   },
   "b09b9f59319ea4802f1f8c8834b0d1c83dcdbf383fe1492e23cc4d7e2c9b3546": {
     "candidate_id": "cand-029",
@@ -5958,7 +7562,7 @@
     },
     "score": 1168.5307558154386,
     "status": "evaluated",
-    "stored_at": "2026-09-29 01:52:07"
+    "stored_at": "2026-09-29 03:05:52"
   },
   "b1f588c1ffdd5c20fd3645e04d19ae27755efed1e4b8c25825b9a456e7532f87": {
     "candidate_id": "cand-112",
@@ -6081,7 +7685,7 @@
     },
     "score": 4455.914242343791,
     "status": "evaluated",
-    "stored_at": "2026-09-29 01:52:07"
+    "stored_at": "2026-09-29 03:05:53"
   },
   "b376889c016a1c16a896a4948639e6cb1aa5f3b961a2e32537402aef911e29b1": {
     "candidate_id": "cand-082",
@@ -6168,7 +7772,7 @@
     },
     "score": 2131.1533261851882,
     "status": "evaluated",
-    "stored_at": "2026-09-29 01:52:07"
+    "stored_at": "2026-09-29 03:05:52"
   },
   "b6edbbff79d0b9a3e1e7ab92b648d7ec386dd171aa96b6cf814af5f9e0c96c71": {
     "candidate_id": "cand-059",
@@ -6247,7 +7851,143 @@
     },
     "score": 1861.325996168528,
     "status": "evaluated",
-    "stored_at": "2026-09-29 01:52:07"
+    "stored_at": "2026-09-29 03:05:52"
+  },
+  "b9b520ba60b789db7b9885c2d0c111ed00dc53e6f5d284201d6a5d6830d84f5c": {
+    "candidate_id": "cand-126",
+    "eligible": true,
+    "functional_passed": true,
+    "metrics": {
+      "candidate": "cand-126",
+      "historical_import": true,
+      "reports": {
+        "grade": {
+          "area_mm2": 22.69981349888,
+          "cases": {
+            "M1_P1": {
+              "busy_cycles": {
+                "shared.cache_bank_0": 390667,
+                "shared.cache_bank_1": 390667,
+                "shared.cache_bank_2": 390668,
+                "shared.cache_bank_3": 390668,
+                "shared.hbm_channel_0": 75888,
+                "shared.hbm_channel_1": 75888,
+                "shared.hbm_channel_2": 75888,
+                "shared.hbm_channel_3": 75888,
+                "shared.hbm_channel_4": 75876,
+                "shared.hbm_channel_5": 75880,
+                "shared.hbm_channel_6": 75880,
+                "shared.hbm_channel_7": 75880,
+                "shared.noc": 1077928,
+                "sm0.dma": 1414592,
+                "sm0.issue": 81947,
+                "sm0.issue_wait": 4943220,
+                "sm0.noc_in": 1031292,
+                "sm0.noc_out": 77728,
+                "sm0.reduce": 81552,
+                "sm0.rf_read": 2643224,
+                "sm0.rf_write": 2405824,
+                "sm0.sfu": 143244,
+                "sm0.shared_read": 0,
+                "sm0.shared_write": 0,
+                "sm0.tc": 410160,
+                "sm0.vec": 412776
+              },
+              "cycles": 5038371,
+              "functional_passed": true,
+              "hbm_read_bytes": 14451584,
+              "hbm_write_bytes": 4974592,
+              "instruction_count": 81947,
+              "max_abs_error": 2.793004260981391e-06,
+              "peak_window_power_w": 4.014955333925761
+            },
+            "M2_D1": {
+              "busy_cycles": {
+                "shared.cache_bank_0": 68196,
+                "shared.cache_bank_1": 68196,
+                "shared.cache_bank_2": 67748,
+                "shared.cache_bank_3": 67748,
+                "shared.hbm_channel_0": 9032,
+                "shared.hbm_channel_1": 9032,
+                "shared.hbm_channel_2": 8968,
+                "shared.hbm_channel_3": 8968,
+                "shared.hbm_channel_4": 9024,
+                "shared.hbm_channel_5": 9024,
+                "shared.hbm_channel_6": 8960,
+                "shared.hbm_channel_7": 8960,
+                "shared.noc": 74568,
+                "sm0.dma": 62976,
+                "sm0.issue": 4762,
+                "sm0.issue_wait": 200446,
+                "sm0.noc_in": 56952,
+                "sm0.noc_out": 1472,
+                "sm0.reduce": 1312,
+                "sm0.rf_read": 39184,
+                "sm0.rf_write": 72544,
+                "sm0.sfu": 2912,
+                "sm0.shared_read": 0,
+                "sm0.shared_write": 0,
+                "sm0.tc": 12056,
+                "sm0.vec": 8736,
+                "sm1.dma": 59392,
+                "sm1.issue": 3722,
+                "sm1.issue_wait": 173376,
+                "sm1.noc_in": 54798,
+                "sm1.noc_out": 384,
+                "sm1.reduce": 480,
+                "sm1.rf_read": 33200,
+                "sm1.rf_write": 63584,
+                "sm1.sfu": 608,
+                "sm1.shared_read": 0,
+                "sm1.shared_write": 0,
+                "sm1.tc": 12056,
+                "sm1.vec": 1760,
+                "sm2.dma": 59392,
+                "sm2.issue": 3722,
+                "sm2.issue_wait": 173466,
+                "sm2.noc_in": 54409,
+                "sm2.noc_out": 384,
+                "sm2.reduce": 480,
+                "sm2.rf_read": 33200,
+                "sm2.rf_write": 63584,
+                "sm2.sfu": 608,
+                "sm2.shared_read": 0,
+                "sm2.shared_write": 0,
+                "sm2.tc": 12056,
+                "sm2.vec": 1760,
+                "sm3.dma": 59392,
+                "sm3.issue": 3722,
+                "sm3.issue_wait": 173538,
+                "sm3.noc_in": 54654,
+                "sm3.noc_out": 384,
+                "sm3.reduce": 480,
+                "sm3.rf_read": 33200,
+                "sm3.rf_write": 63584,
+                "sm3.sfu": 608,
+                "sm3.shared_read": 0,
+                "sm3.shared_write": 0,
+                "sm3.tc": 12056,
+                "sm3.vec": 1760
+              },
+              "cycles": 207673,
+              "functional_passed": true,
+              "hbm_read_bytes": 2135040,
+              "hbm_write_bytes": 167936,
+              "instruction_count": 15424,
+              "max_abs_error": 1.1209758654651125e-06,
+              "peak_window_power_w": 6.707200513472132
+            }
+          },
+          "eligible": true,
+          "mode": "grade",
+          "score": 6210.628265348859
+        }
+      },
+      "verdict": "evaluated"
+    },
+    "score": 6210.628265348859,
+    "status": "evaluated",
+    "stored_at": "2026-09-29 03:05:53"
   },
   "b9fb41d19c35aa4e336287664441e9c91b3cba553a9cc75b998058750b2da4a9": {
     "candidate_id": "cand-018",
@@ -6326,7 +8066,7 @@
     },
     "score": 923.5334757991376,
     "status": "evaluated",
-    "stored_at": "2026-09-29 01:52:06"
+    "stored_at": "2026-09-29 03:05:52"
   },
   "bb1ad199f8c0f6eb3a463a0269ab16a274f0aa4d8967d25f7469a91121b28980": {
     "candidate_id": "cand-083",
@@ -6413,7 +8153,7 @@
     },
     "score": 2245.0389561884695,
     "status": "evaluated",
-    "stored_at": "2026-09-29 01:52:07"
+    "stored_at": "2026-09-29 03:05:52"
   },
   "bb576af806f358e962e8fb279fcd9bc01dc6b84d53d7f9fe6e7bd9b648f09c55": {
     "candidate_id": "cand-061",
@@ -6500,7 +8240,7 @@
     },
     "score": 1338.1757908815193,
     "status": "evaluated",
-    "stored_at": "2026-09-29 01:52:07"
+    "stored_at": "2026-09-29 03:05:52"
   },
   "bd3c2bf486873f7450ac08f1be2b7ef60811570af85a83e88713185305448c7d": {
     "candidate_id": "cand-044",
@@ -6581,7 +8321,7 @@
     },
     "score": 1197.5985984332774,
     "status": "evaluated",
-    "stored_at": "2026-09-29 01:52:07"
+    "stored_at": "2026-09-29 03:05:52"
   },
   "c4cf0a1423e378f252e2033cfb0a6781fcc6fed4e385b54fd409e1480ddc1dbf": {
     "candidate_id": "cand-118",
@@ -6704,7 +8444,7 @@
     },
     "score": 5555.741702281949,
     "status": "evaluated",
-    "stored_at": "2026-09-29 01:52:07"
+    "stored_at": "2026-09-29 03:05:53"
   },
   "c5606389ab2d8e7e873f8652bc32cc53ca80b07801f052e9eacc70b9d622ba7d": {
     "candidate_id": "cand-067",
@@ -6791,7 +8531,7 @@
     },
     "score": 1894.931033551575,
     "status": "evaluated",
-    "stored_at": "2026-09-29 01:52:07"
+    "stored_at": "2026-09-29 03:05:52"
   },
   "c77a0a71246c95d25fbdedf884b4957a6dde6553f217d27f318d59d09c164a67": {
     "candidate_id": "cand-064",
@@ -6870,7 +8610,7 @@
     },
     "score": 1598.6569175780114,
     "status": "evaluated",
-    "stored_at": "2026-09-29 01:52:07"
+    "stored_at": "2026-09-29 03:05:52"
   },
   "c7c0b39be5c6f457f04e19cf264374f8c6f3df03d89cf0f59e425acd75b2ba1d": {
     "candidate_id": "cand-096",
@@ -6957,7 +8697,7 @@
     },
     "score": 2375.7262879581485,
     "status": "evaluated",
-    "stored_at": "2026-09-29 01:52:07"
+    "stored_at": "2026-09-29 03:05:52"
   },
   "cb886b84bd1645ca36c26abf210749550f315abb7c1f353ac21f85cf177dffa6": {
     "candidate_id": "cand-053",
@@ -7038,7 +8778,7 @@
     },
     "score": 1245.0300554926546,
     "status": "evaluated",
-    "stored_at": "2026-09-29 01:52:07"
+    "stored_at": "2026-09-29 03:05:52"
   },
   "cc0619f205c9e1deeac539dbc90bc2fc0ed7aa04c82b805460c38a07651ca374": {
     "candidate_id": "cand-009",
@@ -7117,7 +8857,7 @@
     },
     "score": 1178.3304547853895,
     "status": "evaluated",
-    "stored_at": "2026-09-29 01:52:06"
+    "stored_at": "2026-09-29 03:05:52"
   },
   "cd987d27b724357d890ab429f9c503e2ef4e1584bbd7fb667965738c9a258c3f": {
     "candidate_id": "cand-124",
@@ -7253,7 +8993,7 @@
     },
     "score": 6189.601474987878,
     "status": "evaluated",
-    "stored_at": "2026-09-29 01:52:07"
+    "stored_at": "2026-09-29 03:05:53"
   },
   "ce13232f2cae8b11c68e8bd50ee78e7ad3d5f59988b842be7b8e1e124950fbc6": {
     "candidate_id": "cand-116",
@@ -7376,7 +9116,7 @@
     },
     "score": 5148.962302010063,
     "status": "evaluated",
-    "stored_at": "2026-09-29 01:52:07"
+    "stored_at": "2026-09-29 03:05:53"
   },
   "cf6fe60305c3104f54c1086385aacd862e2fcf08860834c340f4cfba41e33fc8": {
     "candidate_id": "cand-078",
@@ -7463,7 +9203,143 @@
     },
     "score": 2153.6655079126076,
     "status": "evaluated",
-    "stored_at": "2026-09-29 01:52:07"
+    "stored_at": "2026-09-29 03:05:52"
+  },
+  "d1fc97c7837c25e965b2ece7794bed55a6b61975a63098ef13d8fffd6b839b63": {
+    "candidate_id": "cand-132",
+    "eligible": true,
+    "functional_passed": true,
+    "metrics": {
+      "candidate": "cand-132",
+      "historical_import": true,
+      "reports": {
+        "grade": {
+          "area_mm2": 22.69981349888,
+          "cases": {
+            "M1_P1": {
+              "busy_cycles": {
+                "shared.cache_bank_0": 327788,
+                "shared.cache_bank_1": 327788,
+                "shared.cache_bank_2": 327788,
+                "shared.cache_bank_3": 327788,
+                "shared.hbm_channel_0": 69696,
+                "shared.hbm_channel_1": 69696,
+                "shared.hbm_channel_2": 69696,
+                "shared.hbm_channel_3": 69696,
+                "shared.hbm_channel_4": 69688,
+                "shared.hbm_channel_5": 69688,
+                "shared.hbm_channel_6": 69688,
+                "shared.hbm_channel_7": 69688,
+                "shared.noc": 1006104,
+                "sm0.dma": 1163264,
+                "sm0.issue": 78131,
+                "sm0.issue_wait": 4872784,
+                "sm0.noc_in": 961672,
+                "sm0.noc_out": 65440,
+                "sm0.reduce": 81552,
+                "sm0.rf_read": 2637656,
+                "sm0.rf_write": 2363392,
+                "sm0.sfu": 143244,
+                "sm0.shared_read": 786432,
+                "sm0.shared_write": 24576,
+                "sm0.tc": 410928,
+                "sm0.vec": 405288
+              },
+              "cycles": 4960771,
+              "functional_passed": true,
+              "hbm_read_bytes": 13652992,
+              "hbm_write_bytes": 4188160,
+              "instruction_count": 78131,
+              "max_abs_error": 2.793004260981391e-06,
+              "peak_window_power_w": 4.014955333925761
+            },
+            "M2_D1": {
+              "busy_cycles": {
+                "shared.cache_bank_0": 68196,
+                "shared.cache_bank_1": 68196,
+                "shared.cache_bank_2": 67748,
+                "shared.cache_bank_3": 67748,
+                "shared.hbm_channel_0": 9032,
+                "shared.hbm_channel_1": 9032,
+                "shared.hbm_channel_2": 8968,
+                "shared.hbm_channel_3": 8968,
+                "shared.hbm_channel_4": 9024,
+                "shared.hbm_channel_5": 9024,
+                "shared.hbm_channel_6": 8960,
+                "shared.hbm_channel_7": 8960,
+                "shared.noc": 74568,
+                "sm0.dma": 62976,
+                "sm0.issue": 4762,
+                "sm0.issue_wait": 200446,
+                "sm0.noc_in": 56952,
+                "sm0.noc_out": 1472,
+                "sm0.reduce": 1312,
+                "sm0.rf_read": 39184,
+                "sm0.rf_write": 72544,
+                "sm0.sfu": 2912,
+                "sm0.shared_read": 0,
+                "sm0.shared_write": 0,
+                "sm0.tc": 12056,
+                "sm0.vec": 8736,
+                "sm1.dma": 59392,
+                "sm1.issue": 3722,
+                "sm1.issue_wait": 173376,
+                "sm1.noc_in": 54798,
+                "sm1.noc_out": 384,
+                "sm1.reduce": 480,
+                "sm1.rf_read": 33200,
+                "sm1.rf_write": 63584,
+                "sm1.sfu": 608,
+                "sm1.shared_read": 0,
+                "sm1.shared_write": 0,
+                "sm1.tc": 12056,
+                "sm1.vec": 1760,
+                "sm2.dma": 59392,
+                "sm2.issue": 3722,
+                "sm2.issue_wait": 173466,
+                "sm2.noc_in": 54409,
+                "sm2.noc_out": 384,
+                "sm2.reduce": 480,
+                "sm2.rf_read": 33200,
+                "sm2.rf_write": 63584,
+                "sm2.sfu": 608,
+                "sm2.shared_read": 0,
+                "sm2.shared_write": 0,
+                "sm2.tc": 12056,
+                "sm2.vec": 1760,
+                "sm3.dma": 59392,
+                "sm3.issue": 3722,
+                "sm3.issue_wait": 173538,
+                "sm3.noc_in": 54654,
+                "sm3.noc_out": 384,
+                "sm3.reduce": 480,
+                "sm3.rf_read": 33200,
+                "sm3.rf_write": 63584,
+                "sm3.sfu": 608,
+                "sm3.shared_read": 0,
+                "sm3.shared_write": 0,
+                "sm3.tc": 12056,
+                "sm3.vec": 1760
+              },
+              "cycles": 207673,
+              "functional_passed": true,
+              "hbm_read_bytes": 2135040,
+              "hbm_write_bytes": 167936,
+              "instruction_count": 15424,
+              "max_abs_error": 1.1209758654651125e-06,
+              "peak_window_power_w": 6.707200513472132
+            }
+          },
+          "eligible": true,
+          "mode": "grade",
+          "score": 6259.015362751037
+        }
+      },
+      "verdict": "evaluated"
+    },
+    "score": 6259.015362751037,
+    "status": "evaluated",
+    "stored_at": "2026-09-29 03:05:53"
   },
   "d4b1ef4ae96295f72c3b5e4c6f56bc84a0461de62707ecfb7430038a04ffe385": {
     "candidate_id": "cand-002",
@@ -7542,7 +9418,7 @@
     },
     "score": 910.920963143551,
     "status": "evaluated",
-    "stored_at": "2026-09-29 01:52:06"
+    "stored_at": "2026-09-29 03:05:52"
   },
   "d69890967a6d8bde0311d43600717add03d35763139b30204cd549525fde795d": {
     "candidate_id": "cand-093",
@@ -7629,7 +9505,7 @@
     },
     "score": 2512.2200312594855,
     "status": "evaluated",
-    "stored_at": "2026-09-29 01:52:07"
+    "stored_at": "2026-09-29 03:05:52"
   },
   "d9ca67360481fed3f2093feabe0a7f91aa068472a8e9ba7418e4fe17ae2be9d8": {
     "candidate_id": "cand-030",
@@ -7708,7 +9584,7 @@
     },
     "score": 926.8247918622404,
     "status": "evaluated",
-    "stored_at": "2026-09-29 01:52:07"
+    "stored_at": "2026-09-29 03:05:52"
   },
   "dd8f3085a8f60210b3b34445b237866c43a1b8d9a1264118a9cfc64dae197df9": {
     "candidate_id": "cand-011",
@@ -7787,7 +9663,7 @@
     },
     "score": 1122.2175843408888,
     "status": "evaluated",
-    "stored_at": "2026-09-29 01:52:06"
+    "stored_at": "2026-09-29 03:05:52"
   },
   "e3bec8a6d7cd57459b9ff5a84672cdf25dbfc49690d749672b07ee40608ad551": {
     "candidate_id": "cand-080",
@@ -7874,7 +9750,7 @@
     },
     "score": 2078.124801537899,
     "status": "evaluated",
-    "stored_at": "2026-09-29 01:52:07"
+    "stored_at": "2026-09-29 03:05:52"
   },
   "e624d2b5a240dc8bb11513718f568cfd2345097ddb8a3e7071b07a32c0144b22": {
     "candidate_id": "cand-058",
@@ -7953,7 +9829,7 @@
     },
     "score": 1824.400503955544,
     "status": "evaluated",
-    "stored_at": "2026-09-29 01:52:07"
+    "stored_at": "2026-09-29 03:05:52"
   },
   "ea8d5070df435122fea480bae04f68d2d8693f89f851344ac268f0d6d2e58985": {
     "candidate_id": "cand-063",
@@ -8032,7 +9908,143 @@
     },
     "score": 1874.814304538389,
     "status": "evaluated",
-    "stored_at": "2026-09-29 01:52:07"
+    "stored_at": "2026-09-29 03:05:52"
+  },
+  "eb4b0c8b9a0f3c3a1ffdf39e2891b0e80795a6f20ad4fc799fb4621337ee4b70": {
+    "candidate_id": "cand-134",
+    "eligible": true,
+    "functional_passed": true,
+    "metrics": {
+      "candidate": "cand-134",
+      "historical_import": true,
+      "reports": {
+        "grade": {
+          "area_mm2": 22.85981349888,
+          "cases": {
+            "M1_P1": {
+              "busy_cycles": {
+                "shared.cache_bank_0": 328496,
+                "shared.cache_bank_1": 328496,
+                "shared.cache_bank_2": 328496,
+                "shared.cache_bank_3": 328496,
+                "shared.hbm_channel_0": 70400,
+                "shared.hbm_channel_1": 70400,
+                "shared.hbm_channel_2": 70400,
+                "shared.hbm_channel_3": 70400,
+                "shared.hbm_channel_4": 70400,
+                "shared.hbm_channel_5": 70400,
+                "shared.hbm_channel_6": 70400,
+                "shared.hbm_channel_7": 70400,
+                "shared.noc": 1004732,
+                "sm0.dma": 1163264,
+                "sm0.issue": 78131,
+                "sm0.issue_wait": 4872937,
+                "sm0.noc_in": 960313,
+                "sm0.noc_out": 65440,
+                "sm0.reduce": 81552,
+                "sm0.rf_read": 2637656,
+                "sm0.rf_write": 2363392,
+                "sm0.sfu": 143244,
+                "sm0.shared_read": 786432,
+                "sm0.shared_write": 24576,
+                "sm0.tc": 410928,
+                "sm0.vec": 405288
+              },
+              "cycles": 4960924,
+              "functional_passed": true,
+              "hbm_read_bytes": 13834240,
+              "hbm_write_bytes": 4188160,
+              "instruction_count": 78131,
+              "max_abs_error": 2.793004260981391e-06,
+              "peak_window_power_w": 4.018955333925762
+            },
+            "M2_D1": {
+              "busy_cycles": {
+                "shared.cache_bank_0": 67488,
+                "shared.cache_bank_1": 67610,
+                "shared.cache_bank_2": 67804,
+                "shared.cache_bank_3": 67804,
+                "shared.hbm_channel_0": 8774,
+                "shared.hbm_channel_1": 9030,
+                "shared.hbm_channel_2": 8924,
+                "shared.hbm_channel_3": 8976,
+                "shared.hbm_channel_4": 8758,
+                "shared.hbm_channel_5": 9022,
+                "shared.hbm_channel_6": 8914,
+                "shared.hbm_channel_7": 8962,
+                "shared.noc": 73417,
+                "sm0.dma": 62976,
+                "sm0.issue": 4762,
+                "sm0.issue_wait": 199968,
+                "sm0.noc_in": 55640,
+                "sm0.noc_out": 1472,
+                "sm0.reduce": 1312,
+                "sm0.rf_read": 39184,
+                "sm0.rf_write": 72544,
+                "sm0.sfu": 2912,
+                "sm0.shared_read": 0,
+                "sm0.shared_write": 0,
+                "sm0.tc": 12056,
+                "sm0.vec": 8736,
+                "sm1.dma": 59392,
+                "sm1.issue": 3722,
+                "sm1.issue_wait": 173008,
+                "sm1.noc_in": 53365,
+                "sm1.noc_out": 384,
+                "sm1.reduce": 480,
+                "sm1.rf_read": 33200,
+                "sm1.rf_write": 63584,
+                "sm1.sfu": 608,
+                "sm1.shared_read": 0,
+                "sm1.shared_write": 0,
+                "sm1.tc": 12056,
+                "sm1.vec": 1760,
+                "sm2.dma": 59392,
+                "sm2.issue": 3722,
+                "sm2.issue_wait": 173002,
+                "sm2.noc_in": 53017,
+                "sm2.noc_out": 384,
+                "sm2.reduce": 480,
+                "sm2.rf_read": 33200,
+                "sm2.rf_write": 63584,
+                "sm2.sfu": 608,
+                "sm2.shared_read": 0,
+                "sm2.shared_write": 0,
+                "sm2.tc": 12056,
+                "sm2.vec": 1760,
+                "sm3.dma": 59392,
+                "sm3.issue": 3722,
+                "sm3.issue_wait": 173212,
+                "sm3.noc_in": 52462,
+                "sm3.noc_out": 384,
+                "sm3.reduce": 480,
+                "sm3.rf_read": 33200,
+                "sm3.rf_write": 63584,
+                "sm3.sfu": 608,
+                "sm3.shared_read": 0,
+                "sm3.shared_write": 0,
+                "sm3.tc": 12056,
+                "sm3.vec": 1760
+              },
+              "cycles": 207315,
+              "functional_passed": true,
+              "hbm_read_bytes": 2115584,
+              "hbm_write_bytes": 167936,
+              "instruction_count": 15424,
+              "max_abs_error": 1.1209758654651125e-06,
+              "peak_window_power_w": 6.699755653472125
+            }
+          },
+          "eligible": true,
+          "mode": "grade",
+          "score": 6264.320591992501
+        }
+      },
+      "verdict": "evaluated"
+    },
+    "score": 6264.320591992501,
+    "status": "evaluated",
+    "stored_at": "2026-09-29 03:05:53"
   },
   "ebf6fa0ba7187acaad6ce3c03d634598899bea9ac1102c284e937e957d68a8ba": {
     "candidate_id": "cand-024",
@@ -8111,7 +10123,143 @@
     },
     "score": 1188.7989042667773,
     "status": "evaluated",
-    "stored_at": "2026-09-29 01:52:06"
+    "stored_at": "2026-09-29 03:05:52"
+  },
+  "ec151bc5cb4f1cb2460802b2407bb0d9cd4b407e3d0612161591dbec73ae9375": {
+    "candidate_id": "cand-138",
+    "eligible": true,
+    "functional_passed": true,
+    "metrics": {
+      "candidate": "cand-138",
+      "historical_import": true,
+      "reports": {
+        "grade": {
+          "area_mm2": 22.85981349888,
+          "cases": {
+            "M1_P1": {
+              "busy_cycles": {
+                "shared.cache_bank_0": 289388,
+                "shared.cache_bank_1": 289388,
+                "shared.cache_bank_2": 289388,
+                "shared.cache_bank_3": 289388,
+                "shared.hbm_channel_0": 66624,
+                "shared.hbm_channel_1": 66624,
+                "shared.hbm_channel_2": 66624,
+                "shared.hbm_channel_3": 66624,
+                "shared.hbm_channel_4": 66616,
+                "shared.hbm_channel_5": 66616,
+                "shared.hbm_channel_6": 66616,
+                "shared.hbm_channel_7": 66616,
+                "shared.noc": 901363,
+                "sm0.dma": 1009664,
+                "sm0.issue": 78131,
+                "sm0.issue_wait": 4871272,
+                "sm0.noc_in": 861133,
+                "sm0.noc_out": 59296,
+                "sm0.reduce": 81552,
+                "sm0.rf_read": 2637656,
+                "sm0.rf_write": 2363392,
+                "sm0.sfu": 143244,
+                "sm0.shared_read": 1376256,
+                "sm0.shared_write": 49152,
+                "sm0.tc": 410928,
+                "sm0.vec": 405288
+              },
+              "cycles": 4959259,
+              "functional_passed": true,
+              "hbm_read_bytes": 13259776,
+              "hbm_write_bytes": 3794944,
+              "instruction_count": 78131,
+              "max_abs_error": 2.793004260981391e-06,
+              "peak_window_power_w": 4.018955333925762
+            },
+            "M2_D1": {
+              "busy_cycles": {
+                "shared.cache_bank_0": 67680,
+                "shared.cache_bank_1": 67776,
+                "shared.cache_bank_2": 68004,
+                "shared.cache_bank_3": 68004,
+                "shared.hbm_channel_0": 8904,
+                "shared.hbm_channel_1": 9260,
+                "shared.hbm_channel_2": 9048,
+                "shared.hbm_channel_3": 9040,
+                "shared.hbm_channel_4": 8896,
+                "shared.hbm_channel_5": 9252,
+                "shared.hbm_channel_6": 9040,
+                "shared.hbm_channel_7": 9032,
+                "shared.noc": 72561,
+                "sm0.dma": 61824,
+                "sm0.issue": 4570,
+                "sm0.issue_wait": 161840,
+                "sm0.noc_in": 55973,
+                "sm0.noc_out": 1088,
+                "sm0.reduce": 1312,
+                "sm0.rf_read": 36304,
+                "sm0.rf_write": 68320,
+                "sm0.sfu": 1344,
+                "sm0.shared_read": 0,
+                "sm0.shared_write": 0,
+                "sm0.tc": 12056,
+                "sm0.vec": 5408,
+                "sm1.dma": 59776,
+                "sm1.issue": 3914,
+                "sm1.issue_wait": 151330,
+                "sm1.noc_in": 54183,
+                "sm1.noc_out": 512,
+                "sm1.reduce": 480,
+                "sm1.rf_read": 34160,
+                "sm1.rf_write": 64992,
+                "sm1.sfu": 1152,
+                "sm1.shared_read": 0,
+                "sm1.shared_write": 0,
+                "sm1.tc": 12056,
+                "sm1.vec": 3040,
+                "sm2.dma": 59776,
+                "sm2.issue": 3914,
+                "sm2.issue_wait": 151232,
+                "sm2.noc_in": 53769,
+                "sm2.noc_out": 512,
+                "sm2.reduce": 480,
+                "sm2.rf_read": 34160,
+                "sm2.rf_write": 64992,
+                "sm2.sfu": 1152,
+                "sm2.shared_read": 0,
+                "sm2.shared_write": 0,
+                "sm2.tc": 12056,
+                "sm2.vec": 3040,
+                "sm3.dma": 59776,
+                "sm3.issue": 3914,
+                "sm3.issue_wait": 151577,
+                "sm3.noc_in": 53767,
+                "sm3.noc_out": 512,
+                "sm3.reduce": 480,
+                "sm3.rf_read": 34160,
+                "sm3.rf_write": 64992,
+                "sm3.sfu": 1152,
+                "sm3.shared_read": 0,
+                "sm3.shared_write": 0,
+                "sm3.tc": 12056,
+                "sm3.vec": 3040
+              },
+              "cycles": 169003,
+              "functional_passed": true,
+              "hbm_read_bytes": 2151168,
+              "hbm_write_bytes": 167936,
+              "instruction_count": 15808,
+              "max_abs_error": 1.1209758654651125e-06,
+              "peak_window_power_w": 7.498402193472631
+            }
+          },
+          "eligible": true,
+          "mode": "grade",
+          "score": 6939.289778161679
+        }
+      },
+      "verdict": "evaluated"
+    },
+    "score": 6939.289778161679,
+    "status": "evaluated",
+    "stored_at": "2026-09-29 03:05:53"
   },
   "f2b1ef9f1991ab31be847a1c26971ad68ad817d76f1ffbcc09e074fbccd9d89e": {
     "candidate_id": "cand-072",
@@ -8190,7 +10338,7 @@
     },
     "score": 2004.670977306224,
     "status": "evaluated",
-    "stored_at": "2026-09-29 01:52:07"
+    "stored_at": "2026-09-29 03:05:52"
   },
   "f33a7b18973510ecdf22ed86ec3022c3658211a267180da564f204538251015b": {
     "candidate_id": "cand-115",
@@ -8313,7 +10461,143 @@
     },
     "score": 5210.716811684826,
     "status": "evaluated",
-    "stored_at": "2026-09-29 01:52:07"
+    "stored_at": "2026-09-29 03:05:53"
+  },
+  "f58b562b1e7e13044877da819f42f61cadc8b48e16c4dd5997b0cd74f4f2a927": {
+    "candidate_id": "cand-142",
+    "eligible": true,
+    "functional_passed": true,
+    "metrics": {
+      "candidate": "cand-142",
+      "historical_import": true,
+      "reports": {
+        "grade": {
+          "area_mm2": 22.85981349888,
+          "cases": {
+            "M1_P1": {
+              "busy_cycles": {
+                "shared.cache_bank_0": 289388,
+                "shared.cache_bank_1": 289388,
+                "shared.cache_bank_2": 289388,
+                "shared.cache_bank_3": 289388,
+                "shared.hbm_channel_0": 66624,
+                "shared.hbm_channel_1": 66624,
+                "shared.hbm_channel_2": 66624,
+                "shared.hbm_channel_3": 66624,
+                "shared.hbm_channel_4": 66616,
+                "shared.hbm_channel_5": 66616,
+                "shared.hbm_channel_6": 66616,
+                "shared.hbm_channel_7": 66616,
+                "shared.noc": 884455,
+                "sm0.dma": 1009664,
+                "sm0.issue": 78131,
+                "sm0.issue_wait": 4847440,
+                "sm0.noc_in": 844225,
+                "sm0.noc_out": 59296,
+                "sm0.reduce": 81552,
+                "sm0.rf_read": 2637656,
+                "sm0.rf_write": 2363392,
+                "sm0.sfu": 143244,
+                "sm0.shared_read": 1376256,
+                "sm0.shared_write": 49152,
+                "sm0.tc": 410928,
+                "sm0.vec": 405288
+              },
+              "cycles": 4935427,
+              "functional_passed": true,
+              "hbm_read_bytes": 13259776,
+              "hbm_write_bytes": 3794944,
+              "instruction_count": 78131,
+              "max_abs_error": 2.793004260981391e-06,
+              "peak_window_power_w": 4.018955333925762
+            },
+            "M2_D1": {
+              "busy_cycles": {
+                "shared.cache_bank_0": 66468,
+                "shared.cache_bank_1": 66468,
+                "shared.cache_bank_2": 66404,
+                "shared.cache_bank_3": 66404,
+                "shared.hbm_channel_0": 8520,
+                "shared.hbm_channel_1": 8520,
+                "shared.hbm_channel_2": 8520,
+                "shared.hbm_channel_3": 8520,
+                "shared.hbm_channel_4": 8512,
+                "shared.hbm_channel_5": 8512,
+                "shared.hbm_channel_6": 8512,
+                "shared.hbm_channel_7": 8512,
+                "shared.noc": 69637,
+                "sm0.dma": 61440,
+                "sm0.issue": 3866,
+                "sm0.issue_wait": 161038,
+                "sm0.noc_in": 58660,
+                "sm0.noc_out": 1088,
+                "sm0.reduce": 1312,
+                "sm0.rf_read": 36304,
+                "sm0.rf_write": 67936,
+                "sm0.sfu": 1344,
+                "sm0.shared_read": 0,
+                "sm0.shared_write": 0,
+                "sm0.tc": 12056,
+                "sm0.vec": 5408,
+                "sm1.dma": 59392,
+                "sm1.issue": 3210,
+                "sm1.issue_wait": 150516,
+                "sm1.noc_in": 57032,
+                "sm1.noc_out": 512,
+                "sm1.reduce": 480,
+                "sm1.rf_read": 34160,
+                "sm1.rf_write": 64608,
+                "sm1.sfu": 1152,
+                "sm1.shared_read": 0,
+                "sm1.shared_write": 0,
+                "sm1.tc": 12056,
+                "sm1.vec": 3040,
+                "sm2.dma": 59392,
+                "sm2.issue": 3210,
+                "sm2.issue_wait": 150472,
+                "sm2.noc_in": 57008,
+                "sm2.noc_out": 512,
+                "sm2.reduce": 480,
+                "sm2.rf_read": 34160,
+                "sm2.rf_write": 64608,
+                "sm2.sfu": 1152,
+                "sm2.shared_read": 0,
+                "sm2.shared_write": 0,
+                "sm2.tc": 12056,
+                "sm2.vec": 3040,
+                "sm3.dma": 59392,
+                "sm3.issue": 3210,
+                "sm3.issue_wait": 150721,
+                "sm3.noc_in": 57027,
+                "sm3.noc_out": 512,
+                "sm3.reduce": 480,
+                "sm3.rf_read": 34160,
+                "sm3.rf_write": 64608,
+                "sm3.sfu": 1152,
+                "sm3.shared_read": 0,
+                "sm3.shared_write": 0,
+                "sm3.tc": 12056,
+                "sm3.vec": 3040
+              },
+              "cycles": 167539,
+              "functional_passed": true,
+              "hbm_read_bytes": 2012160,
+              "hbm_write_bytes": 167936,
+              "instruction_count": 12992,
+              "max_abs_error": 1.1209758654651125e-06,
+              "peak_window_power_w": 7.494538241472594
+            }
+          },
+          "eligible": true,
+          "mode": "grade",
+          "score": 6986.34937029585
+        }
+      },
+      "verdict": "evaluated"
+    },
+    "score": 6986.34937029585,
+    "status": "evaluated",
+    "stored_at": "2026-09-29 03:05:53"
   },
   "f7ba703d86620627643e78e438fa612068d60a39330b11eed54407f13e780b09": {
     "candidate_id": "cand-060",
@@ -8392,7 +10676,7 @@
     },
     "score": 1726.161168219366,
     "status": "evaluated",
-    "stored_at": "2026-09-29 01:52:07"
+    "stored_at": "2026-09-29 03:05:52"
   },
   "fa97668120b1e97dacef29416f89c5e13abe795cc6fe814caa08b29a56749300": {
     "candidate_id": "cand-038",
@@ -8471,7 +10755,7 @@
     },
     "score": 1192.1825329196229,
     "status": "evaluated",
-    "stored_at": "2026-09-29 01:52:07"
+    "stored_at": "2026-09-29 03:05:52"
   },
   "ff0da3b22e0f91a1e9171e7472051c4e4aa547c95a414c8cf2634cb1f17312d2": {
     "candidate_id": "cand-031",
@@ -8550,6 +10834,6 @@
     },
     "score": 1103.1808039751736,
     "status": "evaluated",
-    "stored_at": "2026-09-29 01:52:07"
+    "stored_at": "2026-09-29 03:05:52"
   }
 }

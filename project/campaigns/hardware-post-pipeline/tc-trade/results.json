@@ -1,0 +1,38 @@
+[
+  {
+    "name": "tc3_cache4_sh64",
+    "changes": {
+      "tc_count": 3,
+      "cache_mib": 4,
+      "shared_kib": 64
+    },
+    "cycles": {
+      "M1_P1": 5224763,
+      "M2_D1": 207283
+    },
+    "score_proxy": 6104.575723107113,
+    "area_mm2": 23.82840616448,
+    "peak_power_w": {
+      "M1_P1": 4.153062610114235,
+      "M2_D1": 6.723970470112125
+    }
+  },
+  {
+    "name": "tc3_cache2_sh64",
+    "changes": {
+      "tc_count": 3,
+      "cache_mib": 2,
+      "shared_kib": 64
+    },
+    "cycles": {
+      "M1_P1": 5224869,
+      "M2_D1": 207283
+    },
+    "score_proxy": 6104.513799228386,
+    "area_mm2": 22.98934466048,
+    "peak_power_w": {
+      "M1_P1": 4.132086072514235,
+      "M2_D1": 6.702993932512125
+    }
+  }
+]

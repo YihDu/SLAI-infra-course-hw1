@@ -1,0 +1,18 @@
+{
+  "bias": null,
+  "created_at": "2026-09-29 03:05:51",
+  "failure_class": "none",
+  "family": null,
+  "fingerprint": null,
+  "hypothesis": "Prefetch each next P1 QKV/WO output column\u2019s K0 B/A operands into released parity-0 RF buffers before the current column\u2019s final stores; preserve events and arithmetic.",
+  "id": "cand-143",
+  "kind": null,
+  "ops": null,
+  "parent": "cand-142",
+  "provenance_note": null,
+  "round": null,
+  "status": "kept",
+  "struct_sig": null,
+  "summary": "Cross-column seed lookahead for pipelined prompt projections.",
+  "verdict_note": "Full grade passes: cross-column prompt projection lookahead yields another positive P1 gain and raises the verified score above 7000."
+}

@@ -12,12 +12,13 @@
       "memory|balanced": "cand-073",
       "memory|p1": "cand-086",
       "p1_multism_control|p1": "cand-100",
-      "persistent_decode|d1": "cand-113",
+      "persistent_decode|d1": "cand-115",
       "persistent_mlp_decode|balanced": "cand-114",
+      "persistent_mlp_pipeline|p1": "cand-118",
       "persistent_mlp|p1": "cand-110",
       "sig:?|?": "cand-098",
       "sig:blocked-prompt-q16-k32": "cand-106",
-      "sig:d1-milp-projections": "cand-113",
+      "sig:d1-milp-projections": "cand-115",
       "sig:d1-panel-owners": "cand-112",
       "sig:fuse": "cand-009",
       "sig:fuse+hw:cache_mib=2+hw:dma_depth=2+hw:dma_engines=2+hw:reduction_units=1+hw:rf_ports=8R4W+hw:sm_noc_bytes_per_cycle=128+hw:tc_array=8x8+hw:tc_k_parallel=4+nkm+nopf+s:rf+stage:d1": "cand-085",
@@ -61,23 +62,24 @@
       "sig:p1-column-head-4-serial": "cand-100",
       "sig:pf": "cand-066",
       "sig:rf-mlp-and-milp-decode": "cand-114",
+      "sig:rf-mlp-double-buffered-operands": "cand-118",
       "sig:rf-streamed-mlp-store-completion": "cand-110",
       "sig:s:rf": "cand-019",
       "sig:stage:d1": "cand-072",
       "sig:stage:p1_prompt": "cand-070"
     },
     "elite": [
+      "cand-118",
+      "cand-115",
       "cand-114",
+      "cand-116",
       "cand-113",
+      "cand-117",
       "cand-112",
-      "cand-110",
-      "cand-106",
-      "cand-095",
-      "cand-098",
-      "cand-100"
+      "cand-110"
     ],
     "pareto": [
-      "cand-114"
+      "cand-118"
     ]
   },
   "candidates": {
@@ -4175,6 +4177,194 @@
       "status": "kept",
       "struct_sig": "rf-mlp-and-milp-decode"
     },
+    "cand-115": {
+      "area_mm2": 16.25838297088,
+      "bias": "d1",
+      "cache_source": null,
+      "cycles": {
+        "M1_P1": 7049767,
+        "M2_D1": 210849
+      },
+      "deltas": {
+        "cycles": {
+          "M1_P1": 0,
+          "M2_D1": -1810
+        },
+        "prior_head": "cand-114",
+        "score": 22.222317424854737,
+        "vs_parent": {
+          "cycles": {
+            "M1_P1": 0,
+            "M2_D1": -1810
+          },
+          "parent": "cand-114",
+          "score": 22.222317424854737
+        }
+      },
+      "elapsed": 118.65551587496884,
+      "eligible": true,
+      "evaluation_attempts": 1,
+      "failure_class": "none",
+      "family": "persistent_decode",
+      "fingerprint": "4f5371b4bf2f23ba",
+      "functional": {
+        "M1_P1": true,
+        "M2_D1": true
+      },
+      "functional_passed": true,
+      "hypothesis": "Automatic MILP D1 projection proposal with measured feedback and event-budget trust region.",
+      "kind": "milp",
+      "ops": [],
+      "outer_sig": "ef38d84af0f6e3b1",
+      "parent": "cand-114",
+      "power_w": 6.673966939606509,
+      "result_logged": true,
+      "round": 12,
+      "score": 5210.716811684826,
+      "status": "kept",
+      "struct_sig": "d1-milp-projections"
+    },
+    "cand-116": {
+      "area_mm2": 16.25838297088,
+      "bias": "d1",
+      "cache_source": null,
+      "cycles": {
+        "M1_P1": 7049767,
+        "M2_D1": 215937
+      },
+      "deltas": {
+        "cycles": {
+          "M1_P1": 0,
+          "M2_D1": 5088
+        },
+        "prior_head": "cand-115",
+        "score": -61.75450967476354,
+        "vs_parent": {
+          "cycles": {
+            "M1_P1": 0,
+            "M2_D1": 5088
+          },
+          "parent": "cand-115",
+          "score": -61.75450967476354
+        }
+      },
+      "elapsed": 123.43369637499563,
+      "eligible": true,
+      "evaluation_attempts": 1,
+      "failure_class": "none",
+      "family": "persistent_decode",
+      "fingerprint": "3d660e0a3a34d881",
+      "functional": {
+        "M1_P1": true,
+        "M2_D1": true
+      },
+      "functional_passed": true,
+      "hypothesis": "Automatic MILP D1 projection proposal with measured feedback and event-budget trust region.",
+      "kind": "milp",
+      "ops": [],
+      "outer_sig": "ef38d84af0f6e3b1",
+      "parent": "cand-115",
+      "power_w": 6.673966939606524,
+      "result_logged": true,
+      "round": 12,
+      "score": 5148.962302010063,
+      "status": "evaluated",
+      "struct_sig": "d1-milp-projections"
+    },
+    "cand-117": {
+      "area_mm2": 16.25838297088,
+      "bias": "d1",
+      "cache_source": null,
+      "cycles": {
+        "M1_P1": 7049767,
+        "M2_D1": 228289
+      },
+      "deltas": {
+        "cycles": {
+          "M1_P1": 0,
+          "M2_D1": 17440
+        },
+        "prior_head": "cand-115",
+        "score": -202.98858858180756,
+        "vs_parent": {
+          "cycles": {
+            "M1_P1": 0,
+            "M2_D1": 17440
+          },
+          "parent": "cand-115",
+          "score": -202.98858858180756
+        }
+      },
+      "elapsed": 115.4090529170353,
+      "eligible": true,
+      "evaluation_attempts": 1,
+      "failure_class": "none",
+      "family": "persistent_decode",
+      "fingerprint": "6fc83ce4f4a042f8",
+      "functional": {
+        "M1_P1": true,
+        "M2_D1": true
+      },
+      "functional_passed": true,
+      "hypothesis": "Automatic MILP D1 projection proposal with measured feedback and event-budget trust region.",
+      "kind": "milp",
+      "ops": [],
+      "outer_sig": "ef38d84af0f6e3b1",
+      "parent": "cand-115",
+      "power_w": 6.673966939606524,
+      "result_logged": true,
+      "round": 12,
+      "score": 5007.7282231030185,
+      "status": "evaluated",
+      "struct_sig": "d1-milp-projections"
+    },
+    "cand-118": {
+      "area_mm2": 16.25838297088,
+      "bias": "p1",
+      "cache_source": null,
+      "cycles": {
+        "M1_P1": 6201341,
+        "M2_D1": 210849
+      },
+      "deltas": {
+        "cycles": {
+          "M1_P1": -848426,
+          "M2_D1": 0
+        },
+        "prior_head": "cand-115",
+        "score": 345.024890597123,
+        "vs_parent": {
+          "cycles": {
+            "M1_P1": -848426,
+            "M2_D1": 0
+          },
+          "parent": "cand-115",
+          "score": 345.024890597123
+        }
+      },
+      "elapsed": 109.24233925004955,
+      "eligible": true,
+      "evaluation_attempts": 1,
+      "failure_class": "none",
+      "family": "persistent_mlp_pipeline",
+      "fingerprint": "2229e827fa1000fe",
+      "functional": {
+        "M1_P1": true,
+        "M2_D1": true
+      },
+      "functional_passed": true,
+      "hypothesis": "After D1 MILP plateau, change outer P1 MLP issue schedule: alternate RF0/1 and RF13/14 operands so next loads overlap current MMA; same arithmetic, loads and stores, D1 unchanged.",
+      "kind": "manual",
+      "ops": [],
+      "outer_sig": "2872c8d7ec2150c0",
+      "parent": "cand-115",
+      "power_w": 6.673966939606509,
+      "result_logged": true,
+      "round": 12,
+      "score": 5555.741702281949,
+      "status": "kept",
+      "struct_sig": "rf-mlp-double-buffered-operands"
+    },
     "drun-001": {
       "bias": "balanced",
       "failure_class": "dry_run",
@@ -4806,7 +4996,7 @@
       "struct_sig": "hw:sm_count=32+nkm+nofuse+nopf+s:hbm"
     }
   },
-  "counter": 114,
+  "counter": 118,
   "dry_counter": 27,
   "fingerprints": {
     "062742f6b8fbbde1": "cand-036",
@@ -4819,6 +5009,7 @@
     "19039ac31e1e14e2": "cand-014",
     "195ec88606acde60": "cand-046",
     "21f05dcb007f40f1": "cand-103",
+    "2229e827fa1000fe": "cand-118",
     "2e4feb59f56b0539": "cand-019",
     "30fd2cc2cedd6be3": "cand-025",
     "31a72fe4aede9d1d": "cand-096",
@@ -4830,6 +5021,7 @@
     "3988387fd58a7e71": "cand-095",
     "3c46cfb80904d994": "cand-102",
     "3c52c7255de1758c": "cand-060",
+    "3d660e0a3a34d881": "cand-116",
     "3ed983a6780dce16": "cand-016",
     "3fe27c0a3b50b890": "cand-106",
     "45ecec5211e523f3": "cand-064",
@@ -4838,6 +5030,7 @@
     "49a489892c124d47": "cand-091",
     "4db087d2863f570d": "cand-023",
     "4f0084c3f43a4af2": "cand-001",
+    "4f5371b4bf2f23ba": "cand-115",
     "52b8df7fb6990c4f": "cand-024",
     "54e65d319bb2c90e": "cand-075",
     "5581718e90a6e16f": "cand-056",
@@ -4851,6 +5044,7 @@
     "6bea8860b230f000": "cand-099",
     "6de9256553383d73": "cand-020",
     "6ee4b82778955948": "cand-077",
+    "6fc83ce4f4a042f8": "cand-117",
     "703e7311b450d7db": "cand-030",
     "7044d4568cdc1820": "cand-032",
     "7a1c6dadac71186e": "cand-079",
@@ -4912,10 +5106,11 @@
     "ff0c29904037c174": "cand-089",
     "ff6870b21f8f0ec7": "cand-055"
   },
-  "head": "cand-114",
+  "head": "cand-118",
+  "revision": 15,
   "search": {
-    "best_id": "cand-114",
-    "best_score": 5188.494494259971,
+    "best_id": "cand-118",
+    "best_score": 5555.741702281949,
     "bottleneck": "M1_P1 sm0.rf_read=2818280, sm0.rf_write=2788264, sm0.dma=1876160; M2_D1 sm0.rf_write=261248, sm0.dma=239104, shared.noc=226521 (overlapping service counts)",
     "explore_ratio": 0.54,
     "hierarchy": {

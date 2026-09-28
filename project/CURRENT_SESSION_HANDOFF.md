@@ -1,5 +1,16 @@
 # 新 session 接手：P1 multi-SM 与 frozen checker 内存阻塞
 
+## Active goal update: 2026-09-29 automatic iteration
+
+- User goal remains active: iterate toward the current design's limit; no global upper bound has been established.
+- Current kept/default **cand-118**: P1 **6201341**, D1 **210849**, score **5555.741702281949**, complete frozen grade passed.
+- Automatic MILP campaign `auto-milp-20260929-005803` evaluated115–117, kept115 and stopped at `outer_structure_required` after3 valid low-gain candidates. Then P1 RF operand pipelining118 produced a structural gain.
+- New entry `python -m project.search.milp_campaign`; see `project/search/AUTO_ITERATION.md`. Registry now rejects stale saves by revision CAS. Solver v2 accepts controlled single-projection delta feedback; retrospective ranking check agrees with115. Read reports before another run.
+- **Next concrete work:** investigate double-buffered operand issue for P1 QKV/WO (current mature GEMM still reuses A/B buffers). Do not call the D1 plateau a whole-design ceiling or restart its same neighborhood after a P1-only change.
+- Latest evidence: `project/campaigns/p1-operand-pipeline/REPORT.md`, `project/campaigns/auto-milp-20260929-005803/REPORT.md`. No grade process remains running at this checkpoint. Gemini read-only review failed provider503; no findings used.
+- Older current-state sections below are historical.
+
+
 ## 最新进展：2026-09-29
 
 - 当前默认/registry head：**cand-114**，完整 frozen grade eligible；P1=**7,049,767**，D1=**212,659**，score=**5188.49449**。硬件未改，未官方提交。

@@ -1,0 +1,33 @@
+{
+  "corrections": {
+    "w1/4:128:8": -203.125,
+    "wo/4:16:64": 270.0,
+    "w2/4:16:64": 922.0
+  },
+  "calibration_evidence": [
+    {
+      "candidate": "cand-115",
+      "stage": "w1",
+      "actual_case_delta": -1810,
+      "proxy_case_delta": 1440,
+      "option": "w1/4:128:8",
+      "correction_per_invocation": -203.125
+    },
+    {
+      "candidate": "cand-116",
+      "stage": "wo",
+      "actual_case_delta": 5088,
+      "proxy_case_delta": 768,
+      "option": "wo/4:16:64",
+      "correction_per_invocation": 270.0
+    },
+    {
+      "candidate": "cand-117",
+      "stage": "w2",
+      "actual_case_delta": 17440,
+      "proxy_case_delta": 2688,
+      "option": "w2/4:16:64",
+      "correction_per_invocation": 922.0
+    }
+  ]
+}

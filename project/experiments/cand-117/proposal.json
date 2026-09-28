@@ -1,0 +1,113 @@
+{
+  "bias": "d1",
+  "compiler_path": "/Users/yihdu/Codefield/SLAI-infra-Code/transformer-codesign-starter/project/experiments/cand-114/inputs/compiler.py",
+  "family": "persistent_decode",
+  "fingerprint": "6fc83ce4f4a042f8",
+  "hardware": {
+    "cache_mib": 2,
+    "dma_depth": 2,
+    "dma_engines": 2,
+    "hbm_channels": 4,
+    "multicast": false,
+    "noc_bytes_per_cycle": 256,
+    "reduction_units": 0,
+    "rf_ports": "8R4W",
+    "sfu_lanes": 8,
+    "shared_banks": 4,
+    "shared_kib": 128,
+    "shared_ports": "1R1W",
+    "sm_count": 4,
+    "sm_noc_bytes_per_cycle": 128,
+    "tc_array": "8x16",
+    "tc_count": 2,
+    "tc_k_parallel": 4,
+    "vector_lanes": 16,
+    "version": "challenge-hardware-v0.4"
+  },
+  "hypothesis": "Automatic MILP D1 projection proposal with measured feedback and event-budget trust region.",
+  "kind": "milp",
+  "ops": [],
+  "outer_sig": "ef38d84af0f6e3b1",
+  "outer_structure": {
+    "attention_algorithm": "blocked_prompt",
+    "fusion_partition": {
+      "bias_gelu": 1,
+      "p1_mlp": "rf_stream"
+    },
+    "parallel_skeleton": {},
+    "persistent_scheduling": {
+      "d1": "fixed_column_head_owners"
+    },
+    "residency_plan": {
+      "explicit": {},
+      "gemm_order": "nkm",
+      "kernels": {},
+      "scores": "rf",
+      "stage_orders": {
+        "p1_prompt": "nkm_lanes"
+      }
+    }
+  },
+  "parent": "cand-115",
+  "recipe": {
+    "attention": {
+      "algorithm": "blocked_prompt",
+      "scores": "rf"
+    },
+    "d1_schedule": {
+      "kind": "column_head",
+      "partition": "panel_owners",
+      "projections": {
+        "qkv": {
+          "k_chunk": 32,
+          "n_tile": 32,
+          "owners": 4
+        },
+        "w1": {
+          "k_chunk": 8,
+          "n_tile": 128,
+          "owners": 4
+        },
+        "w2": {
+          "k_chunk": 64,
+          "n_tile": 16,
+          "owners": 4
+        },
+        "wo": {
+          "k_chunk": 32,
+          "n_tile": 32,
+          "owners": 4
+        }
+      },
+      "shards": 4
+    },
+    "fusion": {
+      "bias_gelu": 1,
+      "p1_mlp": "rf_stream"
+    },
+    "gemm": {
+      "k_chunk": 48,
+      "m_tile": 8,
+      "n_tile": 16,
+      "order": "nkm",
+      "prefetch": 0
+    },
+    "gemm_stages": {
+      "d1": {
+        "k_chunk": 16,
+        "n_tile": 64
+      },
+      "p1_prompt": {
+        "k_chunk": 32,
+        "m_tile": 32,
+        "n_tile": 32,
+        "order": "nkm_lanes"
+      }
+    },
+    "persistent": {
+      "d1": "fixed_column_head_owners"
+    }
+  },
+  "solver_evidence": "project/campaigns/auto-milp-20260929-005803/002-solution.json",
+  "struct_sig": "d1-milp-projections"
+}

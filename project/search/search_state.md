@@ -1,15 +1,15 @@
 # search_state (auto-generated; do not edit)
 
-- best: cand-114 score=5188.494494259971 (P1=7049767, D1=212659)
+- best: cand-118 score=5555.741702281949 (P1=6201341, D1=210849)
 - phase=2 round=12 plateau_rounds=0 explore_ratio=0.54 need_new_operator=False
 - bottleneck: M1_P1 sm0.rf_read=2818280, sm0.rf_write=2788264, sm0.dma=1876160; M2_D1 sm0.rf_write=261248, sm0.dma=239104, shared.noc=226521 (overlapping service counts)
 
 ## elite (score desc)
+- cand-118 score=5555.74 parent=cand-115 sig=rf-mlp-double-buffered-operands hyp=After D1 MILP plateau, change outer P1 MLP issue schedule: a
+- cand-115 score=5210.72 parent=cand-114 sig=d1-milp-projections hyp=Automatic MILP D1 projection proposal with measured feedback
 - cand-114 score=5188.49 parent=cand-113 sig=rf-mlp-and-milp-decode hyp=Compose independently verified P1 RF persistent MLP (cand-11
+- cand-116 score=5148.96 parent=cand-115 sig=d1-milp-projections hyp=Automatic MILP D1 projection proposal with measured feedback
 - cand-113 score=5101.49 parent=cand-112 sig=d1-milp-projections hyp=HiGHS MILP chooses D1 projection owner counts and RF panels
-- cand-112 score=4455.91 parent=cand-106 sig=d1-panel-owners hyp=D1 persistent parallel owners preserve native64-column panel
-- cand-110 score=2823.46 parent=cand-108 sig=rf-streamed-mlp-store-completion hyp=RF persistent MLP with completion waits on final output stor
-- cand-106 score=2776.11 parent=cand-098 sig=blocked-prompt-q16-k32 hyp=Block 16 prompt queries, stream 32-key/value panels, coalesc
 
 ## failure classes
 - dry_run: 27
@@ -23,7 +23,7 @@
 - validation_cost_pruned: 1
 
 ## pareto front
-- cand-114 {'M1_P1': 7049767, 'M2_D1': 212659}
+- cand-118 {'M1_P1': 6201341, 'M2_D1': 210849}
 
 ## diversity cells
 - ?|?: cand-098
@@ -37,12 +37,13 @@
 - memory|balanced: cand-073
 - memory|p1: cand-086
 - p1_multism_control|p1: cand-100
-- persistent_decode|d1: cand-113
+- persistent_decode|d1: cand-115
 - persistent_mlp_decode|balanced: cand-114
+- persistent_mlp_pipeline|p1: cand-118
 - persistent_mlp|p1: cand-110
 - sig:?|?: cand-098
 - sig:blocked-prompt-q16-k32: cand-106
-- sig:d1-milp-projections: cand-113
+- sig:d1-milp-projections: cand-115
 - sig:d1-panel-owners: cand-112
 - sig:fuse: cand-009
 - sig:fuse+hw:cache_mib=2+hw:dma_depth=2+hw:dma_engines=2+hw:reduction_units=1+hw:rf_ports=8R4W+hw:sm_noc_bytes_per_cycle=128+hw:tc_array=8x8+hw:tc_k_parallel=4+nkm+nopf+s:rf+stage:d1: cand-085
@@ -86,6 +87,7 @@
 - sig:p1-column-head-4-serial: cand-100
 - sig:pf: cand-066
 - sig:rf-mlp-and-milp-decode: cand-114
+- sig:rf-mlp-double-buffered-operands: cand-118
 - sig:rf-streamed-mlp-store-completion: cand-110
 - sig:s:rf: cand-019
 - sig:stage:d1: cand-072

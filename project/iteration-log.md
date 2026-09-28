@@ -1465,3 +1465,51 @@ AssertionError: DMA slot changed after issue preview
 - Decision: KEPT — new incumbent head (score=5188.494)
 
 ### cand-114 verdict: KEPT — Complete grade passes: RF resident P1 MLP plus MILP-balanced four-SM decode. Preserve full experiment and solver evidence; no official submission.
+
+## 2026-09-29 00:58:04 — cand-115: Automatic MILP D1 projection proposal with measured feedback and event-budget trust region.
+- Change: parent=cand-114; []
+- Evidence: project/experiments/cand-115/metrics.json; reports/grade.json; attempts=1
+- Command (grade): ['/Users/yihdu/Codefield/SLAI-infra-Code/transformer-codesign-starter/.venv/bin/python', '/Users/yihdu/Codefield/SLAI-infra-Code/transformer-codesign-starter/challenge.py', 'grade', '--hardware', '/Users/yihdu/Codefield/SLAI-infra-Code/transformer-codesign-starter/project/experiments/cand-115/inputs/hardware.json', '--program-p1', '/Users/yihdu/Codefield/SLAI-infra-Code/transformer-codesign-starter/project/experiments/cand-115/programs/M1_P1.asm', '--program-d1', '/Users/yihdu/Codefield/SLAI-infra-Code/transformer-codesign-starter/project/experiments/cand-115/programs/M2_D1.asm', '--report', '/Users/yihdu/Codefield/SLAI-infra-Code/transformer-codesign-starter/project/experiments/cand-115/reports/grade.json', '--seed', '7', '--baseline', '/Users/yihdu/Codefield/SLAI-infra-Code/transformer-codesign-starter/baseline_manifest.json']; elapsed=118.64900533400942; peak MiB=4982.707450866699
+- Inputs: compiler.py@09b90e14 hardware.json@b92be26a recipe.json@37efd95c
+- Verify: PASS elapsed=118.66s
+- Result: M1_P1=7049767 (4.397x), M2_D1=210849 (6.175x); score=5210.717, eligible=True
+  - deltas vs head (cand-114): {'M1_P1': 0, 'M2_D1': -1810}
+- Decision: KEPT — new incumbent head (score=5210.717)
+
+## 2026-09-29 01:00:06 — cand-116: Automatic MILP D1 projection proposal with measured feedback and event-budget trust region.
+- Change: parent=cand-115; []
+- Evidence: project/experiments/cand-116/metrics.json; reports/grade.json; attempts=1
+- Command (grade): ['/Users/yihdu/Codefield/SLAI-infra-Code/transformer-codesign-starter/.venv/bin/python', '/Users/yihdu/Codefield/SLAI-infra-Code/transformer-codesign-starter/challenge.py', 'grade', '--hardware', '/Users/yihdu/Codefield/SLAI-infra-Code/transformer-codesign-starter/project/experiments/cand-116/inputs/hardware.json', '--program-p1', '/Users/yihdu/Codefield/SLAI-infra-Code/transformer-codesign-starter/project/experiments/cand-116/programs/M1_P1.asm', '--program-d1', '/Users/yihdu/Codefield/SLAI-infra-Code/transformer-codesign-starter/project/experiments/cand-116/programs/M2_D1.asm', '--report', '/Users/yihdu/Codefield/SLAI-infra-Code/transformer-codesign-starter/project/experiments/cand-116/reports/grade.json', '--seed', '7', '--baseline', '/Users/yihdu/Codefield/SLAI-infra-Code/transformer-codesign-starter/baseline_manifest.json']; elapsed=123.42704683402553; peak MiB=5218.129623413086
+- Inputs: compiler.py@09b90e14 hardware.json@b92be26a recipe.json@63148e3b
+- Verify: PASS elapsed=123.43s
+- Result: M1_P1=7049767 (4.397x), M2_D1=215937 (6.030x); score=5148.962, eligible=True
+  - deltas vs head (cand-115): {'M1_P1': 0, 'M2_D1': 5088}
+- Decision: evaluated; retained in Pareto/archives (head preserved)
+
+## 2026-09-29 01:02:13 — cand-117: Automatic MILP D1 projection proposal with measured feedback and event-budget trust region.
+- Change: parent=cand-115; []
+- Evidence: project/experiments/cand-117/metrics.json; reports/grade.json; attempts=1
+- Command (grade): ['/Users/yihdu/Codefield/SLAI-infra-Code/transformer-codesign-starter/.venv/bin/python', '/Users/yihdu/Codefield/SLAI-infra-Code/transformer-codesign-starter/challenge.py', 'grade', '--hardware', '/Users/yihdu/Codefield/SLAI-infra-Code/transformer-codesign-starter/project/experiments/cand-117/inputs/hardware.json', '--program-p1', '/Users/yihdu/Codefield/SLAI-infra-Code/transformer-codesign-starter/project/experiments/cand-117/programs/M1_P1.asm', '--program-d1', '/Users/yihdu/Codefield/SLAI-infra-Code/transformer-codesign-starter/project/experiments/cand-117/programs/M2_D1.asm', '--report', '/Users/yihdu/Codefield/SLAI-infra-Code/transformer-codesign-starter/project/experiments/cand-117/reports/grade.json', '--seed', '7', '--baseline', '/Users/yihdu/Codefield/SLAI-infra-Code/transformer-codesign-starter/baseline_manifest.json']; elapsed=115.40498912497424; peak MiB=5524.629737854004
+- Inputs: compiler.py@09b90e14 hardware.json@b92be26a recipe.json@47560b03
+- Verify: PASS elapsed=115.41s
+- Result: M1_P1=7049767 (4.397x), M2_D1=228289 (5.703x); score=5007.728, eligible=True
+  - deltas vs head (cand-115): {'M1_P1': 0, 'M2_D1': 17440}
+- Decision: evaluated; retained in Pareto/archives (head preserved)
+
+## 2026-09-29 01:04:57 — cand-118: After D1 MILP plateau, change outer P1 MLP issue schedule: alternate RF0/1 and RF13/14 operands so next loads overlap current MMA; same arithmetic, loads and stores, D1 unchanged.
+- Change: parent=cand-115; []
+- Evidence: project/experiments/cand-118/metrics.json; reports/grade.json; attempts=1
+- Command (grade): ['/Users/yihdu/Codefield/SLAI-infra-Code/transformer-codesign-starter/.venv/bin/python', '/Users/yihdu/Codefield/SLAI-infra-Code/transformer-codesign-starter/challenge.py', 'grade', '--hardware', '/Users/yihdu/Codefield/SLAI-infra-Code/transformer-codesign-starter/project/experiments/cand-118/inputs/hardware.json', '--program-p1', '/Users/yihdu/Codefield/SLAI-infra-Code/transformer-codesign-starter/project/experiments/cand-118/programs/M1_P1.asm', '--program-d1', '/Users/yihdu/Codefield/SLAI-infra-Code/transformer-codesign-starter/project/experiments/cand-118/programs/M2_D1.asm', '--report', '/Users/yihdu/Codefield/SLAI-infra-Code/transformer-codesign-starter/project/experiments/cand-118/reports/grade.json', '--seed', '7', '--baseline', '/Users/yihdu/Codefield/SLAI-infra-Code/transformer-codesign-starter/baseline_manifest.json']; elapsed=109.23450200003572; peak MiB=5459.535873413086
+- Inputs: compiler.py@79d78164 hardware.json@b92be26a recipe.json@64177290
+- Verify: PASS elapsed=109.24s
+- Result: M1_P1=6201341 (4.998x), M2_D1=210849 (6.175x); score=5555.742, eligible=True
+  - deltas vs head (cand-115): {'M1_P1': -848426, 'M2_D1': 0}
+- Decision: KEPT — new incumbent head (score=5555.742)
+
+## 2026-09-29 — Automated MILP campaign and registry consistency
+- Change: sequential MILP provider, historical no-good exclusions, bounded grade, durable feedback and plateau stop; registry compare-and-swap rejects stale snapshots.
+- Verify: 16 state/feedback/records tests pass; 2 isolated-HiGHS solver tests pass, including independent enumeration and infeasible/no-good constraints.
+- Result: auto-milp-20260929-005803 evaluated cand-115/116/117 at scores5210.7168/5148.9623/5007.7282 and stopped after3 valid low-gain candidates with outer_structure_required; best115 staged.
+- Decision: stop this D1 inner sweep. New outer P1 operand-pipeline candidate118 enters full grade. Local single-projection feedback calibrates subsequent MILP proposals; no global optimum claim. Gemini review returned provider503/no capacity and supplied no usable findings.
+
+### cand-118 verdict: KEPT — Full grade passes: alternate MLP operand buffers overlap loads and MMA; P1 improvement after D1 automatic plateau.

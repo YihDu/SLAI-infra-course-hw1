@@ -484,13 +484,33 @@ class Builder:
                 self.vec("add", [imm(0), imm(0)], rf(add(4, {"ceildiv": [col, tile]}), tile*tile))
             with self.loop(name + "neuron", 0, f, tile) as neuron:
                 self.vec("add", [imm(0), imm(0)], rf(2, tile*tile))
-                with self.loop(name + "k", 0, d, tile) as inner:
-                    self.ld(hbm(add(source.offset, mul(row, d), inner), tile*tile,
-                                [tile, tile], [d, 1]), rf(0, tile*tile))
-                    self.ld(hbm(add(w1.offset, mul(inner, f), neuron), tile*tile,
-                                [tile, tile], [f, 1]), rf(1, tile*tile))
-                    self.emit("MMA.ACC", a=rf(0, tile*tile), b=rf(1, tile*tile),
-                              acc=rf(2, tile*tile), m=tile, n=tile, k=tile, event=None)
+                if self.recipe['fusion']['p1_mlp'] == 'rf_pipeline':
+                    self.ld(hbm(add(source.offset, mul(row, d)), tile*tile,
+                                [tile,tile], [d,1]), rf(0,tile*tile))
+                    self.ld(hbm(add(w1.offset, neuron), tile*tile,
+                                [tile,tile], [f,1]), rf(1,tile*tile))
+                    with self.loop(name + 'k', 0, d, tile) as inner:
+                        parity=mod({'ceildiv':[inner,tile]},2)
+                        lane_a=mul(13,parity)
+                        lane_b=add(1,mul(13,parity))
+                        self.emit('MMA.ACC',a=rf(lane_a,tile*tile),b=rf(lane_b,tile*tile),
+                                  acc=rf(2,tile*tile),m=tile,n=tile,k=tile,event=None)
+                        # Enqueue next operands after issuing this MMA; alternate
+                        # RF partitions avoid overwrite dependencies on its inputs.
+                        with self.loop(name + 'prefetchk', add(inner,tile), d, d) as nxt:
+                            nxt_parity=sub(1,parity)
+                            self.ld(hbm(add(source.offset,mul(row,d),nxt),tile*tile,
+                                        [tile,tile],[d,1]),rf(mul(13,nxt_parity),tile*tile))
+                            self.ld(hbm(add(w1.offset,mul(nxt,f),neuron),tile*tile,
+                                        [tile,tile],[f,1]),rf(add(1,mul(13,nxt_parity)),tile*tile))
+                else:
+                    with self.loop(name + "k", 0, d, tile) as inner:
+                        self.ld(hbm(add(source.offset, mul(row, d), inner), tile*tile,
+                                    [tile, tile], [d, 1]), rf(0, tile*tile))
+                        self.ld(hbm(add(w1.offset, mul(inner, f), neuron), tile*tile,
+                                    [tile, tile], [f, 1]), rf(1, tile*tile))
+                        self.emit("MMA.ACC", a=rf(0, tile*tile), b=rf(1, tile*tile),
+                                  acc=rf(2, tile*tile), m=tile, n=tile, k=tile, event=None)
                 self.ld(hbm(add(b1.offset, neuron), tile), rf(0, tile))
                 self.emit("MMA.ACC", a=rf(12, tile), b=rf(0, tile),
                           acc=rf(2, tile*tile), m=tile, n=tile, k=1, event=None)
@@ -502,12 +522,24 @@ class Builder:
                 self.vec("add", [rf(3, tile*tile), imm(1)], rf(3, tile*tile))
                 self.vec("mul", [rf(2, tile*tile), imm(0.5)], rf(2, tile*tile))
                 self.vec("mul", [rf(2, tile*tile), rf(3, tile*tile)], rf(2, tile*tile))
-                with self.loop(name + "o", 0, d, tile) as col:
-                    self.ld(hbm(add(w2.offset, mul(neuron, d), col), tile*tile,
-                                [tile, tile], [d, 1]), rf(1, tile*tile))
-                    self.emit("MMA.ACC", a=rf(2, tile*tile), b=rf(1, tile*tile),
-                              acc=rf(add(4, {"ceildiv": [col, tile]}), tile*tile),
-                              m=tile, n=tile, k=tile, event=None)
+                if self.recipe['fusion']['p1_mlp'] == 'rf_pipeline':
+                    self.ld(hbm(add(w2.offset,mul(neuron,d)),tile*tile,
+                                [tile,tile],[d,1]),rf(1,tile*tile))
+                    with self.loop(name + 'o',0,d,tile) as col:
+                        parity=mod({'ceildiv':[col,tile]},2)
+                        self.emit('MMA.ACC',a=rf(2,tile*tile),b=rf(add(1,mul(13,parity)),tile*tile),
+                                  acc=rf(add(4,{'ceildiv':[col,tile]}),tile*tile),
+                                  m=tile,n=tile,k=tile,event=None)
+                        with self.loop(name + 'prefetcho',add(col,tile),d,d) as nxt:
+                            self.ld(hbm(add(w2.offset,mul(neuron,d),nxt),tile*tile,
+                                        [tile,tile],[d,1]),rf(add(1,mul(13,sub(1,parity))),tile*tile))
+                else:
+                    with self.loop(name + "o", 0, d, tile) as col:
+                        self.ld(hbm(add(w2.offset, mul(neuron, d), col), tile*tile,
+                                    [tile, tile], [d, 1]), rf(1, tile*tile))
+                        self.emit("MMA.ACC", a=rf(2, tile*tile), b=rf(1, tile*tile),
+                                  acc=rf(add(4, {"ceildiv": [col, tile]}), tile*tile),
+                                  m=tile, n=tile, k=tile, event=None)
             with self.loop(name + "store", 0, d, tile) as col:
                 self.st(rf(add(4, {"ceildiv": [col, tile]}), tile*tile),
                         hbm(add(out.offset, mul(row, d), col), tile*tile,
@@ -1006,7 +1038,7 @@ def generate_m1_p1(recipe: dict | None = None) -> tuple[str, Layout, int]:
                 b.gemm(ctx, weights["wo"], att, rows, d, d, name + "wo")
                 b.add_rows(x, att, res, rows, d, name + "res")
                 b.layernorm(res, weights["ln2_g"], weights["ln2_b"], ln2, rows, d, name + "ln2")
-                if phase == "p" and recipe.get("fusion", {}).get("p1_mlp") == "rf_stream":
+                if phase == "p" and recipe.get("fusion", {}).get("p1_mlp") in ("rf_stream", "rf_pipeline"):
                     b.mlp_rf_stream(ln2, weights["w1"], weights["b1"], weights["w2"],
                                     ff2, rows, d, f, name + "mlp")
                 else:

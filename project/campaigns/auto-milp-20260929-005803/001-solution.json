@@ -1,0 +1,40 @@
+{
+  "status": "optimal_for_proxy_model",
+  "solver": "1.15.1",
+  "selected": {
+    "qkv": {
+      "owners": 4,
+      "n_tile": 32,
+      "k_chunk": 32,
+      "cost_proxy": 1920,
+      "events": 2688
+    },
+    "wo": {
+      "owners": 4,
+      "n_tile": 16,
+      "k_chunk": 64,
+      "cost_proxy": 688,
+      "events": 1024
+    },
+    "w1": {
+      "owners": 4,
+      "n_tile": 128,
+      "k_chunk": 8,
+      "cost_proxy": 2670,
+      "events": 3200
+    },
+    "w2": {
+      "owners": 4,
+      "n_tile": 32,
+      "k_chunk": 32,
+      "cost_proxy": 2524,
+      "events": 3200
+    }
+  },
+  "objective": 124832.0,
+  "events": 15376,
+  "event_cap": 15500,
+  "model_version": 1,
+  "seconds": 0.007699707988649607,
+  "mip_gap": 0.0
+}

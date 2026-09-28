@@ -1,0 +1,174 @@
+{
+  "parent": "cand-114",
+  "event_cap": 15500,
+  "fixed_events": 5264,
+  "flat_valid": 3,
+  "observations": [
+    {
+      "candidate": "cand-115",
+      "verdict": "evaluated",
+      "failure": null,
+      "proxy": 124064.0,
+      "predicted_events": 15248,
+      "peak_memory_mib": 4982.707450866699,
+      "score": 5210.716811684826,
+      "cycles": {
+        "M1_P1": 7049767,
+        "M2_D1": 210849
+      },
+      "incumbent_gain": 0.004282999133841114
+    },
+    {
+      "candidate": "cand-116",
+      "verdict": "evaluated",
+      "failure": null,
+      "proxy": 124832.0,
+      "predicted_events": 15376,
+      "peak_memory_mib": 5218.129623413086,
+      "score": 5148.962302010063,
+      "cycles": {
+        "M1_P1": 7049767,
+        "M2_D1": 215937
+      },
+      "incumbent_gain": -0.011851442307569182
+    },
+    {
+      "candidate": "cand-117",
+      "verdict": "evaluated",
+      "failure": null,
+      "proxy": 126752.0,
+      "predicted_events": 15376,
+      "peak_memory_mib": 5524.629737854004,
+      "score": 5007.7282231030185,
+      "cycles": {
+        "M1_P1": 7049767,
+        "M2_D1": 228289
+      },
+      "incumbent_gain": -0.03895598166582637
+    }
+  ],
+  "excluded": [
+    {
+      "qkv": {
+        "owners": 3,
+        "n_tile": 64,
+        "k_chunk": 16
+      },
+      "wo": {
+        "owners": 2,
+        "n_tile": 64,
+        "k_chunk": 16
+      },
+      "w1": {
+        "owners": 4,
+        "n_tile": 64,
+        "k_chunk": 16
+      },
+      "w2": {
+        "owners": 2,
+        "n_tile": 64,
+        "k_chunk": 16
+      }
+    },
+    {
+      "qkv": {
+        "owners": 4,
+        "n_tile": 32,
+        "k_chunk": 32
+      },
+      "w1": {
+        "owners": 4,
+        "n_tile": 64,
+        "k_chunk": 16
+      },
+      "w2": {
+        "owners": 4,
+        "n_tile": 32,
+        "k_chunk": 32
+      },
+      "wo": {
+        "owners": 4,
+        "n_tile": 32,
+        "k_chunk": 32
+      }
+    },
+    {
+      "qkv": {
+        "owners": 4,
+        "n_tile": 32,
+        "k_chunk": 32
+      },
+      "wo": {
+        "owners": 4,
+        "n_tile": 32,
+        "k_chunk": 32
+      },
+      "w1": {
+        "owners": 4,
+        "n_tile": 128,
+        "k_chunk": 8
+      },
+      "w2": {
+        "owners": 4,
+        "n_tile": 32,
+        "k_chunk": 32
+      }
+    },
+    {
+      "qkv": {
+        "owners": 4,
+        "n_tile": 32,
+        "k_chunk": 32
+      },
+      "wo": {
+        "owners": 4,
+        "n_tile": 16,
+        "k_chunk": 64
+      },
+      "w1": {
+        "owners": 4,
+        "n_tile": 128,
+        "k_chunk": 8
+      },
+      "w2": {
+        "owners": 4,
+        "n_tile": 32,
+        "k_chunk": 32
+      }
+    },
+    {
+      "qkv": {
+        "owners": 4,
+        "n_tile": 32,
+        "k_chunk": 32
+      },
+      "wo": {
+        "owners": 4,
+        "n_tile": 32,
+        "k_chunk": 32
+      },
+      "w1": {
+        "owners": 4,
+        "n_tile": 128,
+        "k_chunk": 8
+      },
+      "w2": {
+        "owners": 4,
+        "n_tile": 16,
+        "k_chunk": 64
+      }
+    }
+  ],
+  "attempts": [
+    "cand-115",
+    "cand-116",
+    "cand-117"
+  ],
+  "stop_reason": "outer_structure_required",
+  "best": "cand-115",
+  "last_budget": {
+    "used": 3,
+    "maximum": 6,
+    "wall_seconds": 367.475
+  }
+}

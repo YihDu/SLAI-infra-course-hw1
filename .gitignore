@@ -16,3 +16,4 @@ recipe.json
 
 # Transient coordinator lock
 project/experiments/.controller.lock
+project/experiments/registry.write.lock

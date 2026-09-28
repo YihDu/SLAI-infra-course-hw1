@@ -1,0 +1,223 @@
+{
+  "candidate": "cand-117",
+  "reports": {
+    "grade": {
+      "mode": "grade",
+      "cases": {
+        "M1_P1": {
+          "functional_passed": true,
+          "max_abs_error": 2.793004260981391e-06,
+          "cycles": 7049767,
+          "instruction_count": 89579,
+          "hbm_read_bytes": 45626624,
+          "hbm_write_bytes": 4974592,
+          "peak_window_power_w": 3.2090927716329922,
+          "busy_cycles": {
+            "sm0.dma": 1428416,
+            "sm0.issue": 89579,
+            "sm0.noc_in": 1137209,
+            "sm0.noc_out": 77728,
+            "sm0.rf_read": 2637800,
+            "sm0.rf_write": 2407936,
+            "sm0.sfu": 268428,
+            "sm0.shared_read": 0,
+            "sm0.shared_write": 0,
+            "sm0.tc": 455472,
+            "sm0.vec": 514440,
+            "sm0.issue_wait": 6941740,
+            "shared.cache_bank_0": 515901,
+            "shared.cache_bank_1": 515901,
+            "shared.cache_bank_2": 515901,
+            "shared.cache_bank_3": 515901,
+            "shared.hbm_channel_0": 395292,
+            "shared.hbm_channel_1": 395352,
+            "shared.hbm_channel_2": 395352,
+            "shared.hbm_channel_3": 395292,
+            "shared.noc": 1191469
+          }
+        },
+        "M2_D1": {
+          "functional_passed": true,
+          "max_abs_error": 1.1209758654651125e-06,
+          "cycles": 228289,
+          "instruction_count": 15552,
+          "hbm_read_bytes": 2156672,
+          "hbm_write_bytes": 167936,
+          "peak_window_power_w": 6.673966939606524,
+          "busy_cycles": {
+            "sm0.dma": 63488,
+            "sm0.issue": 4794,
+            "sm0.noc_in": 57348,
+            "sm0.noc_out": 1472,
+            "sm0.rf_read": 39200,
+            "sm0.rf_write": 72800,
+            "sm0.sfu": 5472,
+            "sm0.shared_read": 0,
+            "sm0.shared_write": 0,
+            "sm0.tc": 14104,
+            "sm0.vec": 10464,
+            "sm0.issue_wait": 220343,
+            "sm1.dma": 59904,
+            "sm1.issue": 3754,
+            "sm1.noc_in": 55191,
+            "sm1.noc_out": 384,
+            "sm1.rf_read": 33216,
+            "sm1.rf_write": 63840,
+            "sm1.sfu": 1120,
+            "sm1.shared_read": 0,
+            "sm1.shared_write": 0,
+            "sm1.tc": 14104,
+            "sm1.vec": 2400,
+            "sm1.issue_wait": 191118,
+            "sm2.dma": 59904,
+            "sm2.issue": 3754,
+            "sm2.noc_in": 55183,
+            "sm2.noc_out": 384,
+            "sm2.rf_read": 33216,
+            "sm2.rf_write": 63840,
+            "sm2.sfu": 1120,
+            "sm2.shared_read": 0,
+            "sm2.shared_write": 0,
+            "sm2.tc": 14104,
+            "sm2.vec": 2400,
+            "sm2.issue_wait": 191124,
+            "sm3.dma": 59904,
+            "sm3.issue": 3754,
+            "sm3.noc_in": 55407,
+            "sm3.noc_out": 384,
+            "sm3.rf_read": 33216,
+            "sm3.rf_write": 63840,
+            "sm3.sfu": 1120,
+            "sm3.shared_read": 0,
+            "sm3.shared_write": 0,
+            "sm3.tc": 14104,
+            "sm3.vec": 2400,
+            "sm3.issue_wait": 191698,
+            "shared.cache_bank_0": 68608,
+            "shared.cache_bank_1": 68692,
+            "shared.cache_bank_2": 68469,
+            "shared.cache_bank_3": 68505,
+            "shared.hbm_channel_0": 18306,
+            "shared.hbm_channel_1": 18242,
+            "shared.hbm_channel_2": 18060,
+            "shared.hbm_channel_3": 18036,
+            "shared.noc": 92935
+          }
+        }
+      },
+      "score": 5007.7282231030185,
+      "eligible": true,
+      "area_mm2": 16.25838297088
+    }
+  },
+  "evaluation_attempts": 1,
+  "runs": {
+    "grade": {
+      "command": [
+        "/Users/yihdu/Codefield/SLAI-infra-Code/transformer-codesign-starter/.venv/bin/python",
+        "/Users/yihdu/Codefield/SLAI-infra-Code/transformer-codesign-starter/challenge.py",
+        "grade",
+        "--hardware",
+        "/Users/yihdu/Codefield/SLAI-infra-Code/transformer-codesign-starter/project/experiments/cand-117/inputs/hardware.json",
+        "--program-p1",
+        "/Users/yihdu/Codefield/SLAI-infra-Code/transformer-codesign-starter/project/experiments/cand-117/programs/M1_P1.asm",
+        "--program-d1",
+        "/Users/yihdu/Codefield/SLAI-infra-Code/transformer-codesign-starter/project/experiments/cand-117/programs/M2_D1.asm",
+        "--report",
+        "/Users/yihdu/Codefield/SLAI-infra-Code/transformer-codesign-starter/project/experiments/cand-117/reports/grade.json",
+        "--seed",
+        "7",
+        "--baseline",
+        "/Users/yihdu/Codefield/SLAI-infra-Code/transformer-codesign-starter/baseline_manifest.json"
+      ],
+      "exit_code": 0,
+      "elapsed": 115.40498912497424,
+      "peak_memory_mib": 5524.629737854004,
+      "failure_class": null
+    }
+  },
+  "static": {
+    "M1_P1": {
+      "expanded_instructions": 89579,
+      "bytes": 355783,
+      "workgroup_lifetimes": 1
+    },
+    "M2_D1": {
+      "expanded_instructions": 15552,
+      "bytes": 1511797,
+      "workgroup_lifetimes": 4
+    }
+  },
+  "validation_cost": {
+    "M2_D1": {
+      "expanded_instructions": 15552,
+      "source_lines": 7552,
+      "static_loops": 1856,
+      "workgroup_lifetimes": 4,
+      "workgroup_names": 4,
+      "opcode_counts": {
+        "WG.BEGIN": 4,
+        "LD": 7736,
+        "REDUCE": 192,
+        "VEC": 2352,
+        "SFU": 128,
+        "ST": 744,
+        "BARRIER": 160,
+        "MMA.ACC": 4224,
+        "STEP.COMMIT": 8,
+        "WG.END": 4
+      },
+      "events": 15376,
+      "graph_edges": 45197,
+      "named_cross_wg_sync_edges": 0,
+      "barrier_directed_pair_relations": 1920,
+      "barrier_incidence_edges": 1280,
+      "global_commit_incidence_edges": 29209,
+      "stages": {
+        "unknown/control": {
+          "instructions": 15552,
+          "WG.BEGIN": 4,
+          "LD": 7736,
+          "events": 15376,
+          "REDUCE": 192,
+          "VEC": 2352,
+          "SFU": 128,
+          "ST": 744,
+          "BARRIER": 160,
+          "MMA.ACC": 4224,
+          "STEP.COMMIT": 8,
+          "WG.END": 4,
+          "sum_dependency_depth_lower_bound": 16940176
+        }
+      },
+      "race_checker_single_wg_fast_path": false,
+      "max_dependency_depth_lower_bound": 2201,
+      "sum_dependency_depth_lower_bound": 16940176,
+      "retained_event_sets_logical_bytes_lower_bound": 273379968,
+      "decision": "within_lower_bound_only",
+      "budget_mib": 6144.0,
+      "checkpoints": [
+        {
+          "visited": 10000,
+          "max_depth": 1414,
+          "sum_depth": 7012360
+        }
+      ],
+      "caveat": "Lower bound on uncompressed CPython event-set allocation, not peak RSS prediction. Passing cost screen never establishes race correctness. Multi-path/HBM unions, tuples, prefixes and graph storage add memory."
+    }
+  },
+  "validation_cost_progress": {
+    "pid": 48902,
+    "status": "completed",
+    "elapsed": 0.7628654579166323,
+    "peak_memory_mib": 59.406707763671875,
+    "updated_at": 1790614935.657461,
+    "command": [
+      "/Users/yihdu/Codefield/SLAI-infra-Code/transformer-codesign-starter/.venv/bin/python",
+      "-c",
+      "import json,pathlib; from project.search.validation_cost import analyze; stats=json.loads(pathlib.Path('reports/static.json').read_text()); out={n:analyze((pathlib.Path('programs')/(n+'.asm')).read_text(),6144.0) for n,v in stats.items() if v.get('workgroup_lifetimes',1)>1}; pathlib.Path('reports/validation-cost.json').write_text(json.dumps(out,indent=2))"
+    ]
+  },
+  "verdict": "evaluated",
+  "elapsed": 115.4090529170353
+}

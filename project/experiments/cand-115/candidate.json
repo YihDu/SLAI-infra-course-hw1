@@ -1,0 +1,18 @@
+{
+  "bias": "d1",
+  "created_at": "2026-09-29 00:58:04",
+  "failure_class": "none",
+  "family": "persistent_decode",
+  "fingerprint": "4f5371b4bf2f23ba",
+  "hypothesis": "Automatic MILP D1 projection proposal with measured feedback and event-budget trust region.",
+  "id": "cand-115",
+  "kind": "milp",
+  "ops": [],
+  "parent": "cand-114",
+  "provenance_note": null,
+  "round": 12,
+  "status": "kept",
+  "struct_sig": "d1-milp-projections",
+  "summary": "[]",
+  "verdict_note": null
+}

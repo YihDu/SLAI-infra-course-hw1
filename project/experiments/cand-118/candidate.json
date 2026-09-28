@@ -1,0 +1,18 @@
+{
+  "bias": "p1",
+  "created_at": "2026-09-29 01:04:57",
+  "failure_class": "none",
+  "family": "persistent_mlp_pipeline",
+  "fingerprint": "2229e827fa1000fe",
+  "hypothesis": "After D1 MILP plateau, change outer P1 MLP issue schedule: alternate RF0/1 and RF13/14 operands so next loads overlap current MMA; same arithmetic, loads and stores, D1 unchanged.",
+  "id": "cand-118",
+  "kind": "manual",
+  "ops": [],
+  "parent": "cand-115",
+  "provenance_note": null,
+  "round": 12,
+  "status": "kept",
+  "struct_sig": "rf-mlp-double-buffered-operands",
+  "summary": "[]",
+  "verdict_note": "Full grade passes: alternate MLP operand buffers overlap loads and MMA; P1 improvement after D1 automatic plateau."
+}

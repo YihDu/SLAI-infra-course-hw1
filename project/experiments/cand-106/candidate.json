@@ -1,0 +1,23 @@
+{
+  "bias": "p1",
+  "created_at": "2026-09-28 23:03:11",
+  "failure_class": "none",
+  "family": "attention_blocked",
+  "fingerprint": "3fe27c0a3b50b890",
+  "hypothesis": "Block 16 prompt queries, stream 32-key/value panels, coalesce public KV export; keep row-local causal softmax and D1 unchanged",
+  "id": "cand-106",
+  "kind": "manual",
+  "ops": [
+    {
+      "algorithm": "blocked_prompt",
+      "op": "attention_algorithm"
+    }
+  ],
+  "parent": "cand-098",
+  "provenance_note": null,
+  "round": 12,
+  "status": "kept",
+  "struct_sig": "blocked-prompt-q16-k32",
+  "summary": "[{\"op\": \"attention_algorithm\", \"algorithm\": \"blocked_prompt\"}]",
+  "verdict_note": "Full frozen grade eligible; blocked prompt attention reduces P1 cycles 14.43%, D1 unchanged. Multi-SM child cand-107 cost-pruned, no claim of multi-SM pass."
+}

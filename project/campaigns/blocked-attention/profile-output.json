@@ -1,0 +1,75 @@
+{
+  "candidate": "cand-106",
+  "cycles": 7292285,
+  "first_issue": 1,
+  "stages": {
+    "ln1": {
+      "instructions": 5850,
+      "issue_to_next_cycles": 171148,
+      "event_span_sum": 213664,
+      "issue_to_next_fraction": 0.02346973548071695
+    },
+    "qkv": {
+      "instructions": 12096,
+      "issue_to_next_cycles": 1339482,
+      "event_span_sum": 1974030,
+      "issue_to_next_fraction": 0.18368481209936255
+    },
+    "attention": {
+      "instructions": 23280,
+      "issue_to_next_cycles": 581682,
+      "event_span_sum": 790590,
+      "issue_to_next_fraction": 0.0797667672067123
+    },
+    "wo": {
+      "instructions": 4032,
+      "issue_to_next_cycles": 448326,
+      "event_span_sum": 661104,
+      "issue_to_next_fraction": 0.06147949511024322
+    },
+    "residual1": {
+      "instructions": 1560,
+      "issue_to_next_cycles": 47214,
+      "event_span_sum": 81930,
+      "issue_to_next_fraction": 0.00647451381837106
+    },
+    "ln2": {
+      "instructions": 5850,
+      "issue_to_next_cycles": 171180,
+      "event_span_sum": 213696,
+      "issue_to_next_fraction": 0.02347412368002622
+    },
+    "w1": {
+      "instructions": 16128,
+      "issue_to_next_cycles": 1784946,
+      "event_span_sum": 2630334,
+      "issue_to_next_fraction": 0.24477183763388294
+    },
+    "gelu": {
+      "instructions": 14040,
+      "issue_to_next_cycles": 904854,
+      "event_span_sum": 1059972,
+      "issue_to_next_fraction": 0.12408374055594372
+    },
+    "w2": {
+      "instructions": 14400,
+      "issue_to_next_cycles": 1761882,
+      "event_span_sum": 2501862,
+      "issue_to_next_fraction": 0.24160904298172658
+    },
+    "residual2": {
+      "instructions": 2340,
+      "issue_to_next_cycles": 73434,
+      "event_span_sum": 127944,
+      "issue_to_next_fraction": 0.010070094627404167
+    },
+    "output": {
+      "instructions": 260,
+      "issue_to_next_cycles": 8136,
+      "event_span_sum": 10822,
+      "issue_to_next_fraction": 0.0011156996743818981
+    }
+  },
+  "method": "issue-to-next partition is attribution, not isolated kernel latency; includes stalls after each instruction. Event span sums overlap.",
+  "trace_events": 99836
+}

@@ -1324,3 +1324,29 @@ Traceback (most recent call last):
 - Verify: `.venv/bin/python -m unittest project.search.tests.test_validation_preflight -v` -> `project/campaigns/validation-preflight-audit/tests.stderr` -> 2 passed; actual generation/static/cost subprocess chain prunes with zero grade launches.
 - Result: No new full-model evaluation or score. cand-098 remains P1=8522411 D1=718132 score=2567.95405. Existing cand-101..105 memory failures were not repeated.
 - Decision: Continue on this Mac as requested. Await explicit choice on advancing Attention algorithm blocking before a multi-SM pass; do not modify frozen checker, expand memory limits or assert an unmeasured speedup. See `project/campaigns/validation-preflight-audit/REPORT.md`.
+
+## 2026-09-28 23:03:11 — cand-106: Block 16 prompt queries, stream 32-key/value panels, coalesce public KV export; keep row-local causal softmax and D1 unchanged
+- Change: parent=cand-098; [{"op": "attention_algorithm", "algorithm": "blocked_prompt"}]
+- Evidence: project/experiments/cand-106/metrics.json; reports/grade.json; attempts=1
+- Command (grade): ['/Users/yihdu/Codefield/SLAI-infra-Code/transformer-codesign-starter/.venv/bin/python', '/Users/yihdu/Codefield/SLAI-infra-Code/transformer-codesign-starter/challenge.py', 'grade', '--hardware', '/Users/yihdu/Codefield/SLAI-infra-Code/transformer-codesign-starter/project/experiments/cand-106/inputs/hardware.json', '--program-p1', '/Users/yihdu/Codefield/SLAI-infra-Code/transformer-codesign-starter/project/experiments/cand-106/programs/M1_P1.asm', '--program-d1', '/Users/yihdu/Codefield/SLAI-infra-Code/transformer-codesign-starter/project/experiments/cand-106/programs/M2_D1.asm', '--report', '/Users/yihdu/Codefield/SLAI-infra-Code/transformer-codesign-starter/project/experiments/cand-106/reports/grade.json', '--seed', '7', '--baseline', '/Users/yihdu/Codefield/SLAI-infra-Code/transformer-codesign-starter/baseline_manifest.json']; elapsed=75.70147025003098; peak MiB=1513.2515563964844
+- Inputs: compiler.py@36184949 hardware.json@b92be26a recipe.json@70dcde79
+- Verify: PASS elapsed=75.70s
+- Result: M1_P1=7292285 (4.251x), M2_D1=718132 (1.813x); score=2776.110, eligible=True
+  - deltas vs head (cand-095): {'M1_P1': -1230126, 'M2_D1': 0}
+- Decision: KEPT — new incumbent head (score=2776.110)
+
+## 2026-09-28 23:06:24 — cand-107: Integrate only W1 four-SM GEMM after verified blocked prompt attention; enforce validation memory preflight.
+- Change: parent=cand-106; []
+- Evidence: project/experiments/cand-107/metrics.json; reports/grade.json; attempts=0
+- Inputs: compiler.py@36184949 hardware.json@b92be26a recipe.json@c23fd461
+- Verify: FAILED — failure_class=validation_cost_pruned; evidence=pipeline
+- Result: status=not_verified, failure_class=validation_cost_pruned
+- Decision: reject/preserve failed candidate (status=not_verified)
+
+### cand-106 verdict: KEPT — Full frozen grade eligible; blocked prompt attention reduces P1 cycles 14.43%, D1 unchanged. Multi-SM child cand-107 cost-pruned, no claim of multi-SM pass.
+
+## 2026-09-28 — cand-106 full-program attribution and cand-107 decision
+- Change: profile verified blocked prompt Attention via native trace; no evaluator edits.
+- Verify: PYTHONPATH=. .venv/bin/python project/campaigns/p1-multism/profile.py cand-106 -> cand-106/reports/p1-profile.json; reproduced P1 7292285 cycles; D1 byte-identical to cand-098.
+- Result: Attention attribution 1811460 -> 581682 cycles, full P1 1.1687x; HBM read/write unchanged. W1/GELU/W2 now 61.05% of P1.
+- Decision: keep cand-106; cand-107 preflight-only prune (41.31 GiB logical retained sets, not measured RSS), no full multi-SM result. Stop same-structure variations; next structural hypothesis persistent MLP, requiring ~2.203x region speedup for 1.5x full P1. See campaigns/blocked-attention/REPORT.md.

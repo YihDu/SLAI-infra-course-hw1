@@ -1,15 +1,15 @@
 # search_state (auto-generated; do not edit)
 
-- best: cand-095 score=2567.954051821853 (P1=8522411, D1=718132)
+- best: cand-106 score=2776.1099913390285 (P1=7292285, D1=718132)
 - phase=2 round=12 plateau_rounds=0 explore_ratio=0.54 need_new_operator=False
 - bottleneck: M1_P1 sm0.rf_read=2818280, sm0.rf_write=2788264, sm0.dma=1876160; M2_D1 sm0.rf_write=261248, sm0.dma=239104, shared.noc=226521 (overlapping service counts)
 
 ## elite (score desc)
+- cand-106 score=2776.11 parent=cand-098 sig=blocked-prompt-q16-k32 hyp=Block 16 prompt queries, stream 32-key/value panels, coalesc
 - cand-095 score=2567.95 parent=cand-094 sig=fuse+hw:cache_mib=2+hw:dma_depth=2+hw:dma_engines=2+hw:rf_ports=8R4W+hw:sm_count=4+hw:sm_noc_bytes_per_cycle=128+hw:tc_array=8x16+hw:tc_k_parallel=4+nkm+nopf+s:rf+stage:d1:nkm+stage:p1_prompt:nkm_lanes hyp=Larger M tile reduces repeated B reads
 - cand-098 score=2567.95 parent=cand-095 sig=None hyp=Fresh full-grade score verification of current worktree subm
 - cand-100 score=2564.61 parent=cand-099 sig=p1-column-head-4-serial hyp=Numerical control: identical four-shard full P1 computation
 - cand-094 score=2547.92 parent=cand-093 sig=fuse+hw:cache_mib=2+hw:dma_depth=2+hw:dma_engines=2+hw:rf_ports=8R4W+hw:sm_count=4+hw:sm_noc_bytes_per_cycle=128+hw:tc_array=8x16+hw:tc_k_parallel=4+nkm+nopf+s:rf+stage:d1:nkm+stage:p1_prompt:nkm_lanes hyp=Expand decode N tile after prompt/hardware controls
-- cand-093 score=2512.22 parent=cand-087 sig=fuse+hw:cache_mib=2+hw:dma_depth=2+hw:dma_engines=2+hw:rf_ports=8R4W+hw:sm_count=4+hw:sm_noc_bytes_per_cycle=128+hw:tc_array=8x16+hw:tc_k_parallel=4+nkm+nopf+s:rf+stage:d1:nkm+stage:p1_prompt:nkm_lanes hyp=Compose best RF dataflow with measured area bridge
 
 ## failure classes
 - dry_run: 27
@@ -19,12 +19,14 @@
 - generate_error: 3
 - harness_noop: 9
 - memory_limit: 6
+- validation_cost_pruned: 1
 
 ## pareto front
-- cand-095 {'M1_P1': 8522411, 'M2_D1': 718132}
+- cand-106 {'M1_P1': 7292285, 'M2_D1': 718132}
 
 ## diversity cells
 - ?|?: cand-098
+- attention_blocked|p1: cand-106
 - attention|balanced: cand-019
 - compute|balanced: cand-095
 - compute|d1: cand-072
@@ -35,6 +37,7 @@
 - memory|p1: cand-086
 - p1_multism_control|p1: cand-100
 - sig:?|?: cand-098
+- sig:blocked-prompt-q16-k32: cand-106
 - sig:fuse: cand-009
 - sig:fuse+hw:cache_mib=2+hw:dma_depth=2+hw:dma_engines=2+hw:reduction_units=1+hw:rf_ports=8R4W+hw:sm_noc_bytes_per_cycle=128+hw:tc_array=8x8+hw:tc_k_parallel=4+nkm+nopf+s:rf+stage:d1: cand-085
 - sig:fuse+hw:cache_mib=2+hw:dma_depth=2+hw:dma_engines=2+hw:rf_ports=8R4W+hw:sm_count=4+hw:sm_noc_bytes_per_cycle=128+hw:tc_array=8x16+hw:tc_k_parallel=4+hw:vector_lanes=8+nkm+nopf+s:rf+stage:d1:nkm+stage:p1_prompt:nkm_lanes: cand-097

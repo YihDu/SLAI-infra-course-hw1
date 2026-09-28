@@ -498,6 +498,10 @@ class Builder:
         head_start=0,
         head_stop=None,
     ):
+        if (self.recipe.get("attention", {}).get("algorithm") == "blocked_prompt"
+                and rows == 64 and past == 0):
+            return self.attention_blocked(qkv, context, k_out, v_out, rows, past,
+                                          d, h, hd, name, head_start, head_stop)
         head_stop = h if head_stop is None else head_stop
         # Export every layer's K/V in the public head-major ABI.
         with self.loop(f"{name}h", head_start, head_stop) as head:
@@ -599,6 +603,66 @@ class Builder:
                         event=None,
                     )
                 self.st(rf(2, hd), hbm(add(context.offset, mul(row, d), mul(head, hd)), hd))
+
+    def attention_blocked(self, qkv, context, k_out, v_out, rows, past,
+                          d, h, hd, name, head_start=0, head_stop=None):
+        """Prompt-only query-block attention; causal softmax remains row-local.
+
+        RF4 holds 16x64 scores/probabilities, RF0 the 16x32 queries,
+        RF1 a 32x32 K/V panel, RF2 the 16x32 context accumulator,
+        RF3 the scalar reduction scratch. Strided RF views avoid packing events.
+        All prompt KV is valid before QK; future probabilities are explicitly zero.
+        """
+        if (rows, past, hd) != (64, 0, 32) or self.scores_res != "rf":
+            raise ValueError("Blocked prompt attention requires 64 rows, head width 32 and RF scores")
+        head_stop = h if head_stop is None else head_stop
+        qm, kn = 16, 32
+
+        def matrix(lane, m, n, stride, offset=0):
+            view = rf(lane, mul(m, n), offset)
+            view.update(shape=[m, n], strides=[stride, 1])
+            return view
+
+        # Coalesced ABI export: gather 32 token rows instead of one head vector.
+        with self.loop(f"{name}h", head_start, head_stop) as head:
+            with self.loop(f"{name}r", 0, rows, kn) as row:
+                for target, component in ((k_out, 1), (v_out, 2)):
+                    source = add(qkv.offset, mul(row, 3*d), component*d, mul(head, hd))
+                    dest = add(target.offset, mul(head, target.shape[2]*hd), mul(row, hd))
+                    self.ld(hbm(source, kn*hd, [kn, hd], [3*d, 1]), rf(0, kn*hd))
+                    self.st(rf(0, kn*hd), hbm(dest, kn*hd))
+        with self.loop(f"{name}head", head_start, head_stop) as head:
+            with self.loop(f"{name}qblock", 0, rows, qm) as first:
+                self.ld(hbm(add(qkv.offset, mul(first, 3*d), mul(head, hd)),
+                            qm*hd, [qm, hd], [3*d, 1]), rf(0, qm*hd))
+                self.vec("add", [imm(0), imm(0)], rf(4, qm*rows))
+                with self.loop(f"{name}keys", 0, rows, kn) as key:
+                    self.ld(hbm(add(k_out.offset, mul(head, k_out.shape[2]*hd), mul(key, hd)),
+                                hd*kn, [hd, kn], [1, hd]), rf(1, hd*kn))
+                    self.emit("MMA.ACC", a=rf(0, qm*hd), b=rf(1, hd*kn),
+                              acc=matrix(4, qm, kn, rows, key), m=qm, n=kn, k=hd, event=None)
+                self.vec("mul", [rf(4, qm*rows), imm(1/sqrt(hd))], rf(4, qm*rows))
+                with self.loop(f"{name}softrow", 0, qm) as local:
+                    limit = add(first, local, 1)
+                    offset = mul(local, rows)
+                    valid = rf(4, limit, offset)
+                    self.reduce("max", valid, rf(3, 1))
+                    self.vec("sub", [valid, rf(3, 1)], valid)
+                    self.sfu("exp", valid, valid)
+                    self.reduce("sum", valid, rf(3, 1))
+                    self.vec("div", [valid, rf(3, 1)], valid)
+                    # A zero-trip static loop avoids an invalid zero-count view.
+                    with self.loop(f"{name}tail", limit, rows, rows) as tail:
+                        self.vec("add", [imm(0), imm(0)],
+                                 rf(4, sub(rows, tail), add(offset, tail)))
+                self.vec("add", [imm(0), imm(0)], rf(2, qm*hd))
+                with self.loop(f"{name}values", 0, rows, kn) as key:
+                    self.ld(hbm(add(v_out.offset, mul(head, v_out.shape[2]*hd), mul(key, hd)),
+                                kn*hd), rf(1, kn*hd))
+                    self.emit("MMA.ACC", a=matrix(4, qm, kn, rows, key), b=rf(1, kn*hd),
+                              acc=rf(2, qm*hd), m=qm, n=hd, k=kn, event=None)
+                self.st(rf(2, qm*hd), hbm(add(context.offset, mul(first, d), mul(head, hd)),
+                                        qm*hd, [qm, hd], [d, 1]))
 
     def attention_decode(
         self,

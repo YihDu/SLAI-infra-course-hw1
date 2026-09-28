@@ -1,5 +1,6 @@
 {
   "attention": {
+    "algorithm": "blocked_prompt",
     "scores": "rf"
   },
   "fusion": {

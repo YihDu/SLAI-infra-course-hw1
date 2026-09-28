@@ -2,7 +2,7 @@
 
 更新：2026-09-28。用户已恢复任务，并明确**继续在同一台16GiB Mac运行**；不再按下文历史建议寻求服务器。本轮新增复核见 `project/campaigns/validation-preflight-audit/REPORT.md`。
 
-当前等待明确是否允许提前放宽成熟Attention路径约束，改变实际分块来减少事件。既有五个OOM实验不重复；frozen checker与默认提交程序不变。
+用户已明确允许改写 Attention。cand-106 分块 Attention 完整 grade 通过并成为默认最优：P1=7,292,285，D1=718,132，score=2776.10999。cand-107 only-W1 多 SM 在验证成本预检被剪枝，逻辑存储下界41.31 GiB，未运行 grade。最新证据：`project/campaigns/blocked-attention/REPORT.md`。下文旧实验描述按历史阅读。
 
 最新记录规则：**只保留当前主对话的一份完整导出；不再收集各 worker/session。** 此要求覆盖此前保存所有 agent traces 的指示。
 
@@ -18,11 +18,11 @@ Python 使用 `.venv/bin/python`（3.12.13 / NumPy 2.5.3）。
 
 ## 2. 当前最优与默认工作区
 
-- registry head 是 **cand-095**；**cand-098** 是其完整 grade 复验，作为本阶段比较基准。
-- P1 = **8,522,411**，D1 = **718,132**，score = **2567.954051821853**。
-- 面积 16.25838297088 mm²；P1/D1 峰值滚动功耗 2.9710608543 / 2.3857896063 W。
+- registry head 是 **cand-106**；cand-098 保留为比较基准。
+- P1 = **7,292,285**，D1 = **718,132**，score = **2776.1099913390285**。
+- 面积 16.25838297088 mm²；P1/D1 峰值滚动功耗 3.2090927716 / 2.3857896063 W。
 - 硬件：4 SM，TC 2×8x16，K parallel 4，vector 16，SFU 8，RF 8R4W，SH 128 KiB/SM，DMA depth2/engines2，cache2MiB。
-- 默认 `project/recipe.json` 与 root `programs/*.asm` 保持 cand-098；新 compiler 含 opt-in 多 SM 路径，默认生成两份 asm **与 cand-098 字节一致**。
+- 默认 recipe/compiler/生成程序已切换至 cand-106；D1 与 cand-098 字节一致。
 - 没有新的完整 multi-SM correctness-pass 或 timing/score；不要把未验证候选晋升或打包为最优。
 
 ## 3. 用户当前目标与约束
@@ -44,7 +44,7 @@ Python 使用 `.venv/bin/python`（3.12.13 / NumPy 2.5.3）。
 ### 历史交接时未确定的选择（本机运行现已明确）
 
 - 是否有现成大内存服务器，容量、SSH host 别名、远程目录是什么？**未提供连接信息，未授权/执行任何具体远程操作。**
-- 是否允许提前放宽“Attention/LN 保持成熟路径”，转向算法级实际指令压缩？**未获明确选择。**
+- 是否允许提前放宽“Attention/LN 保持成熟路径”，转向算法级实际指令压缩？**已获允许，cand-106 已完成改写和验证。**
 - 256–512 GiB 只是先前提出的资源级别，不保证足够，也不建议直接购买。最后的仅 W1 前缀外推约 478 GiB **逻辑事件集合**，并非实测全程峰值，远程也必须先校准。
 
 用户最终要求停下并交接，故不要在接手时自动继续五种已经失败的本地 grade。

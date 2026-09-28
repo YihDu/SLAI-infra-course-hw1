@@ -1,0 +1,65 @@
+{
+  "bias": "balanced",
+  "family": "hardware",
+  "fingerprint": "5581718e90a6e16f",
+  "hardware": {
+    "cache_mib": 0,
+    "dma_depth": 1,
+    "dma_engines": 1,
+    "hbm_channels": 4,
+    "multicast": false,
+    "noc_bytes_per_cycle": 256,
+    "reduction_units": 0,
+    "rf_ports": "8R4W",
+    "sfu_lanes": 8,
+    "shared_banks": 4,
+    "shared_kib": 128,
+    "shared_ports": "1R1W",
+    "sm_count": 8,
+    "sm_noc_bytes_per_cycle": 64,
+    "tc_array": "4x8",
+    "tc_count": 2,
+    "tc_k_parallel": 1,
+    "vector_lanes": 16,
+    "version": "challenge-hardware-v0.4"
+  },
+  "hypothesis": "exploit cand-047: tiles (16, 16, 48)->(4, 16, 48)",
+  "kind": "exploit",
+  "ops": [
+    {
+      "op": "gemm_order",
+      "order": "nkm"
+    },
+    {
+      "k_chunk": 48,
+      "m_tile": 4,
+      "n_tile": 16,
+      "op": "gemm_tiles"
+    },
+    {
+      "op": "scores_residency",
+      "space": "rf"
+    },
+    {
+      "enabled": 1,
+      "op": "fuse_bias_gelu"
+    }
+  ],
+  "parent": "cand-047",
+  "recipe": {
+    "attention": {
+      "scores": "rf"
+    },
+    "fusion": {
+      "bias_gelu": 1
+    },
+    "gemm": {
+      "k_chunk": 48,
+      "m_tile": 4,
+      "n_tile": 16,
+      "order": "nkm",
+      "prefetch": 0
+    }
+  },
+  "struct_sig": "fuse+nkm+s:rf"
+}

@@ -1,0 +1,23 @@
+{
+  "bias": "balanced",
+  "created_at": "2026-09-28 15:20:32",
+  "failure_class": "none",
+  "family": "memory",
+  "fingerprint": "3c52c7255de1758c",
+  "hypothesis": "expand cand-051: double-buffer B tiles",
+  "id": "cand-060",
+  "kind": "expand",
+  "ops": [
+    {
+      "enabled": 1,
+      "op": "gemm_prefetch"
+    }
+  ],
+  "parent": "cand-051",
+  "provenance_note": null,
+  "round": 11,
+  "status": "dominated",
+  "struct_sig": "pf",
+  "summary": "[{\"op\": \"gemm_prefetch\", \"enabled\": 1}]",
+  "verdict_note": null
+}

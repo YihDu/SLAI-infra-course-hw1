@@ -1,6 +1,6 @@
 {
   "cache_mib": 0,
-  "dma_depth": 1,
+  "dma_depth": 2,
   "dma_engines": 1,
   "hbm_channels": 4,
   "multicast": false,
@@ -12,7 +12,7 @@
   "shared_kib": 128,
   "shared_ports": "1R1W",
   "sm_count": 8,
-  "sm_noc_bytes_per_cycle": 64,
+  "sm_noc_bytes_per_cycle": 128,
   "tc_array": "4x8",
   "tc_count": 2,
   "tc_k_parallel": 1,

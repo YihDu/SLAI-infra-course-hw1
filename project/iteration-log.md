@@ -774,3 +774,115 @@ Traceback (most recent call last):
 - Decision: pruned before/at evaluation stage
 
 ### round 10 summary: best=cand-047 score=1874.814 gain=1.0000 plateau=1 explore=0.54
+
+
+## 2026-09-28 15:15:35 — cand-056: exploit cand-047: tiles (16, 16, 48)->(4, 16, 48)
+- Parent: cand-047; kind=exploit family=hardware bias=balanced sig=fuse+nkm+s:rf fp=5581718e90a6e16f
+- Ops: [{"op": "gemm_order", "order": "nkm"}, {"op": "gemm_tiles", "m_tile": 4, "n_tile": 16, "k_chunk": 48}, {"op": "scores_residency", "space": "rf"}, {"op": "fuse_bias_gelu", "enabled": 1}]
+- Verify: functional={'M1_P1': True, 'M2_D1': True}; M1_P1=13475549 M2_D1=888914 cycles; area=6.671639413760001mm2 peakW=2.3279813293190665; score=1835.555492983374 eligible=True
+  - M1_P1: hbm_r=149.7MB top busy: sm0.issue_wait=13089326, sm0.tc=5733024, sm0.rf_read=4533128
+  - M2_D1: hbm_r=15.7MB top busy: sm0.issue_wait=867736, sm0.rf_write=262656, sm0.dma=248320
+- Decision: status=dominated failure_class=none
+
+
+## 2026-09-28 15:16:45 — cand-057: exploit cand-047: hw sm_noc_bytes_per_cycle 64->32
+- Parent: cand-047; kind=exploit family=hardware bias=balanced sig=hw:sm_noc_bytes_per_cycle=32 fp=0bf5c7085bee0f67
+- Ops: [{"op": "hw_set", "path": "sm_noc_bytes_per_cycle", "value": 32}]
+- Verify: functional={'M1_P1': True, 'M2_D1': True}; M1_P1=13787089 M2_D1=1053450 cycles; area=6.62043941376mm2 peakW=1.7199026653547953; score=1666.9684198231182 eligible=True
+  - M1_P1: hbm_r=149.7MB top busy: sm0.issue_wait=13582856, sm0.tc=5571744, shared.noc=4931968
+  - M2_D1: hbm_r=15.7MB top busy: sm0.issue_wait=1032232, shared.noc=496640, sm0.noc_in=491392
+- Decision: status=dominated failure_class=none
+
+
+## 2026-09-28 15:18:48 — cand-058: exploit cand-047: tiles (16, 16, 48)->(16, 16, 32)
+- Parent: cand-047; kind=exploit family=hardware bias=balanced sig=fuse+nkm+s:rf fp=124a216bdb041a89
+- Ops: [{"op": "gemm_order", "order": "nkm"}, {"op": "gemm_tiles", "m_tile": 16, "n_tile": 16, "k_chunk": 32}, {"op": "scores_residency", "space": "rf"}, {"op": "fuse_bias_gelu", "enabled": 1}]
+- Verify: functional={'M1_P1': True, 'M2_D1': True}; M1_P1=13422437 M2_D1=903378 cycles; area=6.671639413760001mm2 peakW=2.3279813293190665; score=1824.400503955544 eligible=True
+  - M1_P1: hbm_r=149.7MB top busy: sm0.issue_wait=13188278, sm0.tc=5596704, sm0.rf_read=4615496
+  - M2_D1: hbm_r=15.7MB top busy: sm0.issue_wait=877208, sm0.rf_write=264320, sm0.dma=248320
+- Decision: status=dominated failure_class=none
+
+
+## 2026-09-28 15:20:32 — cand-059: expand cand-052: wider SM NoC link [sm_noc_bytes_per_cycle=128]
+- Parent: cand-052; kind=expand family=memory bias=balanced sig=hw:sm_noc_bytes_per_cycle=128 fp=f3c21a8095cf8e04
+- Ops: [{"op": "hw_set", "path": "sm_noc_bytes_per_cycle", "value": 128}]
+- Verify: functional={'M1_P1': True, 'M2_D1': True}; M1_P1=13109117 M2_D1=888634 cycles; area=6.774039413760001mm2 peakW=2.3305919133597084; score=1861.325996168528 eligible=True
+  - M1_P1: hbm_r=149.7MB top busy: sm0.issue_wait=12844238, sm0.tc=5625504, sm0.rf_read=4533128
+  - M2_D1: hbm_r=15.7MB top busy: sm0.issue_wait=867456, sm0.rf_write=262656, sm0.dma=248320
+- Decision: status=evaluated failure_class=none
+
+
+## 2026-09-28 15:22:50 — cand-060: expand cand-051: double-buffer B tiles
+- Parent: cand-051; kind=expand family=memory bias=balanced sig=pf fp=3c52c7255de1758c
+- Ops: [{"op": "gemm_prefetch", "enabled": 1}]
+- Verify: functional={'M1_P1': True, 'M2_D1': True}; M1_P1=14202833 M2_D1=953682 cycles; area=6.671639413760001mm2 peakW=2.3279813293190665; score=1726.161168219366 eligible=True
+  - M1_P1: hbm_r=175.8MB top busy: sm0.issue_wait=13926626, sm0.tc=5630304, sm0.rf_read=4720520
+  - M2_D1: hbm_r=16.6MB top busy: sm0.issue_wait=917912, sm0.rf_write=280832, sm0.dma=262016
+- Decision: status=dominated failure_class=none
+
+
+## 2026-09-28 15:26:13 — cand-061: expand cand-050: double HBM channels [hbm_channels=8]
+- Parent: cand-050; kind=expand family=memory bias=balanced sig=hw:hbm_channels=8 fp=88a1c49c01abc017
+- Ops: [{"op": "hw_set", "path": "hbm_channels", "value": 8}]
+- Verify: functional={'M1_P1': True, 'M2_D1': True}; M1_P1=17370443 M2_D1=1297490 cycles; area=6.871639413760001mm2 peakW=2.6128686893463797; score=1338.1757908815193 eligible=True
+  - M1_P1: hbm_r=264.1MB top busy: sm0.issue_wait=17076956, sm0.tc=5933856, sm0.rf_read=4533992
+  - M2_D1: hbm_r=29.1MB top busy: sm0.issue_wait=1260568, sm0.dma=458368, shared.noc=458368
+- Decision: status=evaluated failure_class=none
+
+### round 11 summary: best=cand-047 score=1874.814 gain=1.0000 plateau=2 explore=0.54
+
+
+## 2026-09-28 15:28:32 — cand-062: exploit cand-047: tiles (16, 16, 48)->(16, 16, 64)
+- Parent: cand-047; kind=exploit family=hardware bias=balanced sig=fuse+nkm+s:rf fp=cd40d6a34502fa0f
+- Ops: [{"op": "gemm_order", "order": "nkm"}, {"op": "gemm_tiles", "m_tile": 16, "n_tile": 16, "k_chunk": 64}, {"op": "scores_residency", "space": "rf"}, {"op": "fuse_bias_gelu", "enabled": 1}]
+- Verify: functional={'M1_P1': True, 'M2_D1': True}; M1_P1=13224203 M2_D1=901330 cycles; area=6.671639413760001mm2 peakW=2.3279813293190665; score=1840.1107341264512 eligible=True
+  - M1_P1: hbm_r=149.7MB top busy: sm0.issue_wait=13045340, sm0.tc=5550624, sm0.rf_read=4463432
+  - M2_D1: hbm_r=15.7MB top busy: sm0.issue_wait=884376, sm0.rf_write=261248, sm0.dma=248320
+- Decision: status=dominated failure_class=none
+
+
+## 2026-09-28 15:31:44 — cand-063: exploit cand-047: hw noc_bytes_per_cycle 256->128
+- Parent: cand-047; kind=exploit family=hardware bias=balanced sig=hw:noc_bytes_per_cycle=128 fp=ed7d495f64a422b4
+- Ops: [{"op": "hw_set", "path": "noc_bytes_per_cycle", "value": 128}]
+- Verify: functional={'M1_P1': True, 'M2_D1': True}; M1_P1=12917099 M2_D1=888914 cycles; area=6.607639413760001mm2 peakW=2.322768657411642; score=1874.814304538389 eligible=True
+  - M1_P1: hbm_r=149.7MB top busy: sm0.issue_wait=12712892, sm0.tc=5571744, sm0.rf_read=4533128
+  - M2_D1: hbm_r=15.7MB top busy: sm0.issue_wait=867736, sm0.rf_write=262656, sm0.dma=248320
+- Decision: status=evaluated failure_class=none
+
+
+## 2026-09-28 15:35:11 — cand-064: exploit cand-047: hw tc_count 2->1
+- Parent: cand-047; kind=exploit family=hardware bias=balanced sig=hw:tc_count=1 fp=45ecec5211e523f3
+- Ops: [{"op": "hw_set", "path": "tc_count", "value": 1}]
+- Verify: functional={'M1_P1': True, 'M2_D1': True}; M1_P1=15038603 M2_D1=1050082 cycles; area=5.8362054937600005mm2 peakW=2.3070954813190667; score=1598.6569175780114 eligible=True
+  - M1_P1: hbm_r=149.7MB top busy: sm0.issue_wait=14834396, sm0.tc=10993920, sm0.rf_read=4533128
+  - M2_D1: hbm_r=15.7MB top busy: sm0.issue_wait=1028904, sm0.tc=473216, sm0.rf_write=262656
+- Decision: status=dominated failure_class=none
+
+
+## 2026-09-28 15:37:42 — cand-065: expand cand-059: dma_depth=2 to make prefetch actually overlap [dma_depth=2]
+- Parent: cand-059; kind=expand family=memory bias=balanced sig=hw:dma_depth=2 fp=d084471571e40788
+- Ops: [{"op": "hw_set", "path": "dma_depth", "value": 2}]
+- Verify: functional={'M1_P1': True, 'M2_D1': True}; M1_P1=12522857 M2_D1=833822 cycles; area=6.89403941376mm2 peakW=2.629855153361387; score=1965.9942357374484 eligible=True
+  - M1_P1: hbm_r=149.7MB top busy: sm0.issue_wait=12257978, sm0.tc=5625504, sm0.rf_read=4533128
+  - M2_D1: hbm_r=15.7MB top busy: sm0.issue_wait=812644, sm0.rf_write=262656, sm0.dma=248320
+- Decision: status=evaluated failure_class=none
+
+
+## 2026-09-28 15:39:41 — cand-066: expand cand-052: double-buffer B tiles
+- Parent: cand-052; kind=expand family=memory bias=balanced sig=pf fp=5aa16f9bbbaaa000
+- Ops: [{"op": "gemm_prefetch", "enabled": 1}]
+- Verify: functional={'M1_P1': True, 'M2_D1': True}; M1_P1=13216349 M2_D1=993746 cycles; area=6.671639413760001mm2 peakW=2.3279813293190665; score=1752.9808817511307 eligible=True
+  - M1_P1: hbm_r=151.5MB top busy: sm0.issue_wait=12949742, sm0.tc=5625504, sm0.rf_read=4533128
+  - M2_D1: hbm_r=18.1MB top busy: sm0.issue_wait=971416, sm0.rf_write=299520, sm0.dma=285184
+- Decision: status=dominated failure_class=none
+
+
+## 2026-09-28 15:42:09 — cand-067: expand cand-056: double HBM channels [hbm_channels=8]
+- Parent: cand-056; kind=expand family=memory bias=balanced sig=hw:hbm_channels=8 fp=87c855f7a1b7380e
+- Ops: [{"op": "hw_set", "path": "hbm_channels", "value": 8}]
+- Verify: functional={'M1_P1': True, 'M2_D1': True}; M1_P1=12644297 M2_D1=888914 cycles; area=6.871639413760001mm2 peakW=2.3329813293190664; score=1894.931033551575 eligible=True
+  - M1_P1: hbm_r=149.7MB top busy: sm0.issue_wait=12258074, sm0.tc=5733024, sm0.rf_read=4533128
+  - M2_D1: hbm_r=15.7MB top busy: sm0.issue_wait=867736, sm0.rf_write=262656, sm0.dma=248320
+- Decision: status=evaluated failure_class=none
+
+### round 12 summary: best=cand-065 score=1965.994 gain=1.0486 plateau=0 explore=0.54

@@ -1,0 +1,24 @@
+{
+  "bias": "balanced",
+  "created_at": "2026-09-28 15:35:11",
+  "failure_class": "none",
+  "family": "memory",
+  "fingerprint": "d084471571e40788",
+  "hypothesis": "expand cand-059: dma_depth=2 to make prefetch actually overlap [dma_depth=2]",
+  "id": "cand-065",
+  "kind": "expand",
+  "ops": [
+    {
+      "op": "hw_set",
+      "path": "dma_depth",
+      "value": 2
+    }
+  ],
+  "parent": "cand-059",
+  "provenance_note": null,
+  "round": 12,
+  "status": "kept",
+  "struct_sig": "hw:dma_depth=2",
+  "summary": "[{\"op\": \"hw_set\", \"path\": \"dma_depth\", \"value\": 2}]",
+  "verdict_note": null
+}

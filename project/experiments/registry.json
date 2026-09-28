@@ -5,16 +5,21 @@
       "compute|balanced": "cand-046",
       "fusion|balanced": "cand-009",
       "hardware|balanced": "cand-047",
-      "memory|balanced": "cand-053",
+      "memory|balanced": "cand-065",
       "sig:fuse": "cand-009",
       "sig:fuse+hw:hbm_channels=1+nkm+pf+s:rf": "cand-049",
       "sig:fuse+mnk+nopf+s:hbm": "cand-021",
       "sig:fuse+nkm": "cand-010",
       "sig:fuse+nkm+pf+s:rf": "cand-033",
-      "sig:fuse+nkm+s:rf": "cand-051",
-      "sig:hw:dma_depth=2": "cand-053",
+      "sig:fuse+nkm+s:rf": "cand-062",
+      "sig:hw:dma_depth=2": "cand-065",
+      "sig:hw:hbm_channels=8": "cand-067",
+      "sig:hw:noc_bytes_per_cycle=128": "cand-063",
       "sig:hw:reduction_units=1": "cand-044",
       "sig:hw:rf_ports=8R4W": "cand-047",
+      "sig:hw:sm_noc_bytes_per_cycle=128": "cand-059",
+      "sig:hw:sm_noc_bytes_per_cycle=32": "cand-057",
+      "sig:hw:tc_count=1": "cand-064",
       "sig:hw:vector_lanes=8": "cand-045",
       "sig:mnk": "cand-000",
       "sig:mnk+nofuse+nopf+s:hbm": "cand-027",
@@ -22,21 +27,21 @@
       "sig:nkm+pf": "cand-003",
       "sig:nkm+pf+s:rf": "cand-015",
       "sig:nkm+s:rf": "cand-017",
-      "sig:pf": "cand-025",
+      "sig:pf": "cand-066",
       "sig:s:rf": "cand-019"
     },
     "elite": [
+      "cand-065",
+      "cand-067",
       "cand-047",
+      "cand-063",
+      "cand-059",
       "cand-052",
-      "cand-051",
-      "cand-050",
-      "cand-053",
-      "cand-019",
-      "cand-044",
-      "cand-020"
+      "cand-062",
+      "cand-056"
     ],
     "pareto": [
-      "cand-047"
+      "cand-065"
     ]
   },
   "candidates": {
@@ -1827,6 +1832,374 @@
       "status": "pruned",
       "struct_sig": "mnk+nofuse+nopf+s:rf"
     },
+    "cand-056": {
+      "area_mm2": 6.671639413760001,
+      "bias": "balanced",
+      "cycles": {
+        "M1_P1": 13475549,
+        "M2_D1": 888914
+      },
+      "dominated_by_parent": true,
+      "failure_class": "none",
+      "family": "hardware",
+      "fingerprint": "5581718e90a6e16f",
+      "hypothesis": "exploit cand-047: tiles (16, 16, 48)->(4, 16, 48)",
+      "improved": false,
+      "kind": "exploit",
+      "ops": [
+        {
+          "op": "gemm_order",
+          "order": "nkm"
+        },
+        {
+          "k_chunk": 48,
+          "m_tile": 4,
+          "n_tile": 16,
+          "op": "gemm_tiles"
+        },
+        {
+          "op": "scores_residency",
+          "space": "rf"
+        },
+        {
+          "enabled": 1,
+          "op": "fuse_bias_gelu"
+        }
+      ],
+      "parent": "cand-047",
+      "power_w": 2.3279813293190665,
+      "round": 11,
+      "score": 1835.555492983374,
+      "status": "dominated",
+      "struct_sig": "fuse+nkm+s:rf"
+    },
+    "cand-057": {
+      "area_mm2": 6.62043941376,
+      "bias": "balanced",
+      "cycles": {
+        "M1_P1": 13787089,
+        "M2_D1": 1053450
+      },
+      "dominated_by_parent": true,
+      "failure_class": "none",
+      "family": "hardware",
+      "fingerprint": "0bf5c7085bee0f67",
+      "hypothesis": "exploit cand-047: hw sm_noc_bytes_per_cycle 64->32",
+      "improved": false,
+      "kind": "exploit",
+      "ops": [
+        {
+          "op": "hw_set",
+          "path": "sm_noc_bytes_per_cycle",
+          "value": 32
+        }
+      ],
+      "parent": "cand-047",
+      "power_w": 1.7199026653547953,
+      "round": 11,
+      "score": 1666.9684198231182,
+      "status": "dominated",
+      "struct_sig": "hw:sm_noc_bytes_per_cycle=32"
+    },
+    "cand-058": {
+      "area_mm2": 6.671639413760001,
+      "bias": "balanced",
+      "cycles": {
+        "M1_P1": 13422437,
+        "M2_D1": 903378
+      },
+      "dominated_by_parent": true,
+      "failure_class": "none",
+      "family": "hardware",
+      "fingerprint": "124a216bdb041a89",
+      "hypothesis": "exploit cand-047: tiles (16, 16, 48)->(16, 16, 32)",
+      "improved": false,
+      "kind": "exploit",
+      "ops": [
+        {
+          "op": "gemm_order",
+          "order": "nkm"
+        },
+        {
+          "k_chunk": 32,
+          "m_tile": 16,
+          "n_tile": 16,
+          "op": "gemm_tiles"
+        },
+        {
+          "op": "scores_residency",
+          "space": "rf"
+        },
+        {
+          "enabled": 1,
+          "op": "fuse_bias_gelu"
+        }
+      ],
+      "parent": "cand-047",
+      "power_w": 2.3279813293190665,
+      "round": 11,
+      "score": 1824.400503955544,
+      "status": "dominated",
+      "struct_sig": "fuse+nkm+s:rf"
+    },
+    "cand-059": {
+      "area_mm2": 6.774039413760001,
+      "bias": "balanced",
+      "cycles": {
+        "M1_P1": 13109117,
+        "M2_D1": 888634
+      },
+      "failure_class": "none",
+      "family": "memory",
+      "fingerprint": "f3c21a8095cf8e04",
+      "hypothesis": "expand cand-052: wider SM NoC link [sm_noc_bytes_per_cycle=128]",
+      "improved": true,
+      "kind": "expand",
+      "ops": [
+        {
+          "op": "hw_set",
+          "path": "sm_noc_bytes_per_cycle",
+          "value": 128
+        }
+      ],
+      "parent": "cand-052",
+      "power_w": 2.3305919133597084,
+      "round": 11,
+      "score": 1861.325996168528,
+      "status": "evaluated",
+      "struct_sig": "hw:sm_noc_bytes_per_cycle=128"
+    },
+    "cand-060": {
+      "area_mm2": 6.671639413760001,
+      "bias": "balanced",
+      "cycles": {
+        "M1_P1": 14202833,
+        "M2_D1": 953682
+      },
+      "dominated_by_parent": true,
+      "failure_class": "none",
+      "family": "memory",
+      "fingerprint": "3c52c7255de1758c",
+      "hypothesis": "expand cand-051: double-buffer B tiles",
+      "improved": false,
+      "kind": "expand",
+      "ops": [
+        {
+          "enabled": 1,
+          "op": "gemm_prefetch"
+        }
+      ],
+      "parent": "cand-051",
+      "power_w": 2.3279813293190665,
+      "round": 11,
+      "score": 1726.161168219366,
+      "status": "dominated",
+      "struct_sig": "pf"
+    },
+    "cand-061": {
+      "area_mm2": 6.871639413760001,
+      "bias": "balanced",
+      "cycles": {
+        "M1_P1": 17370443,
+        "M2_D1": 1297490
+      },
+      "failure_class": "none",
+      "family": "memory",
+      "fingerprint": "88a1c49c01abc017",
+      "hypothesis": "expand cand-050: double HBM channels [hbm_channels=8]",
+      "improved": true,
+      "kind": "expand",
+      "ops": [
+        {
+          "op": "hw_set",
+          "path": "hbm_channels",
+          "value": 8
+        }
+      ],
+      "parent": "cand-050",
+      "power_w": 2.6128686893463797,
+      "round": 11,
+      "score": 1338.1757908815193,
+      "status": "evaluated",
+      "struct_sig": "hw:hbm_channels=8"
+    },
+    "cand-062": {
+      "area_mm2": 6.671639413760001,
+      "bias": "balanced",
+      "cycles": {
+        "M1_P1": 13224203,
+        "M2_D1": 901330
+      },
+      "dominated_by_parent": true,
+      "failure_class": "none",
+      "family": "hardware",
+      "fingerprint": "cd40d6a34502fa0f",
+      "hypothesis": "exploit cand-047: tiles (16, 16, 48)->(16, 16, 64)",
+      "improved": false,
+      "kind": "exploit",
+      "ops": [
+        {
+          "op": "gemm_order",
+          "order": "nkm"
+        },
+        {
+          "k_chunk": 64,
+          "m_tile": 16,
+          "n_tile": 16,
+          "op": "gemm_tiles"
+        },
+        {
+          "op": "scores_residency",
+          "space": "rf"
+        },
+        {
+          "enabled": 1,
+          "op": "fuse_bias_gelu"
+        }
+      ],
+      "parent": "cand-047",
+      "power_w": 2.3279813293190665,
+      "round": 12,
+      "score": 1840.1107341264512,
+      "status": "dominated",
+      "struct_sig": "fuse+nkm+s:rf"
+    },
+    "cand-063": {
+      "area_mm2": 6.607639413760001,
+      "bias": "balanced",
+      "cycles": {
+        "M1_P1": 12917099,
+        "M2_D1": 888914
+      },
+      "failure_class": "none",
+      "family": "hardware",
+      "fingerprint": "ed7d495f64a422b4",
+      "hypothesis": "exploit cand-047: hw noc_bytes_per_cycle 256->128",
+      "improved": false,
+      "kind": "exploit",
+      "ops": [
+        {
+          "op": "hw_set",
+          "path": "noc_bytes_per_cycle",
+          "value": 128
+        }
+      ],
+      "parent": "cand-047",
+      "power_w": 2.322768657411642,
+      "round": 12,
+      "score": 1874.814304538389,
+      "status": "evaluated",
+      "struct_sig": "hw:noc_bytes_per_cycle=128"
+    },
+    "cand-064": {
+      "area_mm2": 5.8362054937600005,
+      "bias": "balanced",
+      "cycles": {
+        "M1_P1": 15038603,
+        "M2_D1": 1050082
+      },
+      "dominated_by_parent": true,
+      "failure_class": "none",
+      "family": "hardware",
+      "fingerprint": "45ecec5211e523f3",
+      "hypothesis": "exploit cand-047: hw tc_count 2->1",
+      "improved": false,
+      "kind": "exploit",
+      "ops": [
+        {
+          "op": "hw_set",
+          "path": "tc_count",
+          "value": 1
+        }
+      ],
+      "parent": "cand-047",
+      "power_w": 2.3070954813190667,
+      "round": 12,
+      "score": 1598.6569175780114,
+      "status": "dominated",
+      "struct_sig": "hw:tc_count=1"
+    },
+    "cand-065": {
+      "area_mm2": 6.89403941376,
+      "bias": "balanced",
+      "cycles": {
+        "M1_P1": 12522857,
+        "M2_D1": 833822
+      },
+      "failure_class": "none",
+      "family": "memory",
+      "fingerprint": "d084471571e40788",
+      "hypothesis": "expand cand-059: dma_depth=2 to make prefetch actually overlap [dma_depth=2]",
+      "improved": true,
+      "kind": "expand",
+      "ops": [
+        {
+          "op": "hw_set",
+          "path": "dma_depth",
+          "value": 2
+        }
+      ],
+      "parent": "cand-059",
+      "power_w": 2.629855153361387,
+      "round": 12,
+      "score": 1965.9942357374484,
+      "status": "kept",
+      "struct_sig": "hw:dma_depth=2"
+    },
+    "cand-066": {
+      "area_mm2": 6.671639413760001,
+      "bias": "balanced",
+      "cycles": {
+        "M1_P1": 13216349,
+        "M2_D1": 993746
+      },
+      "dominated_by_parent": true,
+      "failure_class": "none",
+      "family": "memory",
+      "fingerprint": "5aa16f9bbbaaa000",
+      "hypothesis": "expand cand-052: double-buffer B tiles",
+      "improved": false,
+      "kind": "expand",
+      "ops": [
+        {
+          "enabled": 1,
+          "op": "gemm_prefetch"
+        }
+      ],
+      "parent": "cand-052",
+      "power_w": 2.3279813293190665,
+      "round": 12,
+      "score": 1752.9808817511307,
+      "status": "dominated",
+      "struct_sig": "pf"
+    },
+    "cand-067": {
+      "area_mm2": 6.871639413760001,
+      "bias": "balanced",
+      "cycles": {
+        "M1_P1": 12644297,
+        "M2_D1": 888914
+      },
+      "failure_class": "none",
+      "family": "memory",
+      "fingerprint": "87c855f7a1b7380e",
+      "hypothesis": "expand cand-056: double HBM channels [hbm_channels=8]",
+      "improved": true,
+      "kind": "expand",
+      "ops": [
+        {
+          "op": "hw_set",
+          "path": "hbm_channels",
+          "value": 8
+        }
+      ],
+      "parent": "cand-056",
+      "power_w": 2.3329813293190664,
+      "round": 12,
+      "score": 1894.931033551575,
+      "status": "evaluated",
+      "struct_sig": "hw:hbm_channels=8"
+    },
     "drun-001": {
       "bias": "balanced",
       "failure_class": "dry_run",
@@ -2458,12 +2831,14 @@
       "struct_sig": "hw:sm_count=32+nkm+nofuse+nopf+s:hbm"
     }
   },
-  "counter": 55,
+  "counter": 67,
   "dry_counter": 27,
   "fingerprints": {
     "062742f6b8fbbde1": "cand-036",
+    "0bf5c7085bee0f67": "cand-057",
     "0d868c77dfb8fd32": "cand-006",
     "1055104233338e90": "cand-045",
+    "124a216bdb041a89": "cand-058",
     "15dcc438f76ab5b8": "cand-013",
     "19039ac31e1e14e2": "cand-014",
     "195ec88606acde60": "cand-046",
@@ -2472,12 +2847,16 @@
     "32db6f8fc708a8cc": "cand-047",
     "33c61a7d000396c1": "cand-009",
     "3661bda877c83bf0": "cand-011",
+    "3c52c7255de1758c": "cand-060",
     "3ed983a6780dce16": "cand-016",
+    "45ecec5211e523f3": "cand-064",
     "46b7b004577c04fd": "cand-015",
     "4db087d2863f570d": "cand-023",
     "4f0084c3f43a4af2": "cand-001",
     "52b8df7fb6990c4f": "cand-024",
+    "5581718e90a6e16f": "cand-056",
     "56a05cecf41c0696": "cand-005",
+    "5aa16f9bbbaaa000": "cand-066",
     "5bd0cc22e122250c": "cand-021",
     "5e60de2f5066b4dc": "cand-004",
     "6ab351a88bec5627": "cand-048",
@@ -2488,6 +2867,8 @@
     "7c58a9e1521ae859": "cand-031",
     "7ed8a97e522117f4": "cand-029",
     "850a9ef1390e1f3e": "cand-008",
+    "87c855f7a1b7380e": "cand-067",
+    "88a1c49c01abc017": "cand-061",
     "8a7c84d9a7be1c97": "cand-026",
     "8c85c43dcdc09a36": "cand-000",
     "94bc9c7b5d9d25cf": "cand-044",
@@ -2502,22 +2883,26 @@
     "c3a05a00e8785bef": "cand-010",
     "c6152b1c5747f74a": "cand-007",
     "c72def168724372d": "cand-003",
+    "cd40d6a34502fa0f": "cand-062",
+    "d084471571e40788": "cand-065",
     "d0ae7c9cd4adadcd": "cand-053",
     "d366bee507975620": "cand-027",
+    "ed7d495f64a422b4": "cand-063",
     "f0ee74fb076a59aa": "cand-033",
     "f314351fb378b9e5": "cand-012",
+    "f3c21a8095cf8e04": "cand-059",
     "f820976715786740": "cand-054",
     "ff6870b21f8f0ec7": "cand-055"
   },
-  "head": "cand-047",
+  "head": "cand-065",
   "search": {
-    "best_id": "cand-047",
-    "best_score": 1874.814304538389,
-    "bottleneck": "P1 sm0.issue_wait=12712892",
+    "best_id": "cand-065",
+    "best_score": 1965.9942357374484,
+    "bottleneck": "P1 sm0.issue_wait=12257978",
     "explore_ratio": 0.54,
     "need_new_operator": false,
     "phase": 2,
-    "plateau_rounds": 1,
-    "round": 10
+    "plateau_rounds": 0,
+    "round": 12
   }
 }

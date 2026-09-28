@@ -1,0 +1,24 @@
+{
+  "bias": "balanced",
+  "created_at": "2026-09-28 15:31:44",
+  "failure_class": "none",
+  "family": "hardware",
+  "fingerprint": "45ecec5211e523f3",
+  "hypothesis": "exploit cand-047: hw tc_count 2->1",
+  "id": "cand-064",
+  "kind": "exploit",
+  "ops": [
+    {
+      "op": "hw_set",
+      "path": "tc_count",
+      "value": 1
+    }
+  ],
+  "parent": "cand-047",
+  "provenance_note": null,
+  "round": 12,
+  "status": "dominated",
+  "struct_sig": "hw:tc_count=1",
+  "summary": "[{\"op\": \"hw_set\", \"path\": \"tc_count\", \"value\": 1}]",
+  "verdict_note": null
+}

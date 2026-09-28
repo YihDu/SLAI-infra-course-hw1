@@ -1,0 +1,24 @@
+{
+  "bias": "balanced",
+  "created_at": "2026-09-28 15:22:50",
+  "failure_class": "none",
+  "family": "memory",
+  "fingerprint": "88a1c49c01abc017",
+  "hypothesis": "expand cand-050: double HBM channels [hbm_channels=8]",
+  "id": "cand-061",
+  "kind": "expand",
+  "ops": [
+    {
+      "op": "hw_set",
+      "path": "hbm_channels",
+      "value": 8
+    }
+  ],
+  "parent": "cand-050",
+  "provenance_note": null,
+  "round": 11,
+  "status": "evaluated",
+  "struct_sig": "hw:hbm_channels=8",
+  "summary": "[{\"op\": \"hw_set\", \"path\": \"hbm_channels\", \"value\": 8}]",
+  "verdict_note": null
+}

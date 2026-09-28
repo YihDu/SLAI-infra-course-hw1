@@ -1,0 +1,112 @@
+{
+  "candidate": "cand-061",
+  "reports": {
+    "grade": {
+      "mode": "grade",
+      "cases": {
+        "M1_P1": {
+          "functional_passed": true,
+          "max_abs_error": 4.721705174404178e-06,
+          "cycles": 17370443,
+          "instruction_count": 293423,
+          "hbm_read_bytes": 264128512,
+          "hbm_write_bytes": 8120320,
+          "peak_window_power_w": 2.6128686893463797,
+          "busy_cycles": {
+            "sm0.dma": 4310048,
+            "sm0.issue": 293423,
+            "sm0.noc_in": 4127008,
+            "sm0.noc_out": 183040,
+            "sm0.rf_read": 4533992,
+            "sm0.rf_write": 4424008,
+            "sm0.sfu": 269964,
+            "sm0.shared_read": 0,
+            "sm0.shared_write": 0,
+            "sm0.tc": 5933856,
+            "sm0.vec": 579672,
+            "sm0.issue_wait": 17076956,
+            "shared.hbm_channel_0": 1078072,
+            "shared.hbm_channel_1": 1078072,
+            "shared.hbm_channel_2": 1078072,
+            "shared.hbm_channel_3": 1078072,
+            "shared.hbm_channel_4": 1076952,
+            "shared.hbm_channel_5": 1076952,
+            "shared.hbm_channel_6": 1076952,
+            "shared.hbm_channel_7": 1076952,
+            "shared.noc": 4310048
+          }
+        },
+        "M2_D1": {
+          "functional_passed": true,
+          "max_abs_error": 2.9756341235476214e-06,
+          "cycles": 1297490,
+          "instruction_count": 36762,
+          "hbm_read_bytes": 29093888,
+          "hbm_write_bytes": 167936,
+          "peak_window_power_w": 2.607370985355921,
+          "busy_cycles": {
+            "sm0.dma": 458368,
+            "sm0.issue": 36762,
+            "sm0.noc_in": 454592,
+            "sm0.noc_out": 3776,
+            "sm0.rf_read": 147168,
+            "sm0.rf_write": 280576,
+            "sm0.sfu": 8832,
+            "sm0.shared_read": 0,
+            "sm0.shared_write": 0,
+            "sm0.tc": 448832,
+            "sm0.vec": 22528,
+            "sm0.issue_wait": 1260568,
+            "shared.hbm_channel_0": 114768,
+            "shared.hbm_channel_1": 114640,
+            "shared.hbm_channel_2": 114576,
+            "shared.hbm_channel_3": 114448,
+            "shared.hbm_channel_4": 114704,
+            "shared.hbm_channel_5": 114576,
+            "shared.hbm_channel_6": 114576,
+            "shared.hbm_channel_7": 114448,
+            "shared.noc": 458368
+          }
+        }
+      },
+      "score": 1338.1757908815193,
+      "eligible": true,
+      "area_mm2": 6.871639413760001
+    }
+  },
+  "static": {
+    "M1_P1": {
+      "lines": 1915,
+      "ops": {
+        "WG.BEGIN": 1,
+        "FOR": 412,
+        "LD": 316,
+        "REDUCE": 72,
+        "VEC": 432,
+        "SFU": 48,
+        "ST": 148,
+        "END.FOR": 412,
+        "MMA.ACC": 72,
+        "STEP.COMMIT": 1,
+        "WG.END": 1
+      }
+    },
+    "M2_D1": {
+      "lines": 2682,
+      "ops": {
+        "WG.BEGIN": 1,
+        "FOR": 560,
+        "LD": 456,
+        "REDUCE": 96,
+        "VEC": 608,
+        "SFU": 64,
+        "ST": 200,
+        "END.FOR": 560,
+        "MMA.ACC": 128,
+        "STEP.COMMIT": 8,
+        "WG.END": 1
+      }
+    }
+  },
+  "verdict": "evaluated"
+}

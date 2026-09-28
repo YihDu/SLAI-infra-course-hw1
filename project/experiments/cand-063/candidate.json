@@ -1,0 +1,24 @@
+{
+  "bias": "balanced",
+  "created_at": "2026-09-28 15:28:32",
+  "failure_class": "none",
+  "family": "hardware",
+  "fingerprint": "ed7d495f64a422b4",
+  "hypothesis": "exploit cand-047: hw noc_bytes_per_cycle 256->128",
+  "id": "cand-063",
+  "kind": "exploit",
+  "ops": [
+    {
+      "op": "hw_set",
+      "path": "noc_bytes_per_cycle",
+      "value": 128
+    }
+  ],
+  "parent": "cand-047",
+  "provenance_note": null,
+  "round": 12,
+  "status": "evaluated",
+  "struct_sig": "hw:noc_bytes_per_cycle=128",
+  "summary": "[{\"op\": \"hw_set\", \"path\": \"noc_bytes_per_cycle\", \"value\": 128}]",
+  "verdict_note": null
+}

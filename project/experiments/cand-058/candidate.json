@@ -1,0 +1,37 @@
+{
+  "bias": "balanced",
+  "created_at": "2026-09-28 15:16:45",
+  "failure_class": "none",
+  "family": "hardware",
+  "fingerprint": "124a216bdb041a89",
+  "hypothesis": "exploit cand-047: tiles (16, 16, 48)->(16, 16, 32)",
+  "id": "cand-058",
+  "kind": "exploit",
+  "ops": [
+    {
+      "op": "gemm_order",
+      "order": "nkm"
+    },
+    {
+      "k_chunk": 32,
+      "m_tile": 16,
+      "n_tile": 16,
+      "op": "gemm_tiles"
+    },
+    {
+      "op": "scores_residency",
+      "space": "rf"
+    },
+    {
+      "enabled": 1,
+      "op": "fuse_bias_gelu"
+    }
+  ],
+  "parent": "cand-047",
+  "provenance_note": null,
+  "round": 11,
+  "status": "dominated",
+  "struct_sig": "fuse+nkm+s:rf",
+  "summary": "[{\"op\": \"gemm_order\", \"order\": \"nkm\"}, {\"op\": \"gemm_tiles\", \"m_tile\": 16, \"n_tile\": 16, \"k_chunk\": 32}, {\"op\": \"scores_residency\", \"space\": \"rf\"}, {\"op\": \"fuse_bias_gelu\", \"enabled\": 1}]",
+  "verdict_note": null
+}

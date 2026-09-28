@@ -1,6 +1,8 @@
 # 新 session 接手：P1 multi-SM 与 frozen checker 内存阻塞
 
-更新：2026-09-28。用户最后要求：**把进度写入文档并提交 Git，之后由新 session 接手。当前停止实验。**
+更新：2026-09-28。用户已恢复任务，并明确**继续在同一台16GiB Mac运行**；不再按下文历史建议寻求服务器。本轮新增复核见 `project/campaigns/validation-preflight-audit/REPORT.md`。
+
+当前等待明确是否允许提前放宽成熟Attention路径约束，改变实际分块来减少事件。既有五个OOM实验不重复；frozen checker与默认提交程序不变。
 
 最新记录规则：**只保留当前主对话的一份完整导出；不再收集各 worker/session。** 此要求覆盖此前保存所有 agent traces 的指示。
 
@@ -39,7 +41,7 @@ Python 使用 `.venv/bin/python`（3.12.13 / NumPy 2.5.3）。
 
 用户后来问“是否本地 Mac 内存限制”“如何推荐”。已解释：本机 16 GiB，实际终止由我们 runtime 设置的 3/6 GiB 上限触发；不是证明任何机器上都不能跑。建议优先使用现有大内存服务器校准/验证，再决定算法改写。
 
-### 尚未得到用户答复的选择
+### 历史交接时未确定的选择（本机运行现已明确）
 
 - 是否有现成大内存服务器，容量、SSH host 别名、远程目录是什么？**未提供连接信息，未授权/执行任何具体远程操作。**
 - 是否允许提前放宽“Attention/LN 保持成熟路径”，转向算法级实际指令压缩？**未获明确选择。**
@@ -77,8 +79,8 @@ Python 使用 `.venv/bin/python`（3.12.13 / NumPy 2.5.3）。
 
 - 51 个 search tests 通过，含新成本下界与真实小程序 frozen checker 集合大小对照，以及 outer/inner budget 测试。
 - `python -m project.campaigns.p1-multism.verify_controls` 通过；默认两份 asm 与 cand-098 字节一致。
-- 完整自动 preflight 拒绝且不启动 grade 的集成路径尚无专门测试；calibration override 的五次实际运行已覆盖准备/模型/grade 链。
-- prepared=True 的 evaluate 会重新创建 metrics，因此 calibration/preflight 的一些字段不在最终 metrics 中；独立 `reports/validation-cost.json` 和 proposal 完整保留。后续可改善报告整合，但不应因此扩大 infra 工作。
+- 新增实际preflight子进程集成测试已证明超预算时不启动grade，2项新增测试通过；见validation-preflight-audit。
+- 已修复prepared=True路径丢失成本报告的问题；未来metrics保留cost/heartbeat/calibration信息。既有候选报告不回写，仍以独立validation-cost.json和proposal为证。
 
 ## 5. 最关键的技术结论
 
@@ -90,7 +92,7 @@ Python 使用 `.venv/bin/python`（3.12.13 / NumPy 2.5.3）。
 
 ## 6. 下次接手的推荐步骤
 
-1. 先确认用户希望用大内存服务器，还是允许提前算法压缩；不要把上一条建议当成已有远程访问授权。
+1. 按用户最新要求继续在本机；先确认是否允许提前算法压缩。以下服务器条目只保留为历史方案，不执行。
 2. 若有服务器：核对 pinned interpreter/NumPy、源码冻结 hash、RAM/可用内存；先对完整程序做有界 prefix 校准，明确逻辑存储、RSS、耗时，再尝试完整 grade。保留所有报告，不上传官方 server。
 3. 优先考虑 cand-099 的完整 skeleton（其模型下界约29.7 GiB，低于 only-W1 的约108 GiB）；用户之前的“不微调 cand-099”不妨碍在不同资源条件下复验相同输入，但需要明确新 attempt，不覆盖旧报告。
 4. 若选择本地算法压缩：目标必须是减少**实际展开指令/依赖传播**，而不是静态源码行数或 barrier 数。它会超出本轮“成熟 Attention/LN 不变”条件，需要用户确认方向。

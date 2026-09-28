@@ -1318,3 +1318,9 @@ Traceback (most recent call last):
 - Verify: Frozen race checker observation on complete cand-101 at 2560 MiB -> `project/campaigns/validation-efficient/only-w1-race-observation.json`, peak 2568.94 MiB; at PC 9999 still prompt Attention, before first parallel entry at PC 17412. No correctness/timing pass inferred.
 - Result: Incremental event counts all 161516, retained-set logical allocation lower bounds 102–108 GiB. Logical heap estimates are not measured peak RSS. Default score remains 2567.95405 (P1=8522411, D1=718132).
 - Decision: User explicitly requested documentation, Git commit, and new-session handoff. Stop experiments; no official submission. See `project/CURRENT_SESSION_HANDOFF.md` and `project/campaigns/validation-efficient/REPORT.md`. Remote resources and permission to advance algorithm compression remain unconfirmed.
+
+## 2026-09-28 22:59 — Local validation preflight integration audit
+- Change: Preserve validation-cost/heartbeat/calibration metadata for prepared inputs; reject a retained cost-prune decision before grade unless explicitly calibrated. Frozen checker, algorithms, hardware and emitted submission unchanged.
+- Verify: `.venv/bin/python -m unittest project.search.tests.test_validation_preflight -v` -> `project/campaigns/validation-preflight-audit/tests.stderr` -> 2 passed; actual generation/static/cost subprocess chain prunes with zero grade launches.
+- Result: No new full-model evaluation or score. cand-098 remains P1=8522411 D1=718132 score=2567.95405. Existing cand-101..105 memory failures were not repeated.
+- Decision: Continue on this Mac as requested. Await explicit choice on advancing Attention algorithm blocking before a multi-SM pass; do not modify frozen checker, expand memory limits or assert an unmeasured speedup. See `project/campaigns/validation-preflight-audit/REPORT.md`.

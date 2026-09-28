@@ -1,0 +1,7 @@
+test_actual_preflight_rejects_before_any_grade_launch (project.search.tests.test_validation_preflight.ValidationPreflightTests.test_actual_preflight_rejects_before_any_grade_launch) ... ok
+test_explicit_calibration_is_preserved_in_prepared_metrics (project.search.tests.test_validation_preflight.ValidationPreflightTests.test_explicit_calibration_is_preserved_in_prepared_metrics) ... ok
+
+----------------------------------------------------------------------
+Ran 2 tests in 1.043s
+
+OK

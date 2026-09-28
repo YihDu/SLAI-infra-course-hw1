@@ -122,6 +122,20 @@ def evaluate(cand, seeds, log=print, *, validation="grade", timeout_seconds=600,
             return metrics
     elif (cand.reports / "static.json").exists():
         metrics["static"] = json.loads((cand.reports / "static.json").read_text())
+    if prepared and (cand.reports / "validation-cost.json").exists():
+        metrics["validation_cost"] = json.loads((cand.reports / "validation-cost.json").read_text())
+        heartbeat = cand.reports / "validation-cost.heartbeat.json"
+        if heartbeat.exists():
+            metrics["validation_cost_progress"] = json.loads(heartbeat.read_text())
+        proposal_path = cand.dir / "proposal.json"
+        proposal = json.loads(proposal_path.read_text()) if proposal_path.exists() else {}
+        if any(v["decision"] == "prune_validation_cost" for v in metrics["validation_cost"].values()):
+            if proposal.get("validation_cost_calibration") is True:
+                metrics["validation_cost_override"] = proposal.get("calibration_reason", "explicit calibration")
+            else:
+                metrics.update(verdict="pruned", failure_class="validation_cost_pruned")
+                (cand.dir / "metrics.json").write_text(json.dumps(metrics, indent=2)+"\n")
+                return metrics
     for mode in (["check", "grade"] if validation == "full" else ["grade"]):
         report = cand.reports / (mode + ".json")
         if report.exists():

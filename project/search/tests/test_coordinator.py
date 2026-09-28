@@ -43,6 +43,50 @@ class CoordinatorTests(unittest.TestCase):
             self.assertEqual(result[2]['cache_source'],'0')
             self.assertEqual(result[3]['failure_class'],'budget_exhausted')
             self.assertEqual([cid for cid,_ in recorded],['0','1','2','3'])
+    def test_slow_first_does_not_block_refill_or_change_publication_order(self):
+        with tempfile.TemporaryDirectory() as tmp, ExitStack() as stack:
+            root = Path(tmp)
+            candidates = []
+            for i in range(4):
+                folder = root / str(i)
+                folder.mkdir(); (folder / 'reports').mkdir()
+                candidates.append(SimpleNamespace(id=str(i), dir=folder,
+                    reports=folder/'reports', status='created', save=lambda:None))
+            reg = {'candidates':{c.id:{} for c in candidates}}
+            replacement_started = threading.Event()
+            observed = []
+            published = []
+            launches = []
+
+            def evaluate(cand, seeds, **kw):
+                kw['before_launch']('grade')
+                launches.append(cand.id)
+                if cand.id == '0':
+                    observed.append(replacement_started.wait(3))
+                if cand.id == '2':
+                    replacement_started.set()
+                return {'candidate':cand.id, 'verdict':'evaluated',
+                        'evaluation_attempts':1, 'reports':{}}
+
+            stack.enter_context(patch.object(state, 'save'))
+            stack.enter_context(patch.object(records, 'record_result',
+                side_effect=lambda r,c,m:published.append(c.id)))
+            stack.enter_context(patch.object(evaluator, 'prepare', return_value={}))
+            stack.enter_context(patch.object(evaluator, 'evaluate', side_effect=evaluate))
+            stack.enter_context(patch.object(cache, 'index_history'))
+            stack.enter_context(patch.object(cache, 'execution_key',
+                side_effect=lambda c,*a:'shared' if c.id in ('0','3') else c.id))
+            stack.enter_context(patch.object(cache, 'lookup', return_value=None))
+            stack.enter_context(patch.object(cache, 'store'))
+            budget = coordinator.Budget(3)
+            results = coordinator.evaluate_many(reg, candidates, [7], budget, jobs=2)
+            self.assertEqual(observed, [True], 'Replacement must start before slow first exits')
+            self.assertEqual(published, ['0','1','2','3'])
+            self.assertEqual(set(launches), {'0','1','2'})
+            self.assertEqual(budget.used, 3)
+            self.assertTrue(results[3]['cache_hit'])
+            self.assertEqual(results[3]['cache_source'], '0')
+
     def test_incomplete_success_cannot_enter_archives(self):
         for flags in ({'eligible':True}, {'eligible':True,'functional':{'M1_P1':True}}):
             self.assertFalse(archives.is_admissible({'score':9999,'status':'evaluated',**flags}))

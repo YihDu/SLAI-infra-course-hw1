@@ -60,3 +60,14 @@ Run a bounded expansion with `python -m project.search.structural_campaign
 `python -m project.search.structural_campaign --refine --max-evals 3 --jobs 2`.
 Both commands record snapshots, grades, pruning and launch budgets, then
 restore the best submission while retaining the current compiler capability.
+
+## Evaluation slot refill
+
+The coordinator refills an evaluator slot as soon as its process completes,
+instead of waiting for an entire two-candidate wave. Completed metrics are
+buffered and published in proposal order. Registry/cache updates remain on the
+coordinator thread; identical in-flight artifacts share one evaluation future,
+and the locked launch budget is unchanged. A regression test holds the first
+candidate until the third starts, proving a fast second candidate frees a slot
+without changing publication order. This verifies scheduling behavior; no new
+hardware score is claimed from the scheduler change alone.

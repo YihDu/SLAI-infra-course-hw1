@@ -1215,3 +1215,15 @@ Traceback (most recent call last):
 - cand-089: stopped scalar K<16 checker path based on source inspection and CPU sampling; correctness remains unverified. Original runtime report preserved.
 - Evidence: project/campaigns/structural-20260928-180635/RESULTS.md and space-audit.json; structural-refine campaign summary.
 - Policy: promote by eligible composite score; permit per-case tradeoffs. Next: multi-SM prototypes and RF-resident operator chains; see project/search/STRATEGY_NEXT.md.
+
+## 2026-09-28 18:38 — Gemini multi-SM isolated-kernel experiments
+- Change: independent GEMM columns split across 1/2/4 SMs; tiny 2-WG functional/race check, plus worker-only 8-SM timing exploration. No submission candidate changed.
+- Verify: pinned Python reruns in project/campaigns/gemini-multism-review/verified-results.json; worker commands, outputs and failed attempts in worker-experiments.json.
+- Result: tiny 2-WG=235 cycles; M64/K256/N256: 1/2/4 SM=81325/43460/24809 cycles. These are isolated kernels, not full-grade scores.
+- Decision: retain column-split prototype for integration; reject the worker's 8-SM hardware as over-area (30.930 mm²). Full workload correctness and race-check scaling remain unverified.
+
+## 2026-09-28 18:39 — Gemini isolated D1 FFN fusion prototypes
+- Change: full activation RF residency and streaming FFN residency, tested as isolated synthetic kernels; no submission triple changed.
+- Verify: pinned Python reruns in project/campaigns/gemini-fusion-review/verified-results.json; failed attempts and worker commands retained in worker-experiments.json.
+- Result: baseline/A/B=28970/28646/28639 cycles; synthetic functional checks pass. Savings about 1.1% of this FFN kernel; no full-grade score claimed.
+- Decision: retain prototypes for later composition; prioritize multi-SM integration. Reject worker claim of universal RF capacity: weight tile is 1024 words and does not fit 32/64 vector-lane hardware.

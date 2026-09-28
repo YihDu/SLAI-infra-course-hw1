@@ -1,5 +1,5 @@
 """Single writer, bounded evaluator scheduling and exact artifact reuse."""
-from concurrent.futures import ThreadPoolExecutor
+from concurrent.futures import ThreadPoolExecutor, wait, FIRST_COMPLETED
 from contextlib import contextmanager
 from dataclasses import dataclass, field
 from pathlib import Path
@@ -99,55 +99,81 @@ def evaluate_many(reg, candidates, seeds, budget, *, jobs=2, validation='grade',
         score = metrics.get('reports', {}).get('grade', {}).get('score')
         print(f'[{cand.id}] {metrics.get("verdict")} score={score} budget={budget.used}/{budget.maximum}', flush=True)
 
+    # Running slots are replenished on completion. Publication stays in proposal
+    # order, so slower earlier candidates cannot change promotion/delta ordering.
+    entries = []
+    next_publish = 0
+    by_key = {}
+    active = set()
+
+    def publish_ready():
+        nonlocal next_publish
+        while next_publish < len(entries):
+            cand, future, key, duplicate, immediate = entries[next_publish]
+            if future is not None and not future.done():
+                break
+            try:
+                metrics = copy.deepcopy(future.result() if future is not None else immediate)
+            except Exception as exc:
+                metrics = {'reports': {}, 'verdict': 'not_verified',
+                           'failure_class': 'evaluator_error', 'failure_note': str(exc)}
+            if duplicate:
+                source = metrics.get('candidate')
+                metrics.update(cache_hit=True, cache_source=source, evaluation_attempts=0)
+                if metrics.get('verdict') != 'evaluated':
+                    metrics.update(verdict='not_verified', failure_class='duplicate_unverified')
+            finish(cand, metrics, None if duplicate else key)
+            next_publish += 1
+
     with ThreadPoolExecutor(max_workers=jobs) as pool:
-        for start in range(0, len(candidates), jobs):
-            wave = []
-            for cand in candidates[start:start + jobs]:
-                if (cand.dir / 'metrics.json').exists() or list(cand.reports.glob('*.json')):
-                    raise FileExistsError(f'{cand.id} has results; create a new candidate/attempt')
-                cand.status = 'evaluating'; cand.save()
-                reg['candidates'][cand.id]['status'] = 'evaluating'; state.save(reg)
-                try:
-                    candidate_started = time.monotonic()
-                    limit = min(timeout_seconds, max(.01, budget.wall_seconds - (candidate_started-budget.started)))
-                    prepared = evaluator.prepare(cand, timeout_seconds=limit, memory_mib=memory_mib)
-                    if prepared.get('failure_class') or prepared.get('verdict') in ('not_verified', 'pruned'):
-                        finish(cand, prepared); continue
-                    key = cache.execution_key(cand, seeds, validation)
-                    hit = None if force else cache.lookup(key)
-                    if hit:
-                        hit = copy.deepcopy(hit)
-                        source = hit.get('candidate')
-                        hit.update(cache_hit=True, cache_source=source, evaluation_attempts=0)
-                        finish(cand, hit); continue
-                    duplicate = next((item for item in wave if item[2] == key), None)
-                    if duplicate:
-                        wave.append((cand, duplicate[1], key, True)); continue
-                    if not budget.available():
-                        finish(cand, {'reports': {}, 'verdict': 'not_verified',
-                                      'failure_class': 'budget_exhausted', 'evaluation_attempts': 0}); continue
-                    fut = pool.submit(evaluator.evaluate, cand, seeds, validation=validation,
-                                      timeout_seconds=max(.01, limit - (time.monotonic() - candidate_started)), memory_mib=memory_mib,
-                                      prepared=True, before_launch=lambda mode, cid=cand.id: budget.claim(mode, cid))
-                    wave.append((cand, fut, key, False))
-                except Exception as exc:
-                    finish(cand, {'reports': {}, 'verdict': 'not_verified',
-                                  'failure_class': 'prepare_error', 'failure_note': str(exc),
-                                  'evaluation_attempts': 0})
-            # Integrate in proposal order, independent of worker completion order.
-            for cand, fut, key, duplicate in wave:
-                try:
-                    metrics = copy.deepcopy(fut.result())
-                except KeyboardInterrupt:
-                    runtime.cancel_all()
-                    raise
-                except Exception as exc:
-                    metrics = {'reports': {}, 'verdict': 'not_verified',
-                               'failure_class': 'evaluator_error', 'failure_note': str(exc)}
-                if duplicate:
-                    source = metrics.get('candidate')
-                    metrics.update(cache_hit=True, cache_source=source, evaluation_attempts=0)
-                    if metrics.get('verdict') != 'evaluated':
-                        metrics.update(verdict='not_verified', failure_class='duplicate_unverified')
-                finish(cand, metrics, None if duplicate else key)
+        next_candidate = 0
+        try:
+            while next_candidate < len(candidates) or active:
+                while next_candidate < len(candidates) and len(active) < jobs:
+                    cand = candidates[next_candidate]
+                    next_candidate += 1
+                    if (cand.dir / 'metrics.json').exists() or list(cand.reports.glob('*.json')):
+                        raise FileExistsError(f'{cand.id} has results; create a new candidate/attempt')
+                    cand.status = 'evaluating'; cand.save()
+                    reg['candidates'][cand.id]['status'] = 'evaluating'; state.save(reg)
+                    future, key, duplicate, immediate = None, None, False, None
+                    try:
+                        candidate_started = time.monotonic()
+                        limit = min(timeout_seconds, max(.01, budget.wall_seconds - (candidate_started-budget.started)))
+                        prepared = evaluator.prepare(cand, timeout_seconds=limit, memory_mib=memory_mib)
+                        if prepared.get('failure_class') or prepared.get('verdict') in ('not_verified', 'pruned'):
+                            immediate = prepared
+                        else:
+                            key = cache.execution_key(cand, seeds, validation)
+                            hit = None if force else cache.lookup(key)
+                            if hit:
+                                immediate = copy.deepcopy(hit)
+                                immediate.update(cache_hit=True, cache_source=hit.get('candidate'), evaluation_attempts=0)
+                            elif key in by_key:
+                                future, duplicate = by_key[key], True
+                            elif not budget.available():
+                                immediate = {'reports': {}, 'verdict': 'not_verified',
+                                             'failure_class': 'budget_exhausted', 'evaluation_attempts': 0}
+                                key = None
+                            else:
+                                future = pool.submit(evaluator.evaluate, cand, seeds, validation=validation,
+                                    timeout_seconds=max(.01, limit - (time.monotonic() - candidate_started)),
+                                    memory_mib=memory_mib, prepared=True,
+                                    before_launch=lambda mode, cid=cand.id: budget.claim(mode, cid))
+                                by_key[key] = future
+                                active.add(future)
+                    except Exception as exc:
+                        immediate = {'reports': {}, 'verdict': 'not_verified',
+                                     'failure_class': 'prepare_error', 'failure_note': str(exc),
+                                     'evaluation_attempts': 0}
+                        key = None
+                    entries.append((cand, future, key, duplicate, immediate))
+                    publish_ready()
+                if active:
+                    completed, _ = wait(active, return_when=FIRST_COMPLETED)
+                    active.difference_update(completed)
+                publish_ready()
+        except KeyboardInterrupt:
+            runtime.cancel_all()
+            raise
     return results

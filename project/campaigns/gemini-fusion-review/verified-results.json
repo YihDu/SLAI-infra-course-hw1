@@ -1,0 +1,17 @@
+{
+  "functional_a": {
+    "exit_code": 0,
+    "stdout": "Executed successfully!\nMax absolute error: 2.136230e-04\nMax relative error: 4.560501e-05\nWithin tolerance (1e-3 + 1e-3 * abs(ref)): True\n",
+    "stderr": ""
+  },
+  "functional_b": {
+    "exit_code": 0,
+    "stdout": "Approach B executed successfully!\nMax absolute error: 2.136230e-04\nMax relative error: 4.560501e-05\nWithin tolerance: True\n",
+    "stderr": ""
+  },
+  "timing": {
+    "exit_code": 0,
+    "stdout": "BASELINE:    cycles =  28970, energy =   107.41 uJ, read_bytes =  532480, write_bytes =   5120\nAPPROACH A:  cycles =  28646, energy =   105.72 uJ, read_bytes =  527872, write_bytes =    512 (speedup: 1.01x)\nAPPROACH B:  cycles =  28639, energy =   105.71 uJ, read_bytes =  527872, write_bytes =    512 (speedup: 1.01x)\n",
+    "stderr": ""
+  }
+}

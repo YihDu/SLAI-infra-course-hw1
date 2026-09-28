@@ -1,0 +1,15 @@
+{
+  "tiny_functional": {
+    "exit_code": 0,
+    "elapsed": 0.16744724998716265,
+    "stdout": "Validating races...\nRace validation PASSED!\nMax absolute error vs numpy matmul: 5.722046e-06\n2-WG cycles: 235\nSM 0 busy issue cycles: 7\nSM 1 busy issue cycles: 7\n",
+    "stderr": ""
+  },
+  "scaling_four_sm": {
+    "exit_code": 0,
+    "elapsed": 4.976305124931969,
+    "stdout": "SMs: 1 | Cycles:    81325 | Speedup: 1.00x | Efficiency: 100.0% | Avg Power: 0.84W | Peak Power: 1.70W\nSMs: 2 | Cycles:    43460 | Speedup: 1.87x | Efficiency: 93.6% | Avg Power: 1.26W | Peak Power: 2.51W\nSMs: 4 | Cycles:    24809 | Speedup: 3.28x | Efficiency: 82.0% | Avg Power: 1.94W | Peak Power: 3.59W\n",
+    "stderr": ""
+  },
+  "eight_sm_area_mm2": 30.92970443776
+}

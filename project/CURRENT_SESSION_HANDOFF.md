@@ -1,137 +1,228 @@
-# 新 session 接手：P1 multi-SM 与 frozen checker 内存阻塞
+# 当前进度与接手说明：cand-143
 
-## Active goal update: 2026-09-29 automatic iteration
+更新日期：2026-09-29。本文是新 session 的当前状态入口。更详细的最终分析见
+`project/campaigns/current-design-limit/REPORT.md`，完整实验历史见
+`project/iteration-log.md`。旧交接中的 cand-106、cand-114、cand-118 等“当前最优”
+描述均已失效。
 
-- User goal remains active: iterate toward the current design's limit; no global upper bound has been established.
-- Current kept/default **cand-118**: P1 **6201341**, D1 **210849**, score **5555.741702281949**, complete frozen grade passed.
-- Automatic MILP campaign `auto-milp-20260929-005803` evaluated115–117, kept115 and stopped at `outer_structure_required` after3 valid low-gain candidates. Then P1 RF operand pipelining118 produced a structural gain.
-- New entry `python -m project.search.milp_campaign`; see `project/search/AUTO_ITERATION.md`. Registry now rejects stale saves by revision CAS. Solver v2 accepts controlled single-projection delta feedback; retrospective ranking check agrees with115. Read reports before another run.
-- **Next concrete work:** investigate double-buffered operand issue for P1 QKV/WO (current mature GEMM still reuses A/B buffers). Do not call the D1 plateau a whole-design ceiling or restart its same neighborhood after a P1-only change.
-- Latest evidence: `project/campaigns/p1-operand-pipeline/REPORT.md`, `project/campaigns/auto-milp-20260929-005803/REPORT.md`. No grade process remains running at this checkpoint. Gemini read-only review failed provider503; no findings used.
-- Older current-state sections below are historical.
+## 1. 当前可提交状态
 
+- Git 分支：`dev-yh`
+- registry head / best：`cand-143`
+- 完整 frozen grade：正确且 eligible
+- 未修改 frozen evaluator，未手改最终 asm，未上传官方 server
+- Python：`.venv/bin/python`（3.12.13 / NumPy 2.5.3）
+- 当前没有 evaluator 或搜索进程在后台运行
 
-## 最新进展：2026-09-29
+| 指标 | cand-143 | 相对 frozen baseline |
+|---|---:|---:|
+| Score | **7013.610245** | 7.014x baseline score |
+| P1 cycles | **4,897,135** | 6.33x speedup |
+| D1 cycles | **167,539** | 7.77x speedup |
+| Area | **22.859813 mm²** | ≤ 24 mm² |
+| P1 peak power | **4.018955 W** | ≤ 20 W |
+| D1 peak power | **7.494538 W** | ≤ 20 W |
+| Grade peak memory | **4069.86 MiB** | 本机完成 |
 
-- 当前默认/registry head：**cand-114**，完整 frozen grade eligible；P1=**7,049,767**，D1=**212,659**，score=**5188.49449**。硬件未改，未官方提交。
-- P1：分块 Attention + RF 驻留 W1/GELU/W2，仍是单 SM。
-- D1：四个 persistent WG，按 head/投影列分片；MILP 选择 QKV/WO/W2 N32/K32，W1 N64/K16，全部四 SM。峰值验证进程内存5230.46MiB（6GiB上限），本机可完成。
-- MILP 对照：手工 cand-112 score4455.91 / D1278743 → cand-113 score5101.49 / D1212659，完整 grade 证明score+14.49%。最终 cand-114 再合入 P1 驻留 MLP。
-- 证据：`project/campaigns/milp-d1/README.md`、`project/campaigns/structural-mlp/REPORT.md`、cand-108至114报告。模型/求解器仅用于编译期提案，未改 frozen evaluator。
-- **尚未实现 P1 multi-SM pass，也未达到10倍score。** 当前相对baseline1000为5.188倍，相对cand-106为1.869倍。
-- registry曾被并行运行的旧快照覆盖，cand-111保留部分prepare证据但未grade；恢复登记后以新cand-112完成实验。后续registry写入/候选创建必须串行。
-- 下文为历史记录，旧的“当前最优/未有multi-SM”描述按对应阶段理解。
+权威结果：
 
+- `project/experiments/cand-143/reports/grade.json`
+- `project/experiments/cand-143/reports/p1-profile.json`
+- `project/experiments/cand-143/reports/d1-profile.json`
 
-更新：2026-09-28。用户已恢复任务，并明确**继续在同一台16GiB Mac运行**；不再按下文历史建议寻求服务器。本轮新增复核见 `project/campaigns/validation-preflight-audit/REPORT.md`。
+当前硬件为 4 SM、2 个 8x16 TC/SM、K parallel 4、16 vector lanes、16 SFU
+lanes、2 reduction units、RF 8R4W、128 KiB SH/SM、2 DMA engines、8 HBM
+channels、16 MiB cache、multicast enabled。完整配置以 `hardware.json` 为准。
 
-用户已明确允许改写 Attention。cand-106 分块 Attention 完整 grade 通过并成为默认最优：P1=7,292,285，D1=718,132，score=2776.10999。cand-107 only-W1 多 SM 在验证成本预检被剪枝，逻辑存储下界41.31 GiB，未运行 grade。最新证据：`project/campaigns/blocked-attention/REPORT.md`。下文旧实验描述按历史阅读。
+## 2. 当前程序如何工作
 
-最新记录规则：**只保留当前主对话的一份完整导出；不再收集各 worker/session。** 此要求覆盖此前保存所有 agent traces 的指示。
+### P1
 
-## 1. 先读这些文件
+P1 仍是单个长驻 WG 在 SM0 上执行。现有收益主要来自单 SM 内的数据驻留、融合和
+issue pipeline：
 
-1. 本文：任务、结论、未完成事项、接手顺序。
-2. `project/campaigns/validation-efficient/REPORT.md`：本轮详细证据。
-3. `project/campaigns/p1-multism/REPORT.md`：上一轮完整 multi-SM skeleton、cand-099/100 与完整 baseline 阶段归因。
-4. `AGENTS.md`、`project/PROBLEM.md`：项目约束。frozen evaluator 不得修改，asm 只能由 generator 生成。
+- Prompt Attention 使用分块实现，避免完整 scores/probs 的 HBM materialization。
+- Prompt MLP 将 W1/GELU/W2 组织成 RF 驻留流水；W2 accumulator 直接完成 bias、
+  residual epilogue，移除 `ff2` HBM 往返。
+- residual1 直接流入 LN2；LayerNorm gamma/beta 缓存在 RF，LN 输入复用现有 64 KiB SH。
+- QKV、WO 和 MLP panel 使用下一列/下一 neuron 的 seed load lookahead。
+- 第一生成 token 的 GEMM 使用已验证的 N64/K16 tile。
+- P1 的 expanded instructions 已从 cand-124 的 89,579 降到后续融合前的 81,947；
+  cand-143 profile 有 78,032 个 trace events。
 
-仓库：`/Users/yihdu/Codefield/SLAI-infra-Code/transformer-codesign-starter`，分支 `dev-yh`。
-Python 使用 `.venv/bin/python`（3.12.13 / NumPy 2.5.3）。
+### D1
 
-## 2. 当前最优与默认工作区
+D1 使用四个 persistent WG，占用四个 SM，跨 8 个 decode step 保持固定 owner：
 
-- registry head 是 **cand-106**；cand-098 保留为比较基准。
-- P1 = **7,292,285**，D1 = **718,132**，score = **2776.1099913390285**。
-- 面积 16.25838297088 mm²；P1/D1 峰值滚动功耗 3.2090927716 / 2.3857896063 W。
-- 硬件：4 SM，TC 2×8x16，K parallel 4，vector 16，SFU 8，RF 8R4W，SH 128 KiB/SM，DMA depth2/engines2，cache2MiB。
-- 默认 recipe/compiler/生成程序已切换至 cand-106；D1 与 cand-098 字节一致。
-- 没有新的完整 multi-SM correctness-pass 或 timing/score；不要把未验证候选晋升或打包为最优。
+- QKV、WO、W1、W2 按输出列/神经元分片。
+- GELU 分成四个 owner，并复用相邻投影已有 barrier。
+- projection 双缓冲 B panel，同时把完整单 token A vector 保持在 RF，跨 N panel 复用。
+- Attention 对 history K/V panel 做双缓冲。
+- 当前 D1 有 12,816 个 trace events；相对 cand-124，D1 从 207,673 降到 167,539 cycles。
 
-## 3. 用户当前目标与约束
+## 3. cand-124 到 cand-143 的有效实验
 
-用户要求：
+本阶段从 cand-124 的 score 6189.6015 推进到 cand-143 的 7013.6102，综合增益
+13.31%。每一项均经过完整 frozen grade，除明确标记为 preflight 的候选。
 
-- 不把 cand-099 checker 内存失败解释成 multi-SM 性能失败，不再微调它的 tile/barrier。
-- 比较 cand-098/099/100 的展开指令、事件、WG、访存和同步边；建立 validation cost model，grade 前剪枝。
-- 从 cand-098 依次试 only W1、only W2、W1+W2、only QKV、QKV+W1+W2，Attention/LN/residual 保持成熟路径，每个完整 grade。
-- 首个通过者成为新 structural parent；随后分析跨算子 residency、D1 persistent、Attention 算法重写。
-- outer search = skeleton/fusion/residency/attention/persistent；inner = tiles/shards/WG/placement/hardware。连续低收益应停止 inner。
-- 成功标准包括完整 multi-SM grade、内存受控、真实 end-to-end speedup、下一项 >1.5× 潜力结构。
-- 不上传官方 server，不修改 frozen checker。
+| Candidate | 改动 | 结果/结论 |
+|---|---|---|
+| 126 | P1 first-token GEMM N64/K16 | kept，score 6210.63；N128/K8、N256/K4 更慢 |
+| 130 | P1 W2 RF-resident residual epilogue | kept，score 6229.40；cand-129 的 stride-zero 方案不正确 |
+| 131 | LN affine RF cache；residual1→LN2 fusion | kept，score 6257.60 |
+| 132 | LN2→W1 activation 放入已有 64 KiB SH | kept，score 6259.02，收益很小 |
+| 133 | multicast | kept，score 6264.42 |
+| 135 | 四路 D1 GELU | kept，D1 195,174，score 6456.32 |
+| 136 | D1 projection operand double buffer | kept，D1 171,256，score 6892.44 |
+| 137 | D1 history K/V pipeline | kept，D1 169,003，score 6938.23 |
+| 139 | D1 A vector 跨 N panel RF resident | kept，D1 167,539，score 6969.54 |
+| 142 | P1 MLP next-neuron seed lookahead | kept，P1 4,935,427，score 6986.35 |
+| 143 | P1 QKV/WO next-column seed lookahead | kept，P1 4,897,135，score 7013.61 |
 
-**这些成功标准尚未实现。** 五个完整增量 grade 均在本地内存上限中断，没有取得 correctness 或 timing。
+## 4. 当前瓶颈
 
-用户后来问“是否本地 Mac 内存限制”“如何推荐”。已解释：本机 16 GiB，实际终止由我们 runtime 设置的 3/6 GiB 上限触发；不是证明任何机器上都不能跑。建议优先使用现有大内存服务器校准/验证，再决定算法改写。
+### P1 阶段归因
 
-### 历史交接时未确定的选择（本机运行现已明确）
+| 阶段 | Cycles | 占 P1 |
+|---|---:|---:|
+| RF-persistent prompt MLP | 2,486,327 | 50.77% |
+| QKV | 758,838 | 15.50% |
+| Attention | 506,946 | 10.35% |
+| fused output epilogue | 325,105 | 6.64% |
+| first-token W1 | 274,050 | 5.60% |
+| first-token W2 | 272,490 | 5.56% |
+| WO | 253,842 | 5.18% |
 
-- 是否有现成大内存服务器，容量、SSH host 别名、远程目录是什么？**未提供连接信息，未授权/执行任何具体远程操作。**
-- 是否允许提前放宽“Attention/LN 保持成熟路径”，转向算法级实际指令压缩？**已获允许，cand-106 已完成改写和验证。**
-- 256–512 GiB 只是先前提出的资源级别，不保证足够，也不建议直接购买。最后的仅 W1 前缀外推约 478 GiB **逻辑事件集合**，并非实测全程峰值，远程也必须先校准。
+P1 主要受 RF 服务限制：profile 中 RF read/write busy cycles 约 2.64M/2.36M，
+硬件 RF ports 已为合法上限 8R4W。P1 仍只使用 SM0，因此多 SM 在架构上仍有潜力，
+但 frozen checker 的验证表示目前阻塞了该路线。
 
-用户最终要求停下并交接，故不要在接手时自动继续五种已经失败的本地 grade。
+### D1 阶段归因
 
-## 4. 本轮完成了什么
+| 阶段 | 占 D1 |
+|---|---:|
+| W2 | 23.56% |
+| W1 | 23.51% |
+| QKV | 18.71% |
+| Attention | 17.54% |
+| WO | 6.37% |
+| GELU | 2.97% |
 
-### 实现
+D1 已经真实使用四个 SM。剩余时间分散在多个 dense projection 和 Attention；现有
+panel pipeline 的最后几步收益已经低于 1%。
 
-- `project/compiler.py` 新增 `IncrementalP1Builder`：四个 persistent WG，指定 **prompt** GEMM 输出列分片，每个并行 GEMM 前后两个 coarse barrier；第一生成 token 和其他阶段继续成熟单主 WG 路径。未改 D1/hardware。
-- `project/search/validation_cost.py`：只读展开图统计、RF/SH 长依赖链的事件集合逻辑存储下界。不是 race validator，不替代 frozen grade。
-- `project/search/evaluator.py`：多 WG 程序在 generate/static 后运行成本模型，默认预测过预算则 `pruned / validation_cost_pruned`。
-- 本轮五候选的 proposal 明确带 `validation_cost_calibration=true`，允许一次受控完整 grade 校准。这不是模型通过，也不是通用运行设置。
-- `project/search/hierarchy.py` + propose/engine：outer identity 不随 tile/shards/placement/hardware 改变；连续三个 eligible 候选对父候选 score 增益 <10% 时停止该 outer 的 inner proposals。内存失败、不正确或未测量不作为低性能样本。
-- registry 已启用 hierarchy，`start_after_id=100`，objective=score，minimum_gain=.10，patience=3。
-- 这些是身份/预算策略；尚未实现未来 persistent/online-attention 的 generator，不能声称它们已经可自动搜索。
+## 5. P1 multi-SM 的验证边界
 
-### 实验
+不要把 multi-SM preflight 失败解释为性能失败。目前没有可引用的 multi-SM P1
+cycle 数。
 
-| Candidate | Prompt 并行部分 | 展开指令 | events | barriers | grade 峰值 MiB | 状态 |
-|---|---|---:|---:|---:|---:|---|
-| 101 | W1 | 161,537 | 161,516 | 12 | 3079.02 | memory_limit |
-| 102 | W2 | 161,537 | 161,516 | 12 | 3072.35 | memory_limit |
-| 103 | W1+W2 | 161,549 | 161,516 | 24 | 3085.69 | memory_limit |
-| 104 | QKV | 161,537 | 161,516 | 12 | 3078.22 | memory_limit |
-| 105 | QKV+W1+W2 | 161,561 | 161,516 | 36 | 3080.00 | memory_limit |
+cand-141 对最小 two-WG、batch-parallel end-to-end P1 skeleton 做了重新预检：
 
-全部 4 WG、0 WAIT，D1 相同。每个调用了完整 `grade --seed 7`，均未完成；**没有 grade.json，没有分数，没有各阶段 timing**。日志里通用模板提及 grade.json 是预期输出路径，实际失败证据是 metrics、grade heartbeat/stdout/stderr。
+- 78,032 events
+- 156,360 dependency edges
+- 78,136 global commit incidences
+- retained event-set logical lower bound：13,773,311,648 bytes
+- 本机 validation budget：6,144 MiB
+- 预测差距约 2.24x，因此在 grade 前正确剪枝
 
-候选 snapshots/reports/proposals 均在 `project/experiments/cand-101..105`；禁止覆盖。下一编号由 `state.next_id` 获取，不写死。
+报告位于 `project/experiments/cand-141/reports/validation-cost.json`。根因是 frozen
+race checker 为 multi-WG 程序保存展开后事件的依赖集合；静态 FOR 也会先展开，
+barrier 合并依赖但不会压缩已经保留的历史集合。增加 coarse barrier 或只减少源码
+行数不能解决问题，必须减少实际事件和跨 WG 依赖传播。
 
-### 验证
+## 6. 已测量且不应重复的局部搜索
 
-- 51 个 search tests 通过，含新成本下界与真实小程序 frozen checker 集合大小对照，以及 outer/inner budget 测试。
-- `python -m project.campaigns.p1-multism.verify_controls` 通过；默认两份 asm 与 cand-098 字节一致。
-- 新增实际preflight子进程集成测试已证明超预算时不启动grade，2项新增测试通过；见validation-preflight-audit。
-- 已修复prepared=True路径丢失成本报告的问题；未来metrics保留cost/heartbeat/calibration信息。既有候选报告不回写，仍以独立validation-cost.json和proposal为证。
+- P1 first-token N128/K8、N256/K4 均不如 N64/K16。
+- 128 KiB SH activation 路径会损失 pipeline overlap。
+- D1 W1 weight shard 放入 private SH 正确但更慢；W2 的形状和访问方式相同，不应
+  重复同一实验。
+- layer-major batch ordering 基本中性且略慢。
+- TC3/cache4 和 TC3/cache2 交换均比当前 TC2/cache16 慢；TC4/8x16 超面积，
+  TC4/8x8 对齐 tile 的吞吐等价。
+- 增加 SH banks/ports 不改变 cycles；更大 NoC、更多 DMA engine 也已无收益。
+- 当前 design family 内继续做 tile、SH 容量、带宽字段或同类 panel prefetch sweep，
+  预期只会得到微小或负收益。
 
-## 5. 最关键的技术结论
+## 7. 搜索和实验做法
 
-1. **1 WG→多 WG 会触发全程序 checker。** cand-098/100 只有一个 WG，因此 checker early return；多 WG 后会为成熟单 WG 阶段也保存每个事件的依赖快照。
-2. **没有“免费粗化 event/loop”的 ISA 写法。** LD/ST/MMA/VEC/REDUCE/SFU 都要求唯一 event；FOR 进入 checker 前展开。当前 cand-099 已是 4 个长驻 WG、84 个 coarse barrier、0 WAIT。
-3. **RF 重用带来历史集合复制；barrier 只合并，不压缩。** `_join` 保留 event 并集，`_completed` 加 prefix 但不删除已覆盖事件，`event_knowledge` 持有全部快照。同名 WG 重开继承历史；换名字并正确同步也需传递依赖。
-4. **only W1 在到达 W1 前已经膨胀。** 第一并行入口 barrier 的 PC=17,412；观察到 PC=9,999，仍在第一 prompt 的 Attention，9995 个事件集合已占 2,048,903,752 B；2.5 GiB 有界观察随后终止。
-5. cand-099 事件只比 baseline 多 2.9%，并非 WG 把计算笛卡尔积复制四次。增量五候选事件数完全与 baseline 相同。
+候选目录是不可变证据。不要覆盖已有 `cand-NNN`，不要直接修改其中 snapshot。
+所有 generator 修改发生在 `project/compiler.py` 或新的生成器源文件中；asm 通过编译器
+生成。每次评价后必须保留 reports 并追加 `project/iteration-log.md`。
 
-## 6. 下次接手的推荐步骤
+搜索分两层：
 
-1. 按用户最新要求继续在本机；先确认是否允许提前算法压缩。以下服务器条目只保留为历史方案，不执行。
-2. 若有服务器：核对 pinned interpreter/NumPy、源码冻结 hash、RAM/可用内存；先对完整程序做有界 prefix 校准，明确逻辑存储、RSS、耗时，再尝试完整 grade。保留所有报告，不上传官方 server。
-3. 优先考虑 cand-099 的完整 skeleton（其模型下界约29.7 GiB，低于 only-W1 的约108 GiB）；用户之前的“不微调 cand-099”不妨碍在不同资源条件下复验相同输入，但需要明确新 attempt，不覆盖旧报告。
-4. 若选择本地算法压缩：目标必须是减少**实际展开指令/依赖传播**，而不是静态源码行数或 barrier 数。它会超出本轮“成熟 Attention/LN 不变”条件，需要用户确认方向。
-5. 第一个真实完整并行 grade 通过后，再收集 trace、per-SM utilization、sync cost、HBM traffic，建立新 parent。未通过前不报并行 speedup。
-6. 源码上最大的候选机会是 row-block persistent MLP/residency，详见本轮报告。独立 Attention 加速本身无法带来1.5× P1；D1已经单WG跨8个commit，机会在 weight驻留/NoC/RF，而不是重新把WG叫作persistent。
+- Outer structural search：parallel skeleton、fusion partition、residency plan、
+  attention algorithm、persistent scheduling、RF layout/event compression。
+- Inner parameter search：tile M/N/K、shard/WG 数、placement 和 hardware category。
 
-## 7. 复现入口
+同一 outer structure 连续三个 eligible candidate 相对 parent 增益低于 10% 时，应停止
+inner sweep，回到结构搜索。MILP 只负责在受约束的离散空间提出候选，frozen grade 才是
+真实性能和正确性的唯一依据。当前 registry 已实现该 hierarchy policy 和 revision CAS；
+候选创建、registry 保存、checkout/keep/revert 必须串行执行。
+
+标准流程：
 
 ```sh
-.venv/bin/python -m unittest discover -s project/search/tests -v
-.venv/bin/python -m project.campaigns.p1-multism.verify_controls
-.venv/bin/python -m project.search.validation_cost \
-  project/experiments/cand-101/programs/M1_P1.asm \
-  --report project/<new-report-name>.json --memory-mib 3072
+.venv/bin/python -m project.search.controller new cand-NNN --parent cand-143 \
+  --hypothesis "..." --summary "..." --from-worktree
+.venv/bin/python -m project.search.controller run cand-NNN --seed 7
+.venv/bin/python -m project.search.controller keep cand-NNN --note "..."
+# 或：
+.venv/bin/python -m project.search.controller revert cand-NNN --note "..."
 ```
 
-`materialize.py` 会创建新的候选，**不要把它当状态查询重复执行**。已保存成本报告无需重跑。
+对 multi-WG P1，必须先运行 validation-cost preflight。预测超过预算时保留报告并剪枝，
+不要启动必然耗尽本机内存的 grade。
 
-本轮 Gemini worker：`01a0e7ca-3de6-76e0-a4a8-40458a990b77`，只读审计；输出并不简洁，仅作为辅助，最终结论由主 agent 核验源码和实测。用户最新澄清：只需当前主对话的一份完整导出，不再逐个保存 worker/session。`agent-trace/` 已按该要求清理；后续交接依靠本文和实验报告。
+## 8. 下一 session 应从哪里继续
+
+当前实现族已经达到局部设计边界。下一项工作应选择一个新的 outer structure：
+
+1. **新的 P1 RF layout/tile family。** 当前 vector16 和每个 RF partition 的布局限制了
+   更大的 M/N/K tile。可研究 vector8 释放面积/端口压力后重新设计 tile 和 SFU/VEC
+   平衡。这需要成组改写 generator，不能只改一个 tile 参数。
+2. **真正压缩 P1 multi-SM 事件图。** 目标是把实际 expanded event 和跨 WG dependency
+   propagation 至少降低到 cand-141 下界的 1/2.24 以下，再做 frozen grade。只调 barrier、
+   WG 名称或 FOR 写法无效。
+3. **使用能容纳现有 multi-SM checker 状态的验证环境。** 若环境改变，先用 cand-141
+   同一输入做受控内存校准；成功前不要声称 multi-SM speedup。
+
+优先级建议：先做一页纸的 RF layout 候选容量和服务周期模型，同时为事件压缩提出至少
+两个具体 generator skeleton。只有模型显示可能带来大于约 10% 的完整模型收益时才生成
+新候选。不要重新启动当前已饱和的参数 sweep。
+
+## 9. 接手和复现命令
+
+先确认仓库状态，默认不需要重新跑六分钟级 full grade：
+
+```sh
+git status --short
+git log -3 --oneline
+.venv/bin/python -m project.search.controller status
+.venv/bin/python -m project.search.controller checkout cand-143
+.venv/bin/python -m project.compiler
+```
+
+需要复核 profile 或测试时：
+
+```sh
+PYTHONPATH=. .venv/bin/python project/campaigns/p1-multism/profile.py cand-143
+PYTHONPATH=. .venv/bin/python project/campaigns/p1-multism/profile_d1.py cand-143
+.venv/bin/python -m unittest discover -s project/search/tests -q
+```
+
+只有发现报告损坏或准备正式打包时，才重复完整 grade：
+
+```sh
+.venv/bin/python challenge.py grade \
+  --hardware hardware.json \
+  --program-p1 programs/M1_P1.asm \
+  --program-d1 programs/M2_D1.asm \
+  --baseline baseline_manifest.json \
+  --seed 7 \
+  --report project/grade-handoff-verify.json
+```
+
+继续实验时以 `cand-143` 为 parent 创建新 candidate。不要修改 frozen evaluator，
+不要自动向官方 server 提交。按用户最新要求，`agent-trace/` 只保存当前主对话的一份完整
+导出，不收集 Gemini worker 的独立 trace。

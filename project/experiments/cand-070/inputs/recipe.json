@@ -1,0 +1,20 @@
+{
+  "attention": {
+    "scores": "rf"
+  },
+  "fusion": {
+    "bias_gelu": 1
+  },
+  "gemm": {
+    "k_chunk": 48,
+    "m_tile": 8,
+    "n_tile": 16,
+    "order": "nkm",
+    "prefetch": 0
+  },
+  "gemm_stages": {
+    "p1_prompt": {
+      "m_tile": 16
+    }
+  }
+}

@@ -1,0 +1,15 @@
+{
+  "attention": {
+    "scores": "hbm"
+  },
+  "fusion": {
+    "bias_gelu": 1
+  },
+  "gemm": {
+    "k_chunk": 48,
+    "m_tile": 8,
+    "n_tile": 16,
+    "order": "nkm",
+    "prefetch": 0
+  }
+}

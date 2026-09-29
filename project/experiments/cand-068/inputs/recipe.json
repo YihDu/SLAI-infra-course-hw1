@@ -1,0 +1,18 @@
+{
+  "attention": {
+    "scores": "rf"
+  },
+  "fusion": {
+    "bias_gelu": 1
+  },
+  "gemm": {
+    "k_chunk": 48,
+    "m_tile": 8,
+    "n_tile": 16,
+    "order": "nkm",
+    "prefetch": 0
+  },
+  "schedule": {
+    "p1_batch_partition": "batch"
+  }
+}

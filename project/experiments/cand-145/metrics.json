@@ -1,0 +1,551 @@
+{
+  "candidate": "cand-145",
+  "reports": {
+    "grade": {
+      "mode": "grade",
+      "cases": {
+        "M1_P1": {
+          "functional_passed": true,
+          "max_abs_error": 3.012095998400355e-06,
+          "cycles": 1586728,
+          "instruction_count": 95099,
+          "hbm_read_bytes": 23731968,
+          "hbm_write_bytes": 8120320,
+          "peak_window_power_w": 11.526748313483035,
+          "busy_cycles": {
+            "sm0.dma": 370872,
+            "sm0.issue": 23856,
+            "sm0.noc_in": 275560,
+            "sm0.noc_out": 31559,
+            "sm0.reduce": 20496,
+            "sm0.rf_read": 669828,
+            "sm0.rf_write": 606612,
+            "sm0.sfu": 36408,
+            "sm0.shared_read": 0,
+            "sm0.shared_write": 0,
+            "sm0.tc": 101772,
+            "sm0.vec": 114528,
+            "sm0.issue_wait": 1557917,
+            "sm1.dma": 370168,
+            "sm1.issue": 23737,
+            "sm1.noc_in": 275848,
+            "sm1.noc_out": 31026,
+            "sm1.reduce": 20280,
+            "sm1.rf_read": 669064,
+            "sm1.rf_write": 605456,
+            "sm1.sfu": 36372,
+            "sm1.shared_read": 0,
+            "sm1.shared_write": 0,
+            "sm1.tc": 101772,
+            "sm1.vec": 113772,
+            "sm1.issue_wait": 1557146,
+            "sm2.dma": 370872,
+            "sm2.issue": 23856,
+            "sm2.noc_in": 271020,
+            "sm2.noc_out": 31320,
+            "sm2.reduce": 20496,
+            "sm2.rf_read": 669828,
+            "sm2.rf_write": 606612,
+            "sm2.sfu": 36408,
+            "sm2.shared_read": 0,
+            "sm2.shared_write": 0,
+            "sm2.tc": 101772,
+            "sm2.vec": 114528,
+            "sm2.issue_wait": 1558783,
+            "sm3.dma": 370168,
+            "sm3.issue": 23737,
+            "sm3.noc_in": 273228,
+            "sm3.noc_out": 30552,
+            "sm3.reduce": 20280,
+            "sm3.rf_read": 669064,
+            "sm3.rf_write": 605456,
+            "sm3.sfu": 36372,
+            "sm3.shared_read": 0,
+            "sm3.shared_write": 0,
+            "sm3.tc": 101772,
+            "sm3.vec": 113772,
+            "sm3.issue_wait": 1556526,
+            "shared.cache_bank_0": 425633,
+            "shared.cache_bank_1": 425985,
+            "shared.cache_bank_2": 427347,
+            "shared.cache_bank_3": 427630,
+            "shared.hbm_channel_0": 119986,
+            "shared.hbm_channel_1": 125772,
+            "shared.hbm_channel_2": 123726,
+            "shared.hbm_channel_3": 127706,
+            "shared.hbm_channel_4": 122016,
+            "shared.hbm_channel_5": 124394,
+            "shared.hbm_channel_6": 124024,
+            "shared.hbm_channel_7": 127760,
+            "shared.noc": 775964
+          }
+        },
+        "M2_D1": {
+          "functional_passed": true,
+          "max_abs_error": 1.5319426449611484e-06,
+          "cycles": 167539,
+          "instruction_count": 12992,
+          "hbm_read_bytes": 2012160,
+          "hbm_write_bytes": 167936,
+          "peak_window_power_w": 7.494538241472594,
+          "busy_cycles": {
+            "sm0.dma": 61440,
+            "sm0.issue": 3866,
+            "sm0.noc_in": 58660,
+            "sm0.noc_out": 1088,
+            "sm0.reduce": 1312,
+            "sm0.rf_read": 36304,
+            "sm0.rf_write": 67936,
+            "sm0.sfu": 1344,
+            "sm0.shared_read": 0,
+            "sm0.shared_write": 0,
+            "sm0.tc": 12056,
+            "sm0.vec": 5408,
+            "sm0.issue_wait": 161038,
+            "sm1.dma": 59392,
+            "sm1.issue": 3210,
+            "sm1.noc_in": 57032,
+            "sm1.noc_out": 512,
+            "sm1.reduce": 480,
+            "sm1.rf_read": 34160,
+            "sm1.rf_write": 64608,
+            "sm1.sfu": 1152,
+            "sm1.shared_read": 0,
+            "sm1.shared_write": 0,
+            "sm1.tc": 12056,
+            "sm1.vec": 3040,
+            "sm1.issue_wait": 150516,
+            "sm2.dma": 59392,
+            "sm2.issue": 3210,
+            "sm2.noc_in": 57008,
+            "sm2.noc_out": 512,
+            "sm2.reduce": 480,
+            "sm2.rf_read": 34160,
+            "sm2.rf_write": 64608,
+            "sm2.sfu": 1152,
+            "sm2.shared_read": 0,
+            "sm2.shared_write": 0,
+            "sm2.tc": 12056,
+            "sm2.vec": 3040,
+            "sm2.issue_wait": 150472,
+            "sm3.dma": 59392,
+            "sm3.issue": 3210,
+            "sm3.noc_in": 57027,
+            "sm3.noc_out": 512,
+            "sm3.reduce": 480,
+            "sm3.rf_read": 34160,
+            "sm3.rf_write": 64608,
+            "sm3.sfu": 1152,
+            "sm3.shared_read": 0,
+            "sm3.shared_write": 0,
+            "sm3.tc": 12056,
+            "sm3.vec": 3040,
+            "sm3.issue_wait": 150721,
+            "shared.cache_bank_0": 66468,
+            "shared.cache_bank_1": 66468,
+            "shared.cache_bank_2": 66404,
+            "shared.cache_bank_3": 66404,
+            "shared.hbm_channel_0": 8520,
+            "shared.hbm_channel_1": 8520,
+            "shared.hbm_channel_2": 8520,
+            "shared.hbm_channel_3": 8520,
+            "shared.hbm_channel_4": 8512,
+            "shared.hbm_channel_5": 8512,
+            "shared.hbm_channel_6": 8512,
+            "shared.hbm_channel_7": 8512,
+            "shared.noc": 69637
+          }
+        }
+      },
+      "score": 12321.43877576645,
+      "eligible": true,
+      "area_mm2": 22.85981349888
+    }
+  },
+  "evaluation_attempts": 1,
+  "runs": {
+    "grade": {
+      "command": [
+        "/home/jovyan/projects/SLAI-infra-course-hw1/.venv/bin/python",
+        "/home/jovyan/projects/SLAI-infra-course-hw1/challenge.py",
+        "grade",
+        "--hardware",
+        "/home/jovyan/projects/SLAI-infra-course-hw1/project/experiments/cand-145/inputs/hardware.json",
+        "--program-p1",
+        "/home/jovyan/projects/SLAI-infra-course-hw1/project/experiments/cand-145/programs/M1_P1.asm",
+        "--program-d1",
+        "/home/jovyan/projects/SLAI-infra-course-hw1/project/experiments/cand-145/programs/M2_D1.asm",
+        "--report",
+        "/home/jovyan/projects/SLAI-infra-course-hw1/project/experiments/cand-145/reports/grade.json",
+        "--seed",
+        "7",
+        "--baseline",
+        "/home/jovyan/projects/SLAI-infra-course-hw1/baseline_manifest.json"
+      ],
+      "exit_code": 0,
+      "elapsed": 6037.860476180445,
+      "peak_memory_mib": 132569.88671875,
+      "failure_class": null
+    }
+  },
+  "static": {
+    "M1_P1": {
+      "expanded_instructions": 95099,
+      "bytes": 917126,
+      "workgroup_lifetimes": 4
+    },
+    "M2_D1": {
+      "expanded_instructions": 12992,
+      "bytes": 1506133,
+      "workgroup_lifetimes": 4
+    }
+  },
+  "validation_cost": {
+    "M1_P1": {
+      "expanded_instructions": 95099,
+      "source_lines": 4743,
+      "static_loops": 1182,
+      "workgroup_lifetimes": 4,
+      "workgroup_names": 4,
+      "opcode_counts": {
+        "WG.BEGIN": 4,
+        "LD": 30478,
+        "REDUCE": 7800,
+        "VEC": 31338,
+        "SFU": 5460,
+        "ST": 4858,
+        "BARRIER": 84,
+        "MMA.ACC": 15072,
+        "STEP.COMMIT": 1,
+        "WG.END": 4
+      },
+      "events": 95006,
+      "graph_edges": 190280,
+      "named_cross_wg_sync_edges": 0,
+      "barrier_directed_pair_relations": 168,
+      "barrier_incidence_edges": 336,
+      "global_commit_incidence_edges": 95106,
+      "stages": {
+        "unknown/control": {
+          "instructions": 93,
+          "WG.BEGIN": 4,
+          "BARRIER": 84,
+          "STEP.COMMIT": 1,
+          "WG.END": 4
+        },
+        "prompt/ln1": {
+          "instructions": 5016,
+          "LD": 408,
+          "events": 5016,
+          "REDUCE": 768,
+          "VEC": 3072,
+          "SFU": 384,
+          "ST": 384,
+          "sum_dependency_depth_lower_bound": 20405496
+        },
+        "prompt/qkv": {
+          "instructions": 6336,
+          "VEC": 288,
+          "events": 6336,
+          "LD": 3456,
+          "MMA.ACC": 2304,
+          "ST": 288,
+          "sum_dependency_depth_lower_bound": 27335376
+        },
+        "prompt/attention": {
+          "instructions": 21264,
+          "LD": 1152,
+          "events": 21264,
+          "ST": 384,
+          "VEC": 9744,
+          "MMA.ACC": 768,
+          "REDUCE": 6144,
+          "SFU": 3072,
+          "sum_dependency_depth_lower_bound": 105100512
+        },
+        "prompt/wo": {
+          "instructions": 2112,
+          "VEC": 96,
+          "events": 2112,
+          "LD": 1152,
+          "MMA.ACC": 768,
+          "ST": 96,
+          "sum_dependency_depth_lower_bound": 11696880
+        },
+        "prompt/residual1": {
+          "instructions": 6168,
+          "LD": 792,
+          "events": 6168,
+          "VEC": 3456,
+          "ST": 768,
+          "REDUCE": 768,
+          "SFU": 384,
+          "sum_dependency_depth_lower_bound": 35549304
+        },
+        "prompt/w1": {
+          "instructions": 8448,
+          "VEC": 384,
+          "events": 8448,
+          "LD": 4608,
+          "MMA.ACC": 3072,
+          "ST": 384,
+          "sum_dependency_depth_lower_bound": 51603264
+        },
+        "prompt/gelu": {
+          "instructions": 18432,
+          "LD": 3072,
+          "events": 18432,
+          "VEC": 12288,
+          "SFU": 1536,
+          "ST": 1536,
+          "sum_dependency_depth_lower_bound": 125721600
+        },
+        "prompt/w2": {
+          "instructions": 7872,
+          "VEC": 96,
+          "events": 7872,
+          "LD": 4608,
+          "MMA.ACC": 3072,
+          "ST": 96,
+          "sum_dependency_depth_lower_bound": 59247120
+        },
+        "prompt/residual2": {
+          "instructions": 2304,
+          "LD": 1152,
+          "events": 2304,
+          "VEC": 768,
+          "ST": 384,
+          "sum_dependency_depth_lower_bound": 17751552
+        },
+        "prompt/output": {
+          "instructions": 256,
+          "LD": 128,
+          "events": 256,
+          "ST": 128,
+          "sum_dependency_depth_lower_bound": 2981120
+        },
+        "step/ln1": {
+          "instructions": 90,
+          "LD": 18,
+          "events": 90,
+          "REDUCE": 12,
+          "VEC": 48,
+          "SFU": 6,
+          "ST": 6,
+          "sum_dependency_depth_lower_bound": 1098558
+        },
+        "step/qkv": {
+          "instructions": 3600,
+          "VEC": 72,
+          "events": 3600,
+          "LD": 2304,
+          "MMA.ACC": 1152,
+          "ST": 72,
+          "sum_dependency_depth_lower_bound": 44148096
+        },
+        "step/attention": {
+          "instructions": 2016,
+          "LD": 624,
+          "events": 2016,
+          "ST": 144,
+          "VEC": 624,
+          "MMA.ACC": 480,
+          "REDUCE": 96,
+          "SFU": 48,
+          "sum_dependency_depth_lower_bound": 24917664
+        },
+        "step/wo": {
+          "instructions": 1200,
+          "VEC": 24,
+          "events": 1200,
+          "LD": 768,
+          "MMA.ACC": 384,
+          "ST": 24,
+          "sum_dependency_depth_lower_bound": 14908032
+        },
+        "step/residual1": {
+          "instructions": 108,
+          "LD": 24,
+          "events": 108,
+          "VEC": 54,
+          "ST": 12,
+          "REDUCE": 12,
+          "SFU": 6,
+          "sum_dependency_depth_lower_bound": 1344186
+        },
+        "step/w1": {
+          "instructions": 4800,
+          "VEC": 96,
+          "events": 4800,
+          "LD": 3072,
+          "MMA.ACC": 1536,
+          "ST": 96,
+          "sum_dependency_depth_lower_bound": 60102528
+        },
+        "step/gelu": {
+          "instructions": 288,
+          "LD": 48,
+          "events": 288,
+          "VEC": 192,
+          "SFU": 24,
+          "ST": 24,
+          "sum_dependency_depth_lower_bound": 3628464
+        },
+        "step/w2": {
+          "instructions": 4656,
+          "VEC": 24,
+          "events": 4656,
+          "LD": 3072,
+          "MMA.ACC": 1536,
+          "ST": 24,
+          "sum_dependency_depth_lower_bound": 59002416
+        },
+        "step/residual2": {
+          "instructions": 36,
+          "LD": 18,
+          "events": 36,
+          "VEC": 12,
+          "ST": 6,
+          "sum_dependency_depth_lower_bound": 458610
+        },
+        "step/output": {
+          "instructions": 4,
+          "LD": 2,
+          "events": 4,
+          "ST": 2,
+          "sum_dependency_depth_lower_bound": 53126
+        }
+      },
+      "race_checker_single_wg_fast_path": false,
+      "max_dependency_depth_lower_bound": 13282,
+      "sum_dependency_depth_lower_bound": 667053904,
+      "retained_event_sets_logical_bytes_lower_bound": 10687303376,
+      "estimated_peak_rss_bytes": 72673662956.8,
+      "peak_rss_calibration": 6.8,
+      "decision": "within_lower_bound_only",
+      "decision_basis": "calibrated_peak_rss",
+      "budget_mib": 400000,
+      "checkpoints": [
+        {
+          "visited": 10000,
+          "max_depth": 1501,
+          "sum_depth": 7425950
+        },
+        {
+          "visited": 20000,
+          "max_depth": 3033,
+          "sum_depth": 29705000
+        },
+        {
+          "visited": 30000,
+          "max_depth": 4398,
+          "sum_depth": 67599132
+        },
+        {
+          "visited": 40000,
+          "max_depth": 6007,
+          "sum_depth": 119596530
+        },
+        {
+          "visited": 50000,
+          "max_depth": 7534,
+          "sum_depth": 186982308
+        },
+        {
+          "visited": 60000,
+          "max_depth": 8928,
+          "sum_depth": 268980736
+        },
+        {
+          "visited": 70000,
+          "max_depth": 10409,
+          "sum_depth": 365726200
+        },
+        {
+          "visited": 80000,
+          "max_depth": 11845,
+          "sum_depth": 477868255
+        },
+        {
+          "visited": 90000,
+          "max_depth": 12794,
+          "sum_depth": 600736800
+        }
+      ],
+      "caveat": "Decision compares budget to LB x 6.80 calibrated peak RSS (single-point calibration from cand-144). Passing cost screen never establishes race correctness."
+    },
+    "M2_D1": {
+      "expanded_instructions": 12992,
+      "source_lines": 7936,
+      "static_loops": 1568,
+      "workgroup_lifetimes": 4,
+      "workgroup_names": 4,
+      "opcode_counts": {
+        "WG.BEGIN": 4,
+        "LD": 4984,
+        "REDUCE": 192,
+        "VEC": 2544,
+        "SFU": 160,
+        "ST": 712,
+        "BARRIER": 160,
+        "MMA.ACC": 4224,
+        "STEP.COMMIT": 8,
+        "WG.END": 4
+      },
+      "events": 12816,
+      "graph_edges": 37837,
+      "named_cross_wg_sync_edges": 0,
+      "barrier_directed_pair_relations": 1920,
+      "barrier_incidence_edges": 1280,
+      "global_commit_incidence_edges": 24409,
+      "stages": {
+        "unknown/control": {
+          "instructions": 12992,
+          "WG.BEGIN": 4,
+          "LD": 4984,
+          "events": 12816,
+          "REDUCE": 192,
+          "VEC": 2544,
+          "SFU": 160,
+          "ST": 712,
+          "BARRIER": 160,
+          "MMA.ACC": 4224,
+          "STEP.COMMIT": 8,
+          "WG.END": 4,
+          "sum_dependency_depth_lower_bound": 13105456
+        }
+      },
+      "race_checker_single_wg_fast_path": false,
+      "max_dependency_depth_lower_bound": 2041,
+      "sum_dependency_depth_lower_bound": 13105456,
+      "retained_event_sets_logical_bytes_lower_bound": 211635328,
+      "estimated_peak_rss_bytes": 1439120230.3999999,
+      "peak_rss_calibration": 6.8,
+      "decision": "within_lower_bound_only",
+      "decision_basis": "calibrated_peak_rss",
+      "budget_mib": 400000,
+      "checkpoints": [
+        {
+          "visited": 10000,
+          "max_depth": 1572,
+          "sum_depth": 7774774
+        }
+      ],
+      "caveat": "Decision compares budget to LB x 6.80 calibrated peak RSS (single-point calibration from cand-144). Passing cost screen never establishes race correctness."
+    }
+  },
+  "validation_cost_progress": {
+    "pid": 3751899,
+    "status": "completed",
+    "elapsed": 14.281648006755859,
+    "peak_memory_mib": 171.4296875,
+    "updated_at": 1790661569.4397118,
+    "command": [
+      "/home/jovyan/projects/SLAI-infra-course-hw1/.venv/bin/python",
+      "-c",
+      "import json,pathlib; from project.search.validation_cost import analyze; stats=json.loads(pathlib.Path('reports/static.json').read_text()); out={n:analyze((pathlib.Path('programs')/(n+'.asm')).read_text(),400000) for n,v in stats.items() if v.get('workgroup_lifetimes',1)>1}; pathlib.Path('reports/validation-cost.json').write_text(json.dumps(out,indent=2))"
+    ]
+  },
+  "verdict": "evaluated",
+  "elapsed": 6037.87192984391
+}

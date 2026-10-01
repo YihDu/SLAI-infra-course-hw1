@@ -1,0 +1,18 @@
+{
+  "bias": null,
+  "created_at": "2026-09-29 15:40:40",
+  "failure_class": "none",
+  "family": null,
+  "fingerprint": null,
+  "hypothesis": "Elementwise helper chunks 384->1024 (RF lane capacity at vector_lanes=16) cut P1 events 95.1K->85.7K; fewer events should lower race/timing validation cost and remove per-chunk issue overhead in bias_gelu/add_rows/add_bias",
+  "id": "cand-146",
+  "kind": null,
+  "ops": null,
+  "parent": "cand-145",
+  "provenance_note": null,
+  "round": null,
+  "status": "kept",
+  "struct_sig": null,
+  "summary": "cand-145 + 1024-col elementwise chunks; Builder sm_map plumbing (team=2 placement unchanged). dev_functional passed max err 3.0e-6",
+  "verdict_note": null
+}

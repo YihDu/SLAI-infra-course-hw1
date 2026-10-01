@@ -76,7 +76,7 @@
     },
     "score": 1875.6812796394786,
     "status": "evaluated",
-    "stored_at": "2026-09-29 03:05:52"
+    "stored_at": "2026-09-29 23:18:41"
   },
   "04f904bdd8d9d19b0d8083a810381608f93259631bc95cf6e4bdcadf22c4146d": {
     "candidate_id": "cand-085",
@@ -165,7 +165,7 @@
     },
     "score": 2245.0389561884695,
     "status": "evaluated",
-    "stored_at": "2026-09-29 03:05:52"
+    "stored_at": "2026-09-29 23:18:42"
   },
   "05b22fd2da0bab4d3ff92ad05aa04b65196651dccc7fd5d6d1bf83119d678c2a": {
     "candidate_id": "cand-122",
@@ -288,7 +288,7 @@
     },
     "score": 5861.568830137381,
     "status": "evaluated",
-    "stored_at": "2026-09-29 03:05:53"
+    "stored_at": "2026-09-29 23:18:42"
   },
   "0cbc902e58d16083d4d2344ea1e85b1f3403f31ea72ba44474fd92ce56f6ddf0": {
     "candidate_id": "cand-127",
@@ -424,7 +424,7 @@
     },
     "score": 6206.08471886591,
     "status": "evaluated",
-    "stored_at": "2026-09-29 03:05:53"
+    "stored_at": "2026-09-29 23:18:43"
   },
   "11075cdc58a3664900580649dd4d5ea6368c048edaf99c259e71cc5fa664572b": {
     "candidate_id": "cand-088",
@@ -511,7 +511,7 @@
     },
     "score": 2329.2938717469783,
     "status": "evaluated",
-    "stored_at": "2026-09-29 03:05:52"
+    "stored_at": "2026-09-29 23:18:42"
   },
   "128824ced63b281c5368574e5ba42e8a5584d891de912c0d22fc49cf51fdbd67": {
     "candidate_id": "cand-091",
@@ -598,7 +598,7 @@
     },
     "score": 2245.0389561884695,
     "status": "evaluated",
-    "stored_at": "2026-09-29 03:05:52"
+    "stored_at": "2026-09-29 23:18:42"
   },
   "13fe1098f24130d731c12c74f80c8748374c70fc4c95d023cf06c2e482923dac": {
     "candidate_id": "cand-117",
@@ -721,7 +721,7 @@
     },
     "score": 5007.7282231030185,
     "status": "evaluated",
-    "stored_at": "2026-09-29 03:05:53"
+    "stored_at": "2026-09-29 23:18:42"
   },
   "1a5adfd2b23af034bc5db8f8cb93497cbf5eed2123578a8b158ce01b1b80eff0": {
     "candidate_id": "cand-128",
@@ -857,7 +857,7 @@
     },
     "score": 6195.279493434274,
     "status": "evaluated",
-    "stored_at": "2026-09-29 03:05:53"
+    "stored_at": "2026-09-29 23:18:43"
   },
   "1f7b93fb8ef7644bc70ef02da1e9cd594542d7fa7c03e765a87e080086a90f27": {
     "candidate_id": "cand-028",
@@ -936,7 +936,7 @@
     },
     "score": 1098.3125106615971,
     "status": "evaluated",
-    "stored_at": "2026-09-29 03:05:52"
+    "stored_at": "2026-09-29 23:18:40"
   },
   "205d398414177bbc94f4dfdc80aa750bf743dda2ae33c548e2d3b63def8b2065": {
     "candidate_id": "cand-135",
@@ -1072,7 +1072,7 @@
     },
     "score": 6456.320102276015,
     "status": "evaluated",
-    "stored_at": "2026-09-29 03:05:53"
+    "stored_at": "2026-09-29 23:18:43"
   },
   "2247370a6bf1a8273c10cda8c8f1c6f5844d9b62dc9338bea9c11ca97201c4fd": {
     "candidate_id": "cand-005",
@@ -1151,7 +1151,7 @@
     },
     "score": 1105.2478525385854,
     "status": "evaluated",
-    "stored_at": "2026-09-29 03:05:52"
+    "stored_at": "2026-09-29 23:18:39"
   },
   "2542b6c025b4f06a9b293e37960ded9ddd0e5cb1f2e6e74f77dbe619cc63bee0": {
     "candidate_id": "cand-037",
@@ -1230,7 +1230,7 @@
     },
     "score": 1193.4042900831387,
     "status": "evaluated",
-    "stored_at": "2026-09-29 03:05:52"
+    "stored_at": "2026-09-29 23:18:40"
   },
   "273c090f8ffa0059a2d16b4afb0461073f37b0cc58c8204963e781ff9924366e": {
     "candidate_id": "cand-110",
@@ -1317,7 +1317,7 @@
     },
     "score": 2823.456520250167,
     "status": "evaluated",
-    "stored_at": "2026-09-29 03:05:53"
+    "stored_at": "2026-09-29 23:18:42"
   },
   "27caa5d78ce48519918a551779fb7a9d4b78264b8fcd2d4e39aa69178684ef32": {
     "candidate_id": "cand-066",
@@ -1396,7 +1396,7 @@
     },
     "score": 1752.9808817511307,
     "status": "evaluated",
-    "stored_at": "2026-09-29 03:05:52"
+    "stored_at": "2026-09-29 23:18:41"
   },
   "2ce1edc6968b354c9ba5435ce7a44e364b257528aa068ab75be84258e01913f7": {
     "candidate_id": "cand-047",
@@ -1475,7 +1475,7 @@
     },
     "score": 1874.814304538389,
     "status": "evaluated",
-    "stored_at": "2026-09-29 03:05:52"
+    "stored_at": "2026-09-29 23:18:40"
   },
   "30c6f90903c6c322a6ab5a812d3fd0e81f25e2849e15958de3ebdbfcc0ab14cf": {
     "candidate_id": "cand-027",
@@ -1554,7 +1554,7 @@
     },
     "score": 1087.11373917888,
     "status": "evaluated",
-    "stored_at": "2026-09-29 03:05:52"
+    "stored_at": "2026-09-29 23:18:40"
   },
   "3151eeaa6af24b544199928cc719d8d01349bed47020932f06804052c541b663": {
     "candidate_id": "cand-121",
@@ -1677,7 +1677,7 @@
     },
     "score": 5301.424493620085,
     "status": "evaluated",
-    "stored_at": "2026-09-29 03:05:53"
+    "stored_at": "2026-09-29 23:18:42"
   },
   "33b016dae7fa35aa899b447d7a7780410614fbd2c57846272018eb6fda2df28b": {
     "candidate_id": "cand-097",
@@ -1764,7 +1764,7 @@
     },
     "score": 2479.583625689317,
     "status": "evaluated",
-    "stored_at": "2026-09-29 03:05:52"
+    "stored_at": "2026-09-29 23:18:42"
   },
   "33d6c5a23aa8b7b94fecad5c1ae6afcbefbf23edc806dfca6faa0194b1a8a91b": {
     "candidate_id": "cand-004",
@@ -1843,7 +1843,7 @@
     },
     "score": 1077.4312710849626,
     "status": "evaluated",
-    "stored_at": "2026-09-29 03:05:52"
+    "stored_at": "2026-09-29 23:18:39"
   },
   "36a05c88b55a4d11508c93350f26d2ee0ce016f7726fc56fd654e942d842e475": {
     "candidate_id": "cand-010",
@@ -1922,7 +1922,7 @@
     },
     "score": 1174.2540289231054,
     "status": "evaluated",
-    "stored_at": "2026-09-29 03:05:52"
+    "stored_at": "2026-09-29 23:18:39"
   },
   "36ff468e1dc98d5ce9d623d5840e2737ba11b267f1545587faadcdba6609d22f": {
     "candidate_id": "cand-100",
@@ -2009,7 +2009,7 @@
     },
     "score": 2564.606940222133,
     "status": "evaluated",
-    "stored_at": "2026-09-29 03:05:52"
+    "stored_at": "2026-09-29 23:18:42"
   },
   "37053aef61688a517595fea11a846f22c32865d1ed054f2bbd6aac87516435ff": {
     "candidate_id": "cand-050",
@@ -2088,7 +2088,7 @@
     },
     "score": 1296.9228571905599,
     "status": "evaluated",
-    "stored_at": "2026-09-29 03:05:52"
+    "stored_at": "2026-09-29 23:18:40"
   },
   "373317b487332c985ba4d7b7fb66da188a8221a81380402ba17eac7c312fcc60": {
     "candidate_id": "cand-120",
@@ -2211,7 +2211,7 @@
     },
     "score": 5856.474722961825,
     "status": "evaluated",
-    "stored_at": "2026-09-29 03:05:53"
+    "stored_at": "2026-09-29 23:18:42"
   },
   "3765bee76dfd7960bfbf1535b7e29d65b4b0c1a5f78912b8da6b88b25c16ecdb": {
     "candidate_id": "cand-084",
@@ -2298,7 +2298,7 @@
     },
     "score": 2206.2481983505695,
     "status": "evaluated",
-    "stored_at": "2026-09-29 03:05:52"
+    "stored_at": "2026-09-29 23:18:42"
   },
   "398d683332443e2b3d49216616ee095933e21ff5202dae6d341c1dc8bba3d891": {
     "candidate_id": "cand-036",
@@ -2377,7 +2377,7 @@
     },
     "score": 1107.569130887403,
     "status": "evaluated",
-    "stored_at": "2026-09-29 03:05:52"
+    "stored_at": "2026-09-29 23:18:40"
   },
   "3a574934650fc97583112c5b9b01a29befce3880a2a1f28935c9563ca136b7ec": {
     "candidate_id": "cand-087",
@@ -2464,7 +2464,7 @@
     },
     "score": 2390.1102253707836,
     "status": "evaluated",
-    "stored_at": "2026-09-29 03:05:52"
+    "stored_at": "2026-09-29 23:18:42"
   },
   "3db9fdc5b740e0e7f43f460f38da52f1251ffd07031a889479a1494c770abc98": {
     "candidate_id": "cand-026",
@@ -2543,7 +2543,7 @@
     },
     "score": 1128.088530457202,
     "status": "evaluated",
-    "stored_at": "2026-09-29 03:05:52"
+    "stored_at": "2026-09-29 23:18:40"
   },
   "3e2dd500d53c5f236651d927b8c93621ea1079df901ddefbd4a033fd62d0e224": {
     "candidate_id": "cand-094",
@@ -2630,7 +2630,7 @@
     },
     "score": 2547.9215759712715,
     "status": "evaluated",
-    "stored_at": "2026-09-29 03:05:52"
+    "stored_at": "2026-09-29 23:18:42"
   },
   "4120cbbd9f4d5346e20513602486bf8339aee19c5a22f5184839c65b2b518e09": {
     "candidate_id": "cand-025",
@@ -2709,7 +2709,7 @@
     },
     "score": 1130.3388047148876,
     "status": "evaluated",
-    "stored_at": "2026-09-29 03:05:52"
+    "stored_at": "2026-09-29 23:18:40"
   },
   "42a335b925edf5dfb5ed18befa02078c9f8d6219193ec548bc4c0375bf291742": {
     "candidate_id": "cand-092",
@@ -2796,7 +2796,7 @@
     },
     "score": 2322.689428598885,
     "status": "evaluated",
-    "stored_at": "2026-09-29 03:05:52"
+    "stored_at": "2026-09-29 23:18:42"
   },
   "43e7a9cfda14106cf0f184a7155c3923a99fe14aacc6fe7fadcc25fea4309b7c": {
     "candidate_id": "cand-006",
@@ -2875,7 +2875,7 @@
     },
     "score": 1147.6394407423866,
     "status": "evaluated",
-    "stored_at": "2026-09-29 03:05:52"
+    "stored_at": "2026-09-29 23:18:39"
   },
   "48f97f5cb7b606c51c19c89944f9fb2036672ec160732dd47e4b979bc19f46f9": {
     "candidate_id": "cand-056",
@@ -2954,7 +2954,7 @@
     },
     "score": 1835.555492983374,
     "status": "evaluated",
-    "stored_at": "2026-09-29 03:05:52"
+    "stored_at": "2026-09-29 23:18:41"
   },
   "4cae5da79070b98a069e850c4f2cc6fbf292cebfaf9c96ca1a69a34f091372f0": {
     "candidate_id": "cand-123",
@@ -3077,7 +3077,7 @@
     },
     "score": 5486.652829197951,
     "status": "evaluated",
-    "stored_at": "2026-09-29 03:05:53"
+    "stored_at": "2026-09-29 23:18:42"
   },
   "4cb836390050fd3c8f4a87e903bb5c4d932e56f43d17ac0fa2f3ef04f0883076": {
     "candidate_id": "cand-114",
@@ -3200,7 +3200,286 @@
     },
     "score": 5188.494494259971,
     "status": "evaluated",
-    "stored_at": "2026-09-29 03:05:53"
+    "stored_at": "2026-09-29 23:18:42"
+  },
+  "4cd1c60ad16cacd991acbccff4da67760e07fd13585280a0b38b4283bf2bbe08": {
+    "candidate_id": "cand-148",
+    "eligible": true,
+    "functional_passed": true,
+    "metrics": {
+      "candidate": "cand-148",
+      "historical_import": true,
+      "reports": {
+        "grade": {
+          "area_mm2": 22.86477787136,
+          "cases": {
+            "M1_P1": {
+              "busy_cycles": {
+                "shared.cache_bank_0": 451304,
+                "shared.cache_bank_1": 460545,
+                "shared.cache_bank_2": 460356,
+                "shared.cache_bank_3": 459946,
+                "shared.hbm_channel_0": 168382,
+                "shared.hbm_channel_1": 178978,
+                "shared.hbm_channel_2": 180846,
+                "shared.hbm_channel_3": 174742,
+                "shared.hbm_channel_4": 166282,
+                "shared.hbm_channel_5": 178082,
+                "shared.hbm_channel_6": 177160,
+                "shared.hbm_channel_7": 173978,
+                "shared.noc": 627510,
+                "sm0.dma": 178348,
+                "sm0.issue": 10285,
+                "sm0.issue_wait": 785598,
+                "sm0.noc_in": 140262,
+                "sm0.noc_out": 12419,
+                "sm0.reduce": 10356,
+                "sm0.rf_read": 332500,
+                "sm0.rf_write": 299573,
+                "sm0.sfu": 17952,
+                "sm0.shared_read": 0,
+                "sm0.shared_write": 0,
+                "sm0.tc": 94668,
+                "sm0.vec": 52263,
+                "sm1.dma": 177644,
+                "sm1.issue": 10166,
+                "sm1.issue_wait": 784861,
+                "sm1.noc_in": 141504,
+                "sm1.noc_out": 12191,
+                "sm1.reduce": 10140,
+                "sm1.rf_read": 331736,
+                "sm1.rf_write": 298417,
+                "sm1.sfu": 17916,
+                "sm1.shared_read": 0,
+                "sm1.shared_write": 0,
+                "sm1.tc": 94668,
+                "sm1.vec": 51507,
+                "sm2.dma": 177644,
+                "sm2.issue": 10166,
+                "sm2.issue_wait": 792058,
+                "sm2.noc_in": 140919,
+                "sm2.noc_out": 12109,
+                "sm2.reduce": 10140,
+                "sm2.rf_read": 331736,
+                "sm2.rf_write": 298417,
+                "sm2.sfu": 17916,
+                "sm2.shared_read": 0,
+                "sm2.shared_write": 0,
+                "sm2.tc": 94668,
+                "sm2.vec": 51507,
+                "sm3.dma": 177644,
+                "sm3.issue": 10166,
+                "sm3.issue_wait": 791633,
+                "sm3.noc_in": 139626,
+                "sm3.noc_out": 11997,
+                "sm3.reduce": 10140,
+                "sm3.rf_read": 331736,
+                "sm3.rf_write": 298417,
+                "sm3.sfu": 17916,
+                "sm3.shared_read": 0,
+                "sm3.shared_write": 0,
+                "sm3.tc": 94668,
+                "sm3.vec": 51507,
+                "sm4.dma": 178348,
+                "sm4.issue": 10285,
+                "sm4.issue_wait": 783840,
+                "sm4.noc_in": 138033,
+                "sm4.noc_out": 12447,
+                "sm4.reduce": 10356,
+                "sm4.rf_read": 332500,
+                "sm4.rf_write": 299573,
+                "sm4.sfu": 17952,
+                "sm4.shared_read": 0,
+                "sm4.shared_write": 0,
+                "sm4.tc": 94668,
+                "sm4.vec": 52263,
+                "sm5.dma": 177644,
+                "sm5.issue": 10166,
+                "sm5.issue_wait": 783775,
+                "sm5.noc_in": 139515,
+                "sm5.noc_out": 12195,
+                "sm5.reduce": 10140,
+                "sm5.rf_read": 331736,
+                "sm5.rf_write": 298417,
+                "sm5.sfu": 17916,
+                "sm5.shared_read": 0,
+                "sm5.shared_write": 0,
+                "sm5.tc": 94668,
+                "sm5.vec": 51507,
+                "sm6.dma": 177644,
+                "sm6.issue": 10166,
+                "sm6.issue_wait": 792251,
+                "sm6.noc_in": 140677,
+                "sm6.noc_out": 12138,
+                "sm6.reduce": 10140,
+                "sm6.rf_read": 331736,
+                "sm6.rf_write": 298417,
+                "sm6.sfu": 17916,
+                "sm6.shared_read": 0,
+                "sm6.shared_write": 0,
+                "sm6.tc": 94668,
+                "sm6.vec": 51507,
+                "sm7.dma": 177644,
+                "sm7.issue": 10166,
+                "sm7.issue_wait": 791069,
+                "sm7.noc_in": 138677,
+                "sm7.noc_out": 11985,
+                "sm7.reduce": 10140,
+                "sm7.rf_read": 331736,
+                "sm7.rf_write": 298417,
+                "sm7.sfu": 17916,
+                "sm7.shared_read": 0,
+                "sm7.shared_write": 0,
+                "sm7.tc": 94668,
+                "sm7.vec": 51507
+              },
+              "cycles": 811610,
+              "functional_passed": true,
+              "hbm_read_bytes": 38227520,
+              "hbm_write_bytes": 6522880,
+              "instruction_count": 81307,
+              "max_abs_error": 3.012095998400355e-06,
+              "peak_window_power_w": 17.329642019960854
+            },
+            "M2_D1": {
+              "busy_cycles": {
+                "shared.cache_bank_0": 23564,
+                "shared.cache_bank_1": 23564,
+                "shared.cache_bank_2": 23500,
+                "shared.cache_bank_3": 23500,
+                "shared.hbm_channel_0": 8552,
+                "shared.hbm_channel_1": 8552,
+                "shared.hbm_channel_2": 8592,
+                "shared.hbm_channel_3": 8592,
+                "shared.hbm_channel_4": 8544,
+                "shared.hbm_channel_5": 8544,
+                "shared.hbm_channel_6": 8584,
+                "shared.hbm_channel_7": 8584,
+                "shared.noc": 23679,
+                "sm0.dma": 15024,
+                "sm0.issue": 3690,
+                "sm0.issue_wait": 108299,
+                "sm0.noc_in": 13566,
+                "sm0.noc_out": 880,
+                "sm0.reduce": 1312,
+                "sm0.rf_read": 21968,
+                "sm0.rf_write": 40464,
+                "sm0.sfu": 1088,
+                "sm0.shared_read": 98304,
+                "sm0.shared_write": 12288,
+                "sm0.tc": 12080,
+                "sm0.vec": 4752,
+                "sm1.dma": 12976,
+                "sm1.issue": 3034,
+                "sm1.issue_wait": 97773,
+                "sm1.noc_in": 12107,
+                "sm1.noc_out": 304,
+                "sm1.reduce": 480,
+                "sm1.rf_read": 19824,
+                "sm1.rf_write": 37136,
+                "sm1.sfu": 896,
+                "sm1.shared_read": 98304,
+                "sm1.shared_write": 12288,
+                "sm1.tc": 12080,
+                "sm1.vec": 2384,
+                "sm2.dma": 12976,
+                "sm2.issue": 3034,
+                "sm2.issue_wait": 97661,
+                "sm2.noc_in": 12162,
+                "sm2.noc_out": 304,
+                "sm2.reduce": 480,
+                "sm2.rf_read": 19824,
+                "sm2.rf_write": 37136,
+                "sm2.sfu": 896,
+                "sm2.shared_read": 98304,
+                "sm2.shared_write": 12288,
+                "sm2.tc": 12080,
+                "sm2.vec": 2384,
+                "sm3.dma": 12976,
+                "sm3.issue": 3034,
+                "sm3.issue_wait": 97870,
+                "sm3.noc_in": 12014,
+                "sm3.noc_out": 304,
+                "sm3.reduce": 480,
+                "sm3.rf_read": 19824,
+                "sm3.rf_write": 37136,
+                "sm3.sfu": 896,
+                "sm3.shared_read": 98304,
+                "sm3.shared_write": 12288,
+                "sm3.tc": 12080,
+                "sm3.vec": 2384,
+                "sm4.dma": 4304,
+                "sm4.issue": 1978,
+                "sm4.issue_wait": 69973,
+                "sm4.noc_in": 4062,
+                "sm4.noc_out": 208,
+                "sm4.reduce": 0,
+                "sm4.rf_read": 14416,
+                "sm4.rf_write": 27344,
+                "sm4.sfu": 288,
+                "sm4.shared_read": 98304,
+                "sm4.shared_write": 12288,
+                "sm4.tc": 8704,
+                "sm4.vec": 1104,
+                "sm5.dma": 4304,
+                "sm5.issue": 1978,
+                "sm5.issue_wait": 70007,
+                "sm5.noc_in": 4076,
+                "sm5.noc_out": 208,
+                "sm5.reduce": 0,
+                "sm5.rf_read": 14416,
+                "sm5.rf_write": 27344,
+                "sm5.sfu": 288,
+                "sm5.shared_read": 98304,
+                "sm5.shared_write": 12288,
+                "sm5.tc": 8704,
+                "sm5.vec": 1104,
+                "sm6.dma": 4304,
+                "sm6.issue": 1978,
+                "sm6.issue_wait": 70013,
+                "sm6.noc_in": 4062,
+                "sm6.noc_out": 208,
+                "sm6.reduce": 0,
+                "sm6.rf_read": 14416,
+                "sm6.rf_write": 27344,
+                "sm6.sfu": 288,
+                "sm6.shared_read": 98304,
+                "sm6.shared_write": 12288,
+                "sm6.tc": 8704,
+                "sm6.vec": 1104,
+                "sm7.dma": 4304,
+                "sm7.issue": 1978,
+                "sm7.issue_wait": 70033,
+                "sm7.noc_in": 4076,
+                "sm7.noc_out": 208,
+                "sm7.reduce": 0,
+                "sm7.rf_read": 14416,
+                "sm7.rf_write": 27344,
+                "sm7.sfu": 288,
+                "sm7.shared_read": 98304,
+                "sm7.shared_write": 12288,
+                "sm7.tc": 8704,
+                "sm7.vec": 1104
+              },
+              "cycles": 114706,
+              "functional_passed": true,
+              "hbm_read_bytes": 2025472,
+              "hbm_write_bytes": 167936,
+              "instruction_count": 19528,
+              "max_abs_error": 1.5319426449611484e-06,
+              "peak_window_power_w": 11.209778006784656
+            }
+          },
+          "eligible": true,
+          "mode": "grade",
+          "score": 20821.109262854676
+        }
+      },
+      "verdict": "evaluated"
+    },
+    "score": 20821.109262854676,
+    "status": "evaluated",
+    "stored_at": "2026-09-29 23:18:43"
   },
   "4d95b3d969b91185ff7259ef6fe15551f1ac367dc9c6b358aec0e962cd965f70": {
     "candidate_id": "cand-136",
@@ -3336,7 +3615,7 @@
     },
     "score": 6892.442279967131,
     "status": "evaluated",
-    "stored_at": "2026-09-29 03:05:53"
+    "stored_at": "2026-09-29 23:18:43"
   },
   "4f053f14b0646964203ee6cd2056e1dec9ff7163e1bb454b6b8513dc8e5f880e": {
     "candidate_id": "cand-046",
@@ -3417,7 +3696,7 @@
     },
     "score": 1107.569130887403,
     "status": "evaluated",
-    "stored_at": "2026-09-29 03:05:52"
+    "stored_at": "2026-09-29 23:18:40"
   },
   "4f827186d566d1d9c8fdbc204d07726fb95cec6dc8cf82b676fe041375efa63a": {
     "candidate_id": "cand-137",
@@ -3553,7 +3832,7 @@
     },
     "score": 6938.232179882115,
     "status": "evaluated",
-    "stored_at": "2026-09-29 03:05:53"
+    "stored_at": "2026-09-29 23:18:43"
   },
   "500e99bba47ad89e4fe6e954f3bb74d763e85e8e985e4699ad44d8b999c211e7": {
     "candidate_id": "cand-133",
@@ -3689,7 +3968,7 @@
     },
     "score": 6264.4171932728905,
     "status": "evaluated",
-    "stored_at": "2026-09-29 03:05:53"
+    "stored_at": "2026-09-29 23:18:43"
   },
   "52492a70b7fdcdf7a00cc144b9ac41f6c846bbca5528ebea124a41266e0d2e61": {
     "candidate_id": "cand-042",
@@ -3768,7 +4047,7 @@
     },
     "score": 1197.5985984332774,
     "status": "evaluated",
-    "stored_at": "2026-09-29 03:05:52"
+    "stored_at": "2026-09-29 23:18:40"
   },
   "5693414c79fef5522ecca3c233f2657d2ade6018da14a64a97c7105218e310ce": {
     "candidate_id": "cand-049",
@@ -3841,7 +4120,7 @@
     },
     "score": 794.5991478350456,
     "status": "evaluated",
-    "stored_at": "2026-09-29 03:05:52"
+    "stored_at": "2026-09-29 23:18:40"
   },
   "56ea54bc8ceb2fbab2ef5c02d1f0b65cbb75da3973f2724fc06d1380f6bf2d96": {
     "candidate_id": "cand-113",
@@ -3964,7 +4243,7 @@
     },
     "score": 5101.488654851473,
     "status": "evaluated",
-    "stored_at": "2026-09-29 03:05:53"
+    "stored_at": "2026-09-29 23:18:42"
   },
   "5adb81102e129554064951880cc4156627a997fd800504e088b67c7590feaeab": {
     "candidate_id": "cand-008",
@@ -4043,7 +4322,7 @@
     },
     "score": 1115.972170751516,
     "status": "evaluated",
-    "stored_at": "2026-09-29 03:05:52"
+    "stored_at": "2026-09-29 23:18:39"
   },
   "5c004a3de437a6a373eaae2213d803a7595484227ca18c5bddf71a49316da9c9": {
     "candidate_id": "cand-074",
@@ -4130,7 +4409,7 @@
     },
     "score": 2051.47741118116,
     "status": "evaluated",
-    "stored_at": "2026-09-29 03:05:52"
+    "stored_at": "2026-09-29 23:18:41"
   },
   "5c2b5fa7bdf362ae4410c6f425ff8291f79d5542eb89d2a4d320ee183e80202b": {
     "candidate_id": "cand-106",
@@ -4217,7 +4496,7 @@
     },
     "score": 2776.1099913390285,
     "status": "evaluated",
-    "stored_at": "2026-09-29 03:05:53"
+    "stored_at": "2026-09-29 23:18:42"
   },
   "5ee884f5894a72f3d5338163e3a3035299b4a38a7d81df92fb82da131c739313": {
     "candidate_id": "cand-076",
@@ -4304,7 +4583,7 @@
     },
     "score": 2104.4624234432395,
     "status": "evaluated",
-    "stored_at": "2026-09-29 03:05:52"
+    "stored_at": "2026-09-29 23:18:41"
   },
   "61082682175200ff1f198f9ab83522e64f8237ca8c641392c9772507725b215d": {
     "candidate_id": "cand-032",
@@ -4383,7 +4662,7 @@
     },
     "score": 1124.0376356259756,
     "status": "evaluated",
-    "stored_at": "2026-09-29 03:05:52"
+    "stored_at": "2026-09-29 23:18:40"
   },
   "618d8be54cdea7aff4ec1951bdc6ed67c2ef77c344be5a7940965b92aba7f36f": {
     "candidate_id": "cand-052",
@@ -4462,7 +4741,7 @@
     },
     "score": 1860.4743007003888,
     "status": "evaluated",
-    "stored_at": "2026-09-29 03:05:52"
+    "stored_at": "2026-09-29 23:18:41"
   },
   "62390bd6d85c59ff991ef8ebb3d41edb0175523204aca688576d65f08a7b5439": {
     "candidate_id": "cand-039",
@@ -4541,7 +4820,7 @@
     },
     "score": 916.4904172822608,
     "status": "evaluated",
-    "stored_at": "2026-09-29 03:05:52"
+    "stored_at": "2026-09-29 23:18:40"
   },
   "6728bd26a4eabe94e8b23007984cf64f1c6d02649e5500aa1da91aee4cb68b82": {
     "candidate_id": "cand-143",
@@ -4549,8 +4828,7 @@
     "functional_passed": true,
     "metrics": {
       "candidate": "cand-143",
-      "elapsed": 76.34280387498438,
-      "evaluation_attempts": 1,
+      "historical_import": true,
       "reports": {
         "grade": {
           "area_mm2": 22.85981349888,
@@ -4674,118 +4952,186 @@
           "score": 7013.610245245844
         }
       },
-      "runs": {
-        "grade": {
-          "command": [
-            "/Users/yihdu/Codefield/SLAI-infra-Code/transformer-codesign-starter/.venv/bin/python",
-            "/Users/yihdu/Codefield/SLAI-infra-Code/transformer-codesign-starter/challenge.py",
-            "grade",
-            "--hardware",
-            "/Users/yihdu/Codefield/SLAI-infra-Code/transformer-codesign-starter/project/experiments/cand-143/inputs/hardware.json",
-            "--program-p1",
-            "/Users/yihdu/Codefield/SLAI-infra-Code/transformer-codesign-starter/project/experiments/cand-143/programs/M1_P1.asm",
-            "--program-d1",
-            "/Users/yihdu/Codefield/SLAI-infra-Code/transformer-codesign-starter/project/experiments/cand-143/programs/M2_D1.asm",
-            "--report",
-            "/Users/yihdu/Codefield/SLAI-infra-Code/transformer-codesign-starter/project/experiments/cand-143/reports/grade.json",
-            "--seed",
-            "7",
-            "--baseline",
-            "/Users/yihdu/Codefield/SLAI-infra-Code/transformer-codesign-starter/baseline_manifest.json"
-          ],
-          "elapsed": 76.33950995793566,
-          "exit_code": 0,
-          "failure_class": null,
-          "peak_memory_mib": 4069.862991333008
-        }
-      },
-      "static": {
-        "M1_P1": {
-          "bytes": 372428,
-          "expanded_instructions": 78131,
-          "workgroup_lifetimes": 1
-        },
-        "M2_D1": {
-          "bytes": 1506133,
-          "expanded_instructions": 12992,
-          "workgroup_lifetimes": 4
-        }
-      },
-      "validation_cost": {
-        "M2_D1": {
-          "barrier_directed_pair_relations": 1920,
-          "barrier_incidence_edges": 1280,
-          "budget_mib": 6144,
-          "caveat": "Lower bound on uncompressed CPython event-set allocation, not peak RSS prediction. Passing cost screen never establishes race correctness. Multi-path/HBM unions, tuples, prefixes and graph storage add memory.",
-          "checkpoints": [
-            {
-              "max_depth": 1572,
-              "sum_depth": 7774774,
-              "visited": 10000
-            }
-          ],
-          "decision": "within_lower_bound_only",
-          "events": 12816,
-          "expanded_instructions": 12992,
-          "global_commit_incidence_edges": 24409,
-          "graph_edges": 37837,
-          "max_dependency_depth_lower_bound": 2041,
-          "named_cross_wg_sync_edges": 0,
-          "opcode_counts": {
-            "BARRIER": 160,
-            "LD": 4984,
-            "MMA.ACC": 4224,
-            "REDUCE": 192,
-            "SFU": 160,
-            "ST": 712,
-            "STEP.COMMIT": 8,
-            "VEC": 2544,
-            "WG.BEGIN": 4,
-            "WG.END": 4
-          },
-          "race_checker_single_wg_fast_path": false,
-          "retained_event_sets_logical_bytes_lower_bound": 211635328,
-          "source_lines": 7936,
-          "stages": {
-            "unknown/control": {
-              "BARRIER": 160,
-              "LD": 4984,
-              "MMA.ACC": 4224,
-              "REDUCE": 192,
-              "SFU": 160,
-              "ST": 712,
-              "STEP.COMMIT": 8,
-              "VEC": 2544,
-              "WG.BEGIN": 4,
-              "WG.END": 4,
-              "events": 12816,
-              "instructions": 12992,
-              "sum_dependency_depth_lower_bound": 13105456
-            }
-          },
-          "static_loops": 1568,
-          "sum_dependency_depth_lower_bound": 13105456,
-          "workgroup_lifetimes": 4,
-          "workgroup_names": 4
-        }
-      },
-      "validation_cost_progress": {
-        "command": [
-          "/Users/yihdu/Codefield/SLAI-infra-Code/transformer-codesign-starter/.venv/bin/python",
-          "-c",
-          "import json,pathlib; from project.search.validation_cost import analyze; stats=json.loads(pathlib.Path('reports/static.json').read_text()); out={n:analyze((pathlib.Path('programs')/(n+'.asm')).read_text(),6144) for n,v in stats.items() if v.get('workgroup_lifetimes',1)>1}; pathlib.Path('reports/validation-cost.json').write_text(json.dumps(out,indent=2))"
-        ],
-        "elapsed": 0.5086587090045214,
-        "peak_memory_mib": 53.76605987548828,
-        "pid": 56125,
-        "status": "completed",
-        "updated_at": 1790622355.1980212
-      },
       "verdict": "evaluated"
     },
     "score": 7013.610245245844,
     "status": "evaluated",
-    "stored_at": "2026-09-29 03:07:11"
+    "stored_at": "2026-09-29 23:18:43"
+  },
+  "679a3747c9fa625e9a9c32d47664d794acd397c09f80e6ffba3bbeb2c02c3092": {
+    "candidate_id": "cand-145",
+    "eligible": true,
+    "functional_passed": true,
+    "metrics": {
+      "candidate": "cand-145",
+      "historical_import": true,
+      "reports": {
+        "grade": {
+          "area_mm2": 22.85981349888,
+          "cases": {
+            "M1_P1": {
+              "busy_cycles": {
+                "shared.cache_bank_0": 425633,
+                "shared.cache_bank_1": 425985,
+                "shared.cache_bank_2": 427347,
+                "shared.cache_bank_3": 427630,
+                "shared.hbm_channel_0": 119986,
+                "shared.hbm_channel_1": 125772,
+                "shared.hbm_channel_2": 123726,
+                "shared.hbm_channel_3": 127706,
+                "shared.hbm_channel_4": 122016,
+                "shared.hbm_channel_5": 124394,
+                "shared.hbm_channel_6": 124024,
+                "shared.hbm_channel_7": 127760,
+                "shared.noc": 775964,
+                "sm0.dma": 370872,
+                "sm0.issue": 23856,
+                "sm0.issue_wait": 1557917,
+                "sm0.noc_in": 275560,
+                "sm0.noc_out": 31559,
+                "sm0.reduce": 20496,
+                "sm0.rf_read": 669828,
+                "sm0.rf_write": 606612,
+                "sm0.sfu": 36408,
+                "sm0.shared_read": 0,
+                "sm0.shared_write": 0,
+                "sm0.tc": 101772,
+                "sm0.vec": 114528,
+                "sm1.dma": 370168,
+                "sm1.issue": 23737,
+                "sm1.issue_wait": 1557146,
+                "sm1.noc_in": 275848,
+                "sm1.noc_out": 31026,
+                "sm1.reduce": 20280,
+                "sm1.rf_read": 669064,
+                "sm1.rf_write": 605456,
+                "sm1.sfu": 36372,
+                "sm1.shared_read": 0,
+                "sm1.shared_write": 0,
+                "sm1.tc": 101772,
+                "sm1.vec": 113772,
+                "sm2.dma": 370872,
+                "sm2.issue": 23856,
+                "sm2.issue_wait": 1558783,
+                "sm2.noc_in": 271020,
+                "sm2.noc_out": 31320,
+                "sm2.reduce": 20496,
+                "sm2.rf_read": 669828,
+                "sm2.rf_write": 606612,
+                "sm2.sfu": 36408,
+                "sm2.shared_read": 0,
+                "sm2.shared_write": 0,
+                "sm2.tc": 101772,
+                "sm2.vec": 114528,
+                "sm3.dma": 370168,
+                "sm3.issue": 23737,
+                "sm3.issue_wait": 1556526,
+                "sm3.noc_in": 273228,
+                "sm3.noc_out": 30552,
+                "sm3.reduce": 20280,
+                "sm3.rf_read": 669064,
+                "sm3.rf_write": 605456,
+                "sm3.sfu": 36372,
+                "sm3.shared_read": 0,
+                "sm3.shared_write": 0,
+                "sm3.tc": 101772,
+                "sm3.vec": 113772
+              },
+              "cycles": 1586728,
+              "functional_passed": true,
+              "hbm_read_bytes": 23731968,
+              "hbm_write_bytes": 8120320,
+              "instruction_count": 95099,
+              "max_abs_error": 3.012095998400355e-06,
+              "peak_window_power_w": 11.526748313483035
+            },
+            "M2_D1": {
+              "busy_cycles": {
+                "shared.cache_bank_0": 66468,
+                "shared.cache_bank_1": 66468,
+                "shared.cache_bank_2": 66404,
+                "shared.cache_bank_3": 66404,
+                "shared.hbm_channel_0": 8520,
+                "shared.hbm_channel_1": 8520,
+                "shared.hbm_channel_2": 8520,
+                "shared.hbm_channel_3": 8520,
+                "shared.hbm_channel_4": 8512,
+                "shared.hbm_channel_5": 8512,
+                "shared.hbm_channel_6": 8512,
+                "shared.hbm_channel_7": 8512,
+                "shared.noc": 69637,
+                "sm0.dma": 61440,
+                "sm0.issue": 3866,
+                "sm0.issue_wait": 161038,
+                "sm0.noc_in": 58660,
+                "sm0.noc_out": 1088,
+                "sm0.reduce": 1312,
+                "sm0.rf_read": 36304,
+                "sm0.rf_write": 67936,
+                "sm0.sfu": 1344,
+                "sm0.shared_read": 0,
+                "sm0.shared_write": 0,
+                "sm0.tc": 12056,
+                "sm0.vec": 5408,
+                "sm1.dma": 59392,
+                "sm1.issue": 3210,
+                "sm1.issue_wait": 150516,
+                "sm1.noc_in": 57032,
+                "sm1.noc_out": 512,
+                "sm1.reduce": 480,
+                "sm1.rf_read": 34160,
+                "sm1.rf_write": 64608,
+                "sm1.sfu": 1152,
+                "sm1.shared_read": 0,
+                "sm1.shared_write": 0,
+                "sm1.tc": 12056,
+                "sm1.vec": 3040,
+                "sm2.dma": 59392,
+                "sm2.issue": 3210,
+                "sm2.issue_wait": 150472,
+                "sm2.noc_in": 57008,
+                "sm2.noc_out": 512,
+                "sm2.reduce": 480,
+                "sm2.rf_read": 34160,
+                "sm2.rf_write": 64608,
+                "sm2.sfu": 1152,
+                "sm2.shared_read": 0,
+                "sm2.shared_write": 0,
+                "sm2.tc": 12056,
+                "sm2.vec": 3040,
+                "sm3.dma": 59392,
+                "sm3.issue": 3210,
+                "sm3.issue_wait": 150721,
+                "sm3.noc_in": 57027,
+                "sm3.noc_out": 512,
+                "sm3.reduce": 480,
+                "sm3.rf_read": 34160,
+                "sm3.rf_write": 64608,
+                "sm3.sfu": 1152,
+                "sm3.shared_read": 0,
+                "sm3.shared_write": 0,
+                "sm3.tc": 12056,
+                "sm3.vec": 3040
+              },
+              "cycles": 167539,
+              "functional_passed": true,
+              "hbm_read_bytes": 2012160,
+              "hbm_write_bytes": 167936,
+              "instruction_count": 12992,
+              "max_abs_error": 1.5319426449611484e-06,
+              "peak_window_power_w": 7.494538241472594
+            }
+          },
+          "eligible": true,
+          "mode": "grade",
+          "score": 12321.43877576645
+        }
+      },
+      "verdict": "evaluated"
+    },
+    "score": 12321.43877576645,
+    "status": "evaluated",
+    "stored_at": "2026-09-29 23:18:43"
   },
   "6f210797a8205dae777897e9008547c11bf20cc281ccd168dcad82e38e789fa1": {
     "candidate_id": "cand-075",
@@ -4872,7 +5218,7 @@
     },
     "score": 2011.1993372800794,
     "status": "evaluated",
-    "stored_at": "2026-09-29 03:05:52"
+    "stored_at": "2026-09-29 23:18:41"
   },
   "6f473ca829976d3ba32358d28bfb8fbc36c790298966b7789f6227dff6cafcc8": {
     "candidate_id": "cand-079",
@@ -4959,7 +5305,7 @@
     },
     "score": 1995.554860534254,
     "status": "evaluated",
-    "stored_at": "2026-09-29 03:05:52"
+    "stored_at": "2026-09-29 23:18:41"
   },
   "7079e6867892a858c30414f98adcff3626f682715b4f6e8934a73e0403adb736": {
     "candidate_id": "cand-013",
@@ -5038,7 +5384,7 @@
     },
     "score": 1003.5673543192571,
     "status": "evaluated",
-    "stored_at": "2026-09-29 03:05:52"
+    "stored_at": "2026-09-29 23:18:39"
   },
   "7670f66597e612f2f9411669d1e194b2d8f777e73a396834b6aedc04058bb62c": {
     "candidate_id": "cand-140",
@@ -5174,7 +5520,7 @@
     },
     "score": 6931.378716758506,
     "status": "evaluated",
-    "stored_at": "2026-09-29 03:05:53"
+    "stored_at": "2026-09-29 23:18:43"
   },
   "7772605611ef49f476e89b0f53cfa5ee48d11adf7402fe731e218e4bfa2a8f54": {
     "candidate_id": "cand-003",
@@ -5253,7 +5599,7 @@
     },
     "score": 1111.1503617194342,
     "status": "evaluated",
-    "stored_at": "2026-09-29 03:05:52"
+    "stored_at": "2026-09-29 23:18:39"
   },
   "77baf5124e0afa98597feec71336cf6aec4d8a5f21b90a62985347c556cd628e": {
     "candidate_id": "cand-130",
@@ -5389,7 +5735,7 @@
     },
     "score": 6229.399004343326,
     "status": "evaluated",
-    "stored_at": "2026-09-29 03:05:53"
+    "stored_at": "2026-09-29 23:18:43"
   },
   "78b672dd2ff398261291dea4b0383ae754d3377cdcc6571e6fb5b9b810b745f6": {
     "candidate_id": "cand-062",
@@ -5468,7 +5814,7 @@
     },
     "score": 1840.1107341264512,
     "status": "evaluated",
-    "stored_at": "2026-09-29 03:05:52"
+    "stored_at": "2026-09-29 23:18:41"
   },
   "79b4344fb69c439a7cee0acf27366fd97928202cacafd2c5981cf8849c89d9a1": {
     "candidate_id": "cand-015",
@@ -5547,7 +5893,7 @@
     },
     "score": 1133.0546914360318,
     "status": "evaluated",
-    "stored_at": "2026-09-29 03:05:52"
+    "stored_at": "2026-09-29 23:18:39"
   },
   "7b1415a290edb5ba177f937dc98fc0ecddd5f3a880358a1ca338ecd9e93aabd4": {
     "candidate_id": "cand-081",
@@ -5634,7 +5980,7 @@
     },
     "score": 2051.47741118116,
     "status": "evaluated",
-    "stored_at": "2026-09-29 03:05:52"
+    "stored_at": "2026-09-29 23:18:41"
   },
   "7d3a74e434b1cc38185f41594e4b24f92483de2e97d4140717991a395d455a89": {
     "candidate_id": "cand-098",
@@ -5721,7 +6067,7 @@
     },
     "score": 2567.954051821853,
     "status": "evaluated",
-    "stored_at": "2026-09-29 03:05:52"
+    "stored_at": "2026-09-29 23:18:42"
   },
   "7ea9984b85bc986d76c008f8e37a6ebf452f37d6885beb61e45c17be90a91c25": {
     "candidate_id": "cand-090",
@@ -5808,7 +6154,7 @@
     },
     "score": 2287.4851157230846,
     "status": "evaluated",
-    "stored_at": "2026-09-29 03:05:52"
+    "stored_at": "2026-09-29 23:18:42"
   },
   "80601b99e33dd64e8b1d91cd98f14cf7b5ce8d194c7756044423a862114e63c2": {
     "candidate_id": "cand-077",
@@ -5895,7 +6241,7 @@
     },
     "score": 2075.4609403356135,
     "status": "evaluated",
-    "stored_at": "2026-09-29 03:05:52"
+    "stored_at": "2026-09-29 23:18:41"
   },
   "8088cd3a7c69fa051588b82a8cd545b9c3dcc16a439b420b0eb170ed857049c4": {
     "candidate_id": "cand-065",
@@ -5974,7 +6320,7 @@
     },
     "score": 1965.9942357374484,
     "status": "evaluated",
-    "stored_at": "2026-09-29 03:05:52"
+    "stored_at": "2026-09-29 23:18:41"
   },
   "87d2bef22d12f5cab2c830315c6df7a16ab76bc713ef5c67ccdfd7442dcd6c52": {
     "candidate_id": "cand-012",
@@ -6053,7 +6399,7 @@
     },
     "score": 914.1264889348438,
     "status": "evaluated",
-    "stored_at": "2026-09-29 03:05:52"
+    "stored_at": "2026-09-29 23:18:39"
   },
   "8d731fec81e2428f2133977e94a706db2b1b1d16783f3325ca83f65cbe4dc939": {
     "candidate_id": "cand-139",
@@ -6189,7 +6535,7 @@
     },
     "score": 6969.542505603433,
     "status": "evaluated",
-    "stored_at": "2026-09-29 03:05:53"
+    "stored_at": "2026-09-29 23:18:43"
   },
   "9034fc0355651c516a0c03a349a745de0c5273165ec23594ea529b72cef3fcbd": {
     "candidate_id": "cand-022",
@@ -6268,7 +6614,182 @@
     },
     "score": 1126.6638611979947,
     "status": "evaluated",
-    "stored_at": "2026-09-29 03:05:52"
+    "stored_at": "2026-09-29 23:18:40"
+  },
+  "9066a9b2523065754f3c5763d2452c839cc33bc5cfe9ad608d929c31c3b9c429": {
+    "candidate_id": "cand-146",
+    "eligible": true,
+    "functional_passed": true,
+    "metrics": {
+      "candidate": "cand-146",
+      "historical_import": true,
+      "reports": {
+        "grade": {
+          "area_mm2": 22.85981349888,
+          "cases": {
+            "M1_P1": {
+              "busy_cycles": {
+                "shared.cache_bank_0": 429184,
+                "shared.cache_bank_1": 429525,
+                "shared.cache_bank_2": 431926,
+                "shared.cache_bank_3": 432208,
+                "shared.hbm_channel_0": 120096,
+                "shared.hbm_channel_1": 131638,
+                "shared.hbm_channel_2": 124696,
+                "shared.hbm_channel_3": 131284,
+                "shared.hbm_channel_4": 121824,
+                "shared.hbm_channel_5": 131306,
+                "shared.hbm_channel_6": 124992,
+                "shared.hbm_channel_7": 131676,
+                "shared.noc": 777888,
+                "sm0.dma": 370872,
+                "sm0.issue": 21516,
+                "sm0.issue_wait": 1556216,
+                "sm0.noc_in": 275440,
+                "sm0.noc_out": 31395,
+                "sm0.reduce": 20496,
+                "sm0.rf_read": 669828,
+                "sm0.rf_write": 606612,
+                "sm0.sfu": 36018,
+                "sm0.shared_read": 0,
+                "sm0.shared_write": 0,
+                "sm0.tc": 101772,
+                "sm0.vec": 111408,
+                "sm1.dma": 370168,
+                "sm1.issue": 21397,
+                "sm1.issue_wait": 1552516,
+                "sm1.noc_in": 275008,
+                "sm1.noc_out": 30717,
+                "sm1.reduce": 20280,
+                "sm1.rf_read": 669064,
+                "sm1.rf_write": 605456,
+                "sm1.sfu": 35982,
+                "sm1.shared_read": 0,
+                "sm1.shared_write": 0,
+                "sm1.tc": 101772,
+                "sm1.vec": 110652,
+                "sm2.dma": 370872,
+                "sm2.issue": 21516,
+                "sm2.issue_wait": 1556408,
+                "sm2.noc_in": 277732,
+                "sm2.noc_out": 31442,
+                "sm2.reduce": 20496,
+                "sm2.rf_read": 669828,
+                "sm2.rf_write": 606612,
+                "sm2.sfu": 36018,
+                "sm2.shared_read": 0,
+                "sm2.shared_write": 0,
+                "sm2.tc": 101772,
+                "sm2.vec": 111408,
+                "sm3.dma": 370168,
+                "sm3.issue": 21397,
+                "sm3.issue_wait": 1553120,
+                "sm3.noc_in": 277717,
+                "sm3.noc_out": 30835,
+                "sm3.reduce": 20280,
+                "sm3.rf_read": 669064,
+                "sm3.rf_write": 605456,
+                "sm3.sfu": 35982,
+                "sm3.shared_read": 0,
+                "sm3.shared_write": 0,
+                "sm3.tc": 101772,
+                "sm3.vec": 110652
+              },
+              "cycles": 1582025,
+              "functional_passed": true,
+              "hbm_read_bytes": 24440064,
+              "hbm_write_bytes": 8120320,
+              "instruction_count": 85739,
+              "max_abs_error": 3.012095998400355e-06,
+              "peak_window_power_w": 11.489415666359967
+            },
+            "M2_D1": {
+              "busy_cycles": {
+                "shared.cache_bank_0": 66468,
+                "shared.cache_bank_1": 66468,
+                "shared.cache_bank_2": 66404,
+                "shared.cache_bank_3": 66404,
+                "shared.hbm_channel_0": 8520,
+                "shared.hbm_channel_1": 8520,
+                "shared.hbm_channel_2": 8520,
+                "shared.hbm_channel_3": 8520,
+                "shared.hbm_channel_4": 8512,
+                "shared.hbm_channel_5": 8512,
+                "shared.hbm_channel_6": 8512,
+                "shared.hbm_channel_7": 8512,
+                "shared.noc": 69637,
+                "sm0.dma": 61440,
+                "sm0.issue": 3866,
+                "sm0.issue_wait": 161038,
+                "sm0.noc_in": 58660,
+                "sm0.noc_out": 1088,
+                "sm0.reduce": 1312,
+                "sm0.rf_read": 36304,
+                "sm0.rf_write": 67936,
+                "sm0.sfu": 1344,
+                "sm0.shared_read": 0,
+                "sm0.shared_write": 0,
+                "sm0.tc": 12056,
+                "sm0.vec": 5408,
+                "sm1.dma": 59392,
+                "sm1.issue": 3210,
+                "sm1.issue_wait": 150516,
+                "sm1.noc_in": 57032,
+                "sm1.noc_out": 512,
+                "sm1.reduce": 480,
+                "sm1.rf_read": 34160,
+                "sm1.rf_write": 64608,
+                "sm1.sfu": 1152,
+                "sm1.shared_read": 0,
+                "sm1.shared_write": 0,
+                "sm1.tc": 12056,
+                "sm1.vec": 3040,
+                "sm2.dma": 59392,
+                "sm2.issue": 3210,
+                "sm2.issue_wait": 150472,
+                "sm2.noc_in": 57008,
+                "sm2.noc_out": 512,
+                "sm2.reduce": 480,
+                "sm2.rf_read": 34160,
+                "sm2.rf_write": 64608,
+                "sm2.sfu": 1152,
+                "sm2.shared_read": 0,
+                "sm2.shared_write": 0,
+                "sm2.tc": 12056,
+                "sm2.vec": 3040,
+                "sm3.dma": 59392,
+                "sm3.issue": 3210,
+                "sm3.issue_wait": 150721,
+                "sm3.noc_in": 57027,
+                "sm3.noc_out": 512,
+                "sm3.reduce": 480,
+                "sm3.rf_read": 34160,
+                "sm3.rf_write": 64608,
+                "sm3.sfu": 1152,
+                "sm3.shared_read": 0,
+                "sm3.shared_write": 0,
+                "sm3.tc": 12056,
+                "sm3.vec": 3040
+              },
+              "cycles": 167539,
+              "functional_passed": true,
+              "hbm_read_bytes": 2012160,
+              "hbm_write_bytes": 167936,
+              "instruction_count": 12992,
+              "max_abs_error": 1.5319426449611484e-06,
+              "peak_window_power_w": 7.494538241472594
+            }
+          },
+          "eligible": true,
+          "mode": "grade",
+          "score": 12339.739600376924
+        }
+      },
+      "verdict": "evaluated"
+    },
+    "score": 12339.739600376924,
+    "status": "evaluated",
+    "stored_at": "2026-09-29 23:18:43"
   },
   "9156acb1acaa15978eb515d3e37ad8b607116a178b3d0140bd8db0362620104f": {
     "candidate_id": "cand-016",
@@ -6347,7 +6868,7 @@
     },
     "score": 1136.0626036140557,
     "status": "evaluated",
-    "stored_at": "2026-09-29 03:05:52"
+    "stored_at": "2026-09-29 23:18:39"
   },
   "91eb27ab492c258c24d6f4c0f8f2d145b6fba17678ac660f1bf159f9ac7001bc": {
     "candidate_id": "cand-051",
@@ -6426,7 +6947,7 @@
     },
     "score": 1761.5596139891823,
     "status": "evaluated",
-    "stored_at": "2026-09-29 03:05:52"
+    "stored_at": "2026-09-29 23:18:41"
   },
   "929439425a0280c4cfb02cba8a90f301ae6956d7a49fe9645613457d713005b0": {
     "candidate_id": "cand-086",
@@ -6513,7 +7034,7 @@
     },
     "score": 2141.3022952147,
     "status": "evaluated",
-    "stored_at": "2026-09-29 03:05:52"
+    "stored_at": "2026-09-29 23:18:42"
   },
   "98bc67dedd2222f09a72cedd81579862f4571c1cc1f53677c4fbb3f7df7ea49c": {
     "candidate_id": "cand-071",
@@ -6592,7 +7113,7 @@
     },
     "score": 1996.4823457755592,
     "status": "evaluated",
-    "stored_at": "2026-09-29 03:05:52"
+    "stored_at": "2026-09-29 23:18:41"
   },
   "9c33051d881e3cf831c1cc454d38cf29bc7026de196731405e4683426131cb69": {
     "candidate_id": "cand-045",
@@ -6671,7 +7192,7 @@
     },
     "score": 1185.9408933569387,
     "status": "evaluated",
-    "stored_at": "2026-09-29 03:05:52"
+    "stored_at": "2026-09-29 23:18:40"
   },
   "9c442d50b6ddc8be94caa003b6e80f10de6a1d815d16931f8ecf72a58f9c056a": {
     "candidate_id": "cand-023",
@@ -6750,7 +7271,7 @@
     },
     "score": 1140.8975242069364,
     "status": "evaluated",
-    "stored_at": "2026-09-29 03:05:52"
+    "stored_at": "2026-09-29 23:18:40"
   },
   "9d7e7f20593342dd3970fe72bf71d4ce21c9efbc137daffca61fffba91c4d9eb": {
     "candidate_id": "cand-131",
@@ -6886,7 +7407,7 @@
     },
     "score": 6257.601473890406,
     "status": "evaluated",
-    "stored_at": "2026-09-29 03:05:53"
+    "stored_at": "2026-09-29 23:18:43"
   },
   "9fc06c370a7befb039c0d7acd1c887c4e3e33714ae277c7caec12935eee325a7": {
     "candidate_id": "cand-057",
@@ -6965,7 +7486,7 @@
     },
     "score": 1666.9684198231182,
     "status": "evaluated",
-    "stored_at": "2026-09-29 03:05:52"
+    "stored_at": "2026-09-29 23:18:41"
   },
   "a18b3060153cad675e04952d7b15de9339c69602586e2352f287fc0f86810f99": {
     "candidate_id": "cand-119",
@@ -7088,7 +7609,7 @@
     },
     "score": 5776.172027407479,
     "status": "evaluated",
-    "stored_at": "2026-09-29 03:05:53"
+    "stored_at": "2026-09-29 23:18:42"
   },
   "a27a81d8e9ef2776dd8b942d2baa84b3ef3a58559b1083d727d0155d9eda326b": {
     "candidate_id": "cand-033",
@@ -7167,7 +7688,7 @@
     },
     "score": 643.1375334157768,
     "status": "evaluated",
-    "stored_at": "2026-09-29 03:05:52"
+    "stored_at": "2026-09-29 23:18:40"
   },
   "a338c0e1385a7c26a41c8b9ae30e3138928aeee50ead5baf5b7c936052d9d278": {
     "candidate_id": "cand-021",
@@ -7246,7 +7767,7 @@
     },
     "score": 955.2915117902414,
     "status": "evaluated",
-    "stored_at": "2026-09-29 03:05:52"
+    "stored_at": "2026-09-29 23:18:40"
   },
   "a45be73eb7cdc5ebf0388261def1eb6ec18cb1f16837c98f45df477d500df3b6": {
     "candidate_id": "cand-017",
@@ -7325,7 +7846,182 @@
     },
     "score": 1188.0346056227518,
     "status": "evaluated",
-    "stored_at": "2026-09-29 03:05:52"
+    "stored_at": "2026-09-29 23:18:39"
+  },
+  "a6f583db11ff768910a7067856516e5fec1e97893fbf3b5af69c755556f5e956": {
+    "candidate_id": "cand-147",
+    "eligible": true,
+    "functional_passed": true,
+    "metrics": {
+      "candidate": "cand-147",
+      "historical_import": true,
+      "reports": {
+        "grade": {
+          "area_mm2": 22.85981349888,
+          "cases": {
+            "M1_P1": {
+              "busy_cycles": {
+                "shared.cache_bank_0": 374816,
+                "shared.cache_bank_1": 374924,
+                "shared.cache_bank_2": 378033,
+                "shared.cache_bank_3": 378075,
+                "shared.hbm_channel_0": 98274,
+                "shared.hbm_channel_1": 99358,
+                "shared.hbm_channel_2": 99010,
+                "shared.hbm_channel_3": 98830,
+                "shared.hbm_channel_4": 98346,
+                "shared.hbm_channel_5": 100040,
+                "shared.hbm_channel_6": 100604,
+                "shared.hbm_channel_7": 99810,
+                "shared.noc": 649329,
+                "sm0.dma": 355800,
+                "sm0.issue": 20388,
+                "sm0.issue_wait": 1085533,
+                "sm0.noc_in": 261813,
+                "sm0.noc_out": 25300,
+                "sm0.reduce": 20496,
+                "sm0.rf_read": 664236,
+                "sm0.rf_write": 597789,
+                "sm0.sfu": 35868,
+                "sm0.shared_read": 0,
+                "sm0.shared_write": 0,
+                "sm0.tc": 102684,
+                "sm0.vec": 103749,
+                "sm1.dma": 355096,
+                "sm1.issue": 20269,
+                "sm1.issue_wait": 1084673,
+                "sm1.noc_in": 261190,
+                "sm1.noc_out": 24731,
+                "sm1.reduce": 20280,
+                "sm1.rf_read": 663472,
+                "sm1.rf_write": 596633,
+                "sm1.sfu": 35832,
+                "sm1.shared_read": 0,
+                "sm1.shared_write": 0,
+                "sm1.tc": 102684,
+                "sm1.vec": 102993,
+                "sm2.dma": 355800,
+                "sm2.issue": 20388,
+                "sm2.issue_wait": 1086899,
+                "sm2.noc_in": 266960,
+                "sm2.noc_out": 25132,
+                "sm2.reduce": 20496,
+                "sm2.rf_read": 664236,
+                "sm2.rf_write": 597789,
+                "sm2.sfu": 35868,
+                "sm2.shared_read": 0,
+                "sm2.shared_write": 0,
+                "sm2.tc": 102684,
+                "sm2.vec": 103749,
+                "sm3.dma": 355096,
+                "sm3.issue": 20269,
+                "sm3.issue_wait": 1084521,
+                "sm3.noc_in": 266450,
+                "sm3.noc_out": 24026,
+                "sm3.reduce": 20280,
+                "sm3.rf_read": 663472,
+                "sm3.rf_write": 596633,
+                "sm3.sfu": 35832,
+                "sm3.shared_read": 0,
+                "sm3.shared_write": 0,
+                "sm3.tc": 102684,
+                "sm3.vec": 102993
+              },
+              "cycles": 1111753,
+              "functional_passed": true,
+              "hbm_read_bytes": 18893824,
+              "hbm_write_bytes": 6522880,
+              "instruction_count": 81227,
+              "max_abs_error": 3.012095998400355e-06,
+              "peak_window_power_w": 11.489415666359967
+            },
+            "M2_D1": {
+              "busy_cycles": {
+                "shared.cache_bank_0": 66468,
+                "shared.cache_bank_1": 66468,
+                "shared.cache_bank_2": 66404,
+                "shared.cache_bank_3": 66404,
+                "shared.hbm_channel_0": 8520,
+                "shared.hbm_channel_1": 8520,
+                "shared.hbm_channel_2": 8520,
+                "shared.hbm_channel_3": 8520,
+                "shared.hbm_channel_4": 8512,
+                "shared.hbm_channel_5": 8512,
+                "shared.hbm_channel_6": 8512,
+                "shared.hbm_channel_7": 8512,
+                "shared.noc": 69637,
+                "sm0.dma": 61440,
+                "sm0.issue": 3866,
+                "sm0.issue_wait": 161038,
+                "sm0.noc_in": 58660,
+                "sm0.noc_out": 1088,
+                "sm0.reduce": 1312,
+                "sm0.rf_read": 36304,
+                "sm0.rf_write": 67936,
+                "sm0.sfu": 1344,
+                "sm0.shared_read": 0,
+                "sm0.shared_write": 0,
+                "sm0.tc": 12056,
+                "sm0.vec": 5408,
+                "sm1.dma": 59392,
+                "sm1.issue": 3210,
+                "sm1.issue_wait": 150516,
+                "sm1.noc_in": 57032,
+                "sm1.noc_out": 512,
+                "sm1.reduce": 480,
+                "sm1.rf_read": 34160,
+                "sm1.rf_write": 64608,
+                "sm1.sfu": 1152,
+                "sm1.shared_read": 0,
+                "sm1.shared_write": 0,
+                "sm1.tc": 12056,
+                "sm1.vec": 3040,
+                "sm2.dma": 59392,
+                "sm2.issue": 3210,
+                "sm2.issue_wait": 150472,
+                "sm2.noc_in": 57008,
+                "sm2.noc_out": 512,
+                "sm2.reduce": 480,
+                "sm2.rf_read": 34160,
+                "sm2.rf_write": 64608,
+                "sm2.sfu": 1152,
+                "sm2.shared_read": 0,
+                "sm2.shared_write": 0,
+                "sm2.tc": 12056,
+                "sm2.vec": 3040,
+                "sm3.dma": 59392,
+                "sm3.issue": 3210,
+                "sm3.issue_wait": 150721,
+                "sm3.noc_in": 57027,
+                "sm3.noc_out": 512,
+                "sm3.reduce": 480,
+                "sm3.rf_read": 34160,
+                "sm3.rf_write": 64608,
+                "sm3.sfu": 1152,
+                "sm3.shared_read": 0,
+                "sm3.shared_write": 0,
+                "sm3.tc": 12056,
+                "sm3.vec": 3040
+              },
+              "cycles": 167539,
+              "functional_passed": true,
+              "hbm_read_bytes": 2012160,
+              "hbm_write_bytes": 167936,
+              "instruction_count": 12992,
+              "max_abs_error": 1.5319426449611484e-06,
+              "peak_window_power_w": 7.494538241472594
+            }
+          },
+          "eligible": true,
+          "mode": "grade",
+          "score": 14720.023764747755
+        }
+      },
+      "verdict": "evaluated"
+    },
+    "score": 14720.023764747755,
+    "status": "evaluated",
+    "stored_at": "2026-09-29 23:18:43"
   },
   "a7dcd351cb804d64bcb3791ceba04f9ec336d9d05baca42a54d48c0817fc6637": {
     "candidate_id": "cand-001",
@@ -7404,7 +8100,156 @@
     },
     "score": 1173.0811006016247,
     "status": "evaluated",
-    "stored_at": "2026-09-29 03:05:52"
+    "stored_at": "2026-09-29 23:18:39"
+  },
+  "ab0cbd4dccdd0ad1223c8f3251f0e1c3c0869dd14f21c89c5a8b25edbe58bccb": {
+    "candidate_id": "cand-144",
+    "eligible": true,
+    "functional_passed": true,
+    "metrics": {
+      "candidate": "cand-144",
+      "historical_import": true,
+      "reports": {
+        "grade": {
+          "area_mm2": 22.85981349888,
+          "cases": {
+            "M1_P1": {
+              "busy_cycles": {
+                "shared.cache_bank_0": 293390,
+                "shared.cache_bank_1": 293583,
+                "shared.cache_bank_2": 293405,
+                "shared.cache_bank_3": 293546,
+                "shared.hbm_channel_0": 70892,
+                "shared.hbm_channel_1": 70714,
+                "shared.hbm_channel_2": 70712,
+                "shared.hbm_channel_3": 70712,
+                "shared.hbm_channel_4": 70798,
+                "shared.hbm_channel_5": 70652,
+                "shared.hbm_channel_6": 70644,
+                "shared.hbm_channel_7": 70644,
+                "shared.noc": 818593,
+                "sm0.dma": 504832,
+                "sm0.issue": 39067,
+                "sm0.issue_wait": 2440451,
+                "sm0.noc_in": 415168,
+                "sm0.noc_out": 29648,
+                "sm0.reduce": 40776,
+                "sm0.rf_read": 1318828,
+                "sm0.rf_write": 1181696,
+                "sm0.sfu": 71622,
+                "sm0.shared_read": 688128,
+                "sm0.shared_write": 24576,
+                "sm0.tc": 205464,
+                "sm0.vec": 202644,
+                "sm1.dma": 504832,
+                "sm1.issue": 39067,
+                "sm1.issue_wait": 2440592,
+                "sm1.noc_in": 447350,
+                "sm1.noc_out": 29574,
+                "sm1.reduce": 40776,
+                "sm1.rf_read": 1318828,
+                "sm1.rf_write": 1181696,
+                "sm1.sfu": 71622,
+                "sm1.shared_read": 688128,
+                "sm1.shared_write": 24576,
+                "sm1.tc": 205464,
+                "sm1.vec": 202644
+              },
+              "cycles": 2484678,
+              "functional_passed": true,
+              "hbm_read_bytes": 14309632,
+              "hbm_write_bytes": 3794944,
+              "instruction_count": 78133,
+              "max_abs_error": 3.012095998400355e-06,
+              "peak_window_power_w": 7.24980397747878
+            },
+            "M2_D1": {
+              "busy_cycles": {
+                "shared.cache_bank_0": 66468,
+                "shared.cache_bank_1": 66468,
+                "shared.cache_bank_2": 66404,
+                "shared.cache_bank_3": 66404,
+                "shared.hbm_channel_0": 8520,
+                "shared.hbm_channel_1": 8520,
+                "shared.hbm_channel_2": 8520,
+                "shared.hbm_channel_3": 8520,
+                "shared.hbm_channel_4": 8512,
+                "shared.hbm_channel_5": 8512,
+                "shared.hbm_channel_6": 8512,
+                "shared.hbm_channel_7": 8512,
+                "shared.noc": 69637,
+                "sm0.dma": 61440,
+                "sm0.issue": 3866,
+                "sm0.issue_wait": 161038,
+                "sm0.noc_in": 58660,
+                "sm0.noc_out": 1088,
+                "sm0.reduce": 1312,
+                "sm0.rf_read": 36304,
+                "sm0.rf_write": 67936,
+                "sm0.sfu": 1344,
+                "sm0.shared_read": 0,
+                "sm0.shared_write": 0,
+                "sm0.tc": 12056,
+                "sm0.vec": 5408,
+                "sm1.dma": 59392,
+                "sm1.issue": 3210,
+                "sm1.issue_wait": 150516,
+                "sm1.noc_in": 57032,
+                "sm1.noc_out": 512,
+                "sm1.reduce": 480,
+                "sm1.rf_read": 34160,
+                "sm1.rf_write": 64608,
+                "sm1.sfu": 1152,
+                "sm1.shared_read": 0,
+                "sm1.shared_write": 0,
+                "sm1.tc": 12056,
+                "sm1.vec": 3040,
+                "sm2.dma": 59392,
+                "sm2.issue": 3210,
+                "sm2.issue_wait": 150472,
+                "sm2.noc_in": 57008,
+                "sm2.noc_out": 512,
+                "sm2.reduce": 480,
+                "sm2.rf_read": 34160,
+                "sm2.rf_write": 64608,
+                "sm2.sfu": 1152,
+                "sm2.shared_read": 0,
+                "sm2.shared_write": 0,
+                "sm2.tc": 12056,
+                "sm2.vec": 3040,
+                "sm3.dma": 59392,
+                "sm3.issue": 3210,
+                "sm3.issue_wait": 150721,
+                "sm3.noc_in": 57027,
+                "sm3.noc_out": 512,
+                "sm3.reduce": 480,
+                "sm3.rf_read": 34160,
+                "sm3.rf_write": 64608,
+                "sm3.sfu": 1152,
+                "sm3.shared_read": 0,
+                "sm3.shared_write": 0,
+                "sm3.tc": 12056,
+                "sm3.vec": 3040
+              },
+              "cycles": 167539,
+              "functional_passed": true,
+              "hbm_read_bytes": 2012160,
+              "hbm_write_bytes": 167936,
+              "instruction_count": 12992,
+              "max_abs_error": 1.5319426449611484e-06,
+              "peak_window_power_w": 7.494538241472594
+            }
+          },
+          "eligible": true,
+          "mode": "grade",
+          "score": 9846.4030444046
+        }
+      },
+      "verdict": "evaluated"
+    },
+    "score": 9846.4030444046,
+    "status": "evaluated",
+    "stored_at": "2026-09-29 23:18:43"
   },
   "ae023c571217791815b6d6e075e992a317865200c70a394b8cbddd38f53ebfaa": {
     "candidate_id": "cand-000",
@@ -7483,7 +8328,7 @@
     },
     "score": 1000.0,
     "status": "evaluated",
-    "stored_at": "2026-09-29 03:05:52"
+    "stored_at": "2026-09-29 23:18:39"
   },
   "b09b9f59319ea4802f1f8c8834b0d1c83dcdbf383fe1492e23cc4d7e2c9b3546": {
     "candidate_id": "cand-029",
@@ -7562,7 +8407,7 @@
     },
     "score": 1168.5307558154386,
     "status": "evaluated",
-    "stored_at": "2026-09-29 03:05:52"
+    "stored_at": "2026-09-29 23:18:40"
   },
   "b1f588c1ffdd5c20fd3645e04d19ae27755efed1e4b8c25825b9a456e7532f87": {
     "candidate_id": "cand-112",
@@ -7685,7 +8530,7 @@
     },
     "score": 4455.914242343791,
     "status": "evaluated",
-    "stored_at": "2026-09-29 03:05:53"
+    "stored_at": "2026-09-29 23:18:42"
   },
   "b376889c016a1c16a896a4948639e6cb1aa5f3b961a2e32537402aef911e29b1": {
     "candidate_id": "cand-082",
@@ -7772,7 +8617,7 @@
     },
     "score": 2131.1533261851882,
     "status": "evaluated",
-    "stored_at": "2026-09-29 03:05:52"
+    "stored_at": "2026-09-29 23:18:41"
   },
   "b6edbbff79d0b9a3e1e7ab92b648d7ec386dd171aa96b6cf814af5f9e0c96c71": {
     "candidate_id": "cand-059",
@@ -7851,7 +8696,7 @@
     },
     "score": 1861.325996168528,
     "status": "evaluated",
-    "stored_at": "2026-09-29 03:05:52"
+    "stored_at": "2026-09-29 23:18:41"
   },
   "b9b520ba60b789db7b9885c2d0c111ed00dc53e6f5d284201d6a5d6830d84f5c": {
     "candidate_id": "cand-126",
@@ -7987,7 +8832,7 @@
     },
     "score": 6210.628265348859,
     "status": "evaluated",
-    "stored_at": "2026-09-29 03:05:53"
+    "stored_at": "2026-09-29 23:18:42"
   },
   "b9fb41d19c35aa4e336287664441e9c91b3cba553a9cc75b998058750b2da4a9": {
     "candidate_id": "cand-018",
@@ -8066,7 +8911,7 @@
     },
     "score": 923.5334757991376,
     "status": "evaluated",
-    "stored_at": "2026-09-29 03:05:52"
+    "stored_at": "2026-09-29 23:18:39"
   },
   "bb1ad199f8c0f6eb3a463a0269ab16a274f0aa4d8967d25f7469a91121b28980": {
     "candidate_id": "cand-083",
@@ -8153,7 +8998,7 @@
     },
     "score": 2245.0389561884695,
     "status": "evaluated",
-    "stored_at": "2026-09-29 03:05:52"
+    "stored_at": "2026-09-29 23:18:42"
   },
   "bb576af806f358e962e8fb279fcd9bc01dc6b84d53d7f9fe6e7bd9b648f09c55": {
     "candidate_id": "cand-061",
@@ -8240,7 +9085,7 @@
     },
     "score": 1338.1757908815193,
     "status": "evaluated",
-    "stored_at": "2026-09-29 03:05:52"
+    "stored_at": "2026-09-29 23:18:41"
   },
   "bd3c2bf486873f7450ac08f1be2b7ef60811570af85a83e88713185305448c7d": {
     "candidate_id": "cand-044",
@@ -8321,7 +9166,486 @@
     },
     "score": 1197.5985984332774,
     "status": "evaluated",
-    "stored_at": "2026-09-29 03:05:52"
+    "stored_at": "2026-09-29 23:18:40"
+  },
+  "c1a09ef196cf595747228101354cf724408b639eceb92f2a9348384a82b31280": {
+    "candidate_id": "cand-149",
+    "eligible": true,
+    "functional_passed": true,
+    "metrics": {
+      "candidate": "cand-149",
+      "historical_import": true,
+      "reports": {
+        "grade": {
+          "area_mm2": 23.53006052352,
+          "cases": {
+            "M1_P1": {
+              "busy_cycles": {
+                "shared.cache_bank_0": 374796,
+                "shared.cache_bank_1": 374892,
+                "shared.cache_bank_2": 408444,
+                "shared.cache_bank_3": 408479,
+                "shared.hbm_channel_0": 304582,
+                "shared.hbm_channel_1": 314174,
+                "shared.hbm_channel_2": 301804,
+                "shared.hbm_channel_3": 304078,
+                "shared.noc": 475781,
+                "sm0.dma": 88536,
+                "sm0.issue": 5238,
+                "sm0.issue_wait": 538901,
+                "sm0.noc_in": 68960,
+                "sm0.noc_out": 6140,
+                "sm0.reduce": 5358,
+                "sm0.rf_read": 165912,
+                "sm0.rf_write": 149301,
+                "sm0.sfu": 9060,
+                "sm0.shared_read": 0,
+                "sm0.shared_write": 0,
+                "sm0.tc": 172812,
+                "sm0.vec": 26709,
+                "sm1.dma": 88536,
+                "sm1.issue": 5238,
+                "sm1.issue_wait": 539229,
+                "sm1.noc_in": 69125,
+                "sm1.noc_out": 6104,
+                "sm1.reduce": 5358,
+                "sm1.rf_read": 165912,
+                "sm1.rf_write": 149301,
+                "sm1.sfu": 9060,
+                "sm1.shared_read": 0,
+                "sm1.shared_write": 0,
+                "sm1.tc": 172812,
+                "sm1.vec": 26709,
+                "sm10.dma": 72124,
+                "sm10.issue": 4246,
+                "sm10.issue_wait": 475795,
+                "sm10.noc_in": 57103,
+                "sm10.noc_out": 6002,
+                "sm10.reduce": 4998,
+                "sm10.rf_read": 156784,
+                "sm10.rf_write": 131441,
+                "sm10.sfu": 8892,
+                "sm10.shared_read": 0,
+                "sm10.shared_write": 0,
+                "sm10.tc": 158280,
+                "sm10.vec": 25575,
+                "sm11.dma": 72124,
+                "sm11.issue": 4246,
+                "sm11.issue_wait": 476924,
+                "sm11.noc_in": 56810,
+                "sm11.noc_out": 5984,
+                "sm11.reduce": 4998,
+                "sm11.rf_read": 156784,
+                "sm11.rf_write": 131441,
+                "sm11.sfu": 8892,
+                "sm11.shared_read": 0,
+                "sm11.shared_write": 0,
+                "sm11.tc": 158280,
+                "sm11.vec": 25575,
+                "sm12.dma": 72124,
+                "sm12.issue": 4246,
+                "sm12.issue_wait": 477772,
+                "sm12.noc_in": 56740,
+                "sm12.noc_out": 6036,
+                "sm12.reduce": 4998,
+                "sm12.rf_read": 156784,
+                "sm12.rf_write": 131441,
+                "sm12.sfu": 8892,
+                "sm12.shared_read": 0,
+                "sm12.shared_write": 0,
+                "sm12.tc": 158280,
+                "sm12.vec": 25575,
+                "sm13.dma": 72124,
+                "sm13.issue": 4246,
+                "sm13.issue_wait": 478676,
+                "sm13.noc_in": 57619,
+                "sm13.noc_out": 6043,
+                "sm13.reduce": 4998,
+                "sm13.rf_read": 156784,
+                "sm13.rf_write": 131441,
+                "sm13.sfu": 8892,
+                "sm13.shared_read": 0,
+                "sm13.shared_write": 0,
+                "sm13.tc": 158280,
+                "sm13.vec": 25575,
+                "sm14.dma": 72124,
+                "sm14.issue": 4246,
+                "sm14.issue_wait": 477285,
+                "sm14.noc_in": 56706,
+                "sm14.noc_out": 6003,
+                "sm14.reduce": 4998,
+                "sm14.rf_read": 156784,
+                "sm14.rf_write": 131441,
+                "sm14.sfu": 8892,
+                "sm14.shared_read": 0,
+                "sm14.shared_write": 0,
+                "sm14.tc": 158280,
+                "sm14.vec": 25575,
+                "sm15.dma": 72124,
+                "sm15.issue": 4246,
+                "sm15.issue_wait": 478697,
+                "sm15.noc_in": 56601,
+                "sm15.noc_out": 5972,
+                "sm15.reduce": 4998,
+                "sm15.rf_read": 156784,
+                "sm15.rf_write": 131441,
+                "sm15.sfu": 8892,
+                "sm15.shared_read": 0,
+                "sm15.shared_write": 0,
+                "sm15.tc": 158280,
+                "sm15.vec": 25575,
+                "sm2.dma": 87832,
+                "sm2.issue": 5119,
+                "sm2.issue_wait": 539467,
+                "sm2.noc_in": 70376,
+                "sm2.noc_out": 5886,
+                "sm2.reduce": 5142,
+                "sm2.rf_read": 165148,
+                "sm2.rf_write": 148145,
+                "sm2.sfu": 9024,
+                "sm2.shared_read": 0,
+                "sm2.shared_write": 0,
+                "sm2.tc": 172812,
+                "sm2.vec": 25953,
+                "sm3.dma": 87832,
+                "sm3.issue": 5119,
+                "sm3.issue_wait": 540166,
+                "sm3.noc_in": 69924,
+                "sm3.noc_out": 5876,
+                "sm3.reduce": 5142,
+                "sm3.rf_read": 165148,
+                "sm3.rf_write": 148145,
+                "sm3.sfu": 9024,
+                "sm3.shared_read": 0,
+                "sm3.shared_write": 0,
+                "sm3.tc": 172812,
+                "sm3.vec": 25953,
+                "sm4.dma": 87832,
+                "sm4.issue": 5119,
+                "sm4.issue_wait": 535124,
+                "sm4.noc_in": 69809,
+                "sm4.noc_out": 5982,
+                "sm4.reduce": 5142,
+                "sm4.rf_read": 165148,
+                "sm4.rf_write": 148145,
+                "sm4.sfu": 9024,
+                "sm4.shared_read": 0,
+                "sm4.shared_write": 0,
+                "sm4.tc": 172812,
+                "sm4.vec": 25953,
+                "sm5.dma": 87832,
+                "sm5.issue": 5119,
+                "sm5.issue_wait": 541247,
+                "sm5.noc_in": 69791,
+                "sm5.noc_out": 6020,
+                "sm5.reduce": 5142,
+                "sm5.rf_read": 165148,
+                "sm5.rf_write": 148145,
+                "sm5.sfu": 9024,
+                "sm5.shared_read": 0,
+                "sm5.shared_write": 0,
+                "sm5.tc": 172812,
+                "sm5.vec": 25953,
+                "sm6.dma": 87832,
+                "sm6.issue": 5119,
+                "sm6.issue_wait": 539380,
+                "sm6.noc_in": 69595,
+                "sm6.noc_out": 5919,
+                "sm6.reduce": 5142,
+                "sm6.rf_read": 165148,
+                "sm6.rf_write": 148145,
+                "sm6.sfu": 9024,
+                "sm6.shared_read": 0,
+                "sm6.shared_write": 0,
+                "sm6.tc": 172812,
+                "sm6.vec": 25953,
+                "sm7.dma": 87832,
+                "sm7.issue": 5119,
+                "sm7.issue_wait": 540895,
+                "sm7.noc_in": 69788,
+                "sm7.noc_out": 5985,
+                "sm7.reduce": 5142,
+                "sm7.rf_read": 165148,
+                "sm7.rf_write": 148145,
+                "sm7.sfu": 9024,
+                "sm7.shared_read": 0,
+                "sm7.shared_write": 0,
+                "sm7.tc": 172812,
+                "sm7.vec": 25953,
+                "sm8.dma": 72124,
+                "sm8.issue": 4246,
+                "sm8.issue_wait": 473191,
+                "sm8.noc_in": 56678,
+                "sm8.noc_out": 5992,
+                "sm8.reduce": 4998,
+                "sm8.rf_read": 156784,
+                "sm8.rf_write": 131441,
+                "sm8.sfu": 8892,
+                "sm8.shared_read": 0,
+                "sm8.shared_write": 0,
+                "sm8.tc": 158280,
+                "sm8.vec": 25575,
+                "sm9.dma": 72124,
+                "sm9.issue": 4246,
+                "sm9.issue_wait": 473617,
+                "sm9.noc_in": 57129,
+                "sm9.noc_out": 6019,
+                "sm9.reduce": 4998,
+                "sm9.rf_read": 156784,
+                "sm9.rf_write": 131441,
+                "sm9.sfu": 8892,
+                "sm9.shared_read": 0,
+                "sm9.shared_write": 0,
+                "sm9.tc": 158280,
+                "sm9.vec": 25575
+              },
+              "cycles": 563776,
+              "functional_passed": true,
+              "hbm_read_bytes": 32665536,
+              "hbm_write_bytes": 6522880,
+              "instruction_count": 74534,
+              "max_abs_error": 5.718740760829455e-06,
+              "peak_window_power_w": 10.886150158630294
+            },
+            "M2_D1": {
+              "busy_cycles": {
+                "shared.cache_bank_0": 24070,
+                "shared.cache_bank_1": 24074,
+                "shared.cache_bank_2": 24015,
+                "shared.cache_bank_3": 24026,
+                "shared.hbm_channel_0": 18290,
+                "shared.hbm_channel_1": 18270,
+                "shared.hbm_channel_2": 18274,
+                "shared.hbm_channel_3": 18304,
+                "shared.noc": 26381,
+                "sm0.dma": 8160,
+                "sm0.issue": 2150,
+                "sm0.issue_wait": 82319,
+                "sm0.noc_in": 6523,
+                "sm0.noc_out": 824,
+                "sm0.reduce": 1312,
+                "sm0.rf_read": 11168,
+                "sm0.rf_write": 15952,
+                "sm0.sfu": 672,
+                "sm0.shared_read": 28672,
+                "sm0.shared_write": 3584,
+                "sm0.tc": 21872,
+                "sm0.vec": 3696,
+                "sm1.dma": 5536,
+                "sm1.issue": 1174,
+                "sm1.issue_wait": 66158,
+                "sm1.noc_in": 4920,
+                "sm1.noc_out": 176,
+                "sm1.reduce": 256,
+                "sm1.rf_read": 8496,
+                "sm1.rf_write": 11840,
+                "sm1.sfu": 320,
+                "sm1.shared_read": 28672,
+                "sm1.shared_write": 3584,
+                "sm1.tc": 20992,
+                "sm1.vec": 992,
+                "sm10.dma": 5536,
+                "sm10.issue": 1174,
+                "sm10.issue_wait": 67005,
+                "sm10.noc_in": 4836,
+                "sm10.noc_out": 170,
+                "sm10.reduce": 256,
+                "sm10.rf_read": 8496,
+                "sm10.rf_write": 11840,
+                "sm10.sfu": 320,
+                "sm10.shared_read": 28672,
+                "sm10.shared_write": 3584,
+                "sm10.tc": 20992,
+                "sm10.vec": 992,
+                "sm11.dma": 5536,
+                "sm11.issue": 1174,
+                "sm11.issue_wait": 67091,
+                "sm11.noc_in": 4918,
+                "sm11.noc_out": 168,
+                "sm11.reduce": 256,
+                "sm11.rf_read": 8496,
+                "sm11.rf_write": 11840,
+                "sm11.sfu": 320,
+                "sm11.shared_read": 28672,
+                "sm11.shared_write": 3584,
+                "sm11.tc": 20992,
+                "sm11.vec": 992,
+                "sm12.dma": 6128,
+                "sm12.issue": 1494,
+                "sm12.issue_wait": 72137,
+                "sm12.noc_in": 5533,
+                "sm12.noc_out": 270,
+                "sm12.reduce": 480,
+                "sm12.rf_read": 9024,
+                "sm12.rf_write": 12624,
+                "sm12.sfu": 480,
+                "sm12.shared_read": 28672,
+                "sm12.shared_write": 3584,
+                "sm12.tc": 21872,
+                "sm12.vec": 1328,
+                "sm13.dma": 5536,
+                "sm13.issue": 1174,
+                "sm13.issue_wait": 67279,
+                "sm13.noc_in": 4843,
+                "sm13.noc_out": 180,
+                "sm13.reduce": 256,
+                "sm13.rf_read": 8496,
+                "sm13.rf_write": 11840,
+                "sm13.sfu": 320,
+                "sm13.shared_read": 28672,
+                "sm13.shared_write": 3584,
+                "sm13.tc": 20992,
+                "sm13.vec": 992,
+                "sm14.dma": 5536,
+                "sm14.issue": 1174,
+                "sm14.issue_wait": 67295,
+                "sm14.noc_in": 4664,
+                "sm14.noc_out": 180,
+                "sm14.reduce": 256,
+                "sm14.rf_read": 8496,
+                "sm14.rf_write": 11840,
+                "sm14.sfu": 320,
+                "sm14.shared_read": 28672,
+                "sm14.shared_write": 3584,
+                "sm14.tc": 20992,
+                "sm14.vec": 992,
+                "sm15.dma": 5536,
+                "sm15.issue": 1174,
+                "sm15.issue_wait": 67343,
+                "sm15.noc_in": 4812,
+                "sm15.noc_out": 166,
+                "sm15.reduce": 256,
+                "sm15.rf_read": 8496,
+                "sm15.rf_write": 11840,
+                "sm15.sfu": 320,
+                "sm15.shared_read": 28672,
+                "sm15.shared_write": 3584,
+                "sm15.tc": 20992,
+                "sm15.vec": 992,
+                "sm2.dma": 5536,
+                "sm2.issue": 1174,
+                "sm2.issue_wait": 66304,
+                "sm2.noc_in": 4814,
+                "sm2.noc_out": 176,
+                "sm2.reduce": 256,
+                "sm2.rf_read": 8496,
+                "sm2.rf_write": 11840,
+                "sm2.sfu": 320,
+                "sm2.shared_read": 28672,
+                "sm2.shared_write": 3584,
+                "sm2.tc": 20992,
+                "sm2.vec": 992,
+                "sm3.dma": 5536,
+                "sm3.issue": 1174,
+                "sm3.issue_wait": 66474,
+                "sm3.noc_in": 4918,
+                "sm3.noc_out": 176,
+                "sm3.reduce": 256,
+                "sm3.rf_read": 8496,
+                "sm3.rf_write": 11840,
+                "sm3.sfu": 320,
+                "sm3.shared_read": 28672,
+                "sm3.shared_write": 3584,
+                "sm3.tc": 20992,
+                "sm3.vec": 992,
+                "sm4.dma": 6128,
+                "sm4.issue": 1494,
+                "sm4.issue_wait": 71796,
+                "sm4.noc_in": 5551,
+                "sm4.noc_out": 271,
+                "sm4.reduce": 480,
+                "sm4.rf_read": 9024,
+                "sm4.rf_write": 12624,
+                "sm4.sfu": 480,
+                "sm4.shared_read": 28672,
+                "sm4.shared_write": 3584,
+                "sm4.tc": 21872,
+                "sm4.vec": 1328,
+                "sm5.dma": 5536,
+                "sm5.issue": 1174,
+                "sm5.issue_wait": 66640,
+                "sm5.noc_in": 4849,
+                "sm5.noc_out": 176,
+                "sm5.reduce": 256,
+                "sm5.rf_read": 8496,
+                "sm5.rf_write": 11840,
+                "sm5.sfu": 320,
+                "sm5.shared_read": 28672,
+                "sm5.shared_write": 3584,
+                "sm5.tc": 20992,
+                "sm5.vec": 992,
+                "sm6.dma": 5536,
+                "sm6.issue": 1174,
+                "sm6.issue_wait": 66707,
+                "sm6.noc_in": 4687,
+                "sm6.noc_out": 174,
+                "sm6.reduce": 256,
+                "sm6.rf_read": 8496,
+                "sm6.rf_write": 11840,
+                "sm6.sfu": 320,
+                "sm6.shared_read": 28672,
+                "sm6.shared_write": 3584,
+                "sm6.tc": 20992,
+                "sm6.vec": 992,
+                "sm7.dma": 5536,
+                "sm7.issue": 1174,
+                "sm7.issue_wait": 66817,
+                "sm7.noc_in": 4867,
+                "sm7.noc_out": 172,
+                "sm7.reduce": 256,
+                "sm7.rf_read": 8496,
+                "sm7.rf_write": 11840,
+                "sm7.sfu": 320,
+                "sm7.shared_read": 28672,
+                "sm7.shared_write": 3584,
+                "sm7.tc": 20992,
+                "sm7.vec": 992,
+                "sm8.dma": 6112,
+                "sm8.issue": 1494,
+                "sm8.issue_wait": 71926,
+                "sm8.noc_in": 5251,
+                "sm8.noc_out": 249,
+                "sm8.reduce": 480,
+                "sm8.rf_read": 9024,
+                "sm8.rf_write": 12624,
+                "sm8.sfu": 480,
+                "sm8.shared_read": 28672,
+                "sm8.shared_write": 3584,
+                "sm8.tc": 21872,
+                "sm8.vec": 1328,
+                "sm9.dma": 5536,
+                "sm9.issue": 1174,
+                "sm9.issue_wait": 66952,
+                "sm9.noc_in": 4921,
+                "sm9.noc_out": 172,
+                "sm9.reduce": 256,
+                "sm9.rf_read": 8496,
+                "sm9.rf_write": 11840,
+                "sm9.sfu": 320,
+                "sm9.shared_read": 28672,
+                "sm9.shared_write": 3584,
+                "sm9.tc": 20992,
+                "sm9.vec": 992
+              },
+              "cycles": 87779,
+              "functional_passed": true,
+              "hbm_read_bytes": 2084416,
+              "hbm_write_bytes": 202752,
+              "instruction_count": 17960,
+              "max_abs_error": 2.618642856555553e-06,
+              "peak_window_power_w": 10.50048748108938
+            }
+          },
+          "eligible": true,
+          "mode": "grade",
+          "score": 28557.620577252008
+        }
+      },
+      "verdict": "evaluated"
+    },
+    "score": 28557.620577252008,
+    "status": "evaluated",
+    "stored_at": "2026-09-29 23:18:43"
   },
   "c4cf0a1423e378f252e2033cfb0a6781fcc6fed4e385b54fd409e1480ddc1dbf": {
     "candidate_id": "cand-118",
@@ -8444,7 +9768,7 @@
     },
     "score": 5555.741702281949,
     "status": "evaluated",
-    "stored_at": "2026-09-29 03:05:53"
+    "stored_at": "2026-09-29 23:18:42"
   },
   "c5606389ab2d8e7e873f8652bc32cc53ca80b07801f052e9eacc70b9d622ba7d": {
     "candidate_id": "cand-067",
@@ -8531,7 +9855,7 @@
     },
     "score": 1894.931033551575,
     "status": "evaluated",
-    "stored_at": "2026-09-29 03:05:52"
+    "stored_at": "2026-09-29 23:18:41"
   },
   "c77a0a71246c95d25fbdedf884b4957a6dde6553f217d27f318d59d09c164a67": {
     "candidate_id": "cand-064",
@@ -8610,7 +9934,7 @@
     },
     "score": 1598.6569175780114,
     "status": "evaluated",
-    "stored_at": "2026-09-29 03:05:52"
+    "stored_at": "2026-09-29 23:18:41"
   },
   "c7c0b39be5c6f457f04e19cf264374f8c6f3df03d89cf0f59e425acd75b2ba1d": {
     "candidate_id": "cand-096",
@@ -8697,7 +10021,7 @@
     },
     "score": 2375.7262879581485,
     "status": "evaluated",
-    "stored_at": "2026-09-29 03:05:52"
+    "stored_at": "2026-09-29 23:18:42"
   },
   "cb886b84bd1645ca36c26abf210749550f315abb7c1f353ac21f85cf177dffa6": {
     "candidate_id": "cand-053",
@@ -8778,7 +10102,7 @@
     },
     "score": 1245.0300554926546,
     "status": "evaluated",
-    "stored_at": "2026-09-29 03:05:52"
+    "stored_at": "2026-09-29 23:18:41"
   },
   "cc0619f205c9e1deeac539dbc90bc2fc0ed7aa04c82b805460c38a07651ca374": {
     "candidate_id": "cand-009",
@@ -8857,7 +10181,7 @@
     },
     "score": 1178.3304547853895,
     "status": "evaluated",
-    "stored_at": "2026-09-29 03:05:52"
+    "stored_at": "2026-09-29 23:18:39"
   },
   "cd987d27b724357d890ab429f9c503e2ef4e1584bbd7fb667965738c9a258c3f": {
     "candidate_id": "cand-124",
@@ -8993,7 +10317,7 @@
     },
     "score": 6189.601474987878,
     "status": "evaluated",
-    "stored_at": "2026-09-29 03:05:53"
+    "stored_at": "2026-09-29 23:18:42"
   },
   "ce13232f2cae8b11c68e8bd50ee78e7ad3d5f59988b842be7b8e1e124950fbc6": {
     "candidate_id": "cand-116",
@@ -9116,7 +10440,7 @@
     },
     "score": 5148.962302010063,
     "status": "evaluated",
-    "stored_at": "2026-09-29 03:05:53"
+    "stored_at": "2026-09-29 23:18:42"
   },
   "cf6fe60305c3104f54c1086385aacd862e2fcf08860834c340f4cfba41e33fc8": {
     "candidate_id": "cand-078",
@@ -9203,7 +10527,7 @@
     },
     "score": 2153.6655079126076,
     "status": "evaluated",
-    "stored_at": "2026-09-29 03:05:52"
+    "stored_at": "2026-09-29 23:18:41"
   },
   "d1fc97c7837c25e965b2ece7794bed55a6b61975a63098ef13d8fffd6b839b63": {
     "candidate_id": "cand-132",
@@ -9339,7 +10663,7 @@
     },
     "score": 6259.015362751037,
     "status": "evaluated",
-    "stored_at": "2026-09-29 03:05:53"
+    "stored_at": "2026-09-29 23:18:43"
   },
   "d4b1ef4ae96295f72c3b5e4c6f56bc84a0461de62707ecfb7430038a04ffe385": {
     "candidate_id": "cand-002",
@@ -9418,7 +10742,7 @@
     },
     "score": 910.920963143551,
     "status": "evaluated",
-    "stored_at": "2026-09-29 03:05:52"
+    "stored_at": "2026-09-29 23:18:39"
   },
   "d69890967a6d8bde0311d43600717add03d35763139b30204cd549525fde795d": {
     "candidate_id": "cand-093",
@@ -9505,7 +10829,7 @@
     },
     "score": 2512.2200312594855,
     "status": "evaluated",
-    "stored_at": "2026-09-29 03:05:52"
+    "stored_at": "2026-09-29 23:18:42"
   },
   "d9ca67360481fed3f2093feabe0a7f91aa068472a8e9ba7418e4fe17ae2be9d8": {
     "candidate_id": "cand-030",
@@ -9584,7 +10908,7 @@
     },
     "score": 926.8247918622404,
     "status": "evaluated",
-    "stored_at": "2026-09-29 03:05:52"
+    "stored_at": "2026-09-29 23:18:40"
   },
   "dd8f3085a8f60210b3b34445b237866c43a1b8d9a1264118a9cfc64dae197df9": {
     "candidate_id": "cand-011",
@@ -9663,7 +10987,486 @@
     },
     "score": 1122.2175843408888,
     "status": "evaluated",
-    "stored_at": "2026-09-29 03:05:52"
+    "stored_at": "2026-09-29 23:18:39"
+  },
+  "de4fefcf02527c4d9943b6edbd84b2b91026ccc4cd416dae7e9cd18834a59077": {
+    "candidate_id": "cand-150",
+    "eligible": true,
+    "functional_passed": true,
+    "metrics": {
+      "candidate": "cand-150",
+      "historical_import": true,
+      "reports": {
+        "grade": {
+          "area_mm2": 23.53006052352,
+          "cases": {
+            "M1_P1": {
+              "busy_cycles": {
+                "shared.cache_bank_0": 374796,
+                "shared.cache_bank_1": 374892,
+                "shared.cache_bank_2": 408444,
+                "shared.cache_bank_3": 408479,
+                "shared.hbm_channel_0": 304582,
+                "shared.hbm_channel_1": 314174,
+                "shared.hbm_channel_2": 301804,
+                "shared.hbm_channel_3": 304078,
+                "shared.noc": 475781,
+                "sm0.dma": 88536,
+                "sm0.issue": 5238,
+                "sm0.issue_wait": 538901,
+                "sm0.noc_in": 68960,
+                "sm0.noc_out": 6140,
+                "sm0.reduce": 5358,
+                "sm0.rf_read": 165912,
+                "sm0.rf_write": 149301,
+                "sm0.sfu": 9060,
+                "sm0.shared_read": 0,
+                "sm0.shared_write": 0,
+                "sm0.tc": 172812,
+                "sm0.vec": 26709,
+                "sm1.dma": 88536,
+                "sm1.issue": 5238,
+                "sm1.issue_wait": 539229,
+                "sm1.noc_in": 69125,
+                "sm1.noc_out": 6104,
+                "sm1.reduce": 5358,
+                "sm1.rf_read": 165912,
+                "sm1.rf_write": 149301,
+                "sm1.sfu": 9060,
+                "sm1.shared_read": 0,
+                "sm1.shared_write": 0,
+                "sm1.tc": 172812,
+                "sm1.vec": 26709,
+                "sm10.dma": 72124,
+                "sm10.issue": 4246,
+                "sm10.issue_wait": 475795,
+                "sm10.noc_in": 57103,
+                "sm10.noc_out": 6002,
+                "sm10.reduce": 4998,
+                "sm10.rf_read": 156784,
+                "sm10.rf_write": 131441,
+                "sm10.sfu": 8892,
+                "sm10.shared_read": 0,
+                "sm10.shared_write": 0,
+                "sm10.tc": 158280,
+                "sm10.vec": 25575,
+                "sm11.dma": 72124,
+                "sm11.issue": 4246,
+                "sm11.issue_wait": 476924,
+                "sm11.noc_in": 56810,
+                "sm11.noc_out": 5984,
+                "sm11.reduce": 4998,
+                "sm11.rf_read": 156784,
+                "sm11.rf_write": 131441,
+                "sm11.sfu": 8892,
+                "sm11.shared_read": 0,
+                "sm11.shared_write": 0,
+                "sm11.tc": 158280,
+                "sm11.vec": 25575,
+                "sm12.dma": 72124,
+                "sm12.issue": 4246,
+                "sm12.issue_wait": 477772,
+                "sm12.noc_in": 56740,
+                "sm12.noc_out": 6036,
+                "sm12.reduce": 4998,
+                "sm12.rf_read": 156784,
+                "sm12.rf_write": 131441,
+                "sm12.sfu": 8892,
+                "sm12.shared_read": 0,
+                "sm12.shared_write": 0,
+                "sm12.tc": 158280,
+                "sm12.vec": 25575,
+                "sm13.dma": 72124,
+                "sm13.issue": 4246,
+                "sm13.issue_wait": 478676,
+                "sm13.noc_in": 57619,
+                "sm13.noc_out": 6043,
+                "sm13.reduce": 4998,
+                "sm13.rf_read": 156784,
+                "sm13.rf_write": 131441,
+                "sm13.sfu": 8892,
+                "sm13.shared_read": 0,
+                "sm13.shared_write": 0,
+                "sm13.tc": 158280,
+                "sm13.vec": 25575,
+                "sm14.dma": 72124,
+                "sm14.issue": 4246,
+                "sm14.issue_wait": 477285,
+                "sm14.noc_in": 56706,
+                "sm14.noc_out": 6003,
+                "sm14.reduce": 4998,
+                "sm14.rf_read": 156784,
+                "sm14.rf_write": 131441,
+                "sm14.sfu": 8892,
+                "sm14.shared_read": 0,
+                "sm14.shared_write": 0,
+                "sm14.tc": 158280,
+                "sm14.vec": 25575,
+                "sm15.dma": 72124,
+                "sm15.issue": 4246,
+                "sm15.issue_wait": 478697,
+                "sm15.noc_in": 56601,
+                "sm15.noc_out": 5972,
+                "sm15.reduce": 4998,
+                "sm15.rf_read": 156784,
+                "sm15.rf_write": 131441,
+                "sm15.sfu": 8892,
+                "sm15.shared_read": 0,
+                "sm15.shared_write": 0,
+                "sm15.tc": 158280,
+                "sm15.vec": 25575,
+                "sm2.dma": 87832,
+                "sm2.issue": 5119,
+                "sm2.issue_wait": 539467,
+                "sm2.noc_in": 70376,
+                "sm2.noc_out": 5886,
+                "sm2.reduce": 5142,
+                "sm2.rf_read": 165148,
+                "sm2.rf_write": 148145,
+                "sm2.sfu": 9024,
+                "sm2.shared_read": 0,
+                "sm2.shared_write": 0,
+                "sm2.tc": 172812,
+                "sm2.vec": 25953,
+                "sm3.dma": 87832,
+                "sm3.issue": 5119,
+                "sm3.issue_wait": 540166,
+                "sm3.noc_in": 69924,
+                "sm3.noc_out": 5876,
+                "sm3.reduce": 5142,
+                "sm3.rf_read": 165148,
+                "sm3.rf_write": 148145,
+                "sm3.sfu": 9024,
+                "sm3.shared_read": 0,
+                "sm3.shared_write": 0,
+                "sm3.tc": 172812,
+                "sm3.vec": 25953,
+                "sm4.dma": 87832,
+                "sm4.issue": 5119,
+                "sm4.issue_wait": 535124,
+                "sm4.noc_in": 69809,
+                "sm4.noc_out": 5982,
+                "sm4.reduce": 5142,
+                "sm4.rf_read": 165148,
+                "sm4.rf_write": 148145,
+                "sm4.sfu": 9024,
+                "sm4.shared_read": 0,
+                "sm4.shared_write": 0,
+                "sm4.tc": 172812,
+                "sm4.vec": 25953,
+                "sm5.dma": 87832,
+                "sm5.issue": 5119,
+                "sm5.issue_wait": 541247,
+                "sm5.noc_in": 69791,
+                "sm5.noc_out": 6020,
+                "sm5.reduce": 5142,
+                "sm5.rf_read": 165148,
+                "sm5.rf_write": 148145,
+                "sm5.sfu": 9024,
+                "sm5.shared_read": 0,
+                "sm5.shared_write": 0,
+                "sm5.tc": 172812,
+                "sm5.vec": 25953,
+                "sm6.dma": 87832,
+                "sm6.issue": 5119,
+                "sm6.issue_wait": 539380,
+                "sm6.noc_in": 69595,
+                "sm6.noc_out": 5919,
+                "sm6.reduce": 5142,
+                "sm6.rf_read": 165148,
+                "sm6.rf_write": 148145,
+                "sm6.sfu": 9024,
+                "sm6.shared_read": 0,
+                "sm6.shared_write": 0,
+                "sm6.tc": 172812,
+                "sm6.vec": 25953,
+                "sm7.dma": 87832,
+                "sm7.issue": 5119,
+                "sm7.issue_wait": 540895,
+                "sm7.noc_in": 69788,
+                "sm7.noc_out": 5985,
+                "sm7.reduce": 5142,
+                "sm7.rf_read": 165148,
+                "sm7.rf_write": 148145,
+                "sm7.sfu": 9024,
+                "sm7.shared_read": 0,
+                "sm7.shared_write": 0,
+                "sm7.tc": 172812,
+                "sm7.vec": 25953,
+                "sm8.dma": 72124,
+                "sm8.issue": 4246,
+                "sm8.issue_wait": 473191,
+                "sm8.noc_in": 56678,
+                "sm8.noc_out": 5992,
+                "sm8.reduce": 4998,
+                "sm8.rf_read": 156784,
+                "sm8.rf_write": 131441,
+                "sm8.sfu": 8892,
+                "sm8.shared_read": 0,
+                "sm8.shared_write": 0,
+                "sm8.tc": 158280,
+                "sm8.vec": 25575,
+                "sm9.dma": 72124,
+                "sm9.issue": 4246,
+                "sm9.issue_wait": 473617,
+                "sm9.noc_in": 57129,
+                "sm9.noc_out": 6019,
+                "sm9.reduce": 4998,
+                "sm9.rf_read": 156784,
+                "sm9.rf_write": 131441,
+                "sm9.sfu": 8892,
+                "sm9.shared_read": 0,
+                "sm9.shared_write": 0,
+                "sm9.tc": 158280,
+                "sm9.vec": 25575
+              },
+              "cycles": 563776,
+              "functional_passed": true,
+              "hbm_read_bytes": 32665536,
+              "hbm_write_bytes": 6522880,
+              "instruction_count": 74534,
+              "max_abs_error": 5.718740760829455e-06,
+              "peak_window_power_w": 10.886150158630294
+            },
+            "M2_D1": {
+              "busy_cycles": {
+                "shared.cache_bank_0": 16646,
+                "shared.cache_bank_1": 16650,
+                "shared.cache_bank_2": 16591,
+                "shared.cache_bank_3": 16602,
+                "shared.hbm_channel_0": 17778,
+                "shared.hbm_channel_1": 17758,
+                "shared.hbm_channel_2": 17762,
+                "shared.hbm_channel_3": 17792,
+                "shared.noc": 18796,
+                "sm0.dma": 6304,
+                "sm0.issue": 2204,
+                "sm0.issue_wait": 66514,
+                "sm0.noc_in": 4954,
+                "sm0.noc_out": 800,
+                "sm0.reduce": 1312,
+                "sm0.rf_read": 11248,
+                "sm0.rf_write": 12528,
+                "sm0.sfu": 672,
+                "sm0.shared_read": 20480,
+                "sm0.shared_write": 2560,
+                "sm0.tc": 21872,
+                "sm0.vec": 4144,
+                "sm1.dma": 3680,
+                "sm1.issue": 1228,
+                "sm1.issue_wait": 52009,
+                "sm1.noc_in": 3508,
+                "sm1.noc_out": 160,
+                "sm1.reduce": 256,
+                "sm1.rf_read": 8576,
+                "sm1.rf_write": 8416,
+                "sm1.sfu": 320,
+                "sm1.shared_read": 20480,
+                "sm1.shared_write": 2560,
+                "sm1.tc": 20992,
+                "sm1.vec": 1440,
+                "sm10.dma": 3680,
+                "sm10.issue": 1228,
+                "sm10.issue_wait": 52129,
+                "sm10.noc_in": 3485,
+                "sm10.noc_out": 160,
+                "sm10.reduce": 256,
+                "sm10.rf_read": 8576,
+                "sm10.rf_write": 8416,
+                "sm10.sfu": 320,
+                "sm10.shared_read": 20480,
+                "sm10.shared_write": 2560,
+                "sm10.tc": 20992,
+                "sm10.vec": 1440,
+                "sm11.dma": 3680,
+                "sm11.issue": 1228,
+                "sm11.issue_wait": 52159,
+                "sm11.noc_in": 3510,
+                "sm11.noc_out": 160,
+                "sm11.reduce": 256,
+                "sm11.rf_read": 8576,
+                "sm11.rf_write": 8416,
+                "sm11.sfu": 320,
+                "sm11.shared_read": 20480,
+                "sm11.shared_write": 2560,
+                "sm11.tc": 20992,
+                "sm11.vec": 1440,
+                "sm12.dma": 4272,
+                "sm12.issue": 1548,
+                "sm12.issue_wait": 56286,
+                "sm12.noc_in": 3947,
+                "sm12.noc_out": 240,
+                "sm12.reduce": 480,
+                "sm12.rf_read": 9104,
+                "sm12.rf_write": 9200,
+                "sm12.sfu": 480,
+                "sm12.shared_read": 20480,
+                "sm12.shared_write": 2560,
+                "sm12.tc": 21872,
+                "sm12.vec": 1776,
+                "sm13.dma": 3680,
+                "sm13.issue": 1228,
+                "sm13.issue_wait": 52197,
+                "sm13.noc_in": 3510,
+                "sm13.noc_out": 160,
+                "sm13.reduce": 256,
+                "sm13.rf_read": 8576,
+                "sm13.rf_write": 8416,
+                "sm13.sfu": 320,
+                "sm13.shared_read": 20480,
+                "sm13.shared_write": 2560,
+                "sm13.tc": 20992,
+                "sm13.vec": 1440,
+                "sm14.dma": 3680,
+                "sm14.issue": 1228,
+                "sm14.issue_wait": 52183,
+                "sm14.noc_in": 3273,
+                "sm14.noc_out": 160,
+                "sm14.reduce": 256,
+                "sm14.rf_read": 8576,
+                "sm14.rf_write": 8416,
+                "sm14.sfu": 320,
+                "sm14.shared_read": 20480,
+                "sm14.shared_write": 2560,
+                "sm14.tc": 20992,
+                "sm14.vec": 1440,
+                "sm15.dma": 3680,
+                "sm15.issue": 1228,
+                "sm15.issue_wait": 52211,
+                "sm15.noc_in": 3513,
+                "sm15.noc_out": 160,
+                "sm15.reduce": 256,
+                "sm15.rf_read": 8576,
+                "sm15.rf_write": 8416,
+                "sm15.sfu": 320,
+                "sm15.shared_read": 20480,
+                "sm15.shared_write": 2560,
+                "sm15.tc": 20992,
+                "sm15.vec": 1440,
+                "sm2.dma": 3680,
+                "sm2.issue": 1228,
+                "sm2.issue_wait": 51982,
+                "sm2.noc_in": 3485,
+                "sm2.noc_out": 160,
+                "sm2.reduce": 256,
+                "sm2.rf_read": 8576,
+                "sm2.rf_write": 8416,
+                "sm2.sfu": 320,
+                "sm2.shared_read": 20480,
+                "sm2.shared_write": 2560,
+                "sm2.tc": 20992,
+                "sm2.vec": 1440,
+                "sm3.dma": 3680,
+                "sm3.issue": 1228,
+                "sm3.issue_wait": 52021,
+                "sm3.noc_in": 3502,
+                "sm3.noc_out": 160,
+                "sm3.reduce": 256,
+                "sm3.rf_read": 8576,
+                "sm3.rf_write": 8416,
+                "sm3.sfu": 320,
+                "sm3.shared_read": 20480,
+                "sm3.shared_write": 2560,
+                "sm3.tc": 20992,
+                "sm3.vec": 1440,
+                "sm4.dma": 4272,
+                "sm4.issue": 1548,
+                "sm4.issue_wait": 56103,
+                "sm4.noc_in": 3957,
+                "sm4.noc_out": 240,
+                "sm4.reduce": 480,
+                "sm4.rf_read": 9104,
+                "sm4.rf_write": 9200,
+                "sm4.sfu": 480,
+                "sm4.shared_read": 20480,
+                "sm4.shared_write": 2560,
+                "sm4.tc": 21872,
+                "sm4.vec": 1776,
+                "sm5.dma": 3680,
+                "sm5.issue": 1228,
+                "sm5.issue_wait": 52058,
+                "sm5.noc_in": 3508,
+                "sm5.noc_out": 160,
+                "sm5.reduce": 256,
+                "sm5.rf_read": 8576,
+                "sm5.rf_write": 8416,
+                "sm5.sfu": 320,
+                "sm5.shared_read": 20480,
+                "sm5.shared_write": 2560,
+                "sm5.tc": 20992,
+                "sm5.vec": 1440,
+                "sm6.dma": 3680,
+                "sm6.issue": 1228,
+                "sm6.issue_wait": 52041,
+                "sm6.noc_in": 3268,
+                "sm6.noc_out": 160,
+                "sm6.reduce": 256,
+                "sm6.rf_read": 8576,
+                "sm6.rf_write": 8416,
+                "sm6.sfu": 320,
+                "sm6.shared_read": 20480,
+                "sm6.shared_write": 2560,
+                "sm6.tc": 20992,
+                "sm6.vec": 1440,
+                "sm7.dma": 3680,
+                "sm7.issue": 1228,
+                "sm7.issue_wait": 52073,
+                "sm7.noc_in": 3504,
+                "sm7.noc_out": 160,
+                "sm7.reduce": 256,
+                "sm7.rf_read": 8576,
+                "sm7.rf_write": 8416,
+                "sm7.sfu": 320,
+                "sm7.shared_read": 20480,
+                "sm7.shared_write": 2560,
+                "sm7.tc": 20992,
+                "sm7.vec": 1440,
+                "sm8.dma": 4256,
+                "sm8.issue": 1548,
+                "sm8.issue_wait": 56160,
+                "sm8.noc_in": 3697,
+                "sm8.noc_out": 224,
+                "sm8.reduce": 480,
+                "sm8.rf_read": 9104,
+                "sm8.rf_write": 9200,
+                "sm8.sfu": 480,
+                "sm8.shared_read": 20480,
+                "sm8.shared_write": 2560,
+                "sm8.tc": 21872,
+                "sm8.vec": 1776,
+                "sm9.dma": 3680,
+                "sm9.issue": 1228,
+                "sm9.issue_wait": 52147,
+                "sm9.noc_in": 3509,
+                "sm9.noc_out": 160,
+                "sm9.reduce": 256,
+                "sm9.rf_read": 8576,
+                "sm9.rf_write": 8416,
+                "sm9.sfu": 320,
+                "sm9.shared_read": 20480,
+                "sm9.shared_write": 2560,
+                "sm9.tc": 20992,
+                "sm9.vec": 1440
+              },
+              "cycles": 74180,
+              "functional_passed": true,
+              "hbm_read_bytes": 2051648,
+              "hbm_write_bytes": 169984,
+              "instruction_count": 18584,
+              "max_abs_error": 1.3806409508987372e-06,
+              "peak_window_power_w": 10.491617081089254
+            }
+          },
+          "eligible": true,
+          "mode": "grade",
+          "score": 31065.183202404995
+        }
+      },
+      "verdict": "evaluated"
+    },
+    "score": 31065.183202404995,
+    "status": "evaluated",
+    "stored_at": "2026-09-29 23:18:43"
   },
   "e3bec8a6d7cd57459b9ff5a84672cdf25dbfc49690d749672b07ee40608ad551": {
     "candidate_id": "cand-080",
@@ -9750,7 +11553,7 @@
     },
     "score": 2078.124801537899,
     "status": "evaluated",
-    "stored_at": "2026-09-29 03:05:52"
+    "stored_at": "2026-09-29 23:18:41"
   },
   "e624d2b5a240dc8bb11513718f568cfd2345097ddb8a3e7071b07a32c0144b22": {
     "candidate_id": "cand-058",
@@ -9829,7 +11632,7 @@
     },
     "score": 1824.400503955544,
     "status": "evaluated",
-    "stored_at": "2026-09-29 03:05:52"
+    "stored_at": "2026-09-29 23:18:41"
   },
   "ea8d5070df435122fea480bae04f68d2d8693f89f851344ac268f0d6d2e58985": {
     "candidate_id": "cand-063",
@@ -9908,7 +11711,7 @@
     },
     "score": 1874.814304538389,
     "status": "evaluated",
-    "stored_at": "2026-09-29 03:05:52"
+    "stored_at": "2026-09-29 23:18:41"
   },
   "eb4b0c8b9a0f3c3a1ffdf39e2891b0e80795a6f20ad4fc799fb4621337ee4b70": {
     "candidate_id": "cand-134",
@@ -10044,7 +11847,7 @@
     },
     "score": 6264.320591992501,
     "status": "evaluated",
-    "stored_at": "2026-09-29 03:05:53"
+    "stored_at": "2026-09-29 23:18:43"
   },
   "ebf6fa0ba7187acaad6ce3c03d634598899bea9ac1102c284e937e957d68a8ba": {
     "candidate_id": "cand-024",
@@ -10123,7 +11926,7 @@
     },
     "score": 1188.7989042667773,
     "status": "evaluated",
-    "stored_at": "2026-09-29 03:05:52"
+    "stored_at": "2026-09-29 23:18:40"
   },
   "ec151bc5cb4f1cb2460802b2407bb0d9cd4b407e3d0612161591dbec73ae9375": {
     "candidate_id": "cand-138",
@@ -10259,7 +12062,7 @@
     },
     "score": 6939.289778161679,
     "status": "evaluated",
-    "stored_at": "2026-09-29 03:05:53"
+    "stored_at": "2026-09-29 23:18:43"
   },
   "f2b1ef9f1991ab31be847a1c26971ad68ad817d76f1ffbcc09e074fbccd9d89e": {
     "candidate_id": "cand-072",
@@ -10338,7 +12141,7 @@
     },
     "score": 2004.670977306224,
     "status": "evaluated",
-    "stored_at": "2026-09-29 03:05:52"
+    "stored_at": "2026-09-29 23:18:41"
   },
   "f33a7b18973510ecdf22ed86ec3022c3658211a267180da564f204538251015b": {
     "candidate_id": "cand-115",
@@ -10461,7 +12264,7 @@
     },
     "score": 5210.716811684826,
     "status": "evaluated",
-    "stored_at": "2026-09-29 03:05:53"
+    "stored_at": "2026-09-29 23:18:42"
   },
   "f58b562b1e7e13044877da819f42f61cadc8b48e16c4dd5997b0cd74f4f2a927": {
     "candidate_id": "cand-142",
@@ -10597,7 +12400,7 @@
     },
     "score": 6986.34937029585,
     "status": "evaluated",
-    "stored_at": "2026-09-29 03:05:53"
+    "stored_at": "2026-09-29 23:18:43"
   },
   "f7ba703d86620627643e78e438fa612068d60a39330b11eed54407f13e780b09": {
     "candidate_id": "cand-060",
@@ -10676,7 +12479,7 @@
     },
     "score": 1726.161168219366,
     "status": "evaluated",
-    "stored_at": "2026-09-29 03:05:52"
+    "stored_at": "2026-09-29 23:18:41"
   },
   "fa97668120b1e97dacef29416f89c5e13abe795cc6fe814caa08b29a56749300": {
     "candidate_id": "cand-038",
@@ -10755,7 +12558,7 @@
     },
     "score": 1192.1825329196229,
     "status": "evaluated",
-    "stored_at": "2026-09-29 03:05:52"
+    "stored_at": "2026-09-29 23:18:40"
   },
   "ff0da3b22e0f91a1e9171e7472051c4e4aa547c95a414c8cf2634cb1f17312d2": {
     "candidate_id": "cand-031",
@@ -10834,6 +12637,6 @@
     },
     "score": 1103.1808039751736,
     "status": "evaluated",
-    "stored_at": "2026-09-29 03:05:52"
+    "stored_at": "2026-09-29 23:18:40"
   }
 }

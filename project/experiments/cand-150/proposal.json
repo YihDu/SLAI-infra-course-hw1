@@ -1,0 +1,12 @@
+{
+  "sources": {
+    "p1": "project/experiments/cand-149/inputs",
+    "d1": "project/campaigns/d1-sh/layer_rf_v1",
+    "hardware": "project/campaigns/d1-sh/layer_rf_v1/hardware.json",
+    "parent": "cand-149",
+    "hypothesis": "D1 per-layer persistent RF groups with WO/W1/W2 resident in each layer; KV SH, dual accumulators, load-ahead and fused GELU. Frozen D1 seeds7/19 and estimate pass:74180 cycles. P1 and hardware byte-identical to graded cand-149.",
+    "expect_p1": "project/experiments/cand-149/programs/M1_P1.asm",
+    "expect_d1": "project/campaigns/d1-sh/layer_rf_v1/M2_D1.asm"
+  },
+  "program_equality_verified": true
+}

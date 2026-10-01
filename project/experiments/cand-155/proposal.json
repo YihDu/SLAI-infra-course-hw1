@@ -1,0 +1,9 @@
+{
+  "sources": {
+    "hardware": "/home/jovyan/projects/SLAI-infra-course-hw1/project/campaigns/structural-rewrite/hw_privsh256_hbm4.json",
+    "p1_asm": "/home/jovyan/projects/SLAI-infra-course-hw1/project/campaigns/structural-rewrite/p1_privsh256_hbm4.asm",
+    "grade": "/home/jovyan/projects/SLAI-infra-course-hw1/project/campaigns/structural-rewrite/grade_privsh256_hbm4.json"
+  },
+  "program_regeneration_verified": true,
+  "promotion": "manual; sprint-2 salvage branch winner (hbm8 variants power-ineligible)"
+}

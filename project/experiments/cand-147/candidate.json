@@ -1,0 +1,18 @@
+{
+  "bias": null,
+  "created_at": "2026-09-29 17:16:27",
+  "failure_class": "none",
+  "family": null,
+  "fingerprint": null,
+  "hypothesis": "critpath attribution: P1 W1/W2 used the non-prefetching generic GEMM (LD-RAW/WAR stalls) and GELU round-tripped HBM. Enable operand_pipeline for w1/w2, fuse bias+GELU into W1 epilogue (MMA k=1 ones x bias, then in-place tanh-GELU), prefetch step GEMMs.",
+  "id": "cand-147",
+  "kind": null,
+  "ops": null,
+  "parent": "cand-146",
+  "provenance_note": null,
+  "round": null,
+  "status": "kept",
+  "struct_sig": null,
+  "summary": "cand-146 + gemm_stages.p1_prompt.operand_pipeline+=[w1,w2], p1_schedule.fuse_gelu=1, p1_step.prefetch=1. Dev: critpath P1 1,111,753 (-29.7%), dev_functional pass 3.0e-6; 81,227 events",
+  "verdict_note": null
+}

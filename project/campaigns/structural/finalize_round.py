@@ -1,0 +1,183 @@
+"""Wait for the two active campaigns, select the best eligible grade, and stop.
+
+This is a fixed current-round finisher. It never proposes or evaluates new
+candidates. Root files change only if their initial hashes are unchanged.
+"""
+from datetime import datetime, timezone
+import hashlib
+import json
+import math
+from pathlib import Path
+import shutil
+import subprocess
+import sys
+import time
+
+ROOT = Path(__file__).resolve().parents[3]
+CAMPAIGN = ROOT / "project/campaigns/structural"
+OUT = CAMPAIGN / "current-round-finalization"
+OUT.mkdir(exist_ok=True)
+STATUS = OUT / "status.json"
+EXPECTED = {
+    "hardware.json": "e3ce131861ab9bd8221f62d024a403b99c0ff24ddcb6c0750c08011f1f3c926a",
+    "project/recipe.json": "74670c77f8c2d81cc6ea29350a04d7b626ec7b15f2ce1b0ec660045a23092826",
+    "programs/M1_P1.asm": "4b4e9f88569715fc811da29f74bf32f28b2acc21e34bef61a3e90e17ba2f7834",
+    "programs/M2_D1.asm": "ec4d60ee96a58040e95f2d48e8f648d3281ac87d29fd74e19665abb7ca",
+}
+CAMPAIGNS = [CAMPAIGN / "aggressive-r1", CAMPAIGN / "p1-pair-r1"]
+STANDALONE = [
+    CAMPAIGN / "p1_paired_w1_noc512/joint",
+    CAMPAIGN / "p1_paired_w1_step_rf_noc512/joint",
+]
+INCUMBENT = ROOT / "project/campaigns/d1-sh/layer_rf_tc_noc512/joint"
+TERMINAL = {"completed", "failed", "interrupted_or_error"}
+
+
+def read(path):
+    return json.loads(path.read_text())
+
+
+def sha(path):
+    return hashlib.sha256(path.read_bytes()).hexdigest()
+
+
+def stamp():
+    return datetime.now(timezone.utc).isoformat()
+
+
+def save(status):
+    status["updated_utc"] = stamp()
+    STATUS.write_text(json.dumps(status, indent=2) + "\n")
+
+
+def status_snapshot():
+    campaigns = {}
+    for directory in CAMPAIGNS:
+        path = directory / "state.json"
+        if path.exists():
+            data = read(path)
+            campaigns[directory.name] = {"status": data.get("status"),
+                                         "phase": data.get("phase"),
+                                         "results": len(data.get("results", []))}
+        else:
+            campaigns[directory.name] = {"status": "missing"}
+    standalone = {}
+    for directory in STANDALONE:
+        path = directory / "grade-run.json"
+        standalone[directory.parent.name] = read(path).get("status") if path.exists() else "missing"
+    return campaigns, standalone
+
+
+def candidates():
+    result = [INCUMBENT, *STANDALONE]
+    result.extend(CAMPAIGN.glob("aggressive-r1/joint-*"))
+    result.extend(CAMPAIGN.glob("p1-pair-r1/*/joint"))
+    return [p for p in result if p.is_dir()]
+
+
+def patch_file(relative, content):
+    target = ROOT / relative
+    old = target.read_text()
+    if old == content:
+        return
+    lines = ["*** Begin Patch", f"*** Update File: {target}", "@@"]
+    lines.extend("-" + line for line in old.splitlines())
+    lines.extend("+" + line for line in content.splitlines())
+    lines.append("*** End Patch")
+    tool = shutil.which("apply_patch")
+    if not tool:
+        raise RuntimeError("apply_patch executable unavailable")
+    completed = subprocess.run([tool], input="\n".join(lines) + "\n",
+                               text=True, capture_output=True, cwd=ROOT)
+    if completed.returncode:
+        raise RuntimeError(f"apply_patch {relative}: {completed.stdout} {completed.stderr}")
+
+
+def select_and_stage(status):
+    rows = []
+    for directory in candidates():
+        report = directory / "grade.json"
+        meta = directory / "grade-run.json"
+        if not report.exists() or (meta.exists() and read(meta).get("status") != "completed"):
+            continue
+        raw = read(report)
+        score = raw.get("experimental_score")
+        if raw.get("eligible") is not True or not isinstance(score, (int, float)) or not math.isfinite(score):
+            continue
+        cycles = {case: block.get("timing", {}).get("cycles")
+                  for case, block in raw.get("cases", {}).items()}
+        rows.append({"directory":str(directory),"score":score,"cycles":cycles})
+    rows.sort(key=lambda row: -row["score"])
+    status["eligible_grades"] = rows
+    save(status)
+    if not rows:
+        raise RuntimeError("No completed eligible grade in the current round")
+    winner = Path(rows[0]["directory"])
+    for relative, expected in EXPECTED.items():
+        if sha(ROOT / relative) != expected:
+            raise RuntimeError(f"Worktree conflict: {relative} changed since round finalizer started")
+    recipe_text = (winner / "recipe.json").read_text()
+    hardware_text = (winner / "hardware.json").read_text()
+    recipe = json.loads(recipe_text)
+    hardware = json.loads(hardware_text)
+    # Validate regeneration before touching the staged submission.
+    sys.path.insert(0, str(ROOT))
+    from project import compiler
+    p1 = compiler.generate_m1_p1(recipe)[0]
+    d1 = compiler.generate_m1_d1(recipe=recipe)[0]
+    if p1 != (winner / "programs/M1_P1.asm").read_text():
+        raise RuntimeError("Winner P1 cannot be regenerated by root compiler")
+    if d1 != (winner / "programs/M2_D1.asm").read_text():
+        raise RuntimeError("Winner D1 cannot be regenerated by root compiler")
+    if hardware == json.loads((ROOT / "hardware.json").read_text()) and \
+       recipe == json.loads((ROOT / "project/recipe.json").read_text()):
+        status["staged_already"] = True
+    else:
+        patch_file("hardware.json", json.dumps(hardware, indent=2) + "\n")
+        patch_file("project/recipe.json", json.dumps(recipe, indent=2) + "\n")
+        subprocess.run([sys.executable,"-m","project.compiler"],cwd=ROOT,check=True,
+                       capture_output=True,text=True)
+    for filename, expected in (("M1_P1.asm",p1),("M2_D1.asm",d1)):
+        if (ROOT / "programs" / filename).read_text() != expected:
+            raise RuntimeError(f"Staged {filename} differs from eligible winner")
+    if hardware != json.loads((ROOT / "hardware.json").read_text()):
+        raise RuntimeError("Staged hardware differs from eligible winner")
+    if recipe != json.loads((ROOT / "project/recipe.json").read_text()):
+        raise RuntimeError("Staged recipe differs from eligible winner")
+    status.update(status="completed", winner=rows[0], staged=True,
+                  finished_utc=stamp())
+    with (ROOT / "project/iteration-log.md").open("a") as log:
+        log.write(f"\n## {datetime.now(timezone.utc):%Y-%m-%d %H:%M UTC} — Stop after current round; stage highest eligible grade\n"
+                  f"- Change: stage `{winner.relative_to(ROOT)}` into root hardware, recipe and generated programs. No further search rounds launched.\n"
+                  f"- Verify: frozen grade `{(winner/'grade.json').relative_to(ROOT)}` eligible=True; root compiler regenerated P1/D1 byte-identically; complete eligible comparison in `{STATUS.relative_to(ROOT)}`.\n"
+                  f"- Result: P1={rows[0]['cycles'].get('M1_P1')}, D1={rows[0]['cycles'].get('M2_D1')}, score={rows[0]['score']}.\n"
+                  "- Decision: keep this highest fully eligible result and stop search.\n")
+    save(status)
+
+
+def main():
+    status = {"status":"waiting","started_utc":stamp(),
+              "scope":"two current campaigns and two already launched standalone grades",
+              "expected_root_hashes":EXPECTED}
+    save(status)
+    deadline = time.monotonic() + 12 * 3600
+    try:
+        while time.monotonic() < deadline:
+            campaigns, standalone = status_snapshot()
+            status.update(campaigns=campaigns,standalone_grades=standalone)
+            save(status)
+            if (all(item["status"] in {"completed","failed"} for item in campaigns.values())
+                    and all(value in TERMINAL for value in standalone.values())):
+                select_and_stage(status)
+                print(json.dumps(status["winner"]),flush=True)
+                return
+            time.sleep(30)
+        raise TimeoutError("Current round did not finish within 12 hours")
+    except BaseException as exc:
+        status.update(status="failed", error=repr(exc),finished_utc=stamp())
+        save(status)
+        raise
+
+
+if __name__ == "__main__":
+    main()

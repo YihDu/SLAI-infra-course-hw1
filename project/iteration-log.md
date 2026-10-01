@@ -1832,3 +1832,1448 @@ AssertionError: DMA slot changed after issue preview
 - Verify: `project/experiments/cand-143/reports/{p1-profile.json,d1-profile.json,grade.json}`; cand-141 `reports/validation-cost.json`; full evidence summarized in `project/campaigns/current-design-limit/REPORT.md`.
 - Result: cand-143 P1=4,897,135, D1=167,539, score=7013.610245, area=22.8598 mm², peak power=4.019/7.495 W, both functional passes. P1 is 50.77% prompt MLP; D1 W1/W2 are23.51%/23.56%. Compressed batch-parallel P1 still has78,032 events and13.773 GB retained-set logical lower bound versus6,144 MiB budget, so no grade was launched.
 - Decision: current implemented design family is saturated. Stop tile/SH/hardware/panel sweeps; a future campaign needs a different RF layout/event-compressed algorithm or a validation environment capable of the multi-SM skeleton.
+
+## 2026-09-29 11:18:40 — cand-144: New host has 2.8TiB RAM; re-run cand-141 minimal 2-WG P1 skeleton under raised memory budget as controlled calibration before any multi-SM speedup claims
+- Change: parent=cand-141; cand-141 inputs cloned verbatim; memory_mib 6144->131072, timeout 600->7200
+- Evidence: project/experiments/cand-144/metrics.json; reports/grade.json; attempts=1
+- Command (grade): ['/home/jovyan/projects/SLAI-infra-course-hw1/.venv/bin/python', '/home/jovyan/projects/SLAI-infra-course-hw1/challenge.py', 'grade', '--hardware', '/home/jovyan/projects/SLAI-infra-course-hw1/project/experiments/cand-144/inputs/hardware.json', '--program-p1', '/home/jovyan/projects/SLAI-infra-course-hw1/project/experiments/cand-144/programs/M1_P1.asm', '--program-d1', '/home/jovyan/projects/SLAI-infra-course-hw1/project/experiments/cand-144/programs/M2_D1.asm', '--report', '/home/jovyan/projects/SLAI-infra-course-hw1/project/experiments/cand-144/reports/grade.json', '--seed', '7', '--baseline', '/home/jovyan/projects/SLAI-infra-course-hw1/baseline_manifest.json']; elapsed=3050.721168628894; peak MiB=88961.94140625
+- Inputs: compiler.py@fc709d21 hardware.json@d362f61f recipe.json@622d3349
+- Verify: PASS elapsed=3050.74s
+- Result: M1_P1=2484678 (12.475x), M2_D1=167539 (7.772x); score=9846.403, eligible=True
+  - deltas vs head (cand-143): {'M1_P1': -2412457, 'M2_D1': 0}
+- Decision: KEPT — new incumbent head (score=9846.403)
+
+### cand-144 verdict: KEPT — First verified multi-WG P1: 2-WG batch-parallel skeleton, score 9846.40, P1 2484678 (1.97x vs cand-143). Race-checker calibration: real peak 86.9GiB = 6.5x retained-LB; 51min. New-host feasibility confirmed.
+
+## 2026-09-29 13:04:57 — cand-145: 4-WG batch x team(2) shard: each member owned by a 2-WG team; row-sharded LN/residual, head-aligned QKV column split + head-sharded attention, column-sharded WO/W1/W2, teams independent until STEP.COMMIT. Preflight LB 9.95GiB ~ est 68GiB peak.
+- Change: parent=cand-144; new p1_schedule kind=batch_shard team=2 mlp=sharded
+- Evidence: project/experiments/cand-145/metrics.json; reports/grade.json; attempts=1
+- Command (grade): ['/home/jovyan/projects/SLAI-infra-course-hw1/.venv/bin/python', '/home/jovyan/projects/SLAI-infra-course-hw1/challenge.py', 'grade', '--hardware', '/home/jovyan/projects/SLAI-infra-course-hw1/project/experiments/cand-145/inputs/hardware.json', '--program-p1', '/home/jovyan/projects/SLAI-infra-course-hw1/project/experiments/cand-145/programs/M1_P1.asm', '--program-d1', '/home/jovyan/projects/SLAI-infra-course-hw1/project/experiments/cand-145/programs/M2_D1.asm', '--report', '/home/jovyan/projects/SLAI-infra-course-hw1/project/experiments/cand-145/reports/grade.json', '--seed', '7', '--baseline', '/home/jovyan/projects/SLAI-infra-course-hw1/baseline_manifest.json']; elapsed=6037.860476180445; peak MiB=132569.88671875
+- Inputs: compiler.py@c622a7bb hardware.json@d362f61f recipe.json@7984112a
+- Verify: PASS elapsed=6037.87s
+- Result: M1_P1=1586728 (19.535x), M2_D1=167539 (7.772x); score=12321.439, eligible=True
+  - deltas vs head (cand-144): {'M1_P1': -897950, 'M2_D1': 0}
+- Decision: KEPT — new incumbent head (score=12321.439)
+
+## 2026-09-29 16:10 — REJECTED (no candidate): batch_shard team=4 with 2 WGs per SM on 4 SMs
+- Change: worktree-only; recipe p1_schedule team 2->4, Builder sm_map round-robin (8 WGs on 4 SMs). P1 95,155 events.
+- Verify: `project.search.dev_functional` (race check skipped, dev only) -> passed, max err 3.0e-6. `challenge.py estimate` -> /tmp/estimate-team4.log -> CRASHED after ~40 min / ~120 GiB inside frozen `pipeline_events._issue_transfer`: `AssertionError: DMA slot changed after issue preview`.
+- Result: no cycles. Frozen timing scheduler cannot evaluate this co-resident-WG DMA pattern, so any grade would fail.
+- Motivation that remains valid: cand-145 busy stats show issue_wait 1.557M of 1.587M cycles per SM; rf_read 670K (42%), rf_write 606K, dma 371K, tc 102K (6%), vec 115K. TC is not the bottleneck; RF/DMA per SM are.
+- Decision: drop co-residence. Next: 8 WGs on 8 SMs (one WG/SM). Area check: sm_count=8 + shared_kib=0 (neither program uses SH) + tc_count=1 + cache_mib=8 = 21.94 mm².
+
+### cand-145 note: full grade score 12321.439 (P1 1,586,728 / D1 167,539), peak 129.5 GiB, 6038 s. cand-146 (cand-145 + 1024-col elementwise chunks, 85.7K P1 events) registered, not graded yet.
+
+## 2026-09-29 16:30 — Analysis: frozen-timing microbenchmarks for a 10x bound model (no candidate)
+- Change: none to submission. New dev tool `project/campaigns/bound-model/microbench.py` runs hand-built micro-programs through frozen `estimate_pipeline` (with trace).
+- Verify: `PYTHONPATH=. pixi run python project/campaigns/bound-model/microbench.py` -> `project/campaigns/bound-model/microbench.json`.
+- Result: cross-SM ST->BARRIER->LD handoff 18 cycles (1 float) / 51 (1 KiB) / 147 (4 KiB). MMA 32^3 per SM: single dependent chain 101 MAC/cycle; 2-4 interleaved chains 142-144 MAC/cycle (2tc kp4), 142 (1tc kp2), 123 (1tc kp1) -> TC over-provisioned ~7x, RF read port is the limit. GEMV m=1 MMA: 29 MAC/cycle. LD into RF: ~50-55 B/cycle per SM from HBM or SH (RF write port 64 B/cycle), single 4 KiB LD latency ~130-150 cycles.
+- Decision: bound model says 10x needs ~16 SMs with small TC (1tc kp1/kp2), 2D weight/activation partition for P1, SH/RF-resident weights for D1. Retract vector_lanes=8 plan (<=7% RF-read gain).
+
+## 2026-09-29 16:45 — Analysis: critical-path attribution of cand-145 on the frozen timing model (no candidate)
+- Change: none to submission. New dev tool `project/campaigns/bound-model/critpath.py`: subclasses frozen GlobalEventPipeline with a read-only `_issue` observer (same readiness helpers), race validation skipped in-process. Asserts identical cycles.
+- Verify: D1 167,539 == frozen (29 s, <1 GiB); P1 1,586,728 == frozen (419 s, ~1 GiB). Reports `project/campaigns/bound-model/critpath-c145-{d1,p1}.json`.
+- Finding (memory): estimate/grade timing memory (~130 GiB) is the race validator called inside `GlobalEventPipeline.__init__` (pipeline_events.py:293), not the scheduler; scheduler alone ~1 GiB.
+- Result D1 critical path: LD HBM->RF 59.7%, MMA 29.3%, VEC 6.5%, barriers 0.1%. Per-tape stalls: 83% RAW on LD. => weight streaming latency dominates; weights must become resident.
+- Result P1 critical path: MMA 47.9%, LD 27.5%, VEC 15.2%, ST 4.9%, SFU 3.2%, barriers ~0. By stage: prompt W1 22.4%, W2 22.0%, GELU 12.7%, QKV 9.3%, attention 7.4%; step phase (2 rows) 16.5% total. Per-tape stalls: RAW<-LD 42%, WAR 30% (buffer reuse), RAW<-VEC 13%.
+- Decision: fixable inside current structure: fuse bias+GELU into W1 epilogue (12.7%), batch the step phase across all WGs (16.5%), deeper RF buffering for WAR (30% stall). 10x still needs more SMs + small TC + resident weights.
+
+## 2026-09-29 17:20 — Measured estimate (no candidate yet): 8 SMs, batch2 x team4, one WG per SM
+- Change: `project/campaigns/p1-8sm/hardware-8sm.json` (sm_count 8, tc_count 1, kp4, cache 16->8 MiB, shared 0; 21.94 mm²), `recipe-8sm.json` p1_schedule team=4 sm_count=8. P1 95,155 events.
+- Verify: dev_functional P1 passed (3.0e-6); frozen check_case D1 passed; frozen estimate_case P1 -> `project/campaigns/p1-8sm/p1-estimate.json` (3182 s); critpath observer reproduces 951,345.
+- Result: P1 951,345 (1.67x vs cand-145), D1 168,363; projected score ~15.9K (estimate only, full race-validated grade not run). P1 peak window power 18.33 W (limit 20), HBM read 39.3 MB (cache 8 MiB -> misses 371K->614K lines), energy 9.0 mJ.
+- Critical path: MMA 41%, LD 38% (LD did not scale: 436K->362K), step phase (2 rows) ~21% and did not scale (s_w1 102K->91K).
+- Decision: power is now a hard wall (T_P1 >= E/20 W; 9.0 mJ -> >=225K cycles). Next: cut HBM energy (bytes x 150 pJ) and LD latency chains before adding SMs.
+
+## 2026-09-29 15:40:40 — cand-146: Elementwise helper chunks 384->1024 (RF lane capacity at vector_lanes=16) cut P1 events 95.1K->85.7K; fewer events should lower race/timing validation cost and remove per-chunk issue overhead in bias_gelu/add_rows/add_bias
+- Change: parent=cand-145; cand-145 + 1024-col elementwise chunks; Builder sm_map plumbing (team=2 placement unchanged). dev_functional passed max err 3.0e-6
+- Evidence: project/experiments/cand-146/metrics.json; reports/grade.json; attempts=1
+- Command (grade): ['/home/jovyan/projects/SLAI-infra-course-hw1/.venv/bin/python', '/home/jovyan/projects/SLAI-infra-course-hw1/challenge.py', 'grade', '--hardware', '/home/jovyan/projects/SLAI-infra-course-hw1/project/experiments/cand-146/inputs/hardware.json', '--program-p1', '/home/jovyan/projects/SLAI-infra-course-hw1/project/experiments/cand-146/programs/M1_P1.asm', '--program-d1', '/home/jovyan/projects/SLAI-infra-course-hw1/project/experiments/cand-146/programs/M2_D1.asm', '--report', '/home/jovyan/projects/SLAI-infra-course-hw1/project/experiments/cand-146/reports/grade.json', '--seed', '7', '--baseline', '/home/jovyan/projects/SLAI-infra-course-hw1/baseline_manifest.json']; elapsed=4331.682301051915; peak MiB=114770.65625
+- Inputs: compiler.py@772e9676 hardware.json@d362f61f recipe.json@7984112a
+- Verify: PASS elapsed=4331.69s
+- Result: M1_P1=1582025 (19.593x), M2_D1=167539 (7.772x); score=12339.740, eligible=True
+  - deltas vs head (cand-145): {'M1_P1': -4703, 'M2_D1': 0}
+- Decision: KEPT — new incumbent head (score=12339.740)
+
+## 2026-09-29 18:40 — Dev loop (critpath observer + dev_functional): W1/W2 operand pipeline, bias+GELU epilogue fusion, B triple buffer
+- Change: compiler.py adds `epilogue_bias` to generic + operand-pipeline GEMM (MMA k=1 ones x bias, in-place tanh-GELU, same op order as bias_gelu), `p1_schedule.fuse_gelu`, `gemm_stages.p1_prompt.b_buffers` (2 = byte-identical expanded stream to before; 3 rotates B via RF1/7/13). Variants in `project/campaigns/p1-fuse/<v>/` (recipe.json, M1_P1.asm, critpath.json, devfunc.json).
+- Verify: all variants dev_functional pass (max err 3.0e-6). v0 critpath == cand-146 grade (1,582,025).
+- Result (P1 cycles, 4 SM cand-146 hardware): v0 1,582,025; v1 W1/W2 operand pipeline 1,257,064 (-20.5%); v2 fuse GELU 1,521,116 (-3.8%); v3 both 1,198,655; v4 +step prefetch 1,111,753 (-29.7%); v5 +B triple buffer 1,106,913 (-0.4%). 8 SM (hardware-8sm.json): v4_8sm 835,415; v5_8sm 811,610 (vs 951,345 before).
+- Finding: after v5 the remaining g0 stalls are MMA waiting on MMA/operands (RF-read-port-bound GEMM throughput), not buffer WAR; B-buffer WAR diagnosis was only ~0.4%.
+- Decision: v4 promoted to cand-147 (grade running). Next: power check on v5_8sm, step-phase merge, D1 weight residency.
+
+## 2026-09-29 19:40 — Dev loop: D1 8 column owners + SH-resident weights (no candidate yet)
+- Change: compiler.py ParallelD1Builder: shards 8 allowed; `d1_plan` factored out; `d1_schedule.weights="sh"` copies each owner's weight panel HBM->SH once (`preload` upfront | first_use) and D1 GEMV B tiles then load SH->RF; attention owners = min(heads, shards). shards=4 output byte-identical to cand-146. Hardware `project/campaigns/d1-sh/hardware-8sm-sh256.json` (8 SM, 1 TC kp4, cache 8 MiB, shared 256 KiB x4 banks 1R1W, 22.865 mm²).
+- Verify: dev_functional D1 pass for all; critpath (frozen scheduler) -> `project/campaigns/d1-sh/<v>/critpath.json`.
+- Result (D1 cycles): d0 current 168,363; d8 (8 owners, HBM weights) 134,230; d8sh (SH weights, upfront) 115,019; d8shf (first_use) 114,706, peak 11.2 W. P1 v5_8sm on same SMs 811,610, peak 17.3 W, avg 5.19 W.
+- Remaining D1 critical path: MMA waiting on SH->RF tiles (RF write port ~55 B/cycle), attention 25.6% (history K/V LD), preload ~11%.
+- Decision: combine P1 v5_8sm + D1 d8shf + hardware-8sm-sh256 as cand-148 (projected ~20.8K from estimates; must pass full grade).
+
+## 2026-09-29 17:16:27 — cand-147: critpath attribution: P1 W1/W2 used the non-prefetching generic GEMM (LD-RAW/WAR stalls) and GELU round-tripped HBM. Enable operand_pipeline for w1/w2, fuse bias+GELU into W1 epilogue (MMA k=1 ones x bias, then in-place tanh-GELU), prefetch step GEMMs.
+- Change: parent=cand-146; cand-146 + gemm_stages.p1_prompt.operand_pipeline+=[w1,w2], p1_schedule.fuse_gelu=1, p1_step.prefetch=1. Dev: critpath P1 1,111,753 (-29.7%), dev_functional pass 3.0e-6; 81,227 events
+- Evidence: project/experiments/cand-147/metrics.json; reports/grade.json; attempts=1
+- Command (grade): ['/home/jovyan/projects/SLAI-infra-course-hw1/.venv/bin/python', '/home/jovyan/projects/SLAI-infra-course-hw1/challenge.py', 'grade', '--hardware', '/home/jovyan/projects/SLAI-infra-course-hw1/project/experiments/cand-147/inputs/hardware.json', '--program-p1', '/home/jovyan/projects/SLAI-infra-course-hw1/project/experiments/cand-147/programs/M1_P1.asm', '--program-d1', '/home/jovyan/projects/SLAI-infra-course-hw1/project/experiments/cand-147/programs/M2_D1.asm', '--report', '/home/jovyan/projects/SLAI-infra-course-hw1/project/experiments/cand-147/reports/grade.json', '--seed', '7', '--baseline', '/home/jovyan/projects/SLAI-infra-course-hw1/baseline_manifest.json']; elapsed=4072.812298295088; peak MiB=101581.546875
+- Inputs: compiler.py@fc4e6a87 hardware.json@d362f61f recipe.json@d2df42ab
+- Verify: PASS elapsed=4072.82s
+- Result: M1_P1=1111753 (27.881x), M2_D1=167539 (7.772x); score=14720.024, eligible=True
+  - deltas vs head (cand-146): {'M1_P1': -470272, 'M2_D1': 0}
+- Decision: KEPT — new incumbent head (score=14720.024)
+
+## 2026-09-29 18:43 — Log correction + cand-147 verdict
+- Correction: the three preceding analysis entries were stamped with estimated times (16:30/16:45/17:20/18:40/19:40); their actual order is as written but the wall-clock stamps are approximate. Entries are append-only, so they are corrected here rather than edited.
+- cand-147 full grade: score 14,720.024, P1 1,111,753 (identical to critpath dev prediction), D1 167,539, eligible, P1 peak 11.49 W. Kept by controller.
+- cand-146 full grade: score 12,339.740, P1 1,582,025, peak RSS 112.1 GiB / 72 min (cand-145: 129.5 GiB / 100 min). Kept.
+
+## 2026-09-29 19:13 — DMA-slot assertion root cause + dmafix; v6 merged-step results
+- Analysis: `DMA slot changed after issue preview` (pipeline_events.py:701) root-caused via instrumented critpath run. Preview samples `dma_slice` calendar at *dependency-ready* time R (line 534), but issue happens at `begin = max(R, current_cycle)`. With 16 tapes, a dependency-ready LD can wait while other tapes' events issue; if pending HBM transfers' slice reservations then cover `begin+4` on every engine, the recomputed slot_ready > begin and the assertion fires. Confirmed crash: g5 LD in `pb0_resln2`, begin=196395.
+- Fix (hardware menu only, frozen code untouched): `dma_depth=1` makes the assertion structurally unreachable — a free slot's engine has no pending transfer, so its slice calendar has no future reservations. Paired `dma_engines=4` to keep 4 in-flight transfers per SM (same as 2x2). Area: 23.73 mm2 (16-SM config), well under 24.
+- Verify (dev): d16rf_split D1 re-timed on dmafix hw = 87,400 cycles (vs 86,560 on depth=2, +1%). P1 v5_16sm retest in progress.
+- v6_8sm (merged generated step, both batch rows fused m=2): P1 critpath = 730,816 cycles (v5_8sm: 951,345), -23%. Events 81,307 -> 74,374. devfunc pass.
+- v6_16sm generated (team=8 + step_merge): 74,534 events, devfunc pass. critpath running.
+- cand-148 (8-SM hw + P1 v5_8sm + D1 d8shf) grade in progress, ~42 min, ~98 GiB peak.
+
+## 2026-09-29 18:31:48 — cand-148: Hardware rebalance + dataflow: 8 SMs with 1 TC (TC ~7x over-provisioned vs RF read port), 256 KiB SH per SM; P1 batch2 x team4 one WG/SM with W1/W2 operand pipeline, GELU epilogue, B triple buffer; D1 8 column owners with weights SH-resident after first use.
+- Change: parent=cand-147; hardware: sm 8, tc_count 1 kp4, cache 8 MiB, shared 256 KiB 4 banks 1R1W (22.86 mm2). Dev critpath: P1 811,610 (peak 17.3 W), D1 114,706 (peak 11.2 W); dev_functional both pass. Projected ~20.8K (estimate).
+- Evidence: project/experiments/cand-148/metrics.json; reports/grade.json; attempts=1
+- Command (grade): ['/home/jovyan/projects/SLAI-infra-course-hw1/.venv/bin/python', '/home/jovyan/projects/SLAI-infra-course-hw1/challenge.py', 'grade', '--hardware', '/home/jovyan/projects/SLAI-infra-course-hw1/project/experiments/cand-148/inputs/hardware.json', '--program-p1', '/home/jovyan/projects/SLAI-infra-course-hw1/project/experiments/cand-148/programs/M1_P1.asm', '--program-d1', '/home/jovyan/projects/SLAI-infra-course-hw1/project/experiments/cand-148/programs/M2_D1.asm', '--report', '/home/jovyan/projects/SLAI-infra-course-hw1/project/experiments/cand-148/reports/grade.json', '--seed', '7', '--baseline', '/home/jovyan/projects/SLAI-infra-course-hw1/baseline_manifest.json']; elapsed=4654.410382003989; peak MiB=100715.8046875
+- Inputs: compiler.py@3772d72b hardware.json@5585ac1d recipe.json@643c9689
+- Verify: PASS elapsed=4654.43s
+- Result: M1_P1=811610 (38.192x), M2_D1=114706 (11.351x); score=20821.109, eligible=True
+  - deltas vs head (cand-147): {'M1_P1': -300143, 'M2_D1': -52833}
+- Decision: KEPT — new incumbent head (score=20821.109)
+
+## 2026-09-29 19:55 — cand-148 verdict + 16-SM dmafix/power campaign
+- cand-148 full grade: **score 20,821.109**, P1 811,610 / D1 114,706, eligible, peaks 17.33W/11.21W. Kept — new head.
+- 16-SM (dma_depth=1, engines=4, cache8, SH128, 1x8x16 kp1 TC, 23.73mm²): v5_16sm P1=640,202 and v6_16sm P1=558,696 both run assertion-free — the dma_depth=1 fix is confirmed. Step-merge saves 12.7% at 16 SM.
+- Power wall found: 8 HBM channels saturate at ~19.2W dynamic → both 16-SM P1 variants hit 20.02W (>20 limit). hbm_channels menu has no 6; **4 channels caps HBM dynamic at ~9.6W** — D1 re-timed 87,779 cyc/10.5W (+0.4%), P1 v6_16sm 563,776 cyc/10.9W (+0.9%). Power solved at ~1% cost.
+- Energy attribution added to critpath (per-resource energy + peak-window composition): confirmed P1 peak window = p_qkv/p_a weight-load burst; D1 peak = initial weight preload (dlw_pre).
+- cand-149 = hardware-16sm-4ch (23.53mm²) + merged recipe (P1 v6_16sm + D1 d16rf_split), programs byte-identical to validated variants. Grade launched. Projected ~28.6K (dev numbers, unverified).
+
+## 2026-09-29 20:55 — D1 KV-history SH residency + dual accumulator; params_sh rejected
+- Change (compiler.py): `ParallelD1Builder.attention_decode_split` preloads each part-WG's K/V history slice (span×hd each) into SH once; per-step reads switch HBM→RF to SH→RF. K reload preserves the transposed gather (`shape=[hd,n], strides=[1,hd]` — a flat copy produced err≈1.03, caught by bisect: V-only passed, K-only failed). New recipe keys: `d1_schedule.kv_sh` (1/"k"/"v"), `d1_schedule.acc_split` (dual accumulators break the serial MMA->acc chain, lanes 3/4), `d1_schedule.params_sh` (replicate LN/bias params into SH, ld() intercept rewrites in-region flat HBM sources to SH).
+- Verify (dev): d16rf_split_kv devfunc pass (max err 2.6e-6); d16_kv_accs devfunc pass (1.4e-6). Both on hardware-16sm-4ch.
+- Result (dev critpath): D1 87,779 -> **84,084** (kv_sh) -> **81,540** (kv_sh + acc_split), peak ~10.5W. Stall mix after: LD:SH->RF 332K (per-step weight streaming, RF-ingest bound), MMA.ACC 261K, dma_slot 222K, LD:HBM->RF 110K.
+- REJECTED: `params_sh` (LN/bias SH residency) = 84,371 vs 84,084 — preload burst offsets per-step savings; flag left available but off.
+- Structural notes: dma_engines menu caps at 4, dma_depth must stay 1 (slot-assertion) -> max 4 in-flight HBM transfers/SM; dma_slot stalls (~222K summed) are slot-capacity waits on per-step HBM ops (qkv/partials/intermediates). RF ingest is per-SM (64B/c shared by resident WGs) so 2WG/SM would not add bandwidth.
+- Decision: fold d16_kv_accs into next candidate after cand-149; projected P1 563,776 / D1 81,540 -> ~29.6K.
+
+## 2026-09-29 13:15 UTC — D1 screen d16_load_ahead
+- Change: base=project/campaigns/d1-sh/d16_kv_accs/recipe.json; patch={"d1_schedule":{"load_ahead":1}}; hardware=project/campaigns/d1-sh/hardware-16sm-4ch.json
+- Verify: `PYTHONPATH=. .venv/bin/python project/campaigns/d1-sh/refine.py d16_load_ahead --patch {"d1_schedule":{"load_ahead":1}}`; reports `project/campaigns/d1-sh/d16_load_ahead`. Development checks only; full frozen race validation still required.
+- Result: D1=76169; P1 unchanged by recipe; area=23.53006052352; peak W=10.50048748108938; error=None.
+- Decision: screen only, no incumbent promotion; compare before full frozen validation.
+
+## 2026-09-29 13:16 UTC — D1 screen d16_ahead_gelu
+- Change: base=project/campaigns/d1-sh/d16_load_ahead/recipe.json; patch={"d1_schedule":{"fuse_gelu":1}}; hardware=project/campaigns/d1-sh/hardware-16sm-4ch.json
+- Verify: `PYTHONPATH=. .venv/bin/python project/campaigns/d1-sh/refine.py d16_ahead_gelu --base project/campaigns/d1-sh/d16_load_ahead/recipe.json --patch {"d1_schedule":{"fuse_gelu":1}}`; reports `project/campaigns/d1-sh/d16_ahead_gelu`. Development checks only; full frozen race validation still required.
+- Result: D1=75434; P1 unchanged by recipe; area=23.53006052352; peak W=10.50048748108938; error=None.
+- Decision: screen only, no incumbent promotion; compare before full frozen validation.
+
+## 2026-09-29 13:22 UTC — Frozen D1 verification d16_ahead_gelu
+- Change: none; verify screened variant using unmodified check_case and estimate_case.
+- Verify: `PYTHONPATH=. .venv/bin/python project/campaigns/d1-sh/verify.py project/campaigns/d1-sh/d16_ahead_gelu` -> `project/campaigns/d1-sh/d16_ahead_gelu/frozen-verification.json`.
+- Result: check seeds=[7, 19]; timing completed=True.
+- Decision: D1 evidence only; joint grade required before promotion.
+
+## 2026-09-29 13:25 UTC — D1 screen layer_rf_v1
+- Change: base=project/campaigns/d1-sh/d16_ahead_gelu/recipe.json; patch={"d1_schedule":{"layer_groups":1,"shared_bytes":65536,"rf_resident":["l0wo","l0w1","l0w2","l1wo","l1w1","l1w2"]}}; hardware=project/campaigns/d1-sh/hardware-16sm-4ch.json
+- Verify: `PYTHONPATH=. .venv/bin/python project/campaigns/d1-sh/refine.py layer_rf_v1 --base project/campaigns/d1-sh/d16_ahead_gelu/recipe.json --patch {"d1_schedule":{"layer_groups":1,"shared_bytes":65536,"rf_resident":["l0wo","l0w1","l0w2","l1wo","l1w1","l1w2"]}}`; reports `project/campaigns/d1-sh/layer_rf_v1`. Development checks only; full frozen race validation still required.
+- Result: D1=74180; P1 unchanged by recipe; area=23.53006052352; peak W=10.491617081089254; error=None.
+- Decision: screen only, no incumbent promotion; compare before full frozen validation.
+
+## 2026-09-29 13:27 UTC — M1_P1 screen merged_n16
+- Change: base=project/experiments/cand-149/inputs/recipe.json; patch={"p1_schedule":{"kind":"merged_batch"},"gemm_stages":{"p1_prompt":{"n_tile":16}}}; hardware=project/campaigns/d1-sh/hardware-16sm-4ch.json
+- Verify: `PYTHONPATH=. .venv/bin/python project/campaigns/d1-sh/refine.py merged_n16 --case M1_P1 --out-root project/campaigns/structural --base project/experiments/cand-149/inputs/recipe.json --patch {"p1_schedule":{"kind":"merged_batch"},"gemm_stages":{"p1_prompt":{"n_tile":16}}}`; reports `project/campaigns/structural/merged_n16`. Development checks only; full frozen race validation still required.
+- Result: M1_P1=failed; area=None; peak W=None; error=ValueError('Read before write').
+- Decision: screen only, no incumbent promotion; compare before full frozen validation.
+
+## 2026-09-29 13:28 UTC — M1_P1 screen merged_n32
+- Change: base=project/experiments/cand-149/inputs/recipe.json; patch={"p1_schedule":{"kind":"merged_batch"}}; hardware=project/campaigns/d1-sh/hardware-16sm-4ch.json
+- Verify: `PYTHONPATH=. .venv/bin/python project/campaigns/d1-sh/refine.py merged_n32 --case M1_P1 --out-root project/campaigns/structural --base project/experiments/cand-149/inputs/recipe.json --patch {"p1_schedule":{"kind":"merged_batch"}}`; reports `project/campaigns/structural/merged_n32`. Development checks only; full frozen race validation still required.
+- Result: M1_P1=failed; area=None; peak W=None; error=ValueError('Read before write').
+- Decision: screen only, no incumbent promotion; compare before full frozen validation.
+
+## 2026-09-29 13:31 UTC — M2_D1 screen layer_rf_tc4x8kp4
+- Change: base=project/campaigns/d1-sh/layer_rf_v1/recipe.json; patch={}; hardware=project/campaigns/d1-sh/hardware-16sm-4ch.json; hardware_patch={"tc_array":"4x8","tc_k_parallel":4}
+- Verify: `PYTHONPATH=. .venv/bin/python project/campaigns/d1-sh/refine.py layer_rf_tc4x8kp4 --base project/campaigns/d1-sh/layer_rf_v1/recipe.json --hardware-patch {"tc_array":"4x8","tc_k_parallel":4}`; reports `project/campaigns/d1-sh/layer_rf_tc4x8kp4`. Development checks only; full frozen race validation still required.
+- Result: M2_D1=62672; area=22.93345700352; peak W=10.476701993089254; error=None.
+- Decision: screen only, no incumbent promotion; compare before full frozen validation.
+
+## 2026-09-29 13:32 UTC — M2_D1 screen layer_rf_all
+- Change: base=project/campaigns/d1-sh/layer_rf_v1/recipe.json; patch={"d1_schedule":{"compact_rf":1,"rf_resident":["l0qkv","l0wo","l0w1","l0w2","l1qkv","l1wo","l1w1","l1w2"],"projections":{"qkv":{"n_tile":8,"k_chunk":128}}}}; hardware=project/campaigns/d1-sh/hardware-16sm-4ch.json; hardware_patch={}
+- Verify: `PYTHONPATH=. .venv/bin/python project/campaigns/d1-sh/refine.py layer_rf_all --base project/campaigns/d1-sh/layer_rf_v1/recipe.json --patch {"d1_schedule":{"compact_rf":1,"rf_resident":["l0qkv","l0wo","l0w1","l0w2","l1qkv","l1wo","l1w1","l1w2"],"projections":{"qkv":{"n_tile":8,"k_chunk":128}}}}`; reports `project/campaigns/d1-sh/layer_rf_all`. Development checks only; full frozen race validation still required.
+- Result: M2_D1=79384; area=23.53006052352; peak W=10.49776191308942; error=None.
+- Decision: screen only, no incumbent promotion; compare before full frozen validation.
+
+## 2026-09-29 13:33 UTC — M2_D1 screen layer_rf_all_tc4x8kp4
+- Change: base=project/campaigns/d1-sh/layer_rf_all/recipe.json; patch={}; hardware=project/campaigns/d1-sh/layer_rf_tc4x8kp4/hardware.json; hardware_patch={}
+- Verify: `PYTHONPATH=. .venv/bin/python project/campaigns/d1-sh/refine.py layer_rf_all_tc4x8kp4 --base project/campaigns/d1-sh/layer_rf_all/recipe.json --hardware project/campaigns/d1-sh/layer_rf_tc4x8kp4/hardware.json`; reports `project/campaigns/d1-sh/layer_rf_all_tc4x8kp4`. Development checks only; full frozen race validation still required.
+- Result: M2_D1=64560; area=22.93345700352; peak W=10.48284682508942; error=None.
+- Decision: screen only, no incumbent promotion; compare before full frozen validation.
+
+## 2026-09-29 13:33 UTC — M2_D1 screen layer_rf_all_qkvk32
+- Change: base=project/campaigns/d1-sh/layer_rf_all/recipe.json; patch={"d1_schedule":{"projections":{"qkv":{"k_chunk":32}}}}; hardware=project/campaigns/d1-sh/hardware-16sm-4ch.json; hardware_patch={}
+- Verify: `PYTHONPATH=. .venv/bin/python project/campaigns/d1-sh/refine.py layer_rf_all_qkvk32 --base project/campaigns/d1-sh/layer_rf_all/recipe.json --patch {"d1_schedule":{"projections":{"qkv":{"k_chunk":32}}}}`; reports `project/campaigns/d1-sh/layer_rf_all_qkvk32`. Development checks only; full frozen race validation still required.
+- Result: M2_D1=failed; area=None; peak W=None; error=ValueError('RF-resident tiles pack 1 or 2 per lane').
+- Decision: screen only, no incumbent promotion; compare before full frozen validation.
+
+## 2026-09-29 13:35 UTC — M2_D1 screen layer_rf_all_qkvk32_v2
+- Change: base=project/campaigns/d1-sh/layer_rf_all/recipe.json; patch={"d1_schedule":{"projections":{"qkv":{"k_chunk":32}}}}; hardware=project/campaigns/d1-sh/hardware-16sm-4ch.json; hardware_patch={}
+- Verify: `PYTHONPATH=. .venv/bin/python project/campaigns/d1-sh/refine.py layer_rf_all_qkvk32_v2 --base project/campaigns/d1-sh/layer_rf_all/recipe.json --patch {"d1_schedule":{"projections":{"qkv":{"k_chunk":32}}}}`; reports `project/campaigns/d1-sh/layer_rf_all_qkvk32_v2`. Development checks only; full frozen race validation still required.
+- Result: M2_D1=76852; area=23.53006052352; peak W=10.491617081089254; error=None.
+- Decision: screen only, no incumbent promotion; compare before full frozen validation.
+
+## 2026-09-29 13:37 UTC — M2_D1 screen layer_rf_shpre
+- Change: base=project/campaigns/d1-sh/layer_rf_v1/recipe.json; patch={"d1_schedule":{"rf_preload_sh":1}}; hardware=project/campaigns/d1-sh/hardware-16sm-4ch.json; hardware_patch={}
+- Verify: `PYTHONPATH=. .venv/bin/python project/campaigns/d1-sh/refine.py layer_rf_shpre --base project/campaigns/d1-sh/layer_rf_v1/recipe.json --patch {"d1_schedule":{"rf_preload_sh":1}}`; reports `project/campaigns/d1-sh/layer_rf_shpre`. Development checks only; full frozen race validation still required.
+- Result: M2_D1=75327; area=23.53006052352; peak W=10.460384953089202; error=None.
+- Decision: screen only, no incumbent promotion; compare before full frozen validation.
+
+## 2026-09-29 13:37 UTC — M2_D1 screen layer_rf_shpre_tc
+- Change: base=project/campaigns/d1-sh/layer_rf_v1/recipe.json; patch={"d1_schedule":{"rf_preload_sh":1}}; hardware=project/campaigns/d1-sh/layer_rf_tc4x8kp4/hardware.json; hardware_patch={}
+- Verify: `PYTHONPATH=. .venv/bin/python project/campaigns/d1-sh/refine.py layer_rf_shpre_tc --base project/campaigns/d1-sh/layer_rf_v1/recipe.json --hardware project/campaigns/d1-sh/layer_rf_tc4x8kp4/hardware.json --patch {"d1_schedule":{"rf_preload_sh":1}}`; reports `project/campaigns/d1-sh/layer_rf_shpre_tc`. Development checks only; full frozen race validation still required.
+- Result: M2_D1=63795; area=22.93345700352; peak W=10.445469865089201; error=None.
+- Decision: screen only, no incumbent promotion; compare before full frozen validation.
+
+## 2026-09-29 20:11:29 — cand-149: 16-SM rebalance: 1x8x16 kp1 TC, cache8, SH128, dma_depth1+engines4 (frozen-scheduler DMA-slot fix), hbm_channels=4 (power cap); P1 v6_16sm merged-step team8, D1 d16rf_split 16-owner split-K + RF resident
+- Change: parent=cand-148; dev: P1 563776 cyc/10.9W, D1 87779 cyc/10.5W, projected score ~28.6K
+- Evidence: project/experiments/cand-149/metrics.json; reports/grade.json; attempts=1
+- Command (grade): ['/home/jovyan/projects/SLAI-infra-course-hw1/.venv/bin/python', '/home/jovyan/projects/SLAI-infra-course-hw1/challenge.py', 'grade', '--hardware', '/home/jovyan/projects/SLAI-infra-course-hw1/project/experiments/cand-149/inputs/hardware.json', '--program-p1', '/home/jovyan/projects/SLAI-infra-course-hw1/project/experiments/cand-149/programs/M1_P1.asm', '--program-d1', '/home/jovyan/projects/SLAI-infra-course-hw1/project/experiments/cand-149/programs/M2_D1.asm', '--report', '/home/jovyan/projects/SLAI-infra-course-hw1/project/experiments/cand-149/reports/grade.json', '--seed', '7', '--baseline', '/home/jovyan/projects/SLAI-infra-course-hw1/baseline_manifest.json']; elapsed=5147.903912968002; peak MiB=78148.6328125
+- Inputs: compiler.py@651e1ab3 hardware.json@bf2d0822 recipe.json@bf54e8e4
+- Verify: PASS elapsed=5147.93s
+- Result: M1_P1=563776 (54.981x), M2_D1=87779 (14.833x); score=28557.621, eligible=True
+  - deltas vs head (cand-148): {'M1_P1': -247834, 'M2_D1': -26927}
+- Decision: KEPT — new incumbent head (score=28557.621)
+
+## 2026-09-29 13:39 UTC — Frozen D1 verification layer_rf_tc4x8kp4
+- Change: none; verify screened variant using unmodified check_case and estimate_case.
+- Verify: `PYTHONPATH=. .venv/bin/python project/campaigns/d1-sh/verify.py project/campaigns/d1-sh/layer_rf_tc4x8kp4` -> `project/campaigns/d1-sh/layer_rf_tc4x8kp4/frozen-verification.json`.
+- Result: check seeds=[7, 19]; timing completed=True.
+- Decision: D1 evidence only; joint grade required before promotion.
+
+## 2026-09-29 13:39 UTC — Frozen D1 verification layer_rf_v1
+- Change: none; verify screened variant using unmodified check_case and estimate_case.
+- Verify: `PYTHONPATH=. .venv/bin/python project/campaigns/d1-sh/verify.py project/campaigns/d1-sh/layer_rf_v1` -> `project/campaigns/d1-sh/layer_rf_v1/frozen-verification.json`.
+- Result: check seeds=[7, 19]; timing completed=True.
+- Decision: D1 evidence only; joint grade required before promotion.
+
+## 2026-09-29 13:46 UTC — Structural campaign decisions and cand-150 launch
+- Change: D1 per-layer RF ownership; compact all-weight RF and SH-assisted RF preload alternatives; P1 merged-batch and neuron-sharded RF MLP families. Isolated inputs and status: `project/campaigns/structural/STATUS.md`.
+- Verify: D1 layer_rf_v1 and layer_rf_tc4x8kp4 both pass frozen check_case seeds7/19 and estimate_case. Five P1 variants pass development checks seeds7/19; timing ongoing. `traffic.py` -> `project/campaigns/structural/traffic.json` is a static requested-byte audit, not a timing result.
+- Result: same-hardware D1=74180; alternative-TC D1=62672. All-weight RF variants (79384/76852; TC variant64560) and SH-assisted preload (75327; TC variant63795) rejected against their matched hardware reference. P1 timing results pending.
+- Prior pending experiment recovered: NoC512 P1=550728 peak11.2723W area23.6581; reports moved into `project/campaigns/p1-fuse/v6_16sm/critpath-4ch-noc512.json` and `project/campaigns/d1-sh/d16_kv_accs/critpath-4ch-noc512.json` (D1=78040). Development timing only.
+- Decision: cand-149 full grade completed eligible score28557.620577, and root hardware/recipe/programs now reproduce its exact assembly while retaining new compiler capabilities. Made KV SH residency opt-in (missing flag means off), restoring cand-149 source compatibility; all new candidates explicitly set kv_sh=1. Frozen files unchanged. Registered cand-150 with byte-identical parent P1 and frozen-verified layer_rf_v1 D1; controller full grade running, projected31065.18. Alternative TC awaits matched P1 timing before acceptance.
+
+## 2026-09-29 13:49 UTC — M1_P1 screen merged_n32_v2
+- Change: base=project/experiments/cand-149/inputs/recipe.json; patch={"p1_schedule":{"kind":"merged_batch"}}; hardware=project/campaigns/d1-sh/hardware-16sm-4ch.json
+- Verify: `PYTHONPATH=. .venv/bin/python project/campaigns/d1-sh/refine.py merged_n32_v2 --case M1_P1 --out-root project/campaigns/structural --base project/experiments/cand-149/inputs/recipe.json --patch {"p1_schedule":{"kind":"merged_batch"}}`; reports `project/campaigns/structural/merged_n32_v2`. Development checks only; full frozen race validation still required.
+- Result: M1_P1=608136; area=23.53006052352; peak W=11.02602170099784; error=None.
+- Decision: screen only, no incumbent promotion; compare before full frozen validation.
+
+## 2026-09-29 14:00 UTC — M1_P1 screen merged_neuron_mlp
+- Change: base=project/campaigns/structural/merged_n16_v2/recipe.json; patch={"p1_schedule":{"neuron_mlp":1}}; hardware=project/campaigns/d1-sh/hardware-16sm-4ch.json
+- Verify: `PYTHONPATH=. .venv/bin/python project/campaigns/d1-sh/refine.py merged_neuron_mlp --case M1_P1 --out-root project/campaigns/structural --base project/campaigns/structural/merged_n16_v2/recipe.json --patch {"p1_schedule":{"neuron_mlp":1}}`; reports `project/campaigns/structural/merged_neuron_mlp`. Development checks only; full frozen race validation still required.
+- Result: M1_P1=716850; area=23.53006052352; peak W=10.567552425661813; error=None.
+- Decision: screen only, no incumbent promotion; compare before full frozen validation.
+
+## 2026-09-29 14:02 UTC — M1_P1 screen parent_tc4x8kp4
+- Change: base=project/experiments/cand-149/inputs/recipe.json; patch={}; hardware=project/campaigns/d1-sh/layer_rf_tc4x8kp4/hardware.json; hardware_patch={}
+- Verify: `PYTHONPATH=. .venv/bin/python project/campaigns/d1-sh/refine.py parent_tc4x8kp4 --case M1_P1 --out-root project/campaigns/structural --base project/experiments/cand-149/inputs/recipe.json --hardware project/campaigns/d1-sh/layer_rf_tc4x8kp4/hardware.json`; reports `project/campaigns/structural/parent_tc4x8kp4`. Development checks only; full frozen race validation still required.
+- Result: M1_P1=561565; area=22.93345700352; peak W=10.987744390420774; error=None.
+- Decision: screen only, no incumbent promotion; compare before full frozen validation.
+
+## 2026-09-29 14:09 UTC — M1_P1 screen merged_neuron_rfpanel
+- Change: base=project/campaigns/structural/merged_neuron_mlp/recipe.json; patch={"p1_schedule":{"neuron_mlp":2}}; hardware=project/campaigns/d1-sh/hardware-16sm-4ch.json; hardware_patch={}
+- Verify: `PYTHONPATH=. .venv/bin/python project/campaigns/d1-sh/refine.py merged_neuron_rfpanel --case M1_P1 --out-root project/campaigns/structural --base project/campaigns/structural/merged_neuron_mlp/recipe.json --patch {"p1_schedule":{"neuron_mlp":2}}`; reports `project/campaigns/structural/merged_neuron_rfpanel`. Development checks only; full frozen race validation still required.
+- Result: M1_P1=753279; area=23.53006052352; peak W=10.567552425666104; error=None.
+- Decision: screen only, no incumbent promotion; compare before full frozen validation.
+
+## 2026-09-29 14:15 UTC — M1_P1 screen merged_n16_v2
+- Change: base=project/experiments/cand-149/inputs/recipe.json; patch={"p1_schedule":{"kind":"merged_batch"},"gemm_stages":{"p1_prompt":{"n_tile":16}}}; hardware=project/campaigns/d1-sh/hardware-16sm-4ch.json
+- Verify: `PYTHONPATH=. .venv/bin/python project/campaigns/d1-sh/refine.py merged_n16_v2 --case M1_P1 --out-root project/campaigns/structural --base project/experiments/cand-149/inputs/recipe.json --patch {"p1_schedule":{"kind":"merged_batch"},"gemm_stages":{"p1_prompt":{"n_tile":16}}}`; reports `project/campaigns/structural/merged_n16_v2`. Development checks only; full frozen race validation still required.
+- Result: M1_P1=764661; area=23.53006052352; peak W=10.56755242566205; error=None.
+- Decision: screen only, no incumbent promotion; compare before full frozen validation.
+
+## 2026-09-29 14:19 UTC — M2_D1 screen layer_rf_tc_noc512
+- Change: base=project/campaigns/d1-sh/layer_rf_tc4x8kp4/recipe.json; patch={}; hardware=project/campaigns/d1-sh/layer_rf_tc4x8kp4/hardware.json; hardware_patch={"noc_bytes_per_cycle":512}
+- Verify: `PYTHONPATH=. .venv/bin/python project/campaigns/d1-sh/refine.py layer_rf_tc_noc512 --base project/campaigns/d1-sh/layer_rf_tc4x8kp4/recipe.json --hardware project/campaigns/d1-sh/layer_rf_tc4x8kp4/hardware.json --hardware-patch {"noc_bytes_per_cycle":512}`; reports `project/campaigns/d1-sh/layer_rf_tc_noc512`. Development checks only; full frozen race validation still required.
+- Result: M2_D1=58770; area=23.06145700352; peak W=10.77603965708452; error=None.
+- Decision: screen only, no incumbent promotion; compare before full frozen validation.
+
+## 2026-09-29 14:21 UTC — M2_D1 screen layer_rf_tc_params
+- Change: base=project/campaigns/d1-sh/layer_rf_tc4x8kp4/recipe.json; patch={"d1_schedule":{"rf_params":1}}; hardware=project/campaigns/d1-sh/layer_rf_tc4x8kp4/hardware.json; hardware_patch={}
+- Verify: `PYTHONPATH=. .venv/bin/python project/campaigns/d1-sh/refine.py layer_rf_tc_params --base project/campaigns/d1-sh/layer_rf_tc4x8kp4/recipe.json --hardware project/campaigns/d1-sh/layer_rf_tc4x8kp4/hardware.json --patch {"d1_schedule":{"rf_params":1}}`; reports `project/campaigns/d1-sh/layer_rf_tc_params`. Development checks only; full frozen race validation still required.
+- Result: M2_D1=62714; area=22.93345700352; peak W=10.476701993089254; error=None.
+- Decision: screen only, no incumbent promotion; compare before full frozen validation.
+
+## 2026-09-29 14:24 UTC — Structural round verdicts and next targeted tests
+- Change: close cross-batch/MLP round; retain common-hardware TC4x8 kp4; add isolated P1 generated-step and prompt-W1 RF-input residency tests, plus NoC512. Reports/status under `project/campaigns/structural/`.
+- Verify: all four P1 restructures passed dev seeds7/19 but lost in timing. P1 parent on TC4x8 kp4 =561565, D1 frozen verified=62672; same shared hardware area22.93346, peak10.98774/10.47670 W. Joint CLI grade launched under `project/campaigns/d1-sh/layer_rf_tc4x8kp4/joint/`, predicted score33863.655 (not yet joint verified). Cand-150 remains independently in full grade.
+- Result: reject merged N16=764661, merged N32=608136, neuron SH-stream=716850, neuron RF-panel=753279 versus baseline P1=563776. Keep code as experimental options and retain all reports. RF-parameter residency D1=62714 vs62672 is also rejected. NoC512 D1=58770 is promising, frozen verification launched; P1 timing pending.
+- Next: step_a_resident_tc and prompt_w1_a_resident_tc both pass dev seeds7/19 and are timing. Static `traffic-resident.json`: requested HBM->RF bytes 74.48MB/72.34MB vs75.46MB; no cycles claimed from byte counts. Latest compiler still reproduces both cand-149 programs byte-identically with its recipe; `git diff --check` passes; frozen evaluator unchanged.
+
+## 2026-09-29 14:27 UTC — Frozen D1 verification layer_rf_tc_noc512
+- Change: none; verify screened variant using unmodified check_case and estimate_case.
+- Verify: `PYTHONPATH=. .venv/bin/python project/campaigns/d1-sh/verify.py project/campaigns/d1-sh/layer_rf_tc_noc512` -> `project/campaigns/d1-sh/layer_rf_tc_noc512/frozen-verification.json`.
+- Result: check seeds=[7, 19]; timing completed=True.
+- Decision: D1 evidence only; joint grade required before promotion.
+
+## 2026-09-29 14:45 UTC — M1_P1 screen prompt_w1_a_resident_tc
+- Change: base=project/experiments/cand-149/inputs/recipe.json; patch={"gemm_stages":{"p1_prompt":{"a_resident":["w1"]}}}; hardware=project/campaigns/d1-sh/layer_rf_tc4x8kp4/hardware.json; hardware_patch={}
+- Verify: `PYTHONPATH=. .venv/bin/python project/campaigns/d1-sh/refine.py prompt_w1_a_resident_tc --case M1_P1 --out-root project/campaigns/structural --base project/experiments/cand-149/inputs/recipe.json --hardware project/campaigns/d1-sh/layer_rf_tc4x8kp4/hardware.json --patch {"gemm_stages":{"p1_prompt":{"a_resident":["w1"]}}}`; reports `project/campaigns/structural/prompt_w1_a_resident_tc`. Development checks only; full frozen race validation still required.
+- Result: M1_P1=600392; area=22.93345700352; peak W=10.987744390420774; error=None.
+- Decision: screen only, no incumbent promotion; compare before full frozen validation.
+
+## 2026-09-29 14:46 UTC — M1_P1 screen parent_tc_noc512
+- Change: base=project/experiments/cand-149/inputs/recipe.json; patch={}; hardware=project/campaigns/d1-sh/layer_rf_tc_noc512/hardware.json; hardware_patch={}
+- Verify: `PYTHONPATH=. .venv/bin/python project/campaigns/d1-sh/refine.py parent_tc_noc512 --case M1_P1 --out-root project/campaigns/structural --base project/experiments/cand-149/inputs/recipe.json --hardware project/campaigns/d1-sh/layer_rf_tc_noc512/hardware.json`; reports `project/campaigns/structural/parent_tc_noc512`. Development checks only; full frozen race validation still required.
+- Result: M1_P1=560845; area=23.06145700352; peak W=11.323344161093543; error=None.
+- Decision: screen only, no incumbent promotion; compare before full frozen validation.
+
+## 2026-09-29 14:47 UTC — M1_P1 screen step_a_resident_tc
+- Change: base=project/experiments/cand-149/inputs/recipe.json; patch={"gemm_stages":{"p1_step":{"a_resident":1}}}; hardware=project/campaigns/d1-sh/layer_rf_tc4x8kp4/hardware.json; hardware_patch={}
+- Verify: `PYTHONPATH=. .venv/bin/python project/campaigns/d1-sh/refine.py step_a_resident_tc --case M1_P1 --out-root project/campaigns/structural --base project/experiments/cand-149/inputs/recipe.json --hardware project/campaigns/d1-sh/layer_rf_tc4x8kp4/hardware.json --patch {"gemm_stages":{"p1_step":{"a_resident":1}}}`; reports `project/campaigns/structural/step_a_resident_tc`. Development checks only; full frozen race validation still required.
+- Result: M1_P1=558176; area=22.93345700352; peak W=10.987744390420774; error=None.
+- Decision: screen only, no incumbent promotion; compare before full frozen validation.
+
+## 2026-09-29 21:41:36 — cand-150: D1 per-layer persistent RF groups with WO/W1/W2 resident in each layer; KV SH, dual accumulators, load-ahead and fused GELU. Frozen D1 seeds7/19 and estimate pass:74180 cycles. P1 and hardware byte-identical to graded cand-149.
+- Change: parent=cand-149; Isolated structural search; sources in proposal.json
+- Evidence: project/experiments/cand-150/metrics.json; reports/grade.json; attempts=1
+- Command (grade): ['/home/jovyan/projects/SLAI-infra-course-hw1/.venv/bin/python', '/home/jovyan/projects/SLAI-infra-course-hw1/challenge.py', 'grade', '--hardware', '/home/jovyan/projects/SLAI-infra-course-hw1/project/experiments/cand-150/inputs/hardware.json', '--program-p1', '/home/jovyan/projects/SLAI-infra-course-hw1/project/experiments/cand-150/programs/M1_P1.asm', '--program-d1', '/home/jovyan/projects/SLAI-infra-course-hw1/project/experiments/cand-150/programs/M2_D1.asm', '--report', '/home/jovyan/projects/SLAI-infra-course-hw1/project/experiments/cand-150/reports/grade.json', '--seed', '7', '--baseline', '/home/jovyan/projects/SLAI-infra-course-hw1/baseline_manifest.json']; elapsed=5187.866576676723; peak MiB=78147.64453125
+- Inputs: compiler.py@9a853643 hardware.json@f243db04 recipe.json@74670c77
+- Verify: PASS elapsed=5187.90s
+- Result: M1_P1=563776 (54.981x), M2_D1=74180 (17.552x); score=31065.183, eligible=True
+  - deltas vs head (cand-149): {'M1_P1': 0, 'M2_D1': -13599}
+- Decision: KEPT — new incumbent head (score=31065.183)
+
+## 2026-09-29 23:15:46 — cand-151: Shared TC4x8 kp4 and NoC512: screened P1 560845, frozen D1 58770; validate joint score and all gates.
+- Change: parent=cand-150; Isolated structural search; sources in proposal.json
+- Evidence: project/experiments/cand-151/metrics.json; reports/grade.json; attempts=0
+- Inputs: compiler.py@c423ffce hardware.json@9431f1d4 recipe.json@74670c77
+- Verify: FAILED — failure_class=validation_cost_pruned; evidence=pipeline
+- Result: status=not_verified, failure_class=validation_cost_pruned
+- Decision: reject/preserve failed candidate (status=not_verified)
+
+## 2026-09-29 15:16 UTC — M2_D1 screen layer_rf_tc_noc512_vec32
+- Change: base=project/campaigns/d1-sh/layer_rf_tc_noc512/recipe.json; patch={}; hardware=project/campaigns/d1-sh/layer_rf_tc_noc512/hardware.json; hardware_patch={"vector_lanes":32}
+- Verify: `PYTHONPATH=. .venv/bin/python project/campaigns/d1-sh/refine.py layer_rf_tc_noc512_vec32 --base project/campaigns/d1-sh/layer_rf_tc_noc512/recipe.json --hardware project/campaigns/d1-sh/layer_rf_tc_noc512/hardware.json --hardware-patch '{"vector_lanes":32}'`; reports `project/campaigns/d1-sh/layer_rf_tc_noc512_vec32`. Development checks only; full frozen race validation still required.
+- Result: M2_D1=failed; area=None; peak W=None; error=ValueError('RF address/scope invalid').
+- Decision: screen only, no incumbent promotion; compare before full frozen validation.
+
+## 2026-09-29 15:16 UTC — M2_D1 screen layer_rf_tc_noc512_sh2r
+- Change: base=project/campaigns/d1-sh/layer_rf_tc_noc512/recipe.json; patch={}; hardware=project/campaigns/d1-sh/layer_rf_tc_noc512/hardware.json; hardware_patch={"shared_ports":"2R1W"}
+- Verify: `PYTHONPATH=. .venv/bin/python project/campaigns/d1-sh/refine.py layer_rf_tc_noc512_sh2r --base project/campaigns/d1-sh/layer_rf_tc_noc512/recipe.json --hardware project/campaigns/d1-sh/layer_rf_tc_noc512/hardware.json --hardware-patch '{"shared_ports":"2R1W"}'`; reports `project/campaigns/d1-sh/layer_rf_tc_noc512_sh2r`. Development checks only; full frozen race validation still required.
+- Result: M2_D1=57794; area=23.419857003519997; peak W=10.784999657084503; error=None.
+- Decision: screen only, no incumbent promotion; compare before full frozen validation.
+
+## 2026-09-29 15:17 UTC — M2_D1 screen layer_rf_tc_noc512_sh8
+- Change: base=project/campaigns/d1-sh/layer_rf_tc_noc512/recipe.json; patch={}; hardware=project/campaigns/d1-sh/layer_rf_tc_noc512/hardware.json; hardware_patch={"shared_banks":8}
+- Verify: `PYTHONPATH=. .venv/bin/python project/campaigns/d1-sh/refine.py layer_rf_tc_noc512_sh8 --base project/campaigns/d1-sh/layer_rf_tc_noc512/recipe.json --hardware project/campaigns/d1-sh/layer_rf_tc_noc512/hardware.json --hardware-patch '{"shared_banks":8}'`; reports `project/campaigns/d1-sh/layer_rf_tc_noc512_sh8`. Development checks only; full frozen race validation still required.
+- Result: M2_D1=57658; area=23.57345700352; peak W=10.78883965708451; error=None.
+- Decision: screen only, no incumbent promotion; compare before full frozen validation.
+
+## 2026-09-29 15:22 UTC — Frozen D1 verification layer_rf_tc_noc512_sh2r
+- Change: none; verify screened variant using unmodified check_case and estimate_case.
+- Verify: `PYTHONPATH=. .venv/bin/python project/campaigns/d1-sh/verify.py project/campaigns/d1-sh/layer_rf_tc_noc512_sh2r` -> `project/campaigns/d1-sh/layer_rf_tc_noc512_sh2r/frozen-verification.json`.
+- Result: check seeds=[7, 19]; timing completed=True.
+- Decision: D1 evidence only; joint grade required before promotion.
+
+## 2026-09-29 15:23 UTC — Launch aggressive-r1 bounded campaign
+- Change: 26 pinned hypotheses, four evaluation workers; hardware resource reallocations and D1/P1 structural/tiling branches. Add pinned compiler option and area prefilter to isolated screen runner. No evaluator changes.
+- Verify: `PYTHONPATH=. .venv/bin/python project/campaigns/structural/aggressive.py aggressive-r1 --jobs 4`; syntax compilation and plan-only checks passed. Live evidence: `project/campaigns/structural/aggressive-r1/state.json`, per-candidate reports and stdout/stderr.
+- Result: running; no new joint score claimed. Formal registry incumbent remains cand-150 score31065.183.
+- Decision: automatically continue through top-three frozen D1 checks, at most nine same-hardware P1 measurements, then at most two sequential full joint grades. Retain all failed cases; no unverified promotion.
+
+## 2026-09-29 15:23 UTC — M2_D1 screen cache0
+- Change: base=/home/jovyan/projects/SLAI-infra-course-hw1/project/campaigns/d1-sh/layer_rf_tc_noc512/recipe.json; patch={}; hardware=/home/jovyan/projects/SLAI-infra-course-hw1/project/campaigns/d1-sh/layer_rf_tc_noc512/hardware.json; hardware_patch={"cache_mib": 0}
+- Verify: `PYTHONPATH=. .venv/bin/python project/campaigns/d1-sh/refine.py cache0 --case M2_D1 --out-root /home/jovyan/projects/SLAI-infra-course-hw1/project/campaigns/structural/aggressive-r1 --base /home/jovyan/projects/SLAI-infra-course-hw1/project/campaigns/d1-sh/layer_rf_tc_noc512/recipe.json --hardware /home/jovyan/projects/SLAI-infra-course-hw1/project/campaigns/d1-sh/layer_rf_tc_noc512/hardware.json --patch '{}' --hardware-patch '{"cache_mib": 0}' --compiler /home/jovyan/projects/SLAI-infra-course-hw1/project/campaigns/structural/aggressive-r1/compiler.py`; reports `/home/jovyan/projects/SLAI-infra-course-hw1/project/campaigns/structural/aggressive-r1/cache0`. Development checks only; full frozen race validation still required.
+- Result: M2_D1=57057; area=19.58521098752; peak W=10.36964627468937; error=None.
+- Decision: screen only, no incumbent promotion; compare before full frozen validation.
+
+## 2026-09-29 15:23 UTC — M2_D1 screen cache4
+- Change: base=/home/jovyan/projects/SLAI-infra-course-hw1/project/campaigns/d1-sh/layer_rf_tc_noc512/recipe.json; patch={}; hardware=/home/jovyan/projects/SLAI-infra-course-hw1/project/campaigns/d1-sh/layer_rf_tc_noc512/hardware.json; hardware_patch={"cache_mib": 4}
+- Verify: `PYTHONPATH=. .venv/bin/python project/campaigns/d1-sh/refine.py cache4 --case M2_D1 --out-root /home/jovyan/projects/SLAI-infra-course-hw1/project/campaigns/structural/aggressive-r1 --base /home/jovyan/projects/SLAI-infra-course-hw1/project/campaigns/d1-sh/layer_rf_tc_noc512/recipe.json --hardware /home/jovyan/projects/SLAI-infra-course-hw1/project/campaigns/d1-sh/layer_rf_tc_noc512/hardware.json --patch '{}' --hardware-patch '{"cache_mib": 4}' --compiler /home/jovyan/projects/SLAI-infra-course-hw1/project/campaigns/structural/aggressive-r1/compiler.py`; reports `/home/jovyan/projects/SLAI-infra-course-hw1/project/campaigns/structural/aggressive-r1/cache4`. Development checks only; full frozen race validation still required.
+- Result: M2_D1=58770; area=21.38333399552; peak W=10.73408658188452; error=None.
+- Decision: screen only, no incumbent promotion; compare before full frozen validation.
+
+## 2026-09-29 15:23 UTC — M2_D1 screen tc2_kp2
+- Change: base=/home/jovyan/projects/SLAI-infra-course-hw1/project/campaigns/d1-sh/layer_rf_tc_noc512/recipe.json; patch={}; hardware=/home/jovyan/projects/SLAI-infra-course-hw1/project/campaigns/d1-sh/layer_rf_tc_noc512/hardware.json; hardware_patch={"tc_count": 2, "tc_k_parallel": 2}
+- Verify: `PYTHONPATH=. .venv/bin/python project/campaigns/d1-sh/refine.py tc2_kp2 --case M2_D1 --out-root /home/jovyan/projects/SLAI-infra-course-hw1/project/campaigns/structural/aggressive-r1 --base /home/jovyan/projects/SLAI-infra-course-hw1/project/campaigns/d1-sh/layer_rf_tc_noc512/recipe.json --hardware /home/jovyan/projects/SLAI-infra-course-hw1/project/campaigns/d1-sh/layer_rf_tc_noc512/hardware.json --patch '{}' --hardware-patch '{"tc_count": 2, "tc_k_parallel": 2}' --compiler /home/jovyan/projects/SLAI-infra-course-hw1/project/campaigns/structural/aggressive-r1/compiler.py`; reports `/home/jovyan/projects/SLAI-infra-course-hw1/project/campaigns/structural/aggressive-r1/tc2_kp2`. Development checks only; full frozen race validation still required.
+- Result: M2_D1=61278; area=23.26032484352; peak W=10.78101135308454; error=None.
+- Decision: screen only, no incumbent promotion; compare before full frozen validation.
+
+## 2026-09-29 15:23 UTC — M2_D1 screen hbm8_cache4
+- Change: base=/home/jovyan/projects/SLAI-infra-course-hw1/project/campaigns/d1-sh/layer_rf_tc_noc512/recipe.json; patch={}; hardware=/home/jovyan/projects/SLAI-infra-course-hw1/project/campaigns/d1-sh/layer_rf_tc_noc512/hardware.json; hardware_patch={"hbm_channels": 8, "cache_mib": 4}
+- Verify: `PYTHONPATH=. .venv/bin/python project/campaigns/d1-sh/refine.py hbm8_cache4 --case M2_D1 --out-root /home/jovyan/projects/SLAI-infra-course-hw1/project/campaigns/structural/aggressive-r1 --base /home/jovyan/projects/SLAI-infra-course-hw1/project/campaigns/d1-sh/layer_rf_tc_noc512/recipe.json --hardware /home/jovyan/projects/SLAI-infra-course-hw1/project/campaigns/d1-sh/layer_rf_tc_noc512/hardware.json --patch '{}' --hardware-patch '{"hbm_channels": 8, "cache_mib": 4}' --compiler /home/jovyan/projects/SLAI-infra-course-hw1/project/campaigns/structural/aggressive-r1/compiler.py`; reports `/home/jovyan/projects/SLAI-infra-course-hw1/project/campaigns/structural/aggressive-r1/hbm8_cache4`. Development checks only; full frozen race validation still required.
+- Result: M2_D1=58250; area=21.58333399552; peak W=18.78186744588858; error=None.
+- Decision: screen only, no incumbent promotion; compare before full frozen validation.
+
+## 2026-09-29 15:24 UTC — Frozen D1 verification layer_rf_tc_noc512_sh8
+- Change: none; verify screened variant using unmodified check_case and estimate_case.
+- Verify: `PYTHONPATH=. .venv/bin/python project/campaigns/d1-sh/verify.py project/campaigns/d1-sh/layer_rf_tc_noc512_sh8` -> `project/campaigns/d1-sh/layer_rf_tc_noc512_sh8/frozen-verification.json`.
+- Result: check seeds=[7, 19]; timing completed=True.
+- Decision: D1 evidence only; joint grade required before promotion.
+
+## 2026-09-29 15:24 UTC — M2_D1 screen tc4_kp1
+- Change: base=/home/jovyan/projects/SLAI-infra-course-hw1/project/campaigns/d1-sh/layer_rf_tc_noc512/recipe.json; patch={}; hardware=/home/jovyan/projects/SLAI-infra-course-hw1/project/campaigns/d1-sh/layer_rf_tc_noc512/hardware.json; hardware_patch={"tc_count": 4, "tc_k_parallel": 1}
+- Verify: `PYTHONPATH=. .venv/bin/python project/campaigns/d1-sh/refine.py tc4_kp1 --case M2_D1 --out-root /home/jovyan/projects/SLAI-infra-course-hw1/project/campaigns/structural/aggressive-r1 --base /home/jovyan/projects/SLAI-infra-course-hw1/project/campaigns/d1-sh/layer_rf_tc_noc512/recipe.json --hardware /home/jovyan/projects/SLAI-infra-course-hw1/project/campaigns/d1-sh/layer_rf_tc_noc512/hardware.json --patch '{}' --hardware-patch '{"tc_count": 4, "tc_k_parallel": 1}' --compiler /home/jovyan/projects/SLAI-infra-course-hw1/project/campaigns/structural/aggressive-r1/compiler.py`; reports `/home/jovyan/projects/SLAI-infra-course-hw1/project/campaigns/structural/aggressive-r1/tc4_kp1`. Development checks only; full frozen race validation still required.
+- Result: M2_D1=66422; area=23.65806052352; peak W=10.790954745084594; error=None.
+- Decision: screen only, no incumbent promotion; compare before full frozen validation.
+
+## 2026-09-29 15:24 UTC — M2_D1 screen tc8x8_kp2_hbm8
+- Change: base=/home/jovyan/projects/SLAI-infra-course-hw1/project/campaigns/d1-sh/layer_rf_tc_noc512/recipe.json; patch={}; hardware=/home/jovyan/projects/SLAI-infra-course-hw1/project/campaigns/d1-sh/layer_rf_tc_noc512/hardware.json; hardware_patch={"tc_array": "8x8", "tc_k_parallel": 2, "hbm_channels": 8, "cache_mib": 4}
+- Verify: `PYTHONPATH=. .venv/bin/python project/campaigns/d1-sh/refine.py tc8x8_kp2_hbm8 --case M2_D1 --out-root /home/jovyan/projects/SLAI-infra-course-hw1/project/campaigns/structural/aggressive-r1 --base /home/jovyan/projects/SLAI-infra-course-hw1/project/campaigns/d1-sh/layer_rf_tc_noc512/recipe.json --hardware /home/jovyan/projects/SLAI-infra-course-hw1/project/campaigns/d1-sh/layer_rf_tc_noc512/hardware.json --patch '{}' --hardware-patch '{"tc_array": "8x8", "tc_k_parallel": 2, "hbm_channels": 8, "cache_mib": 4}' --compiler /home/jovyan/projects/SLAI-infra-course-hw1/project/campaigns/structural/aggressive-r1/compiler.py`; reports `/home/jovyan/projects/SLAI-infra-course-hw1/project/campaigns/structural/aggressive-r1/tc8x8_kp2_hbm8`. Development checks only; full frozen race validation still required.
+- Result: M2_D1=64026; area=21.78220183552; peak W=18.786839141888592; error=None.
+- Decision: screen only, no incumbent promotion; compare before full frozen validation.
+
+## 2026-09-29 15:24 UTC — M2_D1 screen tc8x8_kp2
+- Change: base=/home/jovyan/projects/SLAI-infra-course-hw1/project/campaigns/d1-sh/layer_rf_tc_noc512/recipe.json; patch={}; hardware=/home/jovyan/projects/SLAI-infra-course-hw1/project/campaigns/d1-sh/layer_rf_tc_noc512/hardware.json; hardware_patch={"tc_array": "8x8", "tc_k_parallel": 2}
+- Verify: `PYTHONPATH=. .venv/bin/python project/campaigns/d1-sh/refine.py tc8x8_kp2 --case M2_D1 --out-root /home/jovyan/projects/SLAI-infra-course-hw1/project/campaigns/structural/aggressive-r1 --base /home/jovyan/projects/SLAI-infra-course-hw1/project/campaigns/d1-sh/layer_rf_tc_noc512/recipe.json --hardware /home/jovyan/projects/SLAI-infra-course-hw1/project/campaigns/d1-sh/layer_rf_tc_noc512/hardware.json --patch '{}' --hardware-patch '{"tc_array": "8x8", "tc_k_parallel": 2}' --compiler /home/jovyan/projects/SLAI-infra-course-hw1/project/campaigns/structural/aggressive-r1/compiler.py`; reports `/home/jovyan/projects/SLAI-infra-course-hw1/project/campaigns/structural/aggressive-r1/tc8x8_kp2`. Development checks only; full frozen race validation still required.
+- Result: M2_D1=64566; area=23.26032484352; peak W=10.781011353084265; error=None.
+- Decision: screen only, no incumbent promotion; compare before full frozen validation.
+
+## 2026-09-29 15:24 UTC — M2_D1 screen sh8_2r_cache4
+- Change: base=/home/jovyan/projects/SLAI-infra-course-hw1/project/campaigns/d1-sh/layer_rf_tc_noc512/recipe.json; patch={}; hardware=/home/jovyan/projects/SLAI-infra-course-hw1/project/campaigns/d1-sh/layer_rf_tc_noc512/hardware.json; hardware_patch={"shared_banks": 8, "shared_ports": "2R1W", "cache_mib": 4}
+- Verify: `PYTHONPATH=. .venv/bin/python project/campaigns/d1-sh/refine.py sh8_2r_cache4 --case M2_D1 --out-root /home/jovyan/projects/SLAI-infra-course-hw1/project/campaigns/structural/aggressive-r1 --base /home/jovyan/projects/SLAI-infra-course-hw1/project/campaigns/d1-sh/layer_rf_tc_noc512/recipe.json --hardware /home/jovyan/projects/SLAI-infra-course-hw1/project/campaigns/d1-sh/layer_rf_tc_noc512/hardware.json --patch '{}' --hardware-patch '{"shared_banks": 8, "shared_ports": "2R1W", "cache_mib": 4}' --compiler /home/jovyan/projects/SLAI-infra-course-hw1/project/campaigns/structural/aggressive-r1/compiler.py`; reports `/home/jovyan/projects/SLAI-infra-course-hw1/project/campaigns/structural/aggressive-r1/sh8_2r_cache4`. Development checks only; full frozen race validation still required.
+- Result: M2_D1=56978; area=22.61213399552; peak W=10.76480658188449; error=None.
+- Decision: screen only, no incumbent promotion; compare before full frozen validation.
+
+## 2026-09-29 15:25 UTC — M2_D1 screen hbm8_sh8_cache4
+- Change: base=/home/jovyan/projects/SLAI-infra-course-hw1/project/campaigns/d1-sh/layer_rf_tc_noc512/recipe.json; patch={}; hardware=/home/jovyan/projects/SLAI-infra-course-hw1/project/campaigns/d1-sh/layer_rf_tc_noc512/hardware.json; hardware_patch={"hbm_channels": 8, "shared_banks": 8, "cache_mib": 4}
+- Verify: `PYTHONPATH=. .venv/bin/python project/campaigns/d1-sh/refine.py hbm8_sh8_cache4 --case M2_D1 --out-root /home/jovyan/projects/SLAI-infra-course-hw1/project/campaigns/structural/aggressive-r1 --base /home/jovyan/projects/SLAI-infra-course-hw1/project/campaigns/d1-sh/layer_rf_tc_noc512/recipe.json --hardware /home/jovyan/projects/SLAI-infra-course-hw1/project/campaigns/d1-sh/layer_rf_tc_noc512/hardware.json --patch '{}' --hardware-patch '{"hbm_channels": 8, "shared_banks": 8, "cache_mib": 4}' --compiler /home/jovyan/projects/SLAI-infra-course-hw1/project/campaigns/structural/aggressive-r1/compiler.py`; reports `/home/jovyan/projects/SLAI-infra-course-hw1/project/campaigns/structural/aggressive-r1/hbm8_sh8_cache4`. Development checks only; full frozen race validation still required.
+- Result: M2_D1=57084; area=22.09533399552; peak W=18.794667445888592; error=None.
+- Decision: screen only, no incumbent promotion; compare before full frozen validation.
+
+## 2026-09-29 15:25 UTC — M2_D1 screen qkv_k16
+- Change: base=/home/jovyan/projects/SLAI-infra-course-hw1/project/campaigns/d1-sh/layer_rf_tc_noc512/recipe.json; patch={"d1_schedule": {"projections": {"qkv": {"k_chunk": 16}}}}; hardware=/home/jovyan/projects/SLAI-infra-course-hw1/project/campaigns/d1-sh/layer_rf_tc_noc512/hardware.json; hardware_patch={}
+- Verify: `PYTHONPATH=. .venv/bin/python project/campaigns/d1-sh/refine.py qkv_k16 --case M2_D1 --out-root /home/jovyan/projects/SLAI-infra-course-hw1/project/campaigns/structural/aggressive-r1 --base /home/jovyan/projects/SLAI-infra-course-hw1/project/campaigns/d1-sh/layer_rf_tc_noc512/recipe.json --hardware /home/jovyan/projects/SLAI-infra-course-hw1/project/campaigns/d1-sh/layer_rf_tc_noc512/hardware.json --patch '{"d1_schedule": {"projections": {"qkv": {"k_chunk": 16}}}}' --hardware-patch '{}' --compiler /home/jovyan/projects/SLAI-infra-course-hw1/project/campaigns/structural/aggressive-r1/compiler.py`; reports `/home/jovyan/projects/SLAI-infra-course-hw1/project/campaigns/structural/aggressive-r1/qkv_k16`. Development checks only; full frozen race validation still required.
+- Result: M2_D1=59291; area=23.06145700352; peak W=10.776039657082642; error=None.
+- Decision: screen only, no incumbent promotion; compare before full frozen validation.
+
+## 2026-09-29 15:25 UTC — M2_D1 screen w1_k16
+- Change: base=/home/jovyan/projects/SLAI-infra-course-hw1/project/campaigns/d1-sh/layer_rf_tc_noc512/recipe.json; patch={"d1_schedule": {"projections": {"w1": {"k_chunk": 16}}}}; hardware=/home/jovyan/projects/SLAI-infra-course-hw1/project/campaigns/d1-sh/layer_rf_tc_noc512/hardware.json; hardware_patch={}
+- Verify: `PYTHONPATH=. .venv/bin/python project/campaigns/d1-sh/refine.py w1_k16 --case M2_D1 --out-root /home/jovyan/projects/SLAI-infra-course-hw1/project/campaigns/structural/aggressive-r1 --base /home/jovyan/projects/SLAI-infra-course-hw1/project/campaigns/d1-sh/layer_rf_tc_noc512/recipe.json --hardware /home/jovyan/projects/SLAI-infra-course-hw1/project/campaigns/d1-sh/layer_rf_tc_noc512/hardware.json --patch '{"d1_schedule": {"projections": {"w1": {"k_chunk": 16}}}}' --hardware-patch '{}' --compiler /home/jovyan/projects/SLAI-infra-course-hw1/project/campaigns/structural/aggressive-r1/compiler.py`; reports `/home/jovyan/projects/SLAI-infra-course-hw1/project/campaigns/structural/aggressive-r1/w1_k16`. Development checks only; full frozen race validation still required.
+- Result: M2_D1=58575; area=23.06145700352; peak W=10.776039657084274; error=None.
+- Decision: screen only, no incumbent promotion; compare before full frozen validation.
+
+## 2026-09-29 15:25 UTC — M2_D1 screen qkv_k8
+- Change: base=/home/jovyan/projects/SLAI-infra-course-hw1/project/campaigns/d1-sh/layer_rf_tc_noc512/recipe.json; patch={"d1_schedule": {"projections": {"qkv": {"k_chunk": 8}}}}; hardware=/home/jovyan/projects/SLAI-infra-course-hw1/project/campaigns/d1-sh/layer_rf_tc_noc512/hardware.json; hardware_patch={}
+- Verify: `PYTHONPATH=. .venv/bin/python project/campaigns/d1-sh/refine.py qkv_k8 --case M2_D1 --out-root /home/jovyan/projects/SLAI-infra-course-hw1/project/campaigns/structural/aggressive-r1 --base /home/jovyan/projects/SLAI-infra-course-hw1/project/campaigns/d1-sh/layer_rf_tc_noc512/recipe.json --hardware /home/jovyan/projects/SLAI-infra-course-hw1/project/campaigns/d1-sh/layer_rf_tc_noc512/hardware.json --patch '{"d1_schedule": {"projections": {"qkv": {"k_chunk": 8}}}}' --hardware-patch '{}' --compiler /home/jovyan/projects/SLAI-infra-course-hw1/project/campaigns/structural/aggressive-r1/compiler.py`; reports `/home/jovyan/projects/SLAI-infra-course-hw1/project/campaigns/structural/aggressive-r1/qkv_k8`. Development checks only; full frozen race validation still required.
+- Result: M2_D1=59646; area=23.06145700352; peak W=10.776039657082627; error=None.
+- Decision: screen only, no incumbent promotion; compare before full frozen validation.
+
+## 2026-09-29 15:25 UTC — M2_D1 screen w2_k64
+- Change: base=/home/jovyan/projects/SLAI-infra-course-hw1/project/campaigns/d1-sh/layer_rf_tc_noc512/recipe.json; patch={"d1_schedule": {"projections": {"w2": {"k_chunk": 64}}}}; hardware=/home/jovyan/projects/SLAI-infra-course-hw1/project/campaigns/d1-sh/layer_rf_tc_noc512/hardware.json; hardware_patch={}
+- Verify: `PYTHONPATH=. .venv/bin/python project/campaigns/d1-sh/refine.py w2_k64 --case M2_D1 --out-root /home/jovyan/projects/SLAI-infra-course-hw1/project/campaigns/structural/aggressive-r1 --base /home/jovyan/projects/SLAI-infra-course-hw1/project/campaigns/d1-sh/layer_rf_tc_noc512/recipe.json --hardware /home/jovyan/projects/SLAI-infra-course-hw1/project/campaigns/d1-sh/layer_rf_tc_noc512/hardware.json --patch '{"d1_schedule": {"projections": {"w2": {"k_chunk": 64}}}}' --hardware-patch '{}' --compiler /home/jovyan/projects/SLAI-infra-course-hw1/project/campaigns/structural/aggressive-r1/compiler.py`; reports `/home/jovyan/projects/SLAI-infra-course-hw1/project/campaigns/structural/aggressive-r1/w2_k64`. Development checks only; full frozen race validation still required.
+- Result: M2_D1=58431; area=23.06145700352; peak W=10.563939017087021; error=None.
+- Decision: screen only, no incumbent promotion; compare before full frozen validation.
+
+## 2026-09-29 15:25 UTC — M2_D1 screen wo_k128
+- Change: base=/home/jovyan/projects/SLAI-infra-course-hw1/project/campaigns/d1-sh/layer_rf_tc_noc512/recipe.json; patch={"d1_schedule": {"projections": {"wo": {"k_chunk": 128}}}}; hardware=/home/jovyan/projects/SLAI-infra-course-hw1/project/campaigns/d1-sh/layer_rf_tc_noc512/hardware.json; hardware_patch={}
+- Verify: `PYTHONPATH=. .venv/bin/python project/campaigns/d1-sh/refine.py wo_k128 --case M2_D1 --out-root /home/jovyan/projects/SLAI-infra-course-hw1/project/campaigns/structural/aggressive-r1 --base /home/jovyan/projects/SLAI-infra-course-hw1/project/campaigns/d1-sh/layer_rf_tc_noc512/recipe.json --hardware /home/jovyan/projects/SLAI-infra-course-hw1/project/campaigns/d1-sh/layer_rf_tc_noc512/hardware.json --patch '{"d1_schedule": {"projections": {"wo": {"k_chunk": 128}}}}' --hardware-patch '{}' --compiler /home/jovyan/projects/SLAI-infra-course-hw1/project/campaigns/structural/aggressive-r1/compiler.py`; reports `/home/jovyan/projects/SLAI-infra-course-hw1/project/campaigns/structural/aggressive-r1/wo_k128`. Development checks only; full frozen race validation still required.
+- Result: M2_D1=59052; area=23.06145700352; peak W=10.77603965708452; error=None.
+- Decision: screen only, no incumbent promotion; compare before full frozen validation.
+
+## 2026-09-29 15:25 UTC — M2_D1 screen wo_k32
+- Change: base=/home/jovyan/projects/SLAI-infra-course-hw1/project/campaigns/d1-sh/layer_rf_tc_noc512/recipe.json; patch={"d1_schedule": {"projections": {"wo": {"k_chunk": 32}}}}; hardware=/home/jovyan/projects/SLAI-infra-course-hw1/project/campaigns/d1-sh/layer_rf_tc_noc512/hardware.json; hardware_patch={}
+- Verify: `PYTHONPATH=. .venv/bin/python project/campaigns/d1-sh/refine.py wo_k32 --case M2_D1 --out-root /home/jovyan/projects/SLAI-infra-course-hw1/project/campaigns/structural/aggressive-r1 --base /home/jovyan/projects/SLAI-infra-course-hw1/project/campaigns/d1-sh/layer_rf_tc_noc512/recipe.json --hardware /home/jovyan/projects/SLAI-infra-course-hw1/project/campaigns/d1-sh/layer_rf_tc_noc512/hardware.json --patch '{"d1_schedule": {"projections": {"wo": {"k_chunk": 32}}}}' --hardware-patch '{}' --compiler /home/jovyan/projects/SLAI-infra-course-hw1/project/campaigns/structural/aggressive-r1/compiler.py`; reports `/home/jovyan/projects/SLAI-infra-course-hw1/project/campaigns/structural/aggressive-r1/wo_k32`. Development checks only; full frozen race validation still required.
+- Result: M2_D1=58770; area=23.06145700352; peak W=10.776039657084489; error=None.
+- Decision: screen only, no incumbent promotion; compare before full frozen validation.
+
+## 2026-09-29 15:26 UTC — M2_D1 screen kv_hbm
+- Change: base=/home/jovyan/projects/SLAI-infra-course-hw1/project/campaigns/d1-sh/layer_rf_tc_noc512/recipe.json; patch={"d1_schedule": {"kv_sh": 0}}; hardware=/home/jovyan/projects/SLAI-infra-course-hw1/project/campaigns/d1-sh/layer_rf_tc_noc512/hardware.json; hardware_patch={}
+- Verify: `PYTHONPATH=. .venv/bin/python project/campaigns/d1-sh/refine.py kv_hbm --case M2_D1 --out-root /home/jovyan/projects/SLAI-infra-course-hw1/project/campaigns/structural/aggressive-r1 --base /home/jovyan/projects/SLAI-infra-course-hw1/project/campaigns/d1-sh/layer_rf_tc_noc512/recipe.json --hardware /home/jovyan/projects/SLAI-infra-course-hw1/project/campaigns/d1-sh/layer_rf_tc_noc512/hardware.json --patch '{"d1_schedule": {"kv_sh": 0}}' --hardware-patch '{}' --compiler /home/jovyan/projects/SLAI-infra-course-hw1/project/campaigns/structural/aggressive-r1/compiler.py`; reports `/home/jovyan/projects/SLAI-infra-course-hw1/project/campaigns/structural/aggressive-r1/kv_hbm`. Development checks only; full frozen race validation still required.
+- Result: M2_D1=62322; area=23.06145700352; peak W=10.776039657084564; error=None.
+- Decision: screen only, no incumbent promotion; compare before full frozen validation.
+
+## 2026-09-29 15:26 UTC — M2_D1 screen rf_w2_only
+- Change: base=/home/jovyan/projects/SLAI-infra-course-hw1/project/campaigns/d1-sh/layer_rf_tc_noc512/recipe.json; patch={"d1_schedule": {"rf_resident": ["l0w2", "l1w2"]}}; hardware=/home/jovyan/projects/SLAI-infra-course-hw1/project/campaigns/d1-sh/layer_rf_tc_noc512/hardware.json; hardware_patch={}
+- Verify: `PYTHONPATH=. .venv/bin/python project/campaigns/d1-sh/refine.py rf_w2_only --case M2_D1 --out-root /home/jovyan/projects/SLAI-infra-course-hw1/project/campaigns/structural/aggressive-r1 --base /home/jovyan/projects/SLAI-infra-course-hw1/project/campaigns/d1-sh/layer_rf_tc_noc512/recipe.json --hardware /home/jovyan/projects/SLAI-infra-course-hw1/project/campaigns/d1-sh/layer_rf_tc_noc512/hardware.json --patch '{"d1_schedule": {"rf_resident": ["l0w2", "l1w2"]}}' --hardware-patch '{}' --compiler /home/jovyan/projects/SLAI-infra-course-hw1/project/campaigns/structural/aggressive-r1/compiler.py`; reports `/home/jovyan/projects/SLAI-infra-course-hw1/project/campaigns/structural/aggressive-r1/rf_w2_only`. Development checks only; full frozen race validation still required.
+- Result: M2_D1=62837; area=23.06145700352; peak W=10.776039657084398; error=None.
+- Decision: screen only, no incumbent promotion; compare before full frozen validation.
+
+## 2026-09-29 15:26 UTC — M2_D1 screen kv_k_only
+- Change: base=/home/jovyan/projects/SLAI-infra-course-hw1/project/campaigns/d1-sh/layer_rf_tc_noc512/recipe.json; patch={"d1_schedule": {"kv_sh": "k"}}; hardware=/home/jovyan/projects/SLAI-infra-course-hw1/project/campaigns/d1-sh/layer_rf_tc_noc512/hardware.json; hardware_patch={}
+- Verify: `PYTHONPATH=. .venv/bin/python project/campaigns/d1-sh/refine.py kv_k_only --case M2_D1 --out-root /home/jovyan/projects/SLAI-infra-course-hw1/project/campaigns/structural/aggressive-r1 --base /home/jovyan/projects/SLAI-infra-course-hw1/project/campaigns/d1-sh/layer_rf_tc_noc512/recipe.json --hardware /home/jovyan/projects/SLAI-infra-course-hw1/project/campaigns/d1-sh/layer_rf_tc_noc512/hardware.json --patch '{"d1_schedule": {"kv_sh": "k"}}' --hardware-patch '{}' --compiler /home/jovyan/projects/SLAI-infra-course-hw1/project/campaigns/structural/aggressive-r1/compiler.py`; reports `/home/jovyan/projects/SLAI-infra-course-hw1/project/campaigns/structural/aggressive-r1/kv_k_only`. Development checks only; full frozen race validation still required.
+- Result: M2_D1=60924; area=23.06145700352; peak W=10.77603965708454; error=None.
+- Decision: screen only, no incumbent promotion; compare before full frozen validation.
+
+## 2026-09-29 15:26 UTC — M2_D1 screen kv_v_only
+- Change: base=/home/jovyan/projects/SLAI-infra-course-hw1/project/campaigns/d1-sh/layer_rf_tc_noc512/recipe.json; patch={"d1_schedule": {"kv_sh": "v"}}; hardware=/home/jovyan/projects/SLAI-infra-course-hw1/project/campaigns/d1-sh/layer_rf_tc_noc512/hardware.json; hardware_patch={}
+- Verify: `PYTHONPATH=. .venv/bin/python project/campaigns/d1-sh/refine.py kv_v_only --case M2_D1 --out-root /home/jovyan/projects/SLAI-infra-course-hw1/project/campaigns/structural/aggressive-r1 --base /home/jovyan/projects/SLAI-infra-course-hw1/project/campaigns/d1-sh/layer_rf_tc_noc512/recipe.json --hardware /home/jovyan/projects/SLAI-infra-course-hw1/project/campaigns/d1-sh/layer_rf_tc_noc512/hardware.json --patch '{"d1_schedule": {"kv_sh": "v"}}' --hardware-patch '{}' --compiler /home/jovyan/projects/SLAI-infra-course-hw1/project/campaigns/structural/aggressive-r1/compiler.py`; reports `/home/jovyan/projects/SLAI-infra-course-hw1/project/campaigns/structural/aggressive-r1/kv_v_only`. Development checks only; full frozen race validation still required.
+- Result: M2_D1=60934; area=23.06145700352; peak W=10.77603965708454; error=None.
+- Decision: screen only, no incumbent promotion; compare before full frozen validation.
+
+## 2026-09-29 15:26 UTC — M1_P1 screen p1_k16
+- Change: base=/home/jovyan/projects/SLAI-infra-course-hw1/project/experiments/cand-149/inputs/recipe.json; patch={"gemm_stages": {"p1_prompt": {"k_chunk": 16}}}; hardware=/home/jovyan/projects/SLAI-infra-course-hw1/project/campaigns/d1-sh/layer_rf_tc_noc512/hardware.json; hardware_patch={}
+- Verify: `PYTHONPATH=. .venv/bin/python project/campaigns/d1-sh/refine.py p1_k16 --case M1_P1 --out-root /home/jovyan/projects/SLAI-infra-course-hw1/project/campaigns/structural/aggressive-r1 --base /home/jovyan/projects/SLAI-infra-course-hw1/project/experiments/cand-149/inputs/recipe.json --hardware /home/jovyan/projects/SLAI-infra-course-hw1/project/campaigns/d1-sh/layer_rf_tc_noc512/hardware.json --patch '{"gemm_stages": {"p1_prompt": {"k_chunk": 16}}}' --hardware-patch '{}' --compiler /home/jovyan/projects/SLAI-infra-course-hw1/project/campaigns/structural/aggressive-r1/compiler.py`; reports `/home/jovyan/projects/SLAI-infra-course-hw1/project/campaigns/structural/aggressive-r1/p1_k16`. Development checks only; full frozen race validation still required.
+- Result: M1_P1=failed; area=None; peak W=None; error=ValueError('P1 operand pipeline requires M64/128 Mtile32 N16/32 K32').
+- Decision: screen only, no incumbent promotion; compare before full frozen validation.
+
+## 2026-09-29 15:27 UTC — M2_D1 screen attention_unsplit
+- Change: base=/home/jovyan/projects/SLAI-infra-course-hw1/project/campaigns/d1-sh/layer_rf_tc_noc512/recipe.json; patch={"d1_schedule": {"attention_split": 0}}; hardware=/home/jovyan/projects/SLAI-infra-course-hw1/project/campaigns/d1-sh/layer_rf_tc_noc512/hardware.json; hardware_patch={}
+- Verify: `PYTHONPATH=. .venv/bin/python project/campaigns/d1-sh/refine.py attention_unsplit --case M2_D1 --out-root /home/jovyan/projects/SLAI-infra-course-hw1/project/campaigns/structural/aggressive-r1 --base /home/jovyan/projects/SLAI-infra-course-hw1/project/campaigns/d1-sh/layer_rf_tc_noc512/recipe.json --hardware /home/jovyan/projects/SLAI-infra-course-hw1/project/campaigns/d1-sh/layer_rf_tc_noc512/hardware.json --patch '{"d1_schedule": {"attention_split": 0}}' --hardware-patch '{}' --compiler /home/jovyan/projects/SLAI-infra-course-hw1/project/campaigns/structural/aggressive-r1/compiler.py`; reports `/home/jovyan/projects/SLAI-infra-course-hw1/project/campaigns/structural/aggressive-r1/attention_unsplit`. Development checks only; full frozen race validation still required.
+- Result: M2_D1=75208; area=23.06145700352; peak W=10.776039657084825; error=None.
+- Decision: screen only, no incumbent promotion; compare before full frozen validation.
+
+## 2026-09-29 15:39 UTC — M1_P1 screen p1_team4
+- Change: base=/home/jovyan/projects/SLAI-infra-course-hw1/project/experiments/cand-149/inputs/recipe.json; patch={"p1_schedule": {"team": 4}}; hardware=/home/jovyan/projects/SLAI-infra-course-hw1/project/campaigns/d1-sh/layer_rf_tc_noc512/hardware.json; hardware_patch={}
+- Verify: `PYTHONPATH=. .venv/bin/python project/campaigns/d1-sh/refine.py p1_team4 --case M1_P1 --out-root /home/jovyan/projects/SLAI-infra-course-hw1/project/campaigns/structural/aggressive-r1 --base /home/jovyan/projects/SLAI-infra-course-hw1/project/experiments/cand-149/inputs/recipe.json --hardware /home/jovyan/projects/SLAI-infra-course-hw1/project/campaigns/d1-sh/layer_rf_tc_noc512/hardware.json --patch '{"p1_schedule": {"team": 4}}' --hardware-patch '{}' --compiler /home/jovyan/projects/SLAI-infra-course-hw1/project/campaigns/structural/aggressive-r1/compiler.py`; reports `/home/jovyan/projects/SLAI-infra-course-hw1/project/campaigns/structural/aggressive-r1/p1_team4`. Development checks only; full frozen race validation still required.
+- Result: M1_P1=875592; area=23.06145700352; peak W=10.523687286426135; error=None.
+- Decision: screen only, no incumbent promotion; compare before full frozen validation.
+
+## 2026-09-29 15:43 UTC — Joint grade layer_rf_tc4x8kp4
+- Change: measured P1/D1 combined with one shared hardware; snapshots `project/campaigns/d1-sh/layer_rf_tc4x8kp4/joint`.
+- Verify: `PYTHONPATH=. .venv/bin/python project/campaigns/structural/grade_joint.py project/campaigns/d1-sh/layer_rf_tc4x8kp4/joint` -> `project/campaigns/d1-sh/layer_rf_tc4x8kp4/joint/grade.json`.
+- Result: status=completed; score=33863.65511607333; eligible=True; cycles={'M1_P1': 561565, 'M2_D1': 62672}.
+- Decision: preserve full grade; registry promotion pending controlled import after writer lock is free.
+
+## 2026-09-29 15:44 UTC — M1_P1 screen step_a_resident_tc_noc512
+- Change: base=project/campaigns/structural/step_a_resident_tc/recipe.json; patch={}; hardware=project/campaigns/d1-sh/layer_rf_tc_noc512/hardware.json; hardware_patch={}
+- Verify: `PYTHONPATH=. .venv/bin/python project/campaigns/d1-sh/refine.py step_a_resident_tc_noc512 --case M1_P1 --out-root project/campaigns/structural --base project/campaigns/structural/step_a_resident_tc/recipe.json --hardware project/campaigns/d1-sh/layer_rf_tc_noc512/hardware.json`; reports `project/campaigns/structural/step_a_resident_tc_noc512`. Development checks only; full frozen race validation still required.
+- Result: M1_P1=556412; area=23.06145700352; peak W=11.323344161093543; error=None.
+- Decision: screen only, no incumbent promotion; compare before full frozen validation.
+
+## 2026-09-29 15:45 UTC — M1_P1 screen parent_tc_noc512_sh2r
+- Change: base=project/experiments/cand-149/inputs/recipe.json; patch={}; hardware=project/campaigns/d1-sh/layer_rf_tc_noc512_sh2r/hardware.json; hardware_patch={}
+- Verify: `PYTHONPATH=. .venv/bin/python project/campaigns/d1-sh/refine.py parent_tc_noc512_sh2r --case M1_P1 --out-root project/campaigns/structural --base project/experiments/cand-149/inputs/recipe.json --hardware project/campaigns/d1-sh/layer_rf_tc_noc512_sh2r/hardware.json`; reports `project/campaigns/structural/parent_tc_noc512_sh2r`. Development checks only; full frozen race validation still required.
+- Result: M1_P1=560845; area=23.419857003519997; peak W=11.332304161093543; error=None.
+- Decision: screen only, no incumbent promotion; compare before full frozen validation.
+
+## 2026-09-29 15:46 UTC — M1_P1 screen parent_tc_noc512_sh8
+- Change: base=project/experiments/cand-149/inputs/recipe.json; patch={}; hardware=project/campaigns/d1-sh/layer_rf_tc_noc512_sh8/hardware.json; hardware_patch={}
+- Verify: `PYTHONPATH=. .venv/bin/python project/campaigns/d1-sh/refine.py parent_tc_noc512_sh8 --case M1_P1 --out-root project/campaigns/structural --base project/experiments/cand-149/inputs/recipe.json --hardware project/campaigns/d1-sh/layer_rf_tc_noc512_sh8/hardware.json`; reports `project/campaigns/structural/parent_tc_noc512_sh8`. Development checks only; full frozen race validation still required.
+- Result: M1_P1=560845; area=23.57345700352; peak W=11.336144161093543; error=None.
+- Decision: screen only, no incumbent promotion; compare before full frozen validation.
+
+## 2026-09-29 15:54 UTC — M1_P1 screen p1_step_rf
+- Change: base=/home/jovyan/projects/SLAI-infra-course-hw1/project/experiments/cand-149/inputs/recipe.json; patch={"gemm_stages": {"p1_step": {"a_resident": 1}}}; hardware=/home/jovyan/projects/SLAI-infra-course-hw1/project/campaigns/d1-sh/layer_rf_tc_noc512/hardware.json; hardware_patch={}
+- Verify: `PYTHONPATH=. .venv/bin/python project/campaigns/d1-sh/refine.py p1_step_rf --case M1_P1 --out-root /home/jovyan/projects/SLAI-infra-course-hw1/project/campaigns/structural/aggressive-r1 --base /home/jovyan/projects/SLAI-infra-course-hw1/project/experiments/cand-149/inputs/recipe.json --hardware /home/jovyan/projects/SLAI-infra-course-hw1/project/campaigns/d1-sh/layer_rf_tc_noc512/hardware.json --patch '{"gemm_stages": {"p1_step": {"a_resident": 1}}}' --hardware-patch '{}' --compiler /home/jovyan/projects/SLAI-infra-course-hw1/project/campaigns/structural/aggressive-r1/compiler.py`; reports `/home/jovyan/projects/SLAI-infra-course-hw1/project/campaigns/structural/aggressive-r1/p1_step_rf`. Development checks only; full frozen race validation still required.
+- Result: M1_P1=556412; area=23.06145700352; peak W=11.323344161093543; error=None.
+- Decision: screen only, no incumbent promotion; compare before full frozen validation.
+
+## 2026-09-29 15:57 UTC — M1_P1 screen p1_b2
+- Change: base=/home/jovyan/projects/SLAI-infra-course-hw1/project/experiments/cand-149/inputs/recipe.json; patch={"gemm_stages": {"p1_prompt": {"b_buffers": 2}}}; hardware=/home/jovyan/projects/SLAI-infra-course-hw1/project/campaigns/d1-sh/layer_rf_tc_noc512/hardware.json; hardware_patch={}
+- Verify: `PYTHONPATH=. .venv/bin/python project/campaigns/d1-sh/refine.py p1_b2 --case M1_P1 --out-root /home/jovyan/projects/SLAI-infra-course-hw1/project/campaigns/structural/aggressive-r1 --base /home/jovyan/projects/SLAI-infra-course-hw1/project/experiments/cand-149/inputs/recipe.json --hardware /home/jovyan/projects/SLAI-infra-course-hw1/project/campaigns/d1-sh/layer_rf_tc_noc512/hardware.json --patch '{"gemm_stages": {"p1_prompt": {"b_buffers": 2}}}' --hardware-patch '{}' --compiler /home/jovyan/projects/SLAI-infra-course-hw1/project/campaigns/structural/aggressive-r1/compiler.py`; reports `/home/jovyan/projects/SLAI-infra-course-hw1/project/campaigns/structural/aggressive-r1/p1_b2`. Development checks only; full frozen race validation still required.
+- Result: M1_P1=587568; area=23.06145700352; peak W=11.184294958662221; error=None.
+- Decision: screen only, no incumbent promotion; compare before full frozen validation.
+
+## 2026-09-29 16:08 UTC — M1_P1 screen p1_n16
+- Change: base=/home/jovyan/projects/SLAI-infra-course-hw1/project/experiments/cand-149/inputs/recipe.json; patch={"gemm_stages": {"p1_prompt": {"n_tile": 16}}}; hardware=/home/jovyan/projects/SLAI-infra-course-hw1/project/campaigns/d1-sh/layer_rf_tc_noc512/hardware.json; hardware_patch={}
+- Verify: `PYTHONPATH=. .venv/bin/python project/campaigns/d1-sh/refine.py p1_n16 --case M1_P1 --out-root /home/jovyan/projects/SLAI-infra-course-hw1/project/campaigns/structural/aggressive-r1 --base /home/jovyan/projects/SLAI-infra-course-hw1/project/experiments/cand-149/inputs/recipe.json --hardware /home/jovyan/projects/SLAI-infra-course-hw1/project/campaigns/d1-sh/layer_rf_tc_noc512/hardware.json --patch '{"gemm_stages": {"p1_prompt": {"n_tile": 16}}}' --hardware-patch '{}' --compiler /home/jovyan/projects/SLAI-infra-course-hw1/project/campaigns/structural/aggressive-r1/compiler.py`; reports `/home/jovyan/projects/SLAI-infra-course-hw1/project/campaigns/structural/aggressive-r1/p1_n16`. Development checks only; full frozen race validation still required.
+- Result: M1_P1=864402; area=23.06145700352; peak W=10.683927591876843; error=None.
+- Decision: screen only, no incumbent promotion; compare before full frozen validation.
+
+## 2026-09-29 16:12 UTC — M1_P1 screen p1_step_unmerged
+- Change: base=/home/jovyan/projects/SLAI-infra-course-hw1/project/experiments/cand-149/inputs/recipe.json; patch={"p1_schedule": {"step_merge": 0}}; hardware=/home/jovyan/projects/SLAI-infra-course-hw1/project/campaigns/d1-sh/layer_rf_tc_noc512/hardware.json; hardware_patch={}
+- Verify: `PYTHONPATH=. .venv/bin/python project/campaigns/d1-sh/refine.py p1_step_unmerged --case M1_P1 --out-root /home/jovyan/projects/SLAI-infra-course-hw1/project/campaigns/structural/aggressive-r1 --base /home/jovyan/projects/SLAI-infra-course-hw1/project/experiments/cand-149/inputs/recipe.json --hardware /home/jovyan/projects/SLAI-infra-course-hw1/project/campaigns/d1-sh/layer_rf_tc_noc512/hardware.json --patch '{"p1_schedule": {"step_merge": 0}}' --hardware-patch '{}' --compiler /home/jovyan/projects/SLAI-infra-course-hw1/project/campaigns/structural/aggressive-r1/compiler.py`; reports `/home/jovyan/projects/SLAI-infra-course-hw1/project/campaigns/structural/aggressive-r1/p1_step_unmerged`. Development checks only; full frozen race validation still required.
+- Result: M1_P1=641065; area=23.06145700352; peak W=11.323344161093543; error=None.
+- Decision: screen only, no incumbent promotion; compare before full frozen validation.
+
+## 2026-09-29 16:17 UTC — Frozen D1 verification sh8_2r_cache4
+- Change: none; verify screened variant using unmodified check_case and estimate_case.
+- Verify: `PYTHONPATH=. .venv/bin/python project/campaigns/d1-sh/verify.py /home/jovyan/projects/SLAI-infra-course-hw1/project/campaigns/structural/aggressive-r1/sh8_2r_cache4` -> `/home/jovyan/projects/SLAI-infra-course-hw1/project/campaigns/structural/aggressive-r1/sh8_2r_cache4/frozen-verification.json`.
+- Result: check seeds=[7, 19]; timing completed=True.
+- Decision: D1 evidence only; joint grade required before promotion.
+
+## 2026-09-29 16:23 UTC — Frozen D1 verification cache0
+- Change: none; verify screened variant using unmodified check_case and estimate_case.
+- Verify: `PYTHONPATH=. .venv/bin/python project/campaigns/d1-sh/verify.py /home/jovyan/projects/SLAI-infra-course-hw1/project/campaigns/structural/aggressive-r1/cache0` -> `/home/jovyan/projects/SLAI-infra-course-hw1/project/campaigns/structural/aggressive-r1/cache0/frozen-verification.json`.
+- Result: check seeds=[7, 19]; timing completed=True.
+- Decision: D1 evidence only; joint grade required before promotion.
+
+## 2026-09-29 16:28 UTC — Frozen D1 verification hbm8_sh8_cache4
+- Change: none; verify screened variant using unmodified check_case and estimate_case.
+- Verify: `PYTHONPATH=. .venv/bin/python project/campaigns/d1-sh/verify.py /home/jovyan/projects/SLAI-infra-course-hw1/project/campaigns/structural/aggressive-r1/hbm8_sh8_cache4` -> `/home/jovyan/projects/SLAI-infra-course-hw1/project/campaigns/structural/aggressive-r1/hbm8_sh8_cache4/frozen-verification.json`.
+- Result: check seeds=[7, 19]; timing completed=True.
+- Decision: D1 evidence only; joint grade required before promotion.
+
+## 2026-09-29 16:41 UTC — M1_P1 screen cache0__parent
+- Change: base=/home/jovyan/projects/SLAI-infra-course-hw1/project/experiments/cand-149/inputs/recipe.json; patch={}; hardware=/home/jovyan/projects/SLAI-infra-course-hw1/project/campaigns/structural/aggressive-r1/cache0/hardware.json; hardware_patch={}
+- Verify: `PYTHONPATH=. .venv/bin/python project/campaigns/d1-sh/refine.py cache0__parent --case M1_P1 --out-root /home/jovyan/projects/SLAI-infra-course-hw1/project/campaigns/structural/aggressive-r1 --base /home/jovyan/projects/SLAI-infra-course-hw1/project/experiments/cand-149/inputs/recipe.json --hardware /home/jovyan/projects/SLAI-infra-course-hw1/project/campaigns/structural/aggressive-r1/cache0/hardware.json --patch '{}' --hardware-patch '{}' --compiler /home/jovyan/projects/SLAI-infra-course-hw1/project/campaigns/structural/aggressive-r1/compiler.py`; reports `/home/jovyan/projects/SLAI-infra-course-hw1/project/campaigns/structural/aggressive-r1/cache0__parent`. Development checks only; full frozen race validation still required.
+- Result: M1_P1=715822; area=19.58521098752; peak W=11.088668194682114; error=None.
+- Decision: screen only, no incumbent promotion; compare before full frozen validation.
+
+## 2026-09-29 16:44 UTC — Joint grade layer_rf_tc_noc512
+- Change: measured P1/D1 combined with one shared hardware; snapshots `project/campaigns/d1-sh/layer_rf_tc_noc512/joint`.
+- Verify: `PYTHONPATH=. .venv/bin/python project/campaigns/structural/grade_joint.py project/campaigns/d1-sh/layer_rf_tc_noc512/joint` -> `project/campaigns/d1-sh/layer_rf_tc_noc512/joint/grade.json`.
+- Result: status=completed; score=34992.20854977672; eligible=True; cycles={'M1_P1': 560845, 'M2_D1': 58770}.
+- Decision: preserve full grade; registry promotion pending controlled import after writer lock is free.
+
+## 2026-09-29 16:45 UTC — Launch P1 paired W1 input reuse
+- Change: opt-in `gemm_stages.p1_prompt.paired_n=["w1"]` emits two adjacent W1 output panels per LN2 input load, with RF accumulators for both 32-row blocks and alternating B weight prefetch. The default recipe still reproduces cand-149 P1/D1 byte for byte.
+- Verify: `PYTHONPATH=. .venv/bin/python project/campaigns/d1-sh/refine.py p1_paired_w1_noc512 --case M1_P1 --out-root project/campaigns/structural --base project/experiments/cand-149/inputs/recipe.json --hardware project/campaigns/d1-sh/layer_rf_tc_noc512/hardware.json --patch '{"gemm_stages":{"p1_prompt":{"paired_n":["w1"]}}}'` -> `project/campaigns/structural/p1_paired_w1_noc512/`; development functional seeds 7/19 passed, timing pending. Static audit `project/campaigns/structural/p1-paired-traffic.json`.
+- Result: requested HBM->RF 69.17 MB versus 75.46 MB parent; 72998 versus 74534 instructions. No cycle claim yet.
+- Decision: retain as a live experiment; compare timing with P1=560845 on the exact NoC512 hardware, then run frozen joint validation only if beneficial.
+
+## 2026-09-29 16:47 UTC — Stage best fully graded triple
+- Change: set root `hardware.json` to NoC512, TC4x8 kp4; set `project/recipe.json` to layer-group D1 with RF-resident WO/W1/W2, SH KV and fused GELU; regenerate both assembly programs. Preserve the experimental paired W1 generator as an opt-in branch.
+- Verify: frozen joint grade `project/campaigns/d1-sh/layer_rf_tc_noc512/joint/grade.json` eligible=True; root hardware JSON semantically matches its snapshot, recipe and both emitted programs match it byte for byte. `git diff --check` passed. Area=23.061457 mm².
+- Result: P1=560845, D1=58770, score=34992.208550, peak powers=11.3233/10.7760 W.
+- Decision: keep as current verified submission while more aggressive P1 dataflow and joint search run separately.
+
+## 2026-09-29 16:54 UTC — M1_P1 screen cache0__p1_step_rf
+- Change: base=/home/jovyan/projects/SLAI-infra-course-hw1/project/campaigns/structural/aggressive-r1/p1_step_rf/recipe.json; patch={}; hardware=/home/jovyan/projects/SLAI-infra-course-hw1/project/campaigns/structural/aggressive-r1/cache0/hardware.json; hardware_patch={}
+- Verify: `PYTHONPATH=. .venv/bin/python project/campaigns/d1-sh/refine.py cache0__p1_step_rf --case M1_P1 --out-root /home/jovyan/projects/SLAI-infra-course-hw1/project/campaigns/structural/aggressive-r1 --base /home/jovyan/projects/SLAI-infra-course-hw1/project/campaigns/structural/aggressive-r1/p1_step_rf/recipe.json --hardware /home/jovyan/projects/SLAI-infra-course-hw1/project/campaigns/structural/aggressive-r1/cache0/hardware.json --patch '{}' --hardware-patch '{}' --compiler /home/jovyan/projects/SLAI-infra-course-hw1/project/campaigns/structural/aggressive-r1/compiler.py`; reports `/home/jovyan/projects/SLAI-infra-course-hw1/project/campaigns/structural/aggressive-r1/cache0__p1_step_rf`. Development checks only; full frozen race validation still required.
+- Result: M1_P1=705418; area=19.58521098752; peak W=11.088668194682114; error=None.
+- Decision: screen only, no incumbent promotion; compare before full frozen validation.
+
+## 2026-09-29 16:56 UTC — M1_P1 screen sh8_2r_cache4__parent
+- Change: base=/home/jovyan/projects/SLAI-infra-course-hw1/project/experiments/cand-149/inputs/recipe.json; patch={}; hardware=/home/jovyan/projects/SLAI-infra-course-hw1/project/campaigns/structural/aggressive-r1/sh8_2r_cache4/hardware.json; hardware_patch={}
+- Verify: `PYTHONPATH=. .venv/bin/python project/campaigns/d1-sh/refine.py sh8_2r_cache4__parent --case M1_P1 --out-root /home/jovyan/projects/SLAI-infra-course-hw1/project/campaigns/structural/aggressive-r1 --base /home/jovyan/projects/SLAI-infra-course-hw1/project/experiments/cand-149/inputs/recipe.json --hardware /home/jovyan/projects/SLAI-infra-course-hw1/project/campaigns/structural/aggressive-r1/sh8_2r_cache4/hardware.json --patch '{}' --hardware-patch '{}' --compiler /home/jovyan/projects/SLAI-infra-course-hw1/project/campaigns/structural/aggressive-r1/compiler.py`; reports `/home/jovyan/projects/SLAI-infra-course-hw1/project/campaigns/structural/aggressive-r1/sh8_2r_cache4__parent`. Development checks only; full frozen race validation still required.
+- Result: M1_P1=560968; area=22.61213399552; peak W=11.312111085893543; error=None.
+- Decision: screen only, no incumbent promotion; compare before full frozen validation.
+
+## 2026-09-29 16:56 UTC — M1_P1 screen sh8_2r_cache4__p1_step_rf
+- Change: base=/home/jovyan/projects/SLAI-infra-course-hw1/project/campaigns/structural/aggressive-r1/p1_step_rf/recipe.json; patch={}; hardware=/home/jovyan/projects/SLAI-infra-course-hw1/project/campaigns/structural/aggressive-r1/sh8_2r_cache4/hardware.json; hardware_patch={}
+- Verify: `PYTHONPATH=. .venv/bin/python project/campaigns/d1-sh/refine.py sh8_2r_cache4__p1_step_rf --case M1_P1 --out-root /home/jovyan/projects/SLAI-infra-course-hw1/project/campaigns/structural/aggressive-r1 --base /home/jovyan/projects/SLAI-infra-course-hw1/project/campaigns/structural/aggressive-r1/p1_step_rf/recipe.json --hardware /home/jovyan/projects/SLAI-infra-course-hw1/project/campaigns/structural/aggressive-r1/sh8_2r_cache4/hardware.json --patch '{}' --hardware-patch '{}' --compiler /home/jovyan/projects/SLAI-infra-course-hw1/project/campaigns/structural/aggressive-r1/compiler.py`; reports `/home/jovyan/projects/SLAI-infra-course-hw1/project/campaigns/structural/aggressive-r1/sh8_2r_cache4__p1_step_rf`. Development checks only; full frozen race validation still required.
+- Result: M1_P1=556591; area=22.61213399552; peak W=11.312111085893543; error=None.
+- Decision: screen only, no incumbent promotion; compare before full frozen validation.
+
+## 2026-09-29 16:59 UTC — M1_P1 screen p1_paired_w1_noc512
+- Change: base=project/experiments/cand-149/inputs/recipe.json; patch={"gemm_stages":{"p1_prompt":{"paired_n":["w1"]}}}; hardware=project/campaigns/d1-sh/layer_rf_tc_noc512/hardware.json; hardware_patch={}
+- Verify: `PYTHONPATH=. .venv/bin/python project/campaigns/d1-sh/refine.py p1_paired_w1_noc512 --case M1_P1 --out-root project/campaigns/structural --base project/experiments/cand-149/inputs/recipe.json --hardware project/campaigns/d1-sh/layer_rf_tc_noc512/hardware.json --patch '{"gemm_stages":{"p1_prompt":{"paired_n":["w1"]}}}'`; reports `project/campaigns/structural/p1_paired_w1_noc512`. Development checks only; full frozen race validation still required.
+- Result: M1_P1=552651; area=23.06145700352; peak W=11.236964777086685; error=None.
+- Decision: screen only, no incumbent promotion; compare before full frozen validation.
+
+## 2026-09-29 16:59 UTC — M1_P1 screen sh8_2r_cache4__p1_b2
+- Change: base=/home/jovyan/projects/SLAI-infra-course-hw1/project/campaigns/structural/aggressive-r1/p1_b2/recipe.json; patch={}; hardware=/home/jovyan/projects/SLAI-infra-course-hw1/project/campaigns/structural/aggressive-r1/sh8_2r_cache4/hardware.json; hardware_patch={}
+- Verify: `PYTHONPATH=. .venv/bin/python project/campaigns/d1-sh/refine.py sh8_2r_cache4__p1_b2 --case M1_P1 --out-root /home/jovyan/projects/SLAI-infra-course-hw1/project/campaigns/structural/aggressive-r1 --base /home/jovyan/projects/SLAI-infra-course-hw1/project/campaigns/structural/aggressive-r1/p1_b2/recipe.json --hardware /home/jovyan/projects/SLAI-infra-course-hw1/project/campaigns/structural/aggressive-r1/sh8_2r_cache4/hardware.json --patch '{}' --hardware-patch '{}' --compiler /home/jovyan/projects/SLAI-infra-course-hw1/project/campaigns/structural/aggressive-r1/compiler.py`; reports `/home/jovyan/projects/SLAI-infra-course-hw1/project/campaigns/structural/aggressive-r1/sh8_2r_cache4__p1_b2`. Development checks only; full frozen race validation still required.
+- Result: M1_P1=587691; area=22.61213399552; peak W=11.173061883462221; error=None.
+- Decision: screen only, no incumbent promotion; compare before full frozen validation.
+
+## 2026-09-29 17:02 UTC — Joint frozen grade launched for paired W1
+- Change: combine paired W1 P1=552651 (development timing) with frozen verified D1=58770 under one exact NoC512 hardware. Snapshot at `project/campaigns/structural/p1_paired_w1_noc512/joint/` asserts both generated programs equal their measured source programs.
+- Verify: `PYTHONPATH=. .venv/bin/python project/campaigns/structural/grade_joint.py project/campaigns/structural/p1_paired_w1_noc512/joint` -> `grade-run.json`, running. Full grade will append its result to this log.
+- Result: projected score 35250.664; eligibility pending frozen validation.
+- Decision: await full grade; keep root on previously eligible 34992.209 triple. Concurrent paired W1 + step RF screen passed dev seeds7/19 and is timing.
+
+## 2026-09-29 17:07 UTC — M1_P1 screen cache0__p1_b2
+- Change: base=/home/jovyan/projects/SLAI-infra-course-hw1/project/campaigns/structural/aggressive-r1/p1_b2/recipe.json; patch={}; hardware=/home/jovyan/projects/SLAI-infra-course-hw1/project/campaigns/structural/aggressive-r1/cache0/hardware.json; hardware_patch={}
+- Verify: `PYTHONPATH=. .venv/bin/python project/campaigns/d1-sh/refine.py cache0__p1_b2 --case M1_P1 --out-root /home/jovyan/projects/SLAI-infra-course-hw1/project/campaigns/structural/aggressive-r1 --base /home/jovyan/projects/SLAI-infra-course-hw1/project/campaigns/structural/aggressive-r1/p1_b2/recipe.json --hardware /home/jovyan/projects/SLAI-infra-course-hw1/project/campaigns/structural/aggressive-r1/cache0/hardware.json --patch '{}' --hardware-patch '{}' --compiler /home/jovyan/projects/SLAI-infra-course-hw1/project/campaigns/structural/aggressive-r1/compiler.py`; reports `/home/jovyan/projects/SLAI-infra-course-hw1/project/campaigns/structural/aggressive-r1/cache0__p1_b2`. Development checks only; full frozen race validation still required.
+- Result: M1_P1=737309; area=19.58521098752; peak W=11.088931938685768; error=None.
+- Decision: screen only, no incumbent promotion; compare before full frozen validation.
+
+## 2026-09-29 17:24 UTC — M1_P1 screen p1_paired_w1_step_rf_noc512
+- Change: base=project/campaigns/structural/p1_paired_w1_noc512/recipe.json; patch={"gemm_stages":{"p1_step":{"a_resident":1}}}; hardware=project/campaigns/d1-sh/layer_rf_tc_noc512/hardware.json; hardware_patch={}
+- Verify: `PYTHONPATH=. .venv/bin/python project/campaigns/d1-sh/refine.py p1_paired_w1_step_rf_noc512 --case M1_P1 --out-root project/campaigns/structural --base project/campaigns/structural/p1_paired_w1_noc512/recipe.json --hardware project/campaigns/d1-sh/layer_rf_tc_noc512/hardware.json --patch '{"gemm_stages":{"p1_step":{"a_resident":1}}}'`; reports `project/campaigns/structural/p1_paired_w1_step_rf_noc512`. Development checks only; full frozen race validation still required.
+- Result: M1_P1=548218; area=23.06145700352; peak W=11.236964777086685; error=None.
+- Decision: screen only, no incumbent promotion; compare before full frozen validation.
+
+## 2026-09-29 17:25 UTC — M1_P1 screen hbm8_sh8_cache4__parent
+- Change: base=/home/jovyan/projects/SLAI-infra-course-hw1/project/experiments/cand-149/inputs/recipe.json; patch={}; hardware=/home/jovyan/projects/SLAI-infra-course-hw1/project/campaigns/structural/aggressive-r1/hbm8_sh8_cache4/hardware.json; hardware_patch={}
+- Verify: `PYTHONPATH=. .venv/bin/python project/campaigns/d1-sh/refine.py hbm8_sh8_cache4__parent --case M1_P1 --out-root /home/jovyan/projects/SLAI-infra-course-hw1/project/campaigns/structural/aggressive-r1 --base /home/jovyan/projects/SLAI-infra-course-hw1/project/experiments/cand-149/inputs/recipe.json --hardware /home/jovyan/projects/SLAI-infra-course-hw1/project/campaigns/structural/aggressive-r1/hbm8_sh8_cache4/hardware.json --patch '{}' --hardware-patch '{}' --compiler /home/jovyan/projects/SLAI-infra-course-hw1/project/campaigns/structural/aggressive-r1/compiler.py`; reports `/home/jovyan/projects/SLAI-infra-course-hw1/project/campaigns/structural/aggressive-r1/hbm8_sh8_cache4__parent`. Development checks only; full frozen race validation still required.
+- Result: M1_P1=565766; area=22.09533399552; peak W=20.32819710358599; error=None.
+- Decision: screen only, no incumbent promotion; compare before full frozen validation.
+
+## 2026-09-29 17:26 UTC — M1_P1 screen hbm8_sh8_cache4__p1_step_rf
+- Change: base=/home/jovyan/projects/SLAI-infra-course-hw1/project/campaigns/structural/aggressive-r1/p1_step_rf/recipe.json; patch={}; hardware=/home/jovyan/projects/SLAI-infra-course-hw1/project/campaigns/structural/aggressive-r1/hbm8_sh8_cache4/hardware.json; hardware_patch={}
+- Verify: `PYTHONPATH=. .venv/bin/python project/campaigns/d1-sh/refine.py hbm8_sh8_cache4__p1_step_rf --case M1_P1 --out-root /home/jovyan/projects/SLAI-infra-course-hw1/project/campaigns/structural/aggressive-r1 --base /home/jovyan/projects/SLAI-infra-course-hw1/project/campaigns/structural/aggressive-r1/p1_step_rf/recipe.json --hardware /home/jovyan/projects/SLAI-infra-course-hw1/project/campaigns/structural/aggressive-r1/hbm8_sh8_cache4/hardware.json --patch '{}' --hardware-patch '{}' --compiler /home/jovyan/projects/SLAI-infra-course-hw1/project/campaigns/structural/aggressive-r1/compiler.py`; reports `/home/jovyan/projects/SLAI-infra-course-hw1/project/campaigns/structural/aggressive-r1/hbm8_sh8_cache4__p1_step_rf`. Development checks only; full frozen race validation still required.
+- Result: M1_P1=560209; area=22.09533399552; peak W=20.32819710358599; error=None.
+- Decision: screen only, no incumbent promotion; compare before full frozen validation.
+
+## 2026-09-29 17:33 UTC — M1_P1 screen hbm8_sh8_cache4__p1_b2
+- Change: base=/home/jovyan/projects/SLAI-infra-course-hw1/project/campaigns/structural/aggressive-r1/p1_b2/recipe.json; patch={}; hardware=/home/jovyan/projects/SLAI-infra-course-hw1/project/campaigns/structural/aggressive-r1/hbm8_sh8_cache4/hardware.json; hardware_patch={}
+- Verify: `PYTHONPATH=. .venv/bin/python project/campaigns/d1-sh/refine.py hbm8_sh8_cache4__p1_b2 --case M1_P1 --out-root /home/jovyan/projects/SLAI-infra-course-hw1/project/campaigns/structural/aggressive-r1 --base /home/jovyan/projects/SLAI-infra-course-hw1/project/campaigns/structural/aggressive-r1/p1_b2/recipe.json --hardware /home/jovyan/projects/SLAI-infra-course-hw1/project/campaigns/structural/aggressive-r1/hbm8_sh8_cache4/hardware.json --patch '{}' --hardware-patch '{}' --compiler /home/jovyan/projects/SLAI-infra-course-hw1/project/campaigns/structural/aggressive-r1/compiler.py`; reports `/home/jovyan/projects/SLAI-infra-course-hw1/project/campaigns/structural/aggressive-r1/hbm8_sh8_cache4__p1_b2`. Development checks only; full frozen race validation still required.
+- Result: M1_P1=566879; area=22.09533399552; peak W=19.530123083949924; error=None.
+- Decision: screen only, no incumbent promotion; compare before full frozen validation.
+
+## 2026-09-29 18:05 UTC — M1_P1 screen step_k16_n64
+- Change: base=/home/jovyan/projects/SLAI-infra-course-hw1/project/campaigns/structural/p1_paired_w1_step_rf_noc512/recipe.json; patch={"gemm_stages": {"p1_step": {"k_chunk": 16, "n_tile": 64}}}; hardware=/home/jovyan/projects/SLAI-infra-course-hw1/project/campaigns/structural/p1_paired_w1_step_rf_noc512/hardware.json; hardware_patch={}
+- Verify: `PYTHONPATH=. .venv/bin/python project/campaigns/d1-sh/refine.py step_k16_n64 --case M1_P1 --out-root /home/jovyan/projects/SLAI-infra-course-hw1/project/campaigns/structural/p1-pair-r1 --base /home/jovyan/projects/SLAI-infra-course-hw1/project/campaigns/structural/p1_paired_w1_step_rf_noc512/recipe.json --hardware /home/jovyan/projects/SLAI-infra-course-hw1/project/campaigns/structural/p1_paired_w1_step_rf_noc512/hardware.json --patch '{"gemm_stages": {"p1_step": {"k_chunk": 16, "n_tile": 64}}}' --hardware-patch '{}' --compiler /home/jovyan/projects/SLAI-infra-course-hw1/project/campaigns/structural/p1-pair-r1/compiler.py`; reports `/home/jovyan/projects/SLAI-infra-course-hw1/project/campaigns/structural/p1-pair-r1/step_k16_n64`. Development checks only; full frozen race validation still required.
+- Result: M1_P1=failed; area=None; peak W=None; error=ValueError('merged step needs head-aligned QKV column tiles').
+- Decision: screen only, no incumbent promotion; compare before full frozen validation.
+
+## 2026-09-29 18:06 UTC — Launch paired W1 large search
+- Change: pin the paired W1 + step RF generator and 27 hypotheses under `project/campaigns/structural/p1-pair-r1/`; vary W1 preload order/K tile, prompt/step program settings, cache/TC/DMA/NoC/SH hardware within the legal menu. Six worker processes screen candidates.
+- Verify: `PYTHONPATH=. .venv/bin/python project/campaigns/structural/p1_pair_campaign.py p1-pair-r1 --workers 6` -> live `state.json` plus per-candidate reports. Compiler syntax, 27-proposal plan and byte-exact reproduction of the screened parent passed before launch.
+- Result: running; current best fully graded score remains 34992.209. The first N64 step proposal was rejected by head-alignment validation and logged above.
+- Decision: complete all screens, frozen-verify top three D1 configurations, then full-grade at most two joint finalists. Keep complete evidence and promote only an eligible grade.
+
+## 2026-09-29 18:12 UTC — User-directed stopping rule for current round
+- Change: freeze search scope to the already running aggressive-r1 and p1-pair-r1 campaigns plus two existing standalone paired-W1 joint grades. Do not propose another round. Launch `project/campaigns/structural/finalize_round.py` to wait for terminal reports, compare all eligible complete grades, and stage the highest score.
+- Verify: `PYTHONPATH=. .venv/bin/python project/campaigns/structural/finalize_round.py` -> `project/campaigns/structural/current-round-finalization/status.json`. The root's four submission artifact hashes are pinned to prevent overwriting later user edits; a temporary-file apply_patch probe succeeded.
+- Result: waiting; highest fully eligible grade so far is 34992.208550. Final result will be appended to this log after selection.
+- Decision: finish this round and stop; update root only from a byte-reproducible, eligible frozen grade.
+
+## 2026-09-29 18:16 UTC — Joint grade p1_paired_w1_noc512
+- Change: measured P1/D1 combined with one shared hardware; snapshots `project/campaigns/structural/p1_paired_w1_noc512/joint`.
+- Verify: `PYTHONPATH=. .venv/bin/python project/campaigns/structural/grade_joint.py project/campaigns/structural/p1_paired_w1_noc512/joint` -> `project/campaigns/structural/p1_paired_w1_noc512/joint/grade.json`.
+- Result: status=completed; score=35250.66385124824; eligible=True; cycles={'M1_P1': 552651, 'M2_D1': 58770}.
+- Decision: preserve full grade; registry promotion pending controlled import after writer lock is free.
+
+## 2026-09-29 18:30 UTC — M1_P1 screen paired_late_b
+- Change: base=/home/jovyan/projects/SLAI-infra-course-hw1/project/campaigns/structural/p1_paired_w1_step_rf_noc512/recipe.json; patch={"gemm_stages": {"p1_prompt": {"paired_b_prefetch": 0}}}; hardware=/home/jovyan/projects/SLAI-infra-course-hw1/project/campaigns/structural/p1_paired_w1_step_rf_noc512/hardware.json; hardware_patch={}
+- Verify: `PYTHONPATH=. .venv/bin/python project/campaigns/d1-sh/refine.py paired_late_b --case M1_P1 --out-root /home/jovyan/projects/SLAI-infra-course-hw1/project/campaigns/structural/p1-pair-r1 --base /home/jovyan/projects/SLAI-infra-course-hw1/project/campaigns/structural/p1_paired_w1_step_rf_noc512/recipe.json --hardware /home/jovyan/projects/SLAI-infra-course-hw1/project/campaigns/structural/p1_paired_w1_step_rf_noc512/hardware.json --patch '{"gemm_stages": {"p1_prompt": {"paired_b_prefetch": 0}}}' --hardware-patch '{}' --compiler /home/jovyan/projects/SLAI-infra-course-hw1/project/campaigns/structural/p1-pair-r1/compiler.py`; reports `/home/jovyan/projects/SLAI-infra-course-hw1/project/campaigns/structural/p1-pair-r1/paired_late_b`. Development checks only; full frozen race validation still required.
+- Result: M1_P1=526494; area=23.06145700352; peak W=11.157735073089668; error=None.
+- Decision: screen only, no incumbent promotion; compare before full frozen validation.
+
+## 2026-09-29 18:30 UTC — M1_P1 screen paired_k16
+- Change: base=/home/jovyan/projects/SLAI-infra-course-hw1/project/campaigns/structural/p1_paired_w1_step_rf_noc512/recipe.json; patch={"gemm_stages": {"p1_prompt": {"paired_k_chunk": 16}}}; hardware=/home/jovyan/projects/SLAI-infra-course-hw1/project/campaigns/structural/p1_paired_w1_step_rf_noc512/hardware.json; hardware_patch={}
+- Verify: `PYTHONPATH=. .venv/bin/python project/campaigns/d1-sh/refine.py paired_k16 --case M1_P1 --out-root /home/jovyan/projects/SLAI-infra-course-hw1/project/campaigns/structural/p1-pair-r1 --base /home/jovyan/projects/SLAI-infra-course-hw1/project/campaigns/structural/p1_paired_w1_step_rf_noc512/recipe.json --hardware /home/jovyan/projects/SLAI-infra-course-hw1/project/campaigns/structural/p1_paired_w1_step_rf_noc512/hardware.json --patch '{"gemm_stages": {"p1_prompt": {"paired_k_chunk": 16}}}' --hardware-patch '{}' --compiler /home/jovyan/projects/SLAI-infra-course-hw1/project/campaigns/structural/p1-pair-r1/compiler.py`; reports `/home/jovyan/projects/SLAI-infra-course-hw1/project/campaigns/structural/p1-pair-r1/paired_k16`. Development checks only; full frozen race validation still required.
+- Result: M1_P1=541622; area=23.06145700352; peak W=11.280452105089136; error=None.
+- Decision: screen only, no incumbent promotion; compare before full frozen validation.
+
+## 2026-09-29 18:30 UTC — M1_P1 screen step_k16_n32
+- Change: base=/home/jovyan/projects/SLAI-infra-course-hw1/project/campaigns/structural/p1_paired_w1_step_rf_noc512/recipe.json; patch={"gemm_stages": {"p1_step": {"k_chunk": 16, "n_tile": 32}}}; hardware=/home/jovyan/projects/SLAI-infra-course-hw1/project/campaigns/structural/p1_paired_w1_step_rf_noc512/hardware.json; hardware_patch={}
+- Verify: `PYTHONPATH=. .venv/bin/python project/campaigns/d1-sh/refine.py step_k16_n32 --case M1_P1 --out-root /home/jovyan/projects/SLAI-infra-course-hw1/project/campaigns/structural/p1-pair-r1 --base /home/jovyan/projects/SLAI-infra-course-hw1/project/campaigns/structural/p1_paired_w1_step_rf_noc512/recipe.json --hardware /home/jovyan/projects/SLAI-infra-course-hw1/project/campaigns/structural/p1_paired_w1_step_rf_noc512/hardware.json --patch '{"gemm_stages": {"p1_step": {"k_chunk": 16, "n_tile": 32}}}' --hardware-patch '{}' --compiler /home/jovyan/projects/SLAI-infra-course-hw1/project/campaigns/structural/p1-pair-r1/compiler.py`; reports `/home/jovyan/projects/SLAI-infra-course-hw1/project/campaigns/structural/p1-pair-r1/step_k16_n32`. Development checks only; full frozen race validation still required.
+- Result: M1_P1=545922; area=23.06145700352; peak W=11.236964777086685; error=None.
+- Decision: screen only, no incumbent promotion; compare before full frozen validation.
+
+## 2026-09-29 18:31 UTC — M1_P1 screen paired_preload_a
+- Change: base=/home/jovyan/projects/SLAI-infra-course-hw1/project/campaigns/structural/p1_paired_w1_step_rf_noc512/recipe.json; patch={"gemm_stages": {"p1_prompt": {"paired_a_preload": 1}}}; hardware=/home/jovyan/projects/SLAI-infra-course-hw1/project/campaigns/structural/p1_paired_w1_step_rf_noc512/hardware.json; hardware_patch={}
+- Verify: `PYTHONPATH=. .venv/bin/python project/campaigns/d1-sh/refine.py paired_preload_a --case M1_P1 --out-root /home/jovyan/projects/SLAI-infra-course-hw1/project/campaigns/structural/p1-pair-r1 --base /home/jovyan/projects/SLAI-infra-course-hw1/project/campaigns/structural/p1_paired_w1_step_rf_noc512/recipe.json --hardware /home/jovyan/projects/SLAI-infra-course-hw1/project/campaigns/structural/p1_paired_w1_step_rf_noc512/hardware.json --patch '{"gemm_stages": {"p1_prompt": {"paired_a_preload": 1}}}' --hardware-patch '{}' --compiler /home/jovyan/projects/SLAI-infra-course-hw1/project/campaigns/structural/p1-pair-r1/compiler.py`; reports `/home/jovyan/projects/SLAI-infra-course-hw1/project/campaigns/structural/p1-pair-r1/paired_preload_a`. Development checks only; full frozen race validation still required.
+- Result: M1_P1=545365; area=23.06145700352; peak W=11.140463990180322; error=None.
+- Decision: screen only, no incumbent promotion; compare before full frozen validation.
+
+## 2026-09-29 18:31 UTC — M1_P1 screen step_k32_n16
+- Change: base=/home/jovyan/projects/SLAI-infra-course-hw1/project/campaigns/structural/p1_paired_w1_step_rf_noc512/recipe.json; patch={"gemm_stages": {"p1_step": {"k_chunk": 32, "n_tile": 16}}}; hardware=/home/jovyan/projects/SLAI-infra-course-hw1/project/campaigns/structural/p1_paired_w1_step_rf_noc512/hardware.json; hardware_patch={}
+- Verify: `PYTHONPATH=. .venv/bin/python project/campaigns/d1-sh/refine.py step_k32_n16 --case M1_P1 --out-root /home/jovyan/projects/SLAI-infra-course-hw1/project/campaigns/structural/p1-pair-r1 --base /home/jovyan/projects/SLAI-infra-course-hw1/project/campaigns/structural/p1_paired_w1_step_rf_noc512/recipe.json --hardware /home/jovyan/projects/SLAI-infra-course-hw1/project/campaigns/structural/p1_paired_w1_step_rf_noc512/hardware.json --patch '{"gemm_stages": {"p1_step": {"k_chunk": 32, "n_tile": 16}}}' --hardware-patch '{}' --compiler /home/jovyan/projects/SLAI-infra-course-hw1/project/campaigns/structural/p1-pair-r1/compiler.py`; reports `/home/jovyan/projects/SLAI-infra-course-hw1/project/campaigns/structural/p1-pair-r1/step_k32_n16`. Development checks only; full frozen race validation still required.
+- Result: M1_P1=610952; area=23.06145700352; peak W=11.236964777086685; error=None.
+- Decision: screen only, no incumbent promotion; compare before full frozen validation.
+
+## 2026-09-29 18:32 UTC — M1_P1 screen prompt_b2
+- Change: base=/home/jovyan/projects/SLAI-infra-course-hw1/project/campaigns/structural/p1_paired_w1_step_rf_noc512/recipe.json; patch={"gemm_stages": {"p1_prompt": {"b_buffers": 2}}}; hardware=/home/jovyan/projects/SLAI-infra-course-hw1/project/campaigns/structural/p1_paired_w1_step_rf_noc512/hardware.json; hardware_patch={}
+- Verify: `PYTHONPATH=. .venv/bin/python project/campaigns/d1-sh/refine.py prompt_b2 --case M1_P1 --out-root /home/jovyan/projects/SLAI-infra-course-hw1/project/campaigns/structural/p1-pair-r1 --base /home/jovyan/projects/SLAI-infra-course-hw1/project/campaigns/structural/p1_paired_w1_step_rf_noc512/recipe.json --hardware /home/jovyan/projects/SLAI-infra-course-hw1/project/campaigns/structural/p1_paired_w1_step_rf_noc512/hardware.json --patch '{"gemm_stages": {"p1_prompt": {"b_buffers": 2}}}' --hardware-patch '{}' --compiler /home/jovyan/projects/SLAI-infra-course-hw1/project/campaigns/structural/p1-pair-r1/compiler.py`; reports `/home/jovyan/projects/SLAI-infra-course-hw1/project/campaigns/structural/p1-pair-r1/prompt_b2`. Development checks only; full frozen race validation still required.
+- Result: M1_P1=549503; area=23.06145700352; peak W=10.952510649088927; error=None.
+- Decision: screen only, no incumbent promotion; compare before full frozen validation.
+
+## 2026-09-29 18:44 UTC — M1_P1 screen cache0
+- Change: base=/home/jovyan/projects/SLAI-infra-course-hw1/project/campaigns/structural/p1_paired_w1_step_rf_noc512/recipe.json; patch={}; hardware=/home/jovyan/projects/SLAI-infra-course-hw1/project/campaigns/structural/p1_paired_w1_step_rf_noc512/hardware.json; hardware_patch={"cache_mib": 0}
+- Verify: `PYTHONPATH=. .venv/bin/python project/campaigns/d1-sh/refine.py cache0 --case M1_P1 --out-root /home/jovyan/projects/SLAI-infra-course-hw1/project/campaigns/structural/p1-pair-r1 --base /home/jovyan/projects/SLAI-infra-course-hw1/project/campaigns/structural/p1_paired_w1_step_rf_noc512/recipe.json --hardware /home/jovyan/projects/SLAI-infra-course-hw1/project/campaigns/structural/p1_paired_w1_step_rf_noc512/hardware.json --patch '{}' --hardware-patch '{"cache_mib": 0}' --compiler /home/jovyan/projects/SLAI-infra-course-hw1/project/campaigns/structural/p1-pair-r1/compiler.py`; reports `/home/jovyan/projects/SLAI-infra-course-hw1/project/campaigns/structural/p1-pair-r1/cache0`. Development checks only; full frozen race validation still required.
+- Result: M1_P1=654584; area=19.58521098752; peak W=11.331714562667601; error=None.
+- Decision: screen only, no incumbent promotion; compare before full frozen validation.
+
+## 2026-09-29 18:44 UTC — M2_D1 screen cache0__d1
+- Change: base=/home/jovyan/projects/SLAI-infra-course-hw1/project/campaigns/d1-sh/layer_rf_tc_noc512/recipe.json; patch={}; hardware=/home/jovyan/projects/SLAI-infra-course-hw1/project/campaigns/d1-sh/layer_rf_tc_noc512/hardware.json; hardware_patch={"cache_mib": 0}
+- Verify: `PYTHONPATH=. .venv/bin/python project/campaigns/d1-sh/refine.py cache0__d1 --case M2_D1 --out-root /home/jovyan/projects/SLAI-infra-course-hw1/project/campaigns/structural/p1-pair-r1 --base /home/jovyan/projects/SLAI-infra-course-hw1/project/campaigns/d1-sh/layer_rf_tc_noc512/recipe.json --hardware /home/jovyan/projects/SLAI-infra-course-hw1/project/campaigns/d1-sh/layer_rf_tc_noc512/hardware.json --patch '{}' --hardware-patch '{"cache_mib": 0}' --compiler /home/jovyan/projects/SLAI-infra-course-hw1/project/campaigns/structural/p1-pair-r1/compiler.py`; reports `/home/jovyan/projects/SLAI-infra-course-hw1/project/campaigns/structural/p1-pair-r1/cache0__d1`. Development checks only; full frozen race validation still required.
+- Result: M2_D1=57057; area=19.58521098752; peak W=10.36964627468937; error=None.
+- Decision: screen only, no incumbent promotion; compare before full frozen validation.
+
+## 2026-09-29 18:54 UTC — M1_P1 screen w2_no_operand_pipeline
+- Change: base=/home/jovyan/projects/SLAI-infra-course-hw1/project/campaigns/structural/p1_paired_w1_step_rf_noc512/recipe.json; patch={"gemm_stages": {"p1_prompt": {"operand_pipeline": ["qkv", "wo", "w1"]}}}; hardware=/home/jovyan/projects/SLAI-infra-course-hw1/project/campaigns/structural/p1_paired_w1_step_rf_noc512/hardware.json; hardware_patch={}
+- Verify: `PYTHONPATH=. .venv/bin/python project/campaigns/d1-sh/refine.py w2_no_operand_pipeline --case M1_P1 --out-root /home/jovyan/projects/SLAI-infra-course-hw1/project/campaigns/structural/p1-pair-r1 --base /home/jovyan/projects/SLAI-infra-course-hw1/project/campaigns/structural/p1_paired_w1_step_rf_noc512/recipe.json --hardware /home/jovyan/projects/SLAI-infra-course-hw1/project/campaigns/structural/p1_paired_w1_step_rf_noc512/hardware.json --patch '{"gemm_stages": {"p1_prompt": {"operand_pipeline": ["qkv", "wo", "w1"]}}}' --hardware-patch '{}' --compiler /home/jovyan/projects/SLAI-infra-course-hw1/project/campaigns/structural/p1-pair-r1/compiler.py`; reports `/home/jovyan/projects/SLAI-infra-course-hw1/project/campaigns/structural/p1-pair-r1/w2_no_operand_pipeline`. Development checks only; full frozen race validation still required.
+- Result: M1_P1=611064; area=23.06145700352; peak W=11.128816158426114; error=None.
+- Decision: screen only, no incumbent promotion; compare before full frozen validation.
+
+## 2026-09-29 18:55 UTC — M1_P1 screen cache2
+- Change: base=/home/jovyan/projects/SLAI-infra-course-hw1/project/campaigns/structural/p1_paired_w1_step_rf_noc512/recipe.json; patch={}; hardware=/home/jovyan/projects/SLAI-infra-course-hw1/project/campaigns/structural/p1_paired_w1_step_rf_noc512/hardware.json; hardware_patch={"cache_mib": 2}
+- Verify: `PYTHONPATH=. .venv/bin/python project/campaigns/d1-sh/refine.py cache2 --case M1_P1 --out-root /home/jovyan/projects/SLAI-infra-course-hw1/project/campaigns/structural/p1-pair-r1 --base /home/jovyan/projects/SLAI-infra-course-hw1/project/campaigns/structural/p1_paired_w1_step_rf_noc512/recipe.json --hardware /home/jovyan/projects/SLAI-infra-course-hw1/project/campaigns/structural/p1_paired_w1_step_rf_noc512/hardware.json --patch '{}' --hardware-patch '{"cache_mib": 2}' --compiler /home/jovyan/projects/SLAI-infra-course-hw1/project/campaigns/structural/p1-pair-r1/compiler.py`; reports `/home/jovyan/projects/SLAI-infra-course-hw1/project/campaigns/structural/p1-pair-r1/cache2`. Development checks only; full frozen race validation still required.
+- Result: M1_P1=549185; area=20.54427249152; peak W=11.174035164286686; error=None.
+- Decision: screen only, no incumbent promotion; compare before full frozen validation.
+
+## 2026-09-29 18:55 UTC — M1_P1 screen cache1
+- Change: base=/home/jovyan/projects/SLAI-infra-course-hw1/project/campaigns/structural/p1_paired_w1_step_rf_noc512/recipe.json; patch={}; hardware=/home/jovyan/projects/SLAI-infra-course-hw1/project/campaigns/structural/p1_paired_w1_step_rf_noc512/hardware.json; hardware_patch={"cache_mib": 1}
+- Verify: `PYTHONPATH=. .venv/bin/python project/campaigns/d1-sh/refine.py cache1 --case M1_P1 --out-root /home/jovyan/projects/SLAI-infra-course-hw1/project/campaigns/structural/p1-pair-r1 --base /home/jovyan/projects/SLAI-infra-course-hw1/project/campaigns/structural/p1_paired_w1_step_rf_noc512/recipe.json --hardware /home/jovyan/projects/SLAI-infra-course-hw1/project/campaigns/structural/p1_paired_w1_step_rf_noc512/hardware.json --patch '{}' --hardware-patch '{"cache_mib": 1}' --compiler /home/jovyan/projects/SLAI-infra-course-hw1/project/campaigns/structural/p1-pair-r1/compiler.py`; reports `/home/jovyan/projects/SLAI-infra-course-hw1/project/campaigns/structural/p1-pair-r1/cache1`. Development checks only; full frozen race validation still required.
+- Result: M1_P1=549159; area=20.12474173952; peak W=11.089792599487993; error=None.
+- Decision: screen only, no incumbent promotion; compare before full frozen validation.
+
+## 2026-09-29 18:55 UTC — M1_P1 screen cache4
+- Change: base=/home/jovyan/projects/SLAI-infra-course-hw1/project/campaigns/structural/p1_paired_w1_step_rf_noc512/recipe.json; patch={}; hardware=/home/jovyan/projects/SLAI-infra-course-hw1/project/campaigns/structural/p1_paired_w1_step_rf_noc512/hardware.json; hardware_patch={"cache_mib": 4}
+- Verify: `PYTHONPATH=. .venv/bin/python project/campaigns/d1-sh/refine.py cache4 --case M1_P1 --out-root /home/jovyan/projects/SLAI-infra-course-hw1/project/campaigns/structural/p1-pair-r1 --base /home/jovyan/projects/SLAI-infra-course-hw1/project/campaigns/structural/p1_paired_w1_step_rf_noc512/recipe.json --hardware /home/jovyan/projects/SLAI-infra-course-hw1/project/campaigns/structural/p1_paired_w1_step_rf_noc512/hardware.json --patch '{}' --hardware-patch '{"cache_mib": 4}' --compiler /home/jovyan/projects/SLAI-infra-course-hw1/project/campaigns/structural/p1-pair-r1/compiler.py`; reports `/home/jovyan/projects/SLAI-infra-course-hw1/project/campaigns/structural/p1-pair-r1/cache4`. Development checks only; full frozen race validation still required.
+- Result: M1_P1=548397; area=21.38333399552; peak W=11.195011701886687; error=None.
+- Decision: screen only, no incumbent promotion; compare before full frozen validation.
+
+## 2026-09-29 18:55 UTC — M2_D1 screen cache2__d1
+- Change: base=/home/jovyan/projects/SLAI-infra-course-hw1/project/campaigns/d1-sh/layer_rf_tc_noc512/recipe.json; patch={}; hardware=/home/jovyan/projects/SLAI-infra-course-hw1/project/campaigns/d1-sh/layer_rf_tc_noc512/hardware.json; hardware_patch={"cache_mib": 2}
+- Verify: `PYTHONPATH=. .venv/bin/python project/campaigns/d1-sh/refine.py cache2__d1 --case M2_D1 --out-root /home/jovyan/projects/SLAI-infra-course-hw1/project/campaigns/structural/p1-pair-r1 --base /home/jovyan/projects/SLAI-infra-course-hw1/project/campaigns/d1-sh/layer_rf_tc_noc512/recipe.json --hardware /home/jovyan/projects/SLAI-infra-course-hw1/project/campaigns/d1-sh/layer_rf_tc_noc512/hardware.json --patch '{}' --hardware-patch '{"cache_mib": 2}' --compiler /home/jovyan/projects/SLAI-infra-course-hw1/project/campaigns/structural/p1-pair-r1/compiler.py`; reports `/home/jovyan/projects/SLAI-infra-course-hw1/project/campaigns/structural/p1-pair-r1/cache2__d1`. Development checks only; full frozen race validation still required.
+- Result: M2_D1=58770; area=20.54427249152; peak W=10.71311004428452; error=None.
+- Decision: screen only, no incumbent promotion; compare before full frozen validation.
+
+## 2026-09-29 18:55 UTC — M2_D1 screen cache1__d1
+- Change: base=/home/jovyan/projects/SLAI-infra-course-hw1/project/campaigns/d1-sh/layer_rf_tc_noc512/recipe.json; patch={}; hardware=/home/jovyan/projects/SLAI-infra-course-hw1/project/campaigns/d1-sh/layer_rf_tc_noc512/hardware.json; hardware_patch={"cache_mib": 1}
+- Verify: `PYTHONPATH=. .venv/bin/python project/campaigns/d1-sh/refine.py cache1__d1 --case M2_D1 --out-root /home/jovyan/projects/SLAI-infra-course-hw1/project/campaigns/structural/p1-pair-r1 --base /home/jovyan/projects/SLAI-infra-course-hw1/project/campaigns/d1-sh/layer_rf_tc_noc512/recipe.json --hardware /home/jovyan/projects/SLAI-infra-course-hw1/project/campaigns/d1-sh/layer_rf_tc_noc512/hardware.json --patch '{}' --hardware-patch '{"cache_mib": 1}' --compiler /home/jovyan/projects/SLAI-infra-course-hw1/project/campaigns/structural/p1-pair-r1/compiler.py`; reports `/home/jovyan/projects/SLAI-infra-course-hw1/project/campaigns/structural/p1-pair-r1/cache1__d1`. Development checks only; full frozen race validation still required.
+- Result: M2_D1=58808; area=20.12474173952; peak W=10.70262177548452; error=None.
+- Decision: screen only, no incumbent promotion; compare before full frozen validation.
+
+## 2026-09-29 18:56 UTC — M2_D1 screen cache4__d1
+- Change: base=/home/jovyan/projects/SLAI-infra-course-hw1/project/campaigns/d1-sh/layer_rf_tc_noc512/recipe.json; patch={}; hardware=/home/jovyan/projects/SLAI-infra-course-hw1/project/campaigns/d1-sh/layer_rf_tc_noc512/hardware.json; hardware_patch={"cache_mib": 4}
+- Verify: `PYTHONPATH=. .venv/bin/python project/campaigns/d1-sh/refine.py cache4__d1 --case M2_D1 --out-root /home/jovyan/projects/SLAI-infra-course-hw1/project/campaigns/structural/p1-pair-r1 --base /home/jovyan/projects/SLAI-infra-course-hw1/project/campaigns/d1-sh/layer_rf_tc_noc512/recipe.json --hardware /home/jovyan/projects/SLAI-infra-course-hw1/project/campaigns/d1-sh/layer_rf_tc_noc512/hardware.json --patch '{}' --hardware-patch '{"cache_mib": 4}' --compiler /home/jovyan/projects/SLAI-infra-course-hw1/project/campaigns/structural/p1-pair-r1/compiler.py`; reports `/home/jovyan/projects/SLAI-infra-course-hw1/project/campaigns/structural/p1-pair-r1/cache4__d1`. Development checks only; full frozen race validation still required.
+- Result: M2_D1=58770; area=21.38333399552; peak W=10.73408658188452; error=None.
+- Decision: screen only, no incumbent promotion; compare before full frozen validation.
+
+## 2026-09-29 18:58 UTC — M1_P1 screen noc256
+- Change: base=/home/jovyan/projects/SLAI-infra-course-hw1/project/campaigns/structural/p1_paired_w1_step_rf_noc512/recipe.json; patch={}; hardware=/home/jovyan/projects/SLAI-infra-course-hw1/project/campaigns/structural/p1_paired_w1_step_rf_noc512/hardware.json; hardware_patch={"noc_bytes_per_cycle": 256}
+- Verify: `PYTHONPATH=. .venv/bin/python project/campaigns/d1-sh/refine.py noc256 --case M1_P1 --out-root /home/jovyan/projects/SLAI-infra-course-hw1/project/campaigns/structural/p1-pair-r1 --base /home/jovyan/projects/SLAI-infra-course-hw1/project/campaigns/structural/p1_paired_w1_step_rf_noc512/recipe.json --hardware /home/jovyan/projects/SLAI-infra-course-hw1/project/campaigns/structural/p1_paired_w1_step_rf_noc512/hardware.json --patch '{}' --hardware-patch '{"noc_bytes_per_cycle": 256}' --compiler /home/jovyan/projects/SLAI-infra-course-hw1/project/campaigns/structural/p1-pair-r1/compiler.py`; reports `/home/jovyan/projects/SLAI-infra-course-hw1/project/campaigns/structural/p1-pair-r1/noc256`. Development checks only; full frozen race validation still required.
+- Result: M1_P1=563573; area=22.93345700352; peak W=11.093703721086094; error=None.
+- Decision: screen only, no incumbent promotion; compare before full frozen validation.
+
+## 2026-09-29 18:58 UTC — Joint grade aggressive-r1
+- Change: measured P1/D1 combined with one shared hardware; snapshots `project/campaigns/structural/aggressive-r1/joint-0`.
+- Verify: `PYTHONPATH=. .venv/bin/python project/campaigns/structural/grade_joint.py project/campaigns/structural/aggressive-r1/joint-0` -> `project/campaigns/structural/aggressive-r1/joint-0/grade.json`.
+- Result: status=completed; score=35673.764039986585; eligible=True; cycles={'M1_P1': 556591, 'M2_D1': 56978}.
+- Decision: preserve full grade; registry promotion pending controlled import after writer lock is free.
+
+## 2026-09-29 18:59 UTC — M2_D1 screen noc256__d1
+- Change: base=/home/jovyan/projects/SLAI-infra-course-hw1/project/campaigns/d1-sh/layer_rf_tc_noc512/recipe.json; patch={}; hardware=/home/jovyan/projects/SLAI-infra-course-hw1/project/campaigns/d1-sh/layer_rf_tc_noc512/hardware.json; hardware_patch={"noc_bytes_per_cycle": 256}
+- Verify: `PYTHONPATH=. .venv/bin/python project/campaigns/d1-sh/refine.py noc256__d1 --case M2_D1 --out-root /home/jovyan/projects/SLAI-infra-course-hw1/project/campaigns/structural/p1-pair-r1 --base /home/jovyan/projects/SLAI-infra-course-hw1/project/campaigns/d1-sh/layer_rf_tc_noc512/recipe.json --hardware /home/jovyan/projects/SLAI-infra-course-hw1/project/campaigns/d1-sh/layer_rf_tc_noc512/hardware.json --patch '{}' --hardware-patch '{"noc_bytes_per_cycle": 256}' --compiler /home/jovyan/projects/SLAI-infra-course-hw1/project/campaigns/structural/p1-pair-r1/compiler.py`; reports `/home/jovyan/projects/SLAI-infra-course-hw1/project/campaigns/structural/p1-pair-r1/noc256__d1`. Development checks only; full frozen race validation still required.
+- Result: M2_D1=62672; area=22.93345700352; peak W=10.476701993089254; error=None.
+- Decision: screen only, no incumbent promotion; compare before full frozen validation.
+
+## 2026-09-29 19:10 UTC — M1_P1 screen hbm8_cache4
+- Change: base=/home/jovyan/projects/SLAI-infra-course-hw1/project/campaigns/structural/p1_paired_w1_step_rf_noc512/recipe.json; patch={}; hardware=/home/jovyan/projects/SLAI-infra-course-hw1/project/campaigns/structural/p1_paired_w1_step_rf_noc512/hardware.json; hardware_patch={"hbm_channels": 8, "cache_mib": 4}
+- Verify: `PYTHONPATH=. .venv/bin/python project/campaigns/d1-sh/refine.py hbm8_cache4 --case M1_P1 --out-root /home/jovyan/projects/SLAI-infra-course-hw1/project/campaigns/structural/p1-pair-r1 --base /home/jovyan/projects/SLAI-infra-course-hw1/project/campaigns/structural/p1_paired_w1_step_rf_noc512/recipe.json --hardware /home/jovyan/projects/SLAI-infra-course-hw1/project/campaigns/structural/p1_paired_w1_step_rf_noc512/hardware.json --patch '{}' --hardware-patch '{"hbm_channels": 8, "cache_mib": 4}' --compiler /home/jovyan/projects/SLAI-infra-course-hw1/project/campaigns/structural/p1-pair-r1/compiler.py`; reports `/home/jovyan/projects/SLAI-infra-course-hw1/project/campaigns/structural/p1-pair-r1/hbm8_cache4`. Development checks only; full frozen race validation still required.
+- Result: M1_P1=527556; area=21.58333399552; peak W=20.31539710358599; error=None.
+- Decision: screen only, no incumbent promotion; compare before full frozen validation.
+
+## 2026-09-29 19:19 UTC — Joint grade p1_paired_w1_step_rf_noc512
+- Change: measured P1/D1 combined with one shared hardware; snapshots `project/campaigns/structural/p1_paired_w1_step_rf_noc512/joint`.
+- Verify: `PYTHONPATH=. .venv/bin/python project/campaigns/structural/grade_joint.py project/campaigns/structural/p1_paired_w1_step_rf_noc512/joint` -> `project/campaigns/structural/p1_paired_w1_step_rf_noc512/joint/grade.json`.
+- Result: status=completed; score=35392.89884148437; eligible=True; cycles={'M1_P1': 548218, 'M2_D1': 58770}.
+- Decision: preserve full grade; registry promotion pending controlled import after writer lock is free.
+
+## 2026-09-29 19:20 UTC — M1_P1 screen sh2r
+- Change: base=/home/jovyan/projects/SLAI-infra-course-hw1/project/campaigns/structural/p1_paired_w1_step_rf_noc512/recipe.json; patch={}; hardware=/home/jovyan/projects/SLAI-infra-course-hw1/project/campaigns/structural/p1_paired_w1_step_rf_noc512/hardware.json; hardware_patch={"shared_ports": "2R1W"}
+- Verify: `PYTHONPATH=. .venv/bin/python project/campaigns/d1-sh/refine.py sh2r --case M1_P1 --out-root /home/jovyan/projects/SLAI-infra-course-hw1/project/campaigns/structural/p1-pair-r1 --base /home/jovyan/projects/SLAI-infra-course-hw1/project/campaigns/structural/p1_paired_w1_step_rf_noc512/recipe.json --hardware /home/jovyan/projects/SLAI-infra-course-hw1/project/campaigns/structural/p1_paired_w1_step_rf_noc512/hardware.json --patch '{}' --hardware-patch '{"shared_ports": "2R1W"}' --compiler /home/jovyan/projects/SLAI-infra-course-hw1/project/campaigns/structural/p1-pair-r1/compiler.py`; reports `/home/jovyan/projects/SLAI-infra-course-hw1/project/campaigns/structural/p1-pair-r1/sh2r`. Development checks only; full frozen race validation still required.
+- Result: M1_P1=548218; area=23.419857003519997; peak W=11.245924777086685; error=None.
+- Decision: screen only, no incumbent promotion; compare before full frozen validation.
+
+## 2026-09-29 19:20 UTC — M1_P1 screen sh8
+- Change: base=/home/jovyan/projects/SLAI-infra-course-hw1/project/campaigns/structural/p1_paired_w1_step_rf_noc512/recipe.json; patch={}; hardware=/home/jovyan/projects/SLAI-infra-course-hw1/project/campaigns/structural/p1_paired_w1_step_rf_noc512/hardware.json; hardware_patch={"shared_banks": 8}
+- Verify: `PYTHONPATH=. .venv/bin/python project/campaigns/d1-sh/refine.py sh8 --case M1_P1 --out-root /home/jovyan/projects/SLAI-infra-course-hw1/project/campaigns/structural/p1-pair-r1 --base /home/jovyan/projects/SLAI-infra-course-hw1/project/campaigns/structural/p1_paired_w1_step_rf_noc512/recipe.json --hardware /home/jovyan/projects/SLAI-infra-course-hw1/project/campaigns/structural/p1_paired_w1_step_rf_noc512/hardware.json --patch '{}' --hardware-patch '{"shared_banks": 8}' --compiler /home/jovyan/projects/SLAI-infra-course-hw1/project/campaigns/structural/p1-pair-r1/compiler.py`; reports `/home/jovyan/projects/SLAI-infra-course-hw1/project/campaigns/structural/p1-pair-r1/sh8`. Development checks only; full frozen race validation still required.
+- Result: M1_P1=548218; area=23.57345700352; peak W=11.249764777086686; error=None.
+- Decision: screen only, no incumbent promotion; compare before full frozen validation.
+
+## 2026-09-29 19:20 UTC — M1_P1 screen hbm8_cache2
+- Change: base=/home/jovyan/projects/SLAI-infra-course-hw1/project/campaigns/structural/p1_paired_w1_step_rf_noc512/recipe.json; patch={}; hardware=/home/jovyan/projects/SLAI-infra-course-hw1/project/campaigns/structural/p1_paired_w1_step_rf_noc512/hardware.json; hardware_patch={"hbm_channels": 8, "cache_mib": 2}
+- Verify: `PYTHONPATH=. .venv/bin/python project/campaigns/d1-sh/refine.py hbm8_cache2 --case M1_P1 --out-root /home/jovyan/projects/SLAI-infra-course-hw1/project/campaigns/structural/p1-pair-r1 --base /home/jovyan/projects/SLAI-infra-course-hw1/project/campaigns/structural/p1_paired_w1_step_rf_noc512/recipe.json --hardware /home/jovyan/projects/SLAI-infra-course-hw1/project/campaigns/structural/p1_paired_w1_step_rf_noc512/hardware.json --patch '{}' --hardware-patch '{"hbm_channels": 8, "cache_mib": 2}' --compiler /home/jovyan/projects/SLAI-infra-course-hw1/project/campaigns/structural/p1-pair-r1/compiler.py`; reports `/home/jovyan/projects/SLAI-infra-course-hw1/project/campaigns/structural/p1-pair-r1/hbm8_cache2`. Development checks only; full frozen race validation still required.
+- Result: M1_P1=523760; area=20.74427249152; peak W=20.294420565985988; error=None.
+- Decision: screen only, no incumbent promotion; compare before full frozen validation.
+
+## 2026-09-29 19:20 UTC — M1_P1 screen sh8_2r_cache4
+- Change: base=/home/jovyan/projects/SLAI-infra-course-hw1/project/campaigns/structural/p1_paired_w1_step_rf_noc512/recipe.json; patch={}; hardware=/home/jovyan/projects/SLAI-infra-course-hw1/project/campaigns/structural/p1_paired_w1_step_rf_noc512/hardware.json; hardware_patch={"shared_banks": 8, "shared_ports": "2R1W", "cache_mib": 4}
+- Verify: `PYTHONPATH=. .venv/bin/python project/campaigns/d1-sh/refine.py sh8_2r_cache4 --case M1_P1 --out-root /home/jovyan/projects/SLAI-infra-course-hw1/project/campaigns/structural/p1-pair-r1 --base /home/jovyan/projects/SLAI-infra-course-hw1/project/campaigns/structural/p1_paired_w1_step_rf_noc512/recipe.json --hardware /home/jovyan/projects/SLAI-infra-course-hw1/project/campaigns/structural/p1_paired_w1_step_rf_noc512/hardware.json --patch '{}' --hardware-patch '{"shared_banks": 8, "shared_ports": "2R1W", "cache_mib": 4}' --compiler /home/jovyan/projects/SLAI-infra-course-hw1/project/campaigns/structural/p1-pair-r1/compiler.py`; reports `/home/jovyan/projects/SLAI-infra-course-hw1/project/campaigns/structural/p1-pair-r1/sh8_2r_cache4`. Development checks only; full frozen race validation still required.
+- Result: M1_P1=548397; area=22.61213399552; peak W=11.225731701886685; error=None.
+- Decision: screen only, no incumbent promotion; compare before full frozen validation.
+
+## 2026-09-29 19:20 UTC — M2_D1 screen sh2r__d1
+- Change: base=/home/jovyan/projects/SLAI-infra-course-hw1/project/campaigns/d1-sh/layer_rf_tc_noc512/recipe.json; patch={}; hardware=/home/jovyan/projects/SLAI-infra-course-hw1/project/campaigns/d1-sh/layer_rf_tc_noc512/hardware.json; hardware_patch={"shared_ports": "2R1W"}
+- Verify: `PYTHONPATH=. .venv/bin/python project/campaigns/d1-sh/refine.py sh2r__d1 --case M2_D1 --out-root /home/jovyan/projects/SLAI-infra-course-hw1/project/campaigns/structural/p1-pair-r1 --base /home/jovyan/projects/SLAI-infra-course-hw1/project/campaigns/d1-sh/layer_rf_tc_noc512/recipe.json --hardware /home/jovyan/projects/SLAI-infra-course-hw1/project/campaigns/d1-sh/layer_rf_tc_noc512/hardware.json --patch '{}' --hardware-patch '{"shared_ports": "2R1W"}' --compiler /home/jovyan/projects/SLAI-infra-course-hw1/project/campaigns/structural/p1-pair-r1/compiler.py`; reports `/home/jovyan/projects/SLAI-infra-course-hw1/project/campaigns/structural/p1-pair-r1/sh2r__d1`. Development checks only; full frozen race validation still required.
+- Result: M2_D1=57794; area=23.419857003519997; peak W=10.784999657084503; error=None.
+- Decision: screen only, no incumbent promotion; compare before full frozen validation.
+
+## 2026-09-29 19:21 UTC — M2_D1 screen sh8__d1
+- Change: base=/home/jovyan/projects/SLAI-infra-course-hw1/project/campaigns/d1-sh/layer_rf_tc_noc512/recipe.json; patch={}; hardware=/home/jovyan/projects/SLAI-infra-course-hw1/project/campaigns/d1-sh/layer_rf_tc_noc512/hardware.json; hardware_patch={"shared_banks": 8}
+- Verify: `PYTHONPATH=. .venv/bin/python project/campaigns/d1-sh/refine.py sh8__d1 --case M2_D1 --out-root /home/jovyan/projects/SLAI-infra-course-hw1/project/campaigns/structural/p1-pair-r1 --base /home/jovyan/projects/SLAI-infra-course-hw1/project/campaigns/d1-sh/layer_rf_tc_noc512/recipe.json --hardware /home/jovyan/projects/SLAI-infra-course-hw1/project/campaigns/d1-sh/layer_rf_tc_noc512/hardware.json --patch '{}' --hardware-patch '{"shared_banks": 8}' --compiler /home/jovyan/projects/SLAI-infra-course-hw1/project/campaigns/structural/p1-pair-r1/compiler.py`; reports `/home/jovyan/projects/SLAI-infra-course-hw1/project/campaigns/structural/p1-pair-r1/sh8__d1`. Development checks only; full frozen race validation still required.
+- Result: M2_D1=57658; area=23.57345700352; peak W=10.78883965708451; error=None.
+- Decision: screen only, no incumbent promotion; compare before full frozen validation.
+
+## 2026-09-29 19:21 UTC — M1_P1 screen dma_depth2
+- Change: base=/home/jovyan/projects/SLAI-infra-course-hw1/project/campaigns/structural/p1_paired_w1_step_rf_noc512/recipe.json; patch={}; hardware=/home/jovyan/projects/SLAI-infra-course-hw1/project/campaigns/structural/p1_paired_w1_step_rf_noc512/hardware.json; hardware_patch={"dma_depth": 2}
+- Verify: `PYTHONPATH=. .venv/bin/python project/campaigns/d1-sh/refine.py dma_depth2 --case M1_P1 --out-root /home/jovyan/projects/SLAI-infra-course-hw1/project/campaigns/structural/p1-pair-r1 --base /home/jovyan/projects/SLAI-infra-course-hw1/project/campaigns/structural/p1_paired_w1_step_rf_noc512/recipe.json --hardware /home/jovyan/projects/SLAI-infra-course-hw1/project/campaigns/structural/p1_paired_w1_step_rf_noc512/hardware.json --patch '{}' --hardware-patch '{"dma_depth": 2}' --compiler /home/jovyan/projects/SLAI-infra-course-hw1/project/campaigns/structural/p1-pair-r1/compiler.py`; reports `/home/jovyan/projects/SLAI-infra-course-hw1/project/campaigns/structural/p1-pair-r1/dma_depth2`. Development checks only; full frozen race validation still required.
+- Result: M1_P1=failed; area=None; peak W=None; error=ValueError('area exceeds 24 mm2').
+- Decision: screen only, no incumbent promotion; compare before full frozen validation.
+
+## 2026-09-29 19:21 UTC — M2_D1 screen sh8_2r_cache4__d1
+- Change: base=/home/jovyan/projects/SLAI-infra-course-hw1/project/campaigns/d1-sh/layer_rf_tc_noc512/recipe.json; patch={}; hardware=/home/jovyan/projects/SLAI-infra-course-hw1/project/campaigns/d1-sh/layer_rf_tc_noc512/hardware.json; hardware_patch={"shared_banks": 8, "shared_ports": "2R1W", "cache_mib": 4}
+- Verify: `PYTHONPATH=. .venv/bin/python project/campaigns/d1-sh/refine.py sh8_2r_cache4__d1 --case M2_D1 --out-root /home/jovyan/projects/SLAI-infra-course-hw1/project/campaigns/structural/p1-pair-r1 --base /home/jovyan/projects/SLAI-infra-course-hw1/project/campaigns/d1-sh/layer_rf_tc_noc512/recipe.json --hardware /home/jovyan/projects/SLAI-infra-course-hw1/project/campaigns/d1-sh/layer_rf_tc_noc512/hardware.json --patch '{}' --hardware-patch '{"shared_banks": 8, "shared_ports": "2R1W", "cache_mib": 4}' --compiler /home/jovyan/projects/SLAI-infra-course-hw1/project/campaigns/structural/p1-pair-r1/compiler.py`; reports `/home/jovyan/projects/SLAI-infra-course-hw1/project/campaigns/structural/p1-pair-r1/sh8_2r_cache4__d1`. Development checks only; full frozen race validation still required.
+- Result: M2_D1=56978; area=22.61213399552; peak W=10.76480658188449; error=None.
+- Decision: screen only, no incumbent promotion; compare before full frozen validation.
+
+## 2026-09-29 19:25 UTC — M1_P1 screen tc8x8_kp2
+- Change: base=/home/jovyan/projects/SLAI-infra-course-hw1/project/campaigns/structural/p1_paired_w1_step_rf_noc512/recipe.json; patch={}; hardware=/home/jovyan/projects/SLAI-infra-course-hw1/project/campaigns/structural/p1_paired_w1_step_rf_noc512/hardware.json; hardware_patch={"tc_array": "8x8", "tc_k_parallel": 2}
+- Verify: `PYTHONPATH=. .venv/bin/python project/campaigns/d1-sh/refine.py tc8x8_kp2 --case M1_P1 --out-root /home/jovyan/projects/SLAI-infra-course-hw1/project/campaigns/structural/p1-pair-r1 --base /home/jovyan/projects/SLAI-infra-course-hw1/project/campaigns/structural/p1_paired_w1_step_rf_noc512/recipe.json --hardware /home/jovyan/projects/SLAI-infra-course-hw1/project/campaigns/structural/p1_paired_w1_step_rf_noc512/hardware.json --patch '{}' --hardware-patch '{"tc_array": "8x8", "tc_k_parallel": 2}' --compiler /home/jovyan/projects/SLAI-infra-course-hw1/project/campaigns/structural/p1-pair-r1/compiler.py`; reports `/home/jovyan/projects/SLAI-infra-course-hw1/project/campaigns/structural/p1-pair-r1/tc8x8_kp2`. Development checks only; full frozen race validation still required.
+- Result: M1_P1=516781; area=23.26032484352; peak W=11.428945474451274; error=None.
+- Decision: screen only, no incumbent promotion; compare before full frozen validation.
+
+## 2026-09-29 19:25 UTC — M2_D1 screen tc8x8_kp2__d1
+- Change: base=/home/jovyan/projects/SLAI-infra-course-hw1/project/campaigns/d1-sh/layer_rf_tc_noc512/recipe.json; patch={}; hardware=/home/jovyan/projects/SLAI-infra-course-hw1/project/campaigns/d1-sh/layer_rf_tc_noc512/hardware.json; hardware_patch={"tc_array": "8x8", "tc_k_parallel": 2}
+- Verify: `PYTHONPATH=. .venv/bin/python project/campaigns/d1-sh/refine.py tc8x8_kp2__d1 --case M2_D1 --out-root /home/jovyan/projects/SLAI-infra-course-hw1/project/campaigns/structural/p1-pair-r1 --base /home/jovyan/projects/SLAI-infra-course-hw1/project/campaigns/d1-sh/layer_rf_tc_noc512/recipe.json --hardware /home/jovyan/projects/SLAI-infra-course-hw1/project/campaigns/d1-sh/layer_rf_tc_noc512/hardware.json --patch '{}' --hardware-patch '{"tc_array": "8x8", "tc_k_parallel": 2}' --compiler /home/jovyan/projects/SLAI-infra-course-hw1/project/campaigns/structural/p1-pair-r1/compiler.py`; reports `/home/jovyan/projects/SLAI-infra-course-hw1/project/campaigns/structural/p1-pair-r1/tc8x8_kp2__d1`. Development checks only; full frozen race validation still required.
+- Result: M2_D1=64566; area=23.26032484352; peak W=10.781011353084265; error=None.
+- Decision: screen only, no incumbent promotion; compare before full frozen validation.
+
+## 2026-09-29 19:36 UTC — M1_P1 screen tc8x16_kp1
+- Change: base=/home/jovyan/projects/SLAI-infra-course-hw1/project/campaigns/structural/p1_paired_w1_step_rf_noc512/recipe.json; patch={}; hardware=/home/jovyan/projects/SLAI-infra-course-hw1/project/campaigns/structural/p1_paired_w1_step_rf_noc512/hardware.json; hardware_patch={"tc_array": "8x16", "tc_k_parallel": 1}
+- Verify: `PYTHONPATH=. .venv/bin/python project/campaigns/d1-sh/refine.py tc8x16_kp1 --case M1_P1 --out-root /home/jovyan/projects/SLAI-infra-course-hw1/project/campaigns/structural/p1-pair-r1 --base /home/jovyan/projects/SLAI-infra-course-hw1/project/campaigns/structural/p1_paired_w1_step_rf_noc512/recipe.json --hardware /home/jovyan/projects/SLAI-infra-course-hw1/project/campaigns/structural/p1_paired_w1_step_rf_noc512/hardware.json --patch '{}' --hardware-patch '{"tc_array": "8x16", "tc_k_parallel": 1}' --compiler /home/jovyan/projects/SLAI-infra-course-hw1/project/campaigns/structural/p1-pair-r1/compiler.py`; reports `/home/jovyan/projects/SLAI-infra-course-hw1/project/campaigns/structural/p1-pair-r1/tc8x16_kp1`. Development checks only; full frozen race validation still required.
+- Result: M1_P1=518406; area=23.65806052352; peak W=11.150765728961359; error=None.
+- Decision: screen only, no incumbent promotion; compare before full frozen validation.
+
+## 2026-09-29 19:36 UTC — M2_D1 screen tc8x16_kp1__d1
+- Change: base=/home/jovyan/projects/SLAI-infra-course-hw1/project/campaigns/d1-sh/layer_rf_tc_noc512/recipe.json; patch={}; hardware=/home/jovyan/projects/SLAI-infra-course-hw1/project/campaigns/d1-sh/layer_rf_tc_noc512/hardware.json; hardware_patch={"tc_array": "8x16", "tc_k_parallel": 1}
+- Verify: `PYTHONPATH=. .venv/bin/python project/campaigns/d1-sh/refine.py tc8x16_kp1__d1 --case M2_D1 --out-root /home/jovyan/projects/SLAI-infra-course-hw1/project/campaigns/structural/p1-pair-r1 --base /home/jovyan/projects/SLAI-infra-course-hw1/project/campaigns/d1-sh/layer_rf_tc_noc512/recipe.json --hardware /home/jovyan/projects/SLAI-infra-course-hw1/project/campaigns/d1-sh/layer_rf_tc_noc512/hardware.json --patch '{}' --hardware-patch '{"tc_array": "8x16", "tc_k_parallel": 1}' --compiler /home/jovyan/projects/SLAI-infra-course-hw1/project/campaigns/structural/p1-pair-r1/compiler.py`; reports `/home/jovyan/projects/SLAI-infra-course-hw1/project/campaigns/structural/p1-pair-r1/tc8x16_kp1__d1`. Development checks only; full frozen race validation still required.
+- Result: M2_D1=70278; area=23.65806052352; peak W=10.790954745084258; error=None.
+- Decision: screen only, no incumbent promotion; compare before full frozen validation.
+
+## 2026-09-29 19:44 UTC — M1_P1 screen rf4r2w
+- Change: base=/home/jovyan/projects/SLAI-infra-course-hw1/project/campaigns/structural/p1_paired_w1_step_rf_noc512/recipe.json; patch={}; hardware=/home/jovyan/projects/SLAI-infra-course-hw1/project/campaigns/structural/p1_paired_w1_step_rf_noc512/hardware.json; hardware_patch={"rf_ports": "4R2W"}
+- Verify: `PYTHONPATH=. .venv/bin/python project/campaigns/d1-sh/refine.py rf4r2w --case M1_P1 --out-root /home/jovyan/projects/SLAI-infra-course-hw1/project/campaigns/structural/p1-pair-r1 --base /home/jovyan/projects/SLAI-infra-course-hw1/project/campaigns/structural/p1_paired_w1_step_rf_noc512/recipe.json --hardware /home/jovyan/projects/SLAI-infra-course-hw1/project/campaigns/structural/p1_paired_w1_step_rf_noc512/hardware.json --patch '{}' --hardware-patch '{"rf_ports": "4R2W"}' --compiler /home/jovyan/projects/SLAI-infra-course-hw1/project/campaigns/structural/p1-pair-r1/compiler.py`; reports `/home/jovyan/projects/SLAI-infra-course-hw1/project/campaigns/structural/p1-pair-r1/rf4r2w`. Development checks only; full frozen race validation still required.
+- Result: M1_P1=839683; area=20.913459553280003; peak W=10.88909245610501; error=None.
+- Decision: screen only, no incumbent promotion; compare before full frozen validation.
+
+## 2026-09-29 19:45 UTC — M2_D1 screen rf4r2w__d1
+- Change: base=/home/jovyan/projects/SLAI-infra-course-hw1/project/campaigns/d1-sh/layer_rf_tc_noc512/recipe.json; patch={}; hardware=/home/jovyan/projects/SLAI-infra-course-hw1/project/campaigns/d1-sh/layer_rf_tc_noc512/hardware.json; hardware_patch={"rf_ports": "4R2W"}
+- Verify: `PYTHONPATH=. .venv/bin/python project/campaigns/d1-sh/refine.py rf4r2w__d1 --case M2_D1 --out-root /home/jovyan/projects/SLAI-infra-course-hw1/project/campaigns/structural/p1-pair-r1 --base /home/jovyan/projects/SLAI-infra-course-hw1/project/campaigns/d1-sh/layer_rf_tc_noc512/recipe.json --hardware /home/jovyan/projects/SLAI-infra-course-hw1/project/campaigns/d1-sh/layer_rf_tc_noc512/hardware.json --patch '{}' --hardware-patch '{"rf_ports": "4R2W"}' --compiler /home/jovyan/projects/SLAI-infra-course-hw1/project/campaigns/structural/p1-pair-r1/compiler.py`; reports `/home/jovyan/projects/SLAI-infra-course-hw1/project/campaigns/structural/p1-pair-r1/rf4r2w__d1`. Development checks only; full frozen race validation still required.
+- Result: M2_D1=79016; area=20.913459553280003; peak W=10.721164680828492; error=None.
+- Decision: screen only, no incumbent promotion; compare before full frozen validation.
+
+## 2026-09-29 19:45 UTC — M1_P1 screen tc4x8_kp2
+- Change: base=/home/jovyan/projects/SLAI-infra-course-hw1/project/campaigns/structural/p1_paired_w1_step_rf_noc512/recipe.json; patch={}; hardware=/home/jovyan/projects/SLAI-infra-course-hw1/project/campaigns/structural/p1_paired_w1_step_rf_noc512/hardware.json; hardware_patch={"tc_k_parallel": 2}
+- Verify: `PYTHONPATH=. .venv/bin/python project/campaigns/d1-sh/refine.py tc4x8_kp2 --case M1_P1 --out-root /home/jovyan/projects/SLAI-infra-course-hw1/project/campaigns/structural/p1-pair-r1 --base /home/jovyan/projects/SLAI-infra-course-hw1/project/campaigns/structural/p1_paired_w1_step_rf_noc512/recipe.json --hardware /home/jovyan/projects/SLAI-infra-course-hw1/project/campaigns/structural/p1_paired_w1_step_rf_noc512/hardware.json --patch '{}' --hardware-patch '{"tc_k_parallel": 2}' --compiler /home/jovyan/projects/SLAI-infra-course-hw1/project/campaigns/structural/p1-pair-r1/compiler.py`; reports `/home/jovyan/projects/SLAI-infra-course-hw1/project/campaigns/structural/p1-pair-r1/tc4x8_kp2`. Development checks only; full frozen race validation still required.
+- Result: M1_P1=594767; area=20.11745700352; peak W=11.026837013516257; error=None.
+- Decision: screen only, no incumbent promotion; compare before full frozen validation.
+
+## 2026-09-29 19:45 UTC — M2_D1 screen tc4x8_kp2__d1
+- Change: base=/home/jovyan/projects/SLAI-infra-course-hw1/project/campaigns/d1-sh/layer_rf_tc_noc512/recipe.json; patch={}; hardware=/home/jovyan/projects/SLAI-infra-course-hw1/project/campaigns/d1-sh/layer_rf_tc_noc512/hardware.json; hardware_patch={"tc_k_parallel": 2}
+- Verify: `PYTHONPATH=. .venv/bin/python project/campaigns/d1-sh/refine.py tc4x8_kp2__d1 --case M2_D1 --out-root /home/jovyan/projects/SLAI-infra-course-hw1/project/campaigns/structural/p1-pair-r1 --base /home/jovyan/projects/SLAI-infra-course-hw1/project/campaigns/d1-sh/layer_rf_tc_noc512/recipe.json --hardware /home/jovyan/projects/SLAI-infra-course-hw1/project/campaigns/d1-sh/layer_rf_tc_noc512/hardware.json --patch '{}' --hardware-patch '{"tc_k_parallel": 2}' --compiler /home/jovyan/projects/SLAI-infra-course-hw1/project/campaigns/structural/p1-pair-r1/compiler.py`; reports `/home/jovyan/projects/SLAI-infra-course-hw1/project/campaigns/structural/p1-pair-r1/tc4x8_kp2__d1`. Development checks only; full frozen race validation still required.
+- Result: M2_D1=64566; area=20.11745700352; peak W=10.702439657084549; error=None.
+- Decision: screen only, no incumbent promotion; compare before full frozen validation.
+
+## 2026-09-29 19:45 UTC — M1_P1 screen sh1bank
+- Change: base=/home/jovyan/projects/SLAI-infra-course-hw1/project/campaigns/structural/p1_paired_w1_step_rf_noc512/recipe.json; patch={}; hardware=/home/jovyan/projects/SLAI-infra-course-hw1/project/campaigns/structural/p1_paired_w1_step_rf_noc512/hardware.json; hardware_patch={"shared_banks": 1}
+- Verify: `PYTHONPATH=. .venv/bin/python project/campaigns/d1-sh/refine.py sh1bank --case M1_P1 --out-root /home/jovyan/projects/SLAI-infra-course-hw1/project/campaigns/structural/p1-pair-r1 --base /home/jovyan/projects/SLAI-infra-course-hw1/project/campaigns/structural/p1_paired_w1_step_rf_noc512/recipe.json --hardware /home/jovyan/projects/SLAI-infra-course-hw1/project/campaigns/structural/p1_paired_w1_step_rf_noc512/hardware.json --patch '{}' --hardware-patch '{"shared_banks": 1}' --compiler /home/jovyan/projects/SLAI-infra-course-hw1/project/campaigns/structural/p1-pair-r1/compiler.py`; reports `/home/jovyan/projects/SLAI-infra-course-hw1/project/campaigns/structural/p1-pair-r1/sh1bank`. Development checks only; full frozen race validation still required.
+- Result: M1_P1=548218; area=22.67745700352; peak W=11.227364777086686; error=None.
+- Decision: screen only, no incumbent promotion; compare before full frozen validation.
+
+## 2026-09-29 19:46 UTC — M2_D1 screen sh1bank__d1
+- Change: base=/home/jovyan/projects/SLAI-infra-course-hw1/project/campaigns/d1-sh/layer_rf_tc_noc512/recipe.json; patch={}; hardware=/home/jovyan/projects/SLAI-infra-course-hw1/project/campaigns/d1-sh/layer_rf_tc_noc512/hardware.json; hardware_patch={"shared_banks": 1}
+- Verify: `PYTHONPATH=. .venv/bin/python project/campaigns/d1-sh/refine.py sh1bank__d1 --case M2_D1 --out-root /home/jovyan/projects/SLAI-infra-course-hw1/project/campaigns/structural/p1-pair-r1 --base /home/jovyan/projects/SLAI-infra-course-hw1/project/campaigns/d1-sh/layer_rf_tc_noc512/recipe.json --hardware /home/jovyan/projects/SLAI-infra-course-hw1/project/campaigns/d1-sh/layer_rf_tc_noc512/hardware.json --patch '{}' --hardware-patch '{"shared_banks": 1}' --compiler /home/jovyan/projects/SLAI-infra-course-hw1/project/campaigns/structural/p1-pair-r1/compiler.py`; reports `/home/jovyan/projects/SLAI-infra-course-hw1/project/campaigns/structural/p1-pair-r1/sh1bank__d1`. Development checks only; full frozen race validation still required.
+- Result: M2_D1=74511; area=22.67745700352; peak W=10.76643965708452; error=None.
+- Decision: screen only, no incumbent promotion; compare before full frozen validation.
+
+## 2026-09-29 19:46 UTC — M1_P1 screen dma2
+- Change: base=/home/jovyan/projects/SLAI-infra-course-hw1/project/campaigns/structural/p1_paired_w1_step_rf_noc512/recipe.json; patch={}; hardware=/home/jovyan/projects/SLAI-infra-course-hw1/project/campaigns/structural/p1_paired_w1_step_rf_noc512/hardware.json; hardware_patch={"dma_engines": 2}
+- Verify: `PYTHONPATH=. .venv/bin/python project/campaigns/d1-sh/refine.py dma2 --case M1_P1 --out-root /home/jovyan/projects/SLAI-infra-course-hw1/project/campaigns/structural/p1-pair-r1 --base /home/jovyan/projects/SLAI-infra-course-hw1/project/campaigns/structural/p1_paired_w1_step_rf_noc512/recipe.json --hardware /home/jovyan/projects/SLAI-infra-course-hw1/project/campaigns/structural/p1_paired_w1_step_rf_noc512/hardware.json --patch '{}' --hardware-patch '{"dma_engines": 2}' --compiler /home/jovyan/projects/SLAI-infra-course-hw1/project/campaigns/structural/p1-pair-r1/compiler.py`; reports `/home/jovyan/projects/SLAI-infra-course-hw1/project/campaigns/structural/p1-pair-r1/dma2`. Development checks only; full frozen race validation still required.
+- Result: M1_P1=593051; area=21.941457003520004; peak W=10.974517001090716; error=None.
+- Decision: screen only, no incumbent promotion; compare before full frozen validation.
+
+## 2026-09-29 19:47 UTC — M2_D1 screen dma2__d1
+- Change: base=/home/jovyan/projects/SLAI-infra-course-hw1/project/campaigns/d1-sh/layer_rf_tc_noc512/recipe.json; patch={}; hardware=/home/jovyan/projects/SLAI-infra-course-hw1/project/campaigns/d1-sh/layer_rf_tc_noc512/hardware.json; hardware_patch={"dma_engines": 2}
+- Verify: `PYTHONPATH=. .venv/bin/python project/campaigns/d1-sh/refine.py dma2__d1 --case M2_D1 --out-root /home/jovyan/projects/SLAI-infra-course-hw1/project/campaigns/structural/p1-pair-r1 --base /home/jovyan/projects/SLAI-infra-course-hw1/project/campaigns/d1-sh/layer_rf_tc_noc512/recipe.json --hardware /home/jovyan/projects/SLAI-infra-course-hw1/project/campaigns/d1-sh/layer_rf_tc_noc512/hardware.json --patch '{}' --hardware-patch '{"dma_engines": 2}' --compiler /home/jovyan/projects/SLAI-infra-course-hw1/project/campaigns/structural/p1-pair-r1/compiler.py`; reports `/home/jovyan/projects/SLAI-infra-course-hw1/project/campaigns/structural/p1-pair-r1/dma2__d1`. Development checks only; full frozen race validation still required.
+- Result: M2_D1=59262; area=21.941457003520004; peak W=10.53076276108713; error=None.
+- Decision: screen only, no incumbent promotion; compare before full frozen validation.
+
+## 2026-09-29 19:52 UTC — M1_P1 screen no_multicast
+- Change: base=/home/jovyan/projects/SLAI-infra-course-hw1/project/campaigns/structural/p1_paired_w1_step_rf_noc512/recipe.json; patch={}; hardware=/home/jovyan/projects/SLAI-infra-course-hw1/project/campaigns/structural/p1_paired_w1_step_rf_noc512/hardware.json; hardware_patch={"multicast": false}
+- Verify: `PYTHONPATH=. .venv/bin/python project/campaigns/d1-sh/refine.py no_multicast --case M1_P1 --out-root /home/jovyan/projects/SLAI-infra-course-hw1/project/campaigns/structural/p1-pair-r1 --base /home/jovyan/projects/SLAI-infra-course-hw1/project/campaigns/structural/p1_paired_w1_step_rf_noc512/recipe.json --hardware /home/jovyan/projects/SLAI-infra-course-hw1/project/campaigns/structural/p1_paired_w1_step_rf_noc512/hardware.json --patch '{}' --hardware-patch '{"multicast": false}' --compiler /home/jovyan/projects/SLAI-infra-course-hw1/project/campaigns/structural/p1-pair-r1/compiler.py`; reports `/home/jovyan/projects/SLAI-infra-course-hw1/project/campaigns/structural/p1-pair-r1/no_multicast`. Development checks only; full frozen race validation still required.
+- Result: M1_P1=624407; area=22.42145700352; peak W=10.66612360358555; error=None.
+- Decision: screen only, no incumbent promotion; compare before full frozen validation.
+
+## 2026-09-29 19:53 UTC — M2_D1 screen no_multicast__d1
+- Change: base=/home/jovyan/projects/SLAI-infra-course-hw1/project/campaigns/d1-sh/layer_rf_tc_noc512/recipe.json; patch={}; hardware=/home/jovyan/projects/SLAI-infra-course-hw1/project/campaigns/d1-sh/layer_rf_tc_noc512/hardware.json; hardware_patch={"multicast": false}
+- Verify: `PYTHONPATH=. .venv/bin/python project/campaigns/d1-sh/refine.py no_multicast__d1 --case M2_D1 --out-root /home/jovyan/projects/SLAI-infra-course-hw1/project/campaigns/structural/p1-pair-r1 --base /home/jovyan/projects/SLAI-infra-course-hw1/project/campaigns/d1-sh/layer_rf_tc_noc512/recipe.json --hardware /home/jovyan/projects/SLAI-infra-course-hw1/project/campaigns/d1-sh/layer_rf_tc_noc512/hardware.json --patch '{}' --hardware-patch '{"multicast": false}' --compiler /home/jovyan/projects/SLAI-infra-course-hw1/project/campaigns/structural/p1-pair-r1/compiler.py`; reports `/home/jovyan/projects/SLAI-infra-course-hw1/project/campaigns/structural/p1-pair-r1/no_multicast__d1`. Development checks only; full frozen race validation still required.
+- Result: M2_D1=72361; area=22.42145700352; peak W=10.53654525710235; error=None.
+- Decision: screen only, no incumbent promotion; compare before full frozen validation.
+
+## 2026-09-29 20:01 UTC — M1_P1 screen sm_noc64
+- Change: base=/home/jovyan/projects/SLAI-infra-course-hw1/project/campaigns/structural/p1_paired_w1_step_rf_noc512/recipe.json; patch={}; hardware=/home/jovyan/projects/SLAI-infra-course-hw1/project/campaigns/structural/p1_paired_w1_step_rf_noc512/hardware.json; hardware_patch={"sm_noc_bytes_per_cycle": 64}
+- Verify: `PYTHONPATH=. .venv/bin/python project/campaigns/d1-sh/refine.py sm_noc64 --case M1_P1 --out-root /home/jovyan/projects/SLAI-infra-course-hw1/project/campaigns/structural/p1-pair-r1 --base /home/jovyan/projects/SLAI-infra-course-hw1/project/campaigns/structural/p1_paired_w1_step_rf_noc512/recipe.json --hardware /home/jovyan/projects/SLAI-infra-course-hw1/project/campaigns/structural/p1_paired_w1_step_rf_noc512/hardware.json --patch '{}' --hardware-patch '{"sm_noc_bytes_per_cycle": 64}' --compiler /home/jovyan/projects/SLAI-infra-course-hw1/project/campaigns/structural/p1-pair-r1/compiler.py`; reports `/home/jovyan/projects/SLAI-infra-course-hw1/project/campaigns/structural/p1-pair-r1/sm_noc64`. Development checks only; full frozen race validation still required.
+- Result: M1_P1=546331; area=22.856657003520002; peak W=11.186841713090251; error=None.
+- Decision: screen only, no incumbent promotion; compare before full frozen validation.
+
+## 2026-09-29 20:02 UTC — M2_D1 screen sm_noc64__d1
+- Change: base=/home/jovyan/projects/SLAI-infra-course-hw1/project/campaigns/d1-sh/layer_rf_tc_noc512/recipe.json; patch={}; hardware=/home/jovyan/projects/SLAI-infra-course-hw1/project/campaigns/d1-sh/layer_rf_tc_noc512/hardware.json; hardware_patch={"sm_noc_bytes_per_cycle": 64}
+- Verify: `PYTHONPATH=. .venv/bin/python project/campaigns/d1-sh/refine.py sm_noc64__d1 --case M2_D1 --out-root /home/jovyan/projects/SLAI-infra-course-hw1/project/campaigns/structural/p1-pair-r1 --base /home/jovyan/projects/SLAI-infra-course-hw1/project/campaigns/d1-sh/layer_rf_tc_noc512/recipe.json --hardware /home/jovyan/projects/SLAI-infra-course-hw1/project/campaigns/d1-sh/layer_rf_tc_noc512/hardware.json --patch '{}' --hardware-patch '{"sm_noc_bytes_per_cycle": 64}' --compiler /home/jovyan/projects/SLAI-infra-course-hw1/project/campaigns/structural/p1-pair-r1/compiler.py`; reports `/home/jovyan/projects/SLAI-infra-course-hw1/project/campaigns/structural/p1-pair-r1/sm_noc64__d1`. Development checks only; full frozen race validation still required.
+- Result: M2_D1=58978; area=22.856657003520002; peak W=10.77091965708452; error=None.
+- Decision: screen only, no incumbent promotion; compare before full frozen validation.
+
+## 2026-09-29 20:07 UTC — Frozen D1 verification sh8_2r_cache4__d1
+- Change: none; verify screened variant using unmodified check_case and estimate_case.
+- Verify: `PYTHONPATH=. .venv/bin/python project/campaigns/d1-sh/verify.py /home/jovyan/projects/SLAI-infra-course-hw1/project/campaigns/structural/p1-pair-r1/sh8_2r_cache4__d1` -> `/home/jovyan/projects/SLAI-infra-course-hw1/project/campaigns/structural/p1-pair-r1/sh8_2r_cache4__d1/frozen-verification.json`.
+- Result: check seeds=[7, 19]; timing completed=True.
+- Decision: D1 evidence only; joint grade required before promotion.
+
+## 2026-09-29 20:13 UTC — Frozen D1 verification sh8__d1
+- Change: none; verify screened variant using unmodified check_case and estimate_case.
+- Verify: `PYTHONPATH=. .venv/bin/python project/campaigns/d1-sh/verify.py /home/jovyan/projects/SLAI-infra-course-hw1/project/campaigns/structural/p1-pair-r1/sh8__d1` -> `/home/jovyan/projects/SLAI-infra-course-hw1/project/campaigns/structural/p1-pair-r1/sh8__d1/frozen-verification.json`.
+- Result: check seeds=[7, 19]; timing completed=True.
+- Decision: D1 evidence only; joint grade required before promotion.
+
+## 2026-09-29 20:23 UTC — Joint grade aggressive-r1
+- Change: measured P1/D1 combined with one shared hardware; snapshots `project/campaigns/structural/aggressive-r1/joint-1`.
+- Verify: `PYTHONPATH=. .venv/bin/python project/campaigns/structural/grade_joint.py project/campaigns/structural/aggressive-r1/joint-1` -> `project/campaigns/structural/aggressive-r1/joint-1/grade.json`.
+- Result: status=completed; score=35534.31772478464; eligible=True; cycles={'M1_P1': 560968, 'M2_D1': 56978}.
+- Decision: preserve full grade; registry promotion pending controlled import after writer lock is free.
+
+## 2026-09-30 02:33 UTC — Diagnostic oracle M2_D1 rf
+- Change: process-local resource ablation only; frozen files and submission unchanged.
+- Verify: `PYTHONPATH=. .venv/bin/python project/gap_analysis/oracle.py M2_D1 rf` -> `project/gap_analysis/M2_D1--rf.json`.
+- Result: 56978 -> 40863 cycles; removable=16115; no valid score/power.
+- Decision: analysis evidence only; never promote an oracle as submission.
+
+## 2026-09-30 02:33 UTC — Diagnostic oracle M2_D1 rf_read
+- Change: process-local resource ablation only; frozen files and submission unchanged.
+- Verify: `PYTHONPATH=. .venv/bin/python project/gap_analysis/oracle.py M2_D1 rf_read` -> `project/gap_analysis/M2_D1--rf_read.json`.
+- Result: 56978 -> 50352 cycles; removable=6626; no valid score/power.
+- Decision: analysis evidence only; never promote an oracle as submission.
+
+## 2026-09-30 02:33 UTC — Diagnostic oracle M2_D1 baseline
+- Change: process-local resource ablation only; frozen files and submission unchanged.
+- Verify: `PYTHONPATH=. .venv/bin/python project/gap_analysis/oracle.py M2_D1 baseline` -> `project/gap_analysis/M2_D1--baseline.json`.
+- Result: 56978 -> 56978 cycles; removable=0; no valid score/power.
+- Decision: analysis evidence only; never promote an oracle as submission.
+
+## 2026-09-30 02:33 UTC — Diagnostic oracle M2_D1 rf_write
+- Change: process-local resource ablation only; frozen files and submission unchanged.
+- Verify: `PYTHONPATH=. .venv/bin/python project/gap_analysis/oracle.py M2_D1 rf_write` -> `project/gap_analysis/M2_D1--rf_write.json`.
+- Result: 56978 -> 46911 cycles; removable=10067; no valid score/power.
+- Decision: analysis evidence only; never promote an oracle as submission.
+
+## 2026-09-30 02:33 UTC — Diagnostic oracle M2_D1 hbm
+- Change: process-local resource ablation only; frozen files and submission unchanged.
+- Verify: `PYTHONPATH=. .venv/bin/python project/gap_analysis/oracle.py M2_D1 hbm` -> `project/gap_analysis/M2_D1--hbm.json`.
+- Result: 56978 -> 54640 cycles; removable=2338; no valid score/power.
+- Decision: analysis evidence only; never promote an oracle as submission.
+
+## 2026-09-30 02:33 UTC — Diagnostic oracle M2_D1 hbm+cache
+- Change: process-local resource ablation only; frozen files and submission unchanged.
+- Verify: `PYTHONPATH=. .venv/bin/python project/gap_analysis/oracle.py M2_D1 hbm+cache` -> `project/gap_analysis/M2_D1--hbm+cache.json`.
+- Result: 56978 -> 43492 cycles; removable=13486; no valid score/power.
+- Decision: analysis evidence only; never promote an oracle as submission.
+
+## 2026-09-30 02:33 UTC — Diagnostic oracle M2_D1 cache
+- Change: process-local resource ablation only; frozen files and submission unchanged.
+- Verify: `PYTHONPATH=. .venv/bin/python project/gap_analysis/oracle.py M2_D1 cache` -> `project/gap_analysis/M2_D1--cache.json`.
+- Result: 56978 -> 54799 cycles; removable=2179; no valid score/power.
+- Decision: analysis evidence only; never promote an oracle as submission.
+
+## 2026-09-30 02:34 UTC — Diagnostic oracle M2_D1 tc
+- Change: process-local resource ablation only; frozen files and submission unchanged.
+- Verify: `PYTHONPATH=. .venv/bin/python project/gap_analysis/oracle.py M2_D1 tc` -> `project/gap_analysis/M2_D1--tc.json`.
+- Result: 56978 -> 53578 cycles; removable=3400; no valid score/power.
+- Decision: analysis evidence only; never promote an oracle as submission.
+
+## 2026-09-30 02:34 UTC — Diagnostic oracle M2_D1 vec
+- Change: process-local resource ablation only; frozen files and submission unchanged.
+- Verify: `PYTHONPATH=. .venv/bin/python project/gap_analysis/oracle.py M2_D1 vec` -> `project/gap_analysis/M2_D1--vec.json`.
+- Result: 56978 -> 54218 cycles; removable=2760; no valid score/power.
+- Decision: analysis evidence only; never promote an oracle as submission.
+
+## 2026-09-30 02:34 UTC — Diagnostic oracle M2_D1 reduce
+- Change: process-local resource ablation only; frozen files and submission unchanged.
+- Verify: `PYTHONPATH=. .venv/bin/python project/gap_analysis/oracle.py M2_D1 reduce` -> `project/gap_analysis/M2_D1--reduce.json`.
+- Result: 56978 -> 55874 cycles; removable=1104; no valid score/power.
+- Decision: analysis evidence only; never promote an oracle as submission.
+
+## 2026-09-30 02:34 UTC — Diagnostic oracle M2_D1 sfu
+- Change: process-local resource ablation only; frozen files and submission unchanged.
+- Verify: `PYTHONPATH=. .venv/bin/python project/gap_analysis/oracle.py M2_D1 sfu` -> `project/gap_analysis/M2_D1--sfu.json`.
+- Result: 56978 -> 56306 cycles; removable=672; no valid score/power.
+- Decision: analysis evidence only; never promote an oracle as submission.
+
+## 2026-09-30 02:34 UTC — Diagnostic oracle M2_D1 vec+sfu+reduce
+- Change: process-local resource ablation only; frozen files and submission unchanged.
+- Verify: `PYTHONPATH=. .venv/bin/python project/gap_analysis/oracle.py M2_D1 vec+sfu+reduce` -> `project/gap_analysis/M2_D1--vec+sfu+reduce.json`.
+- Result: 56978 -> 52490 cycles; removable=4488; no valid score/power.
+- Decision: analysis evidence only; never promote an oracle as submission.
+
+## 2026-09-30 02:38 UTC — Diagnostic oracle M2_D1 noc
+- Change: process-local resource ablation only; frozen files and submission unchanged.
+- Verify: `PYTHONPATH=. .venv/bin/python project/gap_analysis/oracle.py M2_D1 noc` -> `project/gap_analysis/M2_D1--noc.json`.
+- Result: 56978 -> 56009 cycles; removable=969; no valid score/power.
+- Decision: analysis evidence only; never promote an oracle as submission.
+
+## 2026-09-30 02:38 UTC — Diagnostic oracle M2_D1 shared
+- Change: process-local resource ablation only; frozen files and submission unchanged.
+- Verify: `PYTHONPATH=. .venv/bin/python project/gap_analysis/oracle.py M2_D1 shared` -> `project/gap_analysis/M2_D1--shared.json`.
+- Result: 56978 -> 56466 cycles; removable=512; no valid score/power.
+- Decision: analysis evidence only; never promote an oracle as submission.
+
+## 2026-09-30 02:40 UTC — Diagnostic oracle M2_D1 dma
+- Change: process-local resource ablation only; frozen files and submission unchanged.
+- Verify: `PYTHONPATH=. .venv/bin/python project/gap_analysis/oracle.py M2_D1 dma` -> `project/gap_analysis/M2_D1--dma.json`.
+- Result: 56978 -> 66393 cycles; removable=-9415; no valid score/power.
+- Decision: analysis evidence only; never promote an oracle as submission.
+
+## 2026-09-30 02:40 UTC — Diagnostic oracle M2_D1 rf+shared+dma+noc+hbm+cache
+- Change: process-local resource ablation only; frozen files and submission unchanged.
+- Verify: `PYTHONPATH=. .venv/bin/python project/gap_analysis/oracle.py M2_D1 rf+shared+dma+noc+hbm+cache` -> `project/gap_analysis/M2_D1--rf+shared+dma+noc+hbm+cache.json`.
+- Result: 56978 -> 16076 cycles; removable=40902; no valid score/power.
+- Decision: analysis evidence only; never promote an oracle as submission.
+
+## 2026-09-30 02:41 UTC — Diagnostic oracle M2_D1 rf+shared+dma+noc+hbm+cache+tc+vec+sfu+reduce
+- Change: process-local resource ablation only; frozen files and submission unchanged.
+- Verify: `PYTHONPATH=. .venv/bin/python project/gap_analysis/oracle.py M2_D1 rf+shared+dma+noc+hbm+cache+tc+vec+sfu+reduce` -> `project/gap_analysis/M2_D1--rf+shared+dma+noc+hbm+cache+tc+vec+sfu+reduce.json`.
+- Result: 56978 -> 2204 cycles; removable=54774; no valid score/power.
+- Decision: analysis evidence only; never promote an oracle as submission.
+
+## 2026-09-30 02:43 UTC — Diagnostic oracle M2_D1 resident_warm_weights
+- Change: process-local resource ablation only; frozen files and submission unchanged.
+- Verify: `PYTHONPATH=. .venv/bin/python project/gap_analysis/oracle.py M2_D1 resident_warm_weights` -> `project/gap_analysis/M2_D1--resident_warm_weights.json`.
+- Result: 56978 -> 43097 cycles; removable=13881; no valid score/power.
+- Decision: analysis evidence only; never promote an oracle as submission.
+
+## 2026-09-30 02:43 UTC — Diagnostic oracle M2_D1 resident_activations
+- Change: process-local resource ablation only; frozen files and submission unchanged.
+- Verify: `PYTHONPATH=. .venv/bin/python project/gap_analysis/oracle.py M2_D1 resident_activations` -> `project/gap_analysis/M2_D1--resident_activations.json`.
+- Result: 56978 -> 46126 cycles; removable=10852; no valid score/power.
+- Decision: analysis evidence only; never promote an oracle as submission.
+
+## 2026-09-30 02:43 UTC — Diagnostic oracle M2_D1 resident_all
+- Change: process-local resource ablation only; frozen files and submission unchanged.
+- Verify: `PYTHONPATH=. .venv/bin/python project/gap_analysis/oracle.py M2_D1 resident_all` -> `project/gap_analysis/M2_D1--resident_all.json`.
+- Result: 56978 -> 25020 cycles; removable=31958; no valid score/power.
+- Decision: analysis evidence only; never promote an oracle as submission.
+
+## 2026-09-30 02:43 UTC — Diagnostic oracle M2_D1 resident_kv
+- Change: process-local resource ablation only; frozen files and submission unchanged.
+- Verify: `PYTHONPATH=. .venv/bin/python project/gap_analysis/oracle.py M2_D1 resident_kv` -> `project/gap_analysis/M2_D1--resident_kv.json`.
+- Result: 56978 -> 52274 cycles; removable=4704; no valid score/power.
+- Decision: analysis evidence only; never promote an oracle as submission.
+
+## 2026-09-30 02:43 UTC — Diagnostic oracle M2_D1 resident_local_weights
+- Change: process-local resource ablation only; frozen files and submission unchanged.
+- Verify: `PYTHONPATH=. .venv/bin/python project/gap_analysis/oracle.py M2_D1 resident_local_weights` -> `project/gap_analysis/M2_D1--resident_local_weights.json`.
+- Result: 56978 -> 54604 cycles; removable=2374; no valid score/power.
+- Decision: analysis evidence only; never promote an oracle as submission.
+
+## 2026-09-30 02:44 UTC — Diagnostic oracle M2_D1 rf+shared+dma_unlimited+noc+hbm+cache+tc+vec+sfu+reduce
+- Change: process-local resource ablation only; frozen files and submission unchanged.
+- Verify: `PYTHONPATH=. .venv/bin/python project/gap_analysis/oracle.py M2_D1 rf+shared+dma_unlimited+noc+hbm+cache+tc+vec+sfu+reduce` -> `project/gap_analysis/M2_D1--rf+shared+dma_unlimited+noc+hbm+cache+tc+vec+sfu+reduce.json`.
+- Result: 56978 -> 2204 cycles; removable=54774; no valid score/power.
+- Decision: analysis evidence only; never promote an oracle as submission.
+
+## 2026-09-30 02:44 UTC — Diagnostic oracle M2_D1 rf+shared+dma_unlimited+noc+hbm+cache
+- Change: process-local resource ablation only; frozen files and submission unchanged.
+- Verify: `PYTHONPATH=. .venv/bin/python project/gap_analysis/oracle.py M2_D1 rf+shared+dma_unlimited+noc+hbm+cache` -> `project/gap_analysis/M2_D1--rf+shared+dma_unlimited+noc+hbm+cache.json`.
+- Result: 56978 -> 16076 cycles; removable=40902; no valid score/power.
+- Decision: analysis evidence only; never promote an oracle as submission.
+
+## 2026-09-30 02:45 UTC — Diagnostic oracle M2_D1 dma_unlimited
+- Change: process-local resource ablation only; frozen files and submission unchanged.
+- Verify: `PYTHONPATH=. .venv/bin/python project/gap_analysis/oracle.py M2_D1 dma_unlimited` -> `project/gap_analysis/M2_D1--dma_unlimited.json`.
+- Result: 56978 -> 66393 cycles; removable=-9415; no valid score/power.
+- Decision: analysis evidence only; never promote an oracle as submission.
+
+## 2026-09-30 02:45 UTC — Diagnostic oracle M2_D1 resident_warm_weights+activations
+- Change: process-local resource ablation only; frozen files and submission unchanged.
+- Verify: `PYTHONPATH=. .venv/bin/python project/gap_analysis/oracle.py M2_D1 resident_warm_weights+activations` -> `project/gap_analysis/M2_D1--resident_warm_weights+activations.json`.
+- Result: 56978 -> 31868 cycles; removable=25110; no valid score/power.
+- Decision: analysis evidence only; never promote an oracle as submission.
+
+## 2026-09-30 02:45 UTC — Diagnostic oracle M2_D1 resident_local_weights+activations+kv
+- Change: process-local resource ablation only; frozen files and submission unchanged.
+- Verify: `PYTHONPATH=. .venv/bin/python project/gap_analysis/oracle.py M2_D1 resident_local_weights+activations+kv` -> `project/gap_analysis/M2_D1--resident_local_weights+activations+kv.json`.
+- Result: 56978 -> 39312 cycles; removable=17666; no valid score/power.
+- Decision: analysis evidence only; never promote an oracle as submission.
+
+## 2026-09-30 02:45 UTC — Diagnostic oracle M2_D1 rf+hbm+cache
+- Change: process-local resource ablation only; frozen files and submission unchanged.
+- Verify: `PYTHONPATH=. .venv/bin/python project/gap_analysis/oracle.py M2_D1 rf+hbm+cache` -> `project/gap_analysis/M2_D1--rf+hbm+cache.json`.
+- Result: 56978 -> 26340 cycles; removable=30638; no valid score/power.
+- Decision: analysis evidence only; never promote an oracle as submission.
+
+## 2026-09-30 02:45 UTC — Diagnostic oracle M2_D1 rf+tc
+- Change: process-local resource ablation only; frozen files and submission unchanged.
+- Verify: `PYTHONPATH=. .venv/bin/python project/gap_analysis/oracle.py M2_D1 rf+tc` -> `project/gap_analysis/M2_D1--rf+tc.json`.
+- Result: 56978 -> 33425 cycles; removable=23553; no valid score/power.
+- Decision: analysis evidence only; never promote an oracle as submission.
+
+## 2026-09-30 02:45 UTC — Diagnostic oracle M2_D1 rf+hbm+cache+tc+vec+sfu+reduce
+- Change: process-local resource ablation only; frozen files and submission unchanged.
+- Verify: `PYTHONPATH=. .venv/bin/python project/gap_analysis/oracle.py M2_D1 rf+hbm+cache+tc+vec+sfu+reduce` -> `project/gap_analysis/M2_D1--rf+hbm+cache+tc+vec+sfu+reduce.json`.
+- Result: 56978 -> 14312 cycles; removable=42666; no valid score/power.
+- Decision: analysis evidence only; never promote an oracle as submission.
+
+## 2026-09-30 02:45 UTC — Diagnostic oracle M2_D1 rf+vec+sfu+reduce
+- Change: process-local resource ablation only; frozen files and submission unchanged.
+- Verify: `PYTHONPATH=. .venv/bin/python project/gap_analysis/oracle.py M2_D1 rf+vec+sfu+reduce` -> `project/gap_analysis/M2_D1--rf+vec+sfu+reduce.json`.
+- Result: 56978 -> 36605 cycles; removable=20373; no valid score/power.
+- Decision: analysis evidence only; never promote an oracle as submission.
+
+## 2026-09-30 02:48 UTC — Diagnostic oracle M1_P1 resident_all
+- Change: process-local resource ablation only; frozen files and submission unchanged.
+- Verify: `PYTHONPATH=. .venv/bin/python project/gap_analysis/oracle.py M1_P1 resident_all` -> `project/gap_analysis/M1_P1--resident_all.json`.
+- Result: 556591 -> 367959 cycles; removable=188632; no valid score/power.
+- Decision: analysis evidence only; never promote an oracle as submission.
+
+## 2026-09-30 02:56 UTC — Diagnostic oracle M1_P1 resident_activations
+- Change: process-local resource ablation only; frozen files and submission unchanged.
+- Verify: `PYTHONPATH=. .venv/bin/python project/gap_analysis/oracle.py M1_P1 resident_activations` -> `project/gap_analysis/M1_P1--resident_activations.json`.
+- Result: 556591 -> 481139 cycles; removable=75452; no valid score/power.
+- Decision: analysis evidence only; never promote an oracle as submission.
+
+## 2026-09-30 02:58 UTC — Diagnostic oracle M1_P1 resident_weights
+- Change: process-local resource ablation only; frozen files and submission unchanged.
+- Verify: `PYTHONPATH=. .venv/bin/python project/gap_analysis/oracle.py M1_P1 resident_weights` -> `project/gap_analysis/M1_P1--resident_weights.json`.
+- Result: 556591 -> 419621 cycles; removable=136970; no valid score/power.
+- Decision: analysis evidence only; never promote an oracle as submission.
+
+## 2026-09-30 02:59 UTC — Diagnostic oracle M1_P1 rf
+- Change: process-local resource ablation only; frozen files and submission unchanged.
+- Verify: `PYTHONPATH=. .venv/bin/python project/gap_analysis/oracle.py M1_P1 rf` -> `project/gap_analysis/M1_P1--rf.json`.
+- Result: 556591 -> 494418 cycles; removable=62173; no valid score/power.
+- Decision: analysis evidence only; never promote an oracle as submission.
+
+## 2026-09-30 03:01 UTC — Diagnostic oracle M1_P1 rf_write
+- Change: process-local resource ablation only; frozen files and submission unchanged.
+- Verify: `PYTHONPATH=. .venv/bin/python project/gap_analysis/oracle.py M1_P1 rf_write` -> `project/gap_analysis/M1_P1--rf_write.json`.
+- Result: 556591 -> 537297 cycles; removable=19294; no valid score/power.
+- Decision: analysis evidence only; never promote an oracle as submission.
+
+## 2026-09-30 03:02 UTC — Diagnostic oracle M1_P1 baseline
+- Change: process-local resource ablation only; frozen files and submission unchanged.
+- Verify: `PYTHONPATH=. .venv/bin/python project/gap_analysis/oracle.py M1_P1 baseline` -> `project/gap_analysis/M1_P1--baseline.json`.
+- Result: 556591 -> 556591 cycles; removable=0; no valid score/power.
+- Decision: analysis evidence only; never promote an oracle as submission.
+
+## 2026-09-30 03:02 UTC — Diagnostic oracle M1_P1 rf_read
+- Change: process-local resource ablation only; frozen files and submission unchanged.
+- Verify: `PYTHONPATH=. .venv/bin/python project/gap_analysis/oracle.py M1_P1 rf_read` -> `project/gap_analysis/M1_P1--rf_read.json`.
+- Result: 556591 -> 548485 cycles; removable=8106; no valid score/power.
+- Decision: analysis evidence only; never promote an oracle as submission.
+
+## 2026-09-30 03:02 UTC — Diagnostic oracle M1_P1 rf+shared+dma+noc+hbm+cache+tc+vec+sfu+reduce
+- Change: process-local resource ablation only; frozen files and submission unchanged.
+- Verify: `PYTHONPATH=. .venv/bin/python project/gap_analysis/oracle.py M1_P1 rf+shared+dma+noc+hbm+cache+tc+vec+sfu+reduce` -> `project/gap_analysis/M1_P1--rf+shared+dma+noc+hbm+cache+tc+vec+sfu+reduce.json`.
+- Result: 556591 -> 4998 cycles; removable=551593; no valid score/power.
+- Decision: analysis evidence only; never promote an oracle as submission.
+
+## 2026-09-30 03:03 UTC — Diagnostic oracle M1_P1 rf+shared+dma+noc+hbm+cache
+- Change: process-local resource ablation only; frozen files and submission unchanged.
+- Verify: `PYTHONPATH=. .venv/bin/python project/gap_analysis/oracle.py M1_P1 rf+shared+dma+noc+hbm+cache` -> `project/gap_analysis/M1_P1--rf+shared+dma+noc+hbm+cache.json`.
+- Result: 556591 -> 207510 cycles; removable=349081; no valid score/power.
+- Decision: analysis evidence only; never promote an oracle as submission.
+
+## 2026-09-30 03:03 UTC — Diagnostic oracle M2_D1 resident_all__wide
+- Change: process-local resource ablation only; frozen files and submission unchanged.
+- Verify: `PYTHONPATH=. .venv/bin/python project/gap_analysis/oracle.py M2_D1 resident_all__wide` -> `project/gap_analysis/M2_D1--resident_all__wide.json`.
+- Result: 56978 -> 37884 cycles; removable=19094; no valid score/power.
+- Decision: analysis evidence only; never promote an oracle as submission.
+
+## 2026-09-30 03:04 UTC — Diagnostic oracle M1_P1 hbm+cache
+- Change: process-local resource ablation only; frozen files and submission unchanged.
+- Verify: `PYTHONPATH=. .venv/bin/python project/gap_analysis/oracle.py M1_P1 hbm+cache` -> `project/gap_analysis/M1_P1--hbm+cache.json`.
+- Result: 556591 -> 405945 cycles; removable=150646; no valid score/power.
+- Decision: analysis evidence only; never promote an oracle as submission.
+
+## 2026-09-30 03:04 UTC — Diagnostic oracle M1_P1 resident_all__wide
+- Change: process-local resource ablation only; frozen files and submission unchanged.
+- Verify: `PYTHONPATH=. .venv/bin/python project/gap_analysis/oracle.py M1_P1 resident_all__wide` -> `project/gap_analysis/M1_P1--resident_all__wide.json`.
+- Result: 556591 -> 286170 cycles; removable=270421; no valid score/power.
+- Decision: analysis evidence only; never promote an oracle as submission.
+
+## 2026-09-30 03:06 UTC — Diagnostic oracle M1_P1 cache
+- Change: process-local resource ablation only; frozen files and submission unchanged.
+- Verify: `PYTHONPATH=. .venv/bin/python project/gap_analysis/oracle.py M1_P1 cache` -> `project/gap_analysis/M1_P1--cache.json`.
+- Result: 556591 -> 494691 cycles; removable=61900; no valid score/power.
+- Decision: analysis evidence only; never promote an oracle as submission.
+
+## 2026-09-30 03:08 UTC — Diagnostic oracle M1_P1 dma
+- Change: process-local resource ablation only; frozen files and submission unchanged.
+- Verify: `PYTHONPATH=. .venv/bin/python project/gap_analysis/oracle.py M1_P1 dma` -> `project/gap_analysis/M1_P1--dma.json`.
+- Result: 556591 -> 597888 cycles; removable=-41297; no valid score/power.
+- Decision: analysis evidence only; never promote an oracle as submission.
+
+## 2026-09-30 03:09 UTC — Diagnostic oracle M2_D1 dag_no_barriers__resident_local
+- Change: process-local resource ablation only; frozen files and submission unchanged.
+- Verify: `PYTHONPATH=. .venv/bin/python project/gap_analysis/oracle.py M2_D1 dag_no_barriers__resident_local` -> `project/gap_analysis/M2_D1--dag_no_barriers__resident_local.json`.
+- Result: 56978 -> 44563 cycles; removable=12415; no valid score/power.
+- Decision: analysis evidence only; never promote an oracle as submission.
+
+## 2026-09-30 03:09 UTC — Diagnostic oracle M2_D1 dag_no_barriers
+- Change: process-local resource ablation only; frozen files and submission unchanged.
+- Verify: `PYTHONPATH=. .venv/bin/python project/gap_analysis/oracle.py M2_D1 dag_no_barriers` -> `project/gap_analysis/M2_D1--dag_no_barriers.json`.
+- Result: 56978 -> 62428 cycles; removable=-5450; no valid score/power.
+- Decision: analysis evidence only; never promote an oracle as submission.
+
+## 2026-09-30 03:10 UTC — Diagnostic oracle M1_P1 reduce
+- Change: process-local resource ablation only; frozen files and submission unchanged.
+- Verify: `PYTHONPATH=. .venv/bin/python project/gap_analysis/oracle.py M1_P1 reduce` -> `project/gap_analysis/M1_P1--reduce.json`.
+- Result: 556591 -> 531871 cycles; removable=24720; no valid score/power.
+- Decision: analysis evidence only; never promote an oracle as submission.
+
+## 2026-09-30 03:10 UTC — Diagnostic oracle M1_P1 noc
+- Change: process-local resource ablation only; frozen files and submission unchanged.
+- Verify: `PYTHONPATH=. .venv/bin/python project/gap_analysis/oracle.py M1_P1 noc` -> `project/gap_analysis/M1_P1--noc.json`.
+- Result: 556591 -> 547404 cycles; removable=9187; no valid score/power.
+- Decision: analysis evidence only; never promote an oracle as submission.
+
+## 2026-09-30 03:11 UTC — Diagnostic oracle M1_P1 sfu
+- Change: process-local resource ablation only; frozen files and submission unchanged.
+- Verify: `PYTHONPATH=. .venv/bin/python project/gap_analysis/oracle.py M1_P1 sfu` -> `project/gap_analysis/M1_P1--sfu.json`.
+- Result: 556591 -> 554829 cycles; removable=1762; no valid score/power.
+- Decision: analysis evidence only; never promote an oracle as submission.
+
+## 2026-09-30 03:11 UTC — Diagnostic oracle M1_P1 tc
+- Change: process-local resource ablation only; frozen files and submission unchanged.
+- Verify: `PYTHONPATH=. .venv/bin/python project/gap_analysis/oracle.py M1_P1 tc` -> `project/gap_analysis/M1_P1--tc.json`.
+- Result: 556591 -> 546838 cycles; removable=9753; no valid score/power.
+- Decision: analysis evidence only; never promote an oracle as submission.
+
+## 2026-09-30 03:11 UTC — Diagnostic oracle M1_P1 rf+tc
+- Change: process-local resource ablation only; frozen files and submission unchanged.
+- Verify: `PYTHONPATH=. .venv/bin/python project/gap_analysis/oracle.py M1_P1 rf+tc` -> `project/gap_analysis/M1_P1--rf+tc.json`.
+- Result: 556591 -> 490635 cycles; removable=65956; no valid score/power.
+- Decision: analysis evidence only; never promote an oracle as submission.
+
+## 2026-09-30 03:11 UTC — Diagnostic oracle M1_P1 vec+sfu+reduce
+- Change: process-local resource ablation only; frozen files and submission unchanged.
+- Verify: `PYTHONPATH=. .venv/bin/python project/gap_analysis/oracle.py M1_P1 vec+sfu+reduce` -> `project/gap_analysis/M1_P1--vec+sfu+reduce.json`.
+- Result: 556591 -> 524186 cycles; removable=32405; no valid score/power.
+- Decision: analysis evidence only; never promote an oracle as submission.
+
+## 2026-09-30 03:12 UTC — Diagnostic oracle M1_P1 vec
+- Change: process-local resource ablation only; frozen files and submission unchanged.
+- Verify: `PYTHONPATH=. .venv/bin/python project/gap_analysis/oracle.py M1_P1 vec` -> `project/gap_analysis/M1_P1--vec.json`.
+- Result: 556591 -> 542370 cycles; removable=14221; no valid score/power.
+- Decision: analysis evidence only; never promote an oracle as submission.
+
+## 2026-09-30 03:12 UTC — Diagnostic oracle M1_P1 hbm
+- Change: process-local resource ablation only; frozen files and submission unchanged.
+- Verify: `PYTHONPATH=. .venv/bin/python project/gap_analysis/oracle.py M1_P1 hbm` -> `project/gap_analysis/M1_P1--hbm.json`.
+- Result: 556591 -> 558445 cycles; removable=-1854; no valid score/power.
+- Decision: analysis evidence only; never promote an oracle as submission.
+
+## 2026-09-30 03:12 UTC — Diagnostic oracle M1_P1 shared
+- Change: process-local resource ablation only; frozen files and submission unchanged.
+- Verify: `PYTHONPATH=. .venv/bin/python project/gap_analysis/oracle.py M1_P1 shared` -> `project/gap_analysis/M1_P1--shared.json`.
+- Result: 556591 -> 556591 cycles; removable=0; no valid score/power.
+- Decision: analysis evidence only; never promote an oracle as submission.
+
+## 2026-09-30 03:17 UTC — Diagnostic oracle M1_P1 rf+tc+shared+dma+noc+hbm+cache
+- Change: process-local resource ablation only; frozen files and submission unchanged.
+- Verify: `PYTHONPATH=. .venv/bin/python project/gap_analysis/oracle.py M1_P1 rf+tc+shared+dma+noc+hbm+cache` -> `project/gap_analysis/M1_P1--rf+tc+shared+dma+noc+hbm+cache.json`.
+- Result: 556591 -> 44118 cycles; removable=512473; no valid score/power.
+- Decision: analysis evidence only; never promote an oracle as submission.
+
+## 2026-09-30 03:25 UTC — Diagnostic oracle M1_P1 rf+hbm+cache
+- Change: process-local resource ablation only; frozen files and submission unchanged.
+- Verify: `PYTHONPATH=. .venv/bin/python project/gap_analysis/oracle.py M1_P1 rf+hbm+cache` -> `project/gap_analysis/M1_P1--rf+hbm+cache.json`.
+- Result: 556591 -> 237284 cycles; removable=319307; no valid score/power.
+- Decision: analysis evidence only; never promote an oracle as submission.
+
+## 2026-09-30 03:26 UTC — Joint grade paired_late_b
+- Change: measured P1/D1 combined with one shared hardware; snapshots `project/campaigns/structural/p1-pair-r1/paired_late_b/joint`.
+- Verify: `PYTHONPATH=. .venv/bin/python project/campaigns/structural/grade_joint.py project/campaigns/structural/p1-pair-r1/paired_late_b/joint` -> `project/campaigns/structural/p1-pair-r1/paired_late_b/joint/grade.json`.
+- Result: status=completed; score=36115.70251935997; eligible=True; cycles={'M1_P1': 526494, 'M2_D1': 58770}.
+- Decision: preserve full grade; registry promotion pending controlled import after writer lock is free.
+
+## 2026-09-30 03:26 UTC — Joint grade sh8_2r_cache4
+- Change: measured P1/D1 combined with one shared hardware; snapshots `project/campaigns/structural/p1-pair-r1/sh8_2r_cache4/joint`.
+- Verify: `PYTHONPATH=. .venv/bin/python project/campaigns/structural/grade_joint.py project/campaigns/structural/p1-pair-r1/sh8_2r_cache4/joint` -> `project/campaigns/structural/p1-pair-r1/sh8_2r_cache4/joint/grade.json`.
+- Result: status=completed; score=35939.28974242999; eligible=True; cycles={'M1_P1': 548397, 'M2_D1': 56978}.
+- Decision: preserve full grade; registry promotion pending controlled import after writer lock is free.
+
+## 2026-09-30 03:26 UTC — Diagnostic oracle M2_D1 dag_no_barriers_precise__resident_local
+- Change: process-local resource ablation only; frozen files and submission unchanged.
+- Verify: `PYTHONPATH=. .venv/bin/python project/gap_analysis/oracle.py M2_D1 dag_no_barriers_precise__resident_local` -> `project/gap_analysis/M2_D1--dag_no_barriers_precise__resident_local.json`.
+- Result: 56978 -> 44563 cycles; removable=12415; no valid score/power.
+- Decision: analysis evidence only; never promote an oracle as submission.
+
+## 2026-09-30 03:26 UTC — Diagnostic oracle M1_P1 hbm+cache+noc
+- Change: process-local resource ablation only; frozen files and submission unchanged.
+- Verify: `PYTHONPATH=. .venv/bin/python project/gap_analysis/oracle.py M1_P1 hbm+cache+noc` -> `project/gap_analysis/M1_P1--hbm+cache+noc.json`.
+- Result: 556591 -> 395730 cycles; removable=160861; no valid score/power.
+- Decision: analysis evidence only; never promote an oracle as submission.
+
+## 2026-09-30 03:27 UTC — Diagnostic oracle M2_D1 dag_no_barriers_precise
+- Change: process-local resource ablation only; frozen files and submission unchanged.
+- Verify: `PYTHONPATH=. .venv/bin/python project/gap_analysis/oracle.py M2_D1 dag_no_barriers_precise` -> `project/gap_analysis/M2_D1--dag_no_barriers_precise.json`.
+- Result: 56978 -> 62428 cycles; removable=-5450; no valid score/power.
+- Decision: analysis evidence only; never promote an oracle as submission.
+
+## 2026-09-30 03:28 UTC — Oracle gap analysis / DAG audit
+- Change: diagnostic scripts only; pinned joint-0 candidate; no sweep or submission mutation.
+- Verify: baseline oracles and observers reproduce 556591/56978; RF/HBM accounting reconciles exactly; completion-chain lengths conserve both cycles.
+- Result: `project/gap_analysis/REPORT.md`, `summary.json`, per-case DAG/lineage/reservation artifacts. Initial zero-duration calendar / NoC timeline diagnostics failed; fixed in process-local instrumentation and rerun. Observer event-id parsing was corrected and final audits rerun. No failed attempt was scored.
+- Decision: stop after analysis; structural hypotheses and falsification gates documented, no new large search.
+
+## 2026-09-30 03:29 UTC — Oracle gap analysis / DAG audit
+- Change: diagnostic scripts only; pinned joint-0 candidate; no sweep or submission mutation.
+- Verify: baseline oracles and observers reproduce 556591/56978; RF/HBM accounting reconciles exactly; completion-chain lengths conserve both cycles.
+- Result: `project/gap_analysis/REPORT.md`, `summary.json`, per-case DAG/lineage/reservation artifacts. Initial zero-duration calendar / NoC timeline diagnostics failed; fixed in process-local instrumentation and rerun. Observer event-id parsing was corrected and final audits rerun. No failed attempt was scored.
+- Decision: stop after analysis; structural hypotheses and falsification gates documented, no new large search.
+
+## 2026-09-30 15:30:56 — cand-152: Promote frozen-graded paired_late_b joint triple to root: P1 paired W1 kernel (paired_n=[w1], paired_b_prefetch=0) + step a_resident on NoC512/16SM/1TC hardware; D1 layer-RF owners. Byte-identical artifacts.
+- Change: parent=cand-150; Manual promotion of completed joint grade; sources in proposal.json
+- Evidence: project/experiments/cand-152/metrics.json; reports/grade.json; attempts=1
+- Inputs: compiler.py@94da97ef hardware.json@e3ce1318 recipe.json@8713643e
+- Verify: PASS
+- Result: M1_P1=526494 (58.874x), M2_D1=58770 (22.155x); score=36115.703, eligible=True
+  - deltas vs head (cand-150): {'M1_P1': -37282, 'M2_D1': -15410}
+- Decision: KEPT — new incumbent head (score=36115.703)
+
+## 2026-09-30 15:35 UTC — CHECKPOINT: Task 0 closeout before structural rewrite campaign
+- Change: promoted graded paired_late_b joint triple to root as cand-152 via `project/campaigns/structural/promote_paired_late_b.py`; root `hardware.json` (semantic-equal), `project/recipe.json`, `programs/*.asm` now byte-identical to `project/campaigns/structural/p1-pair-r1/paired_late_b/joint/`; `python -m project.compiler` regenerates both programs byte-identically (sha256 verified).
+- Verify: promotion script precondition asserts (compiler equality, program regeneration) -> PASS; registry head=search.best_id=cand-152; `project/experiments/cand-152/` holds inputs/programs/reports/metrics evidence.
+- Result: incumbent score=36115.702519 (P1=526494 58.874x, D1=58770 22.155x), area=23.061mm2, peak power 11.158W/10.776W; prior cand-150 (31065.183) retained unchanged.
+- Decision: checkpoint sealed. Finalizer's waiting state superseded by this manual promotion (user instruction 2026-09-30). Next: structural rewrite campaign Task 1 (persistent dual-batch MLP), Task 2 (D1 persistent layer pipeline), conditional Task 3 (RF-service-aware accumulator DAG). No official-server submission.
+
+## 2026-09-30 16:47:03 — cand-153: Promote frozen-graded paired_late_b joint triple to root: P1 paired W1 kernel (paired_n=[w1], paired_b_prefetch=0) + step a_resident on NoC512/16SM/1TC hardware; D1 layer-RF owners. Byte-identical artifacts.
+- Change: parent=cand-150; Manual promotion of completed joint grade; sources in proposal.json
+- Evidence: project/experiments/cand-153/metrics.json; reports/grade.json; attempts=1
+- Inputs: compiler.py@94da97ef hardware.json@e3ce1318 recipe.json@8713643e
+- Verify: PASS
+- Result: M1_P1=526494 (58.874x), M2_D1=58770 (22.155x); score=36115.703, eligible=True
+  - deltas vs head (cand-152): {'M1_P1': 0, 'M2_D1': 0}
+- Decision: evaluated; retained in Pareto/archives (head preserved)
+
+### cand-153 verdict: duplicate
+- DUPLICATE of cand-152: promote_paired_late_b.py was re-run after context compaction on 2026-09-30 16:47; inputs/programs/grade byte-identical to cand-152. Kept for provenance, not a new result; head remains cand-152.
+
+## 2026-09-30 18:16:04 — cand-154: D1 token-local LN handoff + centred LN fold (beta W built in assembly at step 0, kept in RF) + attention K/V prefetch + b1 fold + chunked A; hardware shared_ports 2R1W. P1 unchanged.
+- Change: parent=cand-152; structural-rewrite Task 2 Stage A/B; frozen D1 check seeds 7/19 pass, frozen D1 estimate 48952
+- Evidence: project/experiments/cand-154/metrics.json; reports/grade.json; attempts=1
+- Command (grade): /home/jovyan/projects/SLAI-infra-course-hw1/.venv/bin/python /home/jovyan/projects/SLAI-infra-course-hw1/challenge.py grade --hardware /home/jovyan/projects/SLAI-infra-course-hw1/project/experiments/cand-154/inputs/hardware.json --program-p1 /home/jovyan/projects/SLAI-infra-course-hw1/project/experiments/cand-154/programs/M1_P1.asm --program-d1 /home/jovyan/projects/SLAI-infra-course-hw1/project/experiments/cand-154/programs/M2_D1.asm --baseline /home/jovyan/projects/SLAI-infra-course-hw1/baseline_manifest.json --seed 7 --report /home/jovyan/projects/SLAI-infra-course-hw1/project/experiments/cand-154/reports/grade.json; elapsed=4704.1; peak MiB=None
+- Inputs: compiler.py@ebeda39d hardware.json@0619510b recipe.json@5dcf9315
+- Verify: PASS elapsed=4704.05s
+- Result: M1_P1=526494 (58.874x), M2_D1=48952 (26.598x); score=39572.063, eligible=True
+  - deltas vs head (cand-152): {'M1_P1': 0, 'M2_D1': -9818}
+- Decision: KEPT — new incumbent head (score=39572.063)
+
+### cand-154 verdict: PROMOTED to root
+- Full frozen joint grade rc=0 score=39572.063052975514 eligible=True cycles={'M1_P1': 526494, 'M2_D1': 48952} elapsed=4704s
+- Root files staged from candidate inputs/programs.
+
+## 2026-09-30 — P1 wavefront family: falsified at microbenchmark
+- Diagnosis (gap_analysis M1_P1 DAG, 556k proxy): 1,163,776 LD line-queries, ~500-775k cross-WG duplicates: rep-8 intra-team A-tiles ~305k, rep-2/rep-3 weights shared pb0<->pb1<->step ~110-160k. Theoretical budget ~60-110k (borderline >=20% gate).
+- Implemented gemm_wavefront (team-lockstep same-cycle A-tile issue -> frozen multicast coalescing); fixed program-order constraint (WAIT may only reference earlier events -> emitted in interleaved wavefront order).
+- MLP microbench (3-layer dual-batch LN2->W1->GELU->W2->residual), same fixture:
+  - current: 253,233 cyc, cache 202,534/373,344, hbm_r 10.93MB
+  - wave (W2 wavefront): 261,877 cyc (-3.4%), cache 163,672/338,976, hbm_r 11.22MB, functional PASS
+  - wave2 (W1 4-pass + W2): 275,337 cyc (-8.7%), cache 125,367/311,072, hbm_r 11.89MB, functional PASS
+- Verdict: multicast coalescing works (queries -9%/-17%) but per-chunk lockstep WAITs serialize MMA issue more than the saved bank slots. Family stopped per gate; primitive removed by user. Evidence: project/campaigns/structural-rewrite/mlp_wave.asm, mlp_wave2.asm, /tmp/mlpw_*.log.
+
+## 2026-10-01 — P1 structural sprint: gjoin / step_sh / wavefront falsifications
+- Experiment (structural sprint): p1_schedule.global_join=1 (16-WG barriers across both prompt teams).
+  Screen (dev-patched estimate, conservative span-overlap, race-check off): cycles=878,500 hbm_r=38.17MB cache=255,210/851,680 vs patched base 533,009 (frozen 526,494). VERDICT: FALSIFIED (-65%). Mechanism confirmed: lockstepping teams puts rep-2 weight queries at identical cycles -> in-flight misses duplicate (no merge in timed_cache) -> hit rate 48%->30%. Team read-timing directly controls weight hit rate.
+- Experiment: p1_schedule.step_sh=['l0w1','l1w1'] shared_bytes=131072 (pre-commit step weights into idle SH): 517,443 (-15.6k vs base). stepsh_order (consumption-order SH fill): 527,017 (-6k). Under 10% gate so far; composing with deeper B pipeline next.
+- Note: patched-estimate baseline = 533,009 vs frozen 526,494 (conservative patch inflates ~1.3%); all screens compared against patched base.
+- Experiment: p1_schedule.team_stagger (pb1 WGs WAIT on pb0 anchor LD at each weight stage -> convert in-flight misses to hits): cycles=556,018 (+4.3% vs base), cache hit rate flat ~48%. VERDICT: FALSIFIED at stage granularity — anchor fires at issue-time not fill-completion, pb1 still lands inside the in-flight window and serializes its own vector work.
+- Experiment: gemm_stages.p1_step.b_bufs=4 (deeper B pipeline in step GEMM, acc->lane10): 531,497 (-0.3%). Negligible alone.
+- Composition stepsh_pipe (step_sh + b_bufs4): 516,243 (-3.1% vs base) — best dev screen so far; still below 10% gate.
+- Experiment: p1_schedule.act_sh=1 (stage ln1/ln2 activation operands into idle 128KiB SH per WG, kill n-tile A re-reads): 528,878 (-0.8%), queries 845k->640k (-24%) but cycles barely moved. KEY FINDING: P1 is NOT cache-bank-service-bound — query removal without latency removal yields ~0. Critical path = raw<-LD dependency chains + dma_slot in-flight cap (4/SM).
+- In flight: hw {cache_mib:4, dma_depth:2} (22.70mm2) and {cache_mib:0, dma_depth:2} — doubles outstanding transfers per SM at the cost of cache capacity; tests whether dma_slot binds.
+- Experiment: hw {cache_mib:0, dma_depth:2}: 663,779 (+24.6%) — cache capacity is essential; hbm_r doubled to 59.7MB.
+- Experiment: hw {cache_mib:4, dma_depth:2} (22.70mm2): 523,478 (-1.8%) — doubling in-flight slots helps modestly.
+- Composition stepsh_pipe_dd2 (step_sh + b_bufs4 + cache4/dd2): 511,178 (-4.0% vs patched base) — best dev screen; roughly additive. Projected frozen P1 ~505k, joint ~40.4k (+2%) — below 10% full-grade gate.
+- Critpath attribution (project/campaigns/structural-rewrite/critpath-p1base.json, 526,494==frozen): critical path = 3,669-instruction serial service chain, gaps=0. service_by_kind: MMA.ACC 278,326 (53%), LD 125,019, ST 59,036, VEC 46,711, SFU 12,450, REDUCE 4,907. by_stage: p_w1 130k, p_w2 84k, sm_ws 77k, p_qkv 73k, p_a 45k. Per-SM RF-read calendar busy 282k ~= chain MMA 278k -> chain is RF-read-service-bound (reads fixed by tc_array only: B-amp=m/pm, A-amp=n/pn).
+- Model decoded: MMA span = rf_read(reads/128B/c) -> tc compute -> rf_write(writes/64B/c), reserved serially; 4x8/kp4 MMA 32x32x32 = 416+130+64=610cyc. 8x16/kp2 span=419 (-31%) area 29.9; 8x16/kp1 span=546 area 24.02; 8x8/kp4 span=482 (-21%) area 29.51.
+- Earlier tc8x8/kp2 516,781 explained: reads -31% but compute/MMA 130->259 = span-neutral (610), hence -2% only. NOT evidence against RF-bound model.
+- Screening: tc8x8k4 (8x8/kp4 + cache4+shared0+dma2/d2+mc0+red0+sfu8+noc256+smnoc64 = 23.20mm2) and tc8x16k1 (8x16/kp1+noc256 = 23.89mm2).
+- Experiment: tc8x16k1 (tc_array 8x16,kp1 + noc256 = 23.89mm2): 516,671 (-2%) — RF reads -46% but chain re-composes around serial LD<->MMA interleave. tc8x8k4 (gutted support hw): 605,319 (+13.6%) — resource cuts starve LD delivery. VERDICT: TC-array upgrades dead under 24mm2 cap.
+- Experiment: step_warm (pre-commit consumption-order cache warming of all step weight slices through scratch RF lanes): 583,179 (+9.4%), hbm_r +6.7MB — consumers duplicated in-flight warm fills (no in-flight miss merge). VERDICT: FALSIFIED; entire cache-timing/dedup direction now conclusively closed (wavefront, gjoin, stagger, act_sh, stepwarm all negative).
+- Experiment: hbm_channels 4->8 (+0.2mm2): 514,232 (-3.5%) — aggregate HBM channel service is on the critical path. peakW 19.62W (tight vs 20W cap).
+- Composition full_stack = stepsh_pipe (step_sh l0w1+l1w1 + b_bufs4) + hw {cache4, dd2, hbm8} = 22.90mm2: **498,010 cycles (-6.6% vs patched base), first sub-500k screen**, peakW 19.95W. D1 under same hw = 48,299 (-1.3%). Frozen functional check running.
+- vec32 probe (vector_lanes 16->32): fails generation — RF lane repacking breaks program views. Not a free hw knob.
+- Experiment: combo_all (actsh + stepsh + pipe + dd2c4): 519,442 — actsh STAGING LDs cost more than query savings; actsh excluded from stack.
+- New mechanism priv_sh (same-WG res/out row-slab residency in aliased 2048-word SH buffer; removes res/out HBM round trips): helpers + generator wired; screens running under full-stack hw.
+- New structural axis team=16 (32 WGs, 2 co-resident per SM; qkv/attention keep 8 head-owners, wo/w2 stay 8-wide, w1+row stages go 16-wide): hypothesis — sibling tapes interleave different-resource stalls (one's MMAs fill the other's LD waits); per-SM rf_read floor unchanged at ~278k. Screen running.
+- Experiment: team=16 (32 WGs, 2 co-resident/SM; qkv/attention 8 head-owners, wo/w2 8 owners, w1+rows 16-wide): 638,675 (+19.8%) — sibling tapes contend on the same per-SM calendars (rf_read is one shared resource); latency-hiding does not materialize. VERDICT: FALSIFIED.
+- Composition privsh_stepsh (priv_sh aliased res/out SH buffer + step_sh l0w1 + b_bufs4, hw {cache4,dd2,hbm8}): **493,745** — new best dev screen (-4.3k vs full_stack); peakW 19.34W (priv_sh removes HBM traffic -> power headroom improved).
+
+## 2026-10-01 — priv_sh residency + step_sh_at + power constraint discovery
+- Frozen check full_stack (stepsh_pipe+cache4/dd2/hbm8, 22.90mm2): P1 functional PASS, cycles=493,701, peakW=**20.39W -> INELIGIBLE** (>20W). D1 PASS 48,299/18.82W. Dev screen's 19.95W underestimated by ~0.4W. Peak window ~cyc 397k = pre-commit prefetch+GEMM overlap; hbm_byte=150pJ/B dominates window energy.
+- Frozen check privsh_stepsh (priv_sh + l0w1 staging): PASS, 493,640, peakW=**20.50W -> INELIGIBLE**.
+- New mechanism priv_sh (res/out same-WG SH residency in one aliased 2048-word buffer): dev screens — privsh_full 499,953; privsh_stepsh 493,745; privsh192 (shared_kib=192, l0w1+l1w1+l0wo) 489,230; privsh256 (shared_kib=256, all-3-w1+l0wo) **480,826**; privsh256_dd1 481,358.
+- New mechanism step_sh_at (prefetch emitted at layer-1 boundary instead of pre-commit — spreads transfer energy & overlap): privsh256_early = **477,110** (-3.7k vs late-prefetch), dev peakW 19.35.
+- Frozen check privsh256 (pre-commit variant): CRASHED at pipeline_events._issue_transfer assert "DMA slot changed after issue preview" — scheduler fragility when a previewed transfer's begin slides into a busy dma_slice window (long prefetch transfers widen the window). Frozen evaluator unmodified; avoid via timing change (early emit / fewer big transfers).
+- team=16 (2 co-resident WGs/SM): 638,675 (+19.8%) FALSIFIED — sibling tapes contend on shared per-SM calendars; no latency-hiding win.
+- Fallback screened: privsh256_hbm4 = 499,209 dev, peakW 11.16W — legal but loses the hbm8 ~18k.
+- Power diagnosis: hbm_byte=150pJ/B dominates; 20W <=> ~270B/cyc avg in a 1000-cyc window. hbm8 doubles burst rate; prefetch concentrates step-weight HBM energy into the commit window. Mitigations in flight: step_sh_at=1 spread (early emit), hbm4 fallback.
+
+## 2026-10-01 12:43:20 — cand-155: Promote frozen-graded privsh256_hbm4: P1 priv_sh res/out SH residency + step_sh 4-slice weight prefetch + 256KiB SH on hbm4/cache4/dd2 hardware (power-legal: peak 11.1W); D1 root program unchanged.
+- Change: parent=cand-154; Manual promotion of completed joint grade; sources in proposal.json
+- Evidence: project/experiments/cand-155/metrics.json; reports/grade.json; attempts=1
+- Inputs: compiler.py@57149b1d hardware.json@c4da83b2 recipe.json@321bd0fd
+- Verify: PASS
+- Result: M1_P1=493984 (62.749x), M2_D1=48838 (26.660x); score=40901.125, eligible=True
+  - deltas vs head (cand-154): {'M1_P1': -32510, 'M2_D1': -114}
+- Decision: KEPT — new incumbent head (score=40901.125)
+
+## 2026-10-01 12:50 — sprint-2 close-out: all remaining structural families falsified; submission frozen
+- Branch B P1 microbenchmarks (all FALSIFIED vs 526,494): wstage (prompt weight SH residency + layer-boundary prefetch) = 660,249 (+24%); wstage_combo (+step_sh) = 619,645 (+18%); ares (RF A-residency) = 597,237 (+13.5%); merged_batch generation-blocked. Pattern: added transfers always lose; work removal wins only ~4-9%.
+- Branch C D1 (FALSIFIED): upfront preload = 60,758 (+24% — streams serialize at t=0); nogroups = 52,754 (+8% — worse steady residency). D1 kept at 48,838.
+- Frozen check noc256 (hbm8 + noc 256B/c throttle): P1 485,106 PASS func but peakW=20.09W -> INELIGIBLE. hbm8+256KiB structurally over-caps power.
+- Winner: cand-155 = privsh256_hbm4 (priv_sh + step_sh[l0w1..l2w1,l0wo] + shared_kib=256 on hbm4/cache4/dd2/16SM): frozen grade eligible, P1=493,984 / D1=48,838, peak 11.1W/10.8W, area 23.37mm2, **score=40,901.125 (+3.35% vs cand-154)**.
+- Structural conclusion: critical WG tape is 100% service-serialized (service_sum==end_cycle==526,494, gaps=0); rf_read calendar ~278k is menu-capped (8R4W max). Remaining gap needs a new primitive (decoupled producer-consumer issue, cross-WG ownership handoff) not expressible in current ISA/DSL.

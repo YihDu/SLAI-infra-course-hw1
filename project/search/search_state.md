@@ -1,18 +1,19 @@
 # search_state (auto-generated; do not edit)
 
-- best: cand-143 score=7013.610245245844 (P1=4897135, D1=167539)
+- best: cand-155 score=40901.124578635245 (P1=493984, D1=48838)
 - phase=2 round=12 plateau_rounds=0 explore_ratio=0.54 need_new_operator=False
 - bottleneck: M1_P1 sm0.rf_read=2818280, sm0.rf_write=2788264, sm0.dma=1876160; M2_D1 sm0.rf_write=261248, sm0.dma=239104, shared.noc=226521 (overlapping service counts)
 
 ## elite (score desc)
-- cand-143 score=7013.61 parent=cand-142 sig=None hyp=Prefetch each next P1 QKV/WO output column’s K0 B/A operands
-- cand-142 score=6986.35 parent=cand-139 sig=None hyp=Prefetch the next prompt MLP neuron panel’s first W1 A/B ope
-- cand-139 score=6969.54 parent=cand-138 sig=None hyp=Keep each single-token D1 activation vector resident in one
-- cand-138 score=6939.29 parent=cand-137 sig=None hyp=Reuse the existing 64 KiB prompt shared allocation for LN1 o
-- cand-137 score=6938.23 parent=cand-136 sig=None hyp=Double-buffer only the 128-token D1 history K/V panels insid
+- cand-155 score=40901.12 parent=cand-154 sig=None hyp=Promote frozen-graded privsh256_hbm4: P1 priv_sh res/out SH 
+- cand-154 score=39572.06 parent=cand-152 sig=None hyp=D1 token-local LN handoff + centred LN fold (beta W built in
+- cand-152 score=36115.70 parent=cand-150 sig=None hyp=Promote frozen-graded paired_late_b joint triple to root: P1
+- cand-153 score=36115.70 parent=cand-150 sig=None hyp=Promote frozen-graded paired_late_b joint triple to root: P1
+- cand-150 score=31065.18 parent=cand-149 sig=None hyp=D1 per-layer persistent RF groups with WO/W1/W2 resident in 
 
 ## failure classes
 - dry_run: 27
+- duplicate: 1
 - evaluation_resource_limit: 1
 - evaluator_assertion: 1
 - evaluator_error: 2
@@ -21,13 +22,13 @@
 - incorrect: 1
 - memory_limit: 7
 - registry_interruption: 1
-- validation_cost_pruned: 3
+- validation_cost_pruned: 4
 
 ## pareto front
-- cand-143 {'M1_P1': 4897135, 'M2_D1': 167539}
+- cand-155 {'M1_P1': 493984, 'M2_D1': 48838}
 
 ## diversity cells
-- ?|?: cand-143
+- ?|?: cand-155
 - attention_blocked_pipeline|p1: cand-122
 - attention_blocked|p1: cand-106
 - attention|balanced: cand-019
@@ -45,7 +46,7 @@
 - persistent_mlp_pipeline|p1: cand-118
 - persistent_mlp_sh|p1: cand-123
 - persistent_mlp|p1: cand-110
-- sig:?|?: cand-143
+- sig:?|?: cand-155
 - sig:blocked-prompt-q16-k32: cand-106
 - sig:blocked-prompt-q16-k32-panel-pipeline: cand-121
 - sig:blocked-prompt-q16-k32-panel-pipeline-v2: cand-122

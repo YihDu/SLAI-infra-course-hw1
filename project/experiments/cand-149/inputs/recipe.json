@@ -1,0 +1,94 @@
+{
+  "attention": {
+    "algorithm": "blocked_prompt_pipeline",
+    "scores": "rf"
+  },
+  "d1_schedule": {
+    "attention_pipeline": 1,
+    "attention_split": 1,
+    "kind": "column_head",
+    "operand_pipeline": "a_resident",
+    "parallel_gelu": 1,
+    "partition": "panel_owners",
+    "preload": "first_use",
+    "projections": {
+      "qkv": {
+        "k_chunk": 32,
+        "n_tile": 24,
+        "owners": 16
+      },
+      "w1": {
+        "k_chunk": 32,
+        "n_tile": 32,
+        "owners": 16
+      },
+      "w2": {
+        "k_chunk": 128,
+        "n_tile": 8,
+        "owners": 16
+      },
+      "wo": {
+        "k_chunk": 64,
+        "n_tile": 8,
+        "owners": 16
+      }
+    },
+    "rf_resident": [
+      "l0wo",
+      "l1wo",
+      "l0w1",
+      "l0w2"
+    ],
+    "shards": 16,
+    "shared_bytes": 131072,
+    "weights": "sh"
+  },
+  "fusion": {
+    "bias_gelu": 1,
+    "p1_ln1_sh": 1,
+    "p1_mlp": "rf_pipeline_residual_sh_input",
+    "p1_norm_residual": 1
+  },
+  "gemm": {
+    "k_chunk": 48,
+    "m_tile": 8,
+    "n_tile": 16,
+    "order": "nkm",
+    "prefetch": 0
+  },
+  "gemm_stages": {
+    "d1": {
+      "k_chunk": 16,
+      "n_tile": 64
+    },
+    "p1_prompt": {
+      "b_buffers": 3,
+      "k_chunk": 32,
+      "m_tile": 32,
+      "n_tile": 32,
+      "operand_pipeline": [
+        "qkv",
+        "wo",
+        "w1",
+        "w2"
+      ],
+      "order": "nkm_lanes"
+    },
+    "p1_step": {
+      "k_chunk": 32,
+      "n_tile": 32,
+      "prefetch": 1
+    }
+  },
+  "p1_schedule": {
+    "fuse_gelu": 1,
+    "kind": "batch_shard",
+    "mlp": "sharded",
+    "sm_count": 16,
+    "step_merge": 1,
+    "team": 8
+  },
+  "persistent": {
+    "d1": "fixed_column_head_owners"
+  }
+}

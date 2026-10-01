@@ -1,0 +1,18 @@
+{
+  "bias": null,
+  "created_at": "2026-09-30 15:30:56",
+  "failure_class": "none",
+  "family": null,
+  "fingerprint": null,
+  "hypothesis": "Promote frozen-graded paired_late_b joint triple to root: P1 paired W1 kernel (paired_n=[w1], paired_b_prefetch=0) + step a_resident on NoC512/16SM/1TC hardware; D1 layer-RF owners. Byte-identical artifacts.",
+  "id": "cand-152",
+  "kind": "manual",
+  "ops": null,
+  "parent": "cand-150",
+  "provenance_note": null,
+  "round": null,
+  "status": "kept",
+  "struct_sig": null,
+  "summary": "Manual promotion of completed joint grade; sources in proposal.json",
+  "verdict_note": null
+}

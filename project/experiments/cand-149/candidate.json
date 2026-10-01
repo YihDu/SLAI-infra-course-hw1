@@ -1,0 +1,18 @@
+{
+  "bias": null,
+  "created_at": "2026-09-29 20:11:29",
+  "failure_class": "none",
+  "family": null,
+  "fingerprint": null,
+  "hypothesis": "16-SM rebalance: 1x8x16 kp1 TC, cache8, SH128, dma_depth1+engines4 (frozen-scheduler DMA-slot fix), hbm_channels=4 (power cap); P1 v6_16sm merged-step team8, D1 d16rf_split 16-owner split-K + RF resident",
+  "id": "cand-149",
+  "kind": null,
+  "ops": null,
+  "parent": "cand-148",
+  "provenance_note": null,
+  "round": null,
+  "status": "kept",
+  "struct_sig": null,
+  "summary": "dev: P1 563776 cyc/10.9W, D1 87779 cyc/10.5W, projected score ~28.6K",
+  "verdict_note": null
+}

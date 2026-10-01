@@ -1,0 +1,18 @@
+{
+  "bias": null,
+  "created_at": "2026-09-29 21:41:36",
+  "failure_class": "none",
+  "family": null,
+  "fingerprint": null,
+  "hypothesis": "D1 per-layer persistent RF groups with WO/W1/W2 resident in each layer; KV SH, dual accumulators, load-ahead and fused GELU. Frozen D1 seeds7/19 and estimate pass:74180 cycles. P1 and hardware byte-identical to graded cand-149.",
+  "id": "cand-150",
+  "kind": "manual",
+  "ops": null,
+  "parent": "cand-149",
+  "provenance_note": null,
+  "round": null,
+  "status": "kept",
+  "struct_sig": null,
+  "summary": "Isolated structural search; sources in proposal.json",
+  "verdict_note": null
+}

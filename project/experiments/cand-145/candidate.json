@@ -1,0 +1,18 @@
+{
+  "bias": null,
+  "created_at": "2026-09-29 13:04:57",
+  "failure_class": "none",
+  "family": null,
+  "fingerprint": null,
+  "hypothesis": "4-WG batch x team(2) shard: each member owned by a 2-WG team; row-sharded LN/residual, head-aligned QKV column split + head-sharded attention, column-sharded WO/W1/W2, teams independent until STEP.COMMIT. Preflight LB 9.95GiB ~ est 68GiB peak.",
+  "id": "cand-145",
+  "kind": null,
+  "ops": null,
+  "parent": "cand-144",
+  "provenance_note": null,
+  "round": null,
+  "status": "kept",
+  "struct_sig": null,
+  "summary": "new p1_schedule kind=batch_shard team=2 mlp=sharded",
+  "verdict_note": null
+}

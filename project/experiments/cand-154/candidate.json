@@ -1,0 +1,18 @@
+{
+  "bias": null,
+  "created_at": "2026-09-30 18:16:04",
+  "failure_class": "none",
+  "family": null,
+  "fingerprint": null,
+  "hypothesis": "D1 token-local LN handoff + centred LN fold (beta W built in assembly at step 0, kept in RF) + attention K/V prefetch + b1 fold + chunked A; hardware shared_ports 2R1W. P1 unchanged.",
+  "id": "cand-154",
+  "kind": "manual",
+  "ops": null,
+  "parent": "cand-152",
+  "provenance_note": null,
+  "round": null,
+  "status": "kept",
+  "struct_sig": null,
+  "summary": "structural-rewrite Task 2 Stage A/B; frozen D1 check seeds 7/19 pass, frozen D1 estimate 48952",
+  "verdict_note": null
+}

@@ -1,7 +1,7 @@
 {
   "archives": {
     "diversity": {
-      "?|?": "cand-143",
+      "?|?": "cand-155",
       "attention_blocked_pipeline|p1": "cand-122",
       "attention_blocked|p1": "cand-106",
       "attention|balanced": "cand-019",
@@ -19,7 +19,7 @@
       "persistent_mlp_pipeline|p1": "cand-118",
       "persistent_mlp_sh|p1": "cand-123",
       "persistent_mlp|p1": "cand-110",
-      "sig:?|?": "cand-143",
+      "sig:?|?": "cand-155",
       "sig:blocked-prompt-q16-k32": "cand-106",
       "sig:blocked-prompt-q16-k32-panel-pipeline": "cand-121",
       "sig:blocked-prompt-q16-k32-panel-pipeline-v2": "cand-122",
@@ -77,17 +77,17 @@
       "sig:stage:p1_prompt": "cand-070"
     },
     "elite": [
-      "cand-143",
-      "cand-142",
-      "cand-139",
-      "cand-138",
-      "cand-137",
-      "cand-140",
-      "cand-136",
-      "cand-135"
+      "cand-155",
+      "cand-154",
+      "cand-152",
+      "cand-150",
+      "cand-149",
+      "cand-148",
+      "cand-147",
+      "cand-146"
     ],
     "pareto": [
-      "cand-143"
+      "cand-155"
     ]
   },
   "candidates": {
@@ -5335,6 +5335,450 @@
       "score": 7013.610245245844,
       "status": "kept"
     },
+    "cand-144": {
+      "area_mm2": 22.85981349888,
+      "cache_source": null,
+      "cycles": {
+        "M1_P1": 2484678,
+        "M2_D1": 167539
+      },
+      "deltas": {
+        "cycles": {
+          "M1_P1": -2412457,
+          "M2_D1": 0
+        },
+        "prior_head": "cand-143",
+        "score": 2832.7927991587558,
+        "vs_parent": {
+          "parent": "cand-141"
+        }
+      },
+      "elapsed": 3050.7378703332506,
+      "eligible": true,
+      "evaluation_attempts": 1,
+      "failure_class": "none",
+      "functional": {
+        "M1_P1": true,
+        "M2_D1": true
+      },
+      "functional_passed": true,
+      "hypothesis": "New host has 2.8TiB RAM; re-run cand-141 minimal 2-WG P1 skeleton under raised memory budget as controlled calibration before any multi-SM speedup claims",
+      "parent": "cand-141",
+      "power_w": 7.494538241472594,
+      "result_logged": true,
+      "score": 9846.4030444046,
+      "status": "kept"
+    },
+    "cand-145": {
+      "area_mm2": 22.85981349888,
+      "cache_source": null,
+      "cycles": {
+        "M1_P1": 1586728,
+        "M2_D1": 167539
+      },
+      "deltas": {
+        "cycles": {
+          "M1_P1": -897950,
+          "M2_D1": 0
+        },
+        "prior_head": "cand-144",
+        "score": 2475.0357313618497,
+        "vs_parent": {
+          "cycles": {
+            "M1_P1": -897950,
+            "M2_D1": 0
+          },
+          "parent": "cand-144",
+          "score": 2475.0357313618497
+        }
+      },
+      "elapsed": 6037.87192984391,
+      "eligible": true,
+      "evaluation_attempts": 1,
+      "failure_class": "none",
+      "functional": {
+        "M1_P1": true,
+        "M2_D1": true
+      },
+      "functional_passed": true,
+      "hypothesis": "4-WG batch x team(2) shard: each member owned by a 2-WG team; row-sharded LN/residual, head-aligned QKV column split + head-sharded attention, column-sharded WO/W1/W2, teams independent until STEP.COMMIT. Preflight LB 9.95GiB ~ est 68GiB peak.",
+      "parent": "cand-144",
+      "power_w": 11.526748313483035,
+      "result_logged": true,
+      "score": 12321.43877576645,
+      "status": "kept"
+    },
+    "cand-146": {
+      "area_mm2": 22.85981349888,
+      "cache_source": null,
+      "cycles": {
+        "M1_P1": 1582025,
+        "M2_D1": 167539
+      },
+      "deltas": {
+        "cycles": {
+          "M1_P1": -4703,
+          "M2_D1": 0
+        },
+        "prior_head": "cand-145",
+        "score": 18.300824610474592,
+        "vs_parent": {
+          "cycles": {
+            "M1_P1": -4703,
+            "M2_D1": 0
+          },
+          "parent": "cand-145",
+          "score": 18.300824610474592
+        }
+      },
+      "elapsed": 4331.692646723241,
+      "eligible": true,
+      "evaluation_attempts": 1,
+      "failure_class": "none",
+      "functional": {
+        "M1_P1": true,
+        "M2_D1": true
+      },
+      "functional_passed": true,
+      "hypothesis": "Elementwise helper chunks 384->1024 (RF lane capacity at vector_lanes=16) cut P1 events 95.1K->85.7K; fewer events should lower race/timing validation cost and remove per-chunk issue overhead in bias_gelu/add_rows/add_bias",
+      "parent": "cand-145",
+      "power_w": 11.489415666359967,
+      "result_logged": true,
+      "score": 12339.739600376924,
+      "status": "kept"
+    },
+    "cand-147": {
+      "area_mm2": 22.85981349888,
+      "cache_source": null,
+      "cycles": {
+        "M1_P1": 1111753,
+        "M2_D1": 167539
+      },
+      "deltas": {
+        "cycles": {
+          "M1_P1": -470272,
+          "M2_D1": 0
+        },
+        "prior_head": "cand-146",
+        "score": 2380.2841643708307,
+        "vs_parent": {
+          "cycles": {
+            "M1_P1": -470272,
+            "M2_D1": 0
+          },
+          "parent": "cand-146",
+          "score": 2380.2841643708307
+        }
+      },
+      "elapsed": 4072.8229463137686,
+      "eligible": true,
+      "evaluation_attempts": 1,
+      "failure_class": "none",
+      "functional": {
+        "M1_P1": true,
+        "M2_D1": true
+      },
+      "functional_passed": true,
+      "hypothesis": "critpath attribution: P1 W1/W2 used the non-prefetching generic GEMM (LD-RAW/WAR stalls) and GELU round-tripped HBM. Enable operand_pipeline for w1/w2, fuse bias+GELU into W1 epilogue (MMA k=1 ones x bias, then in-place tanh-GELU), prefetch step GEMMs.",
+      "parent": "cand-146",
+      "power_w": 11.489415666359967,
+      "result_logged": true,
+      "score": 14720.023764747755,
+      "status": "kept"
+    },
+    "cand-148": {
+      "area_mm2": 22.86477787136,
+      "cache_source": null,
+      "cycles": {
+        "M1_P1": 811610,
+        "M2_D1": 114706
+      },
+      "deltas": {
+        "cycles": {
+          "M1_P1": -300143,
+          "M2_D1": -52833
+        },
+        "prior_head": "cand-147",
+        "score": 6101.085498106921,
+        "vs_parent": {
+          "cycles": {
+            "M1_P1": -300143,
+            "M2_D1": -52833
+          },
+          "parent": "cand-147",
+          "score": 6101.085498106921
+        }
+      },
+      "elapsed": 4654.425850854255,
+      "eligible": true,
+      "evaluation_attempts": 1,
+      "failure_class": "none",
+      "functional": {
+        "M1_P1": true,
+        "M2_D1": true
+      },
+      "functional_passed": true,
+      "hypothesis": "Hardware rebalance + dataflow: 8 SMs with 1 TC (TC ~7x over-provisioned vs RF read port), 256 KiB SH per SM; P1 batch2 x team4 one WG/SM with W1/W2 operand pipeline, GELU epilogue, B triple buffer; D1 8 column owners with weights SH-resident after first use.",
+      "parent": "cand-147",
+      "power_w": 17.329642019960854,
+      "result_logged": true,
+      "score": 20821.109262854676,
+      "status": "kept"
+    },
+    "cand-149": {
+      "area_mm2": 23.53006052352,
+      "cache_source": null,
+      "cycles": {
+        "M1_P1": 563776,
+        "M2_D1": 87779
+      },
+      "deltas": {
+        "cycles": {
+          "M1_P1": -247834,
+          "M2_D1": -26927
+        },
+        "prior_head": "cand-148",
+        "score": 7736.511314397332,
+        "vs_parent": {
+          "cycles": {
+            "M1_P1": -247834,
+            "M2_D1": -26927
+          },
+          "parent": "cand-148",
+          "score": 7736.511314397332
+        }
+      },
+      "elapsed": 5147.933631440159,
+      "eligible": true,
+      "evaluation_attempts": 1,
+      "failure_class": "none",
+      "functional": {
+        "M1_P1": true,
+        "M2_D1": true
+      },
+      "functional_passed": true,
+      "hypothesis": "16-SM rebalance: 1x8x16 kp1 TC, cache8, SH128, dma_depth1+engines4 (frozen-scheduler DMA-slot fix), hbm_channels=4 (power cap); P1 v6_16sm merged-step team8, D1 d16rf_split 16-owner split-K + RF resident",
+      "parent": "cand-148",
+      "power_w": 10.886150158630294,
+      "result_logged": true,
+      "score": 28557.620577252008,
+      "status": "kept"
+    },
+    "cand-150": {
+      "area_mm2": 23.53006052352,
+      "cache_source": null,
+      "cycles": {
+        "M1_P1": 563776,
+        "M2_D1": 74180
+      },
+      "deltas": {
+        "cycles": {
+          "M1_P1": 0,
+          "M2_D1": -13599
+        },
+        "prior_head": "cand-149",
+        "score": 2507.5626251529866,
+        "vs_parent": {
+          "cycles": {
+            "M1_P1": 0,
+            "M2_D1": -13599
+          },
+          "parent": "cand-149",
+          "score": 2507.5626251529866
+        }
+      },
+      "elapsed": 5187.897390685044,
+      "eligible": true,
+      "evaluation_attempts": 1,
+      "failure_class": "none",
+      "functional": {
+        "M1_P1": true,
+        "M2_D1": true
+      },
+      "functional_passed": true,
+      "hypothesis": "D1 per-layer persistent RF groups with WO/W1/W2 resident in each layer; KV SH, dual accumulators, load-ahead and fused GELU. Frozen D1 seeds7/19 and estimate pass:74180 cycles. P1 and hardware byte-identical to graded cand-149.",
+      "kind": "manual",
+      "parent": "cand-149",
+      "power_w": 10.886150158630294,
+      "result_logged": true,
+      "score": 31065.183202404995,
+      "status": "kept"
+    },
+    "cand-151": {
+      "cache_source": null,
+      "deltas": {
+        "prior_head": "cand-150",
+        "vs_parent": {
+          "parent": "cand-150"
+        }
+      },
+      "elapsed": null,
+      "evaluation_attempts": 0,
+      "failure_class": "validation_cost_pruned",
+      "hypothesis": "Shared TC4x8 kp4 and NoC512: screened P1 560845, frozen D1 58770; validate joint score and all gates.",
+      "kind": "manual",
+      "parent": "cand-150",
+      "result_logged": true,
+      "status": "not_verified"
+    },
+    "cand-152": {
+      "area_mm2": 23.06145700352,
+      "cache_source": null,
+      "cycles": {
+        "M1_P1": 526494,
+        "M2_D1": 58770
+      },
+      "deltas": {
+        "cycles": {
+          "M1_P1": -37282,
+          "M2_D1": -15410
+        },
+        "prior_head": "cand-150",
+        "score": 5050.519316954975,
+        "vs_parent": {
+          "cycles": {
+            "M1_P1": -37282,
+            "M2_D1": -15410
+          },
+          "parent": "cand-150",
+          "score": 5050.519316954975
+        }
+      },
+      "elapsed": null,
+      "eligible": true,
+      "evaluation_attempts": 1,
+      "failure_class": "none",
+      "functional": {
+        "M1_P1": true,
+        "M2_D1": true
+      },
+      "functional_passed": true,
+      "hypothesis": "Promote frozen-graded paired_late_b joint triple to root: P1 paired W1 kernel (paired_n=[w1], paired_b_prefetch=0) + step a_resident on NoC512/16SM/1TC hardware; D1 layer-RF owners. Byte-identical artifacts.",
+      "kind": "manual",
+      "parent": "cand-150",
+      "result_logged": true,
+      "score": 36115.70251935997,
+      "status": "kept"
+    },
+    "cand-153": {
+      "area_mm2": 23.06145700352,
+      "cache_source": null,
+      "cycles": {
+        "M1_P1": 526494,
+        "M2_D1": 58770
+      },
+      "deltas": {
+        "cycles": {
+          "M1_P1": 0,
+          "M2_D1": 0
+        },
+        "prior_head": "cand-152",
+        "score": 0.0,
+        "vs_parent": {
+          "cycles": {
+            "M1_P1": -37282,
+            "M2_D1": -15410
+          },
+          "parent": "cand-150",
+          "score": 5050.519316954975
+        }
+      },
+      "duplicate_of": "cand-152",
+      "elapsed": null,
+      "eligible": true,
+      "evaluation_attempts": 1,
+      "failure_class": "duplicate",
+      "functional": {
+        "M1_P1": true,
+        "M2_D1": true
+      },
+      "functional_passed": true,
+      "hypothesis": "Promote frozen-graded paired_late_b joint triple to root: P1 paired W1 kernel (paired_n=[w1], paired_b_prefetch=0) + step a_resident on NoC512/16SM/1TC hardware; D1 layer-RF owners. Byte-identical artifacts.",
+      "kind": "manual",
+      "parent": "cand-150",
+      "provenance_note": "DUPLICATE of cand-152: promote_paired_late_b.py was re-run after context compaction on 2026-09-30 16:47; inputs/programs/grade byte-identical to cand-152. Kept for provenance, not a new result; head remains cand-152.",
+      "result_logged": true,
+      "score": 36115.70251935997,
+      "status": "duplicate"
+    },
+    "cand-154": {
+      "area_mm2": 23.419857003519997,
+      "cache_source": null,
+      "cycles": {
+        "M1_P1": 526494,
+        "M2_D1": 48952
+      },
+      "deltas": {
+        "cycles": {
+          "M1_P1": 0,
+          "M2_D1": -9818
+        },
+        "prior_head": "cand-152",
+        "score": 3456.360533615545,
+        "vs_parent": {
+          "cycles": {
+            "M1_P1": 0,
+            "M2_D1": -9818
+          },
+          "parent": "cand-152",
+          "score": 3456.360533615545
+        }
+      },
+      "elapsed": 4704.050899744034,
+      "eligible": true,
+      "evaluation_attempts": 1,
+      "failure_class": "none",
+      "functional": {
+        "M1_P1": true,
+        "M2_D1": true
+      },
+      "functional_passed": true,
+      "hypothesis": "D1 token-local LN handoff + centred LN fold (beta W built in assembly at step 0, kept in RF) + attention K/V prefetch + b1 fold + chunked A; hardware shared_ports 2R1W. P1 unchanged.",
+      "kind": "manual",
+      "parent": "cand-152",
+      "result_logged": true,
+      "score": 39572.063052975514,
+      "status": "kept"
+    },
+    "cand-155": {
+      "area_mm2": 23.372983198720004,
+      "cache_source": null,
+      "cycles": {
+        "M1_P1": 493984,
+        "M2_D1": 48838
+      },
+      "deltas": {
+        "cycles": {
+          "M1_P1": -32510,
+          "M2_D1": -114
+        },
+        "prior_head": "cand-154",
+        "score": 1329.0615256597303,
+        "vs_parent": {
+          "cycles": {
+            "M1_P1": -32510,
+            "M2_D1": -114
+          },
+          "parent": "cand-154",
+          "score": 1329.0615256597303
+        }
+      },
+      "elapsed": null,
+      "eligible": true,
+      "evaluation_attempts": 1,
+      "failure_class": "none",
+      "functional": {
+        "M1_P1": true,
+        "M2_D1": true
+      },
+      "functional_passed": true,
+      "hypothesis": "Promote frozen-graded privsh256_hbm4: P1 priv_sh res/out SH residency + step_sh 4-slice weight prefetch + 256KiB SH on hbm4/cache4/dd2 hardware (power-legal: peak 11.1W); D1 root program unchanged.",
+      "kind": "manual",
+      "parent": "cand-154",
+      "result_logged": true,
+      "score": 40901.124578635245,
+      "status": "kept"
+    },
     "drun-001": {
       "bias": "balanced",
       "failure_class": "dry_run",
@@ -5966,7 +6410,7 @@
       "struct_sig": "hw:sm_count=32+nkm+nofuse+nopf+s:hbm"
     }
   },
-  "counter": 123,
+  "counter": 155,
   "dry_counter": 27,
   "fingerprints": {
     "062742f6b8fbbde1": "cand-036",
@@ -6081,11 +6525,11 @@
     "ff0c29904037c174": "cand-089",
     "ff6870b21f8f0ec7": "cand-055"
   },
-  "head": "cand-143",
-  "revision": 140,
+  "head": "cand-155",
+  "revision": 180,
   "search": {
-    "best_id": "cand-143",
-    "best_score": 7013.610245245844,
+    "best_id": "cand-155",
+    "best_score": 40901.124578635245,
     "bottleneck": "M1_P1 sm0.rf_read=2818280, sm0.rf_write=2788264, sm0.dma=1876160; M2_D1 sm0.rf_write=261248, sm0.dma=239104, shared.noc=226521 (overlapping service counts)",
     "explore_ratio": 0.54,
     "hierarchy": {

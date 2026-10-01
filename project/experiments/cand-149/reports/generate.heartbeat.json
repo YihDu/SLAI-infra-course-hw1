@@ -1,0 +1,1 @@
+{"pid": 4105326, "status": "completed", "elapsed": 0.7537037548609078, "peak_memory_mib": 35.0703125, "updated_at": 1790683921.1442091, "command": ["/home/jovyan/projects/SLAI-infra-course-hw1/.venv/bin/python", "/home/jovyan/projects/SLAI-infra-course-hw1/project/experiments/cand-149/inputs/compiler.py"]}

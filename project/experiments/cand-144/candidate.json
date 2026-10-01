@@ -1,0 +1,18 @@
+{
+  "bias": null,
+  "created_at": "2026-09-29 11:18:40",
+  "failure_class": "none",
+  "family": null,
+  "fingerprint": null,
+  "hypothesis": "New host has 2.8TiB RAM; re-run cand-141 minimal 2-WG P1 skeleton under raised memory budget as controlled calibration before any multi-SM speedup claims",
+  "id": "cand-144",
+  "kind": null,
+  "ops": null,
+  "parent": "cand-141",
+  "provenance_note": null,
+  "round": null,
+  "status": "kept",
+  "struct_sig": null,
+  "summary": "cand-141 inputs cloned verbatim; memory_mib 6144->131072, timeout 600->7200",
+  "verdict_note": "First verified multi-WG P1: 2-WG batch-parallel skeleton, score 9846.40, P1 2484678 (1.97x vs cand-143). Race-checker calibration: real peak 86.9GiB = 6.5x retained-LB; 51min. New-host feasibility confirmed."
+}

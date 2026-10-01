@@ -1,0 +1,12 @@
+{
+  "sources": {
+    "p1": "project/campaigns/structural/parent_tc_noc512",
+    "d1": "project/campaigns/d1-sh/layer_rf_tc_noc512",
+    "hardware": "project/campaigns/d1-sh/layer_rf_tc_noc512/hardware.json",
+    "parent": "cand-150",
+    "hypothesis": "Shared TC4x8 kp4 and NoC512: screened P1 560845, frozen D1 58770; validate joint score and all gates.",
+    "expect_p1": "project/campaigns/structural/parent_tc_noc512/M1_P1.asm",
+    "expect_d1": "project/campaigns/d1-sh/layer_rf_tc_noc512/M2_D1.asm"
+  },
+  "program_equality_verified": true
+}

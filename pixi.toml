@@ -1,0 +1,33 @@
+[workspace]
+name = "slai-infra-course-hw1"
+version = "0.1.0"
+description = "Transformer hardware-program co-design challenge: compiler + search harness"
+channels = ["conda-forge"]
+platforms = ["linux-64"]
+
+[tasks]
+# Regenerate programs/*.asm from project/compiler.py
+generate = "python -m project.compiler"
+# Fast timing-only evaluation (no baseline needed)
+estimate = "python challenge.py estimate --hardware hardware.json --program-p1 programs/M1_P1.asm --program-d1 programs/M2_D1.asm --seed 7 --report project/estimate-latest.json"
+# Correctness check (functional, seed 7)
+check = "python challenge.py check --hardware hardware.json --program-p1 programs/M1_P1.asm --program-d1 programs/M2_D1.asm --seed 7 --report project/check-latest.json"
+# Full grade vs frozen baseline (requires python==3.12.13, numpy==2.5.3)
+grade = "python challenge.py grade --hardware hardware.json --program-p1 programs/M1_P1.asm --program-d1 programs/M2_D1.asm --baseline baseline_manifest.json --seed 7 --report project/grade-latest.json"
+# Search harness
+controller-status = "python -m project.search.controller status"
+test = "python -m unittest discover -s project/search/tests -q"
+
+[dependencies]
+# Frozen baseline manifest pins the numerical runtime exactly:
+# grade refuses to run on any other python/numpy pair.
+python = "==3.12.13"
+numpy = "==2.5.3"
+
+# MILP solver campaign only (project/campaigns/milp-d1/requirements-solver.txt)
+[feature.milp.pypi-dependencies]
+highspy = "==1.15.1"
+
+[environments]
+default = { features = [] }
+milp = { features = ["milp"] }

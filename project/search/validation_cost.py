@@ -36,6 +36,15 @@ def line_stages(source):
     return out
 
 
+# Calibrated 2026-09-29 on the new host: cand-144 (2-WG, 78,032 events) had
+# retained-set LB 13,773,311,648 B and measured grade-process peak RSS
+# 88,961 MiB -> ~6.77x. Union temporaries, event_knowledge snapshot overlap,
+# _graph storage, interval trees and interpreter baseline all add over the
+# logical lower bound. Single point of calibration; treat as a planning
+# estimate, not a guarantee.
+PEAK_RSS_CALIBRATION = 6.8
+
+
 def analyze(source, budget_mib=3072):
     locations=line_stages(source)
     program=tuple(iter_parse(source)); counts=Counter(i.op for i in program)
@@ -100,6 +109,7 @@ def analyze(source, budget_mib=3072):
     assert visited==len(program)
     events=len(event_depth);bypass=counts['WG.BEGIN']<=1
     logical_lower=0 if bypass else 152*events+16*sum_depth
+    estimated_peak=0 if bypass else logical_lower*PEAK_RSS_CALIBRATION
     return dict(expanded_instructions=len(program),source_lines=len(source.splitlines()),
         static_loops=sum(line.startswith('FOR ') for line in source.splitlines()),
         workgroup_lifetimes=counts['WG.BEGIN'],workgroup_names=len({i.args['wg'] for i in program if i.op=='WG.BEGIN'}),
@@ -110,9 +120,12 @@ def analyze(source, budget_mib=3072):
         stages=stages,race_checker_single_wg_fast_path=bypass,
         max_dependency_depth_lower_bound=max_depth,sum_dependency_depth_lower_bound=sum_depth,
         retained_event_sets_logical_bytes_lower_bound=logical_lower,
-        decision='prune_validation_cost' if logical_lower>budget_mib*1024**2 else 'within_lower_bound_only',
+        estimated_peak_rss_bytes=estimated_peak,
+        peak_rss_calibration=PEAK_RSS_CALIBRATION,
+        decision='prune_validation_cost' if estimated_peak>budget_mib*1024**2 else 'within_lower_bound_only',
+        decision_basis='calibrated_peak_rss',
         budget_mib=budget_mib,checkpoints=checkpoints,
-        caveat='Lower bound on uncompressed CPython event-set allocation, not peak RSS prediction. Passing cost screen never establishes race correctness. Multi-path/HBM unions, tuples, prefixes and graph storage add memory.')
+        caveat='Decision compares budget to LB x %.2f calibrated peak RSS (single-point calibration from cand-144). Passing cost screen never establishes race correctness.' % PEAK_RSS_CALIBRATION)
 
 
 def main():

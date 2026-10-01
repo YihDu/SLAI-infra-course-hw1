@@ -1,0 +1,18 @@
+{
+  "bias": null,
+  "created_at": "2026-09-29 23:15:46",
+  "failure_class": "validation_cost_pruned",
+  "family": null,
+  "fingerprint": null,
+  "hypothesis": "Shared TC4x8 kp4 and NoC512: screened P1 560845, frozen D1 58770; validate joint score and all gates.",
+  "id": "cand-151",
+  "kind": "manual",
+  "ops": null,
+  "parent": "cand-150",
+  "provenance_note": null,
+  "round": null,
+  "status": "not_verified",
+  "struct_sig": null,
+  "summary": "Isolated structural search; sources in proposal.json",
+  "verdict_note": null
+}

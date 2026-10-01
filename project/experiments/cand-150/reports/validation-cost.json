@@ -1,0 +1,233 @@
+{
+  "M1_P1": {
+    "expanded_instructions": 74534,
+    "source_lines": 16478,
+    "static_loops": 4144,
+    "workgroup_lifetimes": 16,
+    "workgroup_names": 16,
+    "opcode_counts": {
+      "WG.BEGIN": 16,
+      "LD": 23398,
+      "REDUCE": 7800,
+      "VEC": 22314,
+      "SFU": 4380,
+      "ST": 3298,
+      "BARRIER": 63,
+      "MMA.ACC": 13248,
+      "STEP.COMMIT": 1,
+      "WG.END": 16
+    },
+    "events": 74438,
+    "graph_edges": 149675,
+    "named_cross_wg_sync_edges": 0,
+    "barrier_directed_pair_relations": 7392,
+    "barrier_incidence_edges": 1344,
+    "global_commit_incidence_edges": 74565,
+    "stages": {
+      "unknown/control": {
+        "instructions": 10918,
+        "WG.BEGIN": 16,
+        "BARRIER": 63,
+        "STEP.COMMIT": 1,
+        "LD": 5606,
+        "events": 10822,
+        "REDUCE": 120,
+        "VEC": 1674,
+        "SFU": 156,
+        "ST": 386,
+        "MMA.ACC": 2880,
+        "WG.END": 16,
+        "sum_dependency_depth_lower_bound": 25180148
+      },
+      "prompt/ln1": {
+        "instructions": 5088,
+        "LD": 480,
+        "events": 5088,
+        "REDUCE": 768,
+        "VEC": 3072,
+        "SFU": 384,
+        "ST": 384,
+        "sum_dependency_depth_lower_bound": 3709632
+      },
+      "prompt/qkv": {
+        "instructions": 6336,
+        "VEC": 288,
+        "events": 6336,
+        "LD": 3456,
+        "MMA.ACC": 2304,
+        "ST": 288,
+        "sum_dependency_depth_lower_bound": 5010480
+      },
+      "prompt/attention": {
+        "instructions": 21264,
+        "LD": 1152,
+        "events": 21264,
+        "ST": 384,
+        "VEC": 9744,
+        "MMA.ACC": 768,
+        "REDUCE": 6144,
+        "SFU": 3072,
+        "sum_dependency_depth_lower_bound": 20167872
+      },
+      "prompt/wo": {
+        "instructions": 2112,
+        "VEC": 96,
+        "events": 2112,
+        "LD": 1152,
+        "MMA.ACC": 768,
+        "ST": 96,
+        "sum_dependency_depth_lower_bound": 2316432
+      },
+      "prompt/residual1": {
+        "instructions": 6240,
+        "LD": 864,
+        "events": 6240,
+        "VEC": 3456,
+        "ST": 768,
+        "REDUCE": 768,
+        "SFU": 384,
+        "sum_dependency_depth_lower_bound": 7191744
+      },
+      "prompt/w1": {
+        "instructions": 12144,
+        "VEC": 3120,
+        "events": 12144,
+        "LD": 4800,
+        "MMA.ACC": 3456,
+        "SFU": 384,
+        "ST": 384,
+        "sum_dependency_depth_lower_bound": 15195456
+      },
+      "prompt/w2": {
+        "instructions": 7872,
+        "VEC": 96,
+        "events": 7872,
+        "LD": 4608,
+        "MMA.ACC": 3072,
+        "ST": 96,
+        "sum_dependency_depth_lower_bound": 10404624
+      },
+      "prompt/residual2": {
+        "instructions": 2304,
+        "LD": 1152,
+        "events": 2304,
+        "VEC": 768,
+        "ST": 384,
+        "sum_dependency_depth_lower_bound": 3111936
+      },
+      "prompt/output": {
+        "instructions": 256,
+        "LD": 128,
+        "events": 256,
+        "ST": 128,
+        "sum_dependency_depth_lower_bound": 524288
+      }
+    },
+    "race_checker_single_wg_fast_path": false,
+    "max_dependency_depth_lower_bound": 2584,
+    "sum_dependency_depth_lower_bound": 92812612,
+    "retained_event_sets_logical_bytes_lower_bound": 1496316368,
+    "estimated_peak_rss_bytes": 10174951302.4,
+    "peak_rss_calibration": 6.8,
+    "decision": "within_lower_bound_only",
+    "decision_basis": "calibrated_peak_rss",
+    "budget_mib": 220000,
+    "checkpoints": [
+      {
+        "visited": 10000,
+        "max_depth": 374,
+        "sum_depth": 1849412
+      },
+      {
+        "visited": 20000,
+        "max_depth": 652,
+        "sum_depth": 7224824
+      },
+      {
+        "visited": 30000,
+        "max_depth": 1010,
+        "sum_depth": 15463280
+      },
+      {
+        "visited": 40000,
+        "max_depth": 1319,
+        "sum_depth": 27309784
+      },
+      {
+        "visited": 50000,
+        "max_depth": 1644,
+        "sum_depth": 41967368
+      },
+      {
+        "visited": 60000,
+        "max_depth": 1986,
+        "sum_depth": 60252968
+      },
+      {
+        "visited": 70000,
+        "max_depth": 2366,
+        "sum_depth": 81633168
+      }
+    ],
+    "caveat": "Decision compares budget to LB x 6.80 calibrated peak RSS (single-point calibration from cand-144). Passing cost screen never establishes race correctness."
+  },
+  "M2_D1": {
+    "expanded_instructions": 18584,
+    "source_lines": 21784,
+    "static_loops": 3296,
+    "workgroup_lifetimes": 32,
+    "workgroup_names": 32,
+    "opcode_counts": {
+      "WG.BEGIN": 32,
+      "BARRIER": 192,
+      "LD": 4088,
+      "REDUCE": 704,
+      "VEC": 6832,
+      "SFU": 608,
+      "ST": 1800,
+      "MMA.ACC": 4288,
+      "STEP.COMMIT": 8,
+      "WG.END": 32
+    },
+    "events": 18320,
+    "graph_edges": 56269,
+    "named_cross_wg_sync_edges": 0,
+    "barrier_directed_pair_relations": 58112,
+    "barrier_incidence_edges": 6656,
+    "global_commit_incidence_edges": 34845,
+    "stages": {
+      "unknown/control": {
+        "instructions": 18584,
+        "WG.BEGIN": 32,
+        "BARRIER": 192,
+        "LD": 4088,
+        "events": 18320,
+        "REDUCE": 704,
+        "VEC": 6832,
+        "SFU": 608,
+        "ST": 1800,
+        "MMA.ACC": 4288,
+        "STEP.COMMIT": 8,
+        "WG.END": 32,
+        "sum_dependency_depth_lower_bound": 10592322
+      }
+    },
+    "race_checker_single_wg_fast_path": false,
+    "max_dependency_depth_lower_bound": 1179,
+    "sum_dependency_depth_lower_bound": 10592322,
+    "retained_event_sets_logical_bytes_lower_bound": 172261792,
+    "estimated_peak_rss_bytes": 1171380185.6,
+    "peak_rss_calibration": 6.8,
+    "decision": "within_lower_bound_only",
+    "decision_basis": "calibrated_peak_rss",
+    "budget_mib": 220000,
+    "checkpoints": [
+      {
+        "visited": 10000,
+        "max_depth": 615,
+        "sum_depth": 2970039
+      }
+    ],
+    "caveat": "Decision compares budget to LB x 6.80 calibrated peak RSS (single-point calibration from cand-144). Passing cost screen never establishes race correctness."
+  }
+}

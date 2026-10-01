@@ -1,0 +1,18 @@
+{
+  "bias": null,
+  "created_at": "2026-09-29 18:31:48",
+  "failure_class": "none",
+  "family": null,
+  "fingerprint": null,
+  "hypothesis": "Hardware rebalance + dataflow: 8 SMs with 1 TC (TC ~7x over-provisioned vs RF read port), 256 KiB SH per SM; P1 batch2 x team4 one WG/SM with W1/W2 operand pipeline, GELU epilogue, B triple buffer; D1 8 column owners with weights SH-resident after first use.",
+  "id": "cand-148",
+  "kind": null,
+  "ops": null,
+  "parent": "cand-147",
+  "provenance_note": null,
+  "round": null,
+  "status": "kept",
+  "struct_sig": null,
+  "summary": "hardware: sm 8, tc_count 1 kp4, cache 8 MiB, shared 256 KiB 4 banks 1R1W (22.86 mm2). Dev critpath: P1 811,610 (peak 17.3 W), D1 114,706 (peak 11.2 W); dev_functional both pass. Projected ~20.8K (estimate).",
+  "verdict_note": null
+}

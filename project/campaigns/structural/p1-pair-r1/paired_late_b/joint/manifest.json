@@ -1,0 +1,12 @@
+{
+  "P1_source": "/home/jovyan/projects/SLAI-infra-course-hw1/project/campaigns/structural/p1-pair-r1/paired_late_b",
+  "D1_source": "/home/jovyan/projects/SLAI-infra-course-hw1/project/campaigns/d1-sh/layer_rf_tc_noc512",
+  "exact_programs": true,
+  "sha256": {
+    "compiler.py": "94da97ef762107c1ce9b9f63699ea62ddc4ce65f926ba9c195ea65e0ed28f1bb",
+    "hardware.json": "9431f1d420803f29eb2a2eda1e12b3cea28146dc016df58a647c49c5bc4f01fe",
+    "recipe.json": "8713643eeb10ba5ddfcfa2fac6bf7a6666284e30a14768e99f8b19c1001357ca",
+    "programs/M1_P1.asm": "30ccf26584507ecc0166d3ff1b37b71e736188e470860199738d0ac48cea8dbe",
+    "programs/M2_D1.asm": "ec4d60ee96a58040e95f2d48e62c48e8f648d3281ac87d29fd74e19665abb7ca"
+  }
+}

@@ -1,0 +1,114 @@
+{
+  "project/experiments/cand-149": {
+    "totals": {
+      "instructions": 74534,
+      "HBM->RF_bytes": 75464704,
+      "RF->HBM_bytes": 6522880,
+      "mma_rf_read_bytes": 289261632,
+      "mma_tc_service_cycles": 2648736,
+      "logical_MAC": 319890432
+    },
+    "max_per_sm": {
+      "HBM->RF_bytes": 5243904,
+      "RF->HBM_bytes": 422400,
+      "mma_rf_read_bytes": 18601896,
+      "mma_tc_service_cycles": 172812,
+      "logical_MAC": 20202240
+    },
+    "note": "Requested payload/service sums. Cache, overlap and stalls require frozen timing."
+  },
+  "project/campaigns/structural/merged_n16_v2": {
+    "totals": {
+      "instructions": 98276,
+      "HBM->RF_bytes": 103763968,
+      "RF->HBM_bytes": 6522880,
+      "mma_rf_read_bytes": 289261632,
+      "mma_tc_service_cycles": 2667936,
+      "logical_MAC": 319890432
+    },
+    "max_per_sm": {
+      "HBM->RF_bytes": 7012608,
+      "RF->HBM_bytes": 422400,
+      "mma_rf_read_bytes": 18601896,
+      "mma_tc_service_cycles": 174012,
+      "logical_MAC": 20202240
+    },
+    "note": "Requested payload/service sums. Cache, overlap and stalls require frozen timing."
+  },
+  "project/campaigns/structural/merged_n32_v2": {
+    "totals": {
+      "instructions": 72164,
+      "HBM->RF_bytes": 66015232,
+      "RF->HBM_bytes": 6522880,
+      "mma_rf_read_bytes": 289261632,
+      "mma_tc_service_cycles": 2648736,
+      "logical_MAC": 319890432
+    },
+    "max_per_sm": {
+      "HBM->RF_bytes": 6127872,
+      "RF->HBM_bytes": 496128,
+      "mma_rf_read_bytes": 26859432,
+      "mma_tc_service_cycles": 247116,
+      "logical_MAC": 29639424
+    },
+    "note": "Requested payload/service sums. Cache, overlap and stalls require frozen timing."
+  },
+  "project/campaigns/structural/merged_neuron_mlp": {
+    "totals": {
+      "instructions": 89156,
+      "HBM->RF_bytes": 66052096,
+      "RF->HBM_bytes": 11241472,
+      "mma_rf_read_bytes": 289261632,
+      "mma_tc_service_cycles": 2654880,
+      "logical_MAC": 319890432,
+      "HBM->SH_bytes": 6291456,
+      "SH->RF_bytes": 25165824
+    },
+    "max_per_sm": {
+      "HBM->RF_bytes": 4655616,
+      "RF->HBM_bytes": 717312,
+      "mma_rf_read_bytes": 18601896,
+      "mma_tc_service_cycles": 173196,
+      "logical_MAC": 20202240,
+      "HBM->SH_bytes": 393216,
+      "SH->RF_bytes": 1572864
+    },
+    "note": "Requested payload/service sums. Cache, overlap and stalls require frozen timing."
+  },
+  "project/campaigns/structural/merged_neuron_rfpanel": {
+    "totals": {
+      "instructions": 82532,
+      "HBM->RF_bytes": 72306688,
+      "RF->HBM_bytes": 11241472,
+      "mma_rf_read_bytes": 289261632,
+      "mma_tc_service_cycles": 2654880,
+      "logical_MAC": 319890432
+    },
+    "max_per_sm": {
+      "HBM->RF_bytes": 5046528,
+      "RF->HBM_bytes": 717312,
+      "mma_rf_read_bytes": 18601896,
+      "mma_tc_service_cycles": 173196,
+      "logical_MAC": 20202240
+    },
+    "note": "Requested payload/service sums. Cache, overlap and stalls require frozen timing."
+  },
+  "project/campaigns/structural/parent_tc4x8kp4": {
+    "totals": {
+      "instructions": 74534,
+      "HBM->RF_bytes": 75464704,
+      "RF->HBM_bytes": 6522880,
+      "mma_rf_read_bytes": 526716864,
+      "mma_tc_service_cycles": 2603712,
+      "logical_MAC": 319890432
+    },
+    "max_per_sm": {
+      "HBM->RF_bytes": 5243904,
+      "RF->HBM_bytes": 422400,
+      "mma_rf_read_bytes": 33495096,
+      "mma_tc_service_cycles": 166728,
+      "logical_MAC": 20202240
+    },
+    "note": "Requested payload/service sums. Cache, overlap and stalls require frozen timing."
+  }
+}

@@ -1,0 +1,236 @@
+[
+  {
+    "name": "paired_preload_a",
+    "recipe_patch": {
+      "gemm_stages": {
+        "p1_prompt": {
+          "paired_a_preload": 1
+        }
+      }
+    },
+    "hardware_patch": {}
+  },
+  {
+    "name": "paired_late_b",
+    "recipe_patch": {
+      "gemm_stages": {
+        "p1_prompt": {
+          "paired_b_prefetch": 0
+        }
+      }
+    },
+    "hardware_patch": {}
+  },
+  {
+    "name": "paired_k16",
+    "recipe_patch": {
+      "gemm_stages": {
+        "p1_prompt": {
+          "paired_k_chunk": 16
+        }
+      }
+    },
+    "hardware_patch": {}
+  },
+  {
+    "name": "step_k16_n64",
+    "recipe_patch": {
+      "gemm_stages": {
+        "p1_step": {
+          "k_chunk": 16,
+          "n_tile": 64
+        }
+      }
+    },
+    "hardware_patch": {}
+  },
+  {
+    "name": "step_k16_n32",
+    "recipe_patch": {
+      "gemm_stages": {
+        "p1_step": {
+          "k_chunk": 16,
+          "n_tile": 32
+        }
+      }
+    },
+    "hardware_patch": {}
+  },
+  {
+    "name": "step_k32_n16",
+    "recipe_patch": {
+      "gemm_stages": {
+        "p1_step": {
+          "k_chunk": 32,
+          "n_tile": 16
+        }
+      }
+    },
+    "hardware_patch": {}
+  },
+  {
+    "name": "prompt_b2",
+    "recipe_patch": {
+      "gemm_stages": {
+        "p1_prompt": {
+          "b_buffers": 2
+        }
+      }
+    },
+    "hardware_patch": {}
+  },
+  {
+    "name": "w2_no_operand_pipeline",
+    "recipe_patch": {
+      "gemm_stages": {
+        "p1_prompt": {
+          "operand_pipeline": [
+            "qkv",
+            "wo",
+            "w1"
+          ]
+        }
+      }
+    },
+    "hardware_patch": {}
+  },
+  {
+    "name": "cache4",
+    "recipe_patch": {},
+    "hardware_patch": {
+      "cache_mib": 4
+    }
+  },
+  {
+    "name": "cache2",
+    "recipe_patch": {},
+    "hardware_patch": {
+      "cache_mib": 2
+    }
+  },
+  {
+    "name": "cache1",
+    "recipe_patch": {},
+    "hardware_patch": {
+      "cache_mib": 1
+    }
+  },
+  {
+    "name": "cache0",
+    "recipe_patch": {},
+    "hardware_patch": {
+      "cache_mib": 0
+    }
+  },
+  {
+    "name": "noc256",
+    "recipe_patch": {},
+    "hardware_patch": {
+      "noc_bytes_per_cycle": 256
+    }
+  },
+  {
+    "name": "hbm8_cache4",
+    "recipe_patch": {},
+    "hardware_patch": {
+      "hbm_channels": 8,
+      "cache_mib": 4
+    }
+  },
+  {
+    "name": "hbm8_cache2",
+    "recipe_patch": {},
+    "hardware_patch": {
+      "hbm_channels": 8,
+      "cache_mib": 2
+    }
+  },
+  {
+    "name": "sh8",
+    "recipe_patch": {},
+    "hardware_patch": {
+      "shared_banks": 8
+    }
+  },
+  {
+    "name": "sh2r",
+    "recipe_patch": {},
+    "hardware_patch": {
+      "shared_ports": "2R1W"
+    }
+  },
+  {
+    "name": "sh8_2r_cache4",
+    "recipe_patch": {},
+    "hardware_patch": {
+      "shared_banks": 8,
+      "shared_ports": "2R1W",
+      "cache_mib": 4
+    }
+  },
+  {
+    "name": "tc8x8_kp2",
+    "recipe_patch": {},
+    "hardware_patch": {
+      "tc_array": "8x8",
+      "tc_k_parallel": 2
+    }
+  },
+  {
+    "name": "tc8x16_kp1",
+    "recipe_patch": {},
+    "hardware_patch": {
+      "tc_array": "8x16",
+      "tc_k_parallel": 1
+    }
+  },
+  {
+    "name": "tc4x8_kp2",
+    "recipe_patch": {},
+    "hardware_patch": {
+      "tc_k_parallel": 2
+    }
+  },
+  {
+    "name": "dma2",
+    "recipe_patch": {},
+    "hardware_patch": {
+      "dma_engines": 2
+    }
+  },
+  {
+    "name": "dma_depth2",
+    "recipe_patch": {},
+    "hardware_patch": {
+      "dma_depth": 2
+    }
+  },
+  {
+    "name": "rf4r2w",
+    "recipe_patch": {},
+    "hardware_patch": {
+      "rf_ports": "4R2W"
+    }
+  },
+  {
+    "name": "sh1bank",
+    "recipe_patch": {},
+    "hardware_patch": {
+      "shared_banks": 1
+    }
+  },
+  {
+    "name": "no_multicast",
+    "recipe_patch": {},
+    "hardware_patch": {
+      "multicast": false
+    }
+  },
+  {
+    "name": "sm_noc64",
+    "recipe_patch": {},
+    "hardware_patch": {
+      "sm_noc_bytes_per_cycle": 64
+    }
+  }
+]

@@ -1,0 +1,589 @@
+{
+  "cycles": 600392,
+  "instructions": 74006,
+  "sim_seconds": 1627.1,
+  "peak_window_power_w": 10.987744390420774,
+  "peak_power_upper_bound_w": 12.048792425087994,
+  "average_power_w": 5.800521661720303,
+  "total_energy_pj": 6965173603.047153,
+  "hbm_read_bytes": 30157696,
+  "hbm_write_bytes": 6522880,
+  "area_mm2": 22.93345700352,
+  "stall_by_tape": {
+    "g0": {
+      "raw<-MMA.ACC": 226398,
+      "raw<-LD:HBM->RF": 207788,
+      "war": 71084,
+      "raw<-VEC": 48429,
+      "raw<-SFU": 12324,
+      "sync:BARRIER:imbalance": 8652,
+      "raw<-REDUCE": 7794,
+      "dma_slot": 7469,
+      "sync:BARRIER:drain": 4012,
+      "sync:STEP.COMMIT:imbalance": 1152,
+      "sync:STEP.COMMIT:drain": 45
+    },
+    "g1": {
+      "raw<-MMA.ACC": 229443,
+      "raw<-LD:HBM->RF": 199317,
+      "war": 71528,
+      "raw<-VEC": 48429,
+      "sync:BARRIER:imbalance": 14111,
+      "raw<-SFU": 12324,
+      "raw<-REDUCE": 7794,
+      "dma_slot": 7011,
+      "sync:BARRIER:drain": 4012,
+      "sync:STEP.COMMIT:imbalance": 1136,
+      "sync:STEP.COMMIT:drain": 45
+    },
+    "g10": {
+      "raw<-MMA.ACC": 236098,
+      "raw<-LD:HBM->RF": 143340,
+      "sync:BARRIER:imbalance": 70606,
+      "war": 63104,
+      "raw<-VEC": 46503,
+      "raw<-SFU": 12096,
+      "sync:BARRIER:drain": 8571,
+      "dma_slot": 8392,
+      "raw<-REDUCE": 7248,
+      "sync:STEP.COMMIT:imbalance": 80,
+      "sync:STEP.COMMIT:drain": 45
+    },
+    "g11": {
+      "raw<-MMA.ACC": 236470,
+      "raw<-LD:HBM->RF": 142953,
+      "sync:BARRIER:imbalance": 71293,
+      "war": 63104,
+      "raw<-VEC": 46503,
+      "raw<-SFU": 12096,
+      "sync:BARRIER:drain": 8571,
+      "dma_slot": 7736,
+      "raw<-REDUCE": 7248,
+      "sync:STEP.COMMIT:imbalance": 64,
+      "sync:STEP.COMMIT:drain": 45
+    },
+    "g12": {
+      "raw<-MMA.ACC": 235901,
+      "raw<-LD:HBM->RF": 144407,
+      "sync:BARRIER:imbalance": 70177,
+      "war": 63104,
+      "raw<-VEC": 46503,
+      "raw<-SFU": 12096,
+      "sync:BARRIER:drain": 8571,
+      "dma_slot": 7983,
+      "raw<-REDUCE": 7248,
+      "sync:STEP.COMMIT:imbalance": 48,
+      "sync:STEP.COMMIT:drain": 45
+    },
+    "g13": {
+      "raw<-MMA.ACC": 236531,
+      "raw<-LD:HBM->RF": 143810,
+      "sync:BARRIER:imbalance": 70177,
+      "war": 63104,
+      "raw<-VEC": 46503,
+      "raw<-SFU": 12096,
+      "sync:BARRIER:drain": 8571,
+      "dma_slot": 7966,
+      "raw<-REDUCE": 7248,
+      "sync:STEP.COMMIT:drain": 45,
+      "sync:STEP.COMMIT:imbalance": 32
+    },
+    "g14": {
+      "raw<-MMA.ACC": 234178,
+      "raw<-LD:HBM->RF": 148599,
+      "sync:BARRIER:imbalance": 67431,
+      "war": 63104,
+      "raw<-VEC": 46503,
+      "raw<-SFU": 12096,
+      "sync:BARRIER:drain": 8571,
+      "dma_slot": 8292,
+      "raw<-REDUCE": 7248,
+      "sync:STEP.COMMIT:drain": 45,
+      "sync:STEP.COMMIT:imbalance": 16
+    },
+    "g15": {
+      "raw<-MMA.ACC": 236527,
+      "raw<-LD:HBM->RF": 145422,
+      "sync:BARRIER:imbalance": 68265,
+      "war": 63104,
+      "raw<-VEC": 46503,
+      "raw<-SFU": 12096,
+      "sync:BARRIER:drain": 8571,
+      "dma_slot": 8302,
+      "raw<-REDUCE": 7248,
+      "sync:STEP.COMMIT:drain": 45,
+      "sync:STEP.COMMIT:imbalance": 0
+    },
+    "g2": {
+      "raw<-MMA.ACC": 233441,
+      "raw<-LD:HBM->RF": 197243,
+      "war": 71255,
+      "raw<-VEC": 46623,
+      "sync:BARRIER:imbalance": 14859,
+      "raw<-SFU": 12276,
+      "raw<-REDUCE": 7440,
+      "dma_slot": 6904,
+      "sync:BARRIER:drain": 4012,
+      "sync:STEP.COMMIT:imbalance": 1112,
+      "sync:STEP.COMMIT:drain": 45
+    },
+    "g3": {
+      "raw<-MMA.ACC": 233279,
+      "raw<-LD:HBM->RF": 198475,
+      "war": 71255,
+      "raw<-VEC": 46623,
+      "sync:BARRIER:imbalance": 13419,
+      "raw<-SFU": 12276,
+      "raw<-REDUCE": 7440,
+      "dma_slot": 7298,
+      "sync:BARRIER:drain": 4012,
+      "sync:STEP.COMMIT:imbalance": 1088,
+      "sync:STEP.COMMIT:drain": 45
+    },
+    "g4": {
+      "raw<-MMA.ACC": 231509,
+      "raw<-LD:HBM->RF": 202348,
+      "war": 71255,
+      "raw<-VEC": 46623,
+      "raw<-SFU": 12276,
+      "sync:BARRIER:imbalance": 11250,
+      "raw<-REDUCE": 7440,
+      "dma_slot": 7380,
+      "sync:BARRIER:drain": 4012,
+      "sync:STEP.COMMIT:imbalance": 1072,
+      "sync:STEP.COMMIT:drain": 45
+    },
+    "g5": {
+      "raw<-MMA.ACC": 228446,
+      "raw<-LD:HBM->RF": 205102,
+      "war": 71084,
+      "raw<-VEC": 46623,
+      "raw<-SFU": 12276,
+      "sync:BARRIER:imbalance": 11834,
+      "raw<-REDUCE": 7440,
+      "dma_slot": 7292,
+      "sync:BARRIER:drain": 4012,
+      "sync:STEP.COMMIT:imbalance": 1056,
+      "sync:STEP.COMMIT:drain": 45
+    },
+    "g6": {
+      "raw<-MMA.ACC": 232782,
+      "raw<-LD:HBM->RF": 201984,
+      "war": 71426,
+      "raw<-VEC": 46623,
+      "raw<-SFU": 12276,
+      "sync:BARRIER:imbalance": 10458,
+      "raw<-REDUCE": 7440,
+      "dma_slot": 7124,
+      "sync:BARRIER:drain": 4012,
+      "sync:STEP.COMMIT:imbalance": 1040,
+      "sync:STEP.COMMIT:drain": 45
+    },
+    "g7": {
+      "raw<-MMA.ACC": 233362,
+      "raw<-LD:HBM->RF": 200981,
+      "war": 71426,
+      "raw<-VEC": 46623,
+      "raw<-SFU": 12276,
+      "sync:BARRIER:imbalance": 10876,
+      "raw<-REDUCE": 7440,
+      "dma_slot": 7145,
+      "sync:BARRIER:drain": 4012,
+      "sync:STEP.COMMIT:imbalance": 1024,
+      "sync:STEP.COMMIT:drain": 45
+    },
+    "g8": {
+      "raw<-MMA.ACC": 236503,
+      "raw<-LD:HBM->RF": 141226,
+      "sync:BARRIER:imbalance": 72903,
+      "war": 63104,
+      "raw<-VEC": 46503,
+      "raw<-SFU": 12096,
+      "sync:BARRIER:drain": 8571,
+      "dma_slot": 7772,
+      "raw<-REDUCE": 7248,
+      "sync:STEP.COMMIT:imbalance": 112,
+      "sync:STEP.COMMIT:drain": 45
+    },
+    "g9": {
+      "raw<-MMA.ACC": 237240,
+      "raw<-LD:HBM->RF": 140593,
+      "sync:BARRIER:imbalance": 72300,
+      "war": 63104,
+      "raw<-VEC": 46503,
+      "raw<-SFU": 12096,
+      "sync:BARRIER:drain": 8571,
+      "dma_slot": 8287,
+      "raw<-REDUCE": 7248,
+      "sync:STEP.COMMIT:imbalance": 96,
+      "sync:STEP.COMMIT:drain": 45
+    }
+  },
+  "stall_g0_by_kind_cause": {
+    "p_w1|MMA.ACC|raw": 90366,
+    "p_w2|MMA.ACC|raw": 84651,
+    "sm_ws|MMA.ACC|raw": 73899,
+    "p_qkv|MMA.ACC|raw": 66898,
+    "p_w1|LD:HBM->RF|war": 59904,
+    "p_w1|VEC|raw": 31368,
+    "p_wo|MMA.ACC|raw": 24433,
+    "sm_qkvs|MMA.ACC|raw": 16830,
+    "p_a|MMA.ACC|raw": 14902,
+    "p_a|ST:RF->HBM|raw": 12470,
+    "p_a|VEC|raw": 9402,
+    "p_resln2|VEC|raw": 9399,
+    "p_qkv|ST:RF->HBM|raw": 7288,
+    "sm_wos|MMA.ACC|raw": 6234,
+    "p_w1|LD:HBM->RF|dma_slot": 6191,
+    "p_out|VEC|raw": 5973,
+    "sm_ws|LD:HBM->RF|war": 5670,
+    "p_a|REDUCE|raw": 5016,
+    "p_ln1|VEC|raw": 4992,
+    "sm_as|MMA.ACC|raw": 4947
+  },
+  "stall_by_stage": {
+    "p_w1": {
+      "raw<-MMA.ACC": 1344636,
+      "war": 968544,
+      "raw<-VEC": 447360,
+      "raw<-LD:HBM->RF": 188954,
+      "raw<-SFU": 135936,
+      "dma_slot": 101223
+    },
+    "p_w2": {
+      "raw<-MMA.ACC": 1158702,
+      "raw<-LD:HBM->RF": 204521
+    },
+    "p_qkv": {
+      "raw<-MMA.ACC": 812270,
+      "raw<-LD:HBM->RF": 345416,
+      "dma_slot": 21130,
+      "war": 3264
+    },
+    "sm_ws": {
+      "raw<-LD:HBM->RF": 1001639,
+      "war": 59712,
+      "raw<-VEC": 8160,
+      "raw<-MMA.ACC": 5552,
+      "raw<-SFU": 2304
+    },
+    "p_a": {
+      "raw<-LD:HBM->RF": 300114,
+      "raw<-MMA.ACC": 207415,
+      "raw<-REDUCE": 70656,
+      "raw<-VEC": 57360,
+      "raw<-SFU": 49152,
+      "war": 8160
+    },
+    "p_wo": {
+      "raw<-LD:HBM->RF": 231894,
+      "raw<-MMA.ACC": 191767
+    },
+    "p_resln2": {
+      "raw<-VEC": 115584,
+      "raw<-LD:HBM->RF": 74761,
+      "raw<-REDUCE": 24576,
+      "raw<-SFU": 3072
+    },
+    "p_ln1": {
+      "raw<-VEC": 96384,
+      "raw<-LD:HBM->RF": 62816,
+      "raw<-REDUCE": 20736,
+      "raw<-SFU": 3072
+    },
+    "sm_qkvs": {
+      "raw<-LD:HBM->RF": 133278,
+      "war": 23049,
+      "raw<-MMA.ACC": 6246
+    },
+    "p_out": {
+      "raw<-LD:HBM->RF": 105681,
+      "raw<-VEC": 19200
+    },
+    "sm_as": {
+      "raw<-LD:HBM->RF": 43122,
+      "raw<-MMA.ACC": 9324,
+      "war": 4128,
+      "raw<-REDUCE": 1536,
+      "raw<-SFU": 1440,
+      "raw<-VEC": 960
+    },
+    "sm_wos": {
+      "raw<-LD:HBM->RF": 48444,
+      "war": 7056,
+      "raw<-MMA.ACC": 2196
+    },
+    "p_output": {
+      "raw<-LD:HBM->RF": 20920,
+      "war": 1232
+    },
+    "sm_reslns": {
+      "raw<-VEC": 1806,
+      "raw<-LD:HBM->RF": 627,
+      "raw<-REDUCE": 384,
+      "raw<-SFU": 48
+    },
+    "sm_lns": {
+      "raw<-VEC": 1506,
+      "raw<-LD:HBM->RF": 480,
+      "raw<-REDUCE": 324,
+      "raw<-SFU": 48
+    },
+    "sm_outs": {
+      "raw<-LD:HBM->RF": 810,
+      "raw<-VEC": 300
+    },
+    "sm_outputs": {
+      "raw<-LD:HBM->RF": 111
+    }
+  },
+  "service_by_tape": {
+    "g0": {
+      "LD:HBM->RF": 801920,
+      "MMA.ACC": 510798,
+      "VEC": 70597,
+      "ST:RF->HBM": 36514,
+      "SFU": 12606,
+      "REDUCE": 8298,
+      "BARRIER": 42,
+      "WG.BEGIN": 1
+    },
+    "g1": {
+      "LD:HBM->RF": 800235,
+      "MMA.ACC": 507884,
+      "VEC": 70846,
+      "ST:RF->HBM": 33375,
+      "SFU": 12606,
+      "REDUCE": 8298,
+      "WG.BEGIN": 1,
+      "WG.END": 1
+    },
+    "g10": {
+      "LD:HBM->RF": 601349,
+      "MMA.ACC": 487872,
+      "VEC": 67372,
+      "ST:RF->HBM": 45303,
+      "SFU": 12366,
+      "REDUCE": 7728,
+      "WG.BEGIN": 1,
+      "WG.END": 1
+    },
+    "g11": {
+      "LD:HBM->RF": 598115,
+      "MMA.ACC": 489375,
+      "VEC": 67322,
+      "ST:RF->HBM": 46653,
+      "SFU": 12366,
+      "REDUCE": 7728,
+      "WG.BEGIN": 1,
+      "WG.END": 1
+    },
+    "g12": {
+      "LD:HBM->RF": 598911,
+      "MMA.ACC": 487688,
+      "VEC": 67372,
+      "ST:RF->HBM": 46013,
+      "SFU": 12366,
+      "REDUCE": 7728,
+      "WG.BEGIN": 1,
+      "WG.END": 1
+    },
+    "g13": {
+      "LD:HBM->RF": 601753,
+      "MMA.ACC": 489569,
+      "VEC": 67372,
+      "ST:RF->HBM": 46161,
+      "SFU": 12366,
+      "REDUCE": 7728,
+      "WG.BEGIN": 1,
+      "WG.END": 1
+    },
+    "g14": {
+      "LD:HBM->RF": 613176,
+      "MMA.ACC": 487527,
+      "VEC": 67372,
+      "ST:RF->HBM": 48469,
+      "SFU": 12366,
+      "REDUCE": 7728,
+      "WG.BEGIN": 1,
+      "WG.END": 1
+    },
+    "g15": {
+      "LD:HBM->RF": 608075,
+      "MMA.ACC": 489379,
+      "VEC": 67372,
+      "ST:RF->HBM": 48689,
+      "SFU": 12366,
+      "REDUCE": 7728,
+      "WG.BEGIN": 1,
+      "WG.END": 1
+    },
+    "g2": {
+      "LD:HBM->RF": 789337,
+      "MMA.ACC": 510381,
+      "VEC": 68963,
+      "ST:RF->HBM": 36615,
+      "SFU": 12552,
+      "REDUCE": 7932,
+      "WG.BEGIN": 1,
+      "WG.END": 1
+    },
+    "g3": {
+      "LD:HBM->RF": 784197,
+      "MMA.ACC": 512511,
+      "VEC": 68841,
+      "ST:RF->HBM": 34953,
+      "SFU": 12552,
+      "REDUCE": 7932,
+      "WG.BEGIN": 1,
+      "WG.END": 1
+    },
+    "g4": {
+      "LD:HBM->RF": 781945,
+      "MMA.ACC": 510500,
+      "VEC": 68970,
+      "ST:RF->HBM": 38552,
+      "SFU": 12552,
+      "REDUCE": 7932,
+      "WG.BEGIN": 1,
+      "WG.END": 1
+    },
+    "g5": {
+      "LD:HBM->RF": 792970,
+      "MMA.ACC": 510085,
+      "VEC": 68817,
+      "ST:RF->HBM": 36954,
+      "SFU": 12552,
+      "REDUCE": 7932,
+      "WG.BEGIN": 1,
+      "WG.END": 1
+    },
+    "g6": {
+      "LD:HBM->RF": 792972,
+      "MMA.ACC": 510636,
+      "VEC": 69123,
+      "ST:RF->HBM": 38921,
+      "SFU": 12552,
+      "REDUCE": 7932,
+      "WG.BEGIN": 1,
+      "WG.END": 1
+    },
+    "g7": {
+      "LD:HBM->RF": 801781,
+      "MMA.ACC": 511381,
+      "VEC": 69123,
+      "ST:RF->HBM": 37197,
+      "SFU": 12552,
+      "REDUCE": 7932,
+      "WG.BEGIN": 1,
+      "WG.END": 1
+    },
+    "g8": {
+      "LD:HBM->RF": 592981,
+      "MMA.ACC": 487766,
+      "VEC": 67447,
+      "ST:RF->HBM": 47676,
+      "SFU": 12366,
+      "REDUCE": 7728,
+      "BARRIER": 21,
+      "WG.BEGIN": 1
+    },
+    "g9": {
+      "LD:HBM->RF": 595924,
+      "MMA.ACC": 489066,
+      "VEC": 67372,
+      "ST:RF->HBM": 47506,
+      "SFU": 12366,
+      "REDUCE": 7728,
+      "WG.BEGIN": 1,
+      "WG.END": 1
+    }
+  },
+  "critical_path": {
+    "length_instructions": 4077,
+    "end_cycle": 600392,
+    "covered_cycles": 600392,
+    "service_by_kind": {
+      "MMA.ACC": 330569,
+      "LD:HBM->RF": 154405,
+      "VEC": 53699,
+      "ST:RF->HBM": 44097,
+      "SFU": 12534,
+      "REDUCE": 5043,
+      "BARRIER": 42,
+      "WG.BEGIN": 1,
+      "STEP.COMMIT": 1,
+      "WG.END": 1
+    },
+    "gaps": {
+      "gap:none": 0,
+      "gap:raw": 0,
+      "gap:sync": 0,
+      "gap:war": 0,
+      "gap:dma_slot": 0
+    },
+    "by_stage": {
+      "p_w1": 201598,
+      "p_w2": 86290,
+      "sm_ws": 81515,
+      "p_qkv": 77135,
+      "p_a": 45702,
+      "p_wo": 27683,
+      "sm_qkvs": 21114,
+      "p_resln2": 16049,
+      "p_ln1": 14689,
+      "p_out": 8471,
+      "sm_as": 7641,
+      "sm_wos": 7578,
+      "sm_reslns": 1605,
+      "sm_lns": 1344,
+      "p_output": 1153,
+      "sm_outs": 684,
+      "sm_outputs": 96,
+      "-": 45
+    }
+  },
+  "energy": {
+    "total_pj_by_resource": {
+      "hbm_read": 4523654400,
+      "hbm_write": 978432000.0,
+      "tc": 424439808.0,
+      "noc_in": 116617805.824,
+      "rf_read": 84854126.39999999,
+      "cache_query": 39221120,
+      "cache_read": 39115315.199999996,
+      "cache_fill": 24126156.8,
+      "rf_write": 20870750.4,
+      "noc_out": 10514882.56,
+      "vec": 5518416.0,
+      "cache_invalidate": 4076800,
+      "sfu": 2515500,
+      "dma": 2464576,
+      "reduce": 298740.0
+    },
+    "peak_window": {
+      "start_cycle": 28259,
+      "fraction": 0.047,
+      "window_pj": 20828815.9,
+      "by_resource_pj": {
+        "hbm_read": 10728000.0,
+        "hbm_write": 8462400.0,
+        "tc": 943063.0,
+        "noc_in": 182401.0,
+        "rf_read": 165196.8,
+        "noc_out": 100588.8,
+        "cache_query": 70240.0,
+        "cache_fill": 57190.4,
+        "cache_read": 45139.2,
+        "cache_invalidate": 35240.0,
+        "rf_write": 32313.6,
+        "dma": 4722.0
+      },
+      "stages_cycles": {
+        "p_qkv": 20458,
+        "p_a": 13330
+      }
+    }
+  },
+  "validation": "dev functional seeds 7/19; HBM race check pending"
+}

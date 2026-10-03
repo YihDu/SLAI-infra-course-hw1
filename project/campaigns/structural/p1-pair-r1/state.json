@@ -1,0 +1,532 @@
+{
+  "status": "running",
+  "phase": "joint_grades",
+  "started_utc": "2026-09-29T18:05:59.224440+00:00",
+  "workers": 6,
+  "planned": 27,
+  "results": [
+    {
+      "name": "step_k16_n64",
+      "recipe_patch": {
+        "gemm_stages": {
+          "p1_step": {
+            "k_chunk": 16,
+            "n_tile": 64
+          }
+        }
+      },
+      "hardware_patch": {},
+      "P1_returncode": 1
+    },
+    {
+      "name": "paired_late_b",
+      "recipe_patch": {
+        "gemm_stages": {
+          "p1_prompt": {
+            "paired_b_prefetch": 0
+          }
+        }
+      },
+      "hardware_patch": {},
+      "P1_returncode": 0,
+      "P1": 526494,
+      "area_mm2": 23.06145700352,
+      "P1_peak_w": 11.157735073089668,
+      "D1": 58770,
+      "D1_source": "/home/jovyan/projects/SLAI-infra-course-hw1/project/campaigns/d1-sh/layer_rf_tc_noc512",
+      "D1_verified": true,
+      "predicted_score": 36115.70251935996,
+      "frozen_D1_passed": true
+    },
+    {
+      "name": "paired_k16",
+      "recipe_patch": {
+        "gemm_stages": {
+          "p1_prompt": {
+            "paired_k_chunk": 16
+          }
+        }
+      },
+      "hardware_patch": {},
+      "P1_returncode": 0,
+      "P1": 541622,
+      "area_mm2": 23.06145700352,
+      "P1_peak_w": 11.280452105089136,
+      "D1": 58770,
+      "D1_source": "/home/jovyan/projects/SLAI-infra-course-hw1/project/campaigns/d1-sh/layer_rf_tc_noc512",
+      "D1_verified": true,
+      "predicted_score": 35607.75818894991
+    },
+    {
+      "name": "step_k16_n32",
+      "recipe_patch": {
+        "gemm_stages": {
+          "p1_step": {
+            "k_chunk": 16,
+            "n_tile": 32
+          }
+        }
+      },
+      "hardware_patch": {},
+      "P1_returncode": 0,
+      "P1": 545922,
+      "area_mm2": 23.06145700352,
+      "P1_peak_w": 11.236964777086685,
+      "D1": 58770,
+      "D1_source": "/home/jovyan/projects/SLAI-infra-course-hw1/project/campaigns/d1-sh/layer_rf_tc_noc512",
+      "D1_verified": true,
+      "predicted_score": 35467.24722216198
+    },
+    {
+      "name": "paired_preload_a",
+      "recipe_patch": {
+        "gemm_stages": {
+          "p1_prompt": {
+            "paired_a_preload": 1
+          }
+        }
+      },
+      "hardware_patch": {},
+      "P1_returncode": 0,
+      "P1": 545365,
+      "area_mm2": 23.06145700352,
+      "P1_peak_w": 11.140463990180322,
+      "D1": 58770,
+      "D1_source": "/home/jovyan/projects/SLAI-infra-course-hw1/project/campaigns/d1-sh/layer_rf_tc_noc512",
+      "D1_verified": true,
+      "predicted_score": 35485.35455862151
+    },
+    {
+      "name": "step_k32_n16",
+      "recipe_patch": {
+        "gemm_stages": {
+          "p1_step": {
+            "k_chunk": 32,
+            "n_tile": 16
+          }
+        }
+      },
+      "hardware_patch": {},
+      "P1_returncode": 0,
+      "P1": 610952,
+      "area_mm2": 23.06145700352,
+      "P1_peak_w": 11.236964777086685,
+      "D1": 58770,
+      "D1_source": "/home/jovyan/projects/SLAI-infra-course-hw1/project/campaigns/d1-sh/layer_rf_tc_noc512",
+      "D1_verified": true,
+      "predicted_score": 33526.57852854294
+    },
+    {
+      "name": "prompt_b2",
+      "recipe_patch": {
+        "gemm_stages": {
+          "p1_prompt": {
+            "b_buffers": 2
+          }
+        }
+      },
+      "hardware_patch": {},
+      "P1_returncode": 0,
+      "P1": 549503,
+      "area_mm2": 23.06145700352,
+      "P1_peak_w": 10.952510649088927,
+      "D1": 58770,
+      "D1_source": "/home/jovyan/projects/SLAI-infra-course-hw1/project/campaigns/d1-sh/layer_rf_tc_noc512",
+      "D1_verified": true,
+      "predicted_score": 35351.491884149444
+    },
+    {
+      "name": "cache0",
+      "recipe_patch": {},
+      "hardware_patch": {
+        "cache_mib": 0
+      },
+      "P1_returncode": 0,
+      "P1": 654584,
+      "area_mm2": 19.58521098752,
+      "P1_peak_w": 11.331714562667601,
+      "D1_returncode": 0,
+      "D1": 57057,
+      "D1_peak_w": 10.36964627468937,
+      "D1_source": "/home/jovyan/projects/SLAI-infra-course-hw1/project/campaigns/structural/p1-pair-r1/cache0__d1",
+      "D1_verified": false,
+      "predicted_score": 32872.55542041954
+    },
+    {
+      "name": "w2_no_operand_pipeline",
+      "recipe_patch": {
+        "gemm_stages": {
+          "p1_prompt": {
+            "operand_pipeline": [
+              "qkv",
+              "wo",
+              "w1"
+            ]
+          }
+        }
+      },
+      "hardware_patch": {},
+      "P1_returncode": 0,
+      "P1": 611064,
+      "area_mm2": 23.06145700352,
+      "P1_peak_w": 11.128816158426114,
+      "D1": 58770,
+      "D1_source": "/home/jovyan/projects/SLAI-infra-course-hw1/project/campaigns/d1-sh/layer_rf_tc_noc512",
+      "D1_verified": true,
+      "predicted_score": 33523.505897140625
+    },
+    {
+      "name": "cache2",
+      "recipe_patch": {},
+      "hardware_patch": {
+        "cache_mib": 2
+      },
+      "P1_returncode": 0,
+      "P1": 549185,
+      "area_mm2": 20.54427249152,
+      "P1_peak_w": 11.174035164286686,
+      "D1_returncode": 0,
+      "D1": 58770,
+      "D1_peak_w": 10.71311004428452,
+      "D1_source": "/home/jovyan/projects/SLAI-infra-course-hw1/project/campaigns/structural/p1-pair-r1/cache2__d1",
+      "D1_verified": false,
+      "predicted_score": 35361.72536424385
+    },
+    {
+      "name": "cache1",
+      "recipe_patch": {},
+      "hardware_patch": {
+        "cache_mib": 1
+      },
+      "P1_returncode": 0,
+      "P1": 549159,
+      "area_mm2": 20.12474173952,
+      "P1_peak_w": 11.089792599487993,
+      "D1_returncode": 0,
+      "D1": 58808,
+      "D1_peak_w": 10.70262177548452,
+      "D1_source": "/home/jovyan/projects/SLAI-infra-course-hw1/project/campaigns/structural/p1-pair-r1/cache1__d1",
+      "D1_verified": false,
+      "predicted_score": 35351.135486793806
+    },
+    {
+      "name": "cache4",
+      "recipe_patch": {},
+      "hardware_patch": {
+        "cache_mib": 4
+      },
+      "P1_returncode": 0,
+      "P1": 548397,
+      "area_mm2": 21.38333399552,
+      "P1_peak_w": 11.195011701886687,
+      "D1_returncode": 0,
+      "D1": 58770,
+      "D1_peak_w": 10.73408658188452,
+      "D1_source": "/home/jovyan/projects/SLAI-infra-course-hw1/project/campaigns/structural/p1-pair-r1/cache4__d1",
+      "D1_verified": false,
+      "predicted_score": 35387.122145086345
+    },
+    {
+      "name": "noc256",
+      "recipe_patch": {},
+      "hardware_patch": {
+        "noc_bytes_per_cycle": 256
+      },
+      "P1_returncode": 0,
+      "P1": 563573,
+      "area_mm2": 22.93345700352,
+      "P1_peak_w": 11.093703721086094,
+      "D1_returncode": 0,
+      "D1": 62672,
+      "D1_peak_w": 10.476701993089254,
+      "D1_source": "/home/jovyan/projects/SLAI-infra-course-hw1/project/campaigns/structural/p1-pair-r1/noc256__d1",
+      "D1_verified": false,
+      "predicted_score": 33803.27350028305
+    },
+    {
+      "name": "hbm8_cache4",
+      "recipe_patch": {},
+      "hardware_patch": {
+        "hbm_channels": 8,
+        "cache_mib": 4
+      },
+      "P1_returncode": 0,
+      "P1": 527556,
+      "area_mm2": 21.58333399552,
+      "P1_peak_w": 20.31539710358599
+    },
+    {
+      "name": "hbm8_cache2",
+      "recipe_patch": {},
+      "hardware_patch": {
+        "hbm_channels": 8,
+        "cache_mib": 2
+      },
+      "P1_returncode": 0,
+      "P1": 523760,
+      "area_mm2": 20.74427249152,
+      "P1_peak_w": 20.294420565985988
+    },
+    {
+      "name": "sh2r",
+      "recipe_patch": {},
+      "hardware_patch": {
+        "shared_ports": "2R1W"
+      },
+      "P1_returncode": 0,
+      "P1": 548218,
+      "area_mm2": 23.419857003519997,
+      "P1_peak_w": 11.245924777086685,
+      "D1_returncode": 0,
+      "D1": 57794,
+      "D1_peak_w": 10.784999657084503,
+      "D1_source": "/home/jovyan/projects/SLAI-infra-course-hw1/project/campaigns/structural/p1-pair-r1/sh2r__d1",
+      "D1_verified": false,
+      "predicted_score": 35690.49763265431
+    },
+    {
+      "name": "sh8",
+      "recipe_patch": {},
+      "hardware_patch": {
+        "shared_banks": 8
+      },
+      "P1_returncode": 0,
+      "P1": 548218,
+      "area_mm2": 23.57345700352,
+      "P1_peak_w": 11.249764777086686,
+      "D1_returncode": 0,
+      "D1": 57658,
+      "D1_peak_w": 10.78883965708451,
+      "D1_source": "/home/jovyan/projects/SLAI-infra-course-hw1/project/campaigns/structural/p1-pair-r1/sh8__d1",
+      "D1_verified": false,
+      "predicted_score": 35732.56507149242,
+      "frozen_D1_passed": true
+    },
+    {
+      "name": "dma_depth2",
+      "recipe_patch": {},
+      "hardware_patch": {
+        "dma_depth": 2
+      },
+      "P1_returncode": 1
+    },
+    {
+      "name": "sh8_2r_cache4",
+      "recipe_patch": {},
+      "hardware_patch": {
+        "shared_banks": 8,
+        "shared_ports": "2R1W",
+        "cache_mib": 4
+      },
+      "P1_returncode": 0,
+      "P1": 548397,
+      "area_mm2": 22.61213399552,
+      "P1_peak_w": 11.225731701886685,
+      "D1_returncode": 0,
+      "D1": 56978,
+      "D1_peak_w": 10.76480658188449,
+      "D1_source": "/home/jovyan/projects/SLAI-infra-course-hw1/project/campaigns/structural/p1-pair-r1/sh8_2r_cache4__d1",
+      "D1_verified": false,
+      "predicted_score": 35939.28974242998,
+      "frozen_D1_passed": true
+    },
+    {
+      "name": "tc8x8_kp2",
+      "recipe_patch": {},
+      "hardware_patch": {
+        "tc_array": "8x8",
+        "tc_k_parallel": 2
+      },
+      "P1_returncode": 0,
+      "P1": 516781,
+      "area_mm2": 23.26032484352,
+      "P1_peak_w": 11.428945474451274,
+      "D1_returncode": 0,
+      "D1": 64566,
+      "D1_peak_w": 10.781011353084265,
+      "D1_source": "/home/jovyan/projects/SLAI-infra-course-hw1/project/campaigns/structural/p1-pair-r1/tc8x8_kp2__d1",
+      "D1_verified": false,
+      "predicted_score": 34778.86587641177
+    },
+    {
+      "name": "tc8x16_kp1",
+      "recipe_patch": {},
+      "hardware_patch": {
+        "tc_array": "8x16",
+        "tc_k_parallel": 1
+      },
+      "P1_returncode": 0,
+      "P1": 518406,
+      "area_mm2": 23.65806052352,
+      "P1_peak_w": 11.150765728961359,
+      "D1_returncode": 0,
+      "D1": 70278,
+      "D1_peak_w": 10.790954745084258,
+      "D1_source": "/home/jovyan/projects/SLAI-infra-course-hw1/project/campaigns/structural/p1-pair-r1/tc8x16_kp1__d1",
+      "D1_verified": false,
+      "predicted_score": 33283.26471275532
+    },
+    {
+      "name": "rf4r2w",
+      "recipe_patch": {},
+      "hardware_patch": {
+        "rf_ports": "4R2W"
+      },
+      "P1_returncode": 0,
+      "P1": 839683,
+      "area_mm2": 20.913459553280003,
+      "P1_peak_w": 10.88909245610501,
+      "D1_returncode": 0,
+      "D1": 79016,
+      "D1_peak_w": 10.721164680828492,
+      "D1_source": "/home/jovyan/projects/SLAI-infra-course-hw1/project/campaigns/structural/p1-pair-r1/rf4r2w__d1",
+      "D1_verified": false,
+      "predicted_score": 24663.540746931056
+    },
+    {
+      "name": "tc4x8_kp2",
+      "recipe_patch": {},
+      "hardware_patch": {
+        "tc_k_parallel": 2
+      },
+      "P1_returncode": 0,
+      "P1": 594767,
+      "area_mm2": 20.11745700352,
+      "P1_peak_w": 11.026837013516257,
+      "D1_returncode": 0,
+      "D1": 64566,
+      "D1_peak_w": 10.702439657084549,
+      "D1_source": "/home/jovyan/projects/SLAI-infra-course-hw1/project/campaigns/structural/p1-pair-r1/tc4x8_kp2__d1",
+      "D1_verified": false,
+      "predicted_score": 32418.674406531154
+    },
+    {
+      "name": "sh1bank",
+      "recipe_patch": {},
+      "hardware_patch": {
+        "shared_banks": 1
+      },
+      "P1_returncode": 0,
+      "P1": 548218,
+      "area_mm2": 22.67745700352,
+      "P1_peak_w": 11.227364777086686,
+      "D1_returncode": 0,
+      "D1": 74511,
+      "D1_peak_w": 10.76643965708452,
+      "D1_source": "/home/jovyan/projects/SLAI-infra-course-hw1/project/campaigns/structural/p1-pair-r1/sh1bank__d1",
+      "D1_verified": false,
+      "predicted_score": 31432.85174420895
+    },
+    {
+      "name": "dma2",
+      "recipe_patch": {},
+      "hardware_patch": {
+        "dma_engines": 2
+      },
+      "P1_returncode": 0,
+      "P1": 593051,
+      "area_mm2": 21.941457003520004,
+      "P1_peak_w": 10.974517001090716,
+      "D1_returncode": 0,
+      "D1": 59262,
+      "D1_peak_w": 10.53076276108713,
+      "D1_source": "/home/jovyan/projects/SLAI-infra-course-hw1/project/campaigns/structural/p1-pair-r1/dma2__d1",
+      "D1_verified": false,
+      "predicted_score": 33887.25980368223
+    },
+    {
+      "name": "no_multicast",
+      "recipe_patch": {},
+      "hardware_patch": {
+        "multicast": false
+      },
+      "P1_returncode": 0,
+      "P1": 624407,
+      "area_mm2": 22.42145700352,
+      "P1_peak_w": 10.66612360358555,
+      "D1_returncode": 0,
+      "D1": 72361,
+      "D1_peak_w": 10.53654525710235,
+      "D1_source": "/home/jovyan/projects/SLAI-infra-course-hw1/project/campaigns/structural/p1-pair-r1/no_multicast__d1",
+      "D1_verified": false,
+      "predicted_score": 29887.14730257958
+    },
+    {
+      "name": "sm_noc64",
+      "recipe_patch": {},
+      "hardware_patch": {
+        "sm_noc_bytes_per_cycle": 64
+      },
+      "P1_returncode": 0,
+      "P1": 546331,
+      "area_mm2": 22.856657003520002,
+      "P1_peak_w": 11.186841713090251,
+      "D1_returncode": 0,
+      "D1": 58978,
+      "D1_peak_w": 10.77091965708452,
+      "D1_source": "/home/jovyan/projects/SLAI-infra-course-hw1/project/campaigns/structural/p1-pair-r1/sm_noc64__d1",
+      "D1_verified": false,
+      "predicted_score": 35391.39514425565
+    }
+  ],
+  "finalists": [
+    {
+      "name": "paired_late_b",
+      "recipe_patch": {
+        "gemm_stages": {
+          "p1_prompt": {
+            "paired_b_prefetch": 0
+          }
+        }
+      },
+      "hardware_patch": {},
+      "P1_returncode": 0,
+      "P1": 526494,
+      "area_mm2": 23.06145700352,
+      "P1_peak_w": 11.157735073089668,
+      "D1": 58770,
+      "D1_source": "/home/jovyan/projects/SLAI-infra-course-hw1/project/campaigns/d1-sh/layer_rf_tc_noc512",
+      "D1_verified": true,
+      "predicted_score": 36115.70251935996,
+      "frozen_D1_passed": true
+    },
+    {
+      "name": "sh8_2r_cache4",
+      "recipe_patch": {},
+      "hardware_patch": {
+        "shared_banks": 8,
+        "shared_ports": "2R1W",
+        "cache_mib": 4
+      },
+      "P1_returncode": 0,
+      "P1": 548397,
+      "area_mm2": 22.61213399552,
+      "P1_peak_w": 11.225731701886685,
+      "D1_returncode": 0,
+      "D1": 56978,
+      "D1_peak_w": 10.76480658188449,
+      "D1_source": "/home/jovyan/projects/SLAI-infra-course-hw1/project/campaigns/structural/p1-pair-r1/sh8_2r_cache4__d1",
+      "D1_verified": false,
+      "predicted_score": 35939.28974242998,
+      "frozen_D1_passed": true
+    },
+    {
+      "name": "sh8",
+      "recipe_patch": {},
+      "hardware_patch": {
+        "shared_banks": 8
+      },
+      "P1_returncode": 0,
+      "P1": 548218,
+      "area_mm2": 23.57345700352,
+      "P1_peak_w": 11.249764777086686,
+      "D1_returncode": 0,
+      "D1": 57658,
+      "D1_peak_w": 10.78883965708451,
+      "D1_source": "/home/jovyan/projects/SLAI-infra-course-hw1/project/campaigns/structural/p1-pair-r1/sh8__d1",
+      "D1_verified": false,
+      "predicted_score": 35732.56507149242,
+      "frozen_D1_passed": true
+    }
+  ]
+}

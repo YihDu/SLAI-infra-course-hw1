@@ -1,0 +1,31 @@
+{
+ "seed_sha256": "a7875cb40ba71741516c7f8ebc020dc9b54d776efda8f4ddc8f5f5291ad35592",
+ "passed": true,
+ "checks": {
+  "output/hidden": {
+   "max_absolute_error": 8.878498678477342e-07,
+   "allclose_1e-3_1e-3": true,
+   "all_elements_written": true
+  },
+  "layer0/new_k": {
+   "max_absolute_error": 4.76837158203125e-07,
+   "allclose_1e-3_1e-3": true,
+   "all_elements_written": true
+  },
+  "layer0/new_v": {
+   "max_absolute_error": 7.152557373046875e-07,
+   "allclose_1e-3_1e-3": true,
+   "all_elements_written": true
+  },
+  "layer1/new_k": {
+   "max_absolute_error": 7.152557373046875e-07,
+   "allclose_1e-3_1e-3": true,
+   "all_elements_written": true
+  },
+  "layer1/new_v": {
+   "max_absolute_error": 7.152557373046875e-07,
+   "allclose_1e-3_1e-3": true,
+   "all_elements_written": true
+  }
+ }
+}

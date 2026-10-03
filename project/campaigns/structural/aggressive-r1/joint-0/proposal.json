@@ -1,0 +1,15 @@
+{
+  "name": "sh8_2r_cache4__p1_step_rf",
+  "case": "M1_P1",
+  "base": "/home/jovyan/projects/SLAI-infra-course-hw1/project/campaigns/structural/aggressive-r1/p1_step_rf/recipe.json",
+  "hardware": "/home/jovyan/projects/SLAI-infra-course-hw1/project/campaigns/structural/aggressive-r1/sh8_2r_cache4/hardware.json",
+  "patch": {},
+  "hw": {},
+  "d1": "sh8_2r_cache4",
+  "returncode": 0,
+  "cycles": 556591,
+  "area_mm2": 22.61213399552,
+  "peak_window_power_w": 11.312111085893543,
+  "screen_passed": true,
+  "predicted_score": 35673.76403998657
+}

@@ -1,0 +1,15 @@
+{
+    "status": "superseded",
+    "superseded_by": "manual promotion 2026-09-30 (user instruction): paired_late_b joint -> cand-152 -> root",
+    "promoted_score": 36115.70251935997,
+    "promoted_cycles": {"M1_P1": 526494, "M2_D1": 58770},
+    "note": "Watcher was left in waiting state; both joint grades completed 03:26 UTC. paired_late_b (36115.70) > sh8_2r_cache4 (35939.29); winner imported under writer_lock as cand-152 with byte-identical artifacts. Root hashes now differ from expected_root_hashes below by design.",
+    "started_utc": "2026-09-29T18:12:07.114512+00:00",
+    "closed_utc": "2026-09-30T15:35:00+00:00",
+    "expected_root_hashes": {
+        "hardware.json": "e3ce131861ab9bd8221f62d024a403b99c0ff24ddcb6c0750c08011f1f3c926a",
+        "project/recipe.json": "74670c77f8c2d81cc6ea29350a04d7b626ec7b15f2ce1b0ec660045a23092826",
+        "programs/M1_P1.asm": "4b4e9f88569715fc811da29f74bf32f28b2acc21e34bef61a3e90e17ba2f7834",
+        "programs/M2_D1.asm": "ec4d60ee96a58040e95f2d48e8f648d3281ac87d29fd74e19665abb7ca"
+    }
+}

@@ -1,0 +1,31 @@
+{
+  "case": "M2_D1",
+  "passed": true,
+  "checks": {
+    "output/hidden": {
+      "max_absolute_error": 1.5319426449611484e-06,
+      "allclose_1e-3_1e-3": true,
+      "all_elements_written": true
+    },
+    "layer0/new_k": {
+      "max_absolute_error": 5.960464477539062e-07,
+      "allclose_1e-3_1e-3": true,
+      "all_elements_written": true
+    },
+    "layer0/new_v": {
+      "max_absolute_error": 7.152557373046875e-07,
+      "allclose_1e-3_1e-3": true,
+      "all_elements_written": true
+    },
+    "layer1/new_k": {
+      "max_absolute_error": 8.344650268554688e-07,
+      "allclose_1e-3_1e-3": true,
+      "all_elements_written": true
+    },
+    "layer1/new_v": {
+      "max_absolute_error": 7.152557373046875e-07,
+      "allclose_1e-3_1e-3": true,
+      "all_elements_written": true
+    }
+  }
+}

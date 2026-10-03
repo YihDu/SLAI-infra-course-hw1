@@ -1,0 +1,290 @@
+[
+  {
+    "name": "hbm8_cache4",
+    "case": "M2_D1",
+    "patch": {},
+    "hw": {
+      "hbm_channels": 8,
+      "cache_mib": 4
+    }
+  },
+  {
+    "name": "cache4",
+    "case": "M2_D1",
+    "patch": {},
+    "hw": {
+      "cache_mib": 4
+    }
+  },
+  {
+    "name": "cache0",
+    "case": "M2_D1",
+    "patch": {},
+    "hw": {
+      "cache_mib": 0
+    }
+  },
+  {
+    "name": "tc2_kp2",
+    "case": "M2_D1",
+    "patch": {},
+    "hw": {
+      "tc_count": 2,
+      "tc_k_parallel": 2
+    }
+  },
+  {
+    "name": "tc4_kp1",
+    "case": "M2_D1",
+    "patch": {},
+    "hw": {
+      "tc_count": 4,
+      "tc_k_parallel": 1
+    }
+  },
+  {
+    "name": "tc8x8_kp2",
+    "case": "M2_D1",
+    "patch": {},
+    "hw": {
+      "tc_array": "8x8",
+      "tc_k_parallel": 2
+    }
+  },
+  {
+    "name": "tc8x8_kp2_hbm8",
+    "case": "M2_D1",
+    "patch": {},
+    "hw": {
+      "tc_array": "8x8",
+      "tc_k_parallel": 2,
+      "hbm_channels": 8,
+      "cache_mib": 4
+    }
+  },
+  {
+    "name": "sh8_2r_cache4",
+    "case": "M2_D1",
+    "patch": {},
+    "hw": {
+      "shared_banks": 8,
+      "shared_ports": "2R1W",
+      "cache_mib": 4
+    }
+  },
+  {
+    "name": "hbm8_sh8_cache4",
+    "case": "M2_D1",
+    "patch": {},
+    "hw": {
+      "hbm_channels": 8,
+      "shared_banks": 8,
+      "cache_mib": 4
+    }
+  },
+  {
+    "name": "qkv_k16",
+    "case": "M2_D1",
+    "patch": {
+      "d1_schedule": {
+        "projections": {
+          "qkv": {
+            "k_chunk": 16
+          }
+        }
+      }
+    },
+    "hw": {}
+  },
+  {
+    "name": "qkv_k8",
+    "case": "M2_D1",
+    "patch": {
+      "d1_schedule": {
+        "projections": {
+          "qkv": {
+            "k_chunk": 8
+          }
+        }
+      }
+    },
+    "hw": {}
+  },
+  {
+    "name": "w1_k16",
+    "case": "M2_D1",
+    "patch": {
+      "d1_schedule": {
+        "projections": {
+          "w1": {
+            "k_chunk": 16
+          }
+        }
+      }
+    },
+    "hw": {}
+  },
+  {
+    "name": "w2_k64",
+    "case": "M2_D1",
+    "patch": {
+      "d1_schedule": {
+        "projections": {
+          "w2": {
+            "k_chunk": 64
+          }
+        }
+      }
+    },
+    "hw": {}
+  },
+  {
+    "name": "wo_k128",
+    "case": "M2_D1",
+    "patch": {
+      "d1_schedule": {
+        "projections": {
+          "wo": {
+            "k_chunk": 128
+          }
+        }
+      }
+    },
+    "hw": {}
+  },
+  {
+    "name": "wo_k32",
+    "case": "M2_D1",
+    "patch": {
+      "d1_schedule": {
+        "projections": {
+          "wo": {
+            "k_chunk": 32
+          }
+        }
+      }
+    },
+    "hw": {}
+  },
+  {
+    "name": "kv_hbm",
+    "case": "M2_D1",
+    "patch": {
+      "d1_schedule": {
+        "kv_sh": 0
+      }
+    },
+    "hw": {}
+  },
+  {
+    "name": "kv_k_only",
+    "case": "M2_D1",
+    "patch": {
+      "d1_schedule": {
+        "kv_sh": "k"
+      }
+    },
+    "hw": {}
+  },
+  {
+    "name": "kv_v_only",
+    "case": "M2_D1",
+    "patch": {
+      "d1_schedule": {
+        "kv_sh": "v"
+      }
+    },
+    "hw": {}
+  },
+  {
+    "name": "rf_w2_only",
+    "case": "M2_D1",
+    "patch": {
+      "d1_schedule": {
+        "rf_resident": [
+          "l0w2",
+          "l1w2"
+        ]
+      }
+    },
+    "hw": {}
+  },
+  {
+    "name": "attention_unsplit",
+    "case": "M2_D1",
+    "patch": {
+      "d1_schedule": {
+        "attention_split": 0
+      }
+    },
+    "hw": {}
+  },
+  {
+    "name": "p1_step_rf",
+    "case": "M1_P1",
+    "patch": {
+      "gemm_stages": {
+        "p1_step": {
+          "a_resident": 1
+        }
+      }
+    },
+    "hw": {}
+  },
+  {
+    "name": "p1_b2",
+    "case": "M1_P1",
+    "patch": {
+      "gemm_stages": {
+        "p1_prompt": {
+          "b_buffers": 2
+        }
+      }
+    },
+    "hw": {}
+  },
+  {
+    "name": "p1_k16",
+    "case": "M1_P1",
+    "patch": {
+      "gemm_stages": {
+        "p1_prompt": {
+          "k_chunk": 16
+        }
+      }
+    },
+    "hw": {}
+  },
+  {
+    "name": "p1_n16",
+    "case": "M1_P1",
+    "patch": {
+      "gemm_stages": {
+        "p1_prompt": {
+          "n_tile": 16
+        }
+      }
+    },
+    "hw": {}
+  },
+  {
+    "name": "p1_team4",
+    "case": "M1_P1",
+    "patch": {
+      "p1_schedule": {
+        "team": 4
+      }
+    },
+    "hw": {}
+  },
+  {
+    "name": "p1_step_unmerged",
+    "case": "M1_P1",
+    "patch": {
+      "p1_schedule": {
+        "step_merge": 0
+      }
+    },
+    "hw": {}
+  }
+]

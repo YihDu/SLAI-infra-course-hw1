@@ -1,0 +1,178 @@
+{
+ "handoff": [
+  {
+   "count": 1,
+   "st": 8,
+   "ld": 17,
+   "st_finish_to_ld_finish": 18,
+   "total": 33
+  },
+  {
+   "count": 32,
+   "st": 10,
+   "ld": 20,
+   "st_finish_to_ld_finish": 21,
+   "total": 40
+  },
+  {
+   "count": 256,
+   "st": 33,
+   "ld": 50,
+   "st_finish_to_ld_finish": 51,
+   "total": 121
+  },
+  {
+   "count": 1024,
+   "st": 105,
+   "ld": 146,
+   "st_finish_to_ld_finish": 147,
+   "total": 385
+  }
+ ],
+ "mma": {
+  "current(2tc kp4)": [
+   {
+    "chains": 1,
+    "mma": 8,
+    "cycles": 2600,
+    "cycles_per_mma": 325.0,
+    "mac_per_cycle": 100.82461538461538
+   },
+   {
+    "chains": 2,
+    "mma": 16,
+    "cycles": 3685,
+    "cycles_per_mma": 230.3125,
+    "mac_per_cycle": 142.2762550881954
+   },
+   {
+    "chains": 4,
+    "mma": 32,
+    "cycles": 7269,
+    "cycles_per_mma": 227.15625,
+    "mac_per_cycle": 144.2531297289861
+   }
+  ],
+  "1tc kp1": [
+   {
+    "chains": 1,
+    "mma": 8,
+    "cycles": 4376,
+    "cycles_per_mma": 547.0,
+    "mac_per_cycle": 59.90493601462523
+   },
+   {
+    "chains": 2,
+    "mma": 16,
+    "cycles": 4634,
+    "cycles_per_mma": 289.625,
+    "mac_per_cycle": 113.13940440224428
+   },
+   {
+    "chains": 4,
+    "mma": 32,
+    "cycles": 8545,
+    "cycles_per_mma": 267.03125,
+    "mac_per_cycle": 122.71222937390287
+   }
+  ],
+  "1tc kp2": [
+   {
+    "chains": 1,
+    "mma": 8,
+    "cycles": 3360,
+    "cycles_per_mma": 420.0,
+    "mac_per_cycle": 78.01904761904763
+   },
+   {
+    "chains": 2,
+    "mma": 16,
+    "cycles": 3780,
+    "cycles_per_mma": 236.25,
+    "mac_per_cycle": 138.7005291005291
+   },
+   {
+    "chains": 4,
+    "mma": 32,
+    "cycles": 7364,
+    "cycles_per_mma": 230.125,
+    "mac_per_cycle": 142.39217816404127
+   }
+  ]
+ },
+ "mma_gemv": {
+  "current(2tc kp4)": [
+   {
+    "chains": 1,
+    "mma": 8,
+    "cycles": 400,
+    "cycles_per_mma": 50.0,
+    "mac_per_cycle": 20.48
+   },
+   {
+    "chains": 4,
+    "mma": 32,
+    "cycles": 1135,
+    "cycles_per_mma": 35.46875,
+    "mac_per_cycle": 28.8704845814978
+   }
+  ],
+  "1tc kp1": [
+   {
+    "chains": 1,
+    "mma": 8,
+    "cycles": 832,
+    "cycles_per_mma": 104.0,
+    "mac_per_cycle": 9.846153846153847
+   },
+   {
+    "chains": 4,
+    "mma": 32,
+    "cycles": 2150,
+    "cycles_per_mma": 67.1875,
+    "mac_per_cycle": 15.24093023255814
+   }
+  ],
+  "1tc kp2": [
+   {
+    "chains": 1,
+    "mma": 8,
+    "cycles": 584,
+    "cycles_per_mma": 73.0,
+    "mac_per_cycle": 14.027397260273972
+   },
+   {
+    "chains": 4,
+    "mma": 32,
+    "cycles": 1158,
+    "cycles_per_mma": 36.1875,
+    "mac_per_cycle": 28.29706390328152
+   }
+  ]
+ },
+ "ld": [
+  {
+   "space": "HBM",
+   "bytes": 32768,
+   "cycles": 652,
+   "bytes_per_cycle": 50.25766871165644,
+   "single_ld_latency": 150
+  },
+  {
+   "space": "SH",
+   "bytes": 32768,
+   "cycles": 592,
+   "bytes_per_cycle": 55.351351351351354,
+   "single_ld_latency": 132
+  }
+ ],
+ "ld_nocache": [
+  {
+   "space": "HBM",
+   "bytes": 32768,
+   "cycles": 616,
+   "bytes_per_cycle": 53.1948051948052,
+   "single_ld_latency": 141
+  }
+ ]
+}

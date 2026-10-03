@@ -3277,3 +3277,9 @@ AssertionError: DMA slot changed after issue preview
 - Frozen check noc256 (hbm8 + noc 256B/c throttle): P1 485,106 PASS func but peakW=20.09W -> INELIGIBLE. hbm8+256KiB structurally over-caps power.
 - Winner: cand-155 = privsh256_hbm4 (priv_sh + step_sh[l0w1..l2w1,l0wo] + shared_kib=256 on hbm4/cache4/dd2/16SM): frozen grade eligible, P1=493,984 / D1=48,838, peak 11.1W/10.8W, area 23.37mm2, **score=40,901.125 (+3.35% vs cand-154)**.
 - Structural conclusion: critical WG tape is 100% service-serialized (service_sum==end_cycle==526,494, gaps=0); rf_read calendar ~278k is menu-capped (8R4W max). Remaining gap needs a new primitive (decoupled producer-consumer issue, cross-WG ownership handoff) not expressible in current ISA/DSL.
+
+## 20261001-144837 UTC — Official starter v0.7.3 revalidation
+- Change: same submitted hardware/programs; isolated updated official scorer and frozen baseline.
+- Verify: public grade, seed 7 -> project/release-verification-20261001-144837/local-grade.json; exit=0.
+- Result: {"M1_P1": {"functional_passed": true, "cycles": 493984, "peak_window_power_w": 11.122408978516123}, "M2_D1": {"functional_passed": true, "cycles": 48838, "peak_window_power_w": 10.793015843962335}}; eligible=True; score=40901.124578635245.
+- Decision: preserve original submission; package updated report only if eligible.

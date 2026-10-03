@@ -1,0 +1,378 @@
+{
+ "cycles": 730816,
+ "instructions": 74374,
+ "sim_seconds": 786.7,
+ "peak_window_power_w": 17.329642019960854,
+ "peak_power_upper_bound_w": 22.68614368208335,
+ "average_power_w": 5.183819069781247,
+ "total_energy_pj": 7576835834.602504,
+ "hbm_read_bytes": 33288256,
+ "hbm_write_bytes": 6522880,
+ "area_mm2": 22.86477787136,
+ "stall_by_tape": {
+  "g0": {
+   "raw<-LD:HBM->RF": 450252,
+   "raw<-VEC": 94932,
+   "raw<-MMA.ACC": 90459,
+   "raw<-SFU": 24420,
+   "dma_slot": 17589,
+   "raw<-REDUCE": 15042,
+   "war": 13440,
+   "sync:BARRIER:imbalance": 12062,
+   "sync:BARRIER:drain": 2776,
+   "sync:STEP.COMMIT:imbalance": 358,
+   "sync:STEP.COMMIT:drain": 32
+  },
+  "g1": {
+   "raw<-LD:HBM->RF": 457485,
+   "raw<-VEC": 94932,
+   "raw<-MMA.ACC": 84400,
+   "raw<-SFU": 24420,
+   "dma_slot": 18577,
+   "raw<-REDUCE": 15042,
+   "war": 13269,
+   "sync:BARRIER:imbalance": 10080,
+   "sync:BARRIER:drain": 2776,
+   "sync:STEP.COMMIT:imbalance": 350,
+   "sync:STEP.COMMIT:drain": 32
+  },
+  "g2": {
+   "raw<-LD:HBM->RF": 461584,
+   "raw<-VEC": 93126,
+   "raw<-MMA.ACC": 86246,
+   "raw<-SFU": 24372,
+   "dma_slot": 18706,
+   "raw<-REDUCE": 14688,
+   "war": 13383,
+   "sync:BARRIER:imbalance": 6276,
+   "sync:BARRIER:drain": 2776,
+   "sync:STEP.COMMIT:imbalance": 241,
+   "sync:STEP.COMMIT:drain": 32
+  },
+  "g3": {
+   "raw<-LD:HBM->RF": 451713,
+   "raw<-MMA.ACC": 97047,
+   "raw<-VEC": 93126,
+   "raw<-SFU": 24372,
+   "dma_slot": 17401,
+   "raw<-REDUCE": 14688,
+   "war": 13486,
+   "sync:BARRIER:imbalance": 6556,
+   "sync:BARRIER:drain": 2776,
+   "sync:STEP.COMMIT:imbalance": 233,
+   "sync:STEP.COMMIT:drain": 32
+  },
+  "g4": {
+   "raw<-LD:HBM->RF": 449469,
+   "raw<-VEC": 93126,
+   "raw<-MMA.ACC": 88758,
+   "raw<-SFU": 24372,
+   "dma_slot": 17930,
+   "sync:BARRIER:imbalance": 16961,
+   "raw<-REDUCE": 14688,
+   "war": 13440,
+   "sync:BARRIER:drain": 2571,
+   "sync:STEP.COMMIT:imbalance": 83,
+   "sync:STEP.COMMIT:drain": 32
+  },
+  "g5": {
+   "raw<-LD:HBM->RF": 458549,
+   "raw<-VEC": 93126,
+   "raw<-MMA.ACC": 80594,
+   "raw<-SFU": 24372,
+   "dma_slot": 19721,
+   "raw<-REDUCE": 14688,
+   "sync:BARRIER:imbalance": 14472,
+   "war": 13273,
+   "sync:BARRIER:drain": 2571,
+   "sync:STEP.COMMIT:imbalance": 32,
+   "sync:STEP.COMMIT:drain": 32
+  },
+  "g6": {
+   "raw<-LD:HBM->RF": 466340,
+   "raw<-VEC": 93126,
+   "raw<-MMA.ACC": 80637,
+   "raw<-SFU": 24372,
+   "dma_slot": 19914,
+   "raw<-REDUCE": 14688,
+   "war": 13326,
+   "sync:BARRIER:imbalance": 6408,
+   "sync:BARRIER:drain": 2571,
+   "sync:STEP.COMMIT:drain": 32,
+   "sync:STEP.COMMIT:imbalance": 16
+  },
+  "g7": {
+   "raw<-LD:HBM->RF": 454417,
+   "raw<-MMA.ACC": 93558,
+   "raw<-VEC": 93126,
+   "raw<-SFU": 24372,
+   "dma_slot": 18619,
+   "raw<-REDUCE": 14688,
+   "war": 13516,
+   "sync:BARRIER:imbalance": 6531,
+   "sync:BARRIER:drain": 2571,
+   "sync:STEP.COMMIT:drain": 32,
+   "sync:STEP.COMMIT:imbalance": 0
+  }
+ },
+ "stall_g0_by_kind_cause": {
+  "p_w2|MMA.ACC|raw": 126465,
+  "p_w1|MMA.ACC|raw": 124929,
+  "p_qkv|MMA.ACC|raw": 86103,
+  "sm_ws|MMA.ACC|raw": 71541,
+  "p_w1|VEC|raw": 63212,
+  "p_wo|MMA.ACC|raw": 32197,
+  "p_a|MMA.ACC|raw": 17692,
+  "sm_qkvs|MMA.ACC|raw": 16328,
+  "p_resln2|VEC|raw": 13744,
+  "p_a|VEC|raw": 13152,
+  "p_a|ST:RF->HBM|raw": 10574,
+  "p_a|REDUCE|raw": 10032,
+  "p_ln1|VEC|raw": 9984,
+  "p_w1|ST:RF->HBM|raw": 9312,
+  "p_qkv|ST:RF->HBM|raw": 9066,
+  "p_w1|SFU|raw": 7776,
+  "p_w1|LD:HBM->RF|dma_slot": 6977,
+  "sm_ws|LD:HBM->RF|war": 6726,
+  "p_out|VEC|raw": 6658,
+  "sm_wos|MMA.ACC|raw": 6030
+ },
+ "stall_by_stage": {
+  "p_w1": {
+   "raw<-LD:HBM->RF": 816028,
+   "raw<-VEC": 447360,
+   "raw<-MMA.ACC": 252098,
+   "raw<-SFU": 135936,
+   "dma_slot": 62345,
+   "war": 5712
+  },
+  "p_w2": {
+   "raw<-LD:HBM->RF": 919640,
+   "raw<-MMA.ACC": 116237,
+   "dma_slot": 26957,
+   "war": 816
+  },
+  "p_qkv": {
+   "raw<-LD:HBM->RF": 603367,
+   "raw<-MMA.ACC": 170845,
+   "dma_slot": 36089,
+   "war": 4080
+  },
+  "sm_ws": {
+   "raw<-LD:HBM->RF": 572870,
+   "war": 54168,
+   "raw<-VEC": 8160,
+   "dma_slot": 7442,
+   "raw<-MMA.ACC": 3321,
+   "raw<-SFU": 2304
+  },
+  "p_a": {
+   "raw<-LD:HBM->RF": 162345,
+   "raw<-MMA.ACC": 97044,
+   "raw<-REDUCE": 70656,
+   "raw<-VEC": 57360,
+   "raw<-SFU": 49152,
+   "war": 8160
+  },
+  "p_wo": {
+   "raw<-LD:HBM->RF": 232834,
+   "raw<-MMA.ACC": 48789,
+   "dma_slot": 8112,
+   "war": 816
+  },
+  "p_resln2": {
+   "raw<-VEC": 115584,
+   "raw<-LD:HBM->RF": 26776,
+   "raw<-REDUCE": 24576,
+   "raw<-SFU": 3072,
+   "dma_slot": 336
+  },
+  "sm_qkvs": {
+   "raw<-LD:HBM->RF": 133583,
+   "war": 21741,
+   "raw<-MMA.ACC": 4593,
+   "dma_slot": 4464
+  },
+  "p_ln1": {
+   "raw<-VEC": 96384,
+   "raw<-LD:HBM->RF": 26142,
+   "raw<-REDUCE": 20736,
+   "raw<-SFU": 3072,
+   "dma_slot": 336
+  },
+  "p_out": {
+   "raw<-LD:HBM->RF": 54395,
+   "raw<-VEC": 19200
+  },
+  "sm_as": {
+   "raw<-LD:HBM->RF": 43925,
+   "raw<-MMA.ACC": 7248,
+   "war": 3936,
+   "raw<-REDUCE": 1536,
+   "raw<-SFU": 1440,
+   "raw<-VEC": 960
+  },
+  "sm_wos": {
+   "raw<-LD:HBM->RF": 48691,
+   "war": 6384,
+   "raw<-MMA.ACC": 1524,
+   "dma_slot": 1488
+  },
+  "p_output": {
+   "raw<-LD:HBM->RF": 7419,
+   "war": 1320
+  },
+  "sm_reslns": {
+   "raw<-VEC": 1806,
+   "raw<-LD:HBM->RF": 480,
+   "raw<-REDUCE": 384,
+   "dma_slot": 84,
+   "raw<-SFU": 48
+  },
+  "sm_lns": {
+   "raw<-VEC": 1506,
+   "raw<-LD:HBM->RF": 390,
+   "raw<-REDUCE": 324,
+   "dma_slot": 84,
+   "raw<-SFU": 48
+  },
+  "sm_outs": {
+   "raw<-LD:HBM->RF": 825,
+   "raw<-VEC": 300
+  },
+  "sm_outputs": {
+   "raw<-LD:HBM->RF": 99
+  }
+ },
+ "service_by_tape": {
+  "g0": {
+   "LD:HBM->RF": 1404064,
+   "MMA.ACC": 539189,
+   "VEC": 138222,
+   "ST:RF->HBM": 36932,
+   "SFU": 24972,
+   "REDUCE": 16026,
+   "BARRIER": 42,
+   "WG.BEGIN": 1
+  },
+  "g1": {
+   "LD:HBM->RF": 1419595,
+   "MMA.ACC": 542278,
+   "VEC": 138069,
+   "ST:RF->HBM": 36589,
+   "SFU": 24972,
+   "REDUCE": 16026,
+   "WG.BEGIN": 1,
+   "WG.END": 1
+  },
+  "g2": {
+   "LD:HBM->RF": 1452869,
+   "MMA.ACC": 548393,
+   "VEC": 136158,
+   "ST:RF->HBM": 35206,
+   "SFU": 24918,
+   "REDUCE": 15660,
+   "WG.BEGIN": 1,
+   "WG.END": 1
+  },
+  "g3": {
+   "LD:HBM->RF": 1441341,
+   "MMA.ACC": 549140,
+   "VEC": 136119,
+   "ST:RF->HBM": 37024,
+   "SFU": 24918,
+   "REDUCE": 15660,
+   "WG.BEGIN": 1,
+   "WG.END": 1
+  },
+  "g4": {
+   "LD:HBM->RF": 1409667,
+   "MMA.ACC": 545122,
+   "VEC": 136209,
+   "ST:RF->HBM": 35236,
+   "SFU": 24918,
+   "REDUCE": 15660,
+   "BARRIER": 21,
+   "WG.BEGIN": 1
+  },
+  "g5": {
+   "LD:HBM->RF": 1424500,
+   "MMA.ACC": 545648,
+   "VEC": 136060,
+   "ST:RF->HBM": 34484,
+   "SFU": 24918,
+   "REDUCE": 15660,
+   "WG.BEGIN": 1,
+   "WG.END": 1
+  },
+  "g6": {
+   "LD:HBM->RF": 1463912,
+   "MMA.ACC": 551597,
+   "VEC": 136107,
+   "ST:RF->HBM": 33990,
+   "SFU": 24918,
+   "REDUCE": 15660,
+   "WG.BEGIN": 1,
+   "WG.END": 1
+  },
+  "g7": {
+   "LD:HBM->RF": 1451529,
+   "MMA.ACC": 554066,
+   "VEC": 136056,
+   "ST:RF->HBM": 35713,
+   "SFU": 24918,
+   "REDUCE": 15660,
+   "WG.BEGIN": 1,
+   "WG.END": 1
+  }
+ },
+ "critical_path": {
+  "length_instructions": 7244,
+  "end_cycle": 730816,
+  "covered_cycles": 730816,
+  "service_by_kind": {
+   "LD:HBM->RF": 311574,
+   "MMA.ACC": 244949,
+   "VEC": 109619,
+   "ST:RF->HBM": 29355,
+   "SFU": 24972,
+   "REDUCE": 10302,
+   "BARRIER": 42,
+   "WG.BEGIN": 1,
+   "STEP.COMMIT": 1,
+   "WG.END": 1
+  },
+  "gaps": {
+   "gap:none": 0,
+   "gap:dma_slot": 0,
+   "gap:raw": 0,
+   "gap:sync": 0,
+   "gap:war": 0
+  },
+  "by_stage": {
+   "p_w1": 219354,
+   "p_w2": 135522,
+   "p_qkv": 105908,
+   "sm_ws": 82361,
+   "p_a": 57989,
+   "p_wo": 37228,
+   "p_resln2": 22376,
+   "sm_qkvs": 21410,
+   "p_ln1": 19133,
+   "p_out": 9697,
+   "sm_wos": 7584,
+   "sm_as": 7407,
+   "sm_reslns": 1551,
+   "sm_lns": 1317,
+   "p_output": 1172,
+   "sm_outs": 678,
+   "sm_outputs": 84,
+   "-": 45
+  }
+ },
+ "inputs": {
+  "hardware": "hardware.json",
+  "program": "project/campaigns/p1-fuse/v6_8sm/M1_P1.asm",
+  "case": "M1_P1"
+ }
+}

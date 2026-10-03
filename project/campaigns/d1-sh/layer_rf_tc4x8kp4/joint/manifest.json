@@ -1,0 +1,13 @@
+{
+  "parent": "cand-149",
+  "status": "prepared, joint grade pending",
+  "P1_identical_to_parent": true,
+  "D1_identical_to_screen": true,
+  "sha256": {
+    "compiler.py": "eeee9ee81183041924d2dda258fdce26b382abaf3177db7293d99476928ffd72",
+    "hardware.json": "b35c158dda6742ba480a8f9c25152664633379b06ae9dfd4abc5ed53ded2d355",
+    "recipe.json": "74670c77f8c2d81cc6ea29350a04d7b626ec7b15f2ce1b0ec660045a23092826",
+    "programs/M1_P1.asm": "4b4e9f88569715fc811da29f74bf32f28b2acc21e34bef61a3e90e17ba2f7834",
+    "programs/M2_D1.asm": "ec4d60ee96a58040e95f2d48e62c48e8f648d3281ac87d29fd74e19665abb7ca"
+  }
+}

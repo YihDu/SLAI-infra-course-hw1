@@ -1,0 +1,20 @@
+{
+  "project/campaigns/structural/p1_paired_w1_noc512": {
+    "totals": {
+      "instructions": 72998,
+      "HBM->RF_bytes": 69173248,
+      "RF->HBM_bytes": 6522880,
+      "mma_rf_read_bytes": 526716864,
+      "mma_tc_service_cycles": 2603712,
+      "logical_MAC": 319890432
+    },
+    "max_per_sm": {
+      "HBM->RF_bytes": 4850688,
+      "RF->HBM_bytes": 422400,
+      "mma_rf_read_bytes": 33495096,
+      "mma_tc_service_cycles": 166728,
+      "logical_MAC": 20202240
+    },
+    "note": "Requested payload/service sums. Cache, overlap and stalls require frozen timing."
+  }
+}

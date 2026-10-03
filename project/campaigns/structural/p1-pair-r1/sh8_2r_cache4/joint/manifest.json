@@ -1,0 +1,12 @@
+{
+  "P1_source": "/home/jovyan/projects/SLAI-infra-course-hw1/project/campaigns/structural/p1-pair-r1/sh8_2r_cache4",
+  "D1_source": "/home/jovyan/projects/SLAI-infra-course-hw1/project/campaigns/structural/p1-pair-r1/sh8_2r_cache4__d1",
+  "exact_programs": true,
+  "sha256": {
+    "compiler.py": "94da97ef762107c1ce9b9f63699ea62ddc4ce65f926ba9c195ea65e0ed28f1bb",
+    "hardware.json": "af0773f45e9f6a5a8e336bf94b578f34d9c17374fc58d819095b2048ff756ba9",
+    "recipe.json": "408ddcf281b6ecf3ff7548175732048f6d3eaf8752314f0307efb26b619af41b",
+    "programs/M1_P1.asm": "154265fcb541cf7a5fac9c45db4ca82f5d8cf4f545043b9e289db720361d68d1",
+    "programs/M2_D1.asm": "ec4d60ee96a58040e95f2d48e62c48e8f648d3281ac87d29fd74e19665abb7ca"
+  }
+}

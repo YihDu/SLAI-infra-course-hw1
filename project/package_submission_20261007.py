@@ -7,7 +7,7 @@ from pathlib import Path
 
 ROOT = Path(__file__).resolve().parents[1]
 SOURCE = ROOT / 'submission-v073-20261001-144837-ready.zip'
-OUTPUT = ROOT / 'submission-v073-20261007-final.zip'
+OUTPUT = ROOT / 'submission-v073-20261007-final-100mib.zip'
 FIXED = ('hardware.json', 'programs/M1_P1.asm', 'programs/M2_D1.asm',
          'local-grade.json', 'baseline_manifest.json')
 
@@ -30,6 +30,24 @@ def main():
         ).splitlines() if n.endswith('metrics.json'))
         for name in tracked:
             entries[name] = (ROOT / name).read_bytes()
+        source_index = {}
+        source_by_hash = {}
+        for name in sorted(list(entries)):
+            if name.startswith('project/experiments/') and '/inputs/' in name and name.endswith('compiler.py'):
+                digest = hashlib.sha256(entries[name]).hexdigest()
+                canonical = source_by_hash.setdefault(digest, name)
+                source_index[name] = {'path': canonical, 'sha256': digest}
+                if canonical != name:
+                    del entries[name]
+        entries['project/compiler-source-index.json'] = json.dumps(
+            {'description': 'Original candidate compiler path -> byte-identical retained source; '
+             'resolve missing compiler.py files through this index.', 'sources': source_index},
+            ensure_ascii=False, separators=(',', ':')).encode()
+        for name in list(entries):
+            if name.startswith('project/') and name.endswith('.json'):
+                entries[name] = json.dumps(json.loads(entries[name]), ensure_ascii=False,
+                                          separators=(',', ':')).encode()
+        assert sum(map(len, entries.values())) <= 100 * 1024**2
         for name in FIXED[:3]:
             assert entries[name] == (ROOT / name).read_bytes(), name
         assert all(len(entries[n]) <= 8 * 1024**2 for n in FIXED[1:3])
@@ -52,10 +70,17 @@ def main():
             for name in FIXED:
                 assert old.read(name) == new.read(name), name
             for name in tracked:
-                assert new.read(name) == (ROOT / name).read_bytes(), name
+                if name in source_index:
+                    assert new.read(source_index[name]['path']) == (ROOT / name).read_bytes(), name
+                elif name.startswith('project/') and name.endswith('.json'):
+                    assert json.loads(new.read(name)) == json.loads((ROOT / name).read_bytes()), name
+                else:
+                    assert new.read(name) == (ROOT / name).read_bytes(), name
+            assert sum(e.file_size for e in new.infolist()) <= 100 * 1024**2
     assert OUTPUT.stat().st_size <= 25 * 1024**2
     print(json.dumps({'zip': str(OUTPUT), 'bytes': OUTPUT.stat().st_size,
                       'mib': OUTPUT.stat().st_size / 1024**2,
+                      'expanded_mib': sum(map(len, entries.values())) / 1024**2,
                       'files': len(entries), 'git_commit': subprocess.check_output(
                           ['git', 'rev-parse', 'HEAD'], cwd=ROOT, text=True).strip(),
                       'sha256': hashlib.sha256(OUTPUT.read_bytes()).hexdigest()}, indent=2))

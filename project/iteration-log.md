@@ -3289,3 +3289,9 @@ AssertionError: DMA slot changed after issue preview
 - Verify: frozen manifest hashes unchanged; prior v0.7.3 ZIP graded inputs match root; all 29 pre-existing commits have commit-command evidence; native trace JSON/JSONL parses. Reports: project/trace-commit-coverage-20261007.json and project/submission-audit-20261007.json.
 - Result: reused eligible v0.7.3 grade: P1=493984, D1=48838 cycles, score=40901.124578635245, area=23.372983198720004 mm2, peak power=11.122408978516123/10.793015843962335 W. No hardware/program experiment in this step.
 - Decision: submit unchanged validated design with complete available history. Package via project/package_submission_20261007.py; verify root paths, CRC, artifact equality, source/evidence inclusion, assembly limits, and 25 MiB cap. Full-history trial was oversized; preserve previous ZIP evidence plus all measured-candidate metrics, source/notes, input snapshots and traces; omit redundant historical ASM/debug copies from archive only.
+
+## 2026-10-07 — Apply 100 MiB expanded ZIP limit
+- Change: packaging only; minify project JSON and deduplicate byte-identical candidate compiler snapshots using project/compiler-source-index.json inside ZIP. Native traces and graded hardware/programs remain unchanged; local evidence remains intact.
+- Verify: project/package_submission_20261007.py checks JSON semantic equality, compiler index byte equality, native trace byte equality, ZIP CRC, compressed <=25 MiB and expanded <=100 MiB.
+- Result: no new hardware/program experiment; reuse eligible cand-155 score 40901.124578635245. Previous ZIP expanded to 133.58 MiB and is superseded.
+- Decision: package revised archive with both size limits enforced before completion.

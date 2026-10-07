@@ -53,12 +53,16 @@
     "CRC test",
     "Byte-identical graded artifacts and baseline",
     "Each assembly <=8 MiB",
-    "ZIP <=25 MiB"
+    "ZIP <=25 MiB",
+    "Expanded ZIP <=100 MiB",
+    "Project JSON semantic equality after minification",
+    "Duplicate compiler snapshot SHA-256 and source index integrity"
   ],
   "notes": [
     "No fresh grade: graded inputs unchanged.",
     "Previous verified ZIP retains its v0.7.3 baseline; workspace frozen evaluator and baseline remain untouched.",
     "Mac source directory retained locally; canonical copies under agent-trace/ only are packaged.",
-    "Historical candidate ASM copies and redundant debugging outputs are excluded from ZIP to meet 25 MiB; retained in repository."
+    "Historical candidate ASM copies and redundant debugging outputs are excluded from ZIP to meet 25 MiB; retained in repository.",
+    "Project JSON is minified without changing data; byte-identical historical compiler snapshots are stored once, mapped by project/compiler-source-index.json. All native traces remain unchanged."
   ]
 }

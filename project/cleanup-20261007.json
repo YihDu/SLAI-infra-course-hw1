@@ -1,0 +1,958 @@
+{
+  "recovery_directory": "/tmp/slai-repo-cleanup-20261007-gpcj6d6w",
+  "moved_items": 76,
+  "moved_bytes": 144083671,
+  "preserved": [
+    "hardware.json",
+    "programs/M1_P1.asm",
+    "programs/M2_D1.asm",
+    "agent-trace/",
+    "All JSON experiment reports and input snapshots",
+    "All generator and search sources",
+    ".pixi/ and .venv",
+    "submission-v073-20261007-final-100mib.zip",
+    "submission-v073-20261001-144837-ready.zip (packaging source)"
+  ],
+  "records": [
+    {
+      "path": "agent-trace-mac",
+      "reason": "Mac upload copies verified identical to canonical agent-trace records; original README retained in recovery directory",
+      "bytes": 28089864,
+      "tracked": false,
+      "files": [
+        {
+          "path": "agent-trace-mac/README.md",
+          "sha256": "c95118efcc1a013d2b767c70570cbcedcdef470d2d96a28bc6fd5c12a7e1c93c"
+        },
+        {
+          "path": "agent-trace-mac/codex/rollout-2026-09-28T14-44-26-01a0e6c1-f711-75e0-9500-31251d0f3bef.jsonl",
+          "sha256": "28eef48b0aa308803e516d10e52445139e73785c9d4e9016f723b6afbd6bb338"
+        },
+        {
+          "path": "agent-trace-mac/codex/rollout-2026-09-28T15-04-48-01a0e6d4-9d27-7a32-88e3-90317a994125.jsonl",
+          "sha256": "a4f469ab74b7fa7d0d67003480bce1c37f7fbf98e9bfe4293ca1901a309d5df9"
+        },
+        {
+          "path": "agent-trace-mac/devin/aged-temper.json",
+          "sha256": "27d571218269902b7f8081c334cac1c6e56e380b2858fa67869fa384c91e4ba0"
+        },
+        {
+          "path": "agent-trace-mac/devin/history_2eb97e981f854424.md",
+          "sha256": "4bf057348e355c16656d18ee826d668f844aa06b1a19c1a6e6f649e9e8b5b20b"
+        },
+        {
+          "path": "agent-trace-mac/devin/history_47e81abfa6764b53.md",
+          "sha256": "97fa6edda8ad381bd886cd1210d5ff48b55312ad7fa1f426e9c3dbbc1f6c0349"
+        },
+        {
+          "path": "agent-trace-mac/devin/honorable-curve.json",
+          "sha256": "254c79921af356d1558657c246280059e1400c8a7978eb9ced77c4893dbad492"
+        },
+        {
+          "path": "agent-trace-mac/devin/pentagonal-fireplant.json",
+          "sha256": "71a23365582630e869cdb27d481c8e3ece3538f758011a1faf661e564170a0c1"
+        }
+      ]
+    },
+    {
+      "path": "submission-v073-20261007-final.zip",
+      "reason": "Superseded submission ZIP; latest final-100mib ZIP retained",
+      "bytes": 19815019,
+      "tracked": false,
+      "files": [
+        {
+          "path": "submission-v073-20261007-final.zip",
+          "sha256": "60b49bc1e0d8c65584fdd55bd8b8c7bb9b7f7427474dbbb1c517b61f8690fea3"
+        }
+      ]
+    },
+    {
+      "path": "submission-v073-20261007-traces.zip",
+      "reason": "Superseded submission ZIP; latest final-100mib ZIP retained",
+      "bytes": 14663756,
+      "tracked": false,
+      "files": [
+        {
+          "path": "submission-v073-20261007-traces.zip",
+          "sha256": "04842b59ec368869c422181efb381d91a7446828b5339ccc6c52adef5d98484a"
+        }
+      ]
+    },
+    {
+      "path": "project/campaigns/d1-sh/layer_rf_tc4x8kp4/joint/grade.stdout",
+      "reason": "Byte-identical to retained project/campaigns/d1-sh/layer_rf_tc4x8kp4/joint/grade.json",
+      "bytes": 3683012,
+      "tracked": false,
+      "files": [
+        {
+          "path": "project/campaigns/d1-sh/layer_rf_tc4x8kp4/joint/grade.stdout",
+          "sha256": "904604c04c77ad9e7dd59c3d81b57fa92a75b4ee49759025832a72f5138d84c4"
+        }
+      ]
+    },
+    {
+      "path": "project/campaigns/d1-sh/layer_rf_tc_noc512/joint/grade.stdout",
+      "reason": "Byte-identical to retained project/campaigns/d1-sh/layer_rf_tc_noc512/joint/grade.json",
+      "bytes": 3677299,
+      "tracked": false,
+      "files": [
+        {
+          "path": "project/campaigns/d1-sh/layer_rf_tc_noc512/joint/grade.stdout",
+          "sha256": "5e80d22c77bed58aae1d122bb3d4183bdf5436bad338c49d86b5734a236e4cfa"
+        }
+      ]
+    },
+    {
+      "path": "project/campaigns/structural/aggressive-r1/joint-0/grade.stdout",
+      "reason": "Byte-identical to retained project/campaigns/structural/aggressive-r1/joint-0/grade.json",
+      "bytes": 3679775,
+      "tracked": false,
+      "files": [
+        {
+          "path": "project/campaigns/structural/aggressive-r1/joint-0/grade.stdout",
+          "sha256": "e2fc5f633274f408022c610388ca148a9ff4f2f8caca286d2002109932c955a0"
+        }
+      ]
+    },
+    {
+      "path": "project/campaigns/structural/aggressive-r1/joint-1/grade.stdout",
+      "reason": "Byte-identical to retained project/campaigns/structural/aggressive-r1/joint-1/grade.json",
+      "bytes": 3680531,
+      "tracked": false,
+      "files": [
+        {
+          "path": "project/campaigns/structural/aggressive-r1/joint-1/grade.stdout",
+          "sha256": "b75b7827bc10615e12dd93e55b87a09d96fff48e23b29822a9e79b203a920add"
+        }
+      ]
+    },
+    {
+      "path": "project/campaigns/structural/p1-pair-r1/paired_late_b/joint/grade.stdout",
+      "reason": "Byte-identical to retained project/campaigns/structural/p1-pair-r1/paired_late_b/joint/grade.json",
+      "bytes": 3669996,
+      "tracked": false,
+      "files": [
+        {
+          "path": "project/campaigns/structural/p1-pair-r1/paired_late_b/joint/grade.stdout",
+          "sha256": "e914149f423fac3f608f9cc9e87c547098d393324fbc7bbd5ddbae218855520a"
+        }
+      ]
+    },
+    {
+      "path": "project/campaigns/structural/p1-pair-r1/sh8_2r_cache4/joint/grade.stdout",
+      "reason": "Byte-identical to retained project/campaigns/structural/p1-pair-r1/sh8_2r_cache4/joint/grade.json",
+      "bytes": 3672262,
+      "tracked": false,
+      "files": [
+        {
+          "path": "project/campaigns/structural/p1-pair-r1/sh8_2r_cache4/joint/grade.stdout",
+          "sha256": "169afb176cd1217a5c5a6b09b0842617793fc72078bd8ed219c4f6c0cdf799b0"
+        }
+      ]
+    },
+    {
+      "path": "project/campaigns/structural/p1_paired_w1_noc512/joint/grade.stdout",
+      "reason": "Byte-identical to retained project/campaigns/structural/p1_paired_w1_noc512/joint/grade.json",
+      "bytes": 3670678,
+      "tracked": false,
+      "files": [
+        {
+          "path": "project/campaigns/structural/p1_paired_w1_noc512/joint/grade.stdout",
+          "sha256": "3f1054c9ca143214ea94d4e72cdd81b25f8b2a248353d1c01db3364ae5af6737"
+        }
+      ]
+    },
+    {
+      "path": "project/campaigns/structural/p1_paired_w1_step_rf_noc512/joint/grade.stdout",
+      "reason": "Byte-identical to retained project/campaigns/structural/p1_paired_w1_step_rf_noc512/joint/grade.json",
+      "bytes": 3669611,
+      "tracked": false,
+      "files": [
+        {
+          "path": "project/campaigns/structural/p1_paired_w1_step_rf_noc512/joint/grade.stdout",
+          "sha256": "c080ac22415715c2aa071296e7a33858ec95955dd0084c24202886e529e0a7da"
+        }
+      ]
+    },
+    {
+      "path": "project/experiments/cand-074/reports/grade.stdout",
+      "reason": "Byte-identical to retained project/experiments/cand-074/reports/grade.json",
+      "bytes": 420403,
+      "tracked": true,
+      "files": [
+        {
+          "path": "project/experiments/cand-074/reports/grade.stdout",
+          "sha256": "f04bf570656320dff0befe34795f104445a3da35bd6526e50cbdf541bb1b5cb0"
+        }
+      ]
+    },
+    {
+      "path": "project/experiments/cand-075/reports/grade.stdout",
+      "reason": "Byte-identical to retained project/experiments/cand-075/reports/grade.json",
+      "bytes": 419391,
+      "tracked": true,
+      "files": [
+        {
+          "path": "project/experiments/cand-075/reports/grade.stdout",
+          "sha256": "144a193bf00ecfc7698e3f3e37de5851f09be53d4fb8d649ec704aa70ac346c7"
+        }
+      ]
+    },
+    {
+      "path": "project/experiments/cand-076/reports/grade.stdout",
+      "reason": "Byte-identical to retained project/experiments/cand-076/reports/grade.json",
+      "bytes": 419561,
+      "tracked": true,
+      "files": [
+        {
+          "path": "project/experiments/cand-076/reports/grade.stdout",
+          "sha256": "7fe32db0b68d855cbded1f6a23c997f4c4ef7cbf23ef08abe57bd924365be0b5"
+        }
+      ]
+    },
+    {
+      "path": "project/experiments/cand-077/reports/grade.stdout",
+      "reason": "Byte-identical to retained project/experiments/cand-077/reports/grade.json",
+      "bytes": 420441,
+      "tracked": true,
+      "files": [
+        {
+          "path": "project/experiments/cand-077/reports/grade.stdout",
+          "sha256": "44ad8ca440ae2f39432bef4a271dc4656b2dd90aecf4976aaeeb1e427f92faa0"
+        }
+      ]
+    },
+    {
+      "path": "project/experiments/cand-078/reports/grade.stdout",
+      "reason": "Byte-identical to retained project/experiments/cand-078/reports/grade.json",
+      "bytes": 420252,
+      "tracked": true,
+      "files": [
+        {
+          "path": "project/experiments/cand-078/reports/grade.stdout",
+          "sha256": "b83fdca0c696a1a2b7f049714523070088a9987ac4feeaf4bd71fc9d93992de6"
+        }
+      ]
+    },
+    {
+      "path": "project/experiments/cand-079/reports/grade.stdout",
+      "reason": "Byte-identical to retained project/experiments/cand-079/reports/grade.json",
+      "bytes": 419629,
+      "tracked": true,
+      "files": [
+        {
+          "path": "project/experiments/cand-079/reports/grade.stdout",
+          "sha256": "2aafe375d50ddf2dd09d35e78928be2307af4709f04da3abaf6b19635cbf389c"
+        }
+      ]
+    },
+    {
+      "path": "project/experiments/cand-080/reports/grade.stdout",
+      "reason": "Byte-identical to retained project/experiments/cand-080/reports/grade.json",
+      "bytes": 420393,
+      "tracked": true,
+      "files": [
+        {
+          "path": "project/experiments/cand-080/reports/grade.stdout",
+          "sha256": "cd0311957aa9a93a9c21103b5b1333fcb2638d85f0336780097f1a9fa79ba70f"
+        }
+      ]
+    },
+    {
+      "path": "project/experiments/cand-081/reports/grade.stdout",
+      "reason": "Byte-identical to retained project/experiments/cand-081/reports/grade.json",
+      "bytes": 420392,
+      "tracked": true,
+      "files": [
+        {
+          "path": "project/experiments/cand-081/reports/grade.stdout",
+          "sha256": "587ee782970ecc70d11ade3bc070a78308db4b0e03ef8a14395e29813b785a49"
+        }
+      ]
+    },
+    {
+      "path": "project/experiments/cand-082/reports/grade.stdout",
+      "reason": "Byte-identical to retained project/experiments/cand-082/reports/grade.json",
+      "bytes": 420242,
+      "tracked": true,
+      "files": [
+        {
+          "path": "project/experiments/cand-082/reports/grade.stdout",
+          "sha256": "d6dfd58503c57dee33707e1fa2fc0192f1a4b309ead7b8ec3a51f05f93a4cdb1"
+        }
+      ]
+    },
+    {
+      "path": "project/experiments/cand-083/reports/grade.stdout",
+      "reason": "Byte-identical to retained project/experiments/cand-083/reports/grade.json",
+      "bytes": 420211,
+      "tracked": true,
+      "files": [
+        {
+          "path": "project/experiments/cand-083/reports/grade.stdout",
+          "sha256": "550a32fda8e755f1674de78b6d44939680e6552414315a63dcea04dc611db72d"
+        }
+      ]
+    },
+    {
+      "path": "project/experiments/cand-084/reports/grade.stdout",
+      "reason": "Byte-identical to retained project/experiments/cand-084/reports/grade.json",
+      "bytes": 419948,
+      "tracked": true,
+      "files": [
+        {
+          "path": "project/experiments/cand-084/reports/grade.stdout",
+          "sha256": "769f9c21a2803e1f13494ed693cb5458d7bd37347ca4cd5eed7772937fa73adf"
+        }
+      ]
+    },
+    {
+      "path": "project/experiments/cand-085/reports/grade.stdout",
+      "reason": "Byte-identical to retained project/experiments/cand-085/reports/grade.json",
+      "bytes": 434954,
+      "tracked": true,
+      "files": [
+        {
+          "path": "project/experiments/cand-085/reports/grade.stdout",
+          "sha256": "c82c6fa127ccc40de3ad9ecfaf1e91b2ff5b3f8ad0bfd7220d2edf9a3d1ecb9b"
+        }
+      ]
+    },
+    {
+      "path": "project/experiments/cand-086/reports/grade.stdout",
+      "reason": "Byte-identical to retained project/experiments/cand-086/reports/grade.json",
+      "bytes": 421705,
+      "tracked": true,
+      "files": [
+        {
+          "path": "project/experiments/cand-086/reports/grade.stdout",
+          "sha256": "703ae90a0e9cd2944c78c3794265c5f9b4299727dc76ae8a60afe3381658f0de"
+        }
+      ]
+    },
+    {
+      "path": "project/experiments/cand-087/reports/grade.stdout",
+      "reason": "Byte-identical to retained project/experiments/cand-087/reports/grade.json",
+      "bytes": 420124,
+      "tracked": true,
+      "files": [
+        {
+          "path": "project/experiments/cand-087/reports/grade.stdout",
+          "sha256": "e71cea8c89595afee620994c233cf88b742ca65cdadbc26c6586d09232f449a1"
+        }
+      ]
+    },
+    {
+      "path": "project/experiments/cand-088/reports/grade.stdout",
+      "reason": "Byte-identical to retained project/experiments/cand-088/reports/grade.json",
+      "bytes": 420082,
+      "tracked": true,
+      "files": [
+        {
+          "path": "project/experiments/cand-088/reports/grade.stdout",
+          "sha256": "3bc974a47c79b4b90031660d99ebda98d1c427d5ae6004483fef461dd517d4f6"
+        }
+      ]
+    },
+    {
+      "path": "project/experiments/cand-090/reports/grade.stdout",
+      "reason": "Byte-identical to retained project/experiments/cand-090/reports/grade.json",
+      "bytes": 420188,
+      "tracked": true,
+      "files": [
+        {
+          "path": "project/experiments/cand-090/reports/grade.stdout",
+          "sha256": "8aa32e0d69da677a8bcf0795a5c92c5f48e98534b3db9dd0bf4afca56c3a5ad1"
+        }
+      ]
+    },
+    {
+      "path": "project/experiments/cand-091/reports/grade.stdout",
+      "reason": "Byte-identical to retained project/experiments/cand-091/reports/grade.json",
+      "bytes": 419980,
+      "tracked": true,
+      "files": [
+        {
+          "path": "project/experiments/cand-091/reports/grade.stdout",
+          "sha256": "80b8ceb79700ebd96c555d04a4a8bf286e1ba65576ffa807c0a949fe00873c95"
+        }
+      ]
+    },
+    {
+      "path": "project/experiments/cand-092/reports/grade.stdout",
+      "reason": "Byte-identical to retained project/experiments/cand-092/reports/grade.json",
+      "bytes": 419593,
+      "tracked": true,
+      "files": [
+        {
+          "path": "project/experiments/cand-092/reports/grade.stdout",
+          "sha256": "bd7f822ece9714d866cda5dbcf74f31d40cf28c0efc436b2ec321181a66ca4e3"
+        }
+      ]
+    },
+    {
+      "path": "project/experiments/cand-093/reports/grade.stdout",
+      "reason": "Byte-identical to retained project/experiments/cand-093/reports/grade.json",
+      "bytes": 419623,
+      "tracked": true,
+      "files": [
+        {
+          "path": "project/experiments/cand-093/reports/grade.stdout",
+          "sha256": "407177bb6bba94df5344e718452d61c7da012193642e9a4be93ef5f57d32f438"
+        }
+      ]
+    },
+    {
+      "path": "project/experiments/cand-094/reports/grade.stdout",
+      "reason": "Byte-identical to retained project/experiments/cand-094/reports/grade.json",
+      "bytes": 420096,
+      "tracked": true,
+      "files": [
+        {
+          "path": "project/experiments/cand-094/reports/grade.stdout",
+          "sha256": "9767d2406affa7d2528dff875011606b4117d2c2dfd9a7a5c8b91b0d2286448b"
+        }
+      ]
+    },
+    {
+      "path": "project/experiments/cand-095/reports/grade.stdout",
+      "reason": "Byte-identical to retained project/experiments/cand-095/reports/grade.json",
+      "bytes": 420015,
+      "tracked": true,
+      "files": [
+        {
+          "path": "project/experiments/cand-095/reports/grade.stdout",
+          "sha256": "9283f8ded98b4472f65068c0839f69b07d1c218039a7f1540f99d14117258691"
+        }
+      ]
+    },
+    {
+      "path": "project/experiments/cand-096/reports/grade.stdout",
+      "reason": "Byte-identical to retained project/experiments/cand-096/reports/grade.json",
+      "bytes": 419925,
+      "tracked": true,
+      "files": [
+        {
+          "path": "project/experiments/cand-096/reports/grade.stdout",
+          "sha256": "fd354c64c81245c0f9202431ea1544c63ff009e092cfabadc68a159d126b95dd"
+        }
+      ]
+    },
+    {
+      "path": "project/experiments/cand-097/reports/grade.stdout",
+      "reason": "Byte-identical to retained project/experiments/cand-097/reports/grade.json",
+      "bytes": 419652,
+      "tracked": true,
+      "files": [
+        {
+          "path": "project/experiments/cand-097/reports/grade.stdout",
+          "sha256": "aa7d643c82b6fa1d973a9b47c8b80aba8fdb088a290494e2b434c851a962f0d4"
+        }
+      ]
+    },
+    {
+      "path": "project/experiments/cand-098/reports/grade.stdout",
+      "reason": "Byte-identical to retained project/experiments/cand-098/reports/grade.json",
+      "bytes": 420011,
+      "tracked": true,
+      "files": [
+        {
+          "path": "project/experiments/cand-098/reports/grade.stdout",
+          "sha256": "c84492737da7753ff683aa66974453ae971006b6a55c38dce74b042adcf2fc82"
+        }
+      ]
+    },
+    {
+      "path": "project/experiments/cand-100/reports/grade.stdout",
+      "reason": "Byte-identical to retained project/experiments/cand-100/reports/grade.json",
+      "bytes": 420123,
+      "tracked": true,
+      "files": [
+        {
+          "path": "project/experiments/cand-100/reports/grade.stdout",
+          "sha256": "04a56b679014a5a2cd7c7f05a2c7ed37a98ee5401e48b6744c71a56720b43725"
+        }
+      ]
+    },
+    {
+      "path": "project/experiments/cand-106/reports/grade.stdout",
+      "reason": "Byte-identical to retained project/experiments/cand-106/reports/grade.json",
+      "bytes": 419427,
+      "tracked": true,
+      "files": [
+        {
+          "path": "project/experiments/cand-106/reports/grade.stdout",
+          "sha256": "6c988892d6c858e71ce3a1a39e30b2b997c51c8f78ad8d4d298bf16379216a99"
+        }
+      ]
+    },
+    {
+      "path": "project/experiments/cand-110/reports/grade.stdout",
+      "reason": "Byte-identical to retained project/experiments/cand-110/reports/grade.json",
+      "bytes": 418571,
+      "tracked": true,
+      "files": [
+        {
+          "path": "project/experiments/cand-110/reports/grade.stdout",
+          "sha256": "502989c5e7596da4c491c416a420e0064ba696e66b910263e591810fc75374c3"
+        }
+      ]
+    },
+    {
+      "path": "project/experiments/cand-112/reports/grade.stdout",
+      "reason": "Byte-identical to retained project/experiments/cand-112/reports/grade.json",
+      "bytes": 714220,
+      "tracked": true,
+      "files": [
+        {
+          "path": "project/experiments/cand-112/reports/grade.stdout",
+          "sha256": "b61f92113a463a4375ec29d64b4e73825895aa65aec3a3a984b46305e4645d66"
+        }
+      ]
+    },
+    {
+      "path": "project/experiments/cand-113/reports/grade.stdout",
+      "reason": "Byte-identical to retained project/experiments/cand-113/reports/grade.json",
+      "bytes": 730522,
+      "tracked": true,
+      "files": [
+        {
+          "path": "project/experiments/cand-113/reports/grade.stdout",
+          "sha256": "ebdda52fbb7e869d75b5a3090402c702471a2b69f3a95db28eac113fac53e95e"
+        }
+      ]
+    },
+    {
+      "path": "project/experiments/cand-114/reports/grade.stdout",
+      "reason": "Byte-identical to retained project/experiments/cand-114/reports/grade.json",
+      "bytes": 729665,
+      "tracked": true,
+      "files": [
+        {
+          "path": "project/experiments/cand-114/reports/grade.stdout",
+          "sha256": "b2f453617722cc016b8ef0b1b49f5d371e87742bccfa2483a4553de68acfd8a4"
+        }
+      ]
+    },
+    {
+      "path": "project/experiments/cand-115/reports/grade.stdout",
+      "reason": "Byte-identical to retained project/experiments/cand-115/reports/grade.json",
+      "bytes": 726206,
+      "tracked": true,
+      "files": [
+        {
+          "path": "project/experiments/cand-115/reports/grade.stdout",
+          "sha256": "7c10bb2e1b4984e50614f3a35ea87e5ff0745cc65c4d705ca4a77e076ee53174"
+        }
+      ]
+    },
+    {
+      "path": "project/experiments/cand-116/reports/grade.stdout",
+      "reason": "Byte-identical to retained project/experiments/cand-116/reports/grade.json",
+      "bytes": 726638,
+      "tracked": true,
+      "files": [
+        {
+          "path": "project/experiments/cand-116/reports/grade.stdout",
+          "sha256": "e9df5a27066d5e533271ba49a92995e26590ee94ea29e438099e4dd7f46ace5f"
+        }
+      ]
+    },
+    {
+      "path": "project/experiments/cand-117/reports/grade.stdout",
+      "reason": "Byte-identical to retained project/experiments/cand-117/reports/grade.json",
+      "bytes": 728843,
+      "tracked": true,
+      "files": [
+        {
+          "path": "project/experiments/cand-117/reports/grade.stdout",
+          "sha256": "b403c39d9e26080e1b60c826fcf91c84a4391c93971174d24b94a349c528733e"
+        }
+      ]
+    },
+    {
+      "path": "project/experiments/cand-118/reports/grade.stdout",
+      "reason": "Byte-identical to retained project/experiments/cand-118/reports/grade.json",
+      "bytes": 726365,
+      "tracked": true,
+      "files": [
+        {
+          "path": "project/experiments/cand-118/reports/grade.stdout",
+          "sha256": "3a05020c2bf9945c947927067841b44a8b680b6e437ca17be7d8f4c71faf1eb7"
+        }
+      ]
+    },
+    {
+      "path": "project/experiments/cand-119/reports/grade.stdout",
+      "reason": "Byte-identical to retained project/experiments/cand-119/reports/grade.json",
+      "bytes": 726297,
+      "tracked": true,
+      "files": [
+        {
+          "path": "project/experiments/cand-119/reports/grade.stdout",
+          "sha256": "87086948170d0c5aa51fde27d253ffc49ad9cd8acde6e1f719f8f8ee4e5a18ff"
+        }
+      ]
+    },
+    {
+      "path": "project/experiments/cand-120/reports/grade.stdout",
+      "reason": "Byte-identical to retained project/experiments/cand-120/reports/grade.json",
+      "bytes": 726310,
+      "tracked": true,
+      "files": [
+        {
+          "path": "project/experiments/cand-120/reports/grade.stdout",
+          "sha256": "609b10f45d6245c60f9cf0c10dff3f826991aa942e5220878aaa7d80fb0b0e7c"
+        }
+      ]
+    },
+    {
+      "path": "project/experiments/cand-121/reports/grade.stdout",
+      "reason": "Byte-identical to retained project/experiments/cand-121/reports/grade.json",
+      "bytes": 726983,
+      "tracked": true,
+      "files": [
+        {
+          "path": "project/experiments/cand-121/reports/grade.stdout",
+          "sha256": "28ddb0b45862c5813c913fdb08d388c2e642d8f76981f50088e71feeb2aaef91"
+        }
+      ]
+    },
+    {
+      "path": "project/experiments/cand-122/reports/grade.stdout",
+      "reason": "Byte-identical to retained project/experiments/cand-122/reports/grade.json",
+      "bytes": 726233,
+      "tracked": true,
+      "files": [
+        {
+          "path": "project/experiments/cand-122/reports/grade.stdout",
+          "sha256": "e040a6817f04a3792ff7170bac75c8c65390c4342781dc31bd0a4d6073eccf35"
+        }
+      ]
+    },
+    {
+      "path": "project/experiments/cand-123/reports/grade.stdout",
+      "reason": "Byte-identical to retained project/experiments/cand-123/reports/grade.json",
+      "bytes": 727695,
+      "tracked": true,
+      "files": [
+        {
+          "path": "project/experiments/cand-123/reports/grade.stdout",
+          "sha256": "c2e99ca585fefac7dc4212705f419146c5157ccc29170f6c585cdc2bc839b029"
+        }
+      ]
+    },
+    {
+      "path": "project/experiments/cand-124/reports/grade.stdout",
+      "reason": "Byte-identical to retained project/experiments/cand-124/reports/grade.json",
+      "bytes": 817739,
+      "tracked": true,
+      "files": [
+        {
+          "path": "project/experiments/cand-124/reports/grade.stdout",
+          "sha256": "d88906a70366f6ccb6eab67bab62d457b317a0f7579658b9b843c793bbaef68c"
+        }
+      ]
+    },
+    {
+      "path": "project/experiments/cand-126/reports/grade.stdout",
+      "reason": "Byte-identical to retained project/experiments/cand-126/reports/grade.json",
+      "bytes": 818384,
+      "tracked": true,
+      "files": [
+        {
+          "path": "project/experiments/cand-126/reports/grade.stdout",
+          "sha256": "a8861a58c974041ba8e20119a611b7400009ab978a2eacf43a7d40c4c54fc98c"
+        }
+      ]
+    },
+    {
+      "path": "project/experiments/cand-127/reports/grade.stdout",
+      "reason": "Byte-identical to retained project/experiments/cand-127/reports/grade.json",
+      "bytes": 818334,
+      "tracked": true,
+      "files": [
+        {
+          "path": "project/experiments/cand-127/reports/grade.stdout",
+          "sha256": "32ff2362bd83deaf5ecba119c9a33afcee32c111838e8fc16eeacd02404298a7"
+        }
+      ]
+    },
+    {
+      "path": "project/experiments/cand-128/reports/grade.stdout",
+      "reason": "Byte-identical to retained project/experiments/cand-128/reports/grade.json",
+      "bytes": 817973,
+      "tracked": true,
+      "files": [
+        {
+          "path": "project/experiments/cand-128/reports/grade.stdout",
+          "sha256": "d1ccfe5319df798b51b32f32196625f71ee8a3180b2fa6b1869d806907c6f58e"
+        }
+      ]
+    },
+    {
+      "path": "project/experiments/cand-129/reports/grade.stdout",
+      "reason": "Byte-identical to retained project/experiments/cand-129/reports/grade.json",
+      "bytes": 575707,
+      "tracked": true,
+      "files": [
+        {
+          "path": "project/experiments/cand-129/reports/grade.stdout",
+          "sha256": "65f53ab754d4787e0a19bec43053902da3e48436270fef077601c9a88bc09b3d"
+        }
+      ]
+    },
+    {
+      "path": "project/experiments/cand-130/reports/grade.stdout",
+      "reason": "Byte-identical to retained project/experiments/cand-130/reports/grade.json",
+      "bytes": 818103,
+      "tracked": true,
+      "files": [
+        {
+          "path": "project/experiments/cand-130/reports/grade.stdout",
+          "sha256": "9db788edef13c3084c2a2b20153302a3c5600790f8f9260bd284d4464c593fa4"
+        }
+      ]
+    },
+    {
+      "path": "project/experiments/cand-131/reports/grade.stdout",
+      "reason": "Byte-identical to retained project/experiments/cand-131/reports/grade.json",
+      "bytes": 818336,
+      "tracked": true,
+      "files": [
+        {
+          "path": "project/experiments/cand-131/reports/grade.stdout",
+          "sha256": "4981a58c1e0a7b6f5e1bf1131035d62f69f27c325508b15a2816e6dbcfb7f433"
+        }
+      ]
+    },
+    {
+      "path": "project/experiments/cand-132/reports/grade.stdout",
+      "reason": "Byte-identical to retained project/experiments/cand-132/reports/grade.json",
+      "bytes": 820068,
+      "tracked": true,
+      "files": [
+        {
+          "path": "project/experiments/cand-132/reports/grade.stdout",
+          "sha256": "e4aac583cdaf680bd62f701b4eace327b09280af9b3c9d6e9c664a6735dfea7c"
+        }
+      ]
+    },
+    {
+      "path": "project/experiments/cand-133/reports/grade.stdout",
+      "reason": "Byte-identical to retained project/experiments/cand-133/reports/grade.json",
+      "bytes": 820060,
+      "tracked": true,
+      "files": [
+        {
+          "path": "project/experiments/cand-133/reports/grade.stdout",
+          "sha256": "1489b668a47607d91baf0d781459c3065ae4d788d08f43625811b9a0ca0cce31"
+        }
+      ]
+    },
+    {
+      "path": "project/experiments/cand-134/reports/grade.stdout",
+      "reason": "Byte-identical to retained project/experiments/cand-134/reports/grade.json",
+      "bytes": 819877,
+      "tracked": true,
+      "files": [
+        {
+          "path": "project/experiments/cand-134/reports/grade.stdout",
+          "sha256": "846d45aff039dc1cb1358c67152bbd806f8cce2db80c68f7bdd3d077f89ccd2f"
+        }
+      ]
+    },
+    {
+      "path": "project/experiments/cand-135/reports/grade.stdout",
+      "reason": "Byte-identical to retained project/experiments/cand-135/reports/grade.json",
+      "bytes": 819890,
+      "tracked": true,
+      "files": [
+        {
+          "path": "project/experiments/cand-135/reports/grade.stdout",
+          "sha256": "d28f1795ce2867a2d6dae95b15c4e4d985d50727cdc21ee01fd0fc148f65da73"
+        }
+      ]
+    },
+    {
+      "path": "project/experiments/cand-136/reports/grade.stdout",
+      "reason": "Byte-identical to retained project/experiments/cand-136/reports/grade.json",
+      "bytes": 821046,
+      "tracked": true,
+      "files": [
+        {
+          "path": "project/experiments/cand-136/reports/grade.stdout",
+          "sha256": "cc2812c374470fe2c0b1e26aaa39db57c53df93783e2f8f0d64113c7a296d438"
+        }
+      ]
+    },
+    {
+      "path": "project/experiments/cand-137/reports/grade.stdout",
+      "reason": "Byte-identical to retained project/experiments/cand-137/reports/grade.json",
+      "bytes": 820522,
+      "tracked": true,
+      "files": [
+        {
+          "path": "project/experiments/cand-137/reports/grade.stdout",
+          "sha256": "bf126d0644d6ec8119dea31487cfe766f3de46b2072ceb963049b5be55d387ef"
+        }
+      ]
+    },
+    {
+      "path": "project/experiments/cand-138/reports/grade.stdout",
+      "reason": "Byte-identical to retained project/experiments/cand-138/reports/grade.json",
+      "bytes": 820912,
+      "tracked": true,
+      "files": [
+        {
+          "path": "project/experiments/cand-138/reports/grade.stdout",
+          "sha256": "5e25690fc5d5758bf12dc55344749d81f82ca6bc36a4f20a2770fd6070c6072a"
+        }
+      ]
+    },
+    {
+      "path": "project/experiments/cand-139/reports/grade.stdout",
+      "reason": "Byte-identical to retained project/experiments/cand-139/reports/grade.json",
+      "bytes": 819821,
+      "tracked": true,
+      "files": [
+        {
+          "path": "project/experiments/cand-139/reports/grade.stdout",
+          "sha256": "2be28dca0ef806cdfc054c4819c239692ee0f76112d756bfbba8c35f12d171a9"
+        }
+      ]
+    },
+    {
+      "path": "project/experiments/cand-140/reports/grade.stdout",
+      "reason": "Byte-identical to retained project/experiments/cand-140/reports/grade.json",
+      "bytes": 817924,
+      "tracked": true,
+      "files": [
+        {
+          "path": "project/experiments/cand-140/reports/grade.stdout",
+          "sha256": "69e3a553acda16a1d14f5eb19cc9ac3a1d11c7d3749a33c3a16185becf23d93a"
+        }
+      ]
+    },
+    {
+      "path": "project/experiments/cand-142/reports/grade.stdout",
+      "reason": "Byte-identical to retained project/experiments/cand-142/reports/grade.json",
+      "bytes": 819814,
+      "tracked": true,
+      "files": [
+        {
+          "path": "project/experiments/cand-142/reports/grade.stdout",
+          "sha256": "3932eec7ee2ba811e4d3e22f1a7ad42035422e88b9bfa1b95738c3a04aab5d54"
+        }
+      ]
+    },
+    {
+      "path": "project/experiments/cand-143/reports/grade.stdout",
+      "reason": "Byte-identical to retained project/experiments/cand-143/reports/grade.json",
+      "bytes": 819119,
+      "tracked": true,
+      "files": [
+        {
+          "path": "project/experiments/cand-143/reports/grade.stdout",
+          "sha256": "7c56d774274dcdab2098b720bfbe7f7b0cbfaf488969a52971edb2709993b915"
+        }
+      ]
+    },
+    {
+      "path": "project/experiments/cand-144/reports/grade.stdout",
+      "reason": "Byte-identical to retained project/experiments/cand-144/reports/grade.json",
+      "bytes": 934269,
+      "tracked": true,
+      "files": [
+        {
+          "path": "project/experiments/cand-144/reports/grade.stdout",
+          "sha256": "912546fc2cde90017419c68b2bd75763b4ac83ef188ed0b9d85fc0a453b9e553"
+        }
+      ]
+    },
+    {
+      "path": "project/experiments/cand-145/reports/grade.stdout",
+      "reason": "Byte-identical to retained project/experiments/cand-145/reports/grade.json",
+      "bytes": 1158825,
+      "tracked": true,
+      "files": [
+        {
+          "path": "project/experiments/cand-145/reports/grade.stdout",
+          "sha256": "c0a036efd364ab2eb4d5ca5dab30353349f634dcd31308afcdcbee5ad29cc224"
+        }
+      ]
+    },
+    {
+      "path": "project/experiments/cand-146/reports/grade.stdout",
+      "reason": "Byte-identical to retained project/experiments/cand-146/reports/grade.json",
+      "bytes": 1159125,
+      "tracked": true,
+      "files": [
+        {
+          "path": "project/experiments/cand-146/reports/grade.stdout",
+          "sha256": "f1109ea908d711b4648e0fdb409bb8fd67f4e74e438ea281353f274545341882"
+        }
+      ]
+    },
+    {
+      "path": "project/experiments/cand-147/reports/grade.stdout",
+      "reason": "Byte-identical to retained project/experiments/cand-147/reports/grade.json",
+      "bytes": 1161542,
+      "tracked": true,
+      "files": [
+        {
+          "path": "project/experiments/cand-147/reports/grade.stdout",
+          "sha256": "72a03c4e6ae437b9c12714c0460208937fb6007e690720e84b8bce792ebdeb89"
+        }
+      ]
+    },
+    {
+      "path": "project/experiments/cand-148/reports/grade.stdout",
+      "reason": "Byte-identical to retained project/experiments/cand-148/reports/grade.json",
+      "bytes": 2045044,
+      "tracked": true,
+      "files": [
+        {
+          "path": "project/experiments/cand-148/reports/grade.stdout",
+          "sha256": "c6856bf2271520bb27d2ee41b197e5eb9d7565d6a1e250c15cfb75084815a8b8"
+        }
+      ]
+    },
+    {
+      "path": "project/experiments/cand-149/reports/grade.stdout",
+      "reason": "Byte-identical to retained project/experiments/cand-149/reports/grade.json",
+      "bytes": 3706821,
+      "tracked": true,
+      "files": [
+        {
+          "path": "project/experiments/cand-149/reports/grade.stdout",
+          "sha256": "5a938b6f0aba13ada8a53c441bf0c25b2e7e2ed7ac339a508106b328e46d9a89"
+        }
+      ]
+    },
+    {
+      "path": "project/experiments/cand-150/reports/grade.stdout",
+      "reason": "Byte-identical to retained project/experiments/cand-150/reports/grade.json",
+      "bytes": 3691609,
+      "tracked": true,
+      "files": [
+        {
+          "path": "project/experiments/cand-150/reports/grade.stdout",
+          "sha256": "92cfa869c711a0bd146d24e004aa2910346b2eb1ead0a5c38de9ae2554046761"
+        }
+      ]
+    },
+    {
+      "path": "project/experiments/cand-154/reports/grade.stdout",
+      "reason": "Byte-identical to retained project/experiments/cand-154/reports/grade.json",
+      "bytes": 3680095,
+      "tracked": true,
+      "files": [
+        {
+          "path": "project/experiments/cand-154/reports/grade.stdout",
+          "sha256": "4c31f5eb7be83a9b22d21aa4e43daadcee9a8806fcab6446301670fdec115be2"
+        }
+      ]
+    }
+  ]
+}

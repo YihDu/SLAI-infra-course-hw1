@@ -3283,3 +3283,9 @@ AssertionError: DMA slot changed after issue preview
 - Verify: public grade, seed 7 -> project/release-verification-20261001-144837/local-grade.json; exit=0.
 - Result: {"M1_P1": {"functional_passed": true, "cycles": 493984, "peak_window_power_w": 11.122408978516123}, "M2_D1": {"functional_passed": true, "cycles": 48838, "peak_window_power_w": 10.793015843962335}}; eligible=True; score=40901.124578635245.
 - Decision: preserve original submission; package updated report only if eligible.
+
+## 2026-10-07 — Submission evidence consolidation and packaging audit
+- Change: retain cand-155 hardware and programs; consolidate Mac/server native traces, retain two early Devin history files, and add per-commit coverage plus submission audit.
+- Verify: frozen manifest hashes unchanged; prior v0.7.3 ZIP graded inputs match root; all 29 pre-existing commits have commit-command evidence; native trace JSON/JSONL parses. Reports: project/trace-commit-coverage-20261007.json and project/submission-audit-20261007.json.
+- Result: reused eligible v0.7.3 grade: P1=493984, D1=48838 cycles, score=40901.124578635245, area=23.372983198720004 mm2, peak power=11.122408978516123/10.793015843962335 W. No hardware/program experiment in this step.
+- Decision: submit unchanged validated design with complete available history. Package via project/package_submission_20261007.py; verify root paths, CRC, artifact equality, source/evidence inclusion, assembly limits, and 25 MiB cap. Full-history trial was oversized; preserve previous ZIP evidence plus all measured-candidate metrics, source/notes, input snapshots and traces; omit redundant historical ASM/debug copies from archive only.

@@ -1,0 +1,64 @@
+{
+  "base_submission": "submission-v073-20261001-144837-ready.zip",
+  "base_git_commit": "5dee29f98af43a61bc92bd84306d97ba8aca43c9",
+  "hardware_programs_unchanged": true,
+  "frozen_files_checked": 31,
+  "frozen_files_unchanged": true,
+  "validation": "Reused v0.7.3 grade; canonical hardware and byte-exact assembly provenance checked by packaging script",
+  "eligible": true,
+  "score": null,
+  "gate_diagnostics": {
+    "area_gate_passed": true,
+    "area_mm2": 23.372983198720004,
+    "eligible": true,
+    "scenarios": {
+      "M1_P1": {
+        "cycles": 493984,
+        "first_token_or_average_step_seconds": 0.000987968,
+        "functional_passed": true,
+        "latency_gate_passed": true,
+        "peak_power_w": 11.122408978516123,
+        "power_gate_passed": true,
+        "throughput_ratio_to_baseline": 62.74898579711084,
+        "throughput_tokens_per_second": 129558.85210857033
+      },
+      "M2_D1": {
+        "cycles": 48838,
+        "first_token_or_average_step_seconds": 1.22095e-05,
+        "functional_passed": true,
+        "latency_gate_passed": true,
+        "peak_power_w": 10.793015843962335,
+        "power_gate_passed": true,
+        "throughput_ratio_to_baseline": 26.66022359637987,
+        "throughput_tokens_per_second": 81903.43584913386
+      }
+    },
+    "score": 40901.124578635245
+  },
+  "native_trace_sessions": 14,
+  "early_history_files": 2,
+  "pre_existing_commits_covered": 29,
+  "required_paths": [
+    "hardware.json",
+    "programs/M1_P1.asm",
+    "programs/M2_D1.asm",
+    "project/iteration-log.md",
+    "agent-trace/"
+  ],
+  "project_evidence": "All evidence from previous verified ZIP; every tracked measured-candidate metrics.json; all generator/script/Markdown sources; candidate input snapshots and proposal metadata; new audit reports.",
+  "trace_snapshot": "Current session copied during archive preparation; subsequent turns remain in local original",
+  "packaging_checks": [
+    "ZIP root paths",
+    "No duplicate names or path traversal",
+    "CRC test",
+    "Byte-identical graded artifacts and baseline",
+    "Each assembly <=8 MiB",
+    "ZIP <=25 MiB"
+  ],
+  "notes": [
+    "No fresh grade: graded inputs unchanged.",
+    "Previous verified ZIP retains its v0.7.3 baseline; workspace frozen evaluator and baseline remain untouched.",
+    "Mac source directory retained locally; canonical copies under agent-trace/ only are packaged.",
+    "Historical candidate ASM copies and redundant debugging outputs are excluded from ZIP to meet 25 MiB; retained in repository."
+  ]
+}

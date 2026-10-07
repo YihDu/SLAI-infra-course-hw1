@@ -1,0 +1,4284 @@
+{
+  "scope": "All regular repository files inspected; 4031 working files hashed for duplicate groups, 829 .git files and 5668 .pixi files inventoried; .venv is an alias of the preserved environment.",
+  "scanned_files": 10528,
+  "recovery_directory": "/tmp/slai-repo-full-cleanup-20261007-w7nu_g_q",
+  "moved_files": 609,
+  "moved_bytes": 22245120,
+  "empty_outputs_removed": 603,
+  "duplicate_report_outputs_removed": 6,
+  "preserved_reasons": {
+    "candidate_source_snapshots": "immutable candidate inputs; independently staged by controller",
+    "candidate_assembly": "historical generated artifacts referenced by candidate replay/evaluation",
+    "json_reports_and_metrics": "required experimental evidence",
+    "gap_analysis": "unique diagnostic data, not byte-duplicate files",
+    "agent_traces": "complete native history",
+    "runtime_and_git": "needed for pinned environment and recoverability",
+    "final_zip": "already verified submission, unchanged"
+  },
+  "remaining_duplicate_excess_mib_before_cleanup": 191.25951194763184,
+  "records": [
+    {
+      "path": "project/campaigns/auto-milp-20260929-005803/000-solver.stderr",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "reason": "Empty diagnostic output; no content; future runs recreate output streams",
+      "tracked": true
+    },
+    {
+      "path": "project/campaigns/auto-milp-20260929-005803/000-solver.stdout",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "reason": "Empty diagnostic output; no content; future runs recreate output streams",
+      "tracked": true
+    },
+    {
+      "path": "project/campaigns/auto-milp-20260929-005803/001-solver.stderr",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "reason": "Empty diagnostic output; no content; future runs recreate output streams",
+      "tracked": true
+    },
+    {
+      "path": "project/campaigns/auto-milp-20260929-005803/001-solver.stdout",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "reason": "Empty diagnostic output; no content; future runs recreate output streams",
+      "tracked": true
+    },
+    {
+      "path": "project/campaigns/auto-milp-20260929-005803/002-solver.stderr",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "reason": "Empty diagnostic output; no content; future runs recreate output streams",
+      "tracked": true
+    },
+    {
+      "path": "project/campaigns/auto-milp-20260929-005803/002-solver.stdout",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "reason": "Empty diagnostic output; no content; future runs recreate output streams",
+      "tracked": true
+    },
+    {
+      "path": "project/campaigns/d1-sh/d0/devfunc.err",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "reason": "Empty diagnostic output; no content; future runs recreate output streams",
+      "tracked": false
+    },
+    {
+      "path": "project/campaigns/d1-sh/d16/devfunc.err",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "reason": "Empty diagnostic output; no content; future runs recreate output streams",
+      "tracked": false
+    },
+    {
+      "path": "project/campaigns/d1-sh/d16_kv_params/devfunc.err",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "reason": "Empty diagnostic output; no content; future runs recreate output streams",
+      "tracked": false
+    },
+    {
+      "path": "project/campaigns/d1-sh/d16rf/devfunc.err",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "reason": "Empty diagnostic output; no content; future runs recreate output streams",
+      "tracked": false
+    },
+    {
+      "path": "project/campaigns/d1-sh/d16rf_split/devfunc.err",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "reason": "Empty diagnostic output; no content; future runs recreate output streams",
+      "tracked": false
+    },
+    {
+      "path": "project/campaigns/d1-sh/d16rf_split_kv/devfunc.err",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "reason": "Empty diagnostic output; no content; future runs recreate output streams",
+      "tracked": false
+    },
+    {
+      "path": "project/campaigns/d1-sh/d8/devfunc.err",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "reason": "Empty diagnostic output; no content; future runs recreate output streams",
+      "tracked": false
+    },
+    {
+      "path": "project/campaigns/d1-sh/d8sh/devfunc.err",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "reason": "Empty diagnostic output; no content; future runs recreate output streams",
+      "tracked": false
+    },
+    {
+      "path": "project/campaigns/d1-sh/d8shf/devfunc.err",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "reason": "Empty diagnostic output; no content; future runs recreate output streams",
+      "tracked": false
+    },
+    {
+      "path": "project/campaigns/d1-sh/d8shf_t32/devfunc.err",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "reason": "Empty diagnostic output; no content; future runs recreate output streams",
+      "tracked": false
+    },
+    {
+      "path": "project/campaigns/d1-sh/layer_rf_tc4x8kp4/joint/grade.stderr",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "reason": "Empty diagnostic output; no content; future runs recreate output streams",
+      "tracked": false
+    },
+    {
+      "path": "project/campaigns/d1-sh/layer_rf_tc_noc512/joint/grade.stderr",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "reason": "Empty diagnostic output; no content; future runs recreate output streams",
+      "tracked": false
+    },
+    {
+      "path": "project/campaigns/d1-sh/rf_a/devfunc.err",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "reason": "Empty diagnostic output; no content; future runs recreate output streams",
+      "tracked": false
+    },
+    {
+      "path": "project/campaigns/d1-sh/rf_a_split/devfunc.err",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "reason": "Empty diagnostic output; no content; future runs recreate output streams",
+      "tracked": false
+    },
+    {
+      "path": "project/campaigns/d1-sh/rf_b/devfunc.err",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "reason": "Empty diagnostic output; no content; future runs recreate output streams",
+      "tracked": false
+    },
+    {
+      "path": "project/campaigns/d1-sh/rf_c/devfunc.err",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "reason": "Empty diagnostic output; no content; future runs recreate output streams",
+      "tracked": false
+    },
+    {
+      "path": "project/campaigns/p1-fuse/v0/devfunc.err",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "reason": "Empty diagnostic output; no content; future runs recreate output streams",
+      "tracked": false
+    },
+    {
+      "path": "project/campaigns/p1-fuse/v1/devfunc.err",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "reason": "Empty diagnostic output; no content; future runs recreate output streams",
+      "tracked": false
+    },
+    {
+      "path": "project/campaigns/p1-fuse/v2/devfunc.err",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "reason": "Empty diagnostic output; no content; future runs recreate output streams",
+      "tracked": false
+    },
+    {
+      "path": "project/campaigns/p1-fuse/v3/devfunc.err",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "reason": "Empty diagnostic output; no content; future runs recreate output streams",
+      "tracked": false
+    },
+    {
+      "path": "project/campaigns/p1-fuse/v4/devfunc.err",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "reason": "Empty diagnostic output; no content; future runs recreate output streams",
+      "tracked": false
+    },
+    {
+      "path": "project/campaigns/p1-fuse/v4_8sm/devfunc.err",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "reason": "Empty diagnostic output; no content; future runs recreate output streams",
+      "tracked": false
+    },
+    {
+      "path": "project/campaigns/p1-fuse/v5/devfunc.err",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "reason": "Empty diagnostic output; no content; future runs recreate output streams",
+      "tracked": false
+    },
+    {
+      "path": "project/campaigns/p1-fuse/v5_16sm/devfunc.err",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "reason": "Empty diagnostic output; no content; future runs recreate output streams",
+      "tracked": false
+    },
+    {
+      "path": "project/campaigns/p1-fuse/v5_8sm/devfunc.err",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "reason": "Empty diagnostic output; no content; future runs recreate output streams",
+      "tracked": false
+    },
+    {
+      "path": "project/campaigns/p1-fuse/v6_16sm/devfunc.err",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "reason": "Empty diagnostic output; no content; future runs recreate output streams",
+      "tracked": false
+    },
+    {
+      "path": "project/campaigns/p1-fuse/v6_8sm/devfunc.err",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "reason": "Empty diagnostic output; no content; future runs recreate output streams",
+      "tracked": false
+    },
+    {
+      "path": "project/campaigns/p1-multism/profile-baseline.stderr",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "reason": "Empty diagnostic output; no content; future runs recreate output streams",
+      "tracked": true
+    },
+    {
+      "path": "project/campaigns/p1-multism/race-observation.stderr",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "reason": "Empty diagnostic output; no content; future runs recreate output streams",
+      "tracked": true
+    },
+    {
+      "path": "project/campaigns/p1-multism/race-observation.stdout",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "reason": "Empty diagnostic output; no content; future runs recreate output streams",
+      "tracked": true
+    },
+    {
+      "path": "project/campaigns/structural-rewrite/check_privsh.log",
+      "bytes": 3741270,
+      "sha256": "14226ea639230a82c013391857178b1502da5fb24ed40de6e1473219eba70af2",
+      "reason": "Byte-identical JSON evidence retained at project/campaigns/structural-rewrite/check_privsh_stepsh.json",
+      "tracked": false
+    },
+    {
+      "path": "project/campaigns/structural-rewrite/check_privsh256_early.log",
+      "bytes": 3738929,
+      "sha256": "cea9166247165f908de768021e8969ab3426d02b1a1e0493be61297b8f8af852",
+      "reason": "Byte-identical JSON evidence retained at project/campaigns/structural-rewrite/check_privsh256_early.json",
+      "tracked": false
+    },
+    {
+      "path": "project/campaigns/structural-rewrite/check_privsh256_hbm4.log",
+      "bytes": 3674902,
+      "sha256": "da181e6ae51ec09620359afd33507550717a88059cb76a6942996533ea0614b3",
+      "reason": "Byte-identical JSON evidence retained at project/campaigns/structural-rewrite/check_privsh256_hbm4.json",
+      "tracked": false
+    },
+    {
+      "path": "project/campaigns/structural-rewrite/check_privsh256e_noc256.log",
+      "bytes": 3738024,
+      "sha256": "7767c023591fe73903daf6625ea30a856708abfd18609d568e5964881e7455a7",
+      "reason": "Byte-identical JSON evidence retained at project/campaigns/structural-rewrite/check_privsh256e_noc256.json",
+      "tracked": false
+    },
+    {
+      "path": "project/campaigns/structural-rewrite/grade_privsh256_hbm4.log",
+      "bytes": 3675986,
+      "sha256": "08ebdb3aeea6689c1147dd1a5e55fb949fea5465f42f41ca79f42c7fd6b504ca",
+      "reason": "Byte-identical JSON evidence retained at project/campaigns/structural-rewrite/grade_privsh256_hbm4.json",
+      "tracked": false
+    },
+    {
+      "path": "project/campaigns/structural/aggressive-r1/attention_unsplit.stderr",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "reason": "Empty diagnostic output; no content; future runs recreate output streams",
+      "tracked": false
+    },
+    {
+      "path": "project/campaigns/structural/aggressive-r1/cache0.stderr",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "reason": "Empty diagnostic output; no content; future runs recreate output streams",
+      "tracked": false
+    },
+    {
+      "path": "project/campaigns/structural/aggressive-r1/cache0__p1_b2.stderr",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "reason": "Empty diagnostic output; no content; future runs recreate output streams",
+      "tracked": false
+    },
+    {
+      "path": "project/campaigns/structural/aggressive-r1/cache0__p1_step_rf.stderr",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "reason": "Empty diagnostic output; no content; future runs recreate output streams",
+      "tracked": false
+    },
+    {
+      "path": "project/campaigns/structural/aggressive-r1/cache0__parent.stderr",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "reason": "Empty diagnostic output; no content; future runs recreate output streams",
+      "tracked": false
+    },
+    {
+      "path": "project/campaigns/structural/aggressive-r1/cache0_verify.stderr",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "reason": "Empty diagnostic output; no content; future runs recreate output streams",
+      "tracked": false
+    },
+    {
+      "path": "project/campaigns/structural/aggressive-r1/cache4.stderr",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "reason": "Empty diagnostic output; no content; future runs recreate output streams",
+      "tracked": false
+    },
+    {
+      "path": "project/campaigns/structural/aggressive-r1/hbm8_cache4.stderr",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "reason": "Empty diagnostic output; no content; future runs recreate output streams",
+      "tracked": false
+    },
+    {
+      "path": "project/campaigns/structural/aggressive-r1/hbm8_sh8_cache4.stderr",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "reason": "Empty diagnostic output; no content; future runs recreate output streams",
+      "tracked": false
+    },
+    {
+      "path": "project/campaigns/structural/aggressive-r1/hbm8_sh8_cache4__p1_b2.stderr",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "reason": "Empty diagnostic output; no content; future runs recreate output streams",
+      "tracked": false
+    },
+    {
+      "path": "project/campaigns/structural/aggressive-r1/hbm8_sh8_cache4__p1_step_rf.stderr",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "reason": "Empty diagnostic output; no content; future runs recreate output streams",
+      "tracked": false
+    },
+    {
+      "path": "project/campaigns/structural/aggressive-r1/hbm8_sh8_cache4__parent.stderr",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "reason": "Empty diagnostic output; no content; future runs recreate output streams",
+      "tracked": false
+    },
+    {
+      "path": "project/campaigns/structural/aggressive-r1/hbm8_sh8_cache4_verify.stderr",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "reason": "Empty diagnostic output; no content; future runs recreate output streams",
+      "tracked": false
+    },
+    {
+      "path": "project/campaigns/structural/aggressive-r1/joint-0.stderr",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "reason": "Empty diagnostic output; no content; future runs recreate output streams",
+      "tracked": false
+    },
+    {
+      "path": "project/campaigns/structural/aggressive-r1/joint-0/grade.stderr",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "reason": "Empty diagnostic output; no content; future runs recreate output streams",
+      "tracked": false
+    },
+    {
+      "path": "project/campaigns/structural/aggressive-r1/joint-1.stderr",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "reason": "Empty diagnostic output; no content; future runs recreate output streams",
+      "tracked": false
+    },
+    {
+      "path": "project/campaigns/structural/aggressive-r1/joint-1/grade.stderr",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "reason": "Empty diagnostic output; no content; future runs recreate output streams",
+      "tracked": false
+    },
+    {
+      "path": "project/campaigns/structural/aggressive-r1/kv_hbm.stderr",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "reason": "Empty diagnostic output; no content; future runs recreate output streams",
+      "tracked": false
+    },
+    {
+      "path": "project/campaigns/structural/aggressive-r1/kv_k_only.stderr",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "reason": "Empty diagnostic output; no content; future runs recreate output streams",
+      "tracked": false
+    },
+    {
+      "path": "project/campaigns/structural/aggressive-r1/kv_v_only.stderr",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "reason": "Empty diagnostic output; no content; future runs recreate output streams",
+      "tracked": false
+    },
+    {
+      "path": "project/campaigns/structural/aggressive-r1/p1_b2.stderr",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "reason": "Empty diagnostic output; no content; future runs recreate output streams",
+      "tracked": false
+    },
+    {
+      "path": "project/campaigns/structural/aggressive-r1/p1_k16.stdout",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "reason": "Empty diagnostic output; no content; future runs recreate output streams",
+      "tracked": false
+    },
+    {
+      "path": "project/campaigns/structural/aggressive-r1/p1_n16.stderr",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "reason": "Empty diagnostic output; no content; future runs recreate output streams",
+      "tracked": false
+    },
+    {
+      "path": "project/campaigns/structural/aggressive-r1/p1_step_rf.stderr",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "reason": "Empty diagnostic output; no content; future runs recreate output streams",
+      "tracked": false
+    },
+    {
+      "path": "project/campaigns/structural/aggressive-r1/p1_step_unmerged.stderr",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "reason": "Empty diagnostic output; no content; future runs recreate output streams",
+      "tracked": false
+    },
+    {
+      "path": "project/campaigns/structural/aggressive-r1/p1_team4.stderr",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "reason": "Empty diagnostic output; no content; future runs recreate output streams",
+      "tracked": false
+    },
+    {
+      "path": "project/campaigns/structural/aggressive-r1/qkv_k16.stderr",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "reason": "Empty diagnostic output; no content; future runs recreate output streams",
+      "tracked": false
+    },
+    {
+      "path": "project/campaigns/structural/aggressive-r1/qkv_k8.stderr",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "reason": "Empty diagnostic output; no content; future runs recreate output streams",
+      "tracked": false
+    },
+    {
+      "path": "project/campaigns/structural/aggressive-r1/rf_w2_only.stderr",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "reason": "Empty diagnostic output; no content; future runs recreate output streams",
+      "tracked": false
+    },
+    {
+      "path": "project/campaigns/structural/aggressive-r1/sh8_2r_cache4.stderr",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "reason": "Empty diagnostic output; no content; future runs recreate output streams",
+      "tracked": false
+    },
+    {
+      "path": "project/campaigns/structural/aggressive-r1/sh8_2r_cache4__p1_b2.stderr",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "reason": "Empty diagnostic output; no content; future runs recreate output streams",
+      "tracked": false
+    },
+    {
+      "path": "project/campaigns/structural/aggressive-r1/sh8_2r_cache4__p1_step_rf.stderr",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "reason": "Empty diagnostic output; no content; future runs recreate output streams",
+      "tracked": false
+    },
+    {
+      "path": "project/campaigns/structural/aggressive-r1/sh8_2r_cache4__parent.stderr",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "reason": "Empty diagnostic output; no content; future runs recreate output streams",
+      "tracked": false
+    },
+    {
+      "path": "project/campaigns/structural/aggressive-r1/sh8_2r_cache4_verify.stderr",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "reason": "Empty diagnostic output; no content; future runs recreate output streams",
+      "tracked": false
+    },
+    {
+      "path": "project/campaigns/structural/aggressive-r1/tc2_kp2.stderr",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "reason": "Empty diagnostic output; no content; future runs recreate output streams",
+      "tracked": false
+    },
+    {
+      "path": "project/campaigns/structural/aggressive-r1/tc4_kp1.stderr",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "reason": "Empty diagnostic output; no content; future runs recreate output streams",
+      "tracked": false
+    },
+    {
+      "path": "project/campaigns/structural/aggressive-r1/tc8x8_kp2.stderr",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "reason": "Empty diagnostic output; no content; future runs recreate output streams",
+      "tracked": false
+    },
+    {
+      "path": "project/campaigns/structural/aggressive-r1/tc8x8_kp2_hbm8.stderr",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "reason": "Empty diagnostic output; no content; future runs recreate output streams",
+      "tracked": false
+    },
+    {
+      "path": "project/campaigns/structural/aggressive-r1/w1_k16.stderr",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "reason": "Empty diagnostic output; no content; future runs recreate output streams",
+      "tracked": false
+    },
+    {
+      "path": "project/campaigns/structural/aggressive-r1/w2_k64.stderr",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "reason": "Empty diagnostic output; no content; future runs recreate output streams",
+      "tracked": false
+    },
+    {
+      "path": "project/campaigns/structural/aggressive-r1/wo_k128.stderr",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "reason": "Empty diagnostic output; no content; future runs recreate output streams",
+      "tracked": false
+    },
+    {
+      "path": "project/campaigns/structural/aggressive-r1/wo_k32.stderr",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "reason": "Empty diagnostic output; no content; future runs recreate output streams",
+      "tracked": false
+    },
+    {
+      "path": "project/campaigns/structural/p1-pair-r1/cache0__d1.stderr",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "reason": "Empty diagnostic output; no content; future runs recreate output streams",
+      "tracked": false
+    },
+    {
+      "path": "project/campaigns/structural/p1-pair-r1/cache0__p1.stderr",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "reason": "Empty diagnostic output; no content; future runs recreate output streams",
+      "tracked": false
+    },
+    {
+      "path": "project/campaigns/structural/p1-pair-r1/cache1__d1.stderr",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "reason": "Empty diagnostic output; no content; future runs recreate output streams",
+      "tracked": false
+    },
+    {
+      "path": "project/campaigns/structural/p1-pair-r1/cache1__p1.stderr",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "reason": "Empty diagnostic output; no content; future runs recreate output streams",
+      "tracked": false
+    },
+    {
+      "path": "project/campaigns/structural/p1-pair-r1/cache2__d1.stderr",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "reason": "Empty diagnostic output; no content; future runs recreate output streams",
+      "tracked": false
+    },
+    {
+      "path": "project/campaigns/structural/p1-pair-r1/cache2__p1.stderr",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "reason": "Empty diagnostic output; no content; future runs recreate output streams",
+      "tracked": false
+    },
+    {
+      "path": "project/campaigns/structural/p1-pair-r1/cache4__d1.stderr",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "reason": "Empty diagnostic output; no content; future runs recreate output streams",
+      "tracked": false
+    },
+    {
+      "path": "project/campaigns/structural/p1-pair-r1/cache4__p1.stderr",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "reason": "Empty diagnostic output; no content; future runs recreate output streams",
+      "tracked": false
+    },
+    {
+      "path": "project/campaigns/structural/p1-pair-r1/dma2__d1.stderr",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "reason": "Empty diagnostic output; no content; future runs recreate output streams",
+      "tracked": false
+    },
+    {
+      "path": "project/campaigns/structural/p1-pair-r1/dma2__p1.stderr",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "reason": "Empty diagnostic output; no content; future runs recreate output streams",
+      "tracked": false
+    },
+    {
+      "path": "project/campaigns/structural/p1-pair-r1/dma_depth2__p1.stdout",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "reason": "Empty diagnostic output; no content; future runs recreate output streams",
+      "tracked": false
+    },
+    {
+      "path": "project/campaigns/structural/p1-pair-r1/hbm8_cache2__p1.stderr",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "reason": "Empty diagnostic output; no content; future runs recreate output streams",
+      "tracked": false
+    },
+    {
+      "path": "project/campaigns/structural/p1-pair-r1/hbm8_cache4__p1.stderr",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "reason": "Empty diagnostic output; no content; future runs recreate output streams",
+      "tracked": false
+    },
+    {
+      "path": "project/campaigns/structural/p1-pair-r1/no_multicast__d1.stderr",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "reason": "Empty diagnostic output; no content; future runs recreate output streams",
+      "tracked": false
+    },
+    {
+      "path": "project/campaigns/structural/p1-pair-r1/no_multicast__p1.stderr",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "reason": "Empty diagnostic output; no content; future runs recreate output streams",
+      "tracked": false
+    },
+    {
+      "path": "project/campaigns/structural/p1-pair-r1/noc256__d1.stderr",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "reason": "Empty diagnostic output; no content; future runs recreate output streams",
+      "tracked": false
+    },
+    {
+      "path": "project/campaigns/structural/p1-pair-r1/noc256__p1.stderr",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "reason": "Empty diagnostic output; no content; future runs recreate output streams",
+      "tracked": false
+    },
+    {
+      "path": "project/campaigns/structural/p1-pair-r1/paired_k16__p1.stderr",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "reason": "Empty diagnostic output; no content; future runs recreate output streams",
+      "tracked": false
+    },
+    {
+      "path": "project/campaigns/structural/p1-pair-r1/paired_late_b/joint/grade.stderr",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "reason": "Empty diagnostic output; no content; future runs recreate output streams",
+      "tracked": false
+    },
+    {
+      "path": "project/campaigns/structural/p1-pair-r1/paired_late_b__grade.stderr",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "reason": "Empty diagnostic output; no content; future runs recreate output streams",
+      "tracked": false
+    },
+    {
+      "path": "project/campaigns/structural/p1-pair-r1/paired_late_b__grade.stdout",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "reason": "Empty diagnostic output; no content; future runs recreate output streams",
+      "tracked": false
+    },
+    {
+      "path": "project/campaigns/structural/p1-pair-r1/paired_late_b__p1.stderr",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "reason": "Empty diagnostic output; no content; future runs recreate output streams",
+      "tracked": false
+    },
+    {
+      "path": "project/campaigns/structural/p1-pair-r1/paired_late_b__prepare.stderr",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "reason": "Empty diagnostic output; no content; future runs recreate output streams",
+      "tracked": false
+    },
+    {
+      "path": "project/campaigns/structural/p1-pair-r1/paired_preload_a__p1.stderr",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "reason": "Empty diagnostic output; no content; future runs recreate output streams",
+      "tracked": false
+    },
+    {
+      "path": "project/campaigns/structural/p1-pair-r1/prompt_b2__p1.stderr",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "reason": "Empty diagnostic output; no content; future runs recreate output streams",
+      "tracked": false
+    },
+    {
+      "path": "project/campaigns/structural/p1-pair-r1/rf4r2w__d1.stderr",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "reason": "Empty diagnostic output; no content; future runs recreate output streams",
+      "tracked": false
+    },
+    {
+      "path": "project/campaigns/structural/p1-pair-r1/rf4r2w__p1.stderr",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "reason": "Empty diagnostic output; no content; future runs recreate output streams",
+      "tracked": false
+    },
+    {
+      "path": "project/campaigns/structural/p1-pair-r1/sh1bank__d1.stderr",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "reason": "Empty diagnostic output; no content; future runs recreate output streams",
+      "tracked": false
+    },
+    {
+      "path": "project/campaigns/structural/p1-pair-r1/sh1bank__p1.stderr",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "reason": "Empty diagnostic output; no content; future runs recreate output streams",
+      "tracked": false
+    },
+    {
+      "path": "project/campaigns/structural/p1-pair-r1/sh2r__d1.stderr",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "reason": "Empty diagnostic output; no content; future runs recreate output streams",
+      "tracked": false
+    },
+    {
+      "path": "project/campaigns/structural/p1-pair-r1/sh2r__p1.stderr",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "reason": "Empty diagnostic output; no content; future runs recreate output streams",
+      "tracked": false
+    },
+    {
+      "path": "project/campaigns/structural/p1-pair-r1/sh8_2r_cache4/joint/grade.stderr",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "reason": "Empty diagnostic output; no content; future runs recreate output streams",
+      "tracked": false
+    },
+    {
+      "path": "project/campaigns/structural/p1-pair-r1/sh8_2r_cache4__d1.stderr",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "reason": "Empty diagnostic output; no content; future runs recreate output streams",
+      "tracked": false
+    },
+    {
+      "path": "project/campaigns/structural/p1-pair-r1/sh8_2r_cache4__p1.stderr",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "reason": "Empty diagnostic output; no content; future runs recreate output streams",
+      "tracked": false
+    },
+    {
+      "path": "project/campaigns/structural/p1-pair-r1/sh8_2r_cache4__verify.stderr",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "reason": "Empty diagnostic output; no content; future runs recreate output streams",
+      "tracked": false
+    },
+    {
+      "path": "project/campaigns/structural/p1-pair-r1/sh8__d1.stderr",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "reason": "Empty diagnostic output; no content; future runs recreate output streams",
+      "tracked": false
+    },
+    {
+      "path": "project/campaigns/structural/p1-pair-r1/sh8__p1.stderr",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "reason": "Empty diagnostic output; no content; future runs recreate output streams",
+      "tracked": false
+    },
+    {
+      "path": "project/campaigns/structural/p1-pair-r1/sh8__verify.stderr",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "reason": "Empty diagnostic output; no content; future runs recreate output streams",
+      "tracked": false
+    },
+    {
+      "path": "project/campaigns/structural/p1-pair-r1/sm_noc64__d1.stderr",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "reason": "Empty diagnostic output; no content; future runs recreate output streams",
+      "tracked": false
+    },
+    {
+      "path": "project/campaigns/structural/p1-pair-r1/sm_noc64__p1.stderr",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "reason": "Empty diagnostic output; no content; future runs recreate output streams",
+      "tracked": false
+    },
+    {
+      "path": "project/campaigns/structural/p1-pair-r1/step_k16_n32__p1.stderr",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "reason": "Empty diagnostic output; no content; future runs recreate output streams",
+      "tracked": false
+    },
+    {
+      "path": "project/campaigns/structural/p1-pair-r1/step_k16_n64__p1.stdout",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "reason": "Empty diagnostic output; no content; future runs recreate output streams",
+      "tracked": false
+    },
+    {
+      "path": "project/campaigns/structural/p1-pair-r1/step_k32_n16__p1.stderr",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "reason": "Empty diagnostic output; no content; future runs recreate output streams",
+      "tracked": false
+    },
+    {
+      "path": "project/campaigns/structural/p1-pair-r1/tc4x8_kp2__d1.stderr",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "reason": "Empty diagnostic output; no content; future runs recreate output streams",
+      "tracked": false
+    },
+    {
+      "path": "project/campaigns/structural/p1-pair-r1/tc4x8_kp2__p1.stderr",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "reason": "Empty diagnostic output; no content; future runs recreate output streams",
+      "tracked": false
+    },
+    {
+      "path": "project/campaigns/structural/p1-pair-r1/tc8x16_kp1__d1.stderr",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "reason": "Empty diagnostic output; no content; future runs recreate output streams",
+      "tracked": false
+    },
+    {
+      "path": "project/campaigns/structural/p1-pair-r1/tc8x16_kp1__p1.stderr",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "reason": "Empty diagnostic output; no content; future runs recreate output streams",
+      "tracked": false
+    },
+    {
+      "path": "project/campaigns/structural/p1-pair-r1/tc8x8_kp2__d1.stderr",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "reason": "Empty diagnostic output; no content; future runs recreate output streams",
+      "tracked": false
+    },
+    {
+      "path": "project/campaigns/structural/p1-pair-r1/tc8x8_kp2__p1.stderr",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "reason": "Empty diagnostic output; no content; future runs recreate output streams",
+      "tracked": false
+    },
+    {
+      "path": "project/campaigns/structural/p1-pair-r1/w2_no_operand_pipeline__p1.stderr",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "reason": "Empty diagnostic output; no content; future runs recreate output streams",
+      "tracked": false
+    },
+    {
+      "path": "project/campaigns/structural/p1_paired_w1_noc512/joint/grade.stderr",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "reason": "Empty diagnostic output; no content; future runs recreate output streams",
+      "tracked": false
+    },
+    {
+      "path": "project/campaigns/structural/p1_paired_w1_step_rf_noc512/joint/grade.stderr",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "reason": "Empty diagnostic output; no content; future runs recreate output streams",
+      "tracked": false
+    },
+    {
+      "path": "project/campaigns/validation-efficient/only-w1-race-observation.stderr",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "reason": "Empty diagnostic output; no content; future runs recreate output streams",
+      "tracked": true
+    },
+    {
+      "path": "project/campaigns/validation-efficient/only-w1-race-observation.stdout",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "reason": "Empty diagnostic output; no content; future runs recreate output streams",
+      "tracked": true
+    },
+    {
+      "path": "project/campaigns/validation-preflight-audit/tests.stdout",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "reason": "Empty diagnostic output; no content; future runs recreate output streams",
+      "tracked": true
+    },
+    {
+      "path": "project/experiments/cand-074/reports/generate.stderr",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "reason": "Empty diagnostic output; no content; future runs recreate output streams",
+      "tracked": true
+    },
+    {
+      "path": "project/experiments/cand-074/reports/grade.stderr",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "reason": "Empty diagnostic output; no content; future runs recreate output streams",
+      "tracked": true
+    },
+    {
+      "path": "project/experiments/cand-074/reports/static.stderr",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "reason": "Empty diagnostic output; no content; future runs recreate output streams",
+      "tracked": true
+    },
+    {
+      "path": "project/experiments/cand-074/reports/static.stdout",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "reason": "Empty diagnostic output; no content; future runs recreate output streams",
+      "tracked": true
+    },
+    {
+      "path": "project/experiments/cand-075/reports/generate.stderr",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "reason": "Empty diagnostic output; no content; future runs recreate output streams",
+      "tracked": true
+    },
+    {
+      "path": "project/experiments/cand-075/reports/grade.stderr",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "reason": "Empty diagnostic output; no content; future runs recreate output streams",
+      "tracked": true
+    },
+    {
+      "path": "project/experiments/cand-075/reports/static.stderr",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "reason": "Empty diagnostic output; no content; future runs recreate output streams",
+      "tracked": true
+    },
+    {
+      "path": "project/experiments/cand-075/reports/static.stdout",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "reason": "Empty diagnostic output; no content; future runs recreate output streams",
+      "tracked": true
+    },
+    {
+      "path": "project/experiments/cand-076/reports/generate.stderr",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "reason": "Empty diagnostic output; no content; future runs recreate output streams",
+      "tracked": true
+    },
+    {
+      "path": "project/experiments/cand-076/reports/grade.stderr",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "reason": "Empty diagnostic output; no content; future runs recreate output streams",
+      "tracked": true
+    },
+    {
+      "path": "project/experiments/cand-076/reports/static.stderr",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "reason": "Empty diagnostic output; no content; future runs recreate output streams",
+      "tracked": true
+    },
+    {
+      "path": "project/experiments/cand-076/reports/static.stdout",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "reason": "Empty diagnostic output; no content; future runs recreate output streams",
+      "tracked": true
+    },
+    {
+      "path": "project/experiments/cand-077/reports/generate.stderr",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "reason": "Empty diagnostic output; no content; future runs recreate output streams",
+      "tracked": true
+    },
+    {
+      "path": "project/experiments/cand-077/reports/grade.stderr",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "reason": "Empty diagnostic output; no content; future runs recreate output streams",
+      "tracked": true
+    },
+    {
+      "path": "project/experiments/cand-077/reports/static.stderr",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "reason": "Empty diagnostic output; no content; future runs recreate output streams",
+      "tracked": true
+    },
+    {
+      "path": "project/experiments/cand-077/reports/static.stdout",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "reason": "Empty diagnostic output; no content; future runs recreate output streams",
+      "tracked": true
+    },
+    {
+      "path": "project/experiments/cand-078/reports/generate.stderr",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "reason": "Empty diagnostic output; no content; future runs recreate output streams",
+      "tracked": true
+    },
+    {
+      "path": "project/experiments/cand-078/reports/grade.stderr",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "reason": "Empty diagnostic output; no content; future runs recreate output streams",
+      "tracked": true
+    },
+    {
+      "path": "project/experiments/cand-078/reports/static.stderr",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "reason": "Empty diagnostic output; no content; future runs recreate output streams",
+      "tracked": true
+    },
+    {
+      "path": "project/experiments/cand-078/reports/static.stdout",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "reason": "Empty diagnostic output; no content; future runs recreate output streams",
+      "tracked": true
+    },
+    {
+      "path": "project/experiments/cand-079/reports/generate.stderr",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "reason": "Empty diagnostic output; no content; future runs recreate output streams",
+      "tracked": true
+    },
+    {
+      "path": "project/experiments/cand-079/reports/grade.stderr",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "reason": "Empty diagnostic output; no content; future runs recreate output streams",
+      "tracked": true
+    },
+    {
+      "path": "project/experiments/cand-079/reports/static.stderr",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "reason": "Empty diagnostic output; no content; future runs recreate output streams",
+      "tracked": true
+    },
+    {
+      "path": "project/experiments/cand-079/reports/static.stdout",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "reason": "Empty diagnostic output; no content; future runs recreate output streams",
+      "tracked": true
+    },
+    {
+      "path": "project/experiments/cand-080/reports/generate.stderr",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "reason": "Empty diagnostic output; no content; future runs recreate output streams",
+      "tracked": true
+    },
+    {
+      "path": "project/experiments/cand-080/reports/grade.stderr",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "reason": "Empty diagnostic output; no content; future runs recreate output streams",
+      "tracked": true
+    },
+    {
+      "path": "project/experiments/cand-080/reports/static.stderr",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "reason": "Empty diagnostic output; no content; future runs recreate output streams",
+      "tracked": true
+    },
+    {
+      "path": "project/experiments/cand-080/reports/static.stdout",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "reason": "Empty diagnostic output; no content; future runs recreate output streams",
+      "tracked": true
+    },
+    {
+      "path": "project/experiments/cand-081/reports/generate.stderr",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "reason": "Empty diagnostic output; no content; future runs recreate output streams",
+      "tracked": true
+    },
+    {
+      "path": "project/experiments/cand-081/reports/grade.stderr",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "reason": "Empty diagnostic output; no content; future runs recreate output streams",
+      "tracked": true
+    },
+    {
+      "path": "project/experiments/cand-081/reports/static.stderr",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "reason": "Empty diagnostic output; no content; future runs recreate output streams",
+      "tracked": true
+    },
+    {
+      "path": "project/experiments/cand-081/reports/static.stdout",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "reason": "Empty diagnostic output; no content; future runs recreate output streams",
+      "tracked": true
+    },
+    {
+      "path": "project/experiments/cand-082/reports/generate.stderr",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "reason": "Empty diagnostic output; no content; future runs recreate output streams",
+      "tracked": true
+    },
+    {
+      "path": "project/experiments/cand-082/reports/grade.stderr",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "reason": "Empty diagnostic output; no content; future runs recreate output streams",
+      "tracked": true
+    },
+    {
+      "path": "project/experiments/cand-082/reports/static.stderr",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "reason": "Empty diagnostic output; no content; future runs recreate output streams",
+      "tracked": true
+    },
+    {
+      "path": "project/experiments/cand-082/reports/static.stdout",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "reason": "Empty diagnostic output; no content; future runs recreate output streams",
+      "tracked": true
+    },
+    {
+      "path": "project/experiments/cand-083/reports/generate.stderr",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "reason": "Empty diagnostic output; no content; future runs recreate output streams",
+      "tracked": true
+    },
+    {
+      "path": "project/experiments/cand-083/reports/grade.stderr",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "reason": "Empty diagnostic output; no content; future runs recreate output streams",
+      "tracked": true
+    },
+    {
+      "path": "project/experiments/cand-083/reports/static.stderr",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "reason": "Empty diagnostic output; no content; future runs recreate output streams",
+      "tracked": true
+    },
+    {
+      "path": "project/experiments/cand-083/reports/static.stdout",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "reason": "Empty diagnostic output; no content; future runs recreate output streams",
+      "tracked": true
+    },
+    {
+      "path": "project/experiments/cand-084/reports/generate.stderr",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "reason": "Empty diagnostic output; no content; future runs recreate output streams",
+      "tracked": true
+    },
+    {
+      "path": "project/experiments/cand-084/reports/grade.stderr",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "reason": "Empty diagnostic output; no content; future runs recreate output streams",
+      "tracked": true
+    },
+    {
+      "path": "project/experiments/cand-084/reports/static.stderr",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "reason": "Empty diagnostic output; no content; future runs recreate output streams",
+      "tracked": true
+    },
+    {
+      "path": "project/experiments/cand-084/reports/static.stdout",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "reason": "Empty diagnostic output; no content; future runs recreate output streams",
+      "tracked": true
+    },
+    {
+      "path": "project/experiments/cand-085/reports/generate.stderr",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "reason": "Empty diagnostic output; no content; future runs recreate output streams",
+      "tracked": true
+    },
+    {
+      "path": "project/experiments/cand-085/reports/grade.stderr",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "reason": "Empty diagnostic output; no content; future runs recreate output streams",
+      "tracked": true
+    },
+    {
+      "path": "project/experiments/cand-085/reports/static.stderr",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "reason": "Empty diagnostic output; no content; future runs recreate output streams",
+      "tracked": true
+    },
+    {
+      "path": "project/experiments/cand-085/reports/static.stdout",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "reason": "Empty diagnostic output; no content; future runs recreate output streams",
+      "tracked": true
+    },
+    {
+      "path": "project/experiments/cand-086/reports/generate.stderr",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "reason": "Empty diagnostic output; no content; future runs recreate output streams",
+      "tracked": true
+    },
+    {
+      "path": "project/experiments/cand-086/reports/grade.stderr",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "reason": "Empty diagnostic output; no content; future runs recreate output streams",
+      "tracked": true
+    },
+    {
+      "path": "project/experiments/cand-086/reports/static.stderr",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "reason": "Empty diagnostic output; no content; future runs recreate output streams",
+      "tracked": true
+    },
+    {
+      "path": "project/experiments/cand-086/reports/static.stdout",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "reason": "Empty diagnostic output; no content; future runs recreate output streams",
+      "tracked": true
+    },
+    {
+      "path": "project/experiments/cand-087/reports/generate.stderr",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "reason": "Empty diagnostic output; no content; future runs recreate output streams",
+      "tracked": true
+    },
+    {
+      "path": "project/experiments/cand-087/reports/grade.stderr",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "reason": "Empty diagnostic output; no content; future runs recreate output streams",
+      "tracked": true
+    },
+    {
+      "path": "project/experiments/cand-087/reports/static.stderr",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "reason": "Empty diagnostic output; no content; future runs recreate output streams",
+      "tracked": true
+    },
+    {
+      "path": "project/experiments/cand-087/reports/static.stdout",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "reason": "Empty diagnostic output; no content; future runs recreate output streams",
+      "tracked": true
+    },
+    {
+      "path": "project/experiments/cand-088/reports/generate.stderr",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "reason": "Empty diagnostic output; no content; future runs recreate output streams",
+      "tracked": true
+    },
+    {
+      "path": "project/experiments/cand-088/reports/grade.stderr",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "reason": "Empty diagnostic output; no content; future runs recreate output streams",
+      "tracked": true
+    },
+    {
+      "path": "project/experiments/cand-088/reports/static.stderr",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "reason": "Empty diagnostic output; no content; future runs recreate output streams",
+      "tracked": true
+    },
+    {
+      "path": "project/experiments/cand-088/reports/static.stdout",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "reason": "Empty diagnostic output; no content; future runs recreate output streams",
+      "tracked": true
+    },
+    {
+      "path": "project/experiments/cand-089/reports/generate.stderr",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "reason": "Empty diagnostic output; no content; future runs recreate output streams",
+      "tracked": true
+    },
+    {
+      "path": "project/experiments/cand-089/reports/grade.stderr",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "reason": "Empty diagnostic output; no content; future runs recreate output streams",
+      "tracked": true
+    },
+    {
+      "path": "project/experiments/cand-089/reports/grade.stdout",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "reason": "Empty diagnostic output; no content; future runs recreate output streams",
+      "tracked": true
+    },
+    {
+      "path": "project/experiments/cand-089/reports/static.stderr",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "reason": "Empty diagnostic output; no content; future runs recreate output streams",
+      "tracked": true
+    },
+    {
+      "path": "project/experiments/cand-089/reports/static.stdout",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "reason": "Empty diagnostic output; no content; future runs recreate output streams",
+      "tracked": true
+    },
+    {
+      "path": "project/experiments/cand-090/reports/generate.stderr",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "reason": "Empty diagnostic output; no content; future runs recreate output streams",
+      "tracked": true
+    },
+    {
+      "path": "project/experiments/cand-090/reports/grade.stderr",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "reason": "Empty diagnostic output; no content; future runs recreate output streams",
+      "tracked": true
+    },
+    {
+      "path": "project/experiments/cand-090/reports/static.stderr",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "reason": "Empty diagnostic output; no content; future runs recreate output streams",
+      "tracked": true
+    },
+    {
+      "path": "project/experiments/cand-090/reports/static.stdout",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "reason": "Empty diagnostic output; no content; future runs recreate output streams",
+      "tracked": true
+    },
+    {
+      "path": "project/experiments/cand-091/reports/generate.stderr",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "reason": "Empty diagnostic output; no content; future runs recreate output streams",
+      "tracked": true
+    },
+    {
+      "path": "project/experiments/cand-091/reports/grade.stderr",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "reason": "Empty diagnostic output; no content; future runs recreate output streams",
+      "tracked": true
+    },
+    {
+      "path": "project/experiments/cand-091/reports/static.stderr",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "reason": "Empty diagnostic output; no content; future runs recreate output streams",
+      "tracked": true
+    },
+    {
+      "path": "project/experiments/cand-091/reports/static.stdout",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "reason": "Empty diagnostic output; no content; future runs recreate output streams",
+      "tracked": true
+    },
+    {
+      "path": "project/experiments/cand-092/reports/generate.stderr",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "reason": "Empty diagnostic output; no content; future runs recreate output streams",
+      "tracked": true
+    },
+    {
+      "path": "project/experiments/cand-092/reports/grade.stderr",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "reason": "Empty diagnostic output; no content; future runs recreate output streams",
+      "tracked": true
+    },
+    {
+      "path": "project/experiments/cand-092/reports/static.stderr",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "reason": "Empty diagnostic output; no content; future runs recreate output streams",
+      "tracked": true
+    },
+    {
+      "path": "project/experiments/cand-092/reports/static.stdout",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "reason": "Empty diagnostic output; no content; future runs recreate output streams",
+      "tracked": true
+    },
+    {
+      "path": "project/experiments/cand-093/reports/generate.stderr",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "reason": "Empty diagnostic output; no content; future runs recreate output streams",
+      "tracked": true
+    },
+    {
+      "path": "project/experiments/cand-093/reports/grade.stderr",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "reason": "Empty diagnostic output; no content; future runs recreate output streams",
+      "tracked": true
+    },
+    {
+      "path": "project/experiments/cand-093/reports/static.stderr",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "reason": "Empty diagnostic output; no content; future runs recreate output streams",
+      "tracked": true
+    },
+    {
+      "path": "project/experiments/cand-093/reports/static.stdout",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "reason": "Empty diagnostic output; no content; future runs recreate output streams",
+      "tracked": true
+    },
+    {
+      "path": "project/experiments/cand-094/reports/generate.stderr",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "reason": "Empty diagnostic output; no content; future runs recreate output streams",
+      "tracked": true
+    },
+    {
+      "path": "project/experiments/cand-094/reports/grade.stderr",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "reason": "Empty diagnostic output; no content; future runs recreate output streams",
+      "tracked": true
+    },
+    {
+      "path": "project/experiments/cand-094/reports/static.stderr",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "reason": "Empty diagnostic output; no content; future runs recreate output streams",
+      "tracked": true
+    },
+    {
+      "path": "project/experiments/cand-094/reports/static.stdout",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "reason": "Empty diagnostic output; no content; future runs recreate output streams",
+      "tracked": true
+    },
+    {
+      "path": "project/experiments/cand-095/reports/generate.stderr",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "reason": "Empty diagnostic output; no content; future runs recreate output streams",
+      "tracked": true
+    },
+    {
+      "path": "project/experiments/cand-095/reports/grade.stderr",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "reason": "Empty diagnostic output; no content; future runs recreate output streams",
+      "tracked": true
+    },
+    {
+      "path": "project/experiments/cand-095/reports/static.stderr",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "reason": "Empty diagnostic output; no content; future runs recreate output streams",
+      "tracked": true
+    },
+    {
+      "path": "project/experiments/cand-095/reports/static.stdout",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "reason": "Empty diagnostic output; no content; future runs recreate output streams",
+      "tracked": true
+    },
+    {
+      "path": "project/experiments/cand-096/reports/generate.stderr",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "reason": "Empty diagnostic output; no content; future runs recreate output streams",
+      "tracked": true
+    },
+    {
+      "path": "project/experiments/cand-096/reports/grade.stderr",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "reason": "Empty diagnostic output; no content; future runs recreate output streams",
+      "tracked": true
+    },
+    {
+      "path": "project/experiments/cand-096/reports/static.stderr",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "reason": "Empty diagnostic output; no content; future runs recreate output streams",
+      "tracked": true
+    },
+    {
+      "path": "project/experiments/cand-096/reports/static.stdout",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "reason": "Empty diagnostic output; no content; future runs recreate output streams",
+      "tracked": true
+    },
+    {
+      "path": "project/experiments/cand-097/reports/generate.stderr",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "reason": "Empty diagnostic output; no content; future runs recreate output streams",
+      "tracked": true
+    },
+    {
+      "path": "project/experiments/cand-097/reports/grade.stderr",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "reason": "Empty diagnostic output; no content; future runs recreate output streams",
+      "tracked": true
+    },
+    {
+      "path": "project/experiments/cand-097/reports/static.stderr",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "reason": "Empty diagnostic output; no content; future runs recreate output streams",
+      "tracked": true
+    },
+    {
+      "path": "project/experiments/cand-097/reports/static.stdout",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "reason": "Empty diagnostic output; no content; future runs recreate output streams",
+      "tracked": true
+    },
+    {
+      "path": "project/experiments/cand-098/reports/generate.stderr",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "reason": "Empty diagnostic output; no content; future runs recreate output streams",
+      "tracked": true
+    },
+    {
+      "path": "project/experiments/cand-098/reports/grade.stderr",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "reason": "Empty diagnostic output; no content; future runs recreate output streams",
+      "tracked": true
+    },
+    {
+      "path": "project/experiments/cand-098/reports/static.stderr",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "reason": "Empty diagnostic output; no content; future runs recreate output streams",
+      "tracked": true
+    },
+    {
+      "path": "project/experiments/cand-098/reports/static.stdout",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "reason": "Empty diagnostic output; no content; future runs recreate output streams",
+      "tracked": true
+    },
+    {
+      "path": "project/experiments/cand-099/reports/generate.stderr",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "reason": "Empty diagnostic output; no content; future runs recreate output streams",
+      "tracked": true
+    },
+    {
+      "path": "project/experiments/cand-099/reports/grade.stderr",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "reason": "Empty diagnostic output; no content; future runs recreate output streams",
+      "tracked": true
+    },
+    {
+      "path": "project/experiments/cand-099/reports/grade.stdout",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "reason": "Empty diagnostic output; no content; future runs recreate output streams",
+      "tracked": true
+    },
+    {
+      "path": "project/experiments/cand-099/reports/static.stderr",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "reason": "Empty diagnostic output; no content; future runs recreate output streams",
+      "tracked": true
+    },
+    {
+      "path": "project/experiments/cand-099/reports/static.stdout",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "reason": "Empty diagnostic output; no content; future runs recreate output streams",
+      "tracked": true
+    },
+    {
+      "path": "project/experiments/cand-100/reports/generate.stderr",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "reason": "Empty diagnostic output; no content; future runs recreate output streams",
+      "tracked": true
+    },
+    {
+      "path": "project/experiments/cand-100/reports/grade.stderr",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "reason": "Empty diagnostic output; no content; future runs recreate output streams",
+      "tracked": true
+    },
+    {
+      "path": "project/experiments/cand-100/reports/static.stderr",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "reason": "Empty diagnostic output; no content; future runs recreate output streams",
+      "tracked": true
+    },
+    {
+      "path": "project/experiments/cand-100/reports/static.stdout",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "reason": "Empty diagnostic output; no content; future runs recreate output streams",
+      "tracked": true
+    },
+    {
+      "path": "project/experiments/cand-101/reports/generate.stderr",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "reason": "Empty diagnostic output; no content; future runs recreate output streams",
+      "tracked": true
+    },
+    {
+      "path": "project/experiments/cand-101/reports/grade.stderr",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "reason": "Empty diagnostic output; no content; future runs recreate output streams",
+      "tracked": true
+    },
+    {
+      "path": "project/experiments/cand-101/reports/grade.stdout",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "reason": "Empty diagnostic output; no content; future runs recreate output streams",
+      "tracked": true
+    },
+    {
+      "path": "project/experiments/cand-101/reports/static.stderr",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "reason": "Empty diagnostic output; no content; future runs recreate output streams",
+      "tracked": true
+    },
+    {
+      "path": "project/experiments/cand-101/reports/static.stdout",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "reason": "Empty diagnostic output; no content; future runs recreate output streams",
+      "tracked": true
+    },
+    {
+      "path": "project/experiments/cand-101/reports/validation-cost.stderr",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "reason": "Empty diagnostic output; no content; future runs recreate output streams",
+      "tracked": true
+    },
+    {
+      "path": "project/experiments/cand-101/reports/validation-cost.stdout",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "reason": "Empty diagnostic output; no content; future runs recreate output streams",
+      "tracked": true
+    },
+    {
+      "path": "project/experiments/cand-102/reports/generate.stderr",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "reason": "Empty diagnostic output; no content; future runs recreate output streams",
+      "tracked": true
+    },
+    {
+      "path": "project/experiments/cand-102/reports/grade.stderr",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "reason": "Empty diagnostic output; no content; future runs recreate output streams",
+      "tracked": true
+    },
+    {
+      "path": "project/experiments/cand-102/reports/grade.stdout",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "reason": "Empty diagnostic output; no content; future runs recreate output streams",
+      "tracked": true
+    },
+    {
+      "path": "project/experiments/cand-102/reports/static.stderr",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "reason": "Empty diagnostic output; no content; future runs recreate output streams",
+      "tracked": true
+    },
+    {
+      "path": "project/experiments/cand-102/reports/static.stdout",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "reason": "Empty diagnostic output; no content; future runs recreate output streams",
+      "tracked": true
+    },
+    {
+      "path": "project/experiments/cand-102/reports/validation-cost.stderr",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "reason": "Empty diagnostic output; no content; future runs recreate output streams",
+      "tracked": true
+    },
+    {
+      "path": "project/experiments/cand-102/reports/validation-cost.stdout",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "reason": "Empty diagnostic output; no content; future runs recreate output streams",
+      "tracked": true
+    },
+    {
+      "path": "project/experiments/cand-103/reports/generate.stderr",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "reason": "Empty diagnostic output; no content; future runs recreate output streams",
+      "tracked": true
+    },
+    {
+      "path": "project/experiments/cand-103/reports/grade.stderr",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "reason": "Empty diagnostic output; no content; future runs recreate output streams",
+      "tracked": true
+    },
+    {
+      "path": "project/experiments/cand-103/reports/grade.stdout",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "reason": "Empty diagnostic output; no content; future runs recreate output streams",
+      "tracked": true
+    },
+    {
+      "path": "project/experiments/cand-103/reports/static.stderr",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "reason": "Empty diagnostic output; no content; future runs recreate output streams",
+      "tracked": true
+    },
+    {
+      "path": "project/experiments/cand-103/reports/static.stdout",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "reason": "Empty diagnostic output; no content; future runs recreate output streams",
+      "tracked": true
+    },
+    {
+      "path": "project/experiments/cand-103/reports/validation-cost.stderr",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "reason": "Empty diagnostic output; no content; future runs recreate output streams",
+      "tracked": true
+    },
+    {
+      "path": "project/experiments/cand-103/reports/validation-cost.stdout",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "reason": "Empty diagnostic output; no content; future runs recreate output streams",
+      "tracked": true
+    },
+    {
+      "path": "project/experiments/cand-104/reports/generate.stderr",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "reason": "Empty diagnostic output; no content; future runs recreate output streams",
+      "tracked": true
+    },
+    {
+      "path": "project/experiments/cand-104/reports/grade.stderr",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "reason": "Empty diagnostic output; no content; future runs recreate output streams",
+      "tracked": true
+    },
+    {
+      "path": "project/experiments/cand-104/reports/grade.stdout",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "reason": "Empty diagnostic output; no content; future runs recreate output streams",
+      "tracked": true
+    },
+    {
+      "path": "project/experiments/cand-104/reports/static.stderr",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "reason": "Empty diagnostic output; no content; future runs recreate output streams",
+      "tracked": true
+    },
+    {
+      "path": "project/experiments/cand-104/reports/static.stdout",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "reason": "Empty diagnostic output; no content; future runs recreate output streams",
+      "tracked": true
+    },
+    {
+      "path": "project/experiments/cand-104/reports/validation-cost.stderr",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "reason": "Empty diagnostic output; no content; future runs recreate output streams",
+      "tracked": true
+    },
+    {
+      "path": "project/experiments/cand-104/reports/validation-cost.stdout",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "reason": "Empty diagnostic output; no content; future runs recreate output streams",
+      "tracked": true
+    },
+    {
+      "path": "project/experiments/cand-105/reports/generate.stderr",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "reason": "Empty diagnostic output; no content; future runs recreate output streams",
+      "tracked": true
+    },
+    {
+      "path": "project/experiments/cand-105/reports/grade.stderr",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "reason": "Empty diagnostic output; no content; future runs recreate output streams",
+      "tracked": true
+    },
+    {
+      "path": "project/experiments/cand-105/reports/grade.stdout",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "reason": "Empty diagnostic output; no content; future runs recreate output streams",
+      "tracked": true
+    },
+    {
+      "path": "project/experiments/cand-105/reports/static.stderr",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "reason": "Empty diagnostic output; no content; future runs recreate output streams",
+      "tracked": true
+    },
+    {
+      "path": "project/experiments/cand-105/reports/static.stdout",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "reason": "Empty diagnostic output; no content; future runs recreate output streams",
+      "tracked": true
+    },
+    {
+      "path": "project/experiments/cand-105/reports/validation-cost.stderr",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "reason": "Empty diagnostic output; no content; future runs recreate output streams",
+      "tracked": true
+    },
+    {
+      "path": "project/experiments/cand-105/reports/validation-cost.stdout",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "reason": "Empty diagnostic output; no content; future runs recreate output streams",
+      "tracked": true
+    },
+    {
+      "path": "project/experiments/cand-106/reports/generate.stderr",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "reason": "Empty diagnostic output; no content; future runs recreate output streams",
+      "tracked": true
+    },
+    {
+      "path": "project/experiments/cand-106/reports/grade.stderr",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "reason": "Empty diagnostic output; no content; future runs recreate output streams",
+      "tracked": true
+    },
+    {
+      "path": "project/experiments/cand-106/reports/static.stderr",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "reason": "Empty diagnostic output; no content; future runs recreate output streams",
+      "tracked": true
+    },
+    {
+      "path": "project/experiments/cand-106/reports/static.stdout",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "reason": "Empty diagnostic output; no content; future runs recreate output streams",
+      "tracked": true
+    },
+    {
+      "path": "project/experiments/cand-107/reports/generate.stderr",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "reason": "Empty diagnostic output; no content; future runs recreate output streams",
+      "tracked": true
+    },
+    {
+      "path": "project/experiments/cand-107/reports/static.stderr",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "reason": "Empty diagnostic output; no content; future runs recreate output streams",
+      "tracked": true
+    },
+    {
+      "path": "project/experiments/cand-107/reports/static.stdout",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "reason": "Empty diagnostic output; no content; future runs recreate output streams",
+      "tracked": true
+    },
+    {
+      "path": "project/experiments/cand-107/reports/validation-cost.stderr",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "reason": "Empty diagnostic output; no content; future runs recreate output streams",
+      "tracked": true
+    },
+    {
+      "path": "project/experiments/cand-107/reports/validation-cost.stdout",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "reason": "Empty diagnostic output; no content; future runs recreate output streams",
+      "tracked": true
+    },
+    {
+      "path": "project/experiments/cand-108/reports/generate.stderr",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "reason": "Empty diagnostic output; no content; future runs recreate output streams",
+      "tracked": true
+    },
+    {
+      "path": "project/experiments/cand-108/reports/grade.stdout",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "reason": "Empty diagnostic output; no content; future runs recreate output streams",
+      "tracked": true
+    },
+    {
+      "path": "project/experiments/cand-108/reports/static.stderr",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "reason": "Empty diagnostic output; no content; future runs recreate output streams",
+      "tracked": true
+    },
+    {
+      "path": "project/experiments/cand-108/reports/static.stdout",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "reason": "Empty diagnostic output; no content; future runs recreate output streams",
+      "tracked": true
+    },
+    {
+      "path": "project/experiments/cand-109/reports/generate.stderr",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "reason": "Empty diagnostic output; no content; future runs recreate output streams",
+      "tracked": true
+    },
+    {
+      "path": "project/experiments/cand-109/reports/grade.stderr",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "reason": "Empty diagnostic output; no content; future runs recreate output streams",
+      "tracked": true
+    },
+    {
+      "path": "project/experiments/cand-109/reports/grade.stdout",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "reason": "Empty diagnostic output; no content; future runs recreate output streams",
+      "tracked": true
+    },
+    {
+      "path": "project/experiments/cand-109/reports/static.stderr",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "reason": "Empty diagnostic output; no content; future runs recreate output streams",
+      "tracked": true
+    },
+    {
+      "path": "project/experiments/cand-109/reports/static.stdout",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "reason": "Empty diagnostic output; no content; future runs recreate output streams",
+      "tracked": true
+    },
+    {
+      "path": "project/experiments/cand-109/reports/validation-cost.stderr",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "reason": "Empty diagnostic output; no content; future runs recreate output streams",
+      "tracked": true
+    },
+    {
+      "path": "project/experiments/cand-109/reports/validation-cost.stdout",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "reason": "Empty diagnostic output; no content; future runs recreate output streams",
+      "tracked": true
+    },
+    {
+      "path": "project/experiments/cand-110/reports/generate.stderr",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "reason": "Empty diagnostic output; no content; future runs recreate output streams",
+      "tracked": true
+    },
+    {
+      "path": "project/experiments/cand-110/reports/grade.stderr",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "reason": "Empty diagnostic output; no content; future runs recreate output streams",
+      "tracked": true
+    },
+    {
+      "path": "project/experiments/cand-110/reports/static.stderr",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "reason": "Empty diagnostic output; no content; future runs recreate output streams",
+      "tracked": true
+    },
+    {
+      "path": "project/experiments/cand-110/reports/static.stdout",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "reason": "Empty diagnostic output; no content; future runs recreate output streams",
+      "tracked": true
+    },
+    {
+      "path": "project/experiments/cand-112/reports/generate.stderr",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "reason": "Empty diagnostic output; no content; future runs recreate output streams",
+      "tracked": true
+    },
+    {
+      "path": "project/experiments/cand-112/reports/grade.stderr",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "reason": "Empty diagnostic output; no content; future runs recreate output streams",
+      "tracked": true
+    },
+    {
+      "path": "project/experiments/cand-112/reports/static.stderr",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "reason": "Empty diagnostic output; no content; future runs recreate output streams",
+      "tracked": true
+    },
+    {
+      "path": "project/experiments/cand-112/reports/static.stdout",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "reason": "Empty diagnostic output; no content; future runs recreate output streams",
+      "tracked": true
+    },
+    {
+      "path": "project/experiments/cand-112/reports/validation-cost.stderr",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "reason": "Empty diagnostic output; no content; future runs recreate output streams",
+      "tracked": true
+    },
+    {
+      "path": "project/experiments/cand-112/reports/validation-cost.stdout",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "reason": "Empty diagnostic output; no content; future runs recreate output streams",
+      "tracked": true
+    },
+    {
+      "path": "project/experiments/cand-113/reports/generate.stderr",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "reason": "Empty diagnostic output; no content; future runs recreate output streams",
+      "tracked": true
+    },
+    {
+      "path": "project/experiments/cand-113/reports/grade.stderr",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "reason": "Empty diagnostic output; no content; future runs recreate output streams",
+      "tracked": true
+    },
+    {
+      "path": "project/experiments/cand-113/reports/static.stderr",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "reason": "Empty diagnostic output; no content; future runs recreate output streams",
+      "tracked": true
+    },
+    {
+      "path": "project/experiments/cand-113/reports/static.stdout",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "reason": "Empty diagnostic output; no content; future runs recreate output streams",
+      "tracked": true
+    },
+    {
+      "path": "project/experiments/cand-113/reports/validation-cost.stderr",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "reason": "Empty diagnostic output; no content; future runs recreate output streams",
+      "tracked": true
+    },
+    {
+      "path": "project/experiments/cand-113/reports/validation-cost.stdout",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "reason": "Empty diagnostic output; no content; future runs recreate output streams",
+      "tracked": true
+    },
+    {
+      "path": "project/experiments/cand-114/reports/generate.stderr",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "reason": "Empty diagnostic output; no content; future runs recreate output streams",
+      "tracked": true
+    },
+    {
+      "path": "project/experiments/cand-114/reports/grade.stderr",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "reason": "Empty diagnostic output; no content; future runs recreate output streams",
+      "tracked": true
+    },
+    {
+      "path": "project/experiments/cand-114/reports/static.stderr",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "reason": "Empty diagnostic output; no content; future runs recreate output streams",
+      "tracked": true
+    },
+    {
+      "path": "project/experiments/cand-114/reports/static.stdout",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "reason": "Empty diagnostic output; no content; future runs recreate output streams",
+      "tracked": true
+    },
+    {
+      "path": "project/experiments/cand-114/reports/validation-cost.stderr",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "reason": "Empty diagnostic output; no content; future runs recreate output streams",
+      "tracked": true
+    },
+    {
+      "path": "project/experiments/cand-114/reports/validation-cost.stdout",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "reason": "Empty diagnostic output; no content; future runs recreate output streams",
+      "tracked": true
+    },
+    {
+      "path": "project/experiments/cand-115/reports/generate.stderr",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "reason": "Empty diagnostic output; no content; future runs recreate output streams",
+      "tracked": true
+    },
+    {
+      "path": "project/experiments/cand-115/reports/grade.stderr",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "reason": "Empty diagnostic output; no content; future runs recreate output streams",
+      "tracked": true
+    },
+    {
+      "path": "project/experiments/cand-115/reports/static.stderr",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "reason": "Empty diagnostic output; no content; future runs recreate output streams",
+      "tracked": true
+    },
+    {
+      "path": "project/experiments/cand-115/reports/static.stdout",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "reason": "Empty diagnostic output; no content; future runs recreate output streams",
+      "tracked": true
+    },
+    {
+      "path": "project/experiments/cand-115/reports/validation-cost.stderr",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "reason": "Empty diagnostic output; no content; future runs recreate output streams",
+      "tracked": true
+    },
+    {
+      "path": "project/experiments/cand-115/reports/validation-cost.stdout",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "reason": "Empty diagnostic output; no content; future runs recreate output streams",
+      "tracked": true
+    },
+    {
+      "path": "project/experiments/cand-116/reports/generate.stderr",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "reason": "Empty diagnostic output; no content; future runs recreate output streams",
+      "tracked": true
+    },
+    {
+      "path": "project/experiments/cand-116/reports/grade.stderr",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "reason": "Empty diagnostic output; no content; future runs recreate output streams",
+      "tracked": true
+    },
+    {
+      "path": "project/experiments/cand-116/reports/static.stderr",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "reason": "Empty diagnostic output; no content; future runs recreate output streams",
+      "tracked": true
+    },
+    {
+      "path": "project/experiments/cand-116/reports/static.stdout",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "reason": "Empty diagnostic output; no content; future runs recreate output streams",
+      "tracked": true
+    },
+    {
+      "path": "project/experiments/cand-116/reports/validation-cost.stderr",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "reason": "Empty diagnostic output; no content; future runs recreate output streams",
+      "tracked": true
+    },
+    {
+      "path": "project/experiments/cand-116/reports/validation-cost.stdout",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "reason": "Empty diagnostic output; no content; future runs recreate output streams",
+      "tracked": true
+    },
+    {
+      "path": "project/experiments/cand-117/reports/generate.stderr",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "reason": "Empty diagnostic output; no content; future runs recreate output streams",
+      "tracked": true
+    },
+    {
+      "path": "project/experiments/cand-117/reports/grade.stderr",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "reason": "Empty diagnostic output; no content; future runs recreate output streams",
+      "tracked": true
+    },
+    {
+      "path": "project/experiments/cand-117/reports/static.stderr",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "reason": "Empty diagnostic output; no content; future runs recreate output streams",
+      "tracked": true
+    },
+    {
+      "path": "project/experiments/cand-117/reports/static.stdout",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "reason": "Empty diagnostic output; no content; future runs recreate output streams",
+      "tracked": true
+    },
+    {
+      "path": "project/experiments/cand-117/reports/validation-cost.stderr",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "reason": "Empty diagnostic output; no content; future runs recreate output streams",
+      "tracked": true
+    },
+    {
+      "path": "project/experiments/cand-117/reports/validation-cost.stdout",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "reason": "Empty diagnostic output; no content; future runs recreate output streams",
+      "tracked": true
+    },
+    {
+      "path": "project/experiments/cand-118/reports/generate.stderr",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "reason": "Empty diagnostic output; no content; future runs recreate output streams",
+      "tracked": true
+    },
+    {
+      "path": "project/experiments/cand-118/reports/grade.stderr",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "reason": "Empty diagnostic output; no content; future runs recreate output streams",
+      "tracked": true
+    },
+    {
+      "path": "project/experiments/cand-118/reports/static.stderr",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "reason": "Empty diagnostic output; no content; future runs recreate output streams",
+      "tracked": true
+    },
+    {
+      "path": "project/experiments/cand-118/reports/static.stdout",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "reason": "Empty diagnostic output; no content; future runs recreate output streams",
+      "tracked": true
+    },
+    {
+      "path": "project/experiments/cand-118/reports/validation-cost.stderr",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "reason": "Empty diagnostic output; no content; future runs recreate output streams",
+      "tracked": true
+    },
+    {
+      "path": "project/experiments/cand-118/reports/validation-cost.stdout",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "reason": "Empty diagnostic output; no content; future runs recreate output streams",
+      "tracked": true
+    },
+    {
+      "path": "project/experiments/cand-119/reports/generate.stderr",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "reason": "Empty diagnostic output; no content; future runs recreate output streams",
+      "tracked": true
+    },
+    {
+      "path": "project/experiments/cand-119/reports/grade.stderr",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "reason": "Empty diagnostic output; no content; future runs recreate output streams",
+      "tracked": true
+    },
+    {
+      "path": "project/experiments/cand-119/reports/static.stderr",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "reason": "Empty diagnostic output; no content; future runs recreate output streams",
+      "tracked": true
+    },
+    {
+      "path": "project/experiments/cand-119/reports/static.stdout",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "reason": "Empty diagnostic output; no content; future runs recreate output streams",
+      "tracked": true
+    },
+    {
+      "path": "project/experiments/cand-119/reports/validation-cost.stderr",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "reason": "Empty diagnostic output; no content; future runs recreate output streams",
+      "tracked": true
+    },
+    {
+      "path": "project/experiments/cand-119/reports/validation-cost.stdout",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "reason": "Empty diagnostic output; no content; future runs recreate output streams",
+      "tracked": true
+    },
+    {
+      "path": "project/experiments/cand-120/reports/generate.stderr",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "reason": "Empty diagnostic output; no content; future runs recreate output streams",
+      "tracked": true
+    },
+    {
+      "path": "project/experiments/cand-120/reports/grade.stderr",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "reason": "Empty diagnostic output; no content; future runs recreate output streams",
+      "tracked": true
+    },
+    {
+      "path": "project/experiments/cand-120/reports/static.stderr",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "reason": "Empty diagnostic output; no content; future runs recreate output streams",
+      "tracked": true
+    },
+    {
+      "path": "project/experiments/cand-120/reports/static.stdout",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "reason": "Empty diagnostic output; no content; future runs recreate output streams",
+      "tracked": true
+    },
+    {
+      "path": "project/experiments/cand-120/reports/validation-cost.stderr",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "reason": "Empty diagnostic output; no content; future runs recreate output streams",
+      "tracked": true
+    },
+    {
+      "path": "project/experiments/cand-120/reports/validation-cost.stdout",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "reason": "Empty diagnostic output; no content; future runs recreate output streams",
+      "tracked": true
+    },
+    {
+      "path": "project/experiments/cand-121/reports/generate.stderr",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "reason": "Empty diagnostic output; no content; future runs recreate output streams",
+      "tracked": true
+    },
+    {
+      "path": "project/experiments/cand-121/reports/grade.stderr",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "reason": "Empty diagnostic output; no content; future runs recreate output streams",
+      "tracked": true
+    },
+    {
+      "path": "project/experiments/cand-121/reports/static.stderr",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "reason": "Empty diagnostic output; no content; future runs recreate output streams",
+      "tracked": true
+    },
+    {
+      "path": "project/experiments/cand-121/reports/static.stdout",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "reason": "Empty diagnostic output; no content; future runs recreate output streams",
+      "tracked": true
+    },
+    {
+      "path": "project/experiments/cand-121/reports/validation-cost.stderr",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "reason": "Empty diagnostic output; no content; future runs recreate output streams",
+      "tracked": true
+    },
+    {
+      "path": "project/experiments/cand-121/reports/validation-cost.stdout",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "reason": "Empty diagnostic output; no content; future runs recreate output streams",
+      "tracked": true
+    },
+    {
+      "path": "project/experiments/cand-122/reports/generate.stderr",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "reason": "Empty diagnostic output; no content; future runs recreate output streams",
+      "tracked": true
+    },
+    {
+      "path": "project/experiments/cand-122/reports/grade.stderr",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "reason": "Empty diagnostic output; no content; future runs recreate output streams",
+      "tracked": true
+    },
+    {
+      "path": "project/experiments/cand-122/reports/static.stderr",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "reason": "Empty diagnostic output; no content; future runs recreate output streams",
+      "tracked": true
+    },
+    {
+      "path": "project/experiments/cand-122/reports/static.stdout",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "reason": "Empty diagnostic output; no content; future runs recreate output streams",
+      "tracked": true
+    },
+    {
+      "path": "project/experiments/cand-122/reports/validation-cost.stderr",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "reason": "Empty diagnostic output; no content; future runs recreate output streams",
+      "tracked": true
+    },
+    {
+      "path": "project/experiments/cand-122/reports/validation-cost.stdout",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "reason": "Empty diagnostic output; no content; future runs recreate output streams",
+      "tracked": true
+    },
+    {
+      "path": "project/experiments/cand-123/reports/generate.stderr",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "reason": "Empty diagnostic output; no content; future runs recreate output streams",
+      "tracked": true
+    },
+    {
+      "path": "project/experiments/cand-123/reports/grade.stderr",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "reason": "Empty diagnostic output; no content; future runs recreate output streams",
+      "tracked": true
+    },
+    {
+      "path": "project/experiments/cand-123/reports/static.stderr",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "reason": "Empty diagnostic output; no content; future runs recreate output streams",
+      "tracked": true
+    },
+    {
+      "path": "project/experiments/cand-123/reports/static.stdout",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "reason": "Empty diagnostic output; no content; future runs recreate output streams",
+      "tracked": true
+    },
+    {
+      "path": "project/experiments/cand-123/reports/validation-cost.stderr",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "reason": "Empty diagnostic output; no content; future runs recreate output streams",
+      "tracked": true
+    },
+    {
+      "path": "project/experiments/cand-123/reports/validation-cost.stdout",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "reason": "Empty diagnostic output; no content; future runs recreate output streams",
+      "tracked": true
+    },
+    {
+      "path": "project/experiments/cand-124/reports/generate.stderr",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "reason": "Empty diagnostic output; no content; future runs recreate output streams",
+      "tracked": true
+    },
+    {
+      "path": "project/experiments/cand-124/reports/grade.stderr",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "reason": "Empty diagnostic output; no content; future runs recreate output streams",
+      "tracked": true
+    },
+    {
+      "path": "project/experiments/cand-124/reports/static.stderr",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "reason": "Empty diagnostic output; no content; future runs recreate output streams",
+      "tracked": true
+    },
+    {
+      "path": "project/experiments/cand-124/reports/static.stdout",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "reason": "Empty diagnostic output; no content; future runs recreate output streams",
+      "tracked": true
+    },
+    {
+      "path": "project/experiments/cand-124/reports/validation-cost.stderr",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "reason": "Empty diagnostic output; no content; future runs recreate output streams",
+      "tracked": true
+    },
+    {
+      "path": "project/experiments/cand-124/reports/validation-cost.stdout",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "reason": "Empty diagnostic output; no content; future runs recreate output streams",
+      "tracked": true
+    },
+    {
+      "path": "project/experiments/cand-125/reports/generate.stderr",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "reason": "Empty diagnostic output; no content; future runs recreate output streams",
+      "tracked": true
+    },
+    {
+      "path": "project/experiments/cand-125/reports/static.stderr",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "reason": "Empty diagnostic output; no content; future runs recreate output streams",
+      "tracked": true
+    },
+    {
+      "path": "project/experiments/cand-125/reports/static.stdout",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "reason": "Empty diagnostic output; no content; future runs recreate output streams",
+      "tracked": true
+    },
+    {
+      "path": "project/experiments/cand-125/reports/validation-cost.stderr",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "reason": "Empty diagnostic output; no content; future runs recreate output streams",
+      "tracked": true
+    },
+    {
+      "path": "project/experiments/cand-125/reports/validation-cost.stdout",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "reason": "Empty diagnostic output; no content; future runs recreate output streams",
+      "tracked": true
+    },
+    {
+      "path": "project/experiments/cand-126/reports/generate.stderr",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "reason": "Empty diagnostic output; no content; future runs recreate output streams",
+      "tracked": true
+    },
+    {
+      "path": "project/experiments/cand-126/reports/grade.stderr",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "reason": "Empty diagnostic output; no content; future runs recreate output streams",
+      "tracked": true
+    },
+    {
+      "path": "project/experiments/cand-126/reports/static.stderr",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "reason": "Empty diagnostic output; no content; future runs recreate output streams",
+      "tracked": true
+    },
+    {
+      "path": "project/experiments/cand-126/reports/static.stdout",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "reason": "Empty diagnostic output; no content; future runs recreate output streams",
+      "tracked": true
+    },
+    {
+      "path": "project/experiments/cand-126/reports/validation-cost.stderr",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "reason": "Empty diagnostic output; no content; future runs recreate output streams",
+      "tracked": true
+    },
+    {
+      "path": "project/experiments/cand-126/reports/validation-cost.stdout",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "reason": "Empty diagnostic output; no content; future runs recreate output streams",
+      "tracked": true
+    },
+    {
+      "path": "project/experiments/cand-127/reports/generate.stderr",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "reason": "Empty diagnostic output; no content; future runs recreate output streams",
+      "tracked": true
+    },
+    {
+      "path": "project/experiments/cand-127/reports/grade.stderr",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "reason": "Empty diagnostic output; no content; future runs recreate output streams",
+      "tracked": true
+    },
+    {
+      "path": "project/experiments/cand-127/reports/static.stderr",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "reason": "Empty diagnostic output; no content; future runs recreate output streams",
+      "tracked": true
+    },
+    {
+      "path": "project/experiments/cand-127/reports/static.stdout",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "reason": "Empty diagnostic output; no content; future runs recreate output streams",
+      "tracked": true
+    },
+    {
+      "path": "project/experiments/cand-127/reports/validation-cost.stderr",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "reason": "Empty diagnostic output; no content; future runs recreate output streams",
+      "tracked": true
+    },
+    {
+      "path": "project/experiments/cand-127/reports/validation-cost.stdout",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "reason": "Empty diagnostic output; no content; future runs recreate output streams",
+      "tracked": true
+    },
+    {
+      "path": "project/experiments/cand-128/reports/generate.stderr",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "reason": "Empty diagnostic output; no content; future runs recreate output streams",
+      "tracked": true
+    },
+    {
+      "path": "project/experiments/cand-128/reports/grade.stderr",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "reason": "Empty diagnostic output; no content; future runs recreate output streams",
+      "tracked": true
+    },
+    {
+      "path": "project/experiments/cand-128/reports/static.stderr",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "reason": "Empty diagnostic output; no content; future runs recreate output streams",
+      "tracked": true
+    },
+    {
+      "path": "project/experiments/cand-128/reports/static.stdout",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "reason": "Empty diagnostic output; no content; future runs recreate output streams",
+      "tracked": true
+    },
+    {
+      "path": "project/experiments/cand-128/reports/validation-cost.stderr",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "reason": "Empty diagnostic output; no content; future runs recreate output streams",
+      "tracked": true
+    },
+    {
+      "path": "project/experiments/cand-128/reports/validation-cost.stdout",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "reason": "Empty diagnostic output; no content; future runs recreate output streams",
+      "tracked": true
+    },
+    {
+      "path": "project/experiments/cand-129/reports/generate.stderr",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "reason": "Empty diagnostic output; no content; future runs recreate output streams",
+      "tracked": true
+    },
+    {
+      "path": "project/experiments/cand-129/reports/grade.stderr",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "reason": "Empty diagnostic output; no content; future runs recreate output streams",
+      "tracked": true
+    },
+    {
+      "path": "project/experiments/cand-129/reports/static.stderr",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "reason": "Empty diagnostic output; no content; future runs recreate output streams",
+      "tracked": true
+    },
+    {
+      "path": "project/experiments/cand-129/reports/static.stdout",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "reason": "Empty diagnostic output; no content; future runs recreate output streams",
+      "tracked": true
+    },
+    {
+      "path": "project/experiments/cand-129/reports/validation-cost.stderr",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "reason": "Empty diagnostic output; no content; future runs recreate output streams",
+      "tracked": true
+    },
+    {
+      "path": "project/experiments/cand-129/reports/validation-cost.stdout",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "reason": "Empty diagnostic output; no content; future runs recreate output streams",
+      "tracked": true
+    },
+    {
+      "path": "project/experiments/cand-130/reports/generate.stderr",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "reason": "Empty diagnostic output; no content; future runs recreate output streams",
+      "tracked": true
+    },
+    {
+      "path": "project/experiments/cand-130/reports/grade.stderr",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "reason": "Empty diagnostic output; no content; future runs recreate output streams",
+      "tracked": true
+    },
+    {
+      "path": "project/experiments/cand-130/reports/static.stderr",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "reason": "Empty diagnostic output; no content; future runs recreate output streams",
+      "tracked": true
+    },
+    {
+      "path": "project/experiments/cand-130/reports/static.stdout",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "reason": "Empty diagnostic output; no content; future runs recreate output streams",
+      "tracked": true
+    },
+    {
+      "path": "project/experiments/cand-130/reports/validation-cost.stderr",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "reason": "Empty diagnostic output; no content; future runs recreate output streams",
+      "tracked": true
+    },
+    {
+      "path": "project/experiments/cand-130/reports/validation-cost.stdout",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "reason": "Empty diagnostic output; no content; future runs recreate output streams",
+      "tracked": true
+    },
+    {
+      "path": "project/experiments/cand-131/reports/generate.stderr",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "reason": "Empty diagnostic output; no content; future runs recreate output streams",
+      "tracked": true
+    },
+    {
+      "path": "project/experiments/cand-131/reports/grade.stderr",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "reason": "Empty diagnostic output; no content; future runs recreate output streams",
+      "tracked": true
+    },
+    {
+      "path": "project/experiments/cand-131/reports/static.stderr",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "reason": "Empty diagnostic output; no content; future runs recreate output streams",
+      "tracked": true
+    },
+    {
+      "path": "project/experiments/cand-131/reports/static.stdout",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "reason": "Empty diagnostic output; no content; future runs recreate output streams",
+      "tracked": true
+    },
+    {
+      "path": "project/experiments/cand-131/reports/validation-cost.stderr",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "reason": "Empty diagnostic output; no content; future runs recreate output streams",
+      "tracked": true
+    },
+    {
+      "path": "project/experiments/cand-131/reports/validation-cost.stdout",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "reason": "Empty diagnostic output; no content; future runs recreate output streams",
+      "tracked": true
+    },
+    {
+      "path": "project/experiments/cand-132/reports/generate.stderr",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "reason": "Empty diagnostic output; no content; future runs recreate output streams",
+      "tracked": true
+    },
+    {
+      "path": "project/experiments/cand-132/reports/grade.stderr",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "reason": "Empty diagnostic output; no content; future runs recreate output streams",
+      "tracked": true
+    },
+    {
+      "path": "project/experiments/cand-132/reports/static.stderr",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "reason": "Empty diagnostic output; no content; future runs recreate output streams",
+      "tracked": true
+    },
+    {
+      "path": "project/experiments/cand-132/reports/static.stdout",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "reason": "Empty diagnostic output; no content; future runs recreate output streams",
+      "tracked": true
+    },
+    {
+      "path": "project/experiments/cand-132/reports/validation-cost.stderr",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "reason": "Empty diagnostic output; no content; future runs recreate output streams",
+      "tracked": true
+    },
+    {
+      "path": "project/experiments/cand-132/reports/validation-cost.stdout",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "reason": "Empty diagnostic output; no content; future runs recreate output streams",
+      "tracked": true
+    },
+    {
+      "path": "project/experiments/cand-133/reports/generate.stderr",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "reason": "Empty diagnostic output; no content; future runs recreate output streams",
+      "tracked": true
+    },
+    {
+      "path": "project/experiments/cand-133/reports/grade.stderr",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "reason": "Empty diagnostic output; no content; future runs recreate output streams",
+      "tracked": true
+    },
+    {
+      "path": "project/experiments/cand-133/reports/static.stderr",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "reason": "Empty diagnostic output; no content; future runs recreate output streams",
+      "tracked": true
+    },
+    {
+      "path": "project/experiments/cand-133/reports/static.stdout",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "reason": "Empty diagnostic output; no content; future runs recreate output streams",
+      "tracked": true
+    },
+    {
+      "path": "project/experiments/cand-133/reports/validation-cost.stderr",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "reason": "Empty diagnostic output; no content; future runs recreate output streams",
+      "tracked": true
+    },
+    {
+      "path": "project/experiments/cand-133/reports/validation-cost.stdout",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "reason": "Empty diagnostic output; no content; future runs recreate output streams",
+      "tracked": true
+    },
+    {
+      "path": "project/experiments/cand-134/reports/generate.stderr",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "reason": "Empty diagnostic output; no content; future runs recreate output streams",
+      "tracked": true
+    },
+    {
+      "path": "project/experiments/cand-134/reports/grade.stderr",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "reason": "Empty diagnostic output; no content; future runs recreate output streams",
+      "tracked": true
+    },
+    {
+      "path": "project/experiments/cand-134/reports/static.stderr",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "reason": "Empty diagnostic output; no content; future runs recreate output streams",
+      "tracked": true
+    },
+    {
+      "path": "project/experiments/cand-134/reports/static.stdout",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "reason": "Empty diagnostic output; no content; future runs recreate output streams",
+      "tracked": true
+    },
+    {
+      "path": "project/experiments/cand-134/reports/validation-cost.stderr",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "reason": "Empty diagnostic output; no content; future runs recreate output streams",
+      "tracked": true
+    },
+    {
+      "path": "project/experiments/cand-134/reports/validation-cost.stdout",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "reason": "Empty diagnostic output; no content; future runs recreate output streams",
+      "tracked": true
+    },
+    {
+      "path": "project/experiments/cand-135/reports/generate.stderr",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "reason": "Empty diagnostic output; no content; future runs recreate output streams",
+      "tracked": true
+    },
+    {
+      "path": "project/experiments/cand-135/reports/grade.stderr",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "reason": "Empty diagnostic output; no content; future runs recreate output streams",
+      "tracked": true
+    },
+    {
+      "path": "project/experiments/cand-135/reports/static.stderr",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "reason": "Empty diagnostic output; no content; future runs recreate output streams",
+      "tracked": true
+    },
+    {
+      "path": "project/experiments/cand-135/reports/static.stdout",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "reason": "Empty diagnostic output; no content; future runs recreate output streams",
+      "tracked": true
+    },
+    {
+      "path": "project/experiments/cand-135/reports/validation-cost.stderr",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "reason": "Empty diagnostic output; no content; future runs recreate output streams",
+      "tracked": true
+    },
+    {
+      "path": "project/experiments/cand-135/reports/validation-cost.stdout",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "reason": "Empty diagnostic output; no content; future runs recreate output streams",
+      "tracked": true
+    },
+    {
+      "path": "project/experiments/cand-136/reports/generate.stderr",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "reason": "Empty diagnostic output; no content; future runs recreate output streams",
+      "tracked": true
+    },
+    {
+      "path": "project/experiments/cand-136/reports/grade.stderr",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "reason": "Empty diagnostic output; no content; future runs recreate output streams",
+      "tracked": true
+    },
+    {
+      "path": "project/experiments/cand-136/reports/static.stderr",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "reason": "Empty diagnostic output; no content; future runs recreate output streams",
+      "tracked": true
+    },
+    {
+      "path": "project/experiments/cand-136/reports/static.stdout",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "reason": "Empty diagnostic output; no content; future runs recreate output streams",
+      "tracked": true
+    },
+    {
+      "path": "project/experiments/cand-136/reports/validation-cost.stderr",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "reason": "Empty diagnostic output; no content; future runs recreate output streams",
+      "tracked": true
+    },
+    {
+      "path": "project/experiments/cand-136/reports/validation-cost.stdout",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "reason": "Empty diagnostic output; no content; future runs recreate output streams",
+      "tracked": true
+    },
+    {
+      "path": "project/experiments/cand-137/reports/generate.stderr",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "reason": "Empty diagnostic output; no content; future runs recreate output streams",
+      "tracked": true
+    },
+    {
+      "path": "project/experiments/cand-137/reports/grade.stderr",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "reason": "Empty diagnostic output; no content; future runs recreate output streams",
+      "tracked": true
+    },
+    {
+      "path": "project/experiments/cand-137/reports/static.stderr",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "reason": "Empty diagnostic output; no content; future runs recreate output streams",
+      "tracked": true
+    },
+    {
+      "path": "project/experiments/cand-137/reports/static.stdout",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "reason": "Empty diagnostic output; no content; future runs recreate output streams",
+      "tracked": true
+    },
+    {
+      "path": "project/experiments/cand-137/reports/validation-cost.stderr",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "reason": "Empty diagnostic output; no content; future runs recreate output streams",
+      "tracked": true
+    },
+    {
+      "path": "project/experiments/cand-137/reports/validation-cost.stdout",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "reason": "Empty diagnostic output; no content; future runs recreate output streams",
+      "tracked": true
+    },
+    {
+      "path": "project/experiments/cand-138/reports/generate.stderr",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "reason": "Empty diagnostic output; no content; future runs recreate output streams",
+      "tracked": true
+    },
+    {
+      "path": "project/experiments/cand-138/reports/grade.stderr",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "reason": "Empty diagnostic output; no content; future runs recreate output streams",
+      "tracked": true
+    },
+    {
+      "path": "project/experiments/cand-138/reports/static.stderr",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "reason": "Empty diagnostic output; no content; future runs recreate output streams",
+      "tracked": true
+    },
+    {
+      "path": "project/experiments/cand-138/reports/static.stdout",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "reason": "Empty diagnostic output; no content; future runs recreate output streams",
+      "tracked": true
+    },
+    {
+      "path": "project/experiments/cand-138/reports/validation-cost.stderr",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "reason": "Empty diagnostic output; no content; future runs recreate output streams",
+      "tracked": true
+    },
+    {
+      "path": "project/experiments/cand-138/reports/validation-cost.stdout",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "reason": "Empty diagnostic output; no content; future runs recreate output streams",
+      "tracked": true
+    },
+    {
+      "path": "project/experiments/cand-139/reports/generate.stderr",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "reason": "Empty diagnostic output; no content; future runs recreate output streams",
+      "tracked": true
+    },
+    {
+      "path": "project/experiments/cand-139/reports/grade.stderr",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "reason": "Empty diagnostic output; no content; future runs recreate output streams",
+      "tracked": true
+    },
+    {
+      "path": "project/experiments/cand-139/reports/static.stderr",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "reason": "Empty diagnostic output; no content; future runs recreate output streams",
+      "tracked": true
+    },
+    {
+      "path": "project/experiments/cand-139/reports/static.stdout",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "reason": "Empty diagnostic output; no content; future runs recreate output streams",
+      "tracked": true
+    },
+    {
+      "path": "project/experiments/cand-139/reports/validation-cost.stderr",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "reason": "Empty diagnostic output; no content; future runs recreate output streams",
+      "tracked": true
+    },
+    {
+      "path": "project/experiments/cand-139/reports/validation-cost.stdout",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "reason": "Empty diagnostic output; no content; future runs recreate output streams",
+      "tracked": true
+    },
+    {
+      "path": "project/experiments/cand-140/reports/generate.stderr",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "reason": "Empty diagnostic output; no content; future runs recreate output streams",
+      "tracked": true
+    },
+    {
+      "path": "project/experiments/cand-140/reports/grade.stderr",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "reason": "Empty diagnostic output; no content; future runs recreate output streams",
+      "tracked": true
+    },
+    {
+      "path": "project/experiments/cand-140/reports/static.stderr",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "reason": "Empty diagnostic output; no content; future runs recreate output streams",
+      "tracked": true
+    },
+    {
+      "path": "project/experiments/cand-140/reports/static.stdout",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "reason": "Empty diagnostic output; no content; future runs recreate output streams",
+      "tracked": true
+    },
+    {
+      "path": "project/experiments/cand-140/reports/validation-cost.stderr",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "reason": "Empty diagnostic output; no content; future runs recreate output streams",
+      "tracked": true
+    },
+    {
+      "path": "project/experiments/cand-140/reports/validation-cost.stdout",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "reason": "Empty diagnostic output; no content; future runs recreate output streams",
+      "tracked": true
+    },
+    {
+      "path": "project/experiments/cand-141/reports/generate.stderr",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "reason": "Empty diagnostic output; no content; future runs recreate output streams",
+      "tracked": true
+    },
+    {
+      "path": "project/experiments/cand-141/reports/static.stderr",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "reason": "Empty diagnostic output; no content; future runs recreate output streams",
+      "tracked": true
+    },
+    {
+      "path": "project/experiments/cand-141/reports/static.stdout",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "reason": "Empty diagnostic output; no content; future runs recreate output streams",
+      "tracked": true
+    },
+    {
+      "path": "project/experiments/cand-141/reports/validation-cost.stderr",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "reason": "Empty diagnostic output; no content; future runs recreate output streams",
+      "tracked": true
+    },
+    {
+      "path": "project/experiments/cand-141/reports/validation-cost.stdout",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "reason": "Empty diagnostic output; no content; future runs recreate output streams",
+      "tracked": true
+    },
+    {
+      "path": "project/experiments/cand-142/reports/generate.stderr",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "reason": "Empty diagnostic output; no content; future runs recreate output streams",
+      "tracked": true
+    },
+    {
+      "path": "project/experiments/cand-142/reports/grade.stderr",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "reason": "Empty diagnostic output; no content; future runs recreate output streams",
+      "tracked": true
+    },
+    {
+      "path": "project/experiments/cand-142/reports/static.stderr",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "reason": "Empty diagnostic output; no content; future runs recreate output streams",
+      "tracked": true
+    },
+    {
+      "path": "project/experiments/cand-142/reports/static.stdout",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "reason": "Empty diagnostic output; no content; future runs recreate output streams",
+      "tracked": true
+    },
+    {
+      "path": "project/experiments/cand-142/reports/validation-cost.stderr",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "reason": "Empty diagnostic output; no content; future runs recreate output streams",
+      "tracked": true
+    },
+    {
+      "path": "project/experiments/cand-142/reports/validation-cost.stdout",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "reason": "Empty diagnostic output; no content; future runs recreate output streams",
+      "tracked": true
+    },
+    {
+      "path": "project/experiments/cand-143/reports/generate.stderr",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "reason": "Empty diagnostic output; no content; future runs recreate output streams",
+      "tracked": true
+    },
+    {
+      "path": "project/experiments/cand-143/reports/grade.stderr",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "reason": "Empty diagnostic output; no content; future runs recreate output streams",
+      "tracked": true
+    },
+    {
+      "path": "project/experiments/cand-143/reports/static.stderr",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "reason": "Empty diagnostic output; no content; future runs recreate output streams",
+      "tracked": true
+    },
+    {
+      "path": "project/experiments/cand-143/reports/static.stdout",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "reason": "Empty diagnostic output; no content; future runs recreate output streams",
+      "tracked": true
+    },
+    {
+      "path": "project/experiments/cand-143/reports/validation-cost.stderr",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "reason": "Empty diagnostic output; no content; future runs recreate output streams",
+      "tracked": true
+    },
+    {
+      "path": "project/experiments/cand-143/reports/validation-cost.stdout",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "reason": "Empty diagnostic output; no content; future runs recreate output streams",
+      "tracked": true
+    },
+    {
+      "path": "project/experiments/cand-144/reports/generate.stderr",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "reason": "Empty diagnostic output; no content; future runs recreate output streams",
+      "tracked": true
+    },
+    {
+      "path": "project/experiments/cand-144/reports/grade.stderr",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "reason": "Empty diagnostic output; no content; future runs recreate output streams",
+      "tracked": true
+    },
+    {
+      "path": "project/experiments/cand-144/reports/static.stderr",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "reason": "Empty diagnostic output; no content; future runs recreate output streams",
+      "tracked": true
+    },
+    {
+      "path": "project/experiments/cand-144/reports/static.stdout",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "reason": "Empty diagnostic output; no content; future runs recreate output streams",
+      "tracked": true
+    },
+    {
+      "path": "project/experiments/cand-144/reports/validation-cost.stderr",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "reason": "Empty diagnostic output; no content; future runs recreate output streams",
+      "tracked": true
+    },
+    {
+      "path": "project/experiments/cand-144/reports/validation-cost.stdout",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "reason": "Empty diagnostic output; no content; future runs recreate output streams",
+      "tracked": true
+    },
+    {
+      "path": "project/experiments/cand-145/reports/generate.stderr",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "reason": "Empty diagnostic output; no content; future runs recreate output streams",
+      "tracked": true
+    },
+    {
+      "path": "project/experiments/cand-145/reports/grade.stderr",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "reason": "Empty diagnostic output; no content; future runs recreate output streams",
+      "tracked": true
+    },
+    {
+      "path": "project/experiments/cand-145/reports/static.stderr",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "reason": "Empty diagnostic output; no content; future runs recreate output streams",
+      "tracked": true
+    },
+    {
+      "path": "project/experiments/cand-145/reports/static.stdout",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "reason": "Empty diagnostic output; no content; future runs recreate output streams",
+      "tracked": true
+    },
+    {
+      "path": "project/experiments/cand-145/reports/validation-cost.stderr",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "reason": "Empty diagnostic output; no content; future runs recreate output streams",
+      "tracked": true
+    },
+    {
+      "path": "project/experiments/cand-145/reports/validation-cost.stdout",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "reason": "Empty diagnostic output; no content; future runs recreate output streams",
+      "tracked": true
+    },
+    {
+      "path": "project/experiments/cand-146/reports/generate.stderr",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "reason": "Empty diagnostic output; no content; future runs recreate output streams",
+      "tracked": true
+    },
+    {
+      "path": "project/experiments/cand-146/reports/grade.stderr",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "reason": "Empty diagnostic output; no content; future runs recreate output streams",
+      "tracked": true
+    },
+    {
+      "path": "project/experiments/cand-146/reports/static.stderr",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "reason": "Empty diagnostic output; no content; future runs recreate output streams",
+      "tracked": true
+    },
+    {
+      "path": "project/experiments/cand-146/reports/static.stdout",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "reason": "Empty diagnostic output; no content; future runs recreate output streams",
+      "tracked": true
+    },
+    {
+      "path": "project/experiments/cand-146/reports/validation-cost.stderr",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "reason": "Empty diagnostic output; no content; future runs recreate output streams",
+      "tracked": true
+    },
+    {
+      "path": "project/experiments/cand-146/reports/validation-cost.stdout",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "reason": "Empty diagnostic output; no content; future runs recreate output streams",
+      "tracked": true
+    },
+    {
+      "path": "project/experiments/cand-147/reports/generate.stderr",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "reason": "Empty diagnostic output; no content; future runs recreate output streams",
+      "tracked": true
+    },
+    {
+      "path": "project/experiments/cand-147/reports/grade.stderr",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "reason": "Empty diagnostic output; no content; future runs recreate output streams",
+      "tracked": true
+    },
+    {
+      "path": "project/experiments/cand-147/reports/static.stderr",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "reason": "Empty diagnostic output; no content; future runs recreate output streams",
+      "tracked": true
+    },
+    {
+      "path": "project/experiments/cand-147/reports/static.stdout",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "reason": "Empty diagnostic output; no content; future runs recreate output streams",
+      "tracked": true
+    },
+    {
+      "path": "project/experiments/cand-147/reports/validation-cost.stderr",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "reason": "Empty diagnostic output; no content; future runs recreate output streams",
+      "tracked": true
+    },
+    {
+      "path": "project/experiments/cand-147/reports/validation-cost.stdout",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "reason": "Empty diagnostic output; no content; future runs recreate output streams",
+      "tracked": true
+    },
+    {
+      "path": "project/experiments/cand-148/reports/generate.stderr",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "reason": "Empty diagnostic output; no content; future runs recreate output streams",
+      "tracked": true
+    },
+    {
+      "path": "project/experiments/cand-148/reports/grade.stderr",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "reason": "Empty diagnostic output; no content; future runs recreate output streams",
+      "tracked": true
+    },
+    {
+      "path": "project/experiments/cand-148/reports/static.stderr",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "reason": "Empty diagnostic output; no content; future runs recreate output streams",
+      "tracked": true
+    },
+    {
+      "path": "project/experiments/cand-148/reports/static.stdout",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "reason": "Empty diagnostic output; no content; future runs recreate output streams",
+      "tracked": true
+    },
+    {
+      "path": "project/experiments/cand-148/reports/validation-cost.stderr",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "reason": "Empty diagnostic output; no content; future runs recreate output streams",
+      "tracked": true
+    },
+    {
+      "path": "project/experiments/cand-148/reports/validation-cost.stdout",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "reason": "Empty diagnostic output; no content; future runs recreate output streams",
+      "tracked": true
+    },
+    {
+      "path": "project/experiments/cand-149/reports/generate.stderr",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "reason": "Empty diagnostic output; no content; future runs recreate output streams",
+      "tracked": true
+    },
+    {
+      "path": "project/experiments/cand-149/reports/grade.stderr",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "reason": "Empty diagnostic output; no content; future runs recreate output streams",
+      "tracked": true
+    },
+    {
+      "path": "project/experiments/cand-149/reports/static.stderr",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "reason": "Empty diagnostic output; no content; future runs recreate output streams",
+      "tracked": true
+    },
+    {
+      "path": "project/experiments/cand-149/reports/static.stdout",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "reason": "Empty diagnostic output; no content; future runs recreate output streams",
+      "tracked": true
+    },
+    {
+      "path": "project/experiments/cand-149/reports/validation-cost.stderr",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "reason": "Empty diagnostic output; no content; future runs recreate output streams",
+      "tracked": true
+    },
+    {
+      "path": "project/experiments/cand-149/reports/validation-cost.stdout",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "reason": "Empty diagnostic output; no content; future runs recreate output streams",
+      "tracked": true
+    },
+    {
+      "path": "project/experiments/cand-150-run.log",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "reason": "Empty diagnostic output; no content; future runs recreate output streams",
+      "tracked": false
+    },
+    {
+      "path": "project/experiments/cand-150/reports/generate.stderr",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "reason": "Empty diagnostic output; no content; future runs recreate output streams",
+      "tracked": true
+    },
+    {
+      "path": "project/experiments/cand-150/reports/grade.stderr",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "reason": "Empty diagnostic output; no content; future runs recreate output streams",
+      "tracked": true
+    },
+    {
+      "path": "project/experiments/cand-150/reports/static.stderr",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "reason": "Empty diagnostic output; no content; future runs recreate output streams",
+      "tracked": true
+    },
+    {
+      "path": "project/experiments/cand-150/reports/static.stdout",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "reason": "Empty diagnostic output; no content; future runs recreate output streams",
+      "tracked": true
+    },
+    {
+      "path": "project/experiments/cand-150/reports/validation-cost.stderr",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "reason": "Empty diagnostic output; no content; future runs recreate output streams",
+      "tracked": true
+    },
+    {
+      "path": "project/experiments/cand-150/reports/validation-cost.stdout",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "reason": "Empty diagnostic output; no content; future runs recreate output streams",
+      "tracked": true
+    },
+    {
+      "path": "project/experiments/cand-151/reports/generate.stderr",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "reason": "Empty diagnostic output; no content; future runs recreate output streams",
+      "tracked": true
+    },
+    {
+      "path": "project/experiments/cand-151/reports/static.stderr",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "reason": "Empty diagnostic output; no content; future runs recreate output streams",
+      "tracked": true
+    },
+    {
+      "path": "project/experiments/cand-151/reports/static.stdout",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "reason": "Empty diagnostic output; no content; future runs recreate output streams",
+      "tracked": true
+    },
+    {
+      "path": "project/experiments/cand-151/reports/validation-cost.stderr",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "reason": "Empty diagnostic output; no content; future runs recreate output streams",
+      "tracked": true
+    },
+    {
+      "path": "project/experiments/cand-151/reports/validation-cost.stdout",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "reason": "Empty diagnostic output; no content; future runs recreate output streams",
+      "tracked": true
+    },
+    {
+      "path": "project/experiments/cand-154/reports/grade.stderr",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "reason": "Empty diagnostic output; no content; future runs recreate output streams",
+      "tracked": true
+    },
+    {
+      "path": "project/gap_analysis/M1_P1--baseline.stderr",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "reason": "Empty diagnostic output; no content; future runs recreate output streams",
+      "tracked": false
+    },
+    {
+      "path": "project/gap_analysis/M1_P1--cache.stderr",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "reason": "Empty diagnostic output; no content; future runs recreate output streams",
+      "tracked": false
+    },
+    {
+      "path": "project/gap_analysis/M1_P1--dma.stderr",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "reason": "Empty diagnostic output; no content; future runs recreate output streams",
+      "tracked": false
+    },
+    {
+      "path": "project/gap_analysis/M1_P1--hbm+cache+noc.stderr",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "reason": "Empty diagnostic output; no content; future runs recreate output streams",
+      "tracked": false
+    },
+    {
+      "path": "project/gap_analysis/M1_P1--hbm+cache.stderr",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "reason": "Empty diagnostic output; no content; future runs recreate output streams",
+      "tracked": false
+    },
+    {
+      "path": "project/gap_analysis/M1_P1--hbm.stderr",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "reason": "Empty diagnostic output; no content; future runs recreate output streams",
+      "tracked": false
+    },
+    {
+      "path": "project/gap_analysis/M1_P1--noc.stderr",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "reason": "Empty diagnostic output; no content; future runs recreate output streams",
+      "tracked": false
+    },
+    {
+      "path": "project/gap_analysis/M1_P1--reduce.stderr",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "reason": "Empty diagnostic output; no content; future runs recreate output streams",
+      "tracked": false
+    },
+    {
+      "path": "project/gap_analysis/M1_P1--resident_activations.stderr",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "reason": "Empty diagnostic output; no content; future runs recreate output streams",
+      "tracked": false
+    },
+    {
+      "path": "project/gap_analysis/M1_P1--resident_all.stderr",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "reason": "Empty diagnostic output; no content; future runs recreate output streams",
+      "tracked": false
+    },
+    {
+      "path": "project/gap_analysis/M1_P1--resident_all__wide.stderr",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "reason": "Empty diagnostic output; no content; future runs recreate output streams",
+      "tracked": false
+    },
+    {
+      "path": "project/gap_analysis/M1_P1--resident_weights.stderr",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "reason": "Empty diagnostic output; no content; future runs recreate output streams",
+      "tracked": false
+    },
+    {
+      "path": "project/gap_analysis/M1_P1--rf+hbm+cache.stderr",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "reason": "Empty diagnostic output; no content; future runs recreate output streams",
+      "tracked": false
+    },
+    {
+      "path": "project/gap_analysis/M1_P1--rf+shared+dma+noc+hbm+cache+tc+vec+sfu+reduce.stderr",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "reason": "Empty diagnostic output; no content; future runs recreate output streams",
+      "tracked": false
+    },
+    {
+      "path": "project/gap_analysis/M1_P1--rf+shared+dma+noc+hbm+cache.stderr",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "reason": "Empty diagnostic output; no content; future runs recreate output streams",
+      "tracked": false
+    },
+    {
+      "path": "project/gap_analysis/M1_P1--rf+tc+shared+dma+noc+hbm+cache.stderr",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "reason": "Empty diagnostic output; no content; future runs recreate output streams",
+      "tracked": false
+    },
+    {
+      "path": "project/gap_analysis/M1_P1--rf+tc.stderr",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "reason": "Empty diagnostic output; no content; future runs recreate output streams",
+      "tracked": false
+    },
+    {
+      "path": "project/gap_analysis/M1_P1--rf.stderr",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "reason": "Empty diagnostic output; no content; future runs recreate output streams",
+      "tracked": false
+    },
+    {
+      "path": "project/gap_analysis/M1_P1--rf_read.stderr",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "reason": "Empty diagnostic output; no content; future runs recreate output streams",
+      "tracked": false
+    },
+    {
+      "path": "project/gap_analysis/M1_P1--rf_write.stderr",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "reason": "Empty diagnostic output; no content; future runs recreate output streams",
+      "tracked": false
+    },
+    {
+      "path": "project/gap_analysis/M1_P1--sfu.stderr",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "reason": "Empty diagnostic output; no content; future runs recreate output streams",
+      "tracked": false
+    },
+    {
+      "path": "project/gap_analysis/M1_P1--shared.stderr",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "reason": "Empty diagnostic output; no content; future runs recreate output streams",
+      "tracked": false
+    },
+    {
+      "path": "project/gap_analysis/M1_P1--tc.stderr",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "reason": "Empty diagnostic output; no content; future runs recreate output streams",
+      "tracked": false
+    },
+    {
+      "path": "project/gap_analysis/M1_P1--vec+sfu+reduce.stderr",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "reason": "Empty diagnostic output; no content; future runs recreate output streams",
+      "tracked": false
+    },
+    {
+      "path": "project/gap_analysis/M1_P1--vec.stderr",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "reason": "Empty diagnostic output; no content; future runs recreate output streams",
+      "tracked": false
+    },
+    {
+      "path": "project/gap_analysis/M2_D1--baseline.stderr",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "reason": "Empty diagnostic output; no content; future runs recreate output streams",
+      "tracked": false
+    },
+    {
+      "path": "project/gap_analysis/M2_D1--cache.stderr",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "reason": "Empty diagnostic output; no content; future runs recreate output streams",
+      "tracked": false
+    },
+    {
+      "path": "project/gap_analysis/M2_D1--dag_no_barriers.stderr",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "reason": "Empty diagnostic output; no content; future runs recreate output streams",
+      "tracked": false
+    },
+    {
+      "path": "project/gap_analysis/M2_D1--dag_no_barriers__resident_local.stderr",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "reason": "Empty diagnostic output; no content; future runs recreate output streams",
+      "tracked": false
+    },
+    {
+      "path": "project/gap_analysis/M2_D1--dag_no_barriers_precise.stderr",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "reason": "Empty diagnostic output; no content; future runs recreate output streams",
+      "tracked": false
+    },
+    {
+      "path": "project/gap_analysis/M2_D1--dag_no_barriers_precise__resident_local.stderr",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "reason": "Empty diagnostic output; no content; future runs recreate output streams",
+      "tracked": false
+    },
+    {
+      "path": "project/gap_analysis/M2_D1--dma.stderr",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "reason": "Empty diagnostic output; no content; future runs recreate output streams",
+      "tracked": false
+    },
+    {
+      "path": "project/gap_analysis/M2_D1--dma_unlimited.stderr",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "reason": "Empty diagnostic output; no content; future runs recreate output streams",
+      "tracked": false
+    },
+    {
+      "path": "project/gap_analysis/M2_D1--hbm+cache.stderr",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "reason": "Empty diagnostic output; no content; future runs recreate output streams",
+      "tracked": false
+    },
+    {
+      "path": "project/gap_analysis/M2_D1--hbm.stderr",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "reason": "Empty diagnostic output; no content; future runs recreate output streams",
+      "tracked": false
+    },
+    {
+      "path": "project/gap_analysis/M2_D1--noc.stderr",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "reason": "Empty diagnostic output; no content; future runs recreate output streams",
+      "tracked": false
+    },
+    {
+      "path": "project/gap_analysis/M2_D1--reduce.stderr",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "reason": "Empty diagnostic output; no content; future runs recreate output streams",
+      "tracked": false
+    },
+    {
+      "path": "project/gap_analysis/M2_D1--resident_activations.stderr",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "reason": "Empty diagnostic output; no content; future runs recreate output streams",
+      "tracked": false
+    },
+    {
+      "path": "project/gap_analysis/M2_D1--resident_all.stderr",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "reason": "Empty diagnostic output; no content; future runs recreate output streams",
+      "tracked": false
+    },
+    {
+      "path": "project/gap_analysis/M2_D1--resident_all__wide.stderr",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "reason": "Empty diagnostic output; no content; future runs recreate output streams",
+      "tracked": false
+    },
+    {
+      "path": "project/gap_analysis/M2_D1--resident_kv.stderr",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "reason": "Empty diagnostic output; no content; future runs recreate output streams",
+      "tracked": false
+    },
+    {
+      "path": "project/gap_analysis/M2_D1--resident_local_weights+activations+kv.stderr",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "reason": "Empty diagnostic output; no content; future runs recreate output streams",
+      "tracked": false
+    },
+    {
+      "path": "project/gap_analysis/M2_D1--resident_local_weights.stderr",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "reason": "Empty diagnostic output; no content; future runs recreate output streams",
+      "tracked": false
+    },
+    {
+      "path": "project/gap_analysis/M2_D1--resident_warm_weights+activations.stderr",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "reason": "Empty diagnostic output; no content; future runs recreate output streams",
+      "tracked": false
+    },
+    {
+      "path": "project/gap_analysis/M2_D1--resident_warm_weights.stderr",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "reason": "Empty diagnostic output; no content; future runs recreate output streams",
+      "tracked": false
+    },
+    {
+      "path": "project/gap_analysis/M2_D1--rf+hbm+cache+tc+vec+sfu+reduce.stderr",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "reason": "Empty diagnostic output; no content; future runs recreate output streams",
+      "tracked": false
+    },
+    {
+      "path": "project/gap_analysis/M2_D1--rf+hbm+cache.stderr",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "reason": "Empty diagnostic output; no content; future runs recreate output streams",
+      "tracked": false
+    },
+    {
+      "path": "project/gap_analysis/M2_D1--rf+shared+dma+noc+hbm+cache+tc+vec+sfu+reduce.stderr",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "reason": "Empty diagnostic output; no content; future runs recreate output streams",
+      "tracked": false
+    },
+    {
+      "path": "project/gap_analysis/M2_D1--rf+shared+dma+noc+hbm+cache.stderr",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "reason": "Empty diagnostic output; no content; future runs recreate output streams",
+      "tracked": false
+    },
+    {
+      "path": "project/gap_analysis/M2_D1--rf+shared+dma_unlimited+noc+hbm+cache+tc+vec+sfu+reduce.stderr",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "reason": "Empty diagnostic output; no content; future runs recreate output streams",
+      "tracked": false
+    },
+    {
+      "path": "project/gap_analysis/M2_D1--rf+shared+dma_unlimited+noc+hbm+cache.stderr",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "reason": "Empty diagnostic output; no content; future runs recreate output streams",
+      "tracked": false
+    },
+    {
+      "path": "project/gap_analysis/M2_D1--rf+tc.stderr",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "reason": "Empty diagnostic output; no content; future runs recreate output streams",
+      "tracked": false
+    },
+    {
+      "path": "project/gap_analysis/M2_D1--rf+vec+sfu+reduce.stderr",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "reason": "Empty diagnostic output; no content; future runs recreate output streams",
+      "tracked": false
+    },
+    {
+      "path": "project/gap_analysis/M2_D1--rf.stderr",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "reason": "Empty diagnostic output; no content; future runs recreate output streams",
+      "tracked": false
+    },
+    {
+      "path": "project/gap_analysis/M2_D1--rf_read.stderr",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "reason": "Empty diagnostic output; no content; future runs recreate output streams",
+      "tracked": false
+    },
+    {
+      "path": "project/gap_analysis/M2_D1--rf_write.stderr",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "reason": "Empty diagnostic output; no content; future runs recreate output streams",
+      "tracked": false
+    },
+    {
+      "path": "project/gap_analysis/M2_D1--sfu.stderr",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "reason": "Empty diagnostic output; no content; future runs recreate output streams",
+      "tracked": false
+    },
+    {
+      "path": "project/gap_analysis/M2_D1--shared.stderr",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "reason": "Empty diagnostic output; no content; future runs recreate output streams",
+      "tracked": false
+    },
+    {
+      "path": "project/gap_analysis/M2_D1--tc.stderr",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "reason": "Empty diagnostic output; no content; future runs recreate output streams",
+      "tracked": false
+    },
+    {
+      "path": "project/gap_analysis/M2_D1--vec+sfu+reduce.stderr",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "reason": "Empty diagnostic output; no content; future runs recreate output streams",
+      "tracked": false
+    },
+    {
+      "path": "project/gap_analysis/M2_D1--vec.stderr",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "reason": "Empty diagnostic output; no content; future runs recreate output streams",
+      "tracked": false
+    },
+    {
+      "path": "project/release-verification-20261001-144837/grade.stderr",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "reason": "Empty diagnostic output; no content; future runs recreate output streams",
+      "tracked": false
+    },
+    {
+      "path": "project/release-verification-20261001-144837/grade.stdout",
+      "bytes": 3676009,
+      "sha256": "57b929a11caafac93175a14bfacd86f5b212c683c1c123d412383131589e8da1",
+      "reason": "Byte-identical JSON evidence retained at project/release-verification-20261001-144837/local-grade.json",
+      "tracked": false
+    }
+  ]
+}

@@ -1,0 +1,44 @@
+__pycache__/
+*.pyc
+.DS_Store
+
+# local experiment reports
+check-*.json
+estimate-*.json
+grade-*.json
+
+# submission artifacts
+*.zip
+
+# local virtual environment
+.venv/
+.venv
+recipe.json
+
+# local grade dumps
+local-*.json
+
+# generated & bulky artifacts inside campaign working dirs
+project/campaigns/**/*.asm
+project/campaigns/**/*.stdout
+project/campaigns/**/*.stderr
+project/campaigns/**/*.log
+project/campaigns/**/*.err
+project/campaigns/**/check_*.json
+project/campaigns/**/dev-check-*.json
+project/campaigns/**/grade*.json
+project/campaigns/**/p1_*.json
+project/campaigns/**/p2_*.json
+project/campaigns/**/*stats*.json
+project/campaigns/**/frozen-verification.json
+
+# analysis artifacts (kept on disk, not versioned)
+project/gap_analysis/
+project/release-verification-*/
+
+# controller run logs
+project/experiments/cand-*-run.log
+
+# Transient coordinator lock
+project/experiments/.controller.lock
+project/experiments/registry.write.lock
